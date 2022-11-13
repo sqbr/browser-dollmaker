@@ -1,21 +1,26 @@
 
 
+var img_head = new Image();
+var img_body = new Image();
+img_head.src = "temp_images/sam_hair.png";
+img_body.src = "temp_images/sam_face.png";
 
 function canvasImgExperiment() {
         // declare all variables and functions
         var canvas = document.getElementById("portCanvas");
         var ctx = canvas.getContext("2d");
-        var img_head = new Image();
-        var img_body = new Image();
-        img_head.src = "spritecreator_images/temp/pink_head.png";
-        img_body.src = "spritecreator_images/temp/green_body.png";
-        //ctx.drawImage(img_body, 10, 10);
-        ctx.drawImage(img_head, 10, 10);
+        
+        for (row = 0; row < 3; row += 1) {
+            ctx.drawImage(img_body, 0, row*256);
+            ctx.drawImage(img_body, 256, row*256);
+        }
+        ctx.drawImage(img_head, 0, 0);
+        //ctx.drawImage(img_head, 10, 10);
 }
 function exportCanvas(){
     var mycanvas = document.getElementById("portCanvas");
     var img = mycanvas.toDataURL("image/png;base64;");
-    window.open(img,"","width=700,height=700");
+    window.open(img,"","width=512,height=768");
 }
 window.onload = canvasImgExperiment;
 
