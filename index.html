@@ -7,6 +7,7 @@
             </head>
 <body>
 <script src="javascript.js"></script>
+<script src="menus.js"></script>
 <div class="grid-container">
     <div><!-- canvas -->
     <canvas id="portCanvas" width="512" height="768">
@@ -14,8 +15,8 @@
     </canvas>
     </div>
 <div><!-- column 2 -->
-<a href="javscript:void(0)" onclick="exportCanvas()">Export</a>
-<p id="demo">JavaScript can change HTML content.</p>
+<button onclick="exportCanvas()">Export</button>
+<div id="controls"></div>
 </div>
 
 <div><!-- column 3 -->
