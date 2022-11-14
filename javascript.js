@@ -7,11 +7,11 @@ function dropFunction() {
   // Close the dropdown if the user clicks outside of it
   window.onclick = function(event) {
     if (!event.target.matches('.dropbtn')) {
-        dropBtnClick()
+        dropBtnClose()
     }
   }
 
-function dropBtnClick(){
+function dropBtnClose(){
     var dropdowns = document.getElementsByClassName("dropdown-content");
       var i;
       for (i = 0; i < dropdowns.length; i++) {
@@ -22,29 +22,44 @@ function dropBtnClick(){
       }
 
 }
+
+
 var img_head = new Image();
 var img_body = new Image();
 img_head.src = "temp_images/sam_hair.png";
 img_body.src = "temp_images/sam_face.png";
 
-function canvasImgExperiment() {
-        // declare all variables and functions
-        var canvas = document.getElementById("portCanvas");
-        var ctx = canvas.getContext("2d");
-        
-        for (row = 0; row < 3; row += 1) {
-            ctx.drawImage(img_body, 0, row*256);
-            ctx.drawImage(img_body, 256, row*256);
+function setVariable(part, number){
+    if (part =="hair"){
+        if (number==0){
+            img_head.src = "temp_images/sam_hair.png";
         }
-        ctx.drawImage(img_head, 0, 0);
-        //ctx.drawImage(img_head, 10, 10);
+        else{
+            img_head.src = "temp_images/sam_hair2.png";
+        }
+    }
+    drawCanvas();
+    document.getElementById("demo").innerHTML = "Hello "+number;
+}
+
+function drawCanvas() {
+    var canvas = document.getElementById("portCanvas");
+    var ctx = canvas.getContext("2d");
+    for (row = 0; row < 3; row += 1) {
+        for (column = 0; column < 2; column += 1) {
+            xpos = 256*column
+            ypos = 256*row
+            ctx.drawImage(img_body, xpos, ypos);
+            ctx.drawImage(img_head, xpos, ypos);
+        }
+    }
 }
 function exportCanvas(){
     var mycanvas = document.getElementById("portCanvas");
     var img = mycanvas.toDataURL("image/png;base64;");
     window.open(img,"","width=512,height=768");
 }
-window.onload = canvasImgExperiment;
+window.onload = drawCanvas;
 
 // addbutton to cycle between colours
 // then turn it into popup window
