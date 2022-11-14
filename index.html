@@ -1,10 +1,32 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Dollmaker</title>
+        <link href="style.css" rel="stylesheet" type = "text/css">
+            </head>
 <body>
-<canvas id="portCanvas" width="512" height="768">
-Your browser does not support HTML5 Canvas. Try downloading latest Chrome, Firefox, Safari, Opera or Internet explorer.
-</canvas>
-<a href="javscript:void(0)" onclick="exportCanvas()">Export</a>
 <script src="javascript.js"></script>
+<div class="grid-container">
+    <div><!-- canvas -->
+    <canvas id="portCanvas" width="512" height="768">
+    Your browser does not support HTML5 Canvas. Try downloading latest Chrome, Firefox, Safari, Opera or Internet explorer.
+    </canvas>
+    </div>
+<div><!-- column 2 -->
+<a href="javscript:void(0)" onclick="exportCanvas()">Export</a>
+</div>
+
+<div><!-- column 3 -->
+    <div class="dropdown">
+        <button onclick="dropFunction()" class="dropbtn">Hair</button>
+        <div id="myDropdown" class="dropdown-content">
+            <button onclick="setVariable('hair',0)" >zero</button>
+            <button onclick="setVariable('hair',1)" >one</button>
+        </div>
+      </div>
+      
+</div>
+</div>
 </body>
 </html>
