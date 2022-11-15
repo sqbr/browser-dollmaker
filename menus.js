@@ -22,8 +22,3 @@ function dropBtnClose(){
       }
 
 }
-function exportCanvas(){
-    var mycanvas = document.getElementById("portCanvas");
-    var img = mycanvas.toDataURL("image/png;base64;");
-    window.open(img,"","width=512,height=768");
-}
