@@ -17,15 +17,22 @@ function makeDropbtnString(name, variablelist, list, type){
     //Create a dropdown menu which is called name, and sets all the entires in variablelist to whatever value of list is chosen 
     var id = name+'Dropdown';
     var functionName;
-    if (type=="body_part"){
-        functionName= "setVariable";
-    } 
-    if (type=="menu_part"){
-        functionName= "setMenu";
-    } 
-    if (type=="colour"){
-        functionName= "setColour";
-    } 
+    switch(type){
+        case "body_part":
+            functionName= "setVariable";
+            break;
+        case "panel":
+            functionName= "setPanel";
+            break;        
+        case "menu_part":
+            functionName= "setMenu";
+            break;  
+        case "colour":
+            functionName= "setColour";
+            break;  
+        default:
+            document.getElementById("test").innerHTML = "Unknown button type";                
+    }
     
     drop_string = '<div class="dropdown">';
     drop_string +='<button onclick="dropFunction(\''+id+'\')" class="dropbtn">'+name+'</button>';
@@ -49,15 +56,19 @@ function setMenu(variablelist, number){
     switch(number){
         case 0: //editing the body
             htmlString+=makeDropbtnString("Head Shape", ["Head"], head_list, "body_part");
+            htmlString+=makeDropbtnString("Skin Colour", skin_list, range(skinNum), "colour");
             break;    
         case 1: //editing the outfit
+            document.getElementById("test").innerHTML = "Hello";
             for (i = 0; i < clothes_list.length; i += 1) {
-                b = findNameMatch(body_objects, clothes_list[i]); 
-                htmlString+=makeDropbtnString(b.name, [b.name], b.list, "body_part");
+                b = findNameMatch(body_objects, "Top"); 
+                htmlString+=makeDropbtnString(b.name, [b.name], b.item_list, "body_part");
                 htmlString+=makeDropbtnString(b.name+" Colour", [b.name], range(b.colourNum), "colour");
             }
             break;    
         case 2: //editing the expression
+            htmlString+=makeDropbtnString("Panel", ["Panel"], panel_list, "panel");
+            htmlString+="<div id = 'current_panel'>"+current_panel +"</div>";
             htmlString+=makeDropbtnString("Eyebrows", ["Eyebrows"], eyebrow_list, "body_part");
             break;      
         default:
@@ -65,6 +76,11 @@ function setMenu(variablelist, number){
 
     }
     document.getElementById("controls").innerHTML = htmlString;
+}
+
+function setPanel(variablelist, number){
+    current_panel = number;
+    document.getElementById("current_panel").innerHTML = current_panel;
 }
 
 function setVariable(variablelist, number){
@@ -95,7 +111,7 @@ function drawCanvas() {
     var canvas = document.getElementById("portCanvas");
     var ctx = canvas.getContext("2d");
     ctx.clearRect(0,0,canvas_width, canvas_height);
-    document.getElementById("test").innerHTML = print_body();
+    document.getElementById("closet").innerHTML = print_body();
     fixSources(body_objects);
     for (row = 0; row < 3; row += 1) {
         for (column = 0; column < 2; column += 1) {
@@ -118,13 +134,6 @@ function setup(){
 }
 
 window.onload = setup;
-
-// addbutton to cycle between colours
-// then turn it into popup window
-//then do all of body
-//then add separatre windows for the different parts
-//show: back, expression, front
-//add save and load with text boxes
 
 //https://github.com/ninique/Dollmaker-Script
 //https://stackoverflow.com/questions/45187291/how-to-change-the-color-of-an-image-in-a-html5-canvas-without-changing-its-patte?rq=1

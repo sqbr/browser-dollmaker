@@ -46,9 +46,11 @@ function newImageList(){
 //Initialising data
 
 var currently_editing;
-var current_expression;
+var current_panel = 0;
 
 const editing_list =["Body","Outfit", "Expressions"];
+
+const panel_list = ["0: Neutral", "1: Happy", "2: Sad", "3: Unique", "4: Blushing", "5: Angry"];
 
 //collections of parts that have the same colours
 const skin_list = ["Torso", "Head"]
@@ -56,6 +58,7 @@ const hair_list = ["Hair_back", "Hair_middle","Hair_front","Facial_hair"]
 const clothes_list = ["Top"];
 
 const skinNum = 2; //how many skin colours there are
+
 //Types of parts
 const head_list =["medium","round"];
 const eyebrow_list = ["none", "flat_thick"];
@@ -79,8 +82,8 @@ function print_body(){
         s+=" colourNum: "+b.colourNum;
         s+="  value_list: "+b.value_list.toString();
         s+=" colour: "+b.colour;
-        s+=" src: "+b.image_list[0].src;
-        s+="\n";
+        //s+=" src: "+b.image_list[0].src;
+        s+="<br>";
     }
     return s
 }
