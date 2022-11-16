@@ -20,5 +20,10 @@ function dropBtnClose(){
           openDropdown.classList.remove('show');
         }
       }
+}
 
+function exportCanvas(){
+    var mycanvas = document.getElementById("portCanvas");
+    var img = mycanvas.toDataURL("image/png;base64;");
+    window.open(img,"","width="+canvas_width+",height="+canvas_height);
 }

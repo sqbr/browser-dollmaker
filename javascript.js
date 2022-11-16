@@ -1,76 +1,84 @@
 
-const canvas_width = 512;
-const canvas_height = 768;
-
-var currently_editing;
-const editing_list =["Body","Expressions"];
-
-const head_list =["None","Medium"];
-const head_colours = 2;
-
-const body_objects =[];
-
-body_objects.push({name: "Head",variablename: "Head", list: head_list, value: 0, colour: 0, image: new Image()});
-
 function fixSources(list){
     // Fixes the "src" attribute for all images in list
     for (i = 0; i < list.length; i += 1){
-        b = list[i]
-        b.image.src = "images/"+b.variablename+"/"+b.list[b.value]+"/"+b.colour+".png"
+        b = list[i];
+        for (j = 0; j < panelSize; j += 1){ 
+            if (b.colourNum==1){
+                b.image_list[j].src = "images/"+b.location+"/"+b.item_list[b.value_list[j]]+".png";
+            }else{
+                b.image_list[j].src  = "images/"+b.location+"/"+b.item_list[b.value_list[j]]+"/"+b.colour+".png";
+            }
+        }
     }
 }
 
-function makeDropbtn(name, variablename, list){
-    document.getElementById(variablename+"Btn").innerHTML = makeDropbtnString(name, variablename, list)
-}
-
-function makeDropbtnString(name, variablename, list){
+function makeDropbtnString(name, variablename, list, type){
     var id = variablename+'Dropdown';
+    var functionName;
+    if (type=="body_part"){
+        functionName= "setVariable";
+    } 
+    if (type=="menu_part"){
+        functionName= "setMenu";
+    } 
+    if (type=="colour"){
+        functionName= "setColour";
+    } 
+    
     drop_string = '<div class="dropdown">';
     drop_string +='<button onclick="dropFunction(\''+id+'\')" class="dropbtn">'+name+'</button>';
     drop_string +='<div id="'+id+'" class="dropdown-content">';
     for (row = 0; row < list.length; row += 1) {
-        drop_string +='<button onclick="setVariable(\''+variablename+'\','+row+')" >'+list[row]+'</button>';
+        drop_string +='<button onclick="'+functionName+'(\''+variablename+'\','+row+')" >'+list[row]+'</button>';
     }
     drop_string +='</div></div>';
-    return drop_string
+    return drop_string;
 }
 
-function findNameMatch(list, name){
-    //returns the first element of list whose variablename equals name
-    for (i = 0; i < list.length; i += 1) {
-        if (list[i].variablename==name){
-            return list[i];
-        }
+function setMenu(variablename, number){
+    //Setting what section we're editing eg body/expressions etc
+    currently_editing = number;
+    document.getElementById("editingTitle").innerHTML = editing_list[number];
+    htmlString = "";
+    switch(number){
+        case 0: //editing the body
+            htmlString+=makeDropbtnString("Head Shape", "Head", head_list, "body_part");
+            break;    
+        case 1: //editing the outfit
+            for (i = 0; i < clothes_list.length; i += 1) {
+                b = findNameMatch(body_objects, clothes_list[i]); 
+                htmlString+=makeDropbtnString(b.name, b.name, b.list, "body_part");
+                htmlString+=makeDropbtnString(b.name+" Colour", b.name, range(b.colourNum), "colour");
+            }
+            break;    
+        case 2: //editing the expression
+            htmlString+=makeDropbtnString("Eyebrows", "Eyebrows", eyebrow_list, "body_part");
+            break;      
+        default:
+            htmlString = "Unknown value";
+
     }
+    document.getElementById("controls").innerHTML = htmlString;
 }
 
 function setVariable(variablename, number){
-    if (variablename =="currently_editing"){
-        currently_editing = number
-        document.getElementById("editingTitle").innerHTML = editing_list[number];
-        if (number ==0){//editing the body
-            htmlString = "";
-            for (i = 0; i < body_objects.length; i += 1) {
-                b = body_objects[i];
-                htmlString+=makeDropbtnString(b.name, b.variablename, b.list);
-            }
-            document.getElementById("controls").innerHTML = htmlString
-        } else{
-            document.getElementById("controls").innerHTML = "not body";
-        }
-    }else{
-        //variablename = "Head"
-        b = findNameMatch(body_objects, variablename); //the eleemnt of body_objects with the right vriablename
-        b.value=number;
-        drawCanvas();
-    }
+    b = findNameMatch(body_objects, variablename); //the eleemnt of body_objects with the right vriablename
+    b.value_list=listOf(number);
+    drawCanvas();
+}
+
+function setColour(variablename, number){
+    b = findNameMatch(body_objects, variablename); //the eleemnt of body_objects with the right vriablename
+    b.colour=number;
+    drawCanvas();
 }
 
 function drawCanvas() {
     var canvas = document.getElementById("portCanvas");
     var ctx = canvas.getContext("2d");
-    //ctx.clearRect(canvas_width, canvas_height)
+    ctx.clearRect(0,0,canvas_width, canvas_height);
+    document.getElementById("test").innerHTML = print_body();
     fixSources(body_objects);
     for (row = 0; row < 3; row += 1) {
         for (column = 0; column < 2; column += 1) {
@@ -78,23 +86,17 @@ function drawCanvas() {
             ypos = 256*row;
             for (i = 0; i < body_objects.length; i += 1){
                 b = body_objects[i];
-                if (b.value !=0){ //Not "none"
-                    ctx.drawImage(b.image, xpos, ypos);
+                if (b.item_list[b.value_list[row*2+column]] !="none"){ 
+                    ctx.drawImage(b.image_list[row*2+column], xpos, ypos);
                 }
             }
         }
     }
 }
 
-function exportCanvas(){
-    var mycanvas = document.getElementById("portCanvas");
-    var img = mycanvas.toDataURL("image/png;base64;");
-    window.open(img,"","width="+canvas_width+",height="+canvas_height);
-}
-
 function setup(){
-    makeDropbtn("Editing:", "currently_editing", editing_list);
-    setVariable("currently_editing", 0);
+    document.getElementById("currently_editingBtn").innerHTML = makeDropbtnString("Editing:", "currently_editing", editing_list, "menu_part");
+    setMenu("currently_editing", 0);
     drawCanvas();
 }
 
