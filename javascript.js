@@ -21,6 +21,9 @@ function makeDropbtnString(name, variablelist, list, type){
         case "body_part":
             functionName= "setVariable";
             break;
+        case "body_part_panel":
+            functionName= "setPanelVariable";
+            break;    
         case "panel":
             functionName= "setPanel";
             break;        
@@ -69,7 +72,7 @@ function setMenu(variablelist, number){
         case 2: //editing the expression
             htmlString+=makeDropbtnString("Panel", ["Panel"], panel_list, "panel");
             htmlString+="<div id = 'current_panel'>"+current_panel +"</div>";
-            htmlString+=makeDropbtnString("Eyebrows", ["Eyebrows"], eyebrow_list, "body_part");
+            htmlString+=makeDropbtnString("Eyebrows", ["Eyebrows"], eyebrow_list, "body_part_panel");
             break;      
         default:
             htmlString = "Unknown value";
@@ -91,10 +94,10 @@ function setVariable(variablelist, number){
     drawCanvas();
 }
 
-function setPanelVariable(variablelist, panel, number){
+function setPanelVariable(variablelist, number){
     for (i = 0; i < variablelist.length; i += 1) {
         b = findNameMatch(body_objects, variablelist[i]); //the eleemnt of body_objects with the right vriablename
-        b.value_list[panel]=number;
+        b.value_list[current_panel]=number;
     }
     drawCanvas();
 }
