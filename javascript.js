@@ -68,6 +68,12 @@ function setVariable(variablename, number){
     drawCanvas();
 }
 
+function setPanelVariable(variablename, panel, number){
+    b = findNameMatch(body_objects, variablename); //the eleemnt of body_objects with the right vriablename
+    b.value_list[panel]=number;
+    drawCanvas();
+}
+
 function setColour(variablename, number){
     b = findNameMatch(body_objects, variablename); //the eleemnt of body_objects with the right vriablename
     b.colour=number;
