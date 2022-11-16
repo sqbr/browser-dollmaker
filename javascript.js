@@ -13,8 +13,9 @@ function fixSources(list){
     }
 }
 
-function makeDropbtnString(name, variablename, list, type){
-    var id = variablename+'Dropdown';
+function makeDropbtnString(name, variablelist, list, type){
+    //Create a dropdown menu which is called name, and sets all the entires in variablelist to whatever value of list is chosen 
+    var id = name+'Dropdown';
     var functionName;
     if (type=="body_part"){
         functionName= "setVariable";
@@ -30,30 +31,34 @@ function makeDropbtnString(name, variablename, list, type){
     drop_string +='<button onclick="dropFunction(\''+id+'\')" class="dropbtn">'+name+'</button>';
     drop_string +='<div id="'+id+'" class="dropdown-content">';
     for (row = 0; row < list.length; row += 1) {
-        drop_string +='<button onclick="'+functionName+'(\''+variablename+'\','+row+')" >'+list[row]+'</button>';
+        drop_string +='<button onclick="'+functionName+'(['
+        for (i = 0; i < variablelist.length; i += 1){
+            drop_string +="\'"+variablelist[i]+"\',"
+        }
+        drop_string +='],'+row+')" >'+list[row]+'</button>';
     }
     drop_string +='</div></div>';
     return drop_string;
 }
 
-function setMenu(variablename, number){
+function setMenu(variablelist, number){
     //Setting what section we're editing eg body/expressions etc
     currently_editing = number;
     document.getElementById("editingTitle").innerHTML = editing_list[number];
     htmlString = "";
     switch(number){
         case 0: //editing the body
-            htmlString+=makeDropbtnString("Head Shape", "Head", head_list, "body_part");
+            htmlString+=makeDropbtnString("Head Shape", ["Head"], head_list, "body_part");
             break;    
         case 1: //editing the outfit
             for (i = 0; i < clothes_list.length; i += 1) {
                 b = findNameMatch(body_objects, clothes_list[i]); 
-                htmlString+=makeDropbtnString(b.name, b.name, b.list, "body_part");
-                htmlString+=makeDropbtnString(b.name+" Colour", b.name, range(b.colourNum), "colour");
+                htmlString+=makeDropbtnString(b.name, [b.name], b.list, "body_part");
+                htmlString+=makeDropbtnString(b.name+" Colour", [b.name], range(b.colourNum), "colour");
             }
             break;    
         case 2: //editing the expression
-            htmlString+=makeDropbtnString("Eyebrows", "Eyebrows", eyebrow_list, "body_part");
+            htmlString+=makeDropbtnString("Eyebrows", ["Eyebrows"], eyebrow_list, "body_part");
             break;      
         default:
             htmlString = "Unknown value";
@@ -62,21 +67,27 @@ function setMenu(variablename, number){
     document.getElementById("controls").innerHTML = htmlString;
 }
 
-function setVariable(variablename, number){
-    b = findNameMatch(body_objects, variablename); //the eleemnt of body_objects with the right vriablename
-    b.value_list=listOf(number);
+function setVariable(variablelist, number){
+    for (i = 0; i < variablelist.length; i += 1) {
+        b = findNameMatch(body_objects, variablelist[i]); //the eleemnt of body_objects with the right vriablename
+        b.value_list=listOf(number);
+    }
     drawCanvas();
 }
 
-function setPanelVariable(variablename, panel, number){
-    b = findNameMatch(body_objects, variablename); //the eleemnt of body_objects with the right vriablename
-    b.value_list[panel]=number;
+function setPanelVariable(variablelist, panel, number){
+    for (i = 0; i < variablelist.length; i += 1) {
+        b = findNameMatch(body_objects, variablelist[i]); //the eleemnt of body_objects with the right vriablename
+        b.value_list[panel]=number;
+    }
     drawCanvas();
 }
 
-function setColour(variablename, number){
-    b = findNameMatch(body_objects, variablename); //the eleemnt of body_objects with the right vriablename
-    b.colour=number;
+function setColour(variablelist, number){
+    for (i = 0; i < variablelist.length; i += 1) {
+        b = findNameMatch(body_objects, variablelist[i]); //the eleemnt of body_objects with the right vriablename
+        b.colour=number;
+    }
     drawCanvas();
 }
 
@@ -101,8 +112,8 @@ function drawCanvas() {
 }
 
 function setup(){
-    document.getElementById("currently_editingBtn").innerHTML = makeDropbtnString("Editing:", "currently_editing", editing_list, "menu_part");
-    setMenu("currently_editing", 0);
+    document.getElementById("currently_editingBtn").innerHTML = makeDropbtnString("Editing:", ["currently_editing"], editing_list, "menu_part");
+    setMenu(["currently_editing"], 0);
     drawCanvas();
 }
 
