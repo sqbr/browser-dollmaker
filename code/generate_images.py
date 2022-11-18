@@ -77,9 +77,10 @@ add_item("Ears", ears_list,"ears_list", "body")
 add_item("Torso", torso_list, "torso_list", "body")
 add_item("Head", head_list, "head_list", "body")
 
+add_item("Eyebrows", eyebrow_list,"eyebrow_list", "expression")
 add_item("Eyes", eye_list,"eye_list", "expression")
 add_item("Mouth", mouth_list,"mouth_list", "expression")
-add_item("Eyebrows", eyebrow_list,"eyebrow_list", "expression")
+
 
 add_item("Nose", nose_list,"nose_list", "body")
 
@@ -200,4 +201,4 @@ def process_all():
         process_list(c)
 
 write_variables()
-process_all()
+#process_all()

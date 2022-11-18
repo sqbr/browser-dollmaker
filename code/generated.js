@@ -16,9 +16,9 @@ const hair_back_list = ["none","short",];
 const ears_list = ["regular",];
 const torso_list = ["medium",];
 const head_list = ["medium","round",];
+const eyebrow_list = ["none","flat_thick",];
 const eye_list = ["medium",];
 const mouth_list = ["flat",];
-const eyebrow_list = ["none","flat_thick",];
 const nose_list = ["none","medium",];
 const shirt_list = ["none","shirt",];
 const coat_list = ["none","cardigan",];
@@ -31,9 +31,9 @@ add_item("Hair_back",hair_back_list)
 add_item("Ears",ears_list)
 add_item("Torso",torso_list)
 add_item("Head",head_list)
+add_item("Eyebrows",eyebrow_list)
 add_item("Eyes",eye_list)
 add_item("Mouth",mouth_list)
-add_item("Eyebrows",eyebrow_list)
 add_item("Nose",nose_list)
 add_item("Shirt",shirt_list)
 add_item("Coat",coat_list)

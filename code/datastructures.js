@@ -63,17 +63,22 @@ function setMenu(variablelist, number){
             break;    
         case 1: //editing the outfit
             document.getElementById("test").innerHTML = "Hello";
-            for (i = 0; i < clothes_list.length; i += 1) {
+            b = findNameMatch(body_objects, "Shirt"); 
+            htmlString+=makeDropbtnString(b.name, [b.name], b.item_list, "body_part");
+            htmlString+=makeDropbtnString(b.name+" Colour", [b.name], range(b.colourNum), "colour");
+            /*for (i = 0; i < outfit_list.length; i += 1) {
                 b = findNameMatch(body_objects, "Shirt"); 
                 htmlString+=makeDropbtnString(b.name, [b.name], b.item_list, "body_part");
                 htmlString+=makeDropbtnString(b.name+" Colour", [b.name], range(b.colourNum), "colour");
-            }
+            }*/
             break;    
         case 2: //editing the expression
             htmlString+="<div class=\"grid-container\"><div style=\"justify-self: end;\">"
             htmlString+=makeDropbtnString("Panel:", ["Panel"], panel_list, "panel");
             htmlString+="</div><h2 id = 'current_panel'>"+panel_list[current_panel] +"</h2></div>";
             htmlString+=makeDropbtnString("Eyebrows", ["Eyebrows"], eyebrow_list, "body_part_panel");
+            htmlString+=makeDropbtnString("Eyes", ["Eyes"], eye_list, "body_part_panel");
+            htmlString+=makeDropbtnString("Mouth", ["Mouth"], mouth_list, "body_part_panel");
             break;      
         default:
             htmlString = "Unknown value";
@@ -116,7 +121,7 @@ function drawCanvas() {
     var ctx = canvas.getContext("2d");
     ctx.clearRect(0,0,canvas_width, canvas_height);
     fixSources(body_objects);
-    document.getElementById("closet").innerHTML = print_body();
+    document.getElementById("closet").innerHTML = outfit_list.length +print_body();
     for (row = 0; row < 3; row += 1) {
         for (column = 0; column < 2; column += 1) {
             xpos = 256*column;
@@ -134,7 +139,6 @@ function drawCanvas() {
 function setup(){
     document.getElementById("currently_editingBtn").innerHTML = makeDropbtnString("Editing:", ["currently_editing"], editing_list, "menu_part");
     setMenu(["currently_editing"], 0);
-    //document.getElementById("closet").innerHTML = print_body();
     drawCanvas();
 }
 
