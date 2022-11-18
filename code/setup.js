@@ -1,16 +1,7 @@
-//shared data, also used by python
-
-const skin_list = ["Torso", "Head"];
-const hair_list = ["Hair_back", "Hair_middle","Hair_front","Facial_hair"];
-
-const outfit_list= ["Shirt"];
-const body_list = ["Torso", "Head"]+hair_list;
-const expression_list = ["Eyes","Eyebrows", "Mouth"]
-
 const canvas_width = 512;
 const canvas_height = 768;
 
-const panelSize = 6; //how many panels
+var panelSize = 6; //how many panels
 
 // Basic functions
 
@@ -61,14 +52,6 @@ const editing_list =["Body","Outfit", "Expressions"];
 
 const panel_list = ["0: Neutral", "1: Happy", "2: Sad", "3: Unique", "4: Blushing", "5: Angry"];
 
-const skinNum = 2; //how many skin colours there are
-
-//Types of parts
-const head_list =["medium","round"];
-const eyebrow_list = ["none", "flat_thick"];
-const torso_list = ["medium"];
-const top_list = ["none", "shirt"];
-
 const body_objects =[];
 
 function add_item(name, list){
@@ -105,4 +88,3 @@ function print_body(){
         s+="<br>";
     }
     return s
-}
