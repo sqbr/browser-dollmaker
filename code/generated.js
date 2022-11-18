@@ -27,5 +27,18 @@ const hair_middle_list = ["none","sidepart",];
 const hair_front_list = ["none","emo",];
 const hat_list = ["none","straw",];
 
+add_item("Hair_back",hair_back_list)
+add_item("Ears",ears_list)
 add_item("Torso",torso_list)
+add_item("Head",head_list)
+add_item("Eyes",eye_list)
+add_item("Mouth",mouth_list)
+add_item("Eyebrows",eyebrow_list)
+add_item("Nose",nose_list)
+add_item("Shirt",shirt_list)
+add_item("Coat",coat_list)
+add_item("Facial_hair",facial_hair_list)
+add_item("Hair_middle",hair_middle_list)
+add_item("Hair_front",hair_front_list)
+add_item("Hat",hat_list)
 

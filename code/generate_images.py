@@ -175,9 +175,8 @@ def write_variables():
         content.write(name_string(c))
     content.write("\n")
     for c in closet:
-        if c.name in ["Torso"]:
+        if c.name in body_list+expression_list+outfit_list+hair_list:
             content.write("add_item(\""+c.name+"\","+ c.listname+")\n")
-    #content.write("add_item(\"Torso\",torso_list)\n")
     content.write("\n")
     
     
