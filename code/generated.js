@@ -4,12 +4,28 @@ const outfit_list = ["Shirt","Accessory","Coat","Eyewear","Hat",];
 const body_list = ["Torso","Head","Complexion","Ears","Nose",];
 const expression_list = ["Eyes","Eyebrows","Mouth",];
 
-const skin_list = ["Torso","Head","Eyebrows","Ears",];
+const skin_list = ["Torso","Head","Complexion","Ears","Nose",];
 const hair_list = ["Hair_back","Hair_middle","Hair_front","Facial_hair",];
 
-const head_list = ["medium","round",];
-const torso_list = ["medium",];
-const eyebrow_list = ["none","flat_thick",];
-const shirt_list = ["none","shirt",];
-
 const skinNum = 2; //how many skin colours there are
+full_body_list = body_list+hair_list;
+
+const coat_back_list = ["none","cardigan",];
+const hat_back_list = ["none","straw",];
+const hair_back_list = ["none","short",];
+const ears_list = ["regular",];
+const torso_list = ["medium",];
+const head_list = ["medium","round",];
+const eye_list = ["medium",];
+const mouth_list = ["flat",];
+const eyebrow_list = ["none","flat_thick",];
+const nose_list = ["none","medium",];
+const shirt_list = ["none","shirt",];
+const coat_list = ["none","cardigan",];
+const facial_hair_list = ["none","mo",];
+const hair_middle_list = ["none","sidepart",];
+const hair_front_list = ["none","emo",];
+const hat_list = ["none","straw",];
+
+add_item("Torso",torso_list)
+

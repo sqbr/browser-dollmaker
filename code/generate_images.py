@@ -11,7 +11,7 @@ body_list = ["Torso", "Head", "Complexion","Ears", "Nose"]
 expression_list = ["Eyes","Eyebrows", "Mouth"]
 outfit_list= ["Shirt", "Accessory", "Coat", "Eyewear", "Hat"]
 
-skin_list = ["Torso", "Head","Eyebrows","Ears"]
+skin_list = body_list
 hair_list = ["Hair_back", "Hair_middle","Hair_front","Facial_hair"]
 
 hair_front_list = ["none", "emo"]
@@ -26,18 +26,74 @@ ears_list =["regular"]
 nose_list =["none","medium"]
 
 eyebrow_list = ["none", "flat_thick"]
-eyes_list = ["medium"]
+eye_list = ["medium"]
 mouth_list = ["flat"]
 
 shirt_list = ["none", "shirt"]
 accessory_list = ["none","choker"]
+coat_back_list = ["none","cardigan"]
 coat_list = ["none","cardigan"]
 eyewear_list = ["none","half"]
 hat_list = ["none","straw"]
+hat_back_list = ["none","straw"]
 
 skin_colours =["#FFCC00","#00FFFF"]
 clothing_colours = ["#FFCC00","#00FFFF"]
 
+#Object stuff
+
+
+closet = [] # list of objects containing information about items of clothing etc
+
+class ClothingItem:
+
+    # name: string describing item type, eg "hat"
+    # item_list: list of strings with names of items, eg hat_list as defined elsewhere
+    # location: string describing where the image files are,
+    #           eg "clothes" because hat images are stored in the folder clothes/hat
+
+    def __init__(self,name,item_list,listname, location):
+        self.name =  name
+        self.item_list = item_list
+        self.listname = listname
+        self.location = location
+
+def add_item(name, item_list,listname, location):
+    # Add an item type to the closet
+    global  closet
+    closet.append(ClothingItem(name, item_list, listname, location))
+
+
+# Not automatically shown
+# add_item("cheeks", cheeks_list, "cheeks_list", "face")
+
+# #Behind eyes
+# shown_start = len(closet) # where the visible items start
+
+add_item("Coat_back", coat_back_list, "coat_back_list","outfit/coat")
+add_item("Hat_back", hat_back_list,"hat_back_list", "outfit/hat")
+add_item("Hair_back", hair_back_list, "hair_back_list","body/hair")
+add_item("Ears", ears_list,"ears_list", "body")
+add_item("Torso", torso_list, "torso_list", "body")
+add_item("Head", head_list, "head_list", "body")
+
+add_item("Eyes", eye_list,"eye_list", "expression")
+add_item("Mouth", mouth_list,"mouth_list", "expression")
+add_item("Eyebrows", eyebrow_list,"eyebrow_list", "expression")
+
+add_item("Nose", nose_list,"nose_list", "body")
+
+# In front of face
+add_item("Shirt", shirt_list,"shirt_list", "outfit")
+#add_item("necklace", necklace_list,"", "outfit")
+add_item("Coat", coat_list,"coat_list", "outfit")
+
+add_item("Facial_hair", facial_hair_list,"facial_hair_list", "body/hair")
+# add_item("face_dec", face_dec_list,"", "outfit")
+add_item("Hair_middle", hair_middle_list,"hair_middle_list", "body/hair")
+
+add_item("Hair_front", hair_front_list,"hair_front_list", "body/hair")
+add_item("Hat", hat_list,"hat_list", "outfit")
 # colour functions
 
 def hex_to_rgba(value):
@@ -84,14 +140,7 @@ def process_image(name, location, colour,colour_list):
         for x in range(img.size[0]):
             if Adata[x, y][3] !=0:
                 Adata[x, y] = colour_this(Adata[x, y], colour_list[colour])  
-    img.save(save_string)                 
-
-def listname(list):
-    # return the string of the list's name
-    if list ==outfit_list:
-        return "outfit_list"
-    if list ==outfit_list:
-        return "outfit_list"    
+    img.save(save_string)                   
 
 def list_string(listname, list):
     # Creates a string to define a list for generated.js
@@ -100,6 +149,13 @@ def list_string(listname, list):
         s+="\""+l+"\","
     s+="];\n"
     return s
+
+def name_string(obj):
+    s = "const "+obj.listname + " = ["
+    for l in obj.item_list:
+        s+="\""+l+"\","
+    s+="];\n"
+    return s    
 
 def write_variables():
     # Write all the shared variables into generated.js
@@ -112,25 +168,37 @@ def write_variables():
     content.write(list_string("skin_list", skin_list))
     content.write(list_string("hair_list", hair_list))
     content.write("\n")
-    content.write(list_string("head_list", head_list))
-    content.write(list_string("torso_list", torso_list))
-    content.write(list_string("eyebrow_list", eyebrow_list))
-    content.write(list_string("shirt_list", shirt_list))
-    content.write("\n")
     content.write("const skinNum = "+str(len(skin_colours))+"; //how many skin colours there are\n")
+    content.write("full_body_list = body_list+hair_list;\n")
+    content.write("\n")
+    for c in closet:
+        content.write(name_string(c))
+    content.write("\n")
+    for c in closet:
+        if c.name in ["Torso"]:
+            content.write("add_item(\""+c.name+"\","+ c.listname+")\n")
+    #content.write("add_item(\"Torso\",torso_list)\n")
+    content.write("\n")
+    
+    
+
     content.close()
 
-def process_list(item_list, colour_list):
-    colour_list = skin_colours
+def process_list(obj):
+    if obj.name in skin_list:
+        colour_list = skin_colours
+    else:
+        colour_list = clothing_colours
+    loc = "../images/"+obj.location + "/"+(obj.name).lower()   
     for c in range(len(colour_list)):
-        loc = "../images/body/hair/hair_front"
-        for item in item_list:
+        for item in obj.item_list:
             if item!="none":
                 process_image(item, loc, c, colour_list)
 
 
 def process_all():
-    process_list(hair_front_list, skin_colours)
+    for c in closet:
+        process_list(c)
 
 write_variables()
 process_all()

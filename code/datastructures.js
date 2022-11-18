@@ -115,8 +115,8 @@ function drawCanvas() {
     var canvas = document.getElementById("portCanvas");
     var ctx = canvas.getContext("2d");
     ctx.clearRect(0,0,canvas_width, canvas_height);
-    document.getElementById("closet").innerHTML = print_body();
     fixSources(body_objects);
+    document.getElementById("closet").innerHTML = print_body();
     for (row = 0; row < 3; row += 1) {
         for (column = 0; column < 2; column += 1) {
             xpos = 256*column;
@@ -134,6 +134,7 @@ function drawCanvas() {
 function setup(){
     document.getElementById("currently_editingBtn").innerHTML = makeDropbtnString("Editing:", ["currently_editing"], editing_list, "menu_part");
     setMenu(["currently_editing"], 0);
+    //document.getElementById("closet").innerHTML = print_body();
     drawCanvas();
 }
 

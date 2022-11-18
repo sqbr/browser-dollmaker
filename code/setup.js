@@ -52,12 +52,9 @@ const editing_list =["Body","Outfit", "Expressions"];
 
 const panel_list = ["0: Neutral", "1: Happy", "2: Sad", "3: Unique", "4: Blushing", "5: Angry"];
 
-full_body_list = body_list+hair_list;
-
 const body_objects =[];
 
 function add_item(name, list){
-    loc="body/torso";
     col = 2;
     if (outfit_list.includes(name)){
         loc = "outfit";
@@ -77,16 +74,13 @@ function add_item(name, list){
     body_objects.push({name: name,location: loc, item_list: list, colourNum: col, value_list: listOf(0),  colour: 0, image_list: newImageList()});
 }
 
-/*body_objects.push({name: "Torso",location: "body/torso", item_list: torso_list, colourNum: skinNum, value_list: listOf(0),  colour: 0, image_list: newImageList()});
-body_objects.push({name: "Head",location: "body/head", item_list: head_list, colourNum: skinNum, value_list: listOf(0),  colour: 0, image_list: newImageList()});
+//body_objects.push({name: "Torso",location: "body/torso", item_list: torso_list, colourNum: skinNum, value_list: listOf(0),  colour: 0, image_list: newImageList()});
+/*body_objects.push({name: "Head",location: "body/head", item_list: head_list, colourNum: skinNum, value_list: listOf(0),  colour: 0, image_list: newImageList()});
 body_objects.push({name: "Shirt",location: "outfit/shirt", item_list: top_list, colourNum: 2, value_list: listOf(0),  colour: 0, image_list: newImageList()});
 body_objects.push({name: "Eyebrows",location: "expression/eyebrows", item_list: eyebrow_list, colourNum: 1, value_list: listOf(0),  colour: 0, image_list: newImageList()});
 */
 
-add_item("Torso", torso_list);
-add_item("Head", head_list);
-add_item("Eyebrows", head_list);
-add_item("Shirt", head_list);
+//add_item("Torso","torso_list")
 
 function print_body(){
     s = "";
