@@ -7,47 +7,36 @@ import glob
 
 # python generate_images.py
 
-outfit_list= ["Shirt"]
-body_list = ["Torso", "Head"]
+body_list = ["Torso", "Head", "Complexion","Ears", "Nose"]
 expression_list = ["Eyes","Eyebrows", "Mouth"]
+outfit_list= ["Shirt", "Accessory", "Coat", "Eyewear", "Hat"]
 
-skin_list = ["Torso", "Head","Eyebrows"]
+skin_list = ["Torso", "Head","Eyebrows","Ears"]
 hair_list = ["Hair_back", "Hair_middle","Hair_front","Facial_hair"]
-outfit_list= ["Shirt"]
 
-head_list =["medium","round"]
-eyebrow_list = ["none", "flat_thick"]
+hair_front_list = ["none", "emo"]
+hair_middle_list = ["none", "sidepart"]
+hair_back_list = ["none", "short"]
+facial_hair_list = ["none","mo"]
+
 torso_list = ["medium"]
+head_list =["medium","round"]
+complexion_list =["none","wrinkles"]
+ears_list =["regular"]
+nose_list =["none","medium"]
+
+eyebrow_list = ["none", "flat_thick"]
+eyes_list = ["medium"]
+mouth_list = ["flat"]
+
 shirt_list = ["none", "shirt"]
+accessory_list = ["none","choker"]
+coat_list = ["none","cardigan"]
+eyewear_list = ["none","half"]
+hat_list = ["none","straw"]
 
 skin_colours =["#FFCC00","#00FFFF"]
-
-
-## general data functions  
-def list_directory(directory,pattern):
-    #lists every element of a directory matching the pattern
-    return [path.split("/").pop() for path in glob.glob(directory+pattern)]
-  
-def sort(l):
-    # a terrible sorting algorithm
-    for i in range(len(l)):
-        min_idx = i
-        for j in range(i+1, len(l)):
-            if l[min_idx] > l[j]:
-                min_idx = j
-                  
-        # Swap the found minimum element with 
-        # the first element        
-        l[i], l[min_idx] = l[min_idx], l[i]   
-    return l     
-    
-def remove_list(list1,list2):
-    #list1 minus any elements of list2
-    new_list = []
-    for l in list1:
-        if not l in list2:
-            new_list.append(l)
-    return new_list  
+clothing_colours = ["#FFCC00","#00FFFF"]
 
 # colour functions
 
@@ -97,6 +86,13 @@ def process_image(name, location, colour,colour_list):
                 Adata[x, y] = colour_this(Adata[x, y], colour_list[colour])  
     img.save(save_string)                 
 
+def listname(list):
+    # return the string of the list's name
+    if list ==outfit_list:
+        return "outfit_list"
+    if list ==outfit_list:
+        return "outfit_list"    
+
 def list_string(listname, list):
     # Creates a string to define a list for generated.js
     s = "const "+listname + " = ["
@@ -124,11 +120,15 @@ def write_variables():
     content.write("const skinNum = "+str(len(skin_colours))+"; //how many skin colours there are\n")
     content.close()
 
+def process_folder():
 
 def process_all():
     colour_list = skin_colours
     for c in range(len(colour_list)):
-        process_image("emo", "../images/body/hair/hair_front", c, colour_list)
+        loc = "../images/body/hair/hair_front"
+        for h in hair_front_list:
+            if h!="none":
+                process_image(h, loc, c, colour_list)
 
 write_variables()
 process_all()

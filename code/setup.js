@@ -85,6 +85,8 @@ body_objects.push({name: "Eyebrows",location: "expression/eyebrows", item_list: 
 
 add_item("Torso", torso_list);
 add_item("Head", head_list);
+add_item("Eyebrows", head_list);
+add_item("Shirt", head_list);
 
 function print_body(){
     s = "";
