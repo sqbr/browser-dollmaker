@@ -52,27 +52,39 @@ const editing_list =["Body","Outfit", "Expressions"];
 
 const panel_list = ["0: Neutral", "1: Happy", "2: Sad", "3: Unique", "4: Blushing", "5: Angry"];
 
+full_body_list = body_list+hair_list;
+
 const body_objects =[];
 
 function add_item(name, list){
-    if (name in outfit_list){
-        location = "outfit";
-        colourNum = 2;
-    } else if (name in body_list){
-        location = "body";
-        colourNum = skinNum;
-    } else if (name in expression_list){
-        location = "expression";
-        colourNum = skinNum;
+    loc="body/torso";
+    col = 2;
+    if (outfit_list.includes(name)){
+        loc = "outfit";
+        col = 2;
+    } else {
+        if (full_body_list.includes(name)){
+            loc = "body";
+            col = skinNum;
+        } else{
+            if (expression_list.includes(name)){
+            loc = "expression";
+            col = skinNum;
+            }
+        }
     }
-    location+="/"+toLowercase(name)
-    body_objects.push({name: name,location: location, item_list: list, colourNum: skinNum, value_list: listOf(0),  colour: 0, image_list: newImageList()});
+    loc+="/"+name.toLowerCase();
+    body_objects.push({name: name,location: loc, item_list: list, colourNum: col, value_list: listOf(0),  colour: 0, image_list: newImageList()});
 }
 
-body_objects.push({name: "Torso",location: "body/torso", item_list: torso_list, colourNum: skinNum, value_list: listOf(0),  colour: 0, image_list: newImageList()});
+/*body_objects.push({name: "Torso",location: "body/torso", item_list: torso_list, colourNum: skinNum, value_list: listOf(0),  colour: 0, image_list: newImageList()});
 body_objects.push({name: "Head",location: "body/head", item_list: head_list, colourNum: skinNum, value_list: listOf(0),  colour: 0, image_list: newImageList()});
 body_objects.push({name: "Shirt",location: "outfit/shirt", item_list: top_list, colourNum: 2, value_list: listOf(0),  colour: 0, image_list: newImageList()});
 body_objects.push({name: "Eyebrows",location: "expression/eyebrows", item_list: eyebrow_list, colourNum: 1, value_list: listOf(0),  colour: 0, image_list: newImageList()});
+*/
+
+add_item("Torso", torso_list);
+add_item("Head", head_list);
 
 function print_body(){
     s = "";
@@ -88,3 +100,4 @@ function print_body(){
         s+="<br>";
     }
     return s
+}

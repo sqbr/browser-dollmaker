@@ -115,7 +115,6 @@ def write_variables():
     content.write("\n")
     content.write(list_string("skin_list", skin_list))
     content.write(list_string("hair_list", hair_list))
-    content.write(list_string("outfit_list", hair_list))
     content.write("\n")
     content.write(list_string("head_list", head_list))
     content.write(list_string("torso_list", torso_list))

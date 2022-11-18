@@ -6,7 +6,6 @@ const expression_list = ["Eyes","Eyebrows","Mouth",];
 
 const skin_list = ["Torso","Head","Eyebrows",];
 const hair_list = ["Hair_back","Hair_middle","Hair_front","Facial_hair",];
-const outfit_list = ["Hair_back","Hair_middle","Hair_front","Facial_hair",];
 
 const head_list = ["medium","round",];
 const torso_list = ["medium",];
