@@ -64,7 +64,7 @@ function setMenu(variablelist, number){
         case 1: //editing the outfit
             document.getElementById("test").innerHTML = "Hello";
             for (i = 0; i < clothes_list.length; i += 1) {
-                b = findNameMatch(body_objects, "Top"); 
+                b = findNameMatch(body_objects, "Shirt"); 
                 htmlString+=makeDropbtnString(b.name, [b.name], b.item_list, "body_part");
                 htmlString+=makeDropbtnString(b.name+" Colour", [b.name], range(b.colourNum), "colour");
             }

@@ -55,7 +55,7 @@ const panel_list = ["0: Neutral", "1: Happy", "2: Sad", "3: Unique", "4: Blushin
 //collections of parts that have the same colours
 const skin_list = ["Torso", "Head"]
 const hair_list = ["Hair_back", "Hair_middle","Hair_front","Facial_hair"]
-const clothes_list = ["Top"];
+const clothes_list = ["Shirt"];
 
 const skinNum = 2; //how many skin colours there are
 
@@ -67,10 +67,10 @@ const top_list = ["none", "shirt"];
 
 const body_objects =[];
 
-body_objects.push({name: "Torso",location: "torso", item_list: torso_list, colourNum: skinNum, value_list: listOf(0),  colour: 0, image_list: newImageList()});
-body_objects.push({name: "Head",location: "head", item_list: head_list, colourNum: skinNum, value_list: listOf(0),  colour: 0, image_list: newImageList()});
-body_objects.push({name: "Top",location: "top", item_list: top_list, colourNum: 2, value_list: listOf(0),  colour: 0, image_list: newImageList()});
-body_objects.push({name: "Eyebrows",location: "eyebrows", item_list: eyebrow_list, colourNum: 1, value_list: listOf(0),  colour: 0, image_list: newImageList()});
+body_objects.push({name: "Torso",location: "body/torso", item_list: torso_list, colourNum: skinNum, value_list: listOf(0),  colour: 0, image_list: newImageList()});
+body_objects.push({name: "Head",location: "body/head", item_list: head_list, colourNum: skinNum, value_list: listOf(0),  colour: 0, image_list: newImageList()});
+body_objects.push({name: "Shirt",location: "outfit/shirt", item_list: top_list, colourNum: 2, value_list: listOf(0),  colour: 0, image_list: newImageList()});
+body_objects.push({name: "Eyebrows",location: "expression/eyebrows", item_list: eyebrow_list, colourNum: 1, value_list: listOf(0),  colour: 0, image_list: newImageList()});
 
 function print_body(){
     s = "";
