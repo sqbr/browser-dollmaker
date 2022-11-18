@@ -7,7 +7,7 @@ function fixSources(list){
             if (b.colourNum==1){
                 b.image_list[j].src = "images/"+b.location+"/"+b.item_list[b.value_list[j]]+".png";
             }else{
-                b.image_list[j].src  = "images/"+b.location+"/"+b.item_list[b.value_list[j]]+"/"+b.colour+".png";
+                b.image_list[j].src  = "images/"+b.location+"/"+b.item_list[b.value_list[j]]+"_"+b.colour+".png";
             }
         }
     }
@@ -70,8 +70,9 @@ function setMenu(variablelist, number){
             }
             break;    
         case 2: //editing the expression
-            htmlString+=makeDropbtnString("Panel", ["Panel"], panel_list, "panel");
-            htmlString+="<div id = 'current_panel'>"+current_panel +"</div>";
+            htmlString+="<div class=\"grid-container\"><div style=\"justify-self: end;\">"
+            htmlString+=makeDropbtnString("Panel:", ["Panel"], panel_list, "panel");
+            htmlString+="</div><h2 id = 'current_panel'>"+panel_list[current_panel] +"</h2></div>";
             htmlString+=makeDropbtnString("Eyebrows", ["Eyebrows"], eyebrow_list, "body_part_panel");
             break;      
         default:
@@ -83,7 +84,7 @@ function setMenu(variablelist, number){
 
 function setPanel(variablelist, number){
     current_panel = number;
-    document.getElementById("current_panel").innerHTML = current_panel;
+    document.getElementById("current_panel").innerHTML = panel_list[current_panel];
 }
 
 function setVariable(variablelist, number){
