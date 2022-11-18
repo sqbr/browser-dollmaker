@@ -120,15 +120,17 @@ def write_variables():
     content.write("const skinNum = "+str(len(skin_colours))+"; //how many skin colours there are\n")
     content.close()
 
-def process_folder():
-
-def process_all():
+def process_list(item_list, colour_list):
     colour_list = skin_colours
     for c in range(len(colour_list)):
         loc = "../images/body/hair/hair_front"
-        for h in hair_front_list:
-            if h!="none":
-                process_image(h, loc, c, colour_list)
+        for item in item_list:
+            if item!="none":
+                process_image(item, loc, c, colour_list)
+
+
+def process_all():
+    process_list(hair_front_list, skin_colours)
 
 write_variables()
 process_all()
