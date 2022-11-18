@@ -8,7 +8,7 @@ import glob
 # python generate_images.py
 
 skin_list = ["Torso", "Head"]
-clothes_list = ["Shirt"]
+outfit_list= ["Shirt"]
 
 skin_colours =["#FFCC00","#00FFFF"]
 
@@ -54,15 +54,26 @@ def rgb_to_hex(red, green, blue):
     # Return color as #rrggbb for the given color values.
     return '#%02x%02x%02x' % (red, green, blue)     
 
+def shading(colour, shadow, r ):
+    return (1-r)*colour + r*colour*shadow/255
+
 def colour_this(pixel, colour):
-    oldr = pixel[0]
-    oldg = pixel[1]
-    oldb = pixel[2]
+    p = [pixel[0],pixel[1],pixel[2]]
     new_colour = hex_to_rgba(colour)
-    r = 0
-    g = 255
-    b = oldb
-    return (r, g, b, pixel[3])
+    if p == [255,0,0]:
+        for i in range(3):
+            p[i] = new_colour[i]      
+    elif p == [0,0,255]: #shading
+        shadow = hex_to_rgba("#1f3066")
+        r = 0.3 #opacity of shadow
+        for i in range(3): #multiply
+           p[i] = int((1-r)*new_colour[i] + r*new_colour[i]*shadow[i]/255)    
+    elif p == [0,255,0]: #highlight
+        highlight = hex_to_rgba("#f9f4ca")
+        r = 0.5 #opacity of highlight
+        for i in range(3): #screen
+           p[i] = int((1-r)*new_colour[i] + r*(255 - (255-new_colour[i])*(255-highlight[i])/255))    
+    return (p[0],p[1],p[2],pixel[3])
 
 
 def process_image(name, location, colour,colour_list):
@@ -76,4 +87,13 @@ def process_image(name, location, colour,colour_list):
                 Adata[x, y] = colour_this(Adata[x, y], colour_list[colour])  
     img.save(save_string)                 
 
-process_image("round", "../images/body/head", 0, skin_colours)
+def read_variables():
+    content = open("code/setup.js","r")
+
+
+def process_all():
+    colour_list = skin_colours
+    for c in range(len(colour_list)):
+        process_image("emo", "../images/body/hair/hair_front", c, colour_list)
+
+process_all()

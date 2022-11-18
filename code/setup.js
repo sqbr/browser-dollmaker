@@ -1,3 +1,12 @@
+//shared data, also used by python
+
+const skin_list = ["Torso", "Head"];
+const hair_list = ["Hair_back", "Hair_middle","Hair_front","Facial_hair"];
+
+const outfit_list= ["Shirt"];
+const body_list = ["Torso", "Head"]+hair_list;
+const expression_list = ["Eyes","Eyebrows", "Mouth"]
+
 const canvas_width = 512;
 const canvas_height = 768;
 
@@ -52,11 +61,6 @@ const editing_list =["Body","Outfit", "Expressions"];
 
 const panel_list = ["0: Neutral", "1: Happy", "2: Sad", "3: Unique", "4: Blushing", "5: Angry"];
 
-//collections of parts that have the same colours
-const skin_list = ["Torso", "Head"]
-const hair_list = ["Hair_back", "Hair_middle","Hair_front","Facial_hair"]
-const clothes_list = ["Shirt"];
-
 const skinNum = 2; //how many skin colours there are
 
 //Types of parts
@@ -66,6 +70,21 @@ const torso_list = ["medium"];
 const top_list = ["none", "shirt"];
 
 const body_objects =[];
+
+function add_item(name, list){
+    if (name in outfit_list){
+        location = "outfit";
+        colourNum = 2;
+    } else if (name in body_list){
+        location = "body";
+        colourNum = skinNum;
+    } else if (name in expression_list){
+        location = "expression";
+        colourNum = skinNum;
+    }
+    location+="/"+toLowercase(name)
+    body_objects.push({name: name,location: location, item_list: list, colourNum: skinNum, value_list: listOf(0),  colour: 0, image_list: newImageList()});
+}
 
 body_objects.push({name: "Torso",location: "body/torso", item_list: torso_list, colourNum: skinNum, value_list: listOf(0),  colour: 0, image_list: newImageList()});
 body_objects.push({name: "Head",location: "body/head", item_list: head_list, colourNum: skinNum, value_list: listOf(0),  colour: 0, image_list: newImageList()});
