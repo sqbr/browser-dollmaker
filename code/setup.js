@@ -59,15 +59,20 @@ function add_item(name, list){
     col = 2;
     if (outfit_list.includes(name)){
         loc = "outfit";
-        col = 2;
+        col = outfitNum;
     } else {
-        if (full_body_list.includes(name)){
+        if (body_list.includes(name)){
             loc = "body";
-            col = skinNum;
+            col = outfitNum;
         } else{
             if (expression_list.includes(name)){
             loc = "expression";
             col = skinNum;
+            } else{
+                if (hair_list.includes(name)){
+                    loc = "body/hair";
+                    col = hairNum;
+                }
             }
         }
     }

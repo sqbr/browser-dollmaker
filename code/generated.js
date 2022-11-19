@@ -7,7 +7,10 @@ const expression_list = ["Eyes","Eyebrows","Mouth",];
 const skin_list = ["Torso","Head","Complexion","Ears","Nose","Eyebrows","Mouth",];
 const hair_list = ["Hair_back","Hair_middle","Hair_front","Facial_hair",];
 
-const skinNum = 2; //how many skin colours there are
+const skinNum = 15; //how many skin colours there are
+const eyeNum = 5; //how many eye colours there are
+const hairNum = 23; //how many hair colours there are
+const outfitNum = 30; //how many clothing colours there are
 const full_body_list = body_list+hair_list;
 
 const coat_back_list = ["none","cardigan",];

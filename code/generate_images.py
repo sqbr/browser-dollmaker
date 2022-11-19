@@ -37,8 +37,28 @@ eyewear_list = ["none","half"]
 hat_list = ["none","straw"]
 hat_back_list = ["none","straw"]
 
-skin_colours =["#FFCC00","#00FFFF"]
-clothing_colours = ["#FFCC00","#00FFFF"]
+skin_basic =["#FFE7D6","#FFD3A6","#FFD3A6","#FFDFA5","#F1A065","#DA773F","#DA874A","#B05934","#B96A2E","#853F27","#783F1A"]
+skin_weird = ["#C3FFFA","#41AD60","#000000","#9BB681"]
+skin_colours =skin_basic + skin_weird
+
+outfit_yellow = ["#FFE201","#FF9F02","#FFDBB6","#F7BE4F"]
+outfit_green = ["#73D080","#4F8B20","#8CC54E","#277032","#56AA04","#7CA838"]
+outfit_blue = ["#477BC8","#3C92ED","#1FDBFF","#2E4D91"]
+outfit_purple = ["#BF2C92","#D361A7","#A46FE2","#9431C6"]
+outfit_red = ["#F0303C","#B71B00","#E55773"]
+outfit_brown = ["#B24836","#912D20","#820000","#630F0F"]
+outfit_grey = ["#FFFFFF","#777471","#4C4C56","#482B57","#000000"]
+
+outfit_colours = outfit_yellow+outfit_green+outfit_blue+outfit_purple +outfit_red +outfit_brown +outfit_grey
+eye_colours = ["#000000","#B25DF6","#1B8EF6","#469951","#F0B50A",]
+hair_blue = ["#7034ED","#B25DF6","#1B8EF6", "#53C7FB","#469951"]
+hair_grey = ["#A59A9D", "#E9E9E9",]
+hair_blonde = ["#FCE374", "#F0B50A",]
+hair_brown = ["#641D00","#923D1F", "#8B4910", "#BB742E",]
+hair_black = ["#48356E","#4B261E", "#5B483C","#5A5A7F", "#602372","#000000"]
+hair_red = ["#FE7423","#FF5565", "#DF433C","#D16132"]
+
+hair_colours = hair_blonde + hair_red+ hair_brown+ hair_black+ hair_blue + hair_grey
 
 #Object stuff
 
@@ -171,6 +191,9 @@ def write_variables():
     content.write(list_string("hair_list", hair_list))
     content.write("\n")
     content.write("const skinNum = "+str(len(skin_colours))+"; //how many skin colours there are\n")
+    content.write("const eyeNum = "+str(len(eye_colours))+"; //how many eye colours there are\n")
+    content.write("const hairNum = "+str(len(hair_colours))+"; //how many hair colours there are\n")
+    content.write("const outfitNum = "+str(len(outfit_colours))+"; //how many clothing colours there are\n")
     content.write("const full_body_list = body_list+hair_list;\n")
     content.write("\n")
     for c in closet:
@@ -188,8 +211,12 @@ def write_variables():
 def process_list(obj):
     if obj.name in skin_list:
         colour_list = skin_colours
+    elif obj.name =="Eyes":
+        colour_list = eye_colours
+    elif obj.name in hair_list:
+        colour_list = hair_colours        
     else:
-        colour_list = clothing_colours
+        colour_list = outfit_colours
     loc = "../images/"+obj.location + "/"+(obj.name).lower()   
     for c in range(len(colour_list)):
         for item in obj.item_list:

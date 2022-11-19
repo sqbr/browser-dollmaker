@@ -34,7 +34,7 @@ function makeDropbtnString(name, variablelist, list, type){
             functionName= "setColour";
             break;  
         default:
-            document.getElementById("test").innerHTML = "Unknown button type";                
+            document.getElementById("test").innerHTML = "Unknown button type "+type;                
     }
     
     let drop_string = '<div class="dropdown">';
@@ -58,15 +58,33 @@ function setMenu(variablelist, number){
     let htmlString = "";
     switch(number){
         case 0: //editing the body
-            htmlString+=makeDropbtnString("Head Shape", ["Head"], head_list, "body_part");
+            htmlString+="<div class=\"grid-choices\">"
             htmlString+=makeDropbtnString("Skin Colour", skin_list, range(skinNum), "colour");
+            htmlString+=makeDropbtnString("Eye Colour", ["Eyes"], range(eyeNum), "colour");
+            htmlString+=makeDropbtnString("Hair Colour", hair_list, range(hairNum), "colour");
+            htmlString+="</div>"
+            htmlString+="<div class=\"grid-choices\">"
+            htmlString+=makeDropbtnString("Head Shape", ["Head"], head_list, "body_part");
+            htmlString+=makeDropbtnString("Ear Shape", ["Ears"], ears_list, "body_part");
+            htmlString+=makeDropbtnString("Nose Shape", ["Nose"], nose_list, "body_part");
+            htmlString+="</div>"
+            htmlString+="<div class=\"grid-choices\">"
+            htmlString+=makeDropbtnString("Hair back", ["Hair_back"], hair_back_list, "body_part");
+            htmlString+=makeDropbtnString("Hair middle", ["Hair_middle"], hair_middle_list, "body_part");
+            htmlString+=makeDropbtnString("Hair front", ["Hair_front"], hair_front_list, "body_part");
+            htmlString+="</div>"
+            htmlString+="<div class=\"grid-choices\">"
+            htmlString+=makeDropbtnString("Facial Hair", ["Facial_hair"], facial_hair_list, "body_part");
+            htmlString+="</div>"
             break;    
         case 1: //editing the outfit
             document.getElementById("test").innerHTML = "Hello";
             for (let i = 0; i < outfit_list.length; i += 1) {
                 let b = findNameMatch(body_objects, outfit_list[i]); 
+                htmlString+="<div class=\"grid-choices\">"
                 htmlString+=makeDropbtnString(b.name, [b.name], b.item_list, "body_part");
                 htmlString+=makeDropbtnString(b.name+" Colour", [b.name], range(b.colourNum), "colour");
+                htmlString+="</div>"
             }
             break;    
         case 2: //editing the expression
@@ -78,7 +96,7 @@ function setMenu(variablelist, number){
             htmlString+=makeDropbtnString("Mouth", ["Mouth"], mouth_list, "body_part_panel");
             break;      
         default:
-            htmlString = "Unknown value";
+            htmlString = "Unknown value "+number;
 
     }
     document.getElementById("controls").innerHTML = htmlString;
@@ -121,7 +139,7 @@ function drawCanvas() {
     let ctx = canvas.getContext("2d");
     ctx.clearRect(0,0,canvas_width, canvas_height);
     fixSources(body_objects);
-    document.getElementById("closet").innerHTML = outfit_list.length +print_body();
+    document.getElementById("closet").innerHTML = print_body();
     for (let row = 0; row < 3; row += 1) {
         for (let column = 0; column < 2; column += 1) {
             let xpos = 256*column;
@@ -136,23 +154,19 @@ function drawCanvas() {
     }
 }
 
-function gameLoop(){
-    //from https://stackoverflow.com/questions/32784387/javascript-canvas-not-redrawing
-    //I don't understand how it works but it makes canvas updating MUCH smoother
-    drawCanvas()
-    requestAnimationFrame(gameLoop);
-  }
-
 function setup(){
     document.getElementById("currently_editingBtn").innerHTML = makeDropbtnString("Editing:", ["currently_editing"], editing_list, "menu_part");
     setMenu(["currently_editing"], 0);
+    drawCanvas();
 }
 
 window.onload = setup;
-requestAnimationFrame(gameLoop);
+var game = setInterval(drawCanvas, 100);//Update canvas every 100 miliseconds
 
+//Some useful posts:
 //https://github.com/ninique/Dollmaker-Script
 //https://stackoverflow.com/questions/45187291/how-to-change-the-color-of-an-image-in-a-html5-canvas-without-changing-its-patte?rq=1
 //https://stackoverflow.com/questions/24405245/html5-canvas-change-image-color
 //https://stackoverflow.com/questions/9303757/how-to-change-color-of-an-image-using-jquery
 //https://stackoverflow.com/questions/28301340/changing-image-colour-through-javascript
+//https://stackoverflow.com/questions/32784387/javascript-canvas-not-redrawing
