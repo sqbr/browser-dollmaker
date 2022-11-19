@@ -33,6 +33,8 @@ const hair_middle_list = ["none","sidepart",];
 const hair_front_list = ["none","emo",];
 const hat_list = ["none","straw",];
 
+add_item("Coat_back",coat_back_list)
+add_item("Hat_back",hat_back_list)
 add_item("Hair_back",hair_back_list)
 add_item("Ears",ears_list)
 add_item("Torso",torso_list)

@@ -107,7 +107,6 @@ add_item("Mouth", mouth_list,"mouth_list", "expression")
 # In front of face
 add_item("Neckwear", neckwear_list,"neckwear_list", "outfit")
 add_item("Shirt", shirt_list,"shirt_list", "outfit")
-#add_item("necklace", necklace_list,"", "outfit")
 add_item("Coat", coat_list,"coat_list", "outfit")
 
 add_item("Facial_hair", facial_hair_list,"facial_hair_list", "body/hair")
@@ -200,8 +199,7 @@ def write_variables():
         content.write(name_string(c))
     content.write("\n")
     for c in closet:
-        if c.name in body_list+expression_list+outfit_list+hair_list:
-            content.write("add_item(\""+c.name+"\","+ c.listname+")\n")
+        content.write("add_item(\""+c.name+"\","+ c.listname+")\n")
     content.write("\n")
     
     
@@ -224,9 +222,9 @@ def process_list(obj):
                 process_image(item, loc, c, colour_list)
 
 
-def process_all():
+def process_all_images():
     for c in closet:
         process_list(c)
 
 write_variables()
-process_all()
+#process_all_images()

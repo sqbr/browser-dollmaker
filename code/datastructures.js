@@ -88,10 +88,14 @@ function setMenu(variablelist, number){
         case 1: //editing the outfit
             document.getElementById("test").innerHTML = "Hello";
             for (let i = 0; i < outfit_list.length; i += 1) {
-                let b = findNameMatch(body_objects, outfit_list[i]); 
+                let b = findNameMatch(body_objects, outfit_list[i]);
+                let edit_list = [b.name];
+                if (back_list.includes(b.name)){
+                    edit_list.push(b.name+"_back");
+                } 
                 htmlString+="<div class=\"grid-choices\">"
-                htmlString+=makeDropbtnString(b.name, [b.name], b.item_list, "body_part");
-                htmlString+=makeDropbtnString(b.name+" Colour", [b.name], range(b.colourNum), "colour");
+                htmlString+=makeDropbtnString(b.name, edit_list, b.item_list, "body_part");
+                htmlString+=makeDropbtnString(b.name+" Colour", edit_list, range(b.colourNum), "colour");
                 htmlString+="</div>"
             }
             break;    

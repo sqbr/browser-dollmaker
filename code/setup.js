@@ -4,6 +4,8 @@ const canvas_height = 768;
 let panelNum = 6; //how many panels
 let panel_width = 256; //width and height of panels in pixels
 
+back_list = ["Hat","Coat"]; //have a back
+
 // Basic functions
 
 function findNameMatch(list, name){
@@ -77,6 +79,15 @@ function add_item(name, list){
             }
         }
     }
+    if (name == "Coat_back"){
+        loc = "outfit/coat";
+        col = outfitNum;
+    }
+    if (name == "Hat_back"){
+        loc = "outfit/hat";
+        col = outfitNum;
+    }
+
     loc+="/"+name.toLowerCase();
     body_objects.push({name: name,location: loc, item_list: list, colourNum: col, value_list: listOf(0),  colour: 0, image_list: newImageList()});
 }
