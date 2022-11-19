@@ -3,7 +3,7 @@ function fixSources(list){
     // Fixes the "src" attribute for all images in list
     for (let i = 0; i < list.length; i += 1){
         let b = list[i];
-        for (let j = 0; j < panelSize; j += 1){ 
+        for (let j = 0; j < panelNum; j += 1){ 
             if (b.colourNum==1){
                 b.image_list[j].src = "images/"+b.location+"/"+b.item_list[b.value_list[j]]+".png";
             }else{
@@ -18,6 +18,9 @@ function makeDropbtnString(name, variablelist, list, type){
     let id = name+'Dropdown';
     let functionName;
     switch(type){
+        case "panels":
+            functionName= "setPanelNum";
+            break;
         case "body_part":
             functionName= "setVariable";
             break;
@@ -49,6 +52,11 @@ function makeDropbtnString(name, variablelist, list, type){
     }
     drop_string +='</div></div>';
     return drop_string;
+}
+
+function setPanelNum(variablelist, number){
+    panelNum = number;
+    document.getElementById("panelTitle").innerHTML = panelNum;
 }
 
 function setMenu(variablelist, number){
@@ -91,9 +99,11 @@ function setMenu(variablelist, number){
             htmlString+="<div class=\"grid-container\"><div style=\"justify-self: end;\">"
             htmlString+=makeDropbtnString("Panel:", ["Panel"], panel_list, "panel");
             htmlString+="</div><h2 id = 'current_panel'>"+panel_list[current_panel] +"</h2></div>";
+            htmlString+="<div class=\"grid-choices\">"
             htmlString+=makeDropbtnString("Eyebrows", ["Eyebrows"], eyebrow_list, "body_part_panel");
             htmlString+=makeDropbtnString("Eyes", ["Eyes"], eye_list, "body_part_panel");
             htmlString+=makeDropbtnString("Mouth", ["Mouth"], mouth_list, "body_part_panel");
+            htmlString+="</div>"
             break;      
         default:
             htmlString = "Unknown value "+number;
@@ -156,7 +166,9 @@ function drawCanvas() {
 
 function setup(){
     document.getElementById("currently_editingBtn").innerHTML = makeDropbtnString("Editing:", ["currently_editing"], editing_list, "menu_part");
+    document.getElementById("panel_numBtn").innerHTML = makeDropbtnString("Panels", ["panel_num"], range(8), "panels");
     setMenu(["currently_editing"], 0);
+    setPanelNum(["panel_numBtn"], 6);
     drawCanvas();
 }
 

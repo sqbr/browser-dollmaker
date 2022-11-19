@@ -10,7 +10,7 @@
 <script src="code/generated.js"></script>
 <script src="code/datastructures.js"></script>
 <script src="code/menus.js"></script> 
-<div class="grid-container"> 
+<div class="grid-choices">
     <div><!-- canvas -->
     <canvas id="portCanvas" width="512" height="768">
     Your browser does not support HTML5 Canvas. Try downloading latest Chrome, Firefox, Safari, Opera or Internet explorer.
@@ -19,8 +19,14 @@
 <div><!-- column 2 -->
     <div class="grid-container">
         <div><button onclick="exportCanvas()">Export</button></div>
-        <div id = "currently_editingBtn" style="justify-self: end;">STUFF</div>    
-        <div><h2 id="editingTitle" text-align="left">THINGS</h2></div>
+        <div class="grid-container">
+            <div id = "panel_numBtn" style="justify-self: end;">STUFF?</div>
+            <div><h2 id="panelTitle" text-align="left">THINGS!</h2></div> 
+        </div> 
+        <div class="grid-container">
+            <div id = "currently_editingBtn" style="justify-self: end;">STUFF</div> 
+            <div><h2 id="editingTitle" text-align="left">THINGS</h2></div>
+        </div>
     </div>
     <hr>
     <div id="controls"></div>
@@ -28,7 +34,7 @@
     <div id="test">Test section</div>
     <hr>
     <div id="closet">Closet</div>
-</div>
+</div>  
       
 </div>
 </div>

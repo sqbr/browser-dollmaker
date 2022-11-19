@@ -1,7 +1,7 @@
 const canvas_width = 512;
 const canvas_height = 768;
 
-let panelSize = 6; //how many panels
+let panelNum = 6; //how many panels
 
 // Basic functions
 
@@ -27,7 +27,7 @@ function range(n){
 function listOf(n){
     // return [n,n,n,n,n,n]
     let x = [];
-    for (let i=0;i<panelSize;i++) {
+    for (let i=0;i<panelNum;i++) {
         x[i]=n;
     }
     return x;
@@ -37,7 +37,7 @@ function listOf(n){
 function newImageList(){
     //list of six images
     let x = [];
-    for (let i=0;i<panelSize;i++) {
+    for (let i=0;i<panelNum;i++) {
         x[i]=new Image();
     }
     return x;
