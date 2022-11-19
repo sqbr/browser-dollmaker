@@ -109,10 +109,13 @@ function setPanelVariable(variablelist, number){
 }
 
 function setColour(variablelist, number){
+    s = "";
     for (i = 0; i < variablelist.length; i += 1) {
         b = findNameMatch(body_objects, variablelist[i]); //the eleemnt of body_objects with the right vriablename
         b.colour=number;
+        s += i +" " + variablelist[i] +" "; 
     }
+    document.getElementById("test").innerHTML = s;
     drawCanvas();
 }
 
@@ -136,13 +139,20 @@ function drawCanvas() {
     }
 }
 
+function gameLoop(){
+    //from https://stackoverflow.com/questions/32784387/javascript-canvas-not-redrawing
+    //I don't understand how it works but it makes canvas updating MUCH smoother
+    drawCanvas()
+    requestAnimationFrame(gameLoop);
+  }
+
 function setup(){
     document.getElementById("currently_editingBtn").innerHTML = makeDropbtnString("Editing:", ["currently_editing"], editing_list, "menu_part");
     setMenu(["currently_editing"], 0);
-    drawCanvas();
 }
 
 window.onload = setup;
+requestAnimationFrame(gameLoop);
 
 //https://github.com/ninique/Dollmaker-Script
 //https://stackoverflow.com/questions/45187291/how-to-change-the-color-of-an-image-in-a-html5-canvas-without-changing-its-patte?rq=1

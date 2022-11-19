@@ -12,6 +12,7 @@ function findNameMatch(list, name){
             return list[i];
         }
     }
+    document.getElementById("test").innerHTML = "Unknown value: "+name;
 }
 
 function range(n){

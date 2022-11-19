@@ -77,12 +77,12 @@ add_item("Ears", ears_list,"ears_list", "body")
 add_item("Torso", torso_list, "torso_list", "body")
 add_item("Head", head_list, "head_list", "body")
 
+add_item("Complexion", complexion_list,"complexion_list", "body")
+add_item("Nose", nose_list,"nose_list", "body")
+
 add_item("Eyebrows", eyebrow_list,"eyebrow_list", "expression")
 add_item("Eyes", eye_list,"eye_list", "expression")
 add_item("Mouth", mouth_list,"mouth_list", "expression")
-
-
-add_item("Nose", nose_list,"nose_list", "body")
 
 # In front of face
 add_item("Shirt", shirt_list,"shirt_list", "outfit")
