@@ -55,7 +55,7 @@ function makeDropbtnString(name, variablelist, list, type){
 }
 
 function setPanelNum(variablelist, number){
-    panelNum = number;
+    panelNum = number+1;
     document.getElementById("panelTitle").innerHTML = panelNum;
 }
 
@@ -146,18 +146,34 @@ function setColour(variablelist, number){
 
 function drawCanvas() {
     let  canvas = document.getElementById("portCanvas");
+    //ctx.clearRect(0,0,canvas_width, canvas_height);
+    let numrows;
+    let numcols;
+    if (panelNum ==1){
+        numcols = 1;
+    }else{
+        numcols = 2;
+    }
+    if (panelNum%2 == 1){
+        numrows = (panelNum+1)/2;
+    }else{
+        numrows = panelNum/2;
+    }
+    canvas.height = panel_width*numrows;
+    canvas.width =  panel_width*numcols;
     let ctx = canvas.getContext("2d");
-    ctx.clearRect(0,0,canvas_width, canvas_height);
     fixSources(body_objects);
     document.getElementById("closet").innerHTML = print_body();
-    for (let row = 0; row < 3; row += 1) {
-        for (let column = 0; column < 2; column += 1) {
-            let xpos = 256*column;
-            let ypos = 256*row;
-            for (let i = 0; i < body_objects.length; i += 1){
-                let b = body_objects[i];
-                if (b.item_list[b.value_list[row*2+column]] !="none"){ 
-                    ctx.drawImage(b.image_list[row*2+column], xpos, ypos);
+    for (let row = 0; row < numrows; row += 1) {
+        for (let column = 0; column < numcols; column += 1) {
+            if (row*2+column < panelNum){
+                let xpos = panel_width*column;
+                let ypos = panel_width*row;
+                for (let i = 0; i < body_objects.length; i += 1){
+                    let b = body_objects[i];
+                    if (b.item_list[b.value_list[row*2+column]] !="none"){ 
+                        ctx.drawImage(b.image_list[row*2+column], xpos, ypos);
+                    }
                 }
             }
         }
@@ -166,9 +182,9 @@ function drawCanvas() {
 
 function setup(){
     document.getElementById("currently_editingBtn").innerHTML = makeDropbtnString("Editing:", ["currently_editing"], editing_list, "menu_part");
-    document.getElementById("panel_numBtn").innerHTML = makeDropbtnString("Panels", ["panel_num"], range(8), "panels");
+    document.getElementById("panel_numBtn").innerHTML = makeDropbtnString("Panels", ["panel_num"], [1,2,3,4,5,6,7,8], "panels");
     setMenu(["currently_editing"], 0);
-    setPanelNum(["panel_numBtn"], 6);
+    setPanelNum(["panel_numBtn"], 5);//setting it to the sixth value eg 6
     drawCanvas();
 }
 

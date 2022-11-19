@@ -2,6 +2,7 @@ const canvas_width = 512;
 const canvas_height = 768;
 
 let panelNum = 6; //how many panels
+let panel_width = 256; //width and height of panels in pixels
 
 // Basic functions
 
