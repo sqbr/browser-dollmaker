@@ -1,9 +1,9 @@
 
 function fixSources(list){
     // Fixes the "src" attribute for all images in list
-    for (i = 0; i < list.length; i += 1){
-        b = list[i];
-        for (j = 0; j < panelSize; j += 1){ 
+    for (let i = 0; i < list.length; i += 1){
+        let b = list[i];
+        for (let j = 0; j < panelSize; j += 1){ 
             if (b.colourNum==1){
                 b.image_list[j].src = "images/"+b.location+"/"+b.item_list[b.value_list[j]]+".png";
             }else{
@@ -15,8 +15,8 @@ function fixSources(list){
 
 function makeDropbtnString(name, variablelist, list, type){
     //Create a dropdown menu which is called name, and sets all the entires in variablelist to whatever value of list is chosen 
-    var id = name+'Dropdown';
-    var functionName;
+    let id = name+'Dropdown';
+    let functionName;
     switch(type){
         case "body_part":
             functionName= "setVariable";
@@ -37,7 +37,7 @@ function makeDropbtnString(name, variablelist, list, type){
             document.getElementById("test").innerHTML = "Unknown button type";                
     }
     
-    drop_string = '<div class="dropdown">';
+    let drop_string = '<div class="dropdown">';
     drop_string +='<button onclick="dropFunction(\''+id+'\')" class="dropbtn">'+name+'</button>';
     drop_string +='<div id="'+id+'" class="dropdown-content">';
     for (row = 0; row < list.length; row += 1) {
@@ -55,7 +55,7 @@ function setMenu(variablelist, number){
     //Setting what section we're editing eg body/expressions etc
     currently_editing = number;
     document.getElementById("editingTitle").innerHTML = editing_list[number];
-    htmlString = "";
+    let htmlString = "";
     switch(number){
         case 0: //editing the body
             htmlString+=makeDropbtnString("Head Shape", ["Head"], head_list, "body_part");
@@ -93,44 +93,44 @@ function setPanel(variablelist, number){
 }
 
 function setVariable(variablelist, number){
-    for (i = 0; i < variablelist.length; i += 1) {
-        b = findNameMatch(body_objects, variablelist[i]); //the eleemnt of body_objects with the right vriablename
+    for (let i = 0; i < variablelist.length; i += 1) {
+        let b = findNameMatch(body_objects, variablelist[i]); //the eleemnt of body_objects with the right vriablename
         b.value_list=listOf(number);
     }
     drawCanvas();
 }
 
 function setPanelVariable(variablelist, number){
-    for (i = 0; i < variablelist.length; i += 1) {
-        b = findNameMatch(body_objects, variablelist[i]); //the eleemnt of body_objects with the right vriablename
+    for (let i = 0; i < variablelist.length; i += 1) {
+        let b = findNameMatch(body_objects, variablelist[i]); //the eleemnt of body_objects with the right vriablename
         b.value_list[current_panel]=number;
     }
     drawCanvas();
 }
 
 function setColour(variablelist, number){
-    s = "";
-    for (i = 0; i < variablelist.length; i += 1) {
-        b = findNameMatch(body_objects, variablelist[i]); //the eleemnt of body_objects with the right vriablename
+    let s = "";
+    for (let i = 0; i < variablelist.length; i += 1) {
+        let b = findNameMatch(body_objects, variablelist[i]); //the eleemnt of body_objects with the right vriablename
         b.colour=number;
-        s += i +" " + variablelist[i] +" "; 
+        s += i +" " + variablelist[i] +" "+b.colour+" - "; 
     }
     document.getElementById("test").innerHTML = s;
     drawCanvas();
 }
 
 function drawCanvas() {
-    var canvas = document.getElementById("portCanvas");
-    var ctx = canvas.getContext("2d");
+    let  canvas = document.getElementById("portCanvas");
+    let ctx = canvas.getContext("2d");
     ctx.clearRect(0,0,canvas_width, canvas_height);
     fixSources(body_objects);
     document.getElementById("closet").innerHTML = outfit_list.length +print_body();
-    for (row = 0; row < 3; row += 1) {
-        for (column = 0; column < 2; column += 1) {
-            xpos = 256*column;
-            ypos = 256*row;
-            for (i = 0; i < body_objects.length; i += 1){
-                b = body_objects[i];
+    for (let row = 0; row < 3; row += 1) {
+        for (let column = 0; column < 2; column += 1) {
+            let xpos = 256*column;
+            let ypos = 256*row;
+            for (let i = 0; i < body_objects.length; i += 1){
+                let b = body_objects[i];
                 if (b.item_list[b.value_list[row*2+column]] !="none"){ 
                     ctx.drawImage(b.image_list[row*2+column], xpos, ypos);
                 }
