@@ -9,9 +9,9 @@ import glob
 
 body_list = ["Torso", "Head", "Complexion","Ears", "Nose"]
 expression_list = ["Eyes","Eyebrows", "Mouth"]
-outfit_list= ["Shirt", "Accessory", "Coat", "Eyewear", "Hat"]
+outfit_list= ["Shirt", "Neckwear", "Coat", "Eyewear", "Hat"]
 
-skin_list = body_list
+skin_list = body_list + ["Eyebrows", "Mouth"]
 hair_list = ["Hair_back", "Hair_middle","Hair_front","Facial_hair"]
 
 hair_front_list = ["none", "emo"]
@@ -30,7 +30,7 @@ eye_list = ["medium"]
 mouth_list = ["flat"]
 
 shirt_list = ["none", "shirt"]
-accessory_list = ["none","choker"]
+neckwear_list = ["none","choker"]
 coat_back_list = ["none","cardigan"]
 coat_list = ["none","cardigan"]
 eyewear_list = ["none","half"]
@@ -85,12 +85,13 @@ add_item("Eyes", eye_list,"eye_list", "expression")
 add_item("Mouth", mouth_list,"mouth_list", "expression")
 
 # In front of face
+add_item("Neckwear", neckwear_list,"neckwear_list", "outfit")
 add_item("Shirt", shirt_list,"shirt_list", "outfit")
 #add_item("necklace", necklace_list,"", "outfit")
 add_item("Coat", coat_list,"coat_list", "outfit")
 
 add_item("Facial_hair", facial_hair_list,"facial_hair_list", "body/hair")
-# add_item("face_dec", face_dec_list,"", "outfit")
+add_item("Eyewear", eyewear_list,"eyewear_list", "outfit")
 add_item("Hair_middle", hair_middle_list,"hair_middle_list", "body/hair")
 
 add_item("Hair_front", hair_front_list,"hair_front_list", "body/hair")
@@ -170,7 +171,7 @@ def write_variables():
     content.write(list_string("hair_list", hair_list))
     content.write("\n")
     content.write("const skinNum = "+str(len(skin_colours))+"; //how many skin colours there are\n")
-    content.write("full_body_list = body_list+hair_list;\n")
+    content.write("const full_body_list = body_list+hair_list;\n")
     content.write("\n")
     for c in closet:
         content.write(name_string(c))
@@ -201,4 +202,4 @@ def process_all():
         process_list(c)
 
 write_variables()
-#process_all()
+process_all()

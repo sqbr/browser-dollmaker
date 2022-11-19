@@ -63,14 +63,11 @@ function setMenu(variablelist, number){
             break;    
         case 1: //editing the outfit
             document.getElementById("test").innerHTML = "Hello";
-            b = findNameMatch(body_objects, "Shirt"); 
-            htmlString+=makeDropbtnString(b.name, [b.name], b.item_list, "body_part");
-            htmlString+=makeDropbtnString(b.name+" Colour", [b.name], range(b.colourNum), "colour");
-            /*for (i = 0; i < outfit_list.length; i += 1) {
-                b = findNameMatch(body_objects, "Shirt"); 
+            for (let i = 0; i < outfit_list.length; i += 1) {
+                let b = findNameMatch(body_objects, outfit_list[i]); 
                 htmlString+=makeDropbtnString(b.name, [b.name], b.item_list, "body_part");
                 htmlString+=makeDropbtnString(b.name+" Colour", [b.name], range(b.colourNum), "colour");
-            }*/
+            }
             break;    
         case 2: //editing the expression
             htmlString+="<div class=\"grid-container\"><div style=\"justify-self: end;\">"

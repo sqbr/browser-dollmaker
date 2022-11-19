@@ -1,13 +1,13 @@
 const canvas_width = 512;
 const canvas_height = 768;
 
-var panelSize = 6; //how many panels
+let panelSize = 6; //how many panels
 
 // Basic functions
 
 function findNameMatch(list, name){
     //returns the first element of list whose name equals "name"
-    for (i = 0; i < list.length; i += 1) {
+    for (let i = 0; i < list.length; i += 1) {
         if (list[i].name==name){
             return list[i];
         }
@@ -17,8 +17,8 @@ function findNameMatch(list, name){
 
 function range(n){
     // return [0...n-1]
-    var x = [];
-    for (var i=0;i<n;i++) {
+    let x = [];
+    for (let i=0;i<n;i++) {
         x[i]=i;
     }
     return x;
@@ -26,8 +26,8 @@ function range(n){
 
 function listOf(n){
     // return [n,n,n,n,n,n]
-    var x = [];
-    for (var i=0;i<panelSize;i++) {
+    let x = [];
+    for (let i=0;i<panelSize;i++) {
         x[i]=n;
     }
     return x;
@@ -36,8 +36,8 @@ function listOf(n){
 
 function newImageList(){
     //list of six images
-    var x = [];
-    for (var i=0;i<panelSize;i++) {
+    let x = [];
+    for (let i=0;i<panelSize;i++) {
         x[i]=new Image();
     }
     return x;
@@ -46,8 +46,8 @@ function newImageList(){
 
 //Initialising data
 
-var currently_editing;
-var current_panel = 0;
+let currently_editing;
+let current_panel = 0;
 
 const editing_list =["Body","Outfit", "Expressions"];
 

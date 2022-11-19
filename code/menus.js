@@ -12,10 +12,10 @@ function dropFunction(id) {
   }
 
 function dropBtnClose(){
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-      var i;
+    let dropdowns = document.getElementsByClassName("dropdown-content");
+      let i;
       for (i = 0; i < dropdowns.length; i++) {
-        var openDropdown = dropdowns[i];
+        let openDropdown = dropdowns[i];
         if (openDropdown.classList.contains('show')) {
           openDropdown.classList.remove('show');
         }
@@ -23,7 +23,7 @@ function dropBtnClose(){
 }
 
 function exportCanvas(){
-    var mycanvas = document.getElementById("portCanvas");
-    var img = mycanvas.toDataURL("image/png;base64;");
+    let mycanvas = document.getElementById("portCanvas");
+    let img = mycanvas.toDataURL("image/png;base64;");
     window.open(img,"","width="+canvas_width+",height="+canvas_height);
 }
