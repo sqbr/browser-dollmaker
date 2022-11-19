@@ -94,7 +94,7 @@ function setMenu(variablelist, number){
                     edit_list.push(b.name+"_back");
                 } 
                 htmlString+="<div class=\"grid-choices\">"
-                htmlString+=makeDropbtnString(b.name, edit_list, b.item_list, "body_part");
+                htmlString+=makeDropbtnString(b.name, [b.name], b.item_list, "body_part");
                 htmlString+=makeDropbtnString(b.name+" Colour", edit_list, range(b.colourNum), "colour");
                 htmlString+="</div>"
             }
@@ -125,6 +125,15 @@ function setVariable(variablelist, number){
     for (let i = 0; i < variablelist.length; i += 1) {
         let b = findNameMatch(body_objects, variablelist[i]); //the eleemnt of body_objects with the right vriablename
         b.value_list=listOf(number);
+        if (back_list.includes(b.name)){
+            let b_back = findNameMatch(body_objects, b.name+"_back");//eg the object associated with "hat_back"
+            let list = b_back.item_list;
+            if (list.includes(b.item_list[number])){ //this is a valid type of back
+                b_back.value_list=listOf(list.indexOf(b.item_list[number])); //set to the correct index, may not match the original object   
+            } else{
+                b_back.value_list=listOf(0); //set to none
+            }
+        }
     }
     drawCanvas();
 }
