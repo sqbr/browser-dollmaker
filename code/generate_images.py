@@ -189,6 +189,8 @@ def write_variables():
     content.write(list_string("skin_list", skin_list))
     content.write(list_string("hair_list", hair_list))
     content.write("\n")
+    
+    content.write("\n")
     content.write("const skinNum = "+str(len(skin_colours))+"; //how many skin colours there are\n")
     content.write("const eyeNum = "+str(len(eye_colours))+"; //how many eye colours there are\n")
     content.write("const hairNum = "+str(len(hair_colours))+"; //how many hair colours there are\n")
@@ -202,8 +204,6 @@ def write_variables():
         content.write("add_item(\""+c.name+"\","+ c.listname+")\n")
     content.write("\n")
     
-    
-
     content.close()
 
 def process_list(obj):

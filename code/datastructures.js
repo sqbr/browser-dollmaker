@@ -1,3 +1,128 @@
+function saturation(colour){
+    //Returns the saturation as a number between ??
+    //colour is an array of numbers between 0 and 255. 
+    let M = Math.max(...colour);
+    let m = Math.min(...colour);
+    let d = (M - m)/255;
+    let L = (M + m)/510; 
+    if (L ==0){
+        return 0;
+    }    
+    else{
+        let X = 1 - Math.abs(2*L-1);
+        if (X == 0){
+            return 0;
+        }
+        return d/X; 
+    }
+}      
+
+function luminance(p){
+    //Returns the saturation as a number between 0 and 255
+    //p is an array of numbers between 0 and 255. 
+    return (0.299*p[0] + 0.587*p[1] + 0.114*p[2]);     
+}
+
+function hue(p){
+    //returns an angle between 0 and 360
+    //p is an array of numbers between 0 and 255. 
+    let R = p[0]
+    let G = p[1]
+    let B = p[2]
+    if (R==G && R==B){
+        return 0;
+    }
+    if ((R>=G) && G >=B){
+        return 60*(G-B)/float(R-B);
+    }
+    if (G>R && R>= B){
+        return 60*(2-(R-B)/float(G-B));
+    }
+    if (G>=B && B> R){
+        return 60*(2+(B-R)/float(G-R));
+    }
+    if (B>G && G> R){
+        return 60*(4-(G-R)/float(B-R));
+    }   
+    if (B>R && R>= G){
+        return 60*(4+(R-G)/float(B-G));
+    }   
+    return 60*(6-(B-G)/float(R-G));  
+}        
+
+function hexToNum(h){
+    //takes 2 digit hex string h and returns a number between 0 and 255
+    parseInt(h,16)
+
+}
+function colour_desc(colour){
+        //returns a text description of a hex colour string. For screenreader/colourblind support.
+        let R = parseInt(colour.slice(1,3),16);
+        let G = parseInt(colour.slice(3,5),16);
+        let B = parseInt(colour.slice(5,7),16);
+        let p = [R,G,B]
+        let h = hue(p);
+        let s = saturation(p);
+        let v = luminance(p);
+
+        let hue;
+
+        //Algorithmic values 
+        if (h < 0.04){
+           if s >0.5{
+              hue = "red";
+           }
+           else{
+               hue = "brown";
+           }
+        }    
+        else{   
+            if (h < 0.13){hue = "orange";}
+        else{
+            if (h < 0.18){hue = "yellow";}
+        else{ 
+            if (h < 0.48) {hue = "green";}
+        else{
+            if (h < 0.73){hue = "blue";}
+        else{
+        if (h < 0.89) {hue = "purple";}
+        else {
+            if (s >0.5) {hue = "red";}
+        else{
+               hue = "brown";}
+        }}}}}}      
+
+        //Using the names in colourlist_list where possible
+
+        /*for sublist in colourlist_list:
+           if colour in sublist[1]:
+               hue = sublist[0]*/
+
+        //Adding "dark"/"light" etc.       
+
+        let c_string = "";
+        if (v ==0){
+            return "black"}
+        else{
+            if (v == 1.0 && s==0){return "white";}
+        else{
+            if (v < 0.2){return hue + "-black";}
+        else{
+            if (v < 0.50){c_string += "dark ";}
+        }}}
+
+        if (s < 0.09){
+            return c_string+ "grey";}
+        else{
+            if (s >0.5){
+            return c_string + hue;}
+        else{
+            if (v>0.5){
+                return "light "+ hue;}
+        else{
+            return "dark grey-"+hue;}
+        }}
+}        
 
 function fixSources(list){
     // Fixes the "src" attribute for all images in list
@@ -95,7 +220,7 @@ function setMenu(variablelist, number){
                 } 
                 htmlString+="<div class=\"grid-choices\">"
                 htmlString+=makeDropbtnString(b.name, [b.name], b.item_list, "body_part");
-                htmlString+=makeDropbtnString(b.name+" Colour", edit_list, range(b.colourNum), "colour");
+                htmlString+='<button onclick="colourPicker()">'+b.name+' Colour</button>';
                 htmlString+="</div>"
             }
             break;    
@@ -113,6 +238,14 @@ function setMenu(variablelist, number){
             htmlString = "Unknown value "+number;
 
     }
+    document.getElementById("controls").innerHTML = htmlString;
+}
+
+function colourPicker(){
+    let colour = 0;
+    let htmlString = "";
+    htmlString+=makeDropbtnString(" Colour", ["Shirt"], [0,1], "colour");
+    htmlString+='<button onclick="setMenu(["currently_editing"], 0)">Back</button>';
     document.getElementById("controls").innerHTML = htmlString;
 }
 
