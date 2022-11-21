@@ -69,7 +69,7 @@ function colour_desc(colour){
 
         //Algorithmic values 
         if (h < 0.04){
-           if s >0.5{
+           if (s >0.5){
               hue = "red";
            }
            else{
