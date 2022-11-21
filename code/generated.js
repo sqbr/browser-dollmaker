@@ -2,6 +2,7 @@
 
 const outfit_list = ["Shirt","Neckwear","Coat","Eyewear","Hat",];
 const body_list = ["Torso","Head","Complexion","Ears","Nose",];
+const skin_list = ["Torso","Head","Complexion","Ears","Nose","Eyebrows","Mouth",];
 const hair_list = ["Hair_back","Hair_middle","Hair_front","Facial_hair",];
 const expression_list = ["Eyes","Eyebrows","Mouth",];
 
@@ -15,7 +16,7 @@ const outfit_grey = ["#FFFFFF","#777471","#4C4C56","#482B57","#000000",];
 const outfit_colours = outfit_yellow+outfit_green+outfit_blue+outfit_purple+outfit_red+outfit_brown+outfit_grey;
 const skin_regular = ["#FFE7D6","#FFD3A6","#FFD3A6","#FFDFA5","#F1A065","#DA773F","#DA874A","#B05934","#B96A2E","#853F27","#783F1A",];
 const skin_weird = ["#C3FFFA","#41AD60","#000000","#9BB681",];
-const skin_list = skin_weird+skin_regular;
+const skin_colours = skin_weird+skin_regular;
 const hair_weird = ["#7034ED","#B25DF6","#1B8EF6","#53C7FB","#469951",];
 const hair_grey = ["#A59A9D","#E9E9E9",];
 const hair_blonde = ["#FCE374","#F0B50A",];

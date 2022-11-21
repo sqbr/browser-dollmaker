@@ -286,7 +286,6 @@ function setColour(variablelist, number){
         b.colour=number;
         s += i +" " + variablelist[i] +" "+b.colour+" - "; 
     }
-    document.getElementById("test").innerHTML = s;
     drawCanvas();
 }
 
