@@ -6,6 +6,7 @@ const skin_list = ["Torso","Head","Complexion","Ears","Nose","Eyebrows","Mouth",
 const hair_list = ["Hair_back","Hair_middle","Hair_front","Facial_hair",];
 const expression_list = ["Eyes","Eyebrows","Mouth",];
 
+const eye_colours = ["#000000","#B25DF6","#1B8EF6","#469951","#F0B50A",];
 const outfit_yellow = ["#FFE201","#FF9F02","#FFDBB6","#F7BE4F",];
 const outfit_green = ["#73D080","#4F8B20","#8CC54E","#277032","#56AA04","#7CA838",];
 const outfit_blue = ["#477BC8","#3C92ED","#1FDBFF","#2E4D91",];

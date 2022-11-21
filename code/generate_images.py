@@ -197,6 +197,7 @@ def write_variables():
     content.write(list_string("hair_list", hair_list))
     content.write(list_string("expression_list", expression_list))
     content.write("\n")
+    content.write(list_string("eye_colours", eye_colours))
     content.write(list_string("outfit_yellow", outfit_yellow))
     content.write(list_string("outfit_green", outfit_green))
     content.write(list_string("outfit_blue", outfit_blue))

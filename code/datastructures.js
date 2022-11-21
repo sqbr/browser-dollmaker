@@ -1,8 +1,8 @@
-function saturation(colour){
+function saturation(p){
     //Returns the saturation as a number between ??
-    //colour is an array of numbers between 0 and 255. 
-    let M = Math.max(...colour);
-    let m = Math.min(...colour);
+    //p is an array of numbers between 0 and 255. 
+    let M = Math.max(...p);
+    let m = Math.min(...p);
     let d = (M - m)/255;
     let L = (M + m)/510; 
     if (L ==0){
@@ -21,9 +21,9 @@ function luminance(p){
     //Returns the saturation as a number between 0 and 255
     //p is an array of numbers between 0 and 255. 
     return (0.299*p[0] + 0.587*p[1] + 0.114*p[2]);     
-}
+}       
 
-function hue(p){
+function findHue(p){
     //returns an angle between 0 and 360
     //p is an array of numbers between 0 and 255. 
     let R = p[0]
@@ -33,23 +33,22 @@ function hue(p){
         return 0;
     }
     if ((R>=G) && G >=B){
-        return 60*(G-B)/float(R-B);
+        return 60*(G-B)/(R-B);
     }
     if (G>R && R>= B){
-        return 60*(2-(R-B)/float(G-B));
+        return 60*(2-(R-B)/(G-B));
     }
     if (G>=B && B> R){
-        return 60*(2+(B-R)/float(G-R));
+        return 60*(2+(B-R)/(G-R));
     }
     if (B>G && G> R){
-        return 60*(4-(G-R)/float(B-R));
+        return 60*(4-(G-R)/(B-R));
     }   
     if (B>R && R>= G){
-        return 60*(4+(R-G)/float(B-G));
+        return 60*(4+(R-G)/(B-G));
     }   
-    return 60*(6-(B-G)/float(R-G));  
-}        
-
+    return 60*(6-(B-G)/(R-G)); 
+}
 function hexToNum(h){
     //takes 2 digit hex string h and returns a number between 0 and 255
     parseInt(h,16)
@@ -61,42 +60,45 @@ function colour_desc(colour){
         let G = parseInt(colour.slice(3,5),16);
         let B = parseInt(colour.slice(5,7),16);
         let p = [R,G,B]
-        let h = hue(p);
+        let h = findHue(p);
         let s = saturation(p);
         let v = luminance(p);
 
-        let hue;
+        let hueString = "unknown";
 
         //Algorithmic values 
-        if (h < 0.04){
+        if (h < 14.4){
            if (s >0.5){
-              hue = "red";
+            hueString = "red";
            }
            else{
-               hue = "brown";
+            hueString = "brown";
            }
         }    
         else{   
-            if (h < 0.13){hue = "orange";}
+            if (h < 46.8){hueString = "orange";}
         else{
-            if (h < 0.18){hue = "yellow";}
+            if (h < 64.8){hueString = "yellow";}
         else{ 
-            if (h < 0.48) {hue = "green";}
+            if (h < 172.8) {hueString = "green";}
         else{
-            if (h < 0.73){hue = "blue";}
+            if (h < 262.8){hueString = "blue";}
         else{
-        if (h < 0.89) {hue = "purple";}
+        if (h < 320.4) {hueString = "purple";}
         else {
-            if (s >0.5) {hue = "red";}
+            if (s >0.5) {hueString = "red";}
         else{
-               hue = "brown";}
+            hueString = "brown";}
         }}}}}}      
 
         //Using the names in colourlist_list where possible
 
-        /*for sublist in colourlist_list:
-           if colour in sublist[1]:
-               hue = sublist[0]*/
+        for (let i = 0; i < colourlist_list.length; i += 1){
+            sublist = colourlist_list[i];
+           if (sublist[1].includes(colour)){
+               hue = sublist[0];
+           }
+        }
 
         //Adding "dark"/"light" etc.       
 
@@ -106,7 +108,7 @@ function colour_desc(colour){
         else{
             if (v == 1.0 && s==0){return "white";}
         else{
-            if (v < 0.2){return hue + "-black";}
+            if (v < 0.2){return hueString + "-black";}
         else{
             if (v < 0.50){c_string += "dark ";}
         }}}
@@ -115,12 +117,12 @@ function colour_desc(colour){
             return c_string+ "grey";}
         else{
             if (s >0.5){
-            return c_string + hue;}
+            return c_string + hueString;}
         else{
             if (v>0.5){
-                return "light "+ hue;}
+                return "light "+ hueString;}
         else{
-            return "dark grey-"+hue;}
+            return "dark grey-"+hueString;}
         }}
 }        
 
@@ -173,7 +175,13 @@ function makeDropbtnString(name, variablelist, list, type){
         for (i = 0; i < variablelist.length; i += 1){
             drop_string +="\'"+variablelist[i]+"\',"
         }
-        drop_string +='],'+row+')" >'+list[row]+'</button>';
+        drop_string +='],'+row+')" >'
+        if (type=="colour"){
+            drop_string +=colour_desc(list[row])
+        }else{
+            drop_string +=list[row]; //name of button
+        }
+        drop_string +='</button>';
     }
     drop_string +='</div></div>';
     return drop_string;
@@ -192,9 +200,9 @@ function setMenu(variablelist, number){
     switch(number){
         case 0: //editing the body
             htmlString+="<div class=\"grid-choices\">"
-            htmlString+=makeDropbtnString("Skin Colour", skin_list, range(skinNum), "colour");
-            htmlString+=makeDropbtnString("Eye Colour", ["Eyes"], range(eyeNum), "colour");
-            htmlString+=makeDropbtnString("Hair Colour", hair_list, range(hairNum), "colour");
+            htmlString+=makeDropbtnString("Skin Colour", skin_list, skin_colours, "colour");
+            htmlString+=makeDropbtnString("Eye Colour", ["Eyes"], eye_colours, "colour");
+            htmlString+=makeDropbtnString("Hair Colour", hair_list, hair_colours, "colour");
             htmlString+="</div>"
             htmlString+="<div class=\"grid-choices\">"
             htmlString+=makeDropbtnString("Head Shape", ["Head"], head_list, "body_part");
@@ -284,7 +292,7 @@ function setColour(variablelist, number){
     for (let i = 0; i < variablelist.length; i += 1) {
         let b = findNameMatch(body_objects, variablelist[i]); //the eleemnt of body_objects with the right vriablename
         b.colour=number;
-        s += i +" " + variablelist[i] +" "+b.colour+" - "; 
+        //s += i +" " + variablelist[i] +" "+b.colour+" - "; 
     }
     drawCanvas();
 }
