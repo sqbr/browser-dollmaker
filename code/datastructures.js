@@ -1,5 +1,5 @@
 function saturation(p){
-    //Returns the saturation as a number between ??
+    //Returns the saturation as a number between 0 and 1, inclusive
     //p is an array of numbers between 0 and 255. 
     let M = Math.max(...p);
     let m = Math.min(...p);
@@ -18,7 +18,7 @@ function saturation(p){
 }      
 
 function luminance(p){
-    //Returns the saturation as a number between 0 and 255
+    //Returns the luminance as a number between 0 and 255
     //p is an array of numbers between 0 and 255. 
     return (0.299*p[0] + 0.587*p[1] + 0.114*p[2]);     
 }       
@@ -64,6 +64,8 @@ function colour_desc(colour){
         let s = saturation(p);
         let v = luminance(p);
 
+        //return colour +" H:"+h.toFixed(2)+" "+s.toFixed(3)+" "+v.toFixed(2)
+
         let hueString = "unknown";
 
         //Algorithmic values 
@@ -93,12 +95,12 @@ function colour_desc(colour){
 
         //Using the names in colourlist_list where possible
 
-        for (let i = 0; i < colourlist_list.length; i += 1){
+        /*for (let i = 0; i < colourlist_list.length; i += 1){
             sublist = colourlist_list[i];
            if (sublist[1].includes(colour)){
-               hue = sublist[0];
+            hueString = sublist[0]+"in list"
            }
-        }
+        }*/
 
         //Adding "dark"/"light" etc.       
 
@@ -106,11 +108,17 @@ function colour_desc(colour){
         if (v ==0){
             return "black"}
         else{
-            if (v == 1.0 && s==0){return "white";}
+            if (v == 255 && s==0){return "white";}
         else{
-            if (v < 0.2){return hueString + "-black";}
+            if (v < 51){
+                if (["red","orange"].includes(hueString)){
+                    return "rich dark brown"
+                } else{
+                    return hueString + "-black";
+                }
+            }
         else{
-            if (v < 0.50){c_string += "dark ";}
+            if (v < 125){c_string += "dark ";}
         }}}
 
         if (s < 0.09){
@@ -119,10 +127,15 @@ function colour_desc(colour){
             if (s >0.5){
             return c_string + hueString;}
         else{
-            if (v>0.5){
+            if (v>125){
                 return "light "+ hueString;}
         else{
-            return "dark grey-"+hueString;}
+            if (["red","orange"].includes(hueString)){
+                return "dark brown"
+            } else{
+                return "dark grey-"+hueString;
+            }
+            }
         }}
 }        
 
@@ -228,7 +241,8 @@ function setMenu(variablelist, number){
                 } 
                 htmlString+="<div class=\"grid-choices\">"
                 htmlString+=makeDropbtnString(b.name, [b.name], b.item_list, "body_part");
-                htmlString+='<button onclick="colourPicker()">'+b.name+' Colour</button>';
+                htmlString+=makeDropbtnString(b.name+" Colour", [b.name], outfit_colours, "colour");
+                //htmlString+='<button onclick="colourPicker()">'+b.name+' Colour</button>';
                 htmlString+="</div>"
             }
             break;    
@@ -292,7 +306,6 @@ function setColour(variablelist, number){
     for (let i = 0; i < variablelist.length; i += 1) {
         let b = findNameMatch(body_objects, variablelist[i]); //the eleemnt of body_objects with the right vriablename
         b.colour=number;
-        //s += i +" " + variablelist[i] +" "+b.colour+" - "; 
     }
     drawCanvas();
 }
@@ -316,7 +329,7 @@ function drawCanvas() {
     canvas.width =  panel_width*numcols;
     let ctx = canvas.getContext("2d");
     fixSources(body_objects);
-    document.getElementById("closet").innerHTML = print_body();
+    //document.getElementById("closet").innerHTML = print_body();
     for (let row = 0; row < numrows; row += 1) {
         for (let column = 0; column < numcols; column += 1) {
             if (row*2+column < panelNum){

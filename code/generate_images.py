@@ -182,9 +182,13 @@ colourlist_list_string = "const colourlist_list = ["
 
 def colour_list_add(list_name, sublists):
     global colourlist_list_string
-    for l in sublists.split("+"):
+    sublist_names = sublists.split("+")
+    for l in sublist_names:
         colourlist_list_string+="[\""+l.split("_")[1]+"\","+l+"],"
-    return "const "+list_name+" = " + sublists+";\n"
+    s = "const "+list_name+" = " + sublist_names[0]+".concat("
+    for l in sublist_names[1:]:
+        s+=l+","
+    return s+ ");\n"  
 
 def write_variables():
     # Write all the shared variables into generated.js
@@ -208,14 +212,14 @@ def write_variables():
     content.write(colour_list_add("outfit_colours", "outfit_yellow+outfit_green+outfit_blue+outfit_purple+outfit_red+outfit_brown+outfit_grey"))
     content.write(list_string("skin_regular", skin_regular))
     content.write(list_string("skin_weird", skin_weird))
-    content.write(colour_list_add("skin_colours", "skin_weird+skin_regular"))
+    content.write(colour_list_add("skin_colours", "skin_regular+skin_weird"))
     content.write(list_string("hair_weird", hair_weird))
     content.write(list_string("hair_grey", hair_grey))
     content.write(list_string("hair_blonde", hair_blonde))
     content.write(list_string("hair_red", hair_red))
     content.write(list_string("hair_brown", hair_brown))
     content.write(list_string("hair_black", hair_black))
-    content.write(colour_list_add("hair_colours","hair_blonde + hair_red+ hair_brown+ hair_black+ hair_weird + hair_grey"))
+    content.write(colour_list_add("hair_colours","hair_blonde+hair_red+hair_brown+hair_black+hair_weird+hair_grey"))
     content.write("\n")
     content.write(colourlist_list_string+"];\n")
     content.write("\n")

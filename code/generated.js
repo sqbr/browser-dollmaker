@@ -14,19 +14,19 @@ const outfit_purple = ["#BF2C92","#D361A7","#A46FE2","#9431C6",];
 const outfit_red = ["#F0303C","#B71B00","#E55773",];
 const outfit_brown = ["#B24836","#912D20","#820000","#630F0F",];
 const outfit_grey = ["#FFFFFF","#777471","#4C4C56","#482B57","#000000",];
-const outfit_colours = outfit_yellow+outfit_green+outfit_blue+outfit_purple+outfit_red+outfit_brown+outfit_grey;
+const outfit_colours = outfit_yellow.concat(outfit_green,outfit_blue,outfit_purple,outfit_red,outfit_brown,outfit_grey,);
 const skin_regular = ["#FFE7D6","#FFD3A6","#FFD3A6","#FFDFA5","#F1A065","#DA773F","#DA874A","#B05934","#B96A2E","#853F27","#783F1A",];
 const skin_weird = ["#C3FFFA","#41AD60","#000000","#9BB681",];
-const skin_colours = skin_weird+skin_regular;
+const skin_colours = skin_regular.concat(skin_weird,);
 const hair_weird = ["#7034ED","#B25DF6","#1B8EF6","#53C7FB","#469951",];
 const hair_grey = ["#A59A9D","#E9E9E9",];
 const hair_blonde = ["#FCE374","#F0B50A",];
 const hair_red = ["#FE7423","#FF5565","#DF433C","#D16132",];
 const hair_brown = ["#641D00","#923D1F","#8B4910","#BB742E",];
 const hair_black = ["#48356E","#4B261E","#5B483C","#5A5A7F","#602372","#000000",];
-const hair_colours = hair_blonde + hair_red+ hair_brown+ hair_black+ hair_weird + hair_grey;
+const hair_colours = hair_blonde.concat(hair_red,hair_brown,hair_black,hair_weird,hair_grey,);
 
-const colourlist_list = [["yellow",outfit_yellow],["green",outfit_green],["blue",outfit_blue],["purple",outfit_purple],["red",outfit_red],["brown",outfit_brown],["grey",outfit_grey],["weird",skin_weird],["regular",skin_regular],["blonde ",hair_blonde ],["red", hair_red],["brown", hair_brown],["black", hair_black],["weird ", hair_weird ],["grey", hair_grey],];
+const colourlist_list = [["yellow",outfit_yellow],["green",outfit_green],["blue",outfit_blue],["purple",outfit_purple],["red",outfit_red],["brown",outfit_brown],["grey",outfit_grey],["regular",skin_regular],["weird",skin_weird],["blonde",hair_blonde],["red",hair_red],["brown",hair_brown],["black",hair_black],["weird",hair_weird],["grey",hair_grey],];
 
 const skinNum = 15; //how many skin colours there are
 const eyeNum = 5; //how many eye colours there are
