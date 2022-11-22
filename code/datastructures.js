@@ -182,20 +182,20 @@ function setPanelNum(variablelist, number){
     document.getElementById("panelTitle").innerHTML = panelNum;
 }
 
-function setToolbar(){
+function setTopbar(){
     let s = '';
-    s+='<div style="display: grid;grid-template-columns: auto;">';
-    s+='<div style="display: grid;grid-template-columns: auto auto;"><!--top row-->';
     s+='<div><button onclick="exportCanvas()">Export</button></div>\n';
     s+='<div class="grid-container">\n';
     s+='<div id = "image_typeBtn" style="justify-self: end;">Something</div>\n';
     s+='<div><h2 id="imageType" text-align="left">Broken</h2></div> \n';
     s+='</div>\n';
-    s+='</div><!-- end top row-->\n'; 
-    s+='<hr>';
+    document.getElementById("topbar").innerHTML = s;
+    document.getElementById("image_typeBtn").innerHTML = makeDropbtnString("Image Type:", ["current_imageType"], imageType_list, "setImageType");
+}
+
+function setToolbar(number){
+    let s = "";
     if (current_imageType == "Portrait"){
-        s+='<div style="display: grid;grid-template-columns: auto auto;"><!--second row-->';//
-        s+='<div class="grid-container">\n';
         s+='<div id = "panel_numBtn" style="justify-self: end;">Something</div>\n';
         s+='<div><h2 id="panelTitle" text-align="left">Broken</h2></div> \n';
         s+='</div>\n'; 
@@ -203,22 +203,46 @@ function setToolbar(){
         s+='    <div id = "currently_editingBtn" style="justify-self: end;">Secret</div>\n'; 
         s+='    <div><h2 id="editingTitle" text-align="left">errors??</h2></div>\n';
         s+='</div>\n';
-        s+='</div><!-- end second row-->\n';
-        s+='</div>\n';
         document.getElementById("toolbar").innerHTML = s;
         document.getElementById("currently_editingBtn").innerHTML = makeDropbtnString("Editing:", ["currently_editing"], editing_list, "setMenu");
         document.getElementById("panel_numBtn").innerHTML = makeDropbtnString("Panels", ["panel_num"], [1,2,3,4,5,6,7,8], "setPanelNum");
 
+    } else{
+        s+='<div class="grid-container">\n';
+        s+='    <div id = "currently_editingBtn" style="justify-self: end;">Secret</div>\n'; 
+        s+='    <div><h2 id="editingTitle" text-align="left">errors??</h2></div>\n';
+        s+='</div>\n';
+        document.getElementById("toolbar").innerHTML = s;
+        document.getElementById("currently_editingBtn").innerHTML = makeDropbtnString("Editing:", ["currently_editing"], editing_list, "setMenu");
     }
-    document.getElementById("image_typeBtn").innerHTML = makeDropbtnString("Image Type:", ["current_imageType"], ["Portrait","Sprite"], "setImageType");
-    
-    
 }
 
 function setImageType(variablelist, number){
     current_imageType = number;
     document.getElementById("imageType").innerHTML = imageType_list[number];
-    setToolbar()
+    let htmlString = "";
+    switch(number){
+        case 0: //editing portraits
+            htmlString+='<div id = "panel_numBtn" style="justify-self: end;">Something</div>\n';
+            htmlString+='<div><h2 id="panelTitle" text-align="left">Broken</h2></div> \n';
+            htmlString+='</div>\n'; 
+            htmlString+='<div class="grid-container">\n';
+            htmlString+='    <div id = "currently_editingBtn" style="justify-self: end;">Secret</div>\n'; 
+            htmlString+='    <div><h2 id="editingTitle" text-align="left">errors??</h2></div>\n';
+            htmlString+='</div>\n';
+            document.getElementById("toolbar").innerHTML = htmlString; 
+            document.getElementById("currently_editingBtn").innerHTML = makeDropbtnString("Editing:", ["currently_editing"], editing_list, "setMenu");
+            document.getElementById("panel_numBtn").innerHTML = makeDropbtnString("Panels", ["panel_num"], [1,2,3,4,5,6,7,8], "setPanelNum");
+            
+            /*htmlString+="<div class=\"grid-choices\">"
+            htmlString+=makeDropbtnString("Editing:", ["currently_editing"], editing_list, "setMenu");
+            htmlString+="</div>"*/
+            break;
+        default:
+            htmlString = "Unknown value "+number;   
+            document.getElementById("toolbar").innerHTML = htmlString;  
+    }   
+    //document.getElementById("toolbar").innerHTML = htmlString; 
 
 }
 
@@ -364,9 +388,8 @@ function drawCanvas() {
 }
 
 function setup(){
-    setToolbar();
-    document.getElementById("currently_editingBtn").innerHTML = makeDropbtnString("Editing:", ["currently_editing"], editing_list, "setMenu");
-    document.getElementById("panel_numBtn").innerHTML = makeDropbtnString("Panels", ["panel_num"], [1,2,3,4,5,6,7,8], "setPanelNum");
+    setTopbar();
+    setImageType([],0)
     setMenu(["currently_editing"], 0);
     setPanelNum(["panel_numBtn"], 5);//setting it to the sixth value eg 6
     drawCanvas();

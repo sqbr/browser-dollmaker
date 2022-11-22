@@ -4,8 +4,8 @@ const canvas_height = 768;
 let panelNum = 6; //how many panels
 let panel_width = 256; //width and height of panels in pixels
 
-let current_imageType = "Portrait";
-let currently_editing = "Body";
+let current_imageType;
+let currently_editing;
 let current_panel = 0;
 
 const editing_list =["Body","Outfit", "Expressions"];
