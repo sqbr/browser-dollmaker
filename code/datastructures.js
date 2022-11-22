@@ -145,9 +145,9 @@ function fixSources(list){
         let b = list[i];
         for (let j = 0; j < panelNum; j += 1){ 
             if (b.colourNum==1){
-                b.image_list[j].src = "images/"+b.location+"/"+b.item_list[b.value_list[j]]+".png";
+                b.image_list[j].src = "images/portraits/"+b.location+"/"+b.item_list[b.value_list[j]]+".png";
             }else{
-                b.image_list[j].src  = "images/"+b.location+"/"+b.item_list[b.value_list[j]]+"_"+b.colour+".png";
+                b.image_list[j].src  = "images/portraits/"+b.location+"/"+b.item_list[b.value_list[j]]+"_"+b.colour+".png";
             }
         }
     }
@@ -234,6 +234,7 @@ function setImageType(variablelist, number){
             document.getElementById("toolbar").innerHTML = htmlString; 
             document.getElementById("currently_editing_portBtn").innerHTML = makeDropbtnString("Editing:", ["currently_editing_port"], editing_list_port, "setMenu");
             document.getElementById("panel_numBtn").innerHTML = makeDropbtnString("Panels", ["panel_num"], [1,2,3,4,5,6,7,8], "setPanelNum");
+            document.getElementById("preview").innerHTML = "<h2>Portraits:</h2>"
             setMenu([], currently_editing_port)
             break;
         case 1: //editing sprites
@@ -244,6 +245,7 @@ function setImageType(variablelist, number){
             htmlString+='</div>\n';
             document.getElementById("toolbar").innerHTML = htmlString; 
             document.getElementById("currently_editing_spritesBtn").innerHTML = makeDropbtnString("Editing:", ["currently_editing_sprites"], editing_list_sprites, "setMenu");
+            document.getElementById("preview").innerHTML = "<h2>Sprites:</h2>"
             setMenu([], currently_editing_sprites)
             break;
     

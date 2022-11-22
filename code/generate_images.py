@@ -247,7 +247,7 @@ def process_list(obj):
         colour_list = hair_colours        
     else:
         colour_list = outfit_colours
-    loc = "../images/"+obj.location + "/"+(obj.name).lower()   
+    loc = "../images/portraits/"+obj.location + "/"+(obj.name).lower()   
     for c in range(len(colour_list)):
         for item in obj.item_list:
             if item!="none":
