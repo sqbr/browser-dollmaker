@@ -155,7 +155,7 @@ function fixSources(list){
 
 function makeDropbtnString(name, variablelist, list, functionName){
     //Create a dropdown menu which is called name, and sets all the entires in variablelist to whatever value of list is chosen 
-    let id = name+'Dropdown';
+    let id = name+functionName+'Dropdown';
     
     let drop_string = '<div class="dropdown">';
     drop_string +='<button onclick="dropFunction(\''+id+'\')" class="dropbtn">'+name+'</button>';
@@ -204,16 +204,16 @@ function setToolbar(number){
         s+='    <div><h2 id="editingTitle" text-align="left">errors??</h2></div>\n';
         s+='</div>\n';
         document.getElementById("toolbar").innerHTML = s;
-        document.getElementById("currently_editing_portBtn").innerHTML = makeDropbtnString("Editing:", ["currently_editing_port"], editing_list_port, "setMenu");
+        document.getElementById("currently_editing_portBtn").innerHTML = makeDropbtnString("Editing:", ["currently_editing_port"], editing_list_port, "setMenuPort");
         document.getElementById("panel_numBtn").innerHTML = makeDropbtnString("Panels", ["panel_num"], [1,2,3,4,5,6,7,8], "setPanelNum");
 
     } else{
         s+='<div class="grid-container">\n';
-        s+='    <div id = "currently_editing_portBtn" style="justify-self: end;">Secret</div>\n'; 
+        s+='    <div id = "currently_editing_spritesBtn" style="justify-self: end;">Secret</div>\n'; 
         s+='    <div><h2 id="editingTitle" text-align="left">errors??</h2></div>\n';
         s+='</div>\n';
         document.getElementById("toolbar").innerHTML = s;
-        document.getElementById("currently_editing_portBtn").innerHTML = makeDropbtnString("Editing:", ["currently_editing_port"], editing_list_port, "setMenu");
+        document.getElementById("currently_editing_spritesBtn").innerHTML = makeDropbtnString("Editing:", ["currently_editing_sprites"], editing_list_sprites, "setMenuPort");
     }
 }
 
@@ -232,29 +232,29 @@ function setImageType(variablelist, number){
             htmlString+='    <div><h2 id="editingTitle" text-align="left">'+editing_list_port[currently_editing_port]+'</h2></div>\n';
             htmlString+='</div>\n';
             document.getElementById("toolbar").innerHTML = htmlString; 
-            document.getElementById("currently_editing_portBtn").innerHTML = makeDropbtnString("Editing:", ["currently_editing_port"], editing_list_port, "setMenu");
+            document.getElementById("currently_editing_portBtn").innerHTML = makeDropbtnString("Editing:", ["currently_editing_port"], editing_list_port, "setMenuPort");
             document.getElementById("panel_numBtn").innerHTML = makeDropbtnString("Panels", ["panel_num"], [1,2,3,4,5,6,7,8], "setPanelNum");
-            setMenu([], currently_editing_port)
+            setMenuPort([], currently_editing_port)
             break;
         case 1: //editing sprites
+            currently_editing_sprites = 0;
             htmlString+='<div class="grid-container">\n';
-            htmlString+='    <div id = "currently_editing_portBtn" style="justify-self: end;">Editing:</div>\n'; 
-            htmlString+='    <div><h2 id="editingTitle" text-align="left">'+editing_list_port[currently_editing_port]+'</h2></div>\n';
+            htmlString+='    <div id = "currently_editing_spritesBtn" style="justify-self: end;">Editing:</div>\n'; 
+            htmlString+='    <div><h2 id="editingTitle" text-align="left">'+editing_list_sprites[currently_editing_sprites]+'</h2></div>\n';
             htmlString+='</div>\n';
             document.getElementById("toolbar").innerHTML = htmlString; 
-            document.getElementById("currently_editing_portBtn").innerHTML = makeDropbtnString("Editing:", ["currently_editing_port"], editing_list_port, "setMenu");
-            
+            document.getElementById("currently_editing_spritesBtn").innerHTML = makeDropbtnString("Editing:", ["currently_editing_sprites"], editing_list_sprites, "setMenuPort");
+            setMenuPort([], currently_editing_sprites)
             break;
     
         default:
             htmlString = "Unknown value "+number;   
             document.getElementById("toolbar").innerHTML = htmlString;  
     }   
-    //document.getElementById("toolbar").innerHTML = htmlString; 
 
 }
 
-function setMenu(variablelist, number){
+function setMenuPort(variablelist, number){
     //Setting what section we're editing eg body/expressions etc
     currently_editing_port = number;
     document.getElementById("editingTitle").innerHTML = editing_list_port[number];
@@ -316,7 +316,7 @@ function colourPicker(){
     let colour = 0;
     let htmlString = "";
     htmlString+=makeDropbtnString(" Colour", ["Shirt"], [0,1], "setColour");
-    htmlString+='<button onclick="setMenu(["currently_editing_port"], 0)">Back</button>';
+    htmlString+='<button onclick="setMenuPort(["currently_editing_port"], 0)">Back</button>';
     document.getElementById("controls").innerHTML = htmlString;
 }
 
