@@ -12,8 +12,7 @@ let current_panel = 0;
 const imageType_list =["Portrait","Sprite"];
 
 const editing_list_port =["Body","Outfit", "Expressions"];
-const editing_list_sprites =["Body","Outfit", "Expressions"];
-
+const editing_list_sprites =["Body","Outfit"];
 
 const panel_list = ["0: Neutral", "1: Happy", "2: Sad", "3: Unique", "4: Blushing", "5: Angry","6","7","8","9","10"];
 

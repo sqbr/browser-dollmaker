@@ -204,7 +204,7 @@ function setToolbar(number){
         s+='    <div><h2 id="editingTitle" text-align="left">errors??</h2></div>\n';
         s+='</div>\n';
         document.getElementById("toolbar").innerHTML = s;
-        document.getElementById("currently_editing_portBtn").innerHTML = makeDropbtnString("Editing:", ["currently_editing_port"], editing_list_port, "setMenuPort");
+        document.getElementById("currently_editing_portBtn").innerHTML = makeDropbtnString("Editing:", ["currently_editing_port"], editing_list_port, "setMenu");
         document.getElementById("panel_numBtn").innerHTML = makeDropbtnString("Panels", ["panel_num"], [1,2,3,4,5,6,7,8], "setPanelNum");
 
     } else{
@@ -213,7 +213,7 @@ function setToolbar(number){
         s+='    <div><h2 id="editingTitle" text-align="left">errors??</h2></div>\n';
         s+='</div>\n';
         document.getElementById("toolbar").innerHTML = s;
-        document.getElementById("currently_editing_spritesBtn").innerHTML = makeDropbtnString("Editing:", ["currently_editing_sprites"], editing_list_sprites, "setMenuPort");
+        document.getElementById("currently_editing_spritesBtn").innerHTML = makeDropbtnString("Editing:", ["currently_editing_sprites"], editing_list_sprites, "setMenu");
     }
 }
 
@@ -232,9 +232,9 @@ function setImageType(variablelist, number){
             htmlString+='    <div><h2 id="editingTitle" text-align="left">'+editing_list_port[currently_editing_port]+'</h2></div>\n';
             htmlString+='</div>\n';
             document.getElementById("toolbar").innerHTML = htmlString; 
-            document.getElementById("currently_editing_portBtn").innerHTML = makeDropbtnString("Editing:", ["currently_editing_port"], editing_list_port, "setMenuPort");
+            document.getElementById("currently_editing_portBtn").innerHTML = makeDropbtnString("Editing:", ["currently_editing_port"], editing_list_port, "setMenu");
             document.getElementById("panel_numBtn").innerHTML = makeDropbtnString("Panels", ["panel_num"], [1,2,3,4,5,6,7,8], "setPanelNum");
-            setMenuPort([], currently_editing_port)
+            setMenu([], currently_editing_port)
             break;
         case 1: //editing sprites
             currently_editing_sprites = 0;
@@ -243,8 +243,8 @@ function setImageType(variablelist, number){
             htmlString+='    <div><h2 id="editingTitle" text-align="left">'+editing_list_sprites[currently_editing_sprites]+'</h2></div>\n';
             htmlString+='</div>\n';
             document.getElementById("toolbar").innerHTML = htmlString; 
-            document.getElementById("currently_editing_spritesBtn").innerHTML = makeDropbtnString("Editing:", ["currently_editing_sprites"], editing_list_sprites, "setMenuPort");
-            setMenuPort([], currently_editing_sprites)
+            document.getElementById("currently_editing_spritesBtn").innerHTML = makeDropbtnString("Editing:", ["currently_editing_sprites"], editing_list_sprites, "setMenu");
+            setMenu([], currently_editing_sprites)
             break;
     
         default:
@@ -254,11 +254,16 @@ function setImageType(variablelist, number){
 
 }
 
-function setMenuPort(variablelist, number){
+function setMenu(variablelist, number){
     //Setting what section we're editing eg body/expressions etc
-    currently_editing_port = number;
-    document.getElementById("editingTitle").innerHTML = editing_list_port[number];
-    let htmlString = "";
+    if (current_imageType==0){ //editing portraits
+        currently_editing_port = number;
+        document.getElementById("editingTitle").innerHTML = editing_list_port[number];
+    }else{
+        currently_editing_sprites = number;
+        document.getElementById("editingTitle").innerHTML = editing_list_sprites[number];
+    }
+        let htmlString = "";
     switch(number){
         case 0: //editing the body
             htmlString+="<div class=\"grid-choices\">"
@@ -266,11 +271,13 @@ function setMenuPort(variablelist, number){
             htmlString+=makeDropbtnString("Eye Colour", ["Eyes"], eye_colours, "setColour");
             htmlString+=makeDropbtnString("Hair Colour", hair_list, hair_colours, "setColour");
             htmlString+="</div>"
-            htmlString+="<div class=\"grid-choices\">"
-            htmlString+=makeDropbtnString("Head Shape", ["Head"], head_list, "setVariable");
-            htmlString+=makeDropbtnString("Ear Shape", ["Ears"], ears_list, "setVariable");
-            htmlString+=makeDropbtnString("Nose Shape", ["Nose"], nose_list, "setVariable");
-            htmlString+="</div>"
+            if (current_imageType==0){ 
+                htmlString+="<div class=\"grid-choices\">"
+                htmlString+=makeDropbtnString("Head Shape", ["Head"], head_list, "setVariable");
+                htmlString+=makeDropbtnString("Ear Shape", ["Ears"], ears_list, "setVariable");
+                htmlString+=makeDropbtnString("Nose Shape", ["Nose"], nose_list, "setVariable");
+                htmlString+="</div>"
+            }
             htmlString+="<div class=\"grid-choices\">"
             htmlString+=makeDropbtnString("Hair back", ["Hair_back"], hair_back_list, "setVariable");
             htmlString+=makeDropbtnString("Hair middle", ["Hair_middle"], hair_middle_list, "setVariable");
@@ -291,20 +298,21 @@ function setMenuPort(variablelist, number){
                 htmlString+="<div class=\"grid-choices\">"
                 htmlString+=makeDropbtnString(b.name, [b.name], b.item_list, "setVariable");
                 htmlString+=makeDropbtnString(b.name+" Colour", [b.name], outfit_colours, "setColour");
-                //htmlString+='<button onclick="colourPicker()">'+b.name+' Colour</button>';
                 htmlString+="</div>"
             }
             break;    
         case 2: //editing the expression
-            htmlString+="<div class=\"grid-container\"><div style=\"justify-self: end;\">"
-            htmlString+=makeDropbtnString("Panel:", ["Panel"], panel_list, "setPanel");
-            htmlString+="</div><h2 id = 'current_panel'>"+panel_list[current_panel] +"</h2></div>";
-            htmlString+="<div class=\"grid-choices\">"
-            htmlString+=makeDropbtnString("Eyebrows", ["Eyebrows"], eyebrow_list, "setPanelVariable");
-            htmlString+=makeDropbtnString("Eyes", ["Eyes"], eye_list, "setPanelVariable");
-            htmlString+=makeDropbtnString("Mouth", ["Mouth"], mouth_list, "setPanelVariable");
-            htmlString+="</div>"
-            break;      
+            if (current_imageType==0){ 
+                htmlString+="<div class=\"grid-container\"><div style=\"justify-self: end;\">"
+                htmlString+=makeDropbtnString("Panel:", ["Panel"], panel_list, "setPanel");
+                htmlString+="</div><h2 id = 'current_panel'>"+panel_list[current_panel] +"</h2></div>";
+                htmlString+="<div class=\"grid-choices\">"
+                htmlString+=makeDropbtnString("Eyebrows", ["Eyebrows"], eyebrow_list, "setPanelVariable");
+                htmlString+=makeDropbtnString("Eyes", ["Eyes"], eye_list, "setPanelVariable");
+                htmlString+=makeDropbtnString("Mouth", ["Mouth"], mouth_list, "setPanelVariable");
+                htmlString+="</div>"
+                break;   
+            }   
         default:
             htmlString = "Unknown value "+number;
 
@@ -312,13 +320,6 @@ function setMenuPort(variablelist, number){
     document.getElementById("controls").innerHTML = htmlString;
 }
 
-function colourPicker(){
-    let colour = 0;
-    let htmlString = "";
-    htmlString+=makeDropbtnString(" Colour", ["Shirt"], [0,1], "setColour");
-    htmlString+='<button onclick="setMenuPort(["currently_editing_port"], 0)">Back</button>';
-    document.getElementById("controls").innerHTML = htmlString;
-}
 
 function setPanel(variablelist, number){
     current_panel = number;
