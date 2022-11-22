@@ -78,43 +78,43 @@ class ClothingItem:
         self.listname = listname
         self.location = location
 
-def add_item(name, item_list,listname, location):
+def add_portrait_object(name, item_list,listname, location):
     # Add an item type to the closet
     global  closet
     closet.append(ClothingItem(name, item_list, listname, location))
 
 
 # Not automatically shown
-# add_item("cheeks", cheeks_list, "cheeks_list", "face")
+# add_portrait_object("cheeks", cheeks_list, "cheeks_list", "face")
 
 # #Behind eyes
 # shown_start = len(closet) # where the visible items start
 
-add_item("Coat_back", coat_back_list, "coat_back_list","outfit/coat")
-add_item("Hat_back", hat_back_list,"hat_back_list", "outfit/hat")
-add_item("Hair_back", hair_back_list, "hair_back_list","body/hair")
-add_item("Ears", ears_list,"ears_list", "body")
-add_item("Torso", torso_list, "torso_list", "body")
-add_item("Head", head_list, "head_list", "body")
+add_portrait_object("Coat_back", coat_back_list, "coat_back_list","outfit/coat")
+add_portrait_object("Hat_back", hat_back_list,"hat_back_list", "outfit/hat")
+add_portrait_object("Hair_back", hair_back_list, "hair_back_list","body/hair")
+add_portrait_object("Ears", ears_list,"ears_list", "body")
+add_portrait_object("Torso", torso_list, "torso_list", "body")
+add_portrait_object("Head", head_list, "head_list", "body")
 
-add_item("Complexion", complexion_list,"complexion_list", "body")
-add_item("Nose", nose_list,"nose_list", "body")
+add_portrait_object("Complexion", complexion_list,"complexion_list", "body")
+add_portrait_object("Nose", nose_list,"nose_list", "body")
 
-add_item("Eyebrows", eyebrow_list,"eyebrow_list", "expression")
-add_item("Eyes", eye_list,"eye_list", "expression")
-add_item("Mouth", mouth_list,"mouth_list", "expression")
+add_portrait_object("Eyebrows", eyebrow_list,"eyebrow_list", "expression")
+add_portrait_object("Eyes", eye_list,"eye_list", "expression")
+add_portrait_object("Mouth", mouth_list,"mouth_list", "expression")
 
 # In front of face
-add_item("Neckwear", neckwear_list,"neckwear_list", "outfit")
-add_item("Shirt", shirt_list,"shirt_list", "outfit")
-add_item("Coat", coat_list,"coat_list", "outfit")
+add_portrait_object("Neckwear", neckwear_list,"neckwear_list", "outfit")
+add_portrait_object("Shirt", shirt_list,"shirt_list", "outfit")
+add_portrait_object("Coat", coat_list,"coat_list", "outfit")
 
-add_item("Facial_hair", facial_hair_list,"facial_hair_list", "body/hair")
-add_item("Eyewear", eyewear_list,"eyewear_list", "outfit")
-add_item("Hair_middle", hair_middle_list,"hair_middle_list", "body/hair")
+add_portrait_object("Facial_hair", facial_hair_list,"facial_hair_list", "body/hair")
+add_portrait_object("Eyewear", eyewear_list,"eyewear_list", "outfit")
+add_portrait_object("Hair_middle", hair_middle_list,"hair_middle_list", "body/hair")
 
-add_item("Hair_front", hair_front_list,"hair_front_list", "body/hair")
-add_item("Hat", hat_list,"hat_list", "outfit")
+add_portrait_object("Hair_front", hair_front_list,"hair_front_list", "body/hair")
+add_portrait_object("Hat", hat_list,"hat_list", "outfit")
 # colour functions
 
 def hex_to_rgba(value):
@@ -151,6 +151,24 @@ def colour_this(pixel, colour):
            p[i] = int((1-r)*new_colour[i] + r*(255 - (255-new_colour[i])*(255-highlight[i])/255))    
     return (p[0],p[1],p[2],pixel[3])
 
+def colour_this_skin(pixel, colour):
+    p = [pixel[0],pixel[1],pixel[2]]
+    new_colour = hex_to_rgba(colour)
+    if p == [249,174,137]: #base skin colour
+        for i in range(3):
+            p[i] = new_colour[i]      
+    elif p == [224,107,101]: #shading
+        shadow = hex_to_rgba("#830016")
+        r = 0.3 #opacity of shadow
+        for i in range(3): #multiply
+           p[i] = int((1-r)*new_colour[i] + r*new_colour[i]*shadow[i]/255)    
+    elif p == [107,0,58]: #edge
+        shadow = hex_to_rgba("#560055")
+        r = 0.8 #opacity of shadow
+        for i in range(3): #multiply
+           p[i] = int((1-r)*new_colour[i] + r*new_colour[i]*shadow[i]/255)    
+    return (p[0],p[1],p[2],pixel[3])    
+
 
 def process_image(name, location, colour,colour_list):
     image_string = location+"/"+name+"_base.png"
@@ -160,7 +178,10 @@ def process_image(name, location, colour,colour_list):
     for y in range(img.size[1]):
         for x in range(img.size[0]):
             if Adata[x, y][3] !=0:
-                Adata[x, y] = colour_this(Adata[x, y], colour_list[colour])  
+                if current_process == "sprites":
+                    Adata[x, y] = colour_this_skin(Adata[x, y], colour_list[colour])  
+                else:    
+                    Adata[x, y] = colour_this_skin(Adata[x, y], colour_list[colour])
     img.save(save_string)                   
 
 def list_string(listname, list):
@@ -233,12 +254,50 @@ def write_variables():
         content.write(name_string(c))
     content.write("\n")
     for c in closet:
-        content.write("add_item(\""+c.name+"\","+ c.listname+")\n")
+        content.write("add_portrait_object(\""+c.name+"\","+ c.listname+")\n")
     content.write("\n")
     
     content.close()
 
-def process_list(obj):
+def make_walksprites(type):
+    image_string = "../images/Farmer/"+type+".png"
+    base_string = "../images/sprites/body/"
+    if type == "farmer_base":
+        base_string += "male"
+    if type == "farmer_base_bald":
+        base_string += "male_bald"    
+    elif type == "farmer_girl_base":
+        base_string += "female"
+    elif type == "farmer_girl_base_bald":
+        base_string += "female_bald"    
+    save_string =base_string+"_body_base.png"
+    original = Image.open(image_string) 
+    new = Image.new("RGBA", (64, 128))
+    new.paste(original.crop((0,0,32,96))) #first two columns
+    new.paste(original.crop((0,0,16,96)),(32,0))# third column, repeating standing still sprite
+    new.paste(original.crop((32,0,48,96)),(48,0))# fourth column
+    for i in range(4):
+        temp = new.crop((0+i*16,32,16+i*16,96))
+        temp = temp.transpose(Image.FLIP_LEFT_RIGHT)
+        new.paste(temp,(0+i*16,96))# fourth row
+    new.save(save_string)
+    save_string = base_string+"_arms_base.png"
+    new.paste(original.crop((96,0,128,96))) #first two columns
+    new.paste(original.crop((96,0,112,96)),(32,0))# third column, repeating standing still sprite
+    new.paste(original.crop((128,0,144,96)),(48,0))# fourth column
+    for i in range(4):
+        temp = new.crop((96+i*16,32,112+i*16,96))
+        temp = temp.transpose(Image.FLIP_LEFT_RIGHT)
+        new.paste(temp,(0+i*16,96))# fourth row
+    new.save(save_string)
+
+def make_farmer_parts():
+    make_walksprites("farmer_base")    
+    make_walksprites("farmer_base_bald")    
+    make_walksprites("farmer_girl_base")    
+    make_walksprites("farmer_girl_base_bald")   
+
+def process_portrait_part(obj):
     if obj.name in skin_list:
         colour_list = skin_colours
     elif obj.name =="Eyes":
@@ -256,7 +315,9 @@ def process_list(obj):
 
 def process_all_images():
     for c in closet:
-        process_list(c)
+        process_portrait_part(c)
 
 write_variables()
+current_process = "sprites"
+process_image("farmer_bald", "../images/sprites/body", 5, skin_colours)
 #process_all_images()

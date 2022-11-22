@@ -18,6 +18,11 @@ const panel_list = ["0: Neutral", "1: Happy", "2: Sad", "3: Unique", "4: Blushin
 
 back_list = ["Hat","Coat"]; //have a back
 
+let canvas;
+let canvas_preview;
+let ctx_preview;
+let ctx;
+
 // Basic functions
 
 function findNameMatch(list, name){
@@ -60,9 +65,11 @@ function newImageList(){
 }
 
 //Initialising data
-const body_objects =[];
+const portrait_objects =[];
 
-function add_item(name, list){
+const sprite_objects =[];
+
+function add_portrait_object(name, list){
     col = 2;
     if (outfit_list.includes(name)){
         loc = "outfit";
@@ -93,13 +100,34 @@ function add_item(name, list){
     }
 
     loc+="/"+name.toLowerCase();
-    body_objects.push({name: name,location: loc, item_list: list, colourNum: col, value_list: listOf(0),  colour: 0, image_list: newImageList()});
+    portrait_objects.push({name: name,location: loc, item_list: list, colourNum: col, value_list: listOf(0),  colour: 0, image_list: newImageList()});
+}
+
+function add_sprite_object(name, list){
+    col = 2;
+    /*if (outfit_list.includes(name)){
+        loc = "outfit";
+        col = outfitNum;
+    } else {
+        if (body_list.includes(name)){
+            loc = "body";
+            col = outfitNum;
+        } else{
+            if (hair_list.includes(name)){
+                loc = "body/hair";
+                col = hairNum;
+            }
+        }
+    }*/
+
+    loc="/"+name.toLowerCase();
+    portrait_objects.push({name: name,location: loc, item_list: list, colourNum: col, value: 0,  colour: 0, image: new Image()});
 }
 
 function print_body(){
     s = "";
-    for (i = 0; i < body_objects.length; i += 1){
-        b = body_objects[i];
+    for (i = 0; i < portrait_objects.length; i += 1){
+        b = portrait_objects[i];
         s+="name: "+b.name;
         s+=" location: "+b.location;
         s+=" item_list: "+b.item_list.toString();

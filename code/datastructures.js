@@ -143,6 +143,12 @@ function fixSources(list){
     // Fixes the "src" attribute for all images in list
     for (let i = 0; i < list.length; i += 1){
         let b = list[i];
+        /*if (b.colourNum==1){
+            b.sprite_image.src = "images/sprites/"+b.location+"/"+b.item_list[b.value_list[0]]+".png";
+        }else{
+            b.sprite_image.src  = "images/sprites/"+b.location+"/"+b.item_list[b.value_list[0]]+"_"+b.colour+".png";
+        }*/
+
         for (let j = 0; j < panelNum; j += 1){ 
             if (b.colourNum==1){
                 b.image_list[j].src = "images/portraits/"+b.location+"/"+b.item_list[b.value_list[j]]+".png";
@@ -184,7 +190,7 @@ function setPanelNum(variablelist, number){
 
 function setTopbar(){
     let s = '';
-    s+='<div><button onclick="exportCanvas()">Export</button></div>\n';
+    s+='<div><button onclick="exexportCanvas()">Export</button></div>\n';
     s+='<div class="grid-container">\n';
     s+='<div id = "image_typeBtn" style="justify-self: end;">Something</div>\n';
     s+='<div><h2 id="imageType" text-align="left">Broken</h2></div> \n';
@@ -245,7 +251,10 @@ function setImageType(variablelist, number){
             htmlString+='</div>\n';
             document.getElementById("toolbar").innerHTML = htmlString; 
             document.getElementById("currently_editing_spritesBtn").innerHTML = makeDropbtnString("Editing:", ["currently_editing_sprites"], editing_list_sprites, "setMenu");
-            document.getElementById("preview").innerHTML = "<h2>Sprites:</h2>"
+            htmlString = '<h2>Preview:</h2>';
+            htmlString +='<canvas id="previewCanvas" width="128" height="128">Your browser does not support HTML5 Canvas. Try downloading latest Chrome, Firefox, Safari, Opera or Internet explorer.</canvas>'; 
+            htmlString += '<h2>Sprites:</h2>';
+            document.getElementById("preview").innerHTML =  htmlString;
             setMenu([], currently_editing_sprites)
             break;
     
@@ -292,7 +301,7 @@ function setMenu(variablelist, number){
         case 1: //editing the outfit
             document.getElementById("test").innerHTML = "Hello";
             for (let i = 0; i < outfit_list.length; i += 1) {
-                let b = findNameMatch(body_objects, outfit_list[i]);
+                let b = findNameMatch(portrait_objects, outfit_list[i]);
                 let edit_list = [b.name];
                 if (back_list.includes(b.name)){
                     edit_list.push(b.name+"_back");
@@ -330,10 +339,10 @@ function setPanel(variablelist, number){
 
 function setVariable(variablelist, number){
     for (let i = 0; i < variablelist.length; i += 1) {
-        let b = findNameMatch(body_objects, variablelist[i]); //the eleemnt of body_objects with the right vriablename
+        let b = findNameMatch(portrait_objects, variablelist[i]); //the eleemnt of portrait_objects with the right vriablename
         b.value_list=listOf(number);
         if (back_list.includes(b.name)){
-            let b_back = findNameMatch(body_objects, b.name+"_back");//eg the object associated with "hat_back"
+            let b_back = findNameMatch(portrait_objects, b.name+"_back");//eg the object associated with "hat_back"
             let list = b_back.item_list;
             if (list.includes(b.item_list[number])){ //this is a valid type of back
                 b_back.value_list=listOf(list.indexOf(b.item_list[number])); //set to the correct index, may not match the original object   
@@ -347,7 +356,7 @@ function setVariable(variablelist, number){
 
 function setPanelVariable(variablelist, number){
     for (let i = 0; i < variablelist.length; i += 1) {
-        let b = findNameMatch(body_objects, variablelist[i]); //the eleemnt of body_objects with the right vriablename
+        let b = findNameMatch(portrait_objects, variablelist[i]); //the eleemnt of portrait_objects with the right vriablename
         b.value_list[current_panel]=number;
     }
     drawCanvas();
@@ -356,54 +365,75 @@ function setPanelVariable(variablelist, number){
 function setColour(variablelist, number){
     let s = "";
     for (let i = 0; i < variablelist.length; i += 1) {
-        let b = findNameMatch(body_objects, variablelist[i]); //the eleemnt of body_objects with the right vriablename
+        let b = findNameMatch(portrait_objects, variablelist[i]); //the eleemnt of portrait_objects with the right vriablename
         b.colour=number;
     }
     drawCanvas();
 }
 
 function drawCanvas() {
-    let  canvas = document.getElementById("portCanvas");
     //ctx.clearRect(0,0,canvas_width, canvas_height);
-    let numrows;
-    let numcols;
-    if (panelNum ==1){
-        numcols = 1;
-    }else{
-        numcols = 2;
-    }
-    if (panelNum%2 == 1){
-        numrows = (panelNum+1)/2;
-    }else{
-        numrows = panelNum/2;
-    }
-    canvas.height = panel_width*numrows;
-    canvas.width =  panel_width*numcols;
-    let ctx = canvas.getContext("2d");
-    fixSources(body_objects);
-    //document.getElementById("closet").innerHTML = print_body();
-    for (let row = 0; row < numrows; row += 1) {
-        for (let column = 0; column < numcols; column += 1) {
-            if (row*2+column < panelNum){
-                let xpos = panel_width*column;
-                let ypos = panel_width*row;
-                for (let i = 0; i < body_objects.length; i += 1){
-                    let b = body_objects[i];
-                    if (b.item_list[b.value_list[row*2+column]] !="none"){ 
-                        ctx.drawImage(b.image_list[row*2+column], xpos, ypos);
+    if (current_imageType==0){
+        let numrows;
+        let numcols;
+        if (panelNum ==1){
+            numcols = 1;
+        }else{
+            numcols = 2;
+        }
+        if (panelNum%2 == 1){
+            numrows = (panelNum+1)/2;
+        }else{
+            numrows = panelNum/2;
+        }
+        canvas.height = panel_width*numrows;
+        canvas.width =  panel_width*numcols;
+        let ctx = canvas.getContext("2d");
+        fixSources(portrait_objects);
+        //document.getElementById("closet").innerHTML = print_body();
+        for (let row = 0; row < numrows; row += 1) {
+            for (let column = 0; column < numcols; column += 1) {
+                if (row*2+column < panelNum){
+                    let xpos = panel_width*column;
+                    let ypos = panel_width*row;
+                    for (let i = 0; i < portrait_objects.length; i += 1){
+                        let b = portrait_objects[i];
+                        if (b.item_list[b.value_list[row*2+column]] !="none"){ 
+                            ctx.drawImage(b.image_list[row*2+column], xpos, ypos);
+                        }
                     }
                 }
             }
         }
+    } else{
+        canvas.height = 128;
+        canvas.width =  64;
+        canvas_preview = document.getElementById("previewCanvas");
+        ctx_preview = canvas_preview.getContext("2d");
+        img.src="images/Farmer/farmer_base.png"
+        ctx.drawImage(img, 0, 0);
+        ctx_preview.drawImage(img, 0, 0, 16,32, 0,0,64,128);
+        ctx_preview.drawImage(img, 0, 32, 16,32, 64,0,64,128);
+        //fixSources(portrait_objects);
+        /*for (let i = 0; i < portrait_objects.length; i += 1){
+            let b = portrait_objects[i];
+            if (b.item_list[b.value_list[0]] !="none"){ 
+                ctx.drawImage(b.sprite_image, 0, 0);
+                ctx_preview.drawImage(b.sprite_image, 0, 0);
+            }
+        }*/
+
     }
 }
 
 function setup(){
     setTopbar();
-    setImageType([],0)
+    setImageType([],0);
+    canvas = document.getElementById("exportCanvas");
+    ctx = canvas.getContext("2d");
     drawCanvas();
 }
-
+let img = new Image();
 window.onload = setup;
 var game = setInterval(drawCanvas, 100);//Update canvas every 100 miliseconds
 
