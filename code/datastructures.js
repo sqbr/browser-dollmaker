@@ -153,32 +153,9 @@ function fixSources(list){
     }
 }
 
-function makeDropbtnString(name, variablelist, list, type){
+function makeDropbtnString(name, variablelist, list, functionName){
     //Create a dropdown menu which is called name, and sets all the entires in variablelist to whatever value of list is chosen 
     let id = name+'Dropdown';
-    let functionName;
-    switch(type){
-        case "panels":
-            functionName= "setPanelNum";
-            break;
-        case "body_part":
-            functionName= "setVariable";
-            break;
-        case "body_part_panel":
-            functionName= "setPanelVariable";
-            break;    
-        case "panel":
-            functionName= "setPanel";
-            break;        
-        case "menu_part":
-            functionName= "setMenu";
-            break;  
-        case "colour":
-            functionName= "setColour";
-            break;  
-        default:
-            document.getElementById("test").innerHTML = "Unknown button type "+type;                
-    }
     
     let drop_string = '<div class="dropdown">';
     drop_string +='<button onclick="dropFunction(\''+id+'\')" class="dropbtn">'+name+'</button>';
@@ -189,7 +166,7 @@ function makeDropbtnString(name, variablelist, list, type){
             drop_string +="\'"+variablelist[i]+"\',"
         }
         drop_string +='],'+row+')" >'
-        if (type=="colour"){
+        if (functionName=="setColour"){
             drop_string +=colour_desc(list[row])
         }else{
             drop_string +=list[row]; //name of button
@@ -205,6 +182,46 @@ function setPanelNum(variablelist, number){
     document.getElementById("panelTitle").innerHTML = panelNum;
 }
 
+function setToolbar(){
+    let s = '';
+    s+='<div style="display: grid;grid-template-columns: auto;">';
+    s+='<div style="display: grid;grid-template-columns: auto auto;"><!--top row-->';
+    s+='<div><button onclick="exportCanvas()">Export</button></div>\n';
+    s+='<div class="grid-container">\n';
+    s+='<div id = "image_typeBtn" style="justify-self: end;">Something</div>\n';
+    s+='<div><h2 id="imageType" text-align="left">Broken</h2></div> \n';
+    s+='</div>\n';
+    s+='</div><!-- end top row-->\n'; 
+    s+='<hr>';
+    if (current_imageType == "Portrait"){
+        s+='<div style="display: grid;grid-template-columns: auto auto;"><!--second row-->';//
+        s+='<div class="grid-container">\n';
+        s+='<div id = "panel_numBtn" style="justify-self: end;">Something</div>\n';
+        s+='<div><h2 id="panelTitle" text-align="left">Broken</h2></div> \n';
+        s+='</div>\n'; 
+        s+='<div class="grid-container">\n';
+        s+='    <div id = "currently_editingBtn" style="justify-self: end;">Secret</div>\n'; 
+        s+='    <div><h2 id="editingTitle" text-align="left">errors??</h2></div>\n';
+        s+='</div>\n';
+        s+='</div><!-- end second row-->\n';
+        s+='</div>\n';
+        document.getElementById("toolbar").innerHTML = s;
+        document.getElementById("currently_editingBtn").innerHTML = makeDropbtnString("Editing:", ["currently_editing"], editing_list, "setMenu");
+        document.getElementById("panel_numBtn").innerHTML = makeDropbtnString("Panels", ["panel_num"], [1,2,3,4,5,6,7,8], "setPanelNum");
+
+    }
+    document.getElementById("image_typeBtn").innerHTML = makeDropbtnString("Image Type:", ["current_imageType"], ["Portrait","Sprite"], "setImageType");
+    
+    
+}
+
+function setImageType(variablelist, number){
+    current_imageType = number;
+    document.getElementById("imageType").innerHTML = imageType_list[number];
+    setToolbar()
+
+}
+
 function setMenu(variablelist, number){
     //Setting what section we're editing eg body/expressions etc
     currently_editing = number;
@@ -213,22 +230,22 @@ function setMenu(variablelist, number){
     switch(number){
         case 0: //editing the body
             htmlString+="<div class=\"grid-choices\">"
-            htmlString+=makeDropbtnString("Skin Colour", skin_list, skin_colours, "colour");
-            htmlString+=makeDropbtnString("Eye Colour", ["Eyes"], eye_colours, "colour");
-            htmlString+=makeDropbtnString("Hair Colour", hair_list, hair_colours, "colour");
+            htmlString+=makeDropbtnString("Skin Colour", skin_list, skin_colours, "setColour");
+            htmlString+=makeDropbtnString("Eye Colour", ["Eyes"], eye_colours, "setColour");
+            htmlString+=makeDropbtnString("Hair Colour", hair_list, hair_colours, "setColour");
             htmlString+="</div>"
             htmlString+="<div class=\"grid-choices\">"
-            htmlString+=makeDropbtnString("Head Shape", ["Head"], head_list, "body_part");
-            htmlString+=makeDropbtnString("Ear Shape", ["Ears"], ears_list, "body_part");
-            htmlString+=makeDropbtnString("Nose Shape", ["Nose"], nose_list, "body_part");
+            htmlString+=makeDropbtnString("Head Shape", ["Head"], head_list, "setVariable");
+            htmlString+=makeDropbtnString("Ear Shape", ["Ears"], ears_list, "setVariable");
+            htmlString+=makeDropbtnString("Nose Shape", ["Nose"], nose_list, "setVariable");
             htmlString+="</div>"
             htmlString+="<div class=\"grid-choices\">"
-            htmlString+=makeDropbtnString("Hair back", ["Hair_back"], hair_back_list, "body_part");
-            htmlString+=makeDropbtnString("Hair middle", ["Hair_middle"], hair_middle_list, "body_part");
-            htmlString+=makeDropbtnString("Hair front", ["Hair_front"], hair_front_list, "body_part");
+            htmlString+=makeDropbtnString("Hair back", ["Hair_back"], hair_back_list, "setVariable");
+            htmlString+=makeDropbtnString("Hair middle", ["Hair_middle"], hair_middle_list, "setVariable");
+            htmlString+=makeDropbtnString("Hair front", ["Hair_front"], hair_front_list, "setVariable");
             htmlString+="</div>"
             htmlString+="<div class=\"grid-choices\">"
-            htmlString+=makeDropbtnString("Facial Hair", ["Facial_hair"], facial_hair_list, "body_part");
+            htmlString+=makeDropbtnString("Facial Hair", ["Facial_hair"], facial_hair_list, "setVariable");
             htmlString+="</div>"
             break;    
         case 1: //editing the outfit
@@ -240,20 +257,20 @@ function setMenu(variablelist, number){
                     edit_list.push(b.name+"_back");
                 } 
                 htmlString+="<div class=\"grid-choices\">"
-                htmlString+=makeDropbtnString(b.name, [b.name], b.item_list, "body_part");
-                htmlString+=makeDropbtnString(b.name+" Colour", [b.name], outfit_colours, "colour");
+                htmlString+=makeDropbtnString(b.name, [b.name], b.item_list, "setVariable");
+                htmlString+=makeDropbtnString(b.name+" Colour", [b.name], outfit_colours, "setColour");
                 //htmlString+='<button onclick="colourPicker()">'+b.name+' Colour</button>';
                 htmlString+="</div>"
             }
             break;    
         case 2: //editing the expression
             htmlString+="<div class=\"grid-container\"><div style=\"justify-self: end;\">"
-            htmlString+=makeDropbtnString("Panel:", ["Panel"], panel_list, "panel");
+            htmlString+=makeDropbtnString("Panel:", ["Panel"], panel_list, "setPanel");
             htmlString+="</div><h2 id = 'current_panel'>"+panel_list[current_panel] +"</h2></div>";
             htmlString+="<div class=\"grid-choices\">"
-            htmlString+=makeDropbtnString("Eyebrows", ["Eyebrows"], eyebrow_list, "body_part_panel");
-            htmlString+=makeDropbtnString("Eyes", ["Eyes"], eye_list, "body_part_panel");
-            htmlString+=makeDropbtnString("Mouth", ["Mouth"], mouth_list, "body_part_panel");
+            htmlString+=makeDropbtnString("Eyebrows", ["Eyebrows"], eyebrow_list, "setPanelVariable");
+            htmlString+=makeDropbtnString("Eyes", ["Eyes"], eye_list, "setPanelVariable");
+            htmlString+=makeDropbtnString("Mouth", ["Mouth"], mouth_list, "setPanelVariable");
             htmlString+="</div>"
             break;      
         default:
@@ -266,7 +283,7 @@ function setMenu(variablelist, number){
 function colourPicker(){
     let colour = 0;
     let htmlString = "";
-    htmlString+=makeDropbtnString(" Colour", ["Shirt"], [0,1], "colour");
+    htmlString+=makeDropbtnString(" Colour", ["Shirt"], [0,1], "setColour");
     htmlString+='<button onclick="setMenu(["currently_editing"], 0)">Back</button>';
     document.getElementById("controls").innerHTML = htmlString;
 }
@@ -347,8 +364,9 @@ function drawCanvas() {
 }
 
 function setup(){
-    document.getElementById("currently_editingBtn").innerHTML = makeDropbtnString("Editing:", ["currently_editing"], editing_list, "menu_part");
-    document.getElementById("panel_numBtn").innerHTML = makeDropbtnString("Panels", ["panel_num"], [1,2,3,4,5,6,7,8], "panels");
+    setToolbar();
+    document.getElementById("currently_editingBtn").innerHTML = makeDropbtnString("Editing:", ["currently_editing"], editing_list, "setMenu");
+    document.getElementById("panel_numBtn").innerHTML = makeDropbtnString("Panels", ["panel_num"], [1,2,3,4,5,6,7,8], "setPanelNum");
     setMenu(["currently_editing"], 0);
     setPanelNum(["panel_numBtn"], 5);//setting it to the sixth value eg 6
     drawCanvas();

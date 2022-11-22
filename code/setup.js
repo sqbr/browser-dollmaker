@@ -4,6 +4,15 @@ const canvas_height = 768;
 let panelNum = 6; //how many panels
 let panel_width = 256; //width and height of panels in pixels
 
+let current_imageType = "Portrait";
+let currently_editing = "Body";
+let current_panel = 0;
+
+const editing_list =["Body","Outfit", "Expressions"];
+const imageType_list =["Portrait","Sprite"];
+
+const panel_list = ["0: Neutral", "1: Happy", "2: Sad", "3: Unique", "4: Blushing", "5: Angry","6","7","8","9","10"];
+
 back_list = ["Hat","Coat"]; //have a back
 
 // Basic functions
@@ -48,14 +57,6 @@ function newImageList(){
 }
 
 //Initialising data
-
-let currently_editing;
-let current_panel = 0;
-
-const editing_list =["Body","Outfit", "Expressions"];
-
-const panel_list = ["0: Neutral", "1: Happy", "2: Sad", "3: Unique", "4: Blushing", "5: Angry"];
-
 const body_objects =[];
 
 function add_item(name, list){

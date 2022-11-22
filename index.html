@@ -11,29 +11,20 @@
 <script src="code/datastructures.js"></script>
 <script src="code/menus.js"></script> 
 <div class="grid-choices">
-    <div width="512"><!-- canvas -->
+    <div style="width: 512;"><!-- column 1 -->
+    <div id="preview"><h2>Uh oh</h2></h2></div>   
     <canvas id="portCanvas" width="512" height="768">
     Your browser does not support HTML5 Canvas. Try downloading latest Chrome, Firefox, Safari, Opera or Internet explorer.
     </canvas>
     </div>
-<div><!-- column 2 -->
-    <div class="grid-container">
-        <div><button onclick="exportCanvas()">Export</button></div>
-        <div class="grid-container">
-            <div id = "panel_numBtn" style="justify-self: end;">STUFF?</div>
-            <div><h2 id="panelTitle" text-align="left">THINGS!</h2></div> 
-        </div> 
-        <div class="grid-container">
-            <div id = "currently_editingBtn" style="justify-self: end;">STUFF</div> 
-            <div><h2 id="editingTitle" text-align="left">THINGS</h2></div>
-        </div>
-    </div>
+<div style="grid-column: 2 / 4;"><!-- column 2 -->
+    <div class="grid-container" id = "toolbar"></div>
     <hr>
     <div id="controls"></div>
     <hr>
-    <div id="test">Test section</div>
+    <div id="test">No errors</div>
     <hr>
-    <div id="closet">Closet</div>
+    <div id="closet"></div>
 </div>  
       
 </div>
