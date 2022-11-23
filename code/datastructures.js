@@ -158,6 +158,7 @@ function fixSpriteSources(list){
     for (let i = 0; i < list.length; i += 1){
         let b = list[i];
         let item = b.item_list[b.item];
+        b.topcorner = item.topcorner;
         if (item.colour){
             b.image.src  = "images/sprites/"+item.location+"_"+b.colour+".png";
         }else{
@@ -427,10 +428,18 @@ function drawCanvas() {
                 if (b.isWalk){
                     xgap = 16;
                 }
-                ctx_preview.drawImage(b.image, b.topcorner[0], b.topcorner[1],16,32,0,0,64,128);
-                ctx_preview.drawImage(b.image, b.topcorner[0], b.topcorner[1]+32,16,32,64,0,64,128);
-                ctx.drawImage(b.image, b.topcorner[0], b.topcorner[1],16,96,0,0,16,96); //top 3 rows, first column
-                ctx.drawImage(b.image, b.topcorner[0]+xgap, b.topcorner[1],16,96,16,0,16,96); //top 3 rows, first column
+                ctx_preview.drawImage(b.image, b.topcorner[0], b.topcorner[1],16,b.height,0,0,64,b.height*4);
+                ctx_preview.drawImage(b.image, b.topcorner[0], b.topcorner[1]+b.height,16,+b.height,64,0,64,+b.height*4);
+                ctx.drawImage(b.image, b.topcorner[0], b.topcorner[1],16,b.height,0,0,16,b.height); //row 1, column 1
+                ctx.drawImage(b.image, b.topcorner[0], b.topcorner[1]+b.height,16,b.height,0,32,16,b.height); //row 2, column 1
+                ctx.drawImage(b.image, b.topcorner[0], b.topcorner[1]+b.height*2,16,b.height,0,48,16,b.height); //row 3, column 1
+                ctx.drawImage(b.image, b.topcorner[0]+xgap, b.topcorner[1],16,96,16,0,16,96); //top 3 rows, second column
+                ctx.drawImage(b.image, b.topcorner[0], b.topcorner[1],16,96,32,0,16,96); //top 3 rows, third column
+                ctx.drawImage(b.image, b.topcorner[0]+2*xgap, b.topcorner[1],16,96,48,0,16,96); //top 3 rows, fourth column
+                for(let a = 0; a < 4; a++){ //each sprite in bottom row
+                    for(let x = 0; x < 16; x++) //janky way of flipping
+                        ctx.drawImage(b.image, b.topcorner[0]+x+a*xgap, b.topcorner[1]+b.height, 1, 32, +a*xgap+16 - x, 96, 1, 32);
+                }        
             }
         }
     }
