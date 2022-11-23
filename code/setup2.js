@@ -10,13 +10,13 @@ topcorner: coordinates of the top corner of the looking down standing still spri
 let sprite_torso_list = []
 for (let i =0; i<sprite_body_list.length;i++){
     b= sprite_body_list[i];
-    sprite_torso_list.push({name: b, location: "body/farmer_"+b, colour: true, topcorner:(0,0)})
+    sprite_torso_list.push({name: b, location: "body/farmer_"+b, colour: true, topcorner:[0,0]})
 }
 
 const sprite_objects =[];
 
 function add_sprite_object(name, list,colour_list,isWalk){
-    sprite_objects.push({name: name,item_list: list, colour_list: colour_list, item: 0,  colour: 0, image: new Image(), isWalk: isWalk, topcorner:(0,0)});
+    sprite_objects.push({name: name,item_list: list, colour_list: colour_list, item: 0,  colour: 0, image: new Image(), isWalk: isWalk, topcorner:[0,0]});
 }
 
 add_sprite_object("Torso", sprite_torso_list,skin_colours,true);

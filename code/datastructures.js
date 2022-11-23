@@ -418,28 +418,21 @@ function drawCanvas() {
         canvas_preview = document.getElementById("previewCanvas");
         ctx_preview = canvas_preview.getContext("2d");
         fixSpriteSources(sprite_objects);
-        document.getElementById("closet").innerHTML = print_sprite_objects();
+        //document.getElementById("closet").innerHTML = print_sprite_objects();
+        //sourceX, sourceY, sourceWidth, sourceHeight, destWidth and destHeight   
         for (let i = 0; i < sprite_objects.length; i += 1){
             let b = sprite_objects[i];
             if (b.item_list[b.value] !="none"){ 
-                ctx.drawImage(b.image, 0, 0);
-                ctx_preview.drawImage(b.image, 0, 0);
+                let xgap = 0;
+                if (b.isWalk){
+                    xgap = 16;
+                }
+                ctx_preview.drawImage(b.image, b.topcorner[0], b.topcorner[1],16,32,0,0,64,128);
+                ctx_preview.drawImage(b.image, b.topcorner[0], b.topcorner[1]+32,16,32,64,0,64,128);
+                ctx.drawImage(b.image, b.topcorner[0], b.topcorner[1],16,96,0,0,16,96); //top 3 rows, first column
+                ctx.drawImage(b.image, b.topcorner[0]+xgap, b.topcorner[1],16,96,16,0,16,96); //top 3 rows, first column
             }
         }
-
-        /*img.src="images/Farmer/farmer_base.png"
-        ctx.drawImage(img, 0, 0);
-        ctx_preview.drawImage(img, 0, 0, 16,32, 0,0,64,128);
-        ctx_preview.drawImage(img, 0, 32, 16,32, 64,0,64,128);
-        //fixPortSources(portrait_objects);
-        /*for (let i = 0; i < portrait_objects.length; i += 1){
-            let b = portrait_objects[i];
-            if (b.item_list[b.value_list[0]] !="none"){ 
-                ctx.drawImage(b.sprite_image, 0, 0);
-                ctx_preview.drawImage(b.sprite_image, 0, 0);
-            }
-        }*/
-
     }
 }
 
