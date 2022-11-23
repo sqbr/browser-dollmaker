@@ -139,22 +139,29 @@ function colour_desc(colour){
         }}
 }        
 
-function fixSources(list){
-    // Fixes the "src" attribute for all images in list
+function fixPortSources(list){
+    // Fixes the "src" attribute for all images in sublist of portrait_objects
     for (let i = 0; i < list.length; i += 1){
         let b = list[i];
-        /*if (b.colourNum==1){
-            b.sprite_image.src = "images/sprites/"+b.location+"/"+b.item_list[b.value_list[0]]+".png";
-        }else{
-            b.sprite_image.src  = "images/sprites/"+b.location+"/"+b.item_list[b.value_list[0]]+"_"+b.colour+".png";
-        }*/
-
         for (let j = 0; j < panelNum; j += 1){ 
             if (b.colourNum==1){
                 b.image_list[j].src = "images/portraits/"+b.location+"/"+b.item_list[b.value_list[j]]+".png";
             }else{
                 b.image_list[j].src  = "images/portraits/"+b.location+"/"+b.item_list[b.value_list[j]]+"_"+b.colour+".png";
             }
+        }
+    }
+}
+
+function fixSpriteSources(list){
+    // Fixes the "src" attribute for all images in sublist of sprite_objects
+    for (let i = 0; i < list.length; i += 1){
+        let b = list[i];
+        let item = b.item_list[b.item];
+        if (item.colour){
+            b.image.src  = "images/sprites/"+item.location+"_"+b.colour+".png";
+        }else{
+            b.image.src = "images/sprites/"+item.location+".png";
         }
     }
 }
@@ -389,8 +396,8 @@ function drawCanvas() {
         canvas.height = panel_width*numrows;
         canvas.width =  panel_width*numcols;
         let ctx = canvas.getContext("2d");
-        fixSources(portrait_objects);
-        //document.getElementById("closet").innerHTML = print_body();
+        fixPortSources(portrait_objects);
+        //document.getElementById("closet").innerHTML = print_portrait_objects();
         for (let row = 0; row < numrows; row += 1) {
             for (let column = 0; column < numcols; column += 1) {
                 if (row*2+column < panelNum){
@@ -410,11 +417,21 @@ function drawCanvas() {
         canvas.width =  64;
         canvas_preview = document.getElementById("previewCanvas");
         ctx_preview = canvas_preview.getContext("2d");
-        img.src="images/Farmer/farmer_base.png"
+        fixSpriteSources(sprite_objects);
+        document.getElementById("closet").innerHTML = print_sprite_objects();
+        for (let i = 0; i < sprite_objects.length; i += 1){
+            let b = sprite_objects[i];
+            if (b.item_list[b.value] !="none"){ 
+                ctx.drawImage(b.image, 0, 0);
+                ctx_preview.drawImage(b.image, 0, 0);
+            }
+        }
+
+        /*img.src="images/Farmer/farmer_base.png"
         ctx.drawImage(img, 0, 0);
         ctx_preview.drawImage(img, 0, 0, 16,32, 0,0,64,128);
         ctx_preview.drawImage(img, 0, 32, 16,32, 64,0,64,128);
-        //fixSources(portrait_objects);
+        //fixPortSources(portrait_objects);
         /*for (let i = 0; i < portrait_objects.length; i += 1){
             let b = portrait_objects[i];
             if (b.item_list[b.value_list[0]] !="none"){ 

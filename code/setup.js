@@ -67,8 +67,6 @@ function newImageList(){
 //Initialising data
 const portrait_objects =[];
 
-const sprite_objects =[];
-
 function add_portrait_object(name, list){
     col = 2;
     if (outfit_list.includes(name)){
@@ -103,28 +101,7 @@ function add_portrait_object(name, list){
     portrait_objects.push({name: name,location: loc, item_list: list, colourNum: col, value_list: listOf(0),  colour: 0, image_list: newImageList()});
 }
 
-function add_sprite_object(name, list){
-    col = 2;
-    /*if (outfit_list.includes(name)){
-        loc = "outfit";
-        col = outfitNum;
-    } else {
-        if (body_list.includes(name)){
-            loc = "body";
-            col = outfitNum;
-        } else{
-            if (hair_list.includes(name)){
-                loc = "body/hair";
-                col = hairNum;
-            }
-        }
-    }*/
-
-    loc="/"+name.toLowerCase();
-    portrait_objects.push({name: name,location: loc, item_list: list, colourNum: col, value: 0,  colour: 0, image: new Image()});
-}
-
-function print_body(){
+function print_portrait_objects(){
     s = "";
     for (i = 0; i < portrait_objects.length; i += 1){
         b = portrait_objects[i];
