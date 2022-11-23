@@ -430,16 +430,29 @@ function drawCanvas() {
                 }
                 ctx_preview.drawImage(b.image, b.topcorner[0], b.topcorner[1],16,b.height,0,0,64,b.height*4);
                 ctx_preview.drawImage(b.image, b.topcorner[0], b.topcorner[1]+b.height,16,+b.height,64,0,64,+b.height*4);
-                ctx.drawImage(b.image, b.topcorner[0], b.topcorner[1],16,b.height,0,0,16,b.height); //row 1, column 1
-                ctx.drawImage(b.image, b.topcorner[0], b.topcorner[1]+b.height,16,b.height,0,32,16,b.height); //row 2, column 1
-                ctx.drawImage(b.image, b.topcorner[0], b.topcorner[1]+b.height*2,16,b.height,0,48,16,b.height); //row 3, column 1
+                for (let column = 0; column < 4; column += 1){ //column 1-4
+                    for (let row = 0; row < 2; row += 1) //rows 1,2   
+                        ctx.drawImage(b.image, b.topcorner[0]+column*xgap, b.topcorner[1]+row*b.height,16,b.height,16*column,row*32,16,b.height);
+                    if (b.isWalk) {
+                        ctx.drawImage(b.image, b.topcorner[0]+column*xgap, b.topcorner[1]+2*b.height,16,b.height,16*column,2*32,16,b.height); //3rd row
+                        for(let x = 0; x < 16; x++) //janky way of flipping
+                            ctx.drawImage(b.image, b.topcorner[0]+x+column*xgap, b.topcorner[1]+b.height, 1, b.height, +column*xgap+16 - x, 96, 1, b.height);
+                    }
+                    else{ 
+                        ctx.drawImage(b.image, b.topcorner[0]+column*xgap, b.topcorner[1]+3*b.height,16,b.height,16*column,2*32,16,b.height); //3rd row
+                        ctx.drawImage(b.image, b.topcorner[0]+column*xgap, b.topcorner[1]+2*b.height,16,b.height,16*column,3*32,16,b.height); //4th row
+                    }
+                }        
+
+/*
                 ctx.drawImage(b.image, b.topcorner[0]+xgap, b.topcorner[1],16,96,16,0,16,96); //top 3 rows, second column
                 ctx.drawImage(b.image, b.topcorner[0], b.topcorner[1],16,96,32,0,16,96); //top 3 rows, third column
                 ctx.drawImage(b.image, b.topcorner[0]+2*xgap, b.topcorner[1],16,96,48,0,16,96); //top 3 rows, fourth column
                 for(let a = 0; a < 4; a++){ //each sprite in bottom row
-                    for(let x = 0; x < 16; x++) //janky way of flipping
-                        ctx.drawImage(b.image, b.topcorner[0]+x+a*xgap, b.topcorner[1]+b.height, 1, 32, +a*xgap+16 - x, 96, 1, 32);
-                }        
+                    if (b.isWalk)
+                                            else
+                    ctx.drawImage(b.image, b.topcorner[0], b.topcorner[1]+b.height*2,16,b.height,0,64,16,b.height); //row 3, column 1      
+                }   */     
             }
         }
     }
