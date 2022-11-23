@@ -180,7 +180,7 @@ function makeDropbtnString(name, variablelist, list, functionName){
             drop_string +="\'"+variablelist[i]+"\',"
         }
         drop_string +='],'+row+')" >'
-        if (functionName=="setColour"){
+        if (functionName.includes("Colour")){
             drop_string +=colour_desc(list[row])
         }else{
             drop_string +=list[row]; //name of button
@@ -286,24 +286,28 @@ function setMenu(variablelist, number){
     switch(number){
         case 0: //editing the body
             htmlString+="<div class=\"grid-choices\">"
-            htmlString+=makeDropbtnString("Skin Colour", skin_list, skin_colours, "setColour");
-            htmlString+=makeDropbtnString("Eye Colour", ["Eyes"], eye_colours, "setColour");
-            htmlString+=makeDropbtnString("Hair Colour", hair_list, hair_colours, "setColour");
+            htmlString+=makeDropbtnString("Skin Colour", skin_list, skin_colours, "setSkinColour");
+            htmlString+=makeDropbtnString("Eye Colour", ["Eyes"], eye_colours, "setEyeColour");
+            htmlString+=makeDropbtnString("Hair Colour", hair_list, hair_colours, "setHairColour");
             htmlString+="</div>"
-            if (current_imageType==0){ 
+            if (current_imageType==0){ //portraits
                 htmlString+="<div class=\"grid-choices\">"
-                htmlString+=makeDropbtnString("Head Shape", ["Head"], head_list, "setVariable");
-                htmlString+=makeDropbtnString("Ear Shape", ["Ears"], ears_list, "setVariable");
-                htmlString+=makeDropbtnString("Nose Shape", ["Nose"], nose_list, "setVariable");
+                htmlString+=makeDropbtnString("Head Shape", ["Head"], head_list, "setPortVariable");
+                htmlString+=makeDropbtnString("Ear Shape", ["Ears"], ears_list, "setPortVariable");
+                htmlString+=makeDropbtnString("Nose Shape", ["Nose"], nose_list, "setPortVariable");
                 htmlString+="</div>"
+                htmlString+="<div class=\"grid-choices\">"
+                htmlString+=makeDropbtnString("Hair back", ["Hair_back"], hair_back_list, "setPortVariable");
+                htmlString+=makeDropbtnString("Hair middle", ["Hair_middle"], hair_middle_list, "setPortVariable");
+                htmlString+=makeDropbtnString("Hair front", ["Hair_front"], hair_front_list, "setPortVariable");
+                htmlString+="</div>"
+                htmlString+="<div class=\"grid-choices\">"
+            }else{
+                htmlString+="<div class=\"grid-choices\">"
+                htmlString+=makeDropbtnString("Hair style", ["Hairstyle"], sprite_hair_list, "setSpriteVariable");
             }
-            htmlString+="<div class=\"grid-choices\">"
-            htmlString+=makeDropbtnString("Hair back", ["Hair_back"], hair_back_list, "setVariable");
-            htmlString+=makeDropbtnString("Hair middle", ["Hair_middle"], hair_middle_list, "setVariable");
-            htmlString+=makeDropbtnString("Hair front", ["Hair_front"], hair_front_list, "setVariable");
-            htmlString+="</div>"
-            htmlString+="<div class=\"grid-choices\">"
-            htmlString+=makeDropbtnString("Facial Hair", ["Facial_hair"], facial_hair_list, "setVariable");
+            
+            htmlString+=makeDropbtnString("Facial Hair", ["Facial_hair"], facial_hair_list, "setPortVariable");
             htmlString+="</div>"
             break;    
         case 1: //editing the outfit
@@ -315,7 +319,7 @@ function setMenu(variablelist, number){
                     edit_list.push(b.name+"_back");
                 } 
                 htmlString+="<div class=\"grid-choices\">"
-                htmlString+=makeDropbtnString(b.name, [b.name], b.item_list, "setVariable");
+                htmlString+=makeDropbtnString(b.name, [b.name], b.item_list, "setPortVariable");
                 htmlString+=makeDropbtnString(b.name+" Colour", [b.name], outfit_colours, "setColour");
                 htmlString+="</div>"
             }
@@ -345,7 +349,7 @@ function setPanel(variablelist, number){
     document.getElementById("current_panel").innerHTML = panel_list[current_panel];
 }
 
-function setVariable(variablelist, number){
+function setPortVariable(variablelist, number){
     for (let i = 0; i < variablelist.length; i += 1) {
         let b = findNameMatch(portrait_objects, variablelist[i]); //the eleemnt of portrait_objects with the right vriablename
         b.value_list=listOf(number);
@@ -362,6 +366,14 @@ function setVariable(variablelist, number){
     drawCanvas();
 }
 
+function setSpriteVariable(variablelist, number){
+    for (let i = 0; i < variablelist.length; i += 1) {
+        let b = findNameMatch(sprite_objects, variablelist[i]); //the eleemnt of portrait_objects with the right vriablename
+        b.value=number;
+    }
+    drawCanvas();
+}
+
 function setPanelVariable(variablelist, number){
     for (let i = 0; i < variablelist.length; i += 1) {
         let b = findNameMatch(portrait_objects, variablelist[i]); //the eleemnt of portrait_objects with the right vriablename
@@ -371,12 +383,67 @@ function setPanelVariable(variablelist, number){
 }
 
 function setColour(variablelist, number){
-    let s = "";
     for (let i = 0; i < variablelist.length; i += 1) {
         let b = findNameMatch(portrait_objects, variablelist[i]); //the eleemnt of portrait_objects with the right vriablename
         b.colour=number;
     }
     drawCanvas();
+}
+
+function setPortColour(variablelist, number){
+    for (let i = 0; i < variablelist.length; i += 1) {
+        let b = findNameMatch(portrait_objects, variablelist[i]); //the eleemnt of portrait_objects with the right vriablename
+        b.colour=number;
+    }
+}
+
+function setSpriteColour(variablelist, number){
+    for (let i = 0; i < variablelist.length; i += 1) {
+        let b = findNameMatch(sprite_objects, variablelist[i]); //the eleemnt of portrait_objects with the right vriablename
+        b.colour=number;
+    }
+}
+
+function setSkinColour(variablelist, number){
+    setPortColour(skin_list, number);
+    setSpriteColour(["Torso","Arms"], number);
+    drawCanvas();
+}
+
+function setEyeColour(variablelist, number){
+    setPortColour(["Eyes"], number);
+    setSpriteColour(["Eyes"], number);
+    drawCanvas();
+}
+
+function setHairColour(variablelist, number){
+    setPortColour(hair_list, number);
+    setSpriteColour(["Hair","Facial Hair"], number);
+    drawCanvas();
+}
+
+function oldX(obj, column){
+    //return the X coordinate of the column of the original image
+    let xgap = 0;
+    if (obj.isWalk){
+        xgap = obj.dimensions[0];
+    }
+    return obj.topcorner[0]+column*xgap;
+}
+
+function oldY(obj, row){
+    //return the X coordinate of the row of the original image
+    return obj.topcorner[1]+row*obj.dimensions[1];
+}
+
+function newX(obj, column){
+    //return the X coordinate of the row of the new image
+    return 16*column+obj.offset[0];
+}
+
+function newY(obj, row){
+    //return the X coordinate of the row of the new image
+    return row*32+obj.offset[1];
 }
 
 function drawCanvas() {
@@ -419,7 +486,7 @@ function drawCanvas() {
         canvas_preview = document.getElementById("previewCanvas");
         ctx_preview = canvas_preview.getContext("2d");
         fixSpriteSources(sprite_objects);
-        //document.getElementById("closet").innerHTML = print_sprite_objects();
+        document.getElementById("closet").innerHTML = print_sprite_objects();
         //sourceX, sourceY, sourceWidth, sourceHeight, destWidth and destHeight   
         for (let i = 0; i < sprite_objects.length; i += 1){
             let b = sprite_objects[i];
@@ -430,29 +497,30 @@ function drawCanvas() {
                 }
                 ctx_preview.drawImage(b.image, b.topcorner[0], b.topcorner[1],b.dimensions[0],b.dimensions[1],b.offset[0]*4,b.offset[1]*4,b.dimensions[0]*4,b.dimensions[1]*4);
                 ctx_preview.drawImage(b.image, b.topcorner[0], b.topcorner[1]+b.dimensions[1],b.dimensions[0],b.dimensions[1],64+b.offset[0]*4,b.offset[1]*4,b.dimensions[0]*4,b.dimensions[1]*4);
-                for (let column = 0; column < 4; column += 1){ //column 1-4
-                    for (let row = 0; row < 2; row += 1) //rows 1,2   
-                        ctx.drawImage(b.image, b.topcorner[0]+column*xgap, b.topcorner[1]+row*b.dimensions[1],b.dimensions[0],b.dimensions[1],16*column+b.offset[0],row*32+b.offset[1],b.dimensions[0],b.dimensions[1]);
-                    if (b.isWalk) {
-                        ctx.drawImage(b.image, b.topcorner[0]+column*xgap, b.topcorner[1]+2*b.dimensions[1],b.dimensions[0],b.dimensions[1],16*column+b.offset[0],2*32+b.offset[1],b.dimensions[0],b.dimensions[1]); //3rd row
-                        for(let x = 0; x < b.dimensions[0]; x++) //janky way of flipping
-                            ctx.drawImage(b.image, b.topcorner[0]+x+column*xgap, b.topcorner[1]+b.dimensions[1], 1, b.dimensions[1], b.offset[0]+column*xgap+b.dimensions[0] - x, 96+b.offset[1], 1, b.dimensions[1]);
+                for (let row = 0; row < 2; row += 1){//rows 1,2   
+                    for (let column = 0; column < 2; column += 1) //column 1-2
+                        ctx.drawImage(b.image, oldX(b,column), oldY(b,row),b.dimensions[0],b.dimensions[1],newX(b,column), newY(b,row),b.dimensions[0],b.dimensions[1]);
+                    ctx.drawImage(b.image, oldX(b,0), oldY(b,row),b.dimensions[0],b.dimensions[1],newX(b,2), newY(b,row),b.dimensions[0],b.dimensions[1]); //column 3  
+                    ctx.drawImage(b.image, oldX(b,2), oldY(b,row),b.dimensions[0],b.dimensions[1],newX(b,3), newY(b,row),b.dimensions[0],b.dimensions[1]); //column 4              
+                }
+                if (b.name =="Hat"){ 
+                    for (let column = 0; column < 2; column += 1){
+                            ctx.drawImage(b.image, oldX(b,0), oldY(b,3),b.dimensions[0],b.dimensions[1],newX(b,2), newY(b,2),b.dimensions[0],b.dimensions[1]); //3rd row
+                            ctx.drawImage(b.image, oldX(b,0), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,2), newY(b,3),b.dimensions[0],b.dimensions[1]); //4th row
                     }
-                    else{ 
-                        ctx.drawImage(b.image, b.topcorner[0]+column*xgap, b.topcorner[1]+3*b.dimensions[1],b.dimensions[0],b.dimensions[1],16*column+b.offset[0],2*32+b.offset[1],b.dimensions[0],b.dimensions[1]); //3rd row
-                        ctx.drawImage(b.image, b.topcorner[0]+column*xgap, b.topcorner[1]+2*b.dimensions[1],b.dimensions[0],b.dimensions[1],16*column+b.offset[0],3*32+b.offset[1],b.dimensions[0],b.dimensions[1]); //4th row
-                    }
+                }else{
+                    //row 3
+                    for (let column = 0; column < 2; column += 1)
+                        ctx.drawImage(b.image, oldX(b,column), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,column),newY(b,2),b.dimensions[0],b.dimensions[1]); //3rd row cols 1-2
+                    ctx.drawImage(b.image, oldX(b,0), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,2), newY(b,2),b.dimensions[0],b.dimensions[1]); //column 3  
+                    ctx.drawImage(b.image, oldX(b,2), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,3), newY(b,2),b.dimensions[0],b.dimensions[1]); //column 4              
+                    for(let x = 0; x < b.dimensions[0]; x++){ //janky way of flipping
+                        for (let column = 0; column < 2; column += 1)
+                            ctx.drawImage(b.image, oldX(b,column)+x, oldY(b,1), 1, b.dimensions[1], newX(b,column)+b.dimensions[0] - x, newY(b,3), 1, b.dimensions[1]);
+                        ctx.drawImage(b.image, oldX(b,0)+x, oldY(b,1), 1, b.dimensions[1], newX(b,2)+b.dimensions[0] - x, newY(b,3), 1, b.dimensions[1]); 
+                        ctx.drawImage(b.image, oldX(b,2)+x, oldY(b,1), 1, b.dimensions[1], newX(b,3)+b.dimensions[0] - x, newY(b,3), 1, b.dimensions[1]);       
+                    }        
                 }        
-
-/*
-                ctx.drawImage(b.image, b.topcorner[0]+xgap, b.topcorner[1],16,96,16,0,16,96); //top 3 rows, second column
-                ctx.drawImage(b.image, b.topcorner[0], b.topcorner[1],16,96,32,0,16,96); //top 3 rows, third column
-                ctx.drawImage(b.image, b.topcorner[0]+2*xgap, b.topcorner[1],16,96,48,0,16,96); //top 3 rows, fourth column
-                for(let a = 0; a < 4; a++){ //each sprite in bottom row
-                    if (b.isWalk)
-                                            else
-                    ctx.drawImage(b.image, b.topcorner[0], b.topcorner[1]+b.dimensions[1]*2,16,b.dimensions[1],0,64,16,b.dimensions[1]); //row 3, column 1      
-                }   */     
             }
         }
     }

@@ -29,7 +29,9 @@ function findNameMatch(list, name){
     //returns the first element of list whose name equals "name"
     for (let i = 0; i < list.length; i += 1) {
         if (list[i].name==name){
+            //document.getElementById("test").innerHTML = "value: "+name;
             return list[i];
+            
         }
     }
     document.getElementById("test").innerHTML = "Unknown value: "+name;

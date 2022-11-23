@@ -398,16 +398,18 @@ def process_all_sprites():
     #    process_image("hats", "../images/sprites/hats", c, outfit_colours,"grey")
     #for c in range(len(outfit_colours)):  
     #    process_image("pants", "../images/sprites/pants", c, outfit_colours,"blue")
+    for c in range(len(hair_colours)):  
+        process_image("facialhair", "../images/sprites/facialhair", c, hair_colours,"grey")
     #for c in range(len(outfit_colours)):  
     #    process_image("shirts", "../images/sprites/shirts", c, outfit_colours,"grey")
     #for c in range(len(outfit_colours)):  
     #    process_image("female", "../images/sprites/shoes", c, outfit_colours,"grey") 
     #    process_image("male", "../images/sprites/shoes", c, outfit_colours,"grey") 
-    for c in range(len(eye_colours)):  
-        process_image("female", "../images/sprites/eyes", c, eye_colours,"") 
-        process_image("male", "../images/sprites/eyes", c, eye_colours,"")        
+    #for c in range(len(eye_colours)):  
+    #    process_image("female", "../images/sprites/eyes", c, eye_colours,"") 
+    #    process_image("male", "../images/sprites/eyes", c, eye_colours,"")        
 
 
 write_variables()
-#process_all_sprites()
+process_all_sprites()
 #process_all_portraits()

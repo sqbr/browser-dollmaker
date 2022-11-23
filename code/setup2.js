@@ -38,6 +38,9 @@ sprite_shirt_list.push({name: "Overalls", location: "shirts/shirts", colour: fal
 const sprite_accessory_list = []
 sprite_accessory_list.push({name: "Glasses", location: "accessory/accessories", colour: false, topcorner:[0,32]})
 
+const sprite_facialhair_list = []
+sprite_facialhair_list.push({name: "Beard", location: "facialhair/facialhair", colour: true, topcorner:[0,0]})
+
 const sprite_hair_list = []
 sprite_hair_list.push({name: "Side part", location: "hair/hairstyles", colour: true, topcorner:[32,0]})
 
@@ -61,7 +64,8 @@ add_sprite_object("Eyes", sprite_eyes_list,eye_colours,true,[16,32],[0,0]);
 add_sprite_object("Pants", sprite_pants_list,outfit_colours,true,[16,32],[0,0]);
 add_sprite_object("Shoes", sprite_shoes_list,outfit_colours,true,[16,32],[0,0]);
 add_sprite_object("Shirt", sprite_shirt_list,outfit_colours,false,[8,8],[4,15]);
-add_sprite_object("Accessory", sprite_accessory_list,outfit_colours,false,[16,16],[0,1]);
+//add_sprite_object("Accessory", sprite_accessory_list,outfit_colours,false,[16,16],[0,1]);
+add_sprite_object("Facial Hair", sprite_facialhair_list,hair_colours,false,[16,16],[0,1]);
 add_sprite_object("Hair", sprite_hair_list,hair_colours,false,[16,32],[0,1]);
 //add_sprite_object("Hat", sprite_hat_list,outfit_colours,false,[16,20],[0,0]);
 add_sprite_object("Arms", sprite_arms_list,skin_colours,true,[16,32],[0,0]);
@@ -71,11 +75,11 @@ function print_sprite_objects(){
     for (i = 0; i < sprite_objects.length; i += 1){
         b = sprite_objects[i];
         s+="name: "+b.name;
-        s+=" item_list: "+b.item_list.toString();
-        s+="  colour_list: "+b.colour_list.toString();
+        //s+=" item_list: "+b.item_list.toString();
+        //s+="  colour_list: "+b.colour_list.toString();
         s+=" item: "+b.item;
         s+=" colour: "+b.colour;
-        s+=" src: "+b.image.src;
+        //s+=" src: "+b.image.src;
         s+="<br>";
     }
     return s
