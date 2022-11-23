@@ -49,7 +49,7 @@ add_sprite_object("Torso", sprite_torso_list,skin_colours,true,[16,32],[0,0]);
 add_sprite_object("Eyes", sprite_eyes_list,eye_colours,true,[16,32],[0,0]);
 add_sprite_object("Pants", sprite_pants_list,outfit_colours,true,[16,32],[0,0]);
 add_sprite_object("Shoes", sprite_shoes_list,outfit_colours,true,[16,32],[0,0]);
-add_sprite_object("Shirt", sprite_shirt_list,outfit_colours,false,[8,8],[0,0]);
+add_sprite_object("Shirt", sprite_shirt_list,outfit_colours,false,[8,8],[4,15]);
 add_sprite_object("Hat", sprite_hat_list,outfit_colours,false,[16,20],[0,0]);
 
 function print_sprite_objects(){
