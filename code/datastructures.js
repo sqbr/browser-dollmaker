@@ -423,24 +423,24 @@ function drawCanvas() {
         //sourceX, sourceY, sourceWidth, sourceHeight, destWidth and destHeight   
         for (let i = 0; i < sprite_objects.length; i += 1){
             let b = sprite_objects[i];
-            if (b.item_list[b.value] !="none"){ 
+            if (b.item_list[b.value] !=none){ 
                 let xgap = 0;
                 if (b.isWalk){
                     xgap = 16;
                 }
-                ctx_preview.drawImage(b.image, b.topcorner[0], b.topcorner[1],16,b.height,0,0,64,b.height*4);
-                ctx_preview.drawImage(b.image, b.topcorner[0], b.topcorner[1]+b.height,16,+b.height,64,0,64,+b.height*4);
+                ctx_preview.drawImage(b.image, b.topcorner[0], b.topcorner[1],b.dimensions[0],b.dimensions[1],b.offset[0],b.offset[1],64,b.dimensions[1]*4);
+                ctx_preview.drawImage(b.image, b.topcorner[0], b.topcorner[1]+b.dimensions[1],16,+b.dimensions[1],64,0,64,+b.dimensions[1]*4);
                 for (let column = 0; column < 4; column += 1){ //column 1-4
                     for (let row = 0; row < 2; row += 1) //rows 1,2   
-                        ctx.drawImage(b.image, b.topcorner[0]+column*xgap, b.topcorner[1]+row*b.height,16,b.height,16*column,row*32,16,b.height);
+                        ctx.drawImage(b.image, b.topcorner[0]+column*xgap, b.topcorner[1]+row*b.dimensions[1],16,b.dimensions[1],16*column,row*32,16,b.dimensions[1]);
                     if (b.isWalk) {
-                        ctx.drawImage(b.image, b.topcorner[0]+column*xgap, b.topcorner[1]+2*b.height,16,b.height,16*column,2*32,16,b.height); //3rd row
+                        ctx.drawImage(b.image, b.topcorner[0]+column*xgap, b.topcorner[1]+2*b.dimensions[1],16,b.dimensions[1],16*column,2*32,16,b.dimensions[1]); //3rd row
                         for(let x = 0; x < 16; x++) //janky way of flipping
-                            ctx.drawImage(b.image, b.topcorner[0]+x+column*xgap, b.topcorner[1]+b.height, 1, b.height, +column*xgap+16 - x, 96, 1, b.height);
+                            ctx.drawImage(b.image, b.topcorner[0]+x+column*xgap, b.topcorner[1]+b.dimensions[1], 1, b.dimensions[1], +column*xgap+16 - x, 96, 1, b.dimensions[1]);
                     }
                     else{ 
-                        ctx.drawImage(b.image, b.topcorner[0]+column*xgap, b.topcorner[1]+3*b.height,16,b.height,16*column,2*32,16,b.height); //3rd row
-                        ctx.drawImage(b.image, b.topcorner[0]+column*xgap, b.topcorner[1]+2*b.height,16,b.height,16*column,3*32,16,b.height); //4th row
+                        ctx.drawImage(b.image, b.topcorner[0]+column*xgap, b.topcorner[1]+3*b.dimensions[1],16,b.dimensions[1],16*column,2*32,16,b.dimensions[1]); //3rd row
+                        ctx.drawImage(b.image, b.topcorner[0]+column*xgap, b.topcorner[1]+2*b.dimensions[1],16,b.dimensions[1],16*column,3*32,16,b.dimensions[1]); //4th row
                     }
                 }        
 
@@ -451,7 +451,7 @@ function drawCanvas() {
                 for(let a = 0; a < 4; a++){ //each sprite in bottom row
                     if (b.isWalk)
                                             else
-                    ctx.drawImage(b.image, b.topcorner[0], b.topcorner[1]+b.height*2,16,b.height,0,64,16,b.height); //row 3, column 1      
+                    ctx.drawImage(b.image, b.topcorner[0], b.topcorner[1]+b.dimensions[1]*2,16,b.dimensions[1],0,64,16,b.dimensions[1]); //row 3, column 1      
                 }   */     
             }
         }
