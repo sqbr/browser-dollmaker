@@ -1,4 +1,4 @@
-const sprite_body_list = ["tall","short","short_bald","tall_bald"];
+const sprite_body_list = ["short","tall","short_bald","tall_bald"];
 
 const height_list = ["short","tall"];
 

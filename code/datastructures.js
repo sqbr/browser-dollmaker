@@ -432,13 +432,12 @@ function setFacialHair(variablelist, number){
 }
 
 function setSpriteHair(variablelist, number){
-    setSpriteVariable(["Hair"], number);
+    setSpriteVariable(["Hairstyle"], number);
     if (number ==0)
         isBald = true;
     else
         isBald = false;    
-
-    drawCanvas();
+    setHeight([], height);
 }
 
 function setHeight(variablelist, number){
