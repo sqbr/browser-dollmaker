@@ -1,6 +1,8 @@
 const sprite_body_list = ["tall","short","tall_bald", "short_bald"];
 
-const height_list = ["short","tall",];
+const height_list = ["short","tall"];
+
+const eyelash_list = ["short","long"];
 
 let height = 0;
 
@@ -27,7 +29,7 @@ const sprite_body_names = ["Short","Tall"]
 
 const sprite_eyes_list = []
 for (let i =0; i<height_list.length;i++){
-    b= ["short", "long"];
+    b= eyelash_list[i];
     sprite_eyes_list.push({name: b, location: "eyes/"+b, colour: true, hasFullRows: false,topcorner:[0,0]})
 }
 
@@ -78,21 +80,31 @@ for (let i =0; i<sprite_body_list.length;i++){
 }
 
 const sprite_objects =[];
-
-function add_sprite_object(name, list,colour_list,isWalk,dimensions, offset){
-    sprite_objects.push({name: name,item_list: list, colour_list: colour_list, item: 0,  colour: 0, image: new Image(), isWalk: isWalk, hasFullRows: false, topcorner:[0,0],dimensions: dimensions, offset: offset});
+/*
+Name: String.
+item_list: lost oif objects as above
+colour_list: list of strings
+item: number
+colour: number
+image: an image
+iswalk: does it have separate sprites for each part of walk cycle
+bobs: does it bob up and down (not relevant is isWalk)
+topcorner: coordinates of the top corner of the looking down standing still sprite
+*/
+function add_sprite_object(name, list,colour_list,isWalk,bobs, dimensions, offset){
+    sprite_objects.push({name: name,item_list: list, colour_list: colour_list, item: 0,  colour: 0, image: new Image(), isWalk: isWalk, bobs: bobs, hasFullRows: false, topcorner:[0,0],dimensions: dimensions, offset: offset});
 }
 
-add_sprite_object("Torso", sprite_torso_list,skin_colours,true, [16,32],[0,0]);
-add_sprite_object("Eyes", sprite_eyes_list,eye_colours,true,[16,32],[0,0]);
-add_sprite_object("Pants", sprite_pants_list,outfit_colours,true,[16,32],[0,0]);
-add_sprite_object("Shoes", sprite_shoes_list,outfit_colours,true,[16,32],[0,0]);
-add_sprite_object("Shirt", sprite_shirt_list,outfit_colours,false,[8,8],[4,15]);
-//add_sprite_object("Accessory", sprite_accessory_list,outfit_colours,false,[16,16],[0,1]);
-add_sprite_object("Facial Hair", sprite_facialhair_list,hair_colours,false,[16,16],[0,1]);
-add_sprite_object("Hairstyle", sprite_hair_list,hair_colours,false,[16,32],[0,1]);
-//add_sprite_object("Hat", sprite_hat_list,outfit_colours,false,[16,20],[0,0]);
-add_sprite_object("Arms", sprite_arms_list,skin_colours,true,[16,32],[0,0]);
+add_sprite_object("Torso", sprite_torso_list,skin_colours,true, false, [16,32],[0,0]);
+add_sprite_object("Eyes", sprite_eyes_list,eye_colours,true,false,[16,32],[0,0]);
+add_sprite_object("Pants", sprite_pants_list,outfit_colours,true,false,[16,32],[0,0]);
+add_sprite_object("Shoes", sprite_shoes_list,outfit_colours,true,false,[16,32],[0,0]);
+add_sprite_object("Shirt", sprite_shirt_list,outfit_colours,false,false,[8,8],[4,15]);
+//add_sprite_object("Accessory", sprite_accessory_list,outfit_colours,false,true,[16,16],[0,1]);
+add_sprite_object("Facial Hair", sprite_facialhair_list,hair_colours,false,true,[16,16],[0,1]);
+add_sprite_object("Hairstyle", sprite_hair_list,hair_colours,false,true, [16,32],[0,1]);
+//add_sprite_object("Hat", sprite_hat_list,outfit_colours,false,true, [16,20],[0,0]);
+add_sprite_object("Arms", sprite_arms_list,skin_colours,true,false, [16,32],[0,0]);
 
 function print_sprite_objects(){
     s = "";

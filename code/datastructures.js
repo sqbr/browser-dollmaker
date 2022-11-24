@@ -429,6 +429,7 @@ function setHairColour(variablelist, number){
 function setHeight(variablelist, number){
     height = number;
     let b = findNameMatch(sprite_objects, "Torso");
+    b.index = sprite_body_list.indexOf(height_list[number]);
     drawCanvas();
 }
 
@@ -451,9 +452,14 @@ function newX(obj, column){
     return 16*column+obj.offset[0];
 }
 
-function newY(obj, row){
+function newY(obj, row,column){
     //return the X coordinate of the row of the new image
-    return row*32+obj.offset[1];
+    let bob = 0;
+    if (obj.bobs){
+        bob =column%2;
+    }
+
+    return row*32+obj.offset[1]+bob;
 }
 
 function drawCanvas() {
@@ -522,32 +528,28 @@ function drawCanvas() {
         for (let i = 0; i < sprite_objects.length; i += 1){
             let b = sprite_objects[i];
             if (b.image.src !=""){ 
-                let xgap = 0;
-                if (b.isWalk){
-                    xgap = b.dimensions[0];
-                }
                 for (let row = 0; row < 2; row += 1){//rows 1,2   
-                    for (let column = 0; column < 2; column += 1) //column 1-2
-                        ctx.drawImage(b.image, oldX(b,column), oldY(b,row),b.dimensions[0],b.dimensions[1],newX(b,column), newY(b,row),b.dimensions[0],b.dimensions[1]);
-                    ctx.drawImage(b.image, oldX(b,0), oldY(b,row),b.dimensions[0],b.dimensions[1],newX(b,2), newY(b,row),b.dimensions[0],b.dimensions[1]); //column 3  
-                    ctx.drawImage(b.image, oldX(b,2), oldY(b,row),b.dimensions[0],b.dimensions[1],newX(b,3), newY(b,row),b.dimensions[0],b.dimensions[1]); //column 4              
+                    for (let column = 0; column < 2; column += 1)
+                        ctx.drawImage(b.image, oldX(b,column), oldY(b,row),b.dimensions[0],b.dimensions[1],newX(b,column), newY(b,row,column),b.dimensions[0],b.dimensions[1]);//column 1
+                    ctx.drawImage(b.image, oldX(b,0), oldY(b,row),b.dimensions[0],b.dimensions[1],newX(b,2), newY(b,row,2),b.dimensions[0],b.dimensions[1]); //column 3  
+                    ctx.drawImage(b.image, oldX(b,2), oldY(b,row),b.dimensions[0],b.dimensions[1],newX(b,3), newY(b,row,3),b.dimensions[0],b.dimensions[1]); //column 4              
                 }
                 if (b.hasFullRows){ //don't have to flip
                     for (let column = 0; column < 4; column += 1){
-                            ctx.drawImage(b.image, oldX(b,0), oldY(b,3),b.dimensions[0],b.dimensions[1],newX(b,column), newY(b,2),b.dimensions[0],b.dimensions[1]); //3rd row
-                            ctx.drawImage(b.image, oldX(b,0), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,column), newY(b,3),b.dimensions[0],b.dimensions[1]); //4th row                
+                            ctx.drawImage(b.image, oldX(b,0), oldY(b,3),b.dimensions[0],b.dimensions[1],newX(b,column), newY(b,2,column),b.dimensions[0],b.dimensions[1]); //3rd row
+                            ctx.drawImage(b.image, oldX(b,0), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,column), newY(b,3,column),b.dimensions[0],b.dimensions[1]); //4th row                
                     }
                 }else{
                     //row 3
                     for (let column = 0; column < 2; column += 1)
-                        ctx.drawImage(b.image, oldX(b,column), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,column),newY(b,2),b.dimensions[0],b.dimensions[1]); //3rd row cols 1-2
-                    ctx.drawImage(b.image, oldX(b,0), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,2), newY(b,2),b.dimensions[0],b.dimensions[1]); //column 3  
-                    ctx.drawImage(b.image, oldX(b,2), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,3), newY(b,2),b.dimensions[0],b.dimensions[1]); //column 4              
+                        ctx.drawImage(b.image, oldX(b,column), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,column),newY(b,2,column),b.dimensions[0],b.dimensions[1]); //3rd row cols 1-2
+                    ctx.drawImage(b.image, oldX(b,0), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,2), newY(b,2,2),b.dimensions[0],b.dimensions[1]); //column 3  
+                    ctx.drawImage(b.image, oldX(b,2), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,3), newY(b,2,3),b.dimensions[0],b.dimensions[1]); //column 4              
                     for(let x = 0; x < b.dimensions[0]; x++){ //janky way of flipping
                         for (let column = 0; column < 2; column += 1)
-                            ctx.drawImage(b.image, oldX(b,column)+x, oldY(b,1), 1, b.dimensions[1], newX(b,column)+b.dimensions[0] - x, newY(b,3), 1, b.dimensions[1]);
-                        ctx.drawImage(b.image, oldX(b,0)+x, oldY(b,1), 1, b.dimensions[1], newX(b,2)+b.dimensions[0] - x, newY(b,3), 1, b.dimensions[1]); 
-                        ctx.drawImage(b.image, oldX(b,2)+x, oldY(b,1), 1, b.dimensions[1], newX(b,3)+b.dimensions[0] - x, newY(b,3), 1, b.dimensions[1]);       
+                            ctx.drawImage(b.image, oldX(b,column)+x, oldY(b,1), 1, b.dimensions[1], newX(b,column)+b.dimensions[0] - x, newY(b,3,column), 1, b.dimensions[1]);
+                        ctx.drawImage(b.image, oldX(b,0)+x, oldY(b,1), 1, b.dimensions[1], newX(b,2)+b.dimensions[0] - x, newY(b,3,2), 1, b.dimensions[1]); 
+                        ctx.drawImage(b.image, oldX(b,2)+x, oldY(b,1), 1, b.dimensions[1], newX(b,3)+b.dimensions[0] - x, newY(b,3,3), 1, b.dimensions[1]);       
                     }        
                 }        
             }

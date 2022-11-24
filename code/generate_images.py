@@ -350,9 +350,9 @@ def process_all_portraits():
         process_portrait_part(c)
 
 def process_all_sprites():
-    for c in range(len(skin_colours)):
-        for b in sprite_body_list:
-            process_image(b, "../images/sprites/body/", c, skin_colours,"skin")
+    #for c in range(len(skin_colours)):
+    #    for b in sprite_body_list:
+    #        process_image(b, "../images/sprites/body/", c, skin_colours,"skin")
     #for c in range(len(hair_colours)):  
     #    process_image("hairstyles", "../images/sprites/hair", c, hair_colours,"grey")
     #    process_image("hairstyles2", "../images/sprites/hair", c, hair_colours,"grey")
@@ -367,9 +367,9 @@ def process_all_sprites():
     #for c in range(len(outfit_colours)):  
     #    process_image("short", "../images/sprites/shoes", c, outfit_colours,"grey") 
     #    process_image("tall", "../images/sprites/shoes", c, outfit_colours,"grey") 
-    #for c in range(len(eye_colours)):  
-    #    process_image("short", "../images/sprites/eyes", c, eye_colours,"") 
-    #    process_image("tall", "../images/sprites/eyes", c, eye_colours,"")        
+    for c in range(len(eye_colours)):  
+        process_image("short", "../images/sprites/eyes", c, eye_colours,"") 
+        process_image("long", "../images/sprites/eyes", c, eye_colours,"")        
 
 
 write_variables()
