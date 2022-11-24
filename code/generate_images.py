@@ -17,7 +17,7 @@ hair_list = ["Hair_back", "Hair_middle","Hair_front","Facial_hair"]
 hair_front_list = ["none", "emo"]
 hair_middle_list = ["none", "sidepart"]
 hair_back_list = ["none", "short"]
-facial_hair_list = ["none","mo"]
+facial_hair_list = ["none", "beard", "moustache", "goatee", "soulpatch", "muttonchops", "neckbeard"];
 
 torso_list = ["medium"]
 head_list =["medium","round"]
@@ -237,8 +237,8 @@ def colour_this_blue(pixel, colour):
     return (p[0],p[1],p[2],pixel[3]) 
 
 def process_image(name, location, colour,colour_list,type):
-    image_string = location+"/"+name+"_base.png"
-    save_string = location+"/"+name+"_"+str(colour)+".png"
+    image_string = "../images/bases/"+location+"/"+name+"_base.png"
+    save_string = "../images/"+location+"/"+name+"_"+str(colour)+".png"
     img = Image.open(image_string) 
     Adata = img.load()       
     for y in range(img.size[1]):
@@ -338,7 +338,7 @@ def process_portrait_part(obj):
         colour_list = hair_colours        
     else:
         colour_list = outfit_colours
-    loc = "../images/portraits/"+obj.location + "/"+(obj.name).lower()   
+    loc = "portraits/"+obj.location + "/"+(obj.name).lower()   
     for c in range(len(colour_list)):
         for item in obj.item_list:
             if item!="none":
@@ -352,26 +352,29 @@ def process_all_portraits():
 def process_all_sprites():
     #for c in range(len(skin_colours)):
     #    for b in sprite_body_list:
-    #        process_image(b, "../images/sprites/body/", c, skin_colours,"skin")
+    #        process_image(b, "sprites/body/", c, skin_colours,"skin")
     #for c in range(len(hair_colours)):  
-    #    process_image("hairstyles", "../images/sprites/hair", c, hair_colours,"grey")
-    #    process_image("hairstyles2", "../images/sprites/hair", c, hair_colours,"grey")
+    #    process_image("hairstyles", "sprites/hair", c, hair_colours,"grey")
+    #    process_image("hairstyles2", "sprites/hair", c, hair_colours,"grey")
     #for c in range(len(outfit_colours)):  
-    #    process_image("hats", "../images/sprites/hats", c, outfit_colours,"grey")
+    #    process_image("hats", "sprites/hats", c, outfit_colours,"grey")
     #for c in range(len(outfit_colours)):  
-    #    process_image("pants", "../images/sprites/pants", c, outfit_colours,"blue")
+    #    process_image("pants", "sprites/pants", c, outfit_colours,"blue")
     #for c in range(len(hair_colours)):  
-    #    process_image("facialhair", "../images/sprites/facialhair", c, hair_colours,"grey")
+    #    process_image("facialhair", "sprites/facialhair", c, hair_colours,"grey")
+    for c in range(len(outfit_colours)):  
+        process_image("shirts", "sprites/shirts", c, outfit_colours,"grey")
     #for c in range(len(outfit_colours)):  
-    #    process_image("shirts", "../images/sprites/shirts", c, outfit_colours,"grey")
-    #for c in range(len(outfit_colours)):  
-    #    process_image("short", "../images/sprites/shoes", c, outfit_colours,"grey") 
-    #    process_image("tall", "../images/sprites/shoes", c, outfit_colours,"grey") 
-    for c in range(len(eye_colours)):  
-        process_image("short", "../images/sprites/eyes", c, eye_colours,"") 
-        process_image("long", "../images/sprites/eyes", c, eye_colours,"")        
+    #    process_image("short", "sprites/shoes", c, outfit_colours,"grey") 
+    #    process_image("tall", "sprites/shoes", c, outfit_colours,"grey") 
+    #for c in range(len(eye_colours)):  
+    #    process_image("short", "sprites/eyes", c, eye_colours,"") 
+    #    process_image("long", "sprites/eyes", c, eye_colours,"")        
 
 
 write_variables()
-process_all_sprites()
+#process_all_sprites()
+for c in closet:
+    if c.name =="Facial_hair":
+        process_portrait_part(c)
 #process_all_portraits()

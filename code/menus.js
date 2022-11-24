@@ -24,6 +24,10 @@ function dropBtnClose(){
 
 function exportCanvas(){ //broken
     let mycanvas = document.getElementById("exportCanvas");
-    let img = mycanvas.toDataURL("image/png;base64;");
-    window.open(img,"","width="+canvas_width+",height="+canvas_height);
+    let img = mycanvas.toDataURL();
+    //window.open(img,"","width="+canvas_width+",height="+canvas_height);
+    //const a = document.createElement("a");
+    //a.href = img;
+    //a.setAttribute("download", "SketchDownload");
+    //a.click();
 }
