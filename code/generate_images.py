@@ -115,7 +115,7 @@ add_portrait_object("Hair_middle", hair_middle_list,"hair_middle_list", "body/ha
 add_portrait_object("Hair_front", hair_front_list,"hair_front_list", "body/hair")
 add_portrait_object("Hat", hat_list,"hat_list", "outfit")
 
-sprite_body_list = ["male","female","male_bald", "female_bald"]
+sprite_body_list = ["tall","short","tall_bald", "short_bald"]
 
 # colour functions
 
@@ -329,44 +329,6 @@ def write_variables():
     
     content.close()
 
-def make_walksprites(type):
-    image_string = "../images/Farmer/"+type+".png"
-    base_string = "../images/sprites/body/"
-    if type == "farmer_base":
-        base_string += "male"
-    if type == "farmer_base_bald":
-        base_string += "male_bald"    
-    elif type == "farmer_girl_base":
-        base_string += "female"
-    elif type == "farmer_girl_base_bald":
-        base_string += "female_bald"    
-    save_string =base_string+"_body_base.png"
-    original = Image.open(image_string) 
-    new = Image.new("RGBA", (64, 128))
-    new.paste(original.crop((0,0,32,96))) #first two columns
-    new.paste(original.crop((0,0,16,96)),(32,0))# third column, repeating standing still sprite
-    new.paste(original.crop((32,0,48,96)),(48,0))# fourth column
-    for i in range(4):
-        temp = new.crop((0+i*16,32,16+i*16,96))
-        temp = temp.transpose(Image.FLIP_LEFT_RIGHT)
-        new.paste(temp,(0+i*16,96))# fourth row
-    new.save(save_string)
-    save_string = base_string+"_arms_base.png"
-    new.paste(original.crop((96,0,128,96))) #first two columns
-    new.paste(original.crop((96,0,112,96)),(32,0))# third column, repeating standing still sprite
-    new.paste(original.crop((128,0,144,96)),(48,0))# fourth column
-    for i in range(4):
-        temp = new.crop((96+i*16,32,112+i*16,96))
-        temp = temp.transpose(Image.FLIP_LEFT_RIGHT)
-        new.paste(temp,(0+i*16,96))# fourth row
-    new.save(save_string)
-
-def make_farmer_parts():
-    make_walksprites("farmer_base")    
-    make_walksprites("farmer_base_bald")    
-    make_walksprites("farmer_girl_base")    
-    make_walksprites("farmer_girl_base_bald")   
-
 def process_portrait_part(obj):
     if obj.name in skin_list:
         colour_list = skin_colours
@@ -388,9 +350,9 @@ def process_all_portraits():
         process_portrait_part(c)
 
 def process_all_sprites():
-    #for c in range(len(skin_colours)):
-    #    for b in sprite_body_list:
-    #        process_image("farmer_"+b, "../images/sprites/body", c, skin_colours,"skin")
+    for c in range(len(skin_colours)):
+        for b in sprite_body_list:
+            process_image(b, "../images/sprites/body/", c, skin_colours,"skin")
     #for c in range(len(hair_colours)):  
     #    process_image("hairstyles", "../images/sprites/hair", c, hair_colours,"grey")
     #    process_image("hairstyles2", "../images/sprites/hair", c, hair_colours,"grey")
@@ -398,16 +360,16 @@ def process_all_sprites():
     #    process_image("hats", "../images/sprites/hats", c, outfit_colours,"grey")
     #for c in range(len(outfit_colours)):  
     #    process_image("pants", "../images/sprites/pants", c, outfit_colours,"blue")
-    for c in range(len(hair_colours)):  
-        process_image("facialhair", "../images/sprites/facialhair", c, hair_colours,"grey")
+    #for c in range(len(hair_colours)):  
+    #    process_image("facialhair", "../images/sprites/facialhair", c, hair_colours,"grey")
     #for c in range(len(outfit_colours)):  
     #    process_image("shirts", "../images/sprites/shirts", c, outfit_colours,"grey")
     #for c in range(len(outfit_colours)):  
-    #    process_image("female", "../images/sprites/shoes", c, outfit_colours,"grey") 
-    #    process_image("male", "../images/sprites/shoes", c, outfit_colours,"grey") 
+    #    process_image("short", "../images/sprites/shoes", c, outfit_colours,"grey") 
+    #    process_image("tall", "../images/sprites/shoes", c, outfit_colours,"grey") 
     #for c in range(len(eye_colours)):  
-    #    process_image("female", "../images/sprites/eyes", c, eye_colours,"") 
-    #    process_image("male", "../images/sprites/eyes", c, eye_colours,"")        
+    #    process_image("short", "../images/sprites/eyes", c, eye_colours,"") 
+    #    process_image("tall", "../images/sprites/eyes", c, eye_colours,"")        
 
 
 write_variables()

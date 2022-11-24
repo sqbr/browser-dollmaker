@@ -158,12 +158,18 @@ function fixSpriteSources(list){
     for (let i = 0; i < list.length; i += 1){
         let b = list[i];
         let item = b.item_list[b.item];
+        if (item == none){
+            b.image.src="";
+
+        }else{
         b.topcorner = item.topcorner;
+        b.hasFullRows= item.hasFullRows;
         if (item.colour){
             b.image.src  = "images/sprites/"+item.location+"_"+b.colour+".png";
         }else{
             b.image.src = "images/sprites/"+item.location+".png";
         }
+    }
     }
 }
 
@@ -297,13 +303,14 @@ function setMenu(variablelist, number){
                 htmlString+=makeDropbtnString("Hair back", ["Hair_back"], hair_back_list, "setPortVariable");
                 htmlString+=makeDropbtnString("Hair middle", ["Hair_middle"], hair_middle_list, "setPortVariable");
                 htmlString+=makeDropbtnString("Hair front", ["Hair_front"], hair_front_list, "setPortVariable");
-                htmlString+="</div>"
-                htmlString+="<div class=\"grid-choices\">"
+                htmlString+="</div>"  
             }else{
                 htmlString+="<div class=\"grid-choices\">"
                 htmlString+=makeDropbtnString("Hair style", ["Hairstyle"], sprite_hair_names, "setSpriteVariable");
+                htmlString+=makeDropbtnString("Height", ["Torso"], ["Short","Tall"], "setHeight");
+                htmlString+="</div>"  
             }
-            
+            htmlString+="<div class=\"grid-choices\">"
             htmlString+=makeDropbtnString("Facial Hair", ["Facial_hair"], facial_hair_list, "setPortVariable");
             htmlString+="</div>"
             break;    
@@ -366,7 +373,7 @@ function setPortVariable(variablelist, number){
 function setSpriteVariable(variablelist, number){
     for (let i = 0; i < variablelist.length; i += 1) {
         let b = findNameMatch(sprite_objects, variablelist[i]); //the eleemnt of portrait_objects with the right vriablename
-        b.value=number;
+        b.item=number;
     }
     drawCanvas();
 }
@@ -415,7 +422,13 @@ function setEyeColour(variablelist, number){
 
 function setHairColour(variablelist, number){
     setPortColour(hair_list, number);
-    setSpriteColour(["Hair","Facial Hair"], number);
+    setSpriteColour(["Hairstyle","Facial Hair"], number);
+    drawCanvas();
+}
+
+function setHeight(variablelist, number){
+    height = number;
+    let b = findNameMatch(sprite_objects, "Torso");
     drawCanvas();
 }
 
@@ -448,6 +461,8 @@ function drawCanvas() {
     ctx_preview = canvas_preview.getContext("2d");
     fixSpriteSources(sprite_objects);
     fixPortSources(portrait_objects);
+    canvas_preview.width = canvas_preview.width; //clears
+    document.getElementById("closet").innerHTML = sprite_hair_names.toString(); //print_sprite_list(sprite_hair_list);
     for (let i = 0; i < sprite_objects.length; i += 1){ //sprite preview
         let b = sprite_objects[i];
         if (b.item_list[b.value] !=none){ 
@@ -485,7 +500,6 @@ function drawCanvas() {
         canvas.width =  panel_width*numcols;
         let ctx = canvas.getContext("2d");
         
-        //document.getElementById("closet").innerHTML = print_portrait_objects();
         for (let row = 0; row < numrows; row += 1) {
             for (let column = 0; column < numcols; column += 1) {
                 if (row*2+column < panelNum){
@@ -503,11 +517,11 @@ function drawCanvas() {
     } else{
         canvas.height = 128;
         canvas.width =  64;
-        document.getElementById("closet").innerHTML = print_sprite_objects();
+        //document.getElementById("closet").innerHTML = print_sprite_objects();
         //sourceX, sourceY, sourceWidth, sourceHeight, destWidth and destHeight   
         for (let i = 0; i < sprite_objects.length; i += 1){
             let b = sprite_objects[i];
-            if (b.item_list[b.value] !=none){ 
+            if (b.image.src !=""){ 
                 let xgap = 0;
                 if (b.isWalk){
                     xgap = b.dimensions[0];
