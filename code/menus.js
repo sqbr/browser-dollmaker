@@ -22,7 +22,7 @@ function dropBtnClose(){
       }
 }
 
-function exexportCanvas(){ //broken
+function exportCanvas(){ //broken
     let mycanvas = document.getElementById("exportCanvas");
     let img = mycanvas.toDataURL("image/png;base64;");
     window.open(img,"","width="+canvas_width+",height="+canvas_height);

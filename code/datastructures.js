@@ -447,6 +447,7 @@ function drawCanvas() {
     canvas_preview = document.getElementById("previewCanvas");
     ctx_preview = canvas_preview.getContext("2d");
     fixSpriteSources(sprite_objects);
+    fixPortSources(portrait_objects);
     for (let i = 0; i < sprite_objects.length; i += 1){ //sprite preview
         let b = sprite_objects[i];
         if (b.item_list[b.value] !=none){ 
@@ -459,6 +460,7 @@ function drawCanvas() {
             }    
         }        
     }
+    ctx_preview.drawImage(portrait_back, 256, 0);
     for (let i = 0; i < portrait_objects.length; i += 1){
         let b = portrait_objects[i];
         if (b.item_list[b.value_list[current_panel]] !="none"){ 
@@ -482,7 +484,7 @@ function drawCanvas() {
         canvas.height = panel_width*numrows;
         canvas.width =  panel_width*numcols;
         let ctx = canvas.getContext("2d");
-        fixPortSources(portrait_objects);
+        
         //document.getElementById("closet").innerHTML = print_portrait_objects();
         for (let row = 0; row < numrows; row += 1) {
             for (let column = 0; column < numcols; column += 1) {
@@ -546,7 +548,8 @@ function setup(){
     ctx = canvas.getContext("2d");
     drawCanvas();
 }
-let img = new Image();
+let portrait_back = new Image();
+portrait_back.src = "images/portrait_back.png"
 window.onload = setup;
 var game = setInterval(drawCanvas, 100);//Update canvas every 100 miliseconds
 
