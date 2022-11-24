@@ -25,6 +25,10 @@ let ctx;
 
 // Basic functions
 
+function nameOf(obj){
+    return obj.name;
+}
+
 function findNameMatch(list, name){
     //returns the first element of list whose name equals "name"
     for (let i = 0; i < list.length; i += 1) {

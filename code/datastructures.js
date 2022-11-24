@@ -248,7 +248,7 @@ function setImageType(variablelist, number){
             document.getElementById("toolbar").innerHTML = htmlString; 
             document.getElementById("currently_editing_portBtn").innerHTML = makeDropbtnString("Editing:", ["currently_editing_port"], editing_list_port, "setMenu");
             document.getElementById("panel_numBtn").innerHTML = makeDropbtnString("Panels", ["panel_num"], [1,2,3,4,5,6,7,8], "setPanelNum");
-            document.getElementById("preview").innerHTML = "<h2>Portraits:</h2>"
+            document.getElementById("canvasName").innerHTML = "Portraits:"
             setMenu([], currently_editing_port)
             break;
         case 1: //editing sprites
@@ -259,10 +259,7 @@ function setImageType(variablelist, number){
             htmlString+='</div>\n';
             document.getElementById("toolbar").innerHTML = htmlString; 
             document.getElementById("currently_editing_spritesBtn").innerHTML = makeDropbtnString("Editing:", ["currently_editing_sprites"], editing_list_sprites, "setMenu");
-            htmlString = '<h2>Preview:</h2>';
-            htmlString +='<canvas id="previewCanvas" width="128" height="128">Your browser does not support HTML5 Canvas. Try downloading latest Chrome, Firefox, Safari, Opera or Internet explorer.</canvas>'; 
-            htmlString += '<h2>Sprites:</h2>';
-            document.getElementById("preview").innerHTML =  htmlString;
+            document.getElementById("canvasName").innerHTML = "Sprites:"
             setMenu([], currently_editing_sprites)
             break;
     
@@ -304,7 +301,7 @@ function setMenu(variablelist, number){
                 htmlString+="<div class=\"grid-choices\">"
             }else{
                 htmlString+="<div class=\"grid-choices\">"
-                htmlString+=makeDropbtnString("Hair style", ["Hairstyle"], sprite_hair_list, "setSpriteVariable");
+                htmlString+=makeDropbtnString("Hair style", ["Hairstyle"], sprite_hair_names, "setSpriteVariable");
             }
             
             htmlString+=makeDropbtnString("Facial Hair", ["Facial_hair"], facial_hair_list, "setPortVariable");
@@ -447,7 +444,28 @@ function newY(obj, row){
 }
 
 function drawCanvas() {
-    //ctx.clearRect(0,0,canvas_width, canvas_height);
+    canvas_preview = document.getElementById("previewCanvas");
+    ctx_preview = canvas_preview.getContext("2d");
+    fixSpriteSources(sprite_objects);
+    for (let i = 0; i < sprite_objects.length; i += 1){ //sprite preview
+        let b = sprite_objects[i];
+        if (b.item_list[b.value] !=none){ 
+            for (let column = 0; column < 2; column += 1) //column 1-2
+                ctx_preview.drawImage(b.image, oldX(b,0), oldY(b,column),b.dimensions[0],b.dimensions[1],64*column+b.offset[0]*4,b.offset[1]*4,b.dimensions[0]*4,b.dimensions[1]*4);
+            if (b.hasFullRows)
+                ctx_preview.drawImage(b.image, oldX(b,0), oldY(b,3),b.dimensions[0],b.dimensions[1],64*2+b.offset[0]*4,b.offset[1]*4,b.dimensions[0]*4,b.dimensions[1]*4);
+            else{
+                ctx_preview.drawImage(b.image, oldX(b,0), oldY(b,2),b.dimensions[0],b.dimensions[1],64*2+b.offset[0]*4,b.offset[1]*4,b.dimensions[0]*4,b.dimensions[1]*4);
+            }    
+        }        
+    }
+    for (let i = 0; i < portrait_objects.length; i += 1){
+        let b = portrait_objects[i];
+        if (b.item_list[b.value_list[current_panel]] !="none"){ 
+            ctx_preview.drawImage(b.image_list[current_panel], 256, 0);
+        }
+    }
+
     if (current_imageType==0){
         let numrows;
         let numcols;
@@ -483,9 +501,6 @@ function drawCanvas() {
     } else{
         canvas.height = 128;
         canvas.width =  64;
-        canvas_preview = document.getElementById("previewCanvas");
-        ctx_preview = canvas_preview.getContext("2d");
-        fixSpriteSources(sprite_objects);
         document.getElementById("closet").innerHTML = print_sprite_objects();
         //sourceX, sourceY, sourceWidth, sourceHeight, destWidth and destHeight   
         for (let i = 0; i < sprite_objects.length; i += 1){
@@ -495,18 +510,16 @@ function drawCanvas() {
                 if (b.isWalk){
                     xgap = b.dimensions[0];
                 }
-                ctx_preview.drawImage(b.image, b.topcorner[0], b.topcorner[1],b.dimensions[0],b.dimensions[1],b.offset[0]*4,b.offset[1]*4,b.dimensions[0]*4,b.dimensions[1]*4);
-                ctx_preview.drawImage(b.image, b.topcorner[0], b.topcorner[1]+b.dimensions[1],b.dimensions[0],b.dimensions[1],64+b.offset[0]*4,b.offset[1]*4,b.dimensions[0]*4,b.dimensions[1]*4);
                 for (let row = 0; row < 2; row += 1){//rows 1,2   
                     for (let column = 0; column < 2; column += 1) //column 1-2
                         ctx.drawImage(b.image, oldX(b,column), oldY(b,row),b.dimensions[0],b.dimensions[1],newX(b,column), newY(b,row),b.dimensions[0],b.dimensions[1]);
                     ctx.drawImage(b.image, oldX(b,0), oldY(b,row),b.dimensions[0],b.dimensions[1],newX(b,2), newY(b,row),b.dimensions[0],b.dimensions[1]); //column 3  
                     ctx.drawImage(b.image, oldX(b,2), oldY(b,row),b.dimensions[0],b.dimensions[1],newX(b,3), newY(b,row),b.dimensions[0],b.dimensions[1]); //column 4              
                 }
-                if (b.name =="Hat"){ 
-                    for (let column = 0; column < 2; column += 1){
-                            ctx.drawImage(b.image, oldX(b,0), oldY(b,3),b.dimensions[0],b.dimensions[1],newX(b,2), newY(b,2),b.dimensions[0],b.dimensions[1]); //3rd row
-                            ctx.drawImage(b.image, oldX(b,0), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,2), newY(b,3),b.dimensions[0],b.dimensions[1]); //4th row
+                if (b.hasFullRows){ //don't have to flip
+                    for (let column = 0; column < 4; column += 1){
+                            ctx.drawImage(b.image, oldX(b,0), oldY(b,3),b.dimensions[0],b.dimensions[1],newX(b,column), newY(b,2),b.dimensions[0],b.dimensions[1]); //3rd row
+                            ctx.drawImage(b.image, oldX(b,0), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,column), newY(b,3),b.dimensions[0],b.dimensions[1]); //4th row                
                     }
                 }else{
                     //row 3
