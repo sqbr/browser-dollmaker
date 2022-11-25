@@ -321,8 +321,9 @@ function setMenu(variablelist, number){
             htmlString+="</div>"
             break;    
         case 1: //editing the outfit
-            document.getElementById("test").innerHTML = "Hello";
+            //document.getElementById("test").innerHTML = "Hello";
             for (let i = 0; i < outfit_list.length; i += 1) {
+                let current_item = outfit_list[i];
                 /*
                 let b = findNameMatch(portrait_objects, outfit_list_portOnly[i]);
                 let edit_list = [b.name];
@@ -334,11 +335,15 @@ function setMenu(variablelist, number){
                 htmlString+=makeDropbtnString(b.name+" Colour", [b.name], outfit_colours, "setColour");
                 htmlString+="</div>"*/
                 if (current_imageType==1){
-                    if (outfit_list_spriteOnly.includes(outfit_list[i])){
-                        let b = findNameMatch(sprite_objects, outfit_list[i]);
+                    if (outfit_list_spriteOnly.includes(current_item)){
+                        let b = findNameMatch(sprite_objects, current_item);
                         htmlString+="<div class=\"grid-choices\">"
-                        htmlString+=makeDropbtnString(b.name, [b.name], b.item_list.map(nameOf), "setSpriteVariable");
-                        htmlString+=makeDropbtnString(b.name+" Colour", [b.name], outfit_colours, "setColour");
+                        if (current_item=="Shoes"){
+                            htmlString+=makeDropbtnString(b.name, [b.name], ["None","Boots"], "setShoes");
+                        } else{
+                            htmlString+=makeDropbtnString(b.name, [b.name], b.item_list.map(nameOf), "setSpriteVariable");
+                        }
+                        htmlString+=makeDropbtnString(b.name+" Colour", [b.name], outfit_colours, "setSpriteColour");
                         htmlString+="</div>"
                     } else{
                         htmlString+=outfit_list[i]+"<br>"
@@ -450,6 +455,12 @@ function setFacialHair(variablelist, number){
     drawCanvas();
 }
 
+function setShoes(variablelist, number){
+    currentShoes = number;
+    setSpriteVariable(["Shoes"], Math.max(0,2*currentShoes-1+height)); 
+    drawCanvas();
+}
+
 function setSpriteHair(variablelist, number){
     setSpriteVariable(["Hairstyle"], number);
     if (number ==0)
@@ -461,7 +472,9 @@ function setSpriteHair(variablelist, number){
 
 function setHeight(variablelist, number){
     height = number;
-    setSpriteVariable(["Shoes","Arms"], number);
+    setSpriteVariable(["Arms"], number);
+    setSpriteVariable(["Shoes"], Math.max(0,2*currentShoes-1+height)); 
+    document.getElementById("test").innerHTML = Math.max(0,2*currentShoes-1+height);
     if (isBald){
         setSpriteVariable(["Torso"], 2+number);
     }else { 
@@ -602,6 +615,7 @@ function drawCanvas() {
 function setup(){
     setTopbar();
     setImageType([],0);
+    setHeight([],height);
     drawCanvas();
 }
 let portrait_back = new Image();

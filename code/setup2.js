@@ -7,6 +7,7 @@ const eyelash_list = ["short","long"];
 let height = 0;
 
 let isBald = true;
+let currentShoes = 0;
 
 const none = {name:"None",location: "", colour: false, rowNum: 3, topcorner:[0,0]}
 
@@ -15,6 +16,8 @@ const hairstyles_names = ["Short shaggy", "Pageboy", "side-part", "Afro", "Mod",
 const hairstyles2_names = ["Flippy", "Wavy", "Long", "loose pony", "high braid", "Over shoulder", "Wavy over shoulder", "short bob", "short", "80s bob", "Half shaved", "short spiky", "Short wavy", "short centre part", "Short bangs", "blowout", "short centre part", "short shaggy", "wavy long", "shaggy medium", "blowout","half shaved medium", "side part medium"]
 
 const pants_names = ["trousers","shorts", "long dress", "short skirt", "pleated skirt", "Dinosaur Pants", "yellow grass skirt", "green grass skirt", "pantaloons", "tight shorts", "baggy pants", "simple dress", "relaxed fit pants", "relaxed fit shorts"];
+
+const accessory_names = []
 /*
 Name: String.
 location: String. Where the file is, stopping before the _[colour].png
@@ -36,7 +39,7 @@ for (let i =0; i<height_list.length;i++){
     sprite_eyes_list.push({name: b, location: "eyes/"+b, colour: true, rowNum: 3,topcorner:[0,0]})
 }
 
-const sprite_shoes_list = []
+const sprite_shoes_list = [none]
 for (let i =0; i<height_list.length;i++){
     b= height_list[i];
     sprite_shoes_list.push({name: b, location: "shoes/"+b, colour: true, rowNum: 3,topcorner:[0,0]})
@@ -111,8 +114,8 @@ function add_sprite_object(name, list,colour_list,isWalk, bobs, heightOffset,dim
 
 add_sprite_object("Torso", sprite_torso_list,skin_colours,true, false, 0, [16,32],[0,0]);
 add_sprite_object("Eyes", sprite_eyes_list,eye_colours,true,false,1, [16,32],[0,0]);
-add_sprite_object("Pants", sprite_pants_list,outfit_colours,true,false,0, [16,32],[0,0]);
 add_sprite_object("Shoes", sprite_shoes_list,outfit_colours,true,false,0, [16,32],[0,0]);
+add_sprite_object("Pants", sprite_pants_list,outfit_colours,true,false,0, [16,32],[0,0]);
 add_sprite_object("Shirt", sprite_shirt_list,outfit_colours,false,false,1, [8,8],[4,15]);
 add_sprite_object("Accessory", sprite_accessory_list,outfit_colours,false,true,1, [16,16],[0,2]);
 add_sprite_object("Facial Hair", sprite_facialhair_list,hair_colours,false,true,1, [16,16],[0,2]);
