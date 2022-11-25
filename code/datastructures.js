@@ -324,6 +324,13 @@ function setMenu(variablelist, number){
             //document.getElementById("test").innerHTML = "Hello";
             for (let i = 0; i < outfit_list.length; i += 1) {
                 let current_item = outfit_list[i];
+                if (["Eyewear"].includes(current_item)){
+                    let b = findNameMatch(sprite_objects, current_item);
+                    htmlString+="<div class=\"grid-choices\">"
+                    htmlString+=makeDropbtnString(b.name, [b.name], b.item_list.map(nameOf), "setSpriteVariable");
+                    htmlString+=makeDropbtnString(b.name+" Colour", [b.name], outfit_colours, "setSpriteColour");
+                    htmlString+="</div>"
+                }
                 /*
                 let b = findNameMatch(portrait_objects, outfit_list_portOnly[i]);
                 let edit_list = [b.name];
@@ -345,9 +352,7 @@ function setMenu(variablelist, number){
                         }
                         htmlString+=makeDropbtnString(b.name+" Colour", [b.name], outfit_colours, "setSpriteColour");
                         htmlString+="</div>"
-                    } else{
-                        htmlString+=outfit_list[i]+"<br>"
-                    }
+                    } 
                 }
             }
             break;    
@@ -616,6 +621,17 @@ function setup(){
     setTopbar();
     setImageType([],0);
     setHeight([],height);
+    setSkinColour([],4);
+    setEyeColour([],3);
+    setHairColour([],3);
+
+    setFacialHair([],2);
+    setSpriteHair([],5);
+    setShoes([],1);
+    setSpriteVariable(["Pants"],1);
+    setSpriteColour(["Pants"],10);
+    setSpriteColour(["Shoes"],4);
+
     drawCanvas();
 }
 let portrait_back = new Image();

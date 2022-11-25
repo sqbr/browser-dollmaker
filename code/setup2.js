@@ -15,7 +15,9 @@ const hairstyles_names = ["Short shaggy", "Pageboy", "side-part", "Afro", "Mod",
 
 const hairstyles2_names = ["Flippy", "Wavy", "Long", "loose pony", "high braid", "Over shoulder", "Wavy over shoulder", "short bob", "short", "80s bob", "Half shaved", "short spiky", "Short wavy", "short centre part", "Short bangs", "blowout", "short centre part", "short shaggy", "wavy long", "shaggy medium", "blowout","half shaved medium", "side part medium"]
 
-const pants_names = ["trousers","shorts", "long dress", "short skirt", "pleated skirt", "Dinosaur Pants", "yellow grass skirt", "green grass skirt", "pantaloons", "tight shorts", "baggy pants", "simple dress", "relaxed fit pants", "relaxed fit shorts"];
+const pants_names = ["trousers","shorts", "long dress", "short skirt", "pleated skirt", "Dinosaur Pants", "yellow grass skirt", "green grass skirt", "pantaloons", "tight pants", "baggy pants", "simple dress", "relaxed fit pants", "relaxed fit shorts"];
+
+const eyewear_names = ["glasses", "half-glasses", "shiny glasses", "robot visor", "sunglasses", "eye-patch"];
 
 const accessory_names = []
 /*
@@ -53,7 +55,7 @@ for (let row =0; row<2;row++)
             let colour = true;
             if  ([5,6,7].includes(column))//already coloured
                 colour=false;
-            sprite_pants_list.push({name: pants_names[row*10+column], location: "pants/pants", colour: colour, rowNum: 3,topcorner:[192*column,704*row]});
+            sprite_pants_list.push({name: pants_names[row*10+column], location: "pants/pants", colour: colour, rowNum: 3,topcorner:[192*column,688*row]});
         }
 }
 
@@ -61,6 +63,14 @@ const sprite_pants_names = sprite_pants_list.map(nameOf);
 
 const sprite_shirt_list = []
 sprite_shirt_list.push({name: "Overalls", location: "shirts/shirts", colour: false, rowNum: 4,topcorner:[0,0]})
+
+const sprite_eyewear_list = [none]
+for (let column =0; column<2;column++){
+    sprite_eyewear_list.push({name: eyewear_names[column], location: "eyewear/eyewear", colour: true, rowNum: 2,topcorner:[16*column,0]})
+}
+for (let column =2; column<eyewear_names.length;column++){
+    sprite_eyewear_list.push({name: eyewear_names[column], location: "eyewear/eyewear", colour: false, rowNum: 2,topcorner:[16*column,0]})
+}
 
 const sprite_accessory_list = [none]
 sprite_accessory_list.push({name: "Glasses", location: "accessory/accessories", colour: false, rowNum: 2,topcorner:[0,32]})
@@ -117,6 +127,7 @@ add_sprite_object("Eyes", sprite_eyes_list,eye_colours,true,false,1, [16,32],[0,
 add_sprite_object("Shoes", sprite_shoes_list,outfit_colours,true,false,0, [16,32],[0,0]);
 add_sprite_object("Pants", sprite_pants_list,outfit_colours,true,false,0, [16,32],[0,0]);
 add_sprite_object("Shirt", sprite_shirt_list,outfit_colours,false,false,1, [8,8],[4,15]);
+add_sprite_object("Eyewear", sprite_eyewear_list,outfit_colours,false,true,1, [16,16],[0,2]);
 add_sprite_object("Accessory", sprite_accessory_list,outfit_colours,false,true,1, [16,16],[0,2]);
 add_sprite_object("Facial Hair", sprite_facialhair_list,hair_colours,false,true,1, [16,16],[0,2]);
 add_sprite_object("Hairstyle", sprite_hair_list,hair_colours,false,true, 1,[16,32],[0,0]);
