@@ -173,6 +173,13 @@ function fixSpriteSources(list){
     }
 }
 
+function niceString(input){
+    //the text to put in a button
+    let output = input.toString();
+    output = output.replace("_", " ");
+    return output.charAt(0).toUpperCase()+output.slice(1)
+
+}
 function makeDropbtnString(name, variablelist, list, functionName){
     //Create a dropdown menu which is called name, and sets all the entires in variablelist to whatever value of list is chosen 
     let id = name+functionName+'Dropdown';
@@ -187,9 +194,9 @@ function makeDropbtnString(name, variablelist, list, functionName){
         }
         drop_string +='],'+row+')" >'
         if (functionName.includes("Colour")){
-            drop_string +=colour_desc(list[row])
+            drop_string +=niceString(colour_desc(list[row]))
         }else{
-            drop_string +=list[row]; //name of button
+            drop_string +=niceString(list[row]); //name of button
         }
         drop_string +='</button>';
     }
@@ -316,7 +323,8 @@ function setMenu(variablelist, number){
         case 1: //editing the outfit
             document.getElementById("test").innerHTML = "Hello";
             for (let i = 0; i < outfit_list.length; i += 1) {
-                let b = findNameMatch(portrait_objects, outfit_list[i]);
+                /*
+                let b = findNameMatch(portrait_objects, outfit_list_portOnly[i]);
                 let edit_list = [b.name];
                 if (back_list.includes(b.name)){
                     edit_list.push(b.name+"_back");
@@ -324,7 +332,18 @@ function setMenu(variablelist, number){
                 htmlString+="<div class=\"grid-choices\">"
                 htmlString+=makeDropbtnString(b.name, [b.name], b.item_list, "setPortVariable");
                 htmlString+=makeDropbtnString(b.name+" Colour", [b.name], outfit_colours, "setColour");
-                htmlString+="</div>"
+                htmlString+="</div>"*/
+                if (current_imageType==1){
+                    if (outfit_list_spriteOnly.includes(outfit_list[i])){
+                        let b = findNameMatch(sprite_objects, outfit_list[i]);
+                        htmlString+="<div class=\"grid-choices\">"
+                        htmlString+=makeDropbtnString(b.name, [b.name], b.item_list.map(nameOf), "setSpriteVariable");
+                        htmlString+=makeDropbtnString(b.name+" Colour", [b.name], outfit_colours, "setColour");
+                        htmlString+="</div>"
+                    } else{
+                        htmlString+=outfit_list[i]+"<br>"
+                    }
+                }
             }
             break;    
         case 2: //editing the expression
@@ -442,6 +461,7 @@ function setSpriteHair(variablelist, number){
 
 function setHeight(variablelist, number){
     height = number;
+    setSpriteVariable(["Shoes","Arms"], number);
     if (isBald){
         setSpriteVariable(["Torso"], 2+number);
     }else { 
@@ -475,22 +495,23 @@ function newY(obj, row,column){
     if (obj.bobs){
         bob =column%2;
     }
-
-    return row*32+obj.offset[1]+bob;
+    return row*32+obj.offset[1]+bob+(1-height)*obj.heightOffset;
 }
 
 function drawCanvas() {
+    canvas = document.getElementById("exportCanvas");
+    ctx = canvas.getContext("2d");
     canvas_preview = document.getElementById("previewCanvas");
     ctx_preview = canvas_preview.getContext("2d");
     fixSpriteSources(sprite_objects);
     fixPortSources(portrait_objects);
     canvas_preview.width = canvas_preview.width; //clears
-    document.getElementById("closet").innerHTML = sprite_hair_names.toString(); //print_sprite_list(sprite_hair_list);
+    document.getElementById("closet").innerHTML = print_sprite_objects();
     for (let i = 0; i < sprite_objects.length; i += 1){ //sprite preview
         let b = sprite_objects[i];
         if (b.item_list[b.value] !=none){ 
             for (let column = 0; column < 2; column += 1) //column 1-2
-                ctx_preview.drawImage(b.image, oldX(b,0), oldY(b,column),b.dimensions[0],b.dimensions[1],64*column+b.offset[0]*4,b.offset[1]*4,b.dimensions[0]*4,b.dimensions[1]*4);
+                ctx_preview.drawImage(b.image, oldX(b,0), oldY(b,column),b.dimensions[0],b.dimensions[1],64*column+b.offset[0]*4,4*(b.offset[1]+(1-height)*b.heightOffset),b.dimensions[0]*4,b.dimensions[1]*4);
             if (b.rowNum==4)
                 ctx_preview.drawImage(b.image, oldX(b,0), oldY(b,3),b.dimensions[0],b.dimensions[1],64*2+b.offset[0]*4,b.offset[1]*4,b.dimensions[0]*4,b.dimensions[1]*4);
             else{
@@ -581,8 +602,6 @@ function drawCanvas() {
 function setup(){
     setTopbar();
     setImageType([],0);
-    canvas = document.getElementById("exportCanvas");
-    ctx = canvas.getContext("2d");
     drawCanvas();
 }
 let portrait_back = new Image();
