@@ -30,7 +30,7 @@ topcorner: coordinates of the top corner of the looking down standing still spri
 const sprite_torso_list = []
 for (let i =0; i<sprite_body_list.length;i++){
     b= sprite_body_list[i];
-    sprite_torso_list.push({name: b, location: "body/"+b, colour: true, rowNum: 3,topcorner:[0,0]})
+    sprite_torso_list.push({name: b, location: "body/"+b, colour: true, asymmetrical: false,  rowNum: 3,topcorner:[0,0]})
 }
 
 const sprite_body_names = ["Short","Tall"]
@@ -38,13 +38,13 @@ const sprite_body_names = ["Short","Tall"]
 const sprite_eyes_list = []
 for (let i =0; i<height_list.length;i++){
     b= eyelash_list[i];
-    sprite_eyes_list.push({name: b, location: "eyes/"+b, colour: true, rowNum: 3,topcorner:[0,0]})
+    sprite_eyes_list.push({name: b, location: "eyes/"+b, colour: true, asymmetrical: false,rowNum: 3,topcorner:[0,0]})
 }
 
 const sprite_shoes_list = [none]
 for (let i =0; i<height_list.length;i++){
     b= height_list[i];
-    sprite_shoes_list.push({name: b, location: "shoes/"+b, colour: true, rowNum: 3,topcorner:[0,0]})
+    sprite_shoes_list.push({name: b, location: "shoes/"+b, colour: true, asymmetrical: false,rowNum: 3,topcorner:[0,0]})
 }
 
 const sprite_pants_list = [none]
@@ -55,31 +55,31 @@ for (let row =0; row<2;row++)
             let colour = true;
             if  ([5,6,7].includes(column))//already coloured
                 colour=false;
-            sprite_pants_list.push({name: pants_names[row*10+column], location: "pants/pants", colour: colour, rowNum: 3,topcorner:[192*column,688*row]});
+            sprite_pants_list.push({name: pants_names[row*10+column], location: "pants/pants", colour: colour, asymmetrical: false,rowNum: 3,topcorner:[192*column,688*row]});
         }
 }
 
 const sprite_pants_names = sprite_pants_list.map(nameOf);
 
 const sprite_shirt_list = []
-sprite_shirt_list.push({name: "Overalls", location: "shirts/shirts", colour: false, rowNum: 4,topcorner:[0,0]})
+sprite_shirt_list.push({name: "Overalls", location: "shirts/shirts", colour: false, asymmetrical: false,rowNum: 4,topcorner:[0,0]})
 
 const sprite_eyewear_list = [none]
-for (let column =0; column<2;column++){
-    sprite_eyewear_list.push({name: eyewear_names[column], location: "eyewear/eyewear", colour: true, rowNum: 2,topcorner:[16*column,0]})
+for (let column =0; column<2;column++){ //add colour
+    sprite_eyewear_list.push({name: eyewear_names[column], location: "eyewear/eyewear", colour: true, asymmetrical: false,rowNum: 2,topcorner:[16*column,0]})
 }
 for (let column =2; column<eyewear_names.length;column++){
-    sprite_eyewear_list.push({name: eyewear_names[column], location: "eyewear/eyewear", colour: false, rowNum: 2,topcorner:[16*column,0]})
+    sprite_eyewear_list.push({name: eyewear_names[column], location: "eyewear/eyewear", colour: false, asymmetrical: false,rowNum: 2,topcorner:[16*column,0]})
 }
 
 const sprite_accessory_list = [none]
-sprite_accessory_list.push({name: "Glasses", location: "accessory/accessories", colour: false, rowNum: 2,topcorner:[0,32]})
+sprite_accessory_list.push({name: "Glasses", location: "accessory/accessories", colour: false, asymmetrical: false,rowNum: 2,topcorner:[0,32]})
 
 const sprite_accessory_names = sprite_accessory_list.map(nameOf);
 
 const sprite_facialhair_list = [none]
 for (let column =0; column<6;column++){
-    sprite_facialhair_list.push({name: facial_hair_list[column+1], location: "facialhair/facialhair", colour: true, rowNum: 2,topcorner:[16*column,0]})
+    sprite_facialhair_list.push({name: facial_hair_list[column+1], location: "facialhair/facialhair", colour: true, asymmetrical: false,rowNum: 2,topcorner:[16*column,0]})
 }
 
 const sprite_facialhair_names = sprite_facialhair_list.map(nameOf);
@@ -88,22 +88,22 @@ const sprite_hair_list = [none]
 for (let row =0; row<7;row++)
     for (let column =0; column<8;column++){
         if (row*8+column< hairstyles_names.length)
-            sprite_hair_list.push({name: hairstyles_names[row*8+column], location: "hair/hairstyles", colour: true, rowNum: 3,topcorner:[16*column,96*row]})
+            sprite_hair_list.push({name: hairstyles_names[row*8+column], location: "hair/hairstyles", colour: true, asymmetrical: false,rowNum: 3,topcorner:[16*column,96*row]})
 }
 for (let row =0; row<3;row++)
     for (let column =0; column<8;column++){
         if (row*8+column<hairstyles2_names.length)
-            sprite_hair_list.push({name: hairstyles2_names[row*8+column], location: "hair/hairstyles2", colour: true, rowNum: 3,topcorner:[16*column,128*row]})
+            sprite_hair_list.push({name: hairstyles2_names[row*8+column], location: "hair/hairstyles2", colour: true, asymmetrical: false,rowNum: 3,topcorner:[16*column,128*row]})
 }
 const sprite_hair_names = sprite_hair_list.map(nameOf);
 
 const sprite_hat_list = [none]
-sprite_hat_list.push({name: "Santa hat", location: "hats/hats", colour: false, rowNum: 4,topcorner:[23,159]})
+sprite_hat_list.push({name: "Santa hat", location: "hats/hats", colour: false, asymmetrical: false,rowNum: 4,topcorner:[23,159]})
 
 const sprite_arms_list = []
 for (let i =0; i<sprite_body_list.length;i++){
     b= sprite_body_list[i];
-    sprite_arms_list.push({name: b, location: "body/"+b, colour: true, rowNum: 3,topcorner:[96,0]})
+    sprite_arms_list.push({name: b, location: "body/"+b, colour: true, asymmetrical: false,rowNum: 3,topcorner:[96,0]})
 }
 
 const sprite_objects =[];
@@ -119,7 +119,7 @@ bobs: does it bob up and down (not relevant is isWalk)
 topcorner: coordinates of the top corner of the looking down standing still sprite
 */
 function add_sprite_object(name, list,colour_list,isWalk, bobs, heightOffset,dimensions, offset){
-    sprite_objects.push({name: name,item_list: list, colour_list: colour_list, item: 0,  colour: 0, image: new Image(), isWalk: isWalk, bobs: bobs, heightOffset: heightOffset, rowNum: 3, topcorner:[0,0],dimensions: dimensions, offset: offset});
+    sprite_objects.push({name: name,item_list: list, colour_list: colour_list, item: 0,  colour: 0, image: new Image(), isWalk: isWalk, bobs: bobs, asymmetrical: false, heightOffset: heightOffset, rowNum: 3, topcorner:[0,0],dimensions: dimensions, offset: offset});
 }
 
 add_sprite_object("Torso", sprite_torso_list,skin_colours,true, false, 0, [16,32],[0,0]);

@@ -145,7 +145,7 @@ function fixPortSources(list){
         let b = list[i];
         for (let j = 0; j < panelNum; j += 1){ 
             if (b.colourNum==1){
-                b.image_list[j].src = "images/portraits/"+b.location+"/"+b.item_list[b.value_list[j]]+".png";
+                b.image_list[j].src = "images/bases/portraits/"+b.location+"/"+b.item_list[b.value_list[j]]+".png";
             }else{
                 b.image_list[j].src  = "images/portraits/"+b.location+"/"+b.item_list[b.value_list[j]]+"_"+b.colour+".png";
             }
@@ -167,7 +167,7 @@ function fixSpriteSources(list){
         if (item.colour){
             b.image.src  = "images/sprites/"+item.location+"_"+b.colour+".png";
         }else{
-            b.image.src = "images/sprites/"+item.location+".png";
+            b.image.src = "images/bases/sprites/"+item.location+".png";
         }
     }
     }
@@ -523,6 +523,8 @@ function drawCanvas() {
     ctx_preview = canvas_preview.getContext("2d");
     fixSpriteSources(sprite_objects);
     fixPortSources(portrait_objects);
+
+    //preview canvas
     canvas_preview.width = canvas_preview.width; //clears
     document.getElementById("closet").innerHTML = print_sprite_objects();
     for (let i = 0; i < sprite_objects.length; i += 1){ //sprite preview
@@ -545,7 +547,7 @@ function drawCanvas() {
             ctx_preview.drawImage(b.image_list[current_panel], 256, 0);
         }
     }
-
+    //main canvas
     if (current_imageType==0){
         let numrows;
         let numcols;
