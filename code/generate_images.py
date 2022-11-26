@@ -9,9 +9,9 @@ import glob
 
 body_list = ["Torso", "Head", "Complexion","Ears", "Nose"]
 expression_list = ["Eyes","Eyebrows", "Mouth"]
-outfit_list_portOnly= ["Shirt", "Neckwear", "Coat", "Hat"]
+outfit_list_portOnly= ["Neckwear", "Coat", "Hat"]
 outfit_list_spriteOnly = ["Pants","Shoes"]
-outfit_list_both = ["Eyewear"]
+outfit_list_both = ["Eyewear","Shirt"]
 outfit_list = outfit_list_both+ outfit_list_portOnly+outfit_list_spriteOnly
 
 skin_list = body_list + ["Eyebrows", "Mouth"]
@@ -256,7 +256,18 @@ def process_image(name, location, colour,colour_list,type):
                     Adata[x, y] = colour_this_grey(Adata[x, y], colour_list[colour])       
                 else:    
                     Adata[x, y] = colour_this(Adata[x, y], colour_list[colour])
-    img.save(save_string)                   
+    img.save(save_string)    
+
+def trimhats():
+    image_string = "../images/bases/sprites/hats/hats_original.png"
+    save_string = "../images/bases/sprites/hats/hats.png"
+    im_old = Image.open(image_string) 
+    im_new = Image.new("RGBA", (12*16, 32*32))
+    for row in range(32):
+        for column in range(12):
+            region = im_old.crop((column*20+2, row*20+3,column*20+18,row*20+20))
+            im_new.paste(region,(column*16, row*32, column*16+16,row*32+17))
+    im_new.save(save_string)                    
 
 def list_string(listname, list):
     # Creates a string to define a list for generated.js
@@ -370,10 +381,10 @@ def process_body_sprites():
 
 def process_outfit_sprites():
     for c in range(len(outfit_colours)): 
-        process_image("eyewear", "sprites/eyewear", c, outfit_colours,"blue") 
+        #process_image("eyewear", "sprites/eyewear", c, outfit_colours,"blue") 
     #    process_image("hats", "sprites/hats", c, outfit_colours,"grey")
     #    process_image("pants", "sprites/pants", c, outfit_colours,"blue")
-    #    process_image("shirts", "sprites/shirts", c, outfit_colours,"grey")
+        process_image("shirts", "sprites/shirts", c, outfit_colours,"grey")
     #    process_image("short", "sprites/shoes", c, outfit_colours,"grey") 
     #    process_image("tall", "sprites/shoes", c, outfit_colours,"grey") 
           
@@ -386,3 +397,4 @@ for c in closet:
     if c.name =="":
         process_portrait_part(c)
 #process_all_portraits()
+trimhats()

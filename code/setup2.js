@@ -17,7 +17,15 @@ const hairstyles2_names = ["Flippy", "Wavy", "Long", "loose pony", "high braid",
 
 const pants_names = ["trousers","shorts", "long dress", "short skirt", "pleated skirt", "Dinosaur Pants", "yellow grass skirt", "green grass skirt", "pantaloons", "tight pants", "baggy pants", "simple dress", "relaxed fit pants", "relaxed fit shorts"];
 
+const coloured_shirts_names = ["Classic overalls", "Shirt", "Mint Blouse", "Dark Shirt", "Skull Shirt", 
+"Light Blue Shirt","Tan Striped Shirt","Green Overalls",'"Good Grief" Shirt',"Aquamarine Shirt","Suit Top","Green Belted Shir","Lime Green Striped Shirt","Red Striped Shirt","Skeleton Shirt","Orange Shirt","Night Sky Shirt","Mayoral Suspenders","Brown Jacket","Sailor Shirt","Green Vest","Yellow and Green Shirt"]
+
+const coloured_shirts_numbers = [2,4,5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, ];
+
+const uncoloured_shirts_names = ["Striped Shirt","Tank Top (low neck)","Tank Top","Crop Tank Top (Low neck)", "Crop Tank Top","Bikini Top","80's Shirt (curvy)","Crop Top Shirt","???","Strapped Top","Button Down Shirt","Tube Top",]
 const accessory_names = []
+
+const hat_names = ["cowboy hat", "Bowler", "Top hat", "sombrero", "straw hat", "official cap", "blue bonnet", "Chapeau", "Skeleton mask", "Goblin Mask", "Chicken Mask", "Earmuffs", "Delicate Bow", "Tropiclip", "Butterfly Bow", "Hunter's Cap", "Trucker Hat", "Sailor's Cap", "Good Ol' Cap", "Fedora", "Cool Cap", "Lucky Bow", "Polka Bow", "Gnome's Cap", "Eye Patch", "Santa Hat", "Tiara", "Hard Hat", "Sou'wester", "Daisy", "Watermelon Band", "Mouse Ears", "Cat Ears", "Cowgal Hat", "Cowpoke Hat", "Archer's Cap", "Panda Hat", "Blue Cowboy Hat", "Red Cowboy Hat", "Cone Hat", "Living Hat", "Emily's Magic Hat", "Mushroom Cap", "Dinosaur Hat", "Totem Mask", "Logo Cap", "Dwarf Helm", "Fashion Hat", "Pumpkin Mask", "Hair Bone",]
 /*
 Name: String.
 location: String. Where the file is, stopping before the _[colour].png
@@ -59,18 +67,29 @@ for (let row =0; row<2;row++)
 
 const sprite_pants_names = sprite_pants_list.map(nameOf);
 
-const sprite_shirt_list = []
-sprite_shirt_list.push({name: "Overalls", location: "shirts/shirts", colour: false, asymmetrical: false,rowNum: 4,topcorner:[0,0]})
+const sprite_shirt_list = [none];
+for (let column =0; column<13;column++)
+    for (let row =0; row<19;row++){
+        let current_num = 13*row+column;
+        if (current_num <uncoloured_shirts_names.length)
+            sprite_shirt_list.push({name: uncoloured_shirts_names[current_num], location: "shirts/shirts", colour: true, asymmetrical: false,rowNum: 4,topcorner:[8*column,8*row]})
+}
+for (let column =0; column<16;column++)
+    for (let row =0; row<19;row++){
+        let current_num = 16*row+column;
+        if (current_num <coloured_shirts_names.length)
+            sprite_shirt_list.push({name: coloured_shirts_names[current_num], location: "shirts/shirts", colour: false, asymmetrical: false,rowNum: 4,topcorner:[8*column,8*row]})
+}
 
 const sprite_eyewear_list = [none]
 for (let column =0; column<2;column++){ //add colour
-    sprite_eyewear_list.push({name: eyewear_list[column], location: "eyewear/eyewear", colour: true, asymmetrical: false,rowNum: 2,topcorner:[16*column,0]})
+    sprite_eyewear_list.push({name: eyewear_list[column+1], location: "eyewear/eyewear", colour: true, asymmetrical: false,rowNum: 2,topcorner:[16*column,0]})
 }
-for (let column =2; column<eyewear_list.length;column++){
+for (let column =2; column<eyewear_list.length-1;column++){
     let asymm =  false;
     if (eyewear_list[column] == "eye-patch")
         asymm = true;    
-    sprite_eyewear_list.push({name: eyewear_list[column], location: "eyewear/eyewear", colour: false, asymmetrical: asymm,rowNum: 2,topcorner:[16*column,0]})
+    sprite_eyewear_list.push({name: eyewear_list[column+1], location: "eyewear/eyewear", colour: false, asymmetrical: asymm,rowNum: 2,topcorner:[16*column,0]})
 }
 
 const sprite_accessory_list = [none]
@@ -99,6 +118,18 @@ for (let row =0; row<3;row++)
 const sprite_hair_names = sprite_hair_list.map(nameOf);
 
 const sprite_hat_list = [none]
+
+for (let row =0; row<32;row++)
+    for (let column =0; column<12;column++){
+        let current_num = row*12+column;
+        if (current_num< hat_names.length){
+            let colour = false;
+            if  ([].includes(column))//can be coloured
+                colour=true;
+            sprite_hat_list.push({name: hat_names[current_num], location: "hats/hats", colour: colour, asymmetrical: false,rowNum: 4,topcorner:[16*column,32*row]})
+
+        }
+}
 sprite_hat_list.push({name: "Santa hat", location: "hats/hats", colour: false, asymmetrical: false,rowNum: 4,topcorner:[23,159]})
 
 const sprite_arms_list = []
@@ -130,7 +161,7 @@ add_sprite_object("Pants", sprite_pants_list,outfit_colours,true,false,0, [16,32
 add_sprite_object("Shirt", sprite_shirt_list,outfit_colours,false,true,1, [8,8],[4,15]);
 add_sprite_object("Eyewear", sprite_eyewear_list,outfit_colours,false,true,1, [16,16],[0,2]);
 add_sprite_object("Accessory", sprite_accessory_list,outfit_colours,false,true,1, [16,16],[0,2]);
-add_sprite_object("Facial Hair", sprite_facialhair_list,hair_colours,false,true,1, [16,16],[0,2]);
+add_sprite_object("Facial_hair", sprite_facialhair_list,hair_colours,false,true,1, [16,16],[0,2]);
 add_sprite_object("Hairstyle", sprite_hair_list,hair_colours,false,true, 1,[16,32],[0,0]);
 add_sprite_object("Hat", sprite_hat_list,outfit_colours,false,true,1, [16,20],[0,0]);
 add_sprite_object("Arms", sprite_arms_list,skin_colours,true,false,0, [16,32],[0,0]);

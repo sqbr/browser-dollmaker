@@ -296,7 +296,7 @@ function setMenu(variablelist, number){
         case 0: //editing the body
             htmlString+="<div class=\"grid-choices\">"
             htmlString+=makeDropbtnString("Skin Colour", skin_list, skin_colours, "setSkinColour");
-            htmlString+=makeDropbtnString("Eye Colour", ["Eyes"], eye_colours, "setEyeColour");
+            htmlString+=makeDropbtnString("Eye Colour", ["Eyes"], eye_colours, "setBothColour");
             htmlString+=makeDropbtnString("Hair Colour", hair_list, hair_colours, "setHairColour");
             htmlString+="</div>"
             if (current_imageType==0){ //portraits
@@ -318,7 +318,7 @@ function setMenu(variablelist, number){
                 htmlString+="</div>"  
             }
             htmlString+="<div class=\"grid-choices\">"
-            htmlString+=makeDropbtnString("Facial Hair", ["Facial_hair"], facial_hair_list, "setFacialHair");
+            htmlString+=makeDropbtnString("Facial Hair", ["Facial_hair"], facial_hair_list, "setBothVariable");
             htmlString+="</div>"
             break;    
         case 1: //editing the outfit
@@ -326,11 +326,9 @@ function setMenu(variablelist, number){
             for (let i = 0; i < outfit_list.length; i += 1) {
                 let current_item = outfit_list[i];
                 if (outfit_list_both.includes(current_item)){
-                    //let b = findNameMatch(sprite_objects, current_item);
-                    let b = findNameMatch(portrait_objects, current_item);
+                    let b = findNameMatch(sprite_objects, current_item);
                     htmlString+="<div class=\"grid-choices\">"
-                    htmlString+=makeDropbtnString(current_item, [current_item], b.item_list, "setBothVariable");
-                    //htmlString+=makeDropbtnString(b.name, [b.name], b.item_list, "setSpriteVariable");
+                    htmlString+=makeDropbtnString(current_item, [current_item], b.item_list.map(nameOf), "set"+current_item);
                     htmlString+=makeDropbtnString(b.name+" Colour", [b.name], outfit_colours, "setBothColour");
                     htmlString+="</div>"
                 }
@@ -446,21 +444,15 @@ function setSkinColour(variablelist, number){
     drawCanvas();
 }
 
-function setEyeColour(variablelist, number){
-    setPortColour(["Eyes"], number);
-    setSpriteColour(["Eyes"], number);
-    drawCanvas();
-}
-
 function setHairColour(variablelist, number){
     setPortColour(hair_list, number);
-    setSpriteColour(["Hairstyle","Facial Hair"], number);
+    setSpriteColour(["Hairstyle","Facial_hair"], number);
     drawCanvas();
 }
 
 function setFacialHair(variablelist, number){
     setPortVariable(["Facial_hair"], number);
-    setSpriteVariable(["Facial Hair"], number);
+    setSpriteVariable(["Facial_hair"], number);
     drawCanvas();
 }
 
@@ -473,6 +465,20 @@ function setBothVariable(variablelist, number){
 function setShoes(variablelist, number){
     currentShoes = number;
     setSpriteVariable(["Shoes"], Math.max(0,2*currentShoes-1+height)); 
+    drawCanvas();
+}
+
+function setEyewear(variablelist, number){
+    setBothVariable(variablelist, number);
+    drawCanvas();
+}
+
+function setShirt(variablelist, number){
+    if (number>0)
+        setPortVariable(variablelist, 1);
+    else
+        setPortVariable(variablelist, 0);
+    setSpriteVariable(variablelist, number);
     drawCanvas();
 }
 
@@ -636,10 +642,11 @@ function setup(){
     setImageType([],0);
     setHeight([],height);
     setSkinColour([],4);
-    setEyeColour([],3);
+    setBothColour(['Eyes'],3);
     setHairColour([],3);
 
-    setFacialHair([],2);
+    //setFacialHair([],2);
+    //setBothVariable(['Facial_hair'],3);
     setSpriteHair([],5);
     setSpriteVariable(["Pants"],1);
     setSpriteColour(["Pants"],10);
@@ -647,6 +654,8 @@ function setup(){
     setSpriteColour(["Shoes"],4);
     setBothVariable(["Eyewear"],2);
     setSpriteColour(["Eyewear"],10);
+    setShirt(['Shirt'],1);
+    setBothColour(['Shirt'],3);
 
     drawCanvas();
 }
