@@ -491,6 +491,15 @@ function setHat(variablelist, number){
     drawCanvas();
 }
 
+function setNeckwear(variablelist, number){
+    if (number>0)
+        setPortVariable(variablelist, 1);
+    else
+        setPortVariable(variablelist, 0);
+    setSpriteVariable(variablelist, number);
+    drawCanvas();
+}
+
 function setSpriteHair(variablelist, number){
     setSpriteVariable(["Hairstyle"], number);
     if (number ==0)

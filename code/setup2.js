@@ -25,6 +25,8 @@ const coloured_shirts_numbers = [2,4,5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17,
 const uncoloured_shirts_names = ["Striped Shirt","Tank Top (low neck)","Tank Top","Crop Tank Top (Low neck)", "Crop Tank Top","Bikini Top","80's Shirt (curvy)","Crop Top Shirt","???","Strapped Top","Button Down Shirt","Tube Top",]
 const accessory_names = []
 
+const neckwear_names = ["bandana", "necklace", "bow-tie", "tie", "choker"]
+
 const hat_names = ["cowboy hat", "Bowler", "Top hat", "sombrero", "straw hat", "official cap", "blue bonnet", "Chapeau", "Skeleton mask", "Goblin Mask", "Chicken Mask", "Earmuffs", "Delicate Bow", "Tropiclip", "Butterfly Bow", "Hunter's Cap", "Trucker Hat", "Sailor's Cap", "Good Ol' Cap", "Fedora", "Cool Cap", "Lucky Bow", "Polka Bow", "Gnome's Cap", "Eye Patch", "Santa Hat", "Tiara", "Hard Hat", "Sou'wester", "Daisy", "Watermelon Band", "Mouse Ears", "Cat Ears", "Cowgal Hat", "Cowpoke Hat", "Archer's Cap", "Panda Hat", "Blue Cowboy Hat", "Red Cowboy Hat", "Cone Hat", "Living Hat", "Emily's Magic Hat", "Mushroom Cap", "Dinosaur Hat", "Totem Mask", "Logo Cap", "Dwarf Helm", "Fashion Hat", "Pumpkin Mask", "Hair Bone",]
 /*
 Name: String.
@@ -90,6 +92,11 @@ for (let column =2; column<eyewear_list.length-1;column++){
     if (eyewear_list[column] == "eye-patch")
         asymm = true;    
     sprite_eyewear_list.push({name: eyewear_list[column+1], location: "eyewear/eyewear", colour: false, asymmetrical: asymm,rowNum: 2,topcorner:[16*column,0]})
+}
+
+const sprite_neckwear_list = [none]
+for (let column =0; column<neckwear_names.length;column++){
+    sprite_neckwear_list.push({name: neckwear_names[column], location: "neckwear/neckwear", colour: true, asymmetrical: false,rowNum: 2,topcorner:[16*column,0]})
 }
 
 const sprite_accessory_list = [none]
@@ -160,6 +167,7 @@ add_sprite_object("Shoes", sprite_shoes_list,outfit_colours,true,false,0, [16,32
 add_sprite_object("Pants", sprite_pants_list,outfit_colours,true,false,0, [16,32],[0,0]);
 add_sprite_object("Shirt", sprite_shirt_list,outfit_colours,false,true,1, [8,8],[4,15]);
 add_sprite_object("Eyewear", sprite_eyewear_list,outfit_colours,false,true,1, [16,16],[0,2]);
+add_sprite_object("Neckwear", sprite_neckwear_list,outfit_colours,false,true,1, [16,32],[0,2]);
 add_sprite_object("Accessory", sprite_accessory_list,outfit_colours,false,true,1, [16,16],[0,2]);
 add_sprite_object("Facial_hair", sprite_facialhair_list,hair_colours,false,true,1, [16,16],[0,2]);
 add_sprite_object("Hairstyle", sprite_hair_list,hair_colours,false,true, 1,[16,32],[0,0]);

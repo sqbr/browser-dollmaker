@@ -9,9 +9,9 @@ import glob
 
 body_list = ["Torso", "Head", "Complexion","Ears", "Nose"]
 expression_list = ["Eyes","Eyebrows", "Mouth"]
-outfit_list_portOnly= ["Neckwear", "Coat",]
+outfit_list_portOnly= [ "Coat",]
 outfit_list_spriteOnly = ["Pants","Shoes"]
-outfit_list_both = ["Eyewear","Shirt", "Hat"]
+outfit_list_both = ["Neckwear","Eyewear","Shirt", "Hat"]
 outfit_list = outfit_list_both+ outfit_list_portOnly+outfit_list_spriteOnly
 
 skin_list = body_list + ["Eyebrows", "Mouth"]
@@ -384,7 +384,8 @@ def process_outfit_sprites():
         #process_image("eyewear", "sprites/eyewear", c, outfit_colours,"blue") 
     #    process_image("hats", "sprites/hats", c, outfit_colours,"grey")
     #    process_image("pants", "sprites/pants", c, outfit_colours,"blue")
-        process_image("shirts", "sprites/shirts", c, outfit_colours,"grey")
+    #    process_image("shirts", "sprites/shirts", c, outfit_colours,"grey")
+        process_image("neckwear", "sprites/neckwear", c, outfit_colours,"grey")
     #    process_image("short", "sprites/shoes", c, outfit_colours,"grey") 
     #    process_image("tall", "sprites/shoes", c, outfit_colours,"grey") 
           
@@ -392,7 +393,7 @@ def process_outfit_sprites():
 
 write_variables()
 #process_body_sprites()
-#process_outfit_sprites()
+process_outfit_sprites()
 for c in closet:
     if c.name =="":
         process_portrait_part(c)
