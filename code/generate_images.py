@@ -36,7 +36,8 @@ shirt_list = ["none", "shirt"]
 neckwear_list = ["none","choker"]
 coat_back_list = ["none","cardigan"]
 coat_list = ["none","cardigan"]
-eyewear_list = ["none","half"]
+eyewear_list = ["glasses", "half-glasses", "shiny glasses", "robot visor", "sunglasses", "eye-patch"];
+
 hat_list = ["none","straw"]
 hat_back_list = ["none","straw"]
 
@@ -112,7 +113,7 @@ add_portrait_object("Shirt", shirt_list,"shirt_list", "outfit")
 add_portrait_object("Coat", coat_list,"coat_list", "outfit")
 
 add_portrait_object("Facial_hair", facial_hair_list,"facial_hair_list", "body/hair")
-add_portrait_object("Eyewear", eyewear_list,"eyewear_list", "outfit")
+add_portrait_object("Eyewear", ["none"]+eyewear_list,"eyewear_list", "outfit")
 add_portrait_object("Hair_middle", hair_middle_list,"hair_middle_list", "body/hair")
 
 add_portrait_object("Hair_front", hair_front_list,"hair_front_list", "body/hair")
@@ -369,7 +370,7 @@ def process_body_sprites():
 
 def process_outfit_sprites():
     for c in range(len(outfit_colours)): 
-        process_image("eyewear", "sprites/eyewear", c, outfit_colours,"skin") 
+        process_image("eyewear", "sprites/eyewear", c, outfit_colours,"blue") 
     #    process_image("hats", "sprites/hats", c, outfit_colours,"grey")
     #    process_image("pants", "sprites/pants", c, outfit_colours,"blue")
     #    process_image("shirts", "sprites/shirts", c, outfit_colours,"grey")
@@ -380,7 +381,7 @@ def process_outfit_sprites():
 
 write_variables()
 #process_body_sprites()
-process_outfit_sprites()
+#process_outfit_sprites()
 for c in closet:
     if c.name =="":
         process_portrait_part(c)

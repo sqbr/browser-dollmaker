@@ -3,7 +3,7 @@
 const outfit_list_both = ["Eyewear",];
 const outfit_list_portOnly = ["Shirt","Neckwear","Coat","Hat",];
 const outfit_list_spriteOnly = ["Pants","Shoes",];
-const outfit_list = (outfit_list_both.concat(outfit_list_spriteOnly)).concat(outfit_list_portOnly);
+const outfit_list = outfit_list_both.concat(outfit_list_spriteOnly).concat(outfit_list_portOnly);
 const body_list = ["Torso","Head","Complexion","Ears","Nose",];
 const skin_list = ["Torso","Head","Complexion","Ears","Nose","Eyebrows","Mouth",];
 const hair_list = ["Hair_back","Hair_middle","Hair_front","Facial_hair",];
@@ -52,7 +52,7 @@ const neckwear_list = ["none","choker",];
 const shirt_list = ["none","shirt",];
 const coat_list = ["none","cardigan",];
 const facial_hair_list = ["none","beard","moustache","goatee","soulpatch","muttonchops","neckbeard",];
-const eyewear_list = ["none","half",];
+const eyewear_list = ["none","glasses","half-glasses","shiny glasses","robot visor","sunglasses","eye-patch",];
 const hair_middle_list = ["none","sidepart",];
 const hair_front_list = ["none","emo",];
 const hat_list = ["none","straw",];

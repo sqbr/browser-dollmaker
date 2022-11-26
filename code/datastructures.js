@@ -164,6 +164,7 @@ function fixSpriteSources(list){
         }else{
         b.topcorner = item.topcorner;
         b.rowNum= item.rowNum;
+        b.asymmetrical = item.asymmetrical;
         if (item.colour){
             b.image.src  = "images/sprites/"+item.location+"_"+b.colour+".png";
         }else{
@@ -324,24 +325,29 @@ function setMenu(variablelist, number){
             //document.getElementById("test").innerHTML = "Hello";
             for (let i = 0; i < outfit_list.length; i += 1) {
                 let current_item = outfit_list[i];
-                if (["Eyewear"].includes(current_item)){
-                    let b = findNameMatch(sprite_objects, current_item);
+                if (outfit_list_both.includes(current_item)){
+                    //let b = findNameMatch(sprite_objects, current_item);
+                    let b = findNameMatch(portrait_objects, current_item);
                     htmlString+="<div class=\"grid-choices\">"
-                    htmlString+=makeDropbtnString(b.name, [b.name], b.item_list.map(nameOf), "setSpriteVariable");
-                    htmlString+=makeDropbtnString(b.name+" Colour", [b.name], outfit_colours, "setSpriteColour");
+                    htmlString+=makeDropbtnString(current_item, [current_item], b.item_list, "setBothVariable");
+                    //htmlString+=makeDropbtnString(b.name, [b.name], b.item_list, "setSpriteVariable");
+                    htmlString+=makeDropbtnString(b.name+" Colour", [b.name], outfit_colours, "setBothColour");
                     htmlString+="</div>"
                 }
-                /*
-                let b = findNameMatch(portrait_objects, outfit_list_portOnly[i]);
-                let edit_list = [b.name];
-                if (back_list.includes(b.name)){
-                    edit_list.push(b.name+"_back");
-                } 
-                htmlString+="<div class=\"grid-choices\">"
-                htmlString+=makeDropbtnString(b.name, [b.name], b.item_list, "setPortVariable");
-                htmlString+=makeDropbtnString(b.name+" Colour", [b.name], outfit_colours, "setColour");
-                htmlString+="</div>"*/
-                if (current_imageType==1){
+                if (current_imageType==0){
+                    if (outfit_list_portOnly.includes(current_item)){
+                        let b = findNameMatch(portrait_objects, current_item);
+                        let edit_list = [current_item];
+                        if (back_list.includes(current_item)){
+                            edit_list.push(current_item+"_back");
+                        } 
+                        htmlString+="<div class=\"grid-choices\">"
+                        htmlString+=makeDropbtnString(current_item, [current_item], b.item_list, "setPortVariable");
+                        htmlString+=makeDropbtnString(current_item+" Colour", [current_item], outfit_colours, "setPortColour");
+                        htmlString+="</div>"
+                    }
+                }
+                else{
                     if (outfit_list_spriteOnly.includes(current_item)){
                         let b = findNameMatch(sprite_objects, current_item);
                         htmlString+="<div class=\"grid-choices\">"
@@ -414,11 +420,9 @@ function setPanelVariable(variablelist, number){
     drawCanvas();
 }
 
-function setColour(variablelist, number){
-    for (let i = 0; i < variablelist.length; i += 1) {
-        let b = findNameMatch(portrait_objects, variablelist[i]); //the eleemnt of portrait_objects with the right vriablename
-        b.colour=number;
-    }
+function setBothColour(variablelist, number){
+    setPortColour(variablelist, number);
+    setSpriteColour(variablelist, number);
     drawCanvas();
 }
 
@@ -457,6 +461,12 @@ function setHairColour(variablelist, number){
 function setFacialHair(variablelist, number){
     setPortVariable(["Facial_hair"], number);
     setSpriteVariable(["Facial Hair"], number);
+    drawCanvas();
+}
+
+function setBothVariable(variablelist, number){
+    setPortVariable(variablelist, number);
+    setSpriteVariable(variablelist, number);
     drawCanvas();
 }
 
@@ -526,7 +536,7 @@ function drawCanvas() {
 
     //preview canvas
     canvas_preview.width = canvas_preview.width; //clears
-    document.getElementById("closet").innerHTML = print_sprite_objects();
+    //document.getElementById("closet").innerHTML = print_portrait_objects();
     for (let i = 0; i < sprite_objects.length; i += 1){ //sprite preview
         let b = sprite_objects[i];
         if (b.item_list[b.value] !=none){ 
@@ -607,12 +617,14 @@ function drawCanvas() {
                         ctx.drawImage(b.image, oldX(b,2), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,3), newY(b,2,3),b.dimensions[0],b.dimensions[1]); //column 4   
                     }           
                     //row 4
-                    for(let x = 0; x < b.dimensions[0]; x++){ //janky way of flipping
-                        for (let column = 0; column < 2; column += 1)
-                            ctx.drawImage(b.image, oldX(b,column)+x, oldY(b,1), 1, b.dimensions[1], newX(b,column)+b.dimensions[0] - x, newY(b,3,column), 1, b.dimensions[1]);
-                        ctx.drawImage(b.image, oldX(b,0)+x, oldY(b,1), 1, b.dimensions[1], newX(b,2)+b.dimensions[0] - x, newY(b,3,2), 1, b.dimensions[1]); 
-                        ctx.drawImage(b.image, oldX(b,2)+x, oldY(b,1), 1, b.dimensions[1], newX(b,3)+b.dimensions[0] - x, newY(b,3,3), 1, b.dimensions[1]);       
-                    }        
+                    if (!b.asymmetrical){
+                        for(let x = 0; x < b.dimensions[0]; x++){ //janky way of flipping
+                            for (let column = 0; column < 2; column += 1)
+                                    ctx.drawImage(b.image, oldX(b,column)+x, oldY(b,1), 1, b.dimensions[1], newX(b,column)+b.dimensions[0] - x, newY(b,3,column), 1, b.dimensions[1]);
+                            ctx.drawImage(b.image, oldX(b,0)+x, oldY(b,1), 1, b.dimensions[1], newX(b,2)+b.dimensions[0] - x, newY(b,3,2), 1, b.dimensions[1]); 
+                            ctx.drawImage(b.image, oldX(b,2)+x, oldY(b,1), 1, b.dimensions[1], newX(b,3)+b.dimensions[0] - x, newY(b,3,3), 1, b.dimensions[1]);       
+                        }     
+                    }   
                 }        
             }
         }
@@ -629,10 +641,12 @@ function setup(){
 
     setFacialHair([],2);
     setSpriteHair([],5);
-    setShoes([],1);
     setSpriteVariable(["Pants"],1);
     setSpriteColour(["Pants"],10);
+    setShoes([],1);
     setSpriteColour(["Shoes"],4);
+    setBothVariable(["Eyewear"],2);
+    setSpriteColour(["Eyewear"],10);
 
     drawCanvas();
 }
