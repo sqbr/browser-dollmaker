@@ -126,7 +126,7 @@ for (let row =0; row<32;row++)
             let colour = false;
             if  ([].includes(column))//can be coloured
                 colour=true;
-            sprite_hat_list.push({name: hat_names[current_num], location: "hats/hats", colour: colour, asymmetrical: false,rowNum: 4,topcorner:[16*column,32*row]})
+            sprite_hat_list.push({name: hat_names[current_num], location: "hats/hats", colour: colour, asymmetrical: false,rowNum: 4,topcorner:[16*column,128*row]})
 
         }
 }
@@ -163,7 +163,7 @@ add_sprite_object("Eyewear", sprite_eyewear_list,outfit_colours,false,true,1, [1
 add_sprite_object("Accessory", sprite_accessory_list,outfit_colours,false,true,1, [16,16],[0,2]);
 add_sprite_object("Facial_hair", sprite_facialhair_list,hair_colours,false,true,1, [16,16],[0,2]);
 add_sprite_object("Hairstyle", sprite_hair_list,hair_colours,false,true, 1,[16,32],[0,0]);
-add_sprite_object("Hat", sprite_hat_list,outfit_colours,false,true,1, [16,20],[0,0]);
+add_sprite_object("Hat", sprite_hat_list,outfit_colours,false,true,1, [16,32],[0,0]);
 add_sprite_object("Arms", sprite_arms_list,skin_colours,true,false,0, [16,32],[0,0]);
 
 function print_sprite_objects(){

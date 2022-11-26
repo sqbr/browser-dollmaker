@@ -9,9 +9,9 @@ import glob
 
 body_list = ["Torso", "Head", "Complexion","Ears", "Nose"]
 expression_list = ["Eyes","Eyebrows", "Mouth"]
-outfit_list_portOnly= ["Neckwear", "Coat", "Hat"]
+outfit_list_portOnly= ["Neckwear", "Coat",]
 outfit_list_spriteOnly = ["Pants","Shoes"]
-outfit_list_both = ["Eyewear","Shirt"]
+outfit_list_both = ["Eyewear","Shirt", "Hat"]
 outfit_list = outfit_list_both+ outfit_list_portOnly+outfit_list_spriteOnly
 
 skin_list = body_list + ["Eyebrows", "Mouth"]
@@ -397,4 +397,4 @@ for c in closet:
     if c.name =="":
         process_portrait_part(c)
 #process_all_portraits()
-trimhats()
+#trimhats()

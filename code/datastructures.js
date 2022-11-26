@@ -482,6 +482,15 @@ function setShirt(variablelist, number){
     drawCanvas();
 }
 
+function setHat(variablelist, number){
+    if (number>0)
+        setPortVariable(variablelist, 1);
+    else
+        setPortVariable(variablelist, 0);
+    setSpriteVariable(variablelist, number);
+    drawCanvas();
+}
+
 function setSpriteHair(variablelist, number){
     setSpriteVariable(["Hairstyle"], number);
     if (number ==0)
@@ -640,14 +649,15 @@ function drawCanvas() {
 function setup(){
     setTopbar();
     setImageType([],0);
+
     setHeight([],height);
     setSkinColour([],4);
     setBothColour(['Eyes'],3);
     setHairColour([],3);
-
-    //setFacialHair([],2);
-    //setBothVariable(['Facial_hair'],3);
+    setBothVariable(['Facial_hair'],3);
     setSpriteHair([],5);
+    setPortVariable(["Hair_back","Hair_front","Hair_middle"],1)
+
     setSpriteVariable(["Pants"],1);
     setSpriteColour(["Pants"],10);
     setShoes([],1);
