@@ -349,10 +349,10 @@ function setMenu(variablelist, number){
                     if (outfit_list_spriteOnly.includes(current_item)){
                         let b = findNameMatch(sprite_objects, current_item);
                         htmlString+="<div class=\"grid-choices\">"
-                        if (current_item=="Shoes"){
-                            htmlString+=makeDropbtnString(b.name, [b.name], ["None","Boots"], "setShoes");
+                        if (["Shoes","Gloves"].includes(current_item)){
+                            htmlString+=makeDropbtnString(b.name, [b.name], b.name_list, "set"+b.name);
                         } else{
-                            htmlString+=makeDropbtnString(b.name, [b.name], b.item_list.map(nameOf), "setSpriteVariable");
+                            htmlString+=makeDropbtnString(b.name, [b.name], b.name_list, "setSpriteVariable");
                         }
                         htmlString+=makeDropbtnString(b.name+" Colour", [b.name], outfit_colours, "setSpriteColour");
                         htmlString+="</div>"
@@ -468,6 +468,12 @@ function setShoes(variablelist, number){
     drawCanvas();
 }
 
+function setGloves(variablelist, number){
+    currentGloves = number;
+    setSpriteVariable(["Gloves"], Math.max(0,2*currentGloves-1+height)); 
+    drawCanvas();
+}
+
 function setEyewear(variablelist, number){
     setBothVariable(variablelist, number);
     drawCanvas();
@@ -500,6 +506,15 @@ function setNeckwear(variablelist, number){
     drawCanvas();
 }
 
+function setEarrings(variablelist, number){
+    if (number>0)
+        setPortVariable(variablelist, 1);
+    else
+        setPortVariable(variablelist, 0);
+    setSpriteVariable(variablelist, number);
+    drawCanvas();
+}
+
 function setSpriteHair(variablelist, number){
     setSpriteVariable(["Hairstyle"], number);
     if (number ==0)
@@ -513,7 +528,8 @@ function setHeight(variablelist, number){
     height = number;
     setSpriteVariable(["Arms"], number);
     setSpriteVariable(["Shoes"], Math.max(0,2*currentShoes-1+height)); 
-    document.getElementById("test").innerHTML = Math.max(0,2*currentShoes-1+height);
+    setSpriteVariable(["Gloves"], Math.max(0,2*currentGloves-1+height)); 
+    document.getElementById("test").innerHTML = Math.max(0,2*currentGloves-1+height);
     if (isBald){
         setSpriteVariable(["Torso"], 2+number);
     }else { 
@@ -561,6 +577,7 @@ function drawCanvas() {
     //preview canvas
     canvas_preview.width = canvas_preview.width; //clears
     //document.getElementById("closet").innerHTML = print_portrait_objects();
+    let hair = findNameMatch(sprite_objects, "Hairstyle");
     for (let i = 0; i < sprite_objects.length; i += 1){ //sprite preview
         let b = sprite_objects[i];
         if (b.item_list[b.value] !=none){ 
@@ -574,6 +591,9 @@ function drawCanvas() {
             }    
         }        
     }
+    //drawing hair
+    ctx_preview.drawImage(hair.image, oldX(hair,0), oldY(hair,1),hair.dimensions[0],hair.dimensions[1],64+hair.offset[0]*4,4*(hair.offset[1]+(1-height)*hair.heightOffset),hair.dimensions[0]*4,hair.dimensions[1]*4);
+    ctx_preview.drawImage(hair.image, oldX(hair,0), oldY(hair,2),hair.dimensions[0],hair.dimensions[1],64*2+hair.offset[0]*4,hair.offset[1]*4,hair.dimensions[0]*4,hair.dimensions[1]*4);
     ctx_preview.drawImage(portrait_back, 256, 0);
     for (let i = 0; i < portrait_objects.length; i += 1){
         let b = portrait_objects[i];
@@ -652,6 +672,22 @@ function drawCanvas() {
                 }        
             }
         }
+        if (hair.rowNum==3){ //has a back
+            //row 3
+            for (let column = 0; column < 2; column += 1)
+                ctx.drawImage(hair.image, oldX(hair,column), oldY(hair,2),hair.dimensions[0],hair.dimensions[1],newX(hair,column),newY(hair,2,column),hair.dimensions[0],hair.dimensions[1]); //3rd row cols 1-2
+            ctx.drawImage(hair.image, oldX(hair,0), oldY(hair,2),hair.dimensions[0],hair.dimensions[1],newX(hair,2), newY(hair,2,2),hair.dimensions[0],hair.dimensions[1]); //column 3  
+            ctx.drawImage(hair.image, oldX(hair,2), oldY(hair,2),hair.dimensions[0],hair.dimensions[1],newX(hair,3), newY(hair,2,3),hair.dimensions[0],hair.dimensions[1]); //column 4   
+        }           
+        //row 4
+        if (!hair.asymmetrical){
+            for(let x = 0; x < hair.dimensions[0]; x++){ //janky way of flipping
+                for (let column = 0; column < 2; column += 1)
+                        ctx.drawImage(hair.image, oldX(hair,column)+x, oldY(hair,1), 1, hair.dimensions[1], newX(hair,column)+hair.dimensions[0] - x, newY(hair,3,column), 1, hair.dimensions[1]);
+                ctx.drawImage(hair.image, oldX(hair,0)+x, oldY(hair,1), 1, hair.dimensions[1], newX(hair,2)+hair.dimensions[0] - x, newY(hair,3,2), 1, hair.dimensions[1]); 
+                ctx.drawImage(hair.image, oldX(hair,2)+x, oldY(hair,1), 1, hair.dimensions[1], newX(hair,3)+hair.dimensions[0] - x, newY(hair,3,3), 1, hair.dimensions[1]);       
+            }     
+        }   
     }
 }
 
@@ -675,6 +711,8 @@ function setup(){
     setSpriteColour(["Eyewear"],10);
     setShirt(['Shirt'],1);
     setBothColour(['Shirt'],3);
+    setGloves([],1);
+    setSpriteColour(["Gloves"],4);
 
     drawCanvas();
 }

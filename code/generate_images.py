@@ -10,8 +10,8 @@ import glob
 body_list = ["Torso", "Head", "Complexion","Ears", "Nose"]
 expression_list = ["Eyes","Eyebrows", "Mouth"]
 outfit_list_portOnly= [ "Coat",]
-outfit_list_spriteOnly = ["Pants","Shoes"]
-outfit_list_both = ["Neckwear","Eyewear","Shirt", "Hat"]
+outfit_list_spriteOnly = ["Pants","Shoes","Gloves"]
+outfit_list_both = ["Neckwear","Eyewear","Earrings", "Shirt", "Hat"]
 outfit_list = outfit_list_both+ outfit_list_portOnly+outfit_list_spriteOnly
 
 skin_list = body_list + ["Eyebrows", "Mouth"]
@@ -37,6 +37,7 @@ neckwear_list = ["none","choker"]
 coat_back_list = ["none","cardigan"]
 coat_list = ["none","cardigan"]
 eyewear_list = ["glasses", "half-glasses", "shiny glasses", "robot visor", "sunglasses", "eye-patch"];
+earrings_list_port = ["studs"]
 
 hat_list = ["none","straw"]
 hat_back_list = ["none","straw"]
@@ -109,6 +110,7 @@ add_portrait_object("Mouth", mouth_list,"mouth_list", "expression")
 
 # In front of face
 add_portrait_object("Neckwear", neckwear_list,"neckwear_list", "outfit")
+add_portrait_object("Earrings", earrings_list_port,"earrings_list_port", "outfit")
 add_portrait_object("Shirt", shirt_list,"shirt_list", "outfit")
 add_portrait_object("Coat", coat_list,"coat_list", "outfit")
 
@@ -374,28 +376,31 @@ def process_body_sprites():
     for c in range(len(hair_colours)):  
         process_image("hairstyles", "sprites/hair", c, hair_colours,"grey")
         process_image("hairstyles2", "sprites/hair", c, hair_colours,"grey")
-        process_image("facialhair", "sprites/facialhair", c, hair_colours,"grey")
+        process_image("facialhair", "sprites/hair/facialhair", c, hair_colours,"grey")
     for c in range(len(eye_colours)):  
-        process_image("short", "sprites/eyes", c, eye_colours,"") 
-        process_image("long", "sprites/eyes", c, eye_colours,"")  
+        process_image("short", "sprites/body/eyes", c, eye_colours,"") 
+        process_image("long", "sprites/body/eyes", c, eye_colours,"")  
 
 def process_outfit_sprites():
     for c in range(len(outfit_colours)): 
-        #process_image("eyewear", "sprites/eyewear", c, outfit_colours,"blue") 
-    #    process_image("hats", "sprites/hats", c, outfit_colours,"grey")
-    #    process_image("pants", "sprites/pants", c, outfit_colours,"blue")
-    #    process_image("shirts", "sprites/shirts", c, outfit_colours,"grey")
-        process_image("neckwear", "sprites/neckwear", c, outfit_colours,"grey")
-    #    process_image("short", "sprites/shoes", c, outfit_colours,"grey") 
-    #    process_image("tall", "sprites/shoes", c, outfit_colours,"grey") 
+        #process_image("eyewear", "sprites/accessories/eyewear", c, outfit_colours,"blue") 
+    #    process_image("hats", "sprites/outfit/hats", c, outfit_colours,"grey")
+    #    process_image("pants", "sprites/outfit/pants", c, outfit_colours,"blue")
+    #    process_image("shirts", "sprites/outfit/shirts", c, outfit_colours,"grey")
+        #process_image("neckwear", "sprites/accessories/neckwear", c, outfit_colours,"grey")
+        process_image("earrings", "sprites/accessories/earrings", c, outfit_colours,"")
+        for height in ["short","tall"]:
+        #    process_image(height, "sprites/outfit/shoes", c, outfit_colours,"grey") 
+            process_image(height, "sprites/outfit/hands and arms/gloves", c, outfit_colours,"grey")
+            process_image(height, "sprites/outfit/hands and arms/sleeves", c, outfit_colours,"grey") 
           
 
 
 write_variables()
 #process_body_sprites()
-process_outfit_sprites()
+#process_outfit_sprites()
 for c in closet:
-    if c.name =="":
+    if c.name =="Earrings":
         process_portrait_part(c)
 #process_all_portraits()
 #trimhats()
