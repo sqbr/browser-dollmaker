@@ -25,6 +25,7 @@ const coloured_shirts_numbers = [2,4,5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17,
 
 const uncoloured_shirts_names = ["Striped Shirt","Tank Top (low neck)","Tank Top","Crop Tank Top (Low neck)", "Crop Tank Top","Bikini Top","80's Shirt (curvy)","Crop Top Shirt","???","Strapped Top","Button Down Shirt","Tube Top",]
 
+const shirt_dec_names = ["fish", "gi", "high waist", "letterman", "skeleton", "overalls", "star", "sports shoulders", "heart", "overalls2?", "collar", "necklace", "necklace2", "dot?", "dot?", "collar", "sailor", "sailor2", "bandana", "Dark Highlight Shirt", "dots", "silky", "vest sleeves", "oily?", "vest"]
 const neckwear_names = ["bandana", "necklace", "bow-tie", "tie", "choker"]
 
 const earrings_list_sprites = ["gold drop","blue drop", "studs", "single stud"]
@@ -83,6 +84,14 @@ for (let column =0; column<16;column++)
         let current_num = 16*row+column;
         if (current_num <coloured_shirts_names.length)
             sprite_shirt_list.push({name: coloured_shirts_names[current_num], location: "outfit/shirts/shirts", colour: false, asymmetrical: false,rowNum: 4,topcorner:[8*column,8*row]})
+}
+
+const sprite_shirt_dec_list = [none];
+for (let column =0; column<16;column++)
+    for (let row =0; row<2;row++){
+        let current_num = 16*row+column;
+        if (current_num <shirt_dec_names.length)
+            sprite_shirt_dec_list.push({name: shirt_dec_names[current_num], location: "outfit/shirts/decorations/shirt_decs", colour: true, asymmetrical: false,rowNum: 4,topcorner:[8*column,8*row]})
 }
 
 const sprite_eyewear_list = [none]
@@ -152,7 +161,13 @@ for (let i =0; i<sprite_body_list.length;i++){
 const sprite_gloves_list = [none]
 for (let i =0; i<height_list.length;i++){
     b= height_list[i];
-    sprite_gloves_list.push({name: b, location: "outfit/hands and arms/gloves"+b, colour: true, asymmetrical: false,rowNum: 3,topcorner:[0,0]})
+    sprite_gloves_list.push({name: b, location: "outfit/gloves/"+b, colour: true, asymmetrical: false,rowNum: 3,topcorner:[0,0]})
+}
+
+const sprite_sleeves_list = [none]
+for (let i =0; i<height_list.length;i++){
+    b= height_list[i];
+    sprite_sleeves_list.push({name: b, location: "outfit/sleeves/"+b, colour: true, asymmetrical: false,rowNum: 3,topcorner:[0,0]})
 }
 
 const sprite_objects =[];
@@ -176,6 +191,7 @@ add_sprite_object("Eyes", sprite_eyes_list,eyelash_list, eye_colours,true,false,
 add_sprite_object("Shoes", sprite_shoes_list,["None","Boots"], outfit_colours,true,false,0, [16,32],[0,0]);
 add_sprite_object("Pants", sprite_pants_list,sprite_pants_list.map(nameOf), outfit_colours,true,false,0, [16,32],[0,0]);
 add_sprite_object("Shirt", sprite_shirt_list,sprite_shirt_list.map(nameOf),outfit_colours,false,true,1, [8,8],[4,15]);
+add_sprite_object("Shirt Dec", sprite_shirt_dec_list,sprite_shirt_dec_list.map(nameOf),outfit_colours,false,true,1, [8,8],[4,15]);
 add_sprite_object("Eyewear", sprite_eyewear_list,sprite_eyewear_list.map(nameOf),outfit_colours,false,true,1, [16,16],[0,2]);
 add_sprite_object("Neckwear", sprite_neckwear_list,sprite_neckwear_list.map(nameOf), outfit_colours,false,true,1, [16,32],[0,2]);
 add_sprite_object("Earrings", sprite_earrings_list,sprite_earrings_list.map(nameOf), outfit_colours,false,true,1, [16,16],[0,2]);
@@ -183,6 +199,7 @@ add_sprite_object("Facial_hair", sprite_facialhair_list,sprite_facialhair_list.m
 add_sprite_object("Hairstyle", sprite_hair_list,sprite_hair_list.map(nameOf), hair_colours,false,true, 1,[16,32],[0,0]);
 add_sprite_object("Arms", sprite_arms_list,height_list, skin_colours,true,false,0, [16,32],[0,0]);
 add_sprite_object("Gloves", sprite_gloves_list,["None","Mittens"], outfit_colours,true,false,0, [16,32],[0,0]);
+add_sprite_object("Sleeves", sprite_sleeves_list,["None","Sleeves"], outfit_colours,true,false,0, [16,32],[0,0]);
 add_sprite_object("Hat", sprite_hat_list,sprite_hat_list.map(nameOf), outfit_colours,false,true,1, [16,32],[0,0]);
 
 function print_sprite_objects(){
@@ -195,7 +212,7 @@ function print_sprite_objects(){
         //s+=" item: "+b.item;
         //s+=" colour: "+b.colour;
         s+=" heightOffset: "+b.heightOffset;
-        //s+=" src: "+b.image.src;
+        s+=" src: "+b.image.src;
         s+="<br>";
     }
     return s

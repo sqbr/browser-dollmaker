@@ -529,7 +529,7 @@ function setHeight(variablelist, number){
     setSpriteVariable(["Arms"], number);
     setSpriteVariable(["Shoes"], Math.max(0,2*currentShoes-1+height)); 
     setSpriteVariable(["Gloves"], Math.max(0,2*currentGloves-1+height)); 
-    document.getElementById("test").innerHTML = Math.max(0,2*currentGloves-1+height);
+    document.getElementById("test").innerHTML = Math.max(0,2*currentGloves-1+height)+" "+Math.max(0,2*currentShoes-1+height);
     if (isBald){
         setSpriteVariable(["Torso"], 2+number);
     }else { 
@@ -636,7 +636,7 @@ function drawCanvas() {
     } else{
         canvas.height = 128;
         canvas.width =  64;
-        //document.getElementById("closet").innerHTML = print_sprite_objects();
+        document.getElementById("closet").innerHTML = print_sprite_objects();
         //sourceX, sourceY, sourceWidth, sourceHeight, destWidth and destHeight   
         for (let i = 0; i < sprite_objects.length; i += 1){
             let b = sprite_objects[i];

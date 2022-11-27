@@ -387,20 +387,21 @@ def process_outfit_sprites():
     #    process_image("hats", "sprites/outfit/hats", c, outfit_colours,"grey")
     #    process_image("pants", "sprites/outfit/pants", c, outfit_colours,"blue")
     #    process_image("shirts", "sprites/outfit/shirts", c, outfit_colours,"grey")
+        process_image("shirt decs", "sprites/outfit/shirts/decorations", c, outfit_colours,"grey")
         #process_image("neckwear", "sprites/accessories/neckwear", c, outfit_colours,"grey")
-        process_image("earrings", "sprites/accessories/earrings", c, outfit_colours,"")
-        for height in ["short","tall"]:
+        #process_image("earrings", "sprites/accessories/earrings", c, outfit_colours,"")
+        #for height in ["short","tall"]:
         #    process_image(height, "sprites/outfit/shoes", c, outfit_colours,"grey") 
-            process_image(height, "sprites/outfit/hands and arms/gloves", c, outfit_colours,"grey")
-            process_image(height, "sprites/outfit/hands and arms/sleeves", c, outfit_colours,"grey") 
+        #    process_image(height, "sprites/outfit/gloves", c, outfit_colours,"grey")
+        #    process_image(height, "sprites/outfit/sleeves", c, outfit_colours,"grey") 
           
 
 
 write_variables()
 #process_body_sprites()
-#process_outfit_sprites()
+process_outfit_sprites()
 for c in closet:
-    if c.name =="Earrings":
+    if c.name =="":
         process_portrait_part(c)
 #process_all_portraits()
 #trimhats()
