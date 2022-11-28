@@ -464,12 +464,16 @@ function setHairColour(variablelist, number){
 function setShirtColour(variablelist, number){
     setPortColour(["Shirt"], number);
     setSpriteColour(["Shirt1","Shirt2"], number);
+    if (!hasCoatSleeves && hasShirtSleeves)
+        setSpriteColour(["Sleeves"], number);
     drawCanvas();
 }
 
 function setCoatColour(variablelist, number){
     setPortColour(["Coat"], number);
-    setSpriteColour(["Coat","Sleeves"], number);
+    setSpriteColour(["Coat"], number);
+    if (hasCoatSleeves)
+        setSpriteColour(["Sleeves"], number);
     drawCanvas();
 }
 
@@ -505,8 +509,20 @@ function setEyewear(variablelist, number){
 function setShirt(variablelist, number){
     if (number>0)
         setPortVariable(["Shirt"], 1);
+        if (false){ //some test for whether shirt has sleeves
+            hasShirtSleeves= true;
+            setSpriteVariable(["Sleeves"], 1);
+            if (!hasCoatSleeves){
+                let shirtcolour = findNameMatch(sprite_objects,"Shirt").colour
+                setSpriteColour(["Sleeves"], shirtcolour);
+            }
+        }
+        
     else
         setPortVariable(["Shirt"], 0);
+        hasShirtSleeves= false;
+        if (!hasCoatSleeves)
+            setSpriteVariable(["Sleeves"], 0);
     setSpriteVariable(["Shirt1","Shirt2"], number);
     drawCanvas();
 }
@@ -515,9 +531,13 @@ function setCoat(variablelist, number){
     if (number>0){
         setPortVariable(["Coat"], 1);
         setSpriteVariable(["Sleeves"], 1);
+        hasCoatSleeves = true;
     }
     else
         setPortVariable(["Coat"], 0);
+        hasCoatSleeves = false;
+        if (!hasShirtSleeves)
+            setSpriteVariable(["Sleeves"], 0);
     setSpriteVariable(["Coat"], number);
     drawCanvas();
 }
@@ -733,10 +753,13 @@ function setup(){
     setSkinColour([],4);
     setBothColour(['Eyes'],3);
     setHairColour([],3);
-    setBothVariable(['Facial_hair'],3);
+    setBothVariable(['Facial_hair'],5);
     setSpriteHair([],5);
     setPortVariable(["Hair_back","Hair_front","Hair_middle"],1)
-    setPortVariable(["Nose"],1)
+    setPortVariable(["Nose"],2)
+
+    setCoat(['Coat'],1);
+    setCoatColour(['Coat'],3);
 
     /*setSpriteVariable(["Pants"],1);
     setSpriteColour(["Pants"],10);

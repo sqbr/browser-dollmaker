@@ -9,6 +9,8 @@ let height = 0;
 let isBald = true;
 let currentShoes = 0;
 let currentGloves = 0;
+let hasShirtSleeves = false;
+let hasCoatSleeves = false;
 
 const none = {name:"None",location: "", colour: false, rowNum: 3, topcorner:[0,0]}
 
