@@ -147,7 +147,10 @@ function fixPortSources(list){
             if (b.colourNum==1){
                 b.image_list[j].src = "images/bases/portraits/"+b.location+"/"+b.item_list[b.value_list[j]]+".png";
             }else{
-                b.image_list[j].src  = "images/portraits/"+b.location+"/"+b.item_list[b.value_list[j]]+"_"+b.colour+".png";
+                if (b.name =="Nose_front"){
+                    b.image_list[j].src  = "images/portraits/"+b.location+"/"+b.item_list[b.value_list[j]]+"_noshadow_"+b.colour+".png";
+                }else
+                    b.image_list[j].src  = "images/portraits/"+b.location+"/"+b.item_list[b.value_list[j]]+"_"+b.colour+".png";
             }
         }
     }
@@ -303,7 +306,7 @@ function setMenu(variablelist, number){
                 htmlString+="<div class=\"grid-choices\">"
                 htmlString+=makeDropbtnString("Head Shape", ["Head"], head_list, "setPortVariable");
                 htmlString+=makeDropbtnString("Ear Shape", ["Ears"], ears_list, "setPortVariable");
-                htmlString+=makeDropbtnString("Nose Shape", ["Nose"], nose_list, "setPortVariable");
+                htmlString+=makeDropbtnString("Nose Shape", ["Nose","Nose_front"], nose_list, "setPortVariable");
                 htmlString+="</div>"
                 htmlString+="<div class=\"grid-choices\">"
                 htmlString+=makeDropbtnString("Hair back", ["Hair_back"], hair_back_list, "setPortVariable");
@@ -733,8 +736,9 @@ function setup(){
     setBothVariable(['Facial_hair'],3);
     setSpriteHair([],5);
     setPortVariable(["Hair_back","Hair_front","Hair_middle"],1)
+    setPortVariable(["Nose"],1)
 
-    setSpriteVariable(["Pants"],1);
+    /*setSpriteVariable(["Pants"],1);
     setSpriteColour(["Pants"],10);
     setShoes([],1);
     setSpriteColour(["Shoes"],4);
@@ -743,7 +747,7 @@ function setup(){
     setShirt(['Shirt'],1);
     setShirtColour(['Shirt'],3);
     setGloves([],1);
-    setSpriteColour(["Gloves"],4);
+    setSpriteColour(["Gloves"],4);*/
 
     drawCanvas();
 }

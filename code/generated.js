@@ -5,8 +5,8 @@ const outfit_list_complex = ["Shirt","Coat",];
 const outfit_list_portOnly = [];
 const outfit_list_spriteOnly = ["Pants","Shoes","Gloves",];
 const outfit_list = outfit_list_both.concat(outfit_list_spriteOnly).concat(outfit_list_portOnly);
-const body_list = ["Torso","Head","Complexion","Ears","Nose",];
-const skin_list = ["Torso","Head","Complexion","Ears","Nose","Eyebrows","Mouth",];
+const body_list = ["Torso","Head","Complexion","Ears","Nose","Nose_front",];
+const skin_list = ["Torso","Head","Complexion","Ears","Nose","Nose_front","Eyebrows","Mouth",];
 const hair_list = ["Hair_back","Hair_middle","Hair_front","Facial_hair",];
 const expression_list = ["Eyes","Eyebrows","Mouth",];
 
@@ -43,9 +43,9 @@ const hat_back_list = ["none","straw",];
 const hair_back_list = ["none","short",];
 const ears_list = ["regular",];
 const torso_list = ["medium",];
-const head_list = ["medium","round",];
+const head_list = ["square","medium","round",];
 const complexion_list = ["none","wrinkles",];
-const nose_list = ["none","medium",];
+const nose_list = ["none","button","medium","broad","round","pointed",];
 const eyebrow_list = ["none","flat_thick",];
 const eye_list = ["medium",];
 const mouth_list = ["flat",];
@@ -53,7 +53,7 @@ const neckwear_list = ["none","choker",];
 const earrings_list_port = ["studs",];
 const shirt_list = ["none","Shirt",];
 const coat_list = ["none","cardigan",];
-const facial_hair_list = ["none","beard","moustache","goatee","soulpatch","muttonchops","neckbeard",];
+const facial_hair_list = ["none","beard","moustache","big moustache","goatee","soul patch","fluffy goatee",];
 const eyewear_list = ["none","glasses","half-glasses","shiny glasses","robot visor","sunglasses","eye-patch",];
 const hair_middle_list = ["none","sidepart",];
 const hair_front_list = ["none","emo",];
@@ -75,6 +75,7 @@ add_portrait_object("Earrings",earrings_list_port)
 add_portrait_object("Shirt",shirt_list)
 add_portrait_object("Coat",coat_list)
 add_portrait_object("Facial_hair",facial_hair_list)
+add_portrait_object("Nose_front",nose_list)
 add_portrait_object("Eyewear",eyewear_list)
 add_portrait_object("Hair_middle",hair_middle_list)
 add_portrait_object("Hair_front",hair_front_list)

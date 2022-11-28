@@ -7,7 +7,7 @@ import glob
 
 # python generate_images.py
 
-body_list = ["Torso", "Head", "Complexion","Ears", "Nose"]
+body_list = ["Torso", "Head", "Complexion","Ears", "Nose","Nose_front"]
 expression_list = ["Eyes","Eyebrows", "Mouth"]
 outfit_list_portOnly= []
 outfit_list_complex = ["Shirt","Coat"]
@@ -21,13 +21,13 @@ hair_list = ["Hair_back", "Hair_middle","Hair_front","Facial_hair"]
 hair_front_list = ["none", "emo"]
 hair_middle_list = ["none", "sidepart"]
 hair_back_list = ["none", "short"]
-facial_hair_list = ["none", "beard", "moustache", "goatee", "soulpatch", "muttonchops", "neckbeard"];
+facial_hair_list = ["none", "beard", "moustache", "big moustache", "goatee", "soul patch", "fluffy goatee", ]
 
 torso_list = ["medium"]
-head_list =["medium","round"]
+head_list =["square","medium","round"]
 complexion_list =["none","wrinkles"]
 ears_list =["regular"]
-nose_list =["none","medium"]
+nose_list =["none","button", "medium", "broad","round","pointed"]
 
 eyebrow_list = ["none", "flat_thick"]
 eye_list = ["medium"]
@@ -116,6 +116,7 @@ add_portrait_object("Shirt", shirt_list,"shirt_list", "outfit")
 add_portrait_object("Coat", coat_list,"coat_list", "outfit")
 
 add_portrait_object("Facial_hair", facial_hair_list,"facial_hair_list", "body/hair")
+add_portrait_object("Nose_front", nose_list,"nose_list", "body")
 add_portrait_object("Eyewear", ["none"]+eyewear_list,"eyewear_list", "outfit")
 add_portrait_object("Hair_middle", hair_middle_list,"hair_middle_list", "body/hair")
 
@@ -162,6 +163,22 @@ def colour_this(pixel, colour):
         for i in range(3): #screen
            p[i] = int((1-r)*new_colour[i] + r*(255 - (255-new_colour[i])*(255-highlight[i])/255))    
     return (p[0],p[1],p[2],pixel[3])
+
+def colour_this_noshadow(pixel, colour):
+    p = [pixel[0],pixel[1],pixel[2]]
+    alpha = pixel[3]
+    new_colour = hex_to_rgba(colour)
+    if p == [255,0,0]:
+        for i in range(3):
+            p[i] = new_colour[i]      
+    elif p == [0,0,255]: #shading
+        alpha = 0
+    elif p == [0,255,0]: #highlight
+        highlight = hex_to_rgba("#f9f4ca")
+        r = 0.5 #opacity of highlight
+        for i in range(3): #screen
+           p[i] = int((1-r)*new_colour[i] + r*(255 - (255-new_colour[i])*(255-highlight[i])/255))    
+    return (p[0],p[1],p[2],alpha)
 
 def colour_this_skin(pixel, colour):
     p = [pixel[0],pixel[1],pixel[2]]
@@ -260,6 +277,17 @@ def process_image(name, location, colour,colour_list,type):
                 else:    
                     Adata[x, y] = colour_this(Adata[x, y], colour_list[colour])
     img.save(save_string)    
+    if location =="portraits/body/nose":
+        image_string = "../images/bases/"+location+"/"+name+"_base.png"
+        save_string = "../images/"+location+"/"+name+"_noshadow_"+str(colour)+".png"
+        img = Image.open(image_string) 
+        Adata = img.load()       
+        for y in range(img.size[1]):
+            for x in range(img.size[0]):
+                if Adata[x, y][3] !=0:
+                    Adata[x, y] = colour_this_noshadow(Adata[x, y], colour_list[colour])  
+        img.save(save_string)        
+
 
 def trimhats():
     image_string = "../images/bases/sprites/hats/hats_original.png"
@@ -360,7 +388,8 @@ def write_variables():
     content.write("const full_body_list = body_list+hair_list;\n")
     content.write("\n")
     for c in closet:
-        content.write(name_string(c))
+        if c.name!="Nose_front":
+            content.write(name_string(c))
     content.write("\n")
     for c in closet:
         content.write("add_portrait_object(\""+c.name+"\","+ c.listname+")\n")
@@ -419,9 +448,9 @@ def process_outfit_sprites():
 
 write_variables()
 #process_body_sprites()
-process_outfit_sprites()
+#process_outfit_sprites()
 for c in closet:
     if c.name =="":
         process_portrait_part(c)
 #process_all_portraits()
-make_coat()
+#make_coat()

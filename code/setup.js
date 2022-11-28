@@ -104,6 +104,9 @@ function add_portrait_object(name, list){
     }
 
     loc+="/"+name.toLowerCase();
+    if (name == "Nose_front")
+        loc = "body/nose";
+
     portrait_objects.push({name: name,location: loc, item_list: list, colourNum: col, value_list: listOf(0),  colour: 0, image_list: newImageList()});
 }
 
