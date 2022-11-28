@@ -326,6 +326,10 @@ function setMenu(variablelist, number){
             htmlString+="<div class=\"grid-choices\">"
             htmlString+=makeDropbtnString("Shirt", ["Shirt1","Shirt2"], shirt_list, "setShirt");
             htmlString+=makeDropbtnString("Shirt Colour", ["Shirt1","Shirt2"], outfit_colours, "setShirtColour");
+            htmlString+="<div class=\"grid-choices\">"
+            htmlString+="</div>"
+            htmlString+=makeDropbtnString("Coat", ["Coat"], coat_list, "setCoat");
+            htmlString+=makeDropbtnString("Coat Colour", ["Coat"], outfit_colours, "setCoatColour");
             htmlString+="</div>"
             for (let i = 0; i < outfit_list.length; i += 1) {
                 let current_item = outfit_list[i];
@@ -460,6 +464,12 @@ function setShirtColour(variablelist, number){
     drawCanvas();
 }
 
+function setCoatColour(variablelist, number){
+    setPortColour(["Coat"], number);
+    setSpriteColour(["Coat","Sleeves"], number);
+    drawCanvas();
+}
+
 function setFacialHair(variablelist, number){
     setPortVariable(["Facial_hair"], number);
     setSpriteVariable(["Facial_hair"], number);
@@ -495,6 +505,17 @@ function setShirt(variablelist, number){
     else
         setPortVariable(["Shirt"], 0);
     setSpriteVariable(["Shirt1","Shirt2"], number);
+    drawCanvas();
+}
+
+function setCoat(variablelist, number){
+    if (number>0){
+        setPortVariable(["Coat"], 1);
+        setSpriteVariable(["Sleeves"], 1);
+    }
+    else
+        setPortVariable(["Coat"], 0);
+    setSpriteVariable(["Coat"], number);
     drawCanvas();
 }
 

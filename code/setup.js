@@ -75,7 +75,7 @@ const portrait_objects =[];
 
 function add_portrait_object(name, list){
     col = 2;
-    if (outfit_list.includes(name)||name =="Shirt"){
+    if (outfit_list.includes(name)||outfit_list_complex.includes(name)){
         loc = "outfit";
         col = outfitNum;
     } else {

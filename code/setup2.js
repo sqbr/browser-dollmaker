@@ -92,6 +92,11 @@ for (let column =0; column<16;column++)
             sprite_shirt2_list.push({name: shirt_dec_names[current_num], location: "outfit/shirts/decorations/shirt_decs", colour: true, asymmetrical: false,rowNum: 4,topcorner:[8*column,8*row]})
 }
 
+const sprite_coat_list = [none];
+for (let column =0; column<2;column++){
+        if (column <coat_list.length)
+            sprite_coat_list.push({name: coat_list[column], location: "outfit/coat/coat", colour: true, asymmetrical: false,rowNum: 3,topcorner:[16*column,0]})
+}
 const sprite_eyewear_list = [none]
 for (let column =0; column<2;column++){ //add colour
     sprite_eyewear_list.push({name: eyewear_list[column+1], location: "accessories/eyewear/eyewear", colour: true, asymmetrical: false,rowNum: 2,topcorner:[16*column,0]})
@@ -187,6 +192,7 @@ add_sprite_object("Shirt2", sprite_shirt2_list,sprite_shirt2_list.map(nameOf),ou
 add_sprite_object("Eyewear", sprite_eyewear_list,sprite_eyewear_list.map(nameOf),outfit_colours,false,true,1, [16,16],[0,2]);
 add_sprite_object("Neckwear", sprite_neckwear_list,sprite_neckwear_list.map(nameOf), outfit_colours,false,true,1, [16,32],[0,2]);
 add_sprite_object("Earrings", sprite_earrings_list,sprite_earrings_list.map(nameOf), outfit_colours,false,true,1, [16,16],[0,2]);
+add_sprite_object("Coat", sprite_coat_list,sprite_coat_list.map(nameOf),outfit_colours,true,false,1, [8,8],[0,0]);
 add_sprite_object("Facial_hair", sprite_facialhair_list,sprite_facialhair_list.map(nameOf), hair_colours,false,true,1, [16,16],[0,2]);
 add_sprite_object("Hairstyle", sprite_hair_list,sprite_hair_list.map(nameOf), hair_colours,false,true, 1,[16,32],[0,0]);
 add_sprite_object("Arms", sprite_arms_list,height_list, skin_colours,true,false,0, [16,32],[0,0]);
