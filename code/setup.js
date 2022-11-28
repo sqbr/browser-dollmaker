@@ -75,7 +75,7 @@ const portrait_objects =[];
 
 function add_portrait_object(name, list){
     col = 2;
-    if (outfit_list.includes(name)){
+    if (outfit_list.includes(name)||name =="Shirt"){
         loc = "outfit";
         col = outfitNum;
     } else {
@@ -112,12 +112,12 @@ function print_portrait_objects(){
     for (i = 0; i < portrait_objects.length; i += 1){
         b = portrait_objects[i];
         s+="name: "+b.name;
-        //s+=" location: "+b.location;
+        s+=" location: "+b.location;
         s+=" item_list: "+b.item_list.toString();
         //s+=" colourNum: "+b.colourNum;
         s+="  value_list: "+b.value_list.toString();
         //s+=" colour: "+b.colour;
-        s+=" src: "+b.image_list[0].src;
+        //s+=" src: "+b.image_list[0].src;
         s+="<br>";
     }
     return s

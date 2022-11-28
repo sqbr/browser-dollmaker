@@ -312,7 +312,7 @@ function setMenu(variablelist, number){
                 htmlString+="</div>"  
             }else{
                 htmlString+="<div class=\"grid-choices\">"
-                htmlString+=makeDropbtnString("Hair style", ["Hairstyle"], sprite_hair_names, "setSpriteHair");
+                htmlString+=makeDropbtnString("Hair style", ["Hairstyle"], sprite_hair_list.map(nameOf), "setSpriteHair");
                 htmlString+=makeDropbtnString("Height", ["Torso"], ["Short","Tall"], "setHeight");
                 htmlString+=makeDropbtnString("Eyelashes", ["Eyes"], eyelash_list, "setSpriteVariable");
                 htmlString+="</div>"  
@@ -323,6 +323,10 @@ function setMenu(variablelist, number){
             break;    
         case 1: //editing the outfit
             //document.getElementById("test").innerHTML = "Hello";
+            htmlString+="<div class=\"grid-choices\">"
+            htmlString+=makeDropbtnString("Shirt", ["Shirt1","Shirt2"], shirt_list, "setShirt");
+            htmlString+=makeDropbtnString("Shirt Colour", ["Shirt1","Shirt2"], outfit_colours, "setShirtColour");
+            htmlString+="</div>"
             for (let i = 0; i < outfit_list.length; i += 1) {
                 let current_item = outfit_list[i];
                 if (outfit_list_both.includes(current_item)){
@@ -450,6 +454,12 @@ function setHairColour(variablelist, number){
     drawCanvas();
 }
 
+function setShirtColour(variablelist, number){
+    setPortColour(["Shirt"], number);
+    setSpriteColour(["Shirt1","Shirt2"], number);
+    drawCanvas();
+}
+
 function setFacialHair(variablelist, number){
     setPortVariable(["Facial_hair"], number);
     setSpriteVariable(["Facial_hair"], number);
@@ -481,10 +491,10 @@ function setEyewear(variablelist, number){
 
 function setShirt(variablelist, number){
     if (number>0)
-        setPortVariable(variablelist, 1);
+        setPortVariable(["Shirt"], 1);
     else
-        setPortVariable(variablelist, 0);
-    setSpriteVariable(variablelist, number);
+        setPortVariable(["Shirt"], 0);
+    setSpriteVariable(["Shirt1","Shirt2"], number);
     drawCanvas();
 }
 
@@ -576,7 +586,7 @@ function drawCanvas() {
 
     //preview canvas
     canvas_preview.width = canvas_preview.width; //clears
-    //document.getElementById("closet").innerHTML = print_portrait_objects();
+    document.getElementById("closet").innerHTML = print_portrait_objects();
     let hair = findNameMatch(sprite_objects, "Hairstyle");
     for (let i = 0; i < sprite_objects.length; i += 1){ //sprite preview
         let b = sprite_objects[i];
@@ -710,7 +720,7 @@ function setup(){
     setBothVariable(["Eyewear"],2);
     setSpriteColour(["Eyewear"],10);
     setShirt(['Shirt'],1);
-    setBothColour(['Shirt'],3);
+    setShirtColour(['Shirt'],3);
     setGloves([],1);
     setSpriteColour(["Gloves"],4);
 
