@@ -98,6 +98,10 @@ function add_portrait_object(name, list){
         loc = "outfit/coat";
         col = outfitNum;
     }
+    if (name == "Shirt_collar"){
+        loc = "outfit/shirt";
+        col = outfitNum;
+    }
     if (name == "Hat_back"){
         loc = "outfit/hat";
         col = outfitNum;

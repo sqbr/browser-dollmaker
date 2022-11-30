@@ -33,10 +33,11 @@ eyebrow_list = ["none", "flat_thick"]
 eye_list = ["medium"]
 mouth_list = ["flat"]
 
-shirt_list = ["none", "Shirt"]
+shirt_collar_list = ["none","button up"]
+shirt_list = shirt_collar_list +["tshirt"]
 neckwear_list = ["none","choker"]
-coat_back_list = ["none","cardigan"]
-coat_list = ["none","cardigan"]
+coat_back_list = ["none","suit jacket","jacket","hoodie"]
+coat_list = coat_back_list
 eyewear_list = ["glasses", "half-glasses", "shiny glasses", "robot visor", "sunglasses", "eye-patch"];
 earrings_list_port = ["studs"]
 
@@ -110,9 +111,10 @@ add_portrait_object("Eyes", eye_list,"eye_list", "expression")
 add_portrait_object("Mouth", mouth_list,"mouth_list", "expression")
 
 # In front of face
-add_portrait_object("Neckwear", neckwear_list,"neckwear_list", "outfit")
 add_portrait_object("Earrings", earrings_list_port,"earrings_list_port", "outfit")
 add_portrait_object("Shirt", shirt_list,"shirt_list", "outfit")
+add_portrait_object("Neckwear", neckwear_list,"neckwear_list", "outfit")
+add_portrait_object("Shirt_collar", shirt_collar_list,"shirt_collar_list", "outfit/shirt")
 add_portrait_object("Coat", coat_list,"coat_list", "outfit")
 
 add_portrait_object("Facial_hair", facial_hair_list,"facial_hair_list", "body/hair")
@@ -406,7 +408,10 @@ def process_portrait_part(obj):
         colour_list = hair_colours        
     else:
         colour_list = outfit_colours
-    loc = "portraits/"+obj.location + "/"+(obj.name).lower()   
+    if obj.name == "Nose_front":
+        loc = "portraits/"+obj.location + "/nose"   
+    else:       
+        loc = "portraits/"+obj.location + "/"+(obj.name).lower()   
     for c in range(len(colour_list)):
         for item in obj.item_list:
             if item!="none":
@@ -452,5 +457,5 @@ write_variables()
 for c in closet:
     if c.name =="":
         process_portrait_part(c)
-#process_all_portraits()
+process_all_portraits()
 #make_coat()

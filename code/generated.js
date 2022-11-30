@@ -38,7 +38,7 @@ const hairNum = 23; //how many hair colours there are
 const outfitNum = 30; //how many clothing colours there are
 const full_body_list = body_list+hair_list;
 
-const coat_back_list = ["none","cardigan",];
+const coat_back_list = ["none","suit jacket","jacket","hoodie",];
 const hat_back_list = ["none","straw",];
 const hair_back_list = ["none","short",];
 const ears_list = ["regular",];
@@ -49,10 +49,11 @@ const nose_list = ["none","button","medium","broad","round","pointed",];
 const eyebrow_list = ["none","flat_thick",];
 const eye_list = ["medium",];
 const mouth_list = ["flat",];
-const neckwear_list = ["none","choker",];
 const earrings_list_port = ["studs",];
-const shirt_list = ["none","Shirt",];
-const coat_list = ["none","cardigan",];
+const shirt_list = ["none","button up","tshirt",];
+const neckwear_list = ["none","choker",];
+const shirt_collar_list = ["none","button up",];
+const coat_list = ["none","suit jacket","jacket","hoodie",];
 const facial_hair_list = ["none","beard","moustache","big moustache","goatee","soul patch","fluffy goatee",];
 const eyewear_list = ["none","glasses","half-glasses","shiny glasses","robot visor","sunglasses","eye-patch",];
 const hair_middle_list = ["none","sidepart",];
@@ -70,9 +71,10 @@ add_portrait_object("Nose",nose_list)
 add_portrait_object("Eyebrows",eyebrow_list)
 add_portrait_object("Eyes",eye_list)
 add_portrait_object("Mouth",mouth_list)
-add_portrait_object("Neckwear",neckwear_list)
 add_portrait_object("Earrings",earrings_list_port)
 add_portrait_object("Shirt",shirt_list)
+add_portrait_object("Neckwear",neckwear_list)
+add_portrait_object("Shirt_collar",shirt_collar_list)
 add_portrait_object("Coat",coat_list)
 add_portrait_object("Facial_hair",facial_hair_list)
 add_portrait_object("Nose_front",nose_list)

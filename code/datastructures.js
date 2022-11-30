@@ -508,7 +508,7 @@ function setEyewear(variablelist, number){
 
 function setShirt(variablelist, number){
     if (number>0)
-        setPortVariable(["Shirt"], 1);
+        setPortVariable(["Shirt","Shirt_collar"], number);
         if (false){ //some test for whether shirt has sleeves
             hasShirtSleeves= true;
             setSpriteVariable(["Sleeves"], 1);
