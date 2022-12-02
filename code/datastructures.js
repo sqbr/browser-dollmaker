@@ -339,9 +339,15 @@ function setMenu(variablelist, number){
         case 1: //editing the outfit
             document.getElementById("test").innerHTML = pants_menu_list.toString();
             for (let i = 0; i < menu_object_names.length; i += 1) {
+                htmlString+="<div class=\"grid-choices\">"
                 let current_item = menu_object_names[i];
                 let obj = findNameMatch(menu_objects, current_item);
-                htmlString+=makeDropbtnString(current_item, [current_item], obj.name_list, "setClothing");
+                if (["Shoes","Gloves"].includes(current_item))
+                    htmlString+=makeDropbtnString(current_item, [current_item], obj.name_list, "set"+current_item);
+                else
+                    htmlString+=makeDropbtnString(current_item, [current_item], obj.name_list, "setClothing");
+                htmlString+=makeDropbtnString(current_item+" Colour", [current_item], outfit_colours, "setClothingColour");
+                htmlString+="</div>"
             }    
             /*htmlString+="<div class=\"grid-choices\">"
             htmlString+=makeDropbtnString("Shirt", ["Shirt1","Shirt2"], shirt_list_port, "setShirt");
@@ -576,9 +582,6 @@ function setup(){
     setSpriteHair([],5);
     setPortVariable(["Hair_back","Hair_front","Hair_middle"],1)
     setPortVariable(["Nose"],2)
-
-    setCoat(['Coat'],1);
-    setCoatColour(['Coat'],3);
 
     /*setSpriteVariable(["Pants"],1);
     setSpriteColour(["Pants"],10);

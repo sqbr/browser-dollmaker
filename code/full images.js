@@ -20,19 +20,44 @@ function add_menu_object(name, list_list, colour_list, port_item_list, sprite_it
     menu_objects.push({name: name,list_list: list_list, name_list: list_list.map(firstElement),colour_list: colour_list, port_item_list: port_item_list, sprite_item_list: sprite_item_list, item: 0,  colour: 0, colour2: 0 });
 }
 
-none_menu = ["none",[],[]]
+const none_menu = ["none",[],[]]
 
-shirt_menu_list = [ none_menu,["T-Shirt",[2,0],[1,0,0]], ["Button up",[1,1],[1,1,0]]]
+const hat_menu_list = [ none_menu];
 
-pants_menu_list = [none_menu];
+const neckwear_menu_list = [ none_menu];
+
+const eyewear_menu_list = [ none_menu];
+
+const earrings_menu_list = [ none_menu];
+
+const coat_menu_list = [ none_menu, ["Short Coat",[],[]]];
+
+const shirt_menu_list = [ none_menu,["T-Shirt",[2,0],[1,0,0]], ["Short-sleeve Buttoned",[1,1],[1,1,0]], ["Long-sleeve Buttoned",[1,1],[1,1,1]]]
+
+const pants_menu_list = [none_menu];
 for (let i = 0; i < pants_names.length; i += 1) {
     pants_menu_list.push([pants_names[i],[],[i+1]])
 }
 
-add_menu_object("Shirt", shirt_menu_list, outfit_colours,["Shirt","Shirt_collar"],["Shirt1","Shirt2","Sleeves"]);
+const shoes_menu_list = [none_menu];
+for (let i = 0; i < shoes_names.length; i += 1) {
+    shoes_menu_list.push([shoes_names[i],[],[i+1]])
+}
+
+const gloves_menu_list = [none_menu];
+for (let i = 0; i < gloves_names.length; i += 1) {
+    gloves_menu_list.push([gloves_names[i],[],[i+1]])
+}
+
+add_menu_object("Hat", hat_menu_list, outfit_colours,["Hat","Hat_back"],["Hat"]);
+add_menu_object("Neckwear", neckwear_menu_list, outfit_colours,["Neckwear"],["Neckwear"]);
+add_menu_object("Eyewear", eyewear_menu_list, outfit_colours,["Eyewear"],["Eyewear"]);
+add_menu_object("Earrings", earrings_menu_list, outfit_colours,["Earrings"],["Earrings"]);
+add_menu_object("Shirt", shirt_menu_list, outfit_colours,["Shirt","Shirt_collar"],["Shirt1","Shirt2","Shirt_sleeves"]);
+add_menu_object("Coat", coat_menu_list, outfit_colours,["Coat","Coat_back"],["Coat","Coat_sleeves"]);
 add_menu_object("Pants", pants_menu_list, outfit_colours,[],["Pants"]);
-
-
+add_menu_object("Shoes", shoes_menu_list, outfit_colours,[],["Shoes"]);
+add_menu_object("Gloves", gloves_menu_list, outfit_colours,[],["Gloves"]);
 
 const menu_object_names = menu_objects.map(nameOf);
 
@@ -87,6 +112,15 @@ function setSpriteColour(variablelist, number){
         let b = findNameMatch(sprite_objects, variablelist[i]); //the eleemnt of portrait_objects with the right vriablename
         b.colour=number;
     }
+}
+
+function setClothingColour(variablelist, number){
+    for (let i = 0; i < variablelist.length; i += 1) {
+        let menu_obj = findNameMatch(menu_objects, variablelist[i]);
+        setPortColour(menu_obj.port_item_list,number);
+        setSpriteColour(menu_obj.sprite_item_list,number);
+    } 
+    drawCanvas();
 }
 
 function setSkinColour(variablelist, number){
