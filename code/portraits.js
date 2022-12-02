@@ -88,12 +88,12 @@ const facial_hair_list_menu = ["none","beard","moustache","big moustache","goate
 const hat_list_sprite = ["cowboy hat","Bowler","Top hat","sombrero","straw hat","official cap","blue bonnet","Chapeau","Skeleton mask","Goblin Mask","Chicken Mask","Earmuffs","Delicate Bow","Tropiclip","Butterfly Bow","Hunter's Cap","Trucker Hat","Sailor's Cap","Good Ol' Cap","Fedora","Cool Cap","Lucky Bow","Polka Bow","Gnome's Cap","Eye Patch","Santa Hat","Tiara","Hard Hat","Sou'wester","Daisy","Watermelon Band","Mouse Ears","Cat Ears","Cowgal Hat","Cowpoke Hat","Archer's Cap","Panda Hat","Blue Cowboy Hat","Red Cowboy Hat","Cone Hat","Living Hat","Emily's Magic Hat","Mushroom Cap","Dinosaur Hat","Totem Mask","Logo Cap","Dwarf Helm","Fashion Hat","Pumpkin Mask","Hair Bone",];
 const hat_list_menu = ["none","straw",];
 const shirt_list_menu = ["none","button up",];
-const neckwear_list_sprite = ["bandana","necklace","bow-tie","tie","choker",];
+const neckwear_list_sprite = ["none","bandana","necklace","bow-tie","tie","choker",];
 const neckwear_list_menu = ["none","tie",];
 const coat_list_sprite = ["none","suit jacket","jacket","hoodie",];
 const coat_list_menu = ["none","suit jacket","jacket","hoodie",];
-const eyewear_list_sprite = ["glasses","half-glasses","shiny glasses","robot visor","sunglasses","eye-patch",];
-const eyewearlist_menu = ["glasses","half-glasses","shiny glasses","robot visor","sunglasses","eye-patch",];
-const earrings_list_sprite = ["gold drop","blue drop","studs","single stud",];
+const eyewear_list_sprite = ["none","glasses","half-glasses","shiny glasses","robot visor","sunglasses","eye-patch",];
+const eyewearlist_menu = ["none","glasses","half-glasses","shiny glasses","robot visor","sunglasses","eye-patch",];
+const earrings_list_sprite = ["none","gold drop","blue drop","studs","single stud",];
 const earrings_list_menu = ["none","studs",];
 

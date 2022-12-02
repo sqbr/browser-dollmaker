@@ -583,16 +583,22 @@ function setup(){
     setPortVariable(["Hair_back","Hair_front","Hair_middle"],1)
     setPortVariable(["Nose"],2)
 
-    /*setSpriteVariable(["Pants"],1);
-    setSpriteColour(["Pants"],10);
-    setShoes([],1);
-    setSpriteColour(["Shoes"],4);
+    setShoes([],2);
+    setClothingColour(["Shoes"],5);
+    setClothing(["Gloves"],1);
+    setClothingColour(["Gloves"],4)
+    setClothing(["Pants"],2);
+    setClothingColour(["Pants"],12)
+
+    /*
     setBothVariable(["Eyewear"],2);
     setSpriteColour(["Eyewear"],10);
     setShirt(['Shirt'],1);
     setShirtColour(['Shirt'],3);
-    setGloves([],1);
-    setSpriteColour(["Gloves"],4);*/
+    coat
+    neckwear
+    hat
+;*/
 
     drawCanvas();
 }

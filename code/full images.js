@@ -24,19 +24,23 @@ const none_menu = ["none",[],[]]
 
 const hat_menu_list = [ none_menu];
 
-const neckwear_menu_list = [ none_menu];
+const neckwear_menu_list = [ none_menu, ["Tie",[1],[3]]];
 
 const eyewear_menu_list = [ none_menu];
+for (let i = 1; i < eyewearlist_menu.length; i += 1) {
+    eyewear_menu_list.push([eyewearlist_menu[i],[i],[i]])
+}
 
 const earrings_menu_list = [ none_menu];
 
-const coat_menu_list = [ none_menu, ["Short Coat",[],[]]];
+const coat_menu_list = [ none_menu, ["Short Coat",[1,1],[1,1]]];
 
 const shirt_menu_list = [ none_menu,["T-Shirt",[2,0],[1,0,0]], ["Short-sleeve Buttoned",[1,1],[1,1,0]], ["Long-sleeve Buttoned",[1,1],[1,1,1]]]
 
 const pants_menu_list = [none_menu];
-for (let i = 0; i < pants_names.length; i += 1) {
-    pants_menu_list.push([pants_names[i],[],[i+1]])
+const pants_names_all = ["briefs","trousers"].concat(pants_names)
+for (let i = 0; i < pants_names_all.length; i += 1) {
+    pants_menu_list.push([pants_names_all[i],[],[i+1]])
 }
 
 const shoes_menu_list = [none_menu];
@@ -48,6 +52,8 @@ const gloves_menu_list = [none_menu];
 for (let i = 0; i < gloves_names.length; i += 1) {
     gloves_menu_list.push([gloves_names[i],[],[i+1]])
 }
+
+
 
 add_menu_object("Hat", hat_menu_list, outfit_colours,["Hat","Hat_back"],["Hat"]);
 add_menu_object("Neckwear", neckwear_menu_list, outfit_colours,["Neckwear"],["Neckwear"]);
