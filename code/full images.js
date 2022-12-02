@@ -22,10 +22,19 @@ function add_menu_object(name, list_list, colour_list, port_item_list, sprite_it
 
 none_menu = ["none",[],[]]
 
-shirt_menu_list = [ none_menu,["Button up",[1,1],[1,1,0]]]
+shirt_menu_list = [ none_menu,["T-Shirt",[2,0],[1,0,0]], ["Button up",[1,1],[1,1,0]]]
+
+pants_menu_list = [none_menu];
+for (let i = 0; i < pants_names.length; i += 1) {
+    pants_menu_list.push([pants_names[i],[],[i+1]])
+}
 
 add_menu_object("Shirt", shirt_menu_list, outfit_colours,["Shirt","Shirt_collar"],["Shirt1","Shirt2","Sleeves"]);
+add_menu_object("Pants", pants_menu_list, outfit_colours,[],["Pants"]);
 
+
+
+const menu_object_names = menu_objects.map(nameOf);
 
 function setPortVariable(variablelist, number){
     for (let i = 0; i < variablelist.length; i += 1) {
@@ -137,43 +146,26 @@ function setEyewear(variablelist, number){
     drawCanvas();
 }
 
-function setShirt(variablelist, number){
-    let menu_obj = findNameMatch(menu_objects, "Shirt");
-    let current = menu_obj.list_list[number]
-    document.getElementById("test").innerHTML = "found";
-    for (let i = 0; i < menu_obj.port_item_list.length; i += 1) {
-        let name = menu_obj.port_item_list[i]; //eg "Shirt"
-        if (current  == none_menu)
-            setPortVariable([name],0);
-        else
-            setPortVariable([name],current[1][i]);
-    }
-    for (let i = 0; i < menu_obj.sprite_item_list.length; i += 1) {
-        let name = menu_obj.sprite_item_list[i];
-        if (current  == none_menu)
-            setSpriteVariable([name],0);
-        else
-            setSpriteVariable([name],current[2][i]);
-    }
-/*
-    if (number>0)
-        setPortVariable(["Shirt","Shirt_collar"], number);
-        if (false){ //some test for whether shirt has sleeves
-            hasShirtSleeves= true;
-            setSpriteVariable(["Sleeves"], 1);
-            if (!hasCoatSleeves){
-                let shirtcolour = findNameMatch(sprite_objects,"Shirt").colour
-                setSpriteColour(["Sleeves"], shirtcolour);
-            }
+function setClothing(variablelist, number){
+    for (let i = 0; i < variablelist.length; i += 1) {
+        let menu_obj = findNameMatch(menu_objects, variablelist[i]);
+        let current = menu_obj.list_list[number]
+        //document.getElementById("test").innerHTML = "found";
+        for (let j = 0; j < menu_obj.port_item_list.length; j += 1) {
+            let name = menu_obj.port_item_list[j]; //eg "Shirt"
+            if (current  == none_menu)
+                setPortVariable([name],0);
+            else
+                setPortVariable([name],current[1][j]);
         }
-        
-    else
-        setPortVariable(["Shirt"], 0);
-        hasShirtSleeves= false;
-        if (!hasCoatSleeves)
-            setSpriteVariable(["Sleeves"], 0);
-    setSpriteVariable(["Shirt1","Shirt2"], number);
-    */
+        for (let j = 0; j < menu_obj.sprite_item_list.length; j += 1) {
+            let name = menu_obj.sprite_item_list[j];
+            if (current  == none_menu)
+                setSpriteVariable([name],0);
+            else
+                setSpriteVariable([name],current[2][j]);
+        }
+    }    
     drawCanvas();
 }
 
@@ -233,7 +225,7 @@ function setHeight(variablelist, number){
     setSpriteVariable(["Arms"], number);
     setSpriteVariable(["Shoes"], Math.max(0,2*currentShoes-1+height)); 
     setSpriteVariable(["Gloves"], Math.max(0,2*currentGloves-1+height)); 
-    document.getElementById("test").innerHTML = Math.max(0,2*currentGloves-1+height)+" "+Math.max(0,2*currentShoes-1+height);
+    //document.getElementById("test").innerHTML = Math.max(0,2*currentGloves-1+height)+" "+Math.max(0,2*currentShoes-1+height);
     if (isBald){
         setSpriteVariable(["Torso"], 2+number);
     }else { 
@@ -246,6 +238,19 @@ function print_menu_objects(){
     s = "";
     for (i = 0; i < menu_objects.length; i += 1){
         b = menu_objects[i];
+        s+="name: "+b.name;
+        s+=" name_list: "+b.name_list.toString();
+        //s+="  colour_list: "+b.colour_list.toString();
+        s+=" item: "+b.item;
+        //s+=" colour: "+b.colour;
+        s+="<br>";
+    }
+    return s
+}
+
+function print_menu_list(listname){
+    s = "";
+    for (i = 0; i < listname.length; i += 1){
         s+="name: "+b.name;
         s+=" name_list: "+b.name_list.toString();
         //s+="  colour_list: "+b.colour_list.toString();

@@ -337,9 +337,12 @@ function setMenu(variablelist, number){
             htmlString+="</div>"
             break;    
         case 1: //editing the outfit
-            document.getElementById("test").innerHTML = print_menu_objects();
-            htmlString+=makeDropbtnString("Shirt", ["Shirt1","Shirt2"], shirt_list_menu, "setShirt");
-
+            document.getElementById("test").innerHTML = pants_menu_list.toString();
+            for (let i = 0; i < menu_object_names.length; i += 1) {
+                let current_item = menu_object_names[i];
+                let obj = findNameMatch(menu_objects, current_item);
+                htmlString+=makeDropbtnString(current_item, [current_item], obj.name_list, "setClothing");
+            }    
             /*htmlString+="<div class=\"grid-choices\">"
             htmlString+=makeDropbtnString("Shirt", ["Shirt1","Shirt2"], shirt_list_port, "setShirt");
             htmlString+=makeDropbtnString("Shirt Colour", ["Shirt1","Shirt2"], outfit_colours, "setShirtColour");
