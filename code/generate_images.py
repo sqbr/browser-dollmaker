@@ -9,41 +9,65 @@ import glob
 
 body_list = ["Torso", "Head", "Complexion","Ears", "Nose","Nose_front"]
 expression_list = ["Eyes","Eyebrows", "Mouth"]
-outfit_list_portOnly= []
 outfit_list_complex = ["Shirt","Coat"]
+outfit_list_portOnly = []
 outfit_list_spriteOnly = ["Pants","Shoes","Gloves"]
 outfit_list_both = ["Neckwear","Eyewear","Earrings", "Hat"]
-outfit_list = outfit_list_both+ outfit_list_portOnly+outfit_list_spriteOnly
+outfit_list = outfit_list_both+ outfit_list_portOnly+ outfit_list_spriteOnly
 
 skin_list = body_list + ["Eyebrows", "Mouth"]
+
+#Only in portraits
 hair_list = ["Hair_back", "Hair_middle","Hair_front","Facial_hair"]
 
 hair_front_list = ["none", "emo"]
 hair_middle_list = ["none", "sidepart"]
 hair_back_list = ["none", "short"]
-facial_hair_list = ["none", "beard", "moustache", "big moustache", "goatee", "soul patch", "fluffy goatee", ]
 
 torso_list = ["medium"]
 head_list =["square","medium","round"]
 complexion_list =["none","wrinkles"]
 ears_list =["regular"]
 nose_list =["none","button", "medium", "broad","round","pointed"]
-
 eyebrow_list = ["none", "flat_thick"]
 eye_list = ["medium"]
 mouth_list = ["flat"]
 
+#back and fronts
 shirt_collar_list = ["none","button up"]
-shirt_list = shirt_collar_list +["tshirt"]
-neckwear_list = ["none","choker"]
 coat_back_list = ["none","suit jacket","jacket","hoodie"]
-coat_list = coat_back_list
-eyewear_list = ["glasses", "half-glasses", "shiny glasses", "robot visor", "sunglasses", "eye-patch"];
-earrings_list_port = ["studs"]
-
-hat_list = ["none","straw"]
 hat_back_list = ["none","straw"]
 
+#The same for sprites and portraits
+facial_hair_list_port = ["none", "beard", "moustache", "big moustache", "goatee", "soul patch", "fluffy goatee", ]
+facial_hair_list_sprite = facial_hair_list_port
+facial_hair_list_menu = facial_hair_list_port  
+
+#Different for portraits and sprites
+hat_list_port = ["none","straw"]
+hat_list_sprite = ["cowboy hat", "Bowler", "Top hat", "sombrero", "straw hat", "official cap", "blue bonnet", "Chapeau", "Skeleton mask", "Goblin Mask", "Chicken Mask", "Earmuffs", "Delicate Bow", "Tropiclip", "Butterfly Bow", "Hunter's Cap", "Trucker Hat", "Sailor's Cap", "Good Ol' Cap", "Fedora", "Cool Cap", "Lucky Bow", "Polka Bow", "Gnome's Cap", "Eye Patch", "Santa Hat", "Tiara", "Hard Hat", "Sou'wester", "Daisy", "Watermelon Band", "Mouse Ears", "Cat Ears", "Cowgal Hat", "Cowpoke Hat", "Archer's Cap", "Panda Hat", "Blue Cowboy Hat", "Red Cowboy Hat", "Cone Hat", "Living Hat", "Emily's Magic Hat", "Mushroom Cap", "Dinosaur Hat", "Totem Mask", "Logo Cap", "Dwarf Helm", "Fashion Hat", "Pumpkin Mask", "Hair Bone",]
+hat_list_menu = hat_list_port 
+
+shirt_list_port = shirt_collar_list +["tshirt"]
+shirt_list_menu =  ["none","button up"]
+
+neckwear_list_port = ["none","tie"]
+neckwear_list_sprite = ["bandana", "necklace", "bow-tie", "tie", "choker"]
+neckwear_list_menu = neckwear_list_port
+
+coat_list_port = coat_back_list
+coat_list_sprite = coat_back_list
+coat_list_menu = coat_back_list
+
+eyewear_list_port = ["glasses", "half-glasses", "shiny glasses", "robot visor", "sunglasses", "eye-patch"];
+eyewear_list_sprite = eyewear_list_port
+eyewear_list_menu = eyewear_list_port
+
+earrings_list_port = ["none", "studs"]
+earrings_list_sprite = ["gold drop","blue drop", "studs", "single stud"]
+earrings_list_menu = earrings_list_port
+
+#colours
 skin_regular =["#FFE7D6","#FFD3A6","#FFD3A6","#FFDFA5","#F1A065","#DA773F","#DA874A","#B05934","#B96A2E","#853F27","#783F1A"]
 skin_weird = ["#C3FFFA","#41AD60","#000000","#9BB681"]
 skin_colours =skin_regular + skin_weird
@@ -112,18 +136,18 @@ add_portrait_object("Mouth", mouth_list,"mouth_list", "expression")
 
 # In front of face
 add_portrait_object("Earrings", earrings_list_port,"earrings_list_port", "outfit")
-add_portrait_object("Shirt", shirt_list,"shirt_list", "outfit")
-add_portrait_object("Neckwear", neckwear_list,"neckwear_list", "outfit")
+add_portrait_object("Shirt", shirt_list_port,"shirt_list_port", "outfit")
+add_portrait_object("Neckwear", neckwear_list_port,"neckwear_list_port", "outfit")
 add_portrait_object("Shirt_collar", shirt_collar_list,"shirt_collar_list", "outfit/shirt")
-add_portrait_object("Coat", coat_list,"coat_list", "outfit")
+add_portrait_object("Coat", coat_list_port,"coat_list_port", "outfit")
 
-add_portrait_object("Facial_hair", facial_hair_list,"facial_hair_list", "body/hair")
+add_portrait_object("Facial_hair", facial_hair_list_port,"facial_hair_list_port", "body/hair")
 add_portrait_object("Nose_front", nose_list,"nose_list", "body")
-add_portrait_object("Eyewear", ["none"]+eyewear_list,"eyewear_list", "outfit")
+add_portrait_object("Eyewear", ["none"]+eyewear_list_port,"eyewear_list_port", "outfit")
 add_portrait_object("Hair_middle", hair_middle_list,"hair_middle_list", "body/hair")
 
 add_portrait_object("Hair_front", hair_front_list,"hair_front_list", "body/hair")
-add_portrait_object("Hat", hat_list,"hat_list", "outfit")
+add_portrait_object("Hat", hat_list_port,"hat_list_port", "outfit")
 
 sprite_body_list = ["tall","short","tall_bald", "short_bald"]
 
@@ -349,7 +373,7 @@ def colour_list_add(list_name, sublists):
 def write_variables():
     # Write all the shared variables into generated.js
 
-    content = open("generated.js","w")
+    content = open("portraits.js","w")
     content.write("//generated by generate_images.py\n\n")
     content.write(list_string("outfit_list_both", outfit_list_both))
     content.write(list_string("outfit_list_complex", outfit_list_complex))
@@ -395,6 +419,20 @@ def write_variables():
     content.write("\n")
     for c in closet:
         content.write("add_portrait_object(\""+c.name+"\","+ c.listname+")\n")
+    content.write("\n")    
+    content.write(list_string("facial_hair_list_sprite", facial_hair_list_sprite))
+    content.write(list_string("facial_hair_list_menu", facial_hair_list_menu))
+    content.write(list_string("hat_list_sprite", hat_list_sprite))
+    content.write(list_string("hat_list_menu", hat_list_menu))
+    content.write(list_string("shirt_list_menu", shirt_list_menu))
+    content.write(list_string("neckwear_list_sprite", neckwear_list_sprite))
+    content.write(list_string("neckwear_list_menu", neckwear_list_menu))
+    content.write(list_string("coat_list_sprite", coat_list_sprite))
+    content.write(list_string("coat_list_menu", coat_list_menu))
+    content.write(list_string("eyewear_list_sprite", eyewear_list_sprite))
+    content.write(list_string("eyewearlist_menu", eyewear_list_menu))
+    content.write(list_string("earrings_list_sprite", earrings_list_sprite))
+    content.write(list_string("earrings_list_menu", earrings_list_menu))
     content.write("\n")
     
     content.close()
@@ -457,5 +495,5 @@ write_variables()
 for c in closet:
     if c.name =="":
         process_portrait_part(c)
-process_all_portraits()
+#process_all_portraits()
 #make_coat()

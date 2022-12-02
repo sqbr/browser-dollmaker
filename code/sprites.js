@@ -23,20 +23,16 @@ const pants_names = ["trousers","shorts", "long dress", "short skirt", "pleated 
 const coloured_shirts_names = ["Classic overalls", "Shirt", "Mint Blouse", "Dark Shirt", "Skull Shirt", 
 "Light Blue Shirt","Tan Striped Shirt","Green Overalls",'"Good Grief" Shirt',"Aquamarine Shirt","Suit Top","Green Belted Shir","Lime Green Striped Shirt","Red Striped Shirt","Skeleton Shirt","Orange Shirt","Night Sky Shirt","Mayoral Suspenders","Brown Jacket","Sailor Shirt","Green Vest","Yellow and Green Shirt"]
 
-const coloured_shirts_numbers = [2,4,5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, ];
-
 const uncoloured_shirts_names = ["Striped Shirt","Tank Top (low neck)","Tank Top","Crop Tank Top (Low neck)", "Crop Tank Top","Bikini Top","80's Shirt (curvy)","Crop Top Shirt","???","Strapped Top","Button Down Shirt","Tube Top",]
 
 const shirt_dec_names = ["fish", "gi", "high waist", "letterman", "skeleton", "overalls", "star", "sports shoulders", "heart", "overalls2?", "collar", "necklace", "necklace2", "dot?", "dot?", "collar", "sailor", "sailor2", "bandana", "Dark Highlight Shirt", "dots", "silky", "vest sleeves", "oily?", "vest"]
-const neckwear_names = ["bandana", "necklace", "bow-tie", "tie", "choker"]
 
-const earrings_list_sprites = ["gold drop","blue drop", "studs", "single stud"]
-
-const hat_names = ["cowboy hat", "Bowler", "Top hat", "sombrero", "straw hat", "official cap", "blue bonnet", "Chapeau", "Skeleton mask", "Goblin Mask", "Chicken Mask", "Earmuffs", "Delicate Bow", "Tropiclip", "Butterfly Bow", "Hunter's Cap", "Trucker Hat", "Sailor's Cap", "Good Ol' Cap", "Fedora", "Cool Cap", "Lucky Bow", "Polka Bow", "Gnome's Cap", "Eye Patch", "Santa Hat", "Tiara", "Hard Hat", "Sou'wester", "Daisy", "Watermelon Band", "Mouse Ears", "Cat Ears", "Cowgal Hat", "Cowpoke Hat", "Archer's Cap", "Panda Hat", "Blue Cowboy Hat", "Red Cowboy Hat", "Cone Hat", "Living Hat", "Emily's Magic Hat", "Mushroom Cap", "Dinosaur Hat", "Totem Mask", "Logo Cap", "Dwarf Helm", "Fashion Hat", "Pumpkin Mask", "Hair Bone",]
 /*
 Name: String.
 location: String. Where the file is, stopping before the _[colour].png
 colour: Boolean. whether this image has colour variants
+asymmetrical: Boolean. If true, the left facing version is left blank.
+rowNum: How many rows this sprite has
 topcorner: coordinates of the top corner of the looking down standing still sprite
 */
 
@@ -96,34 +92,34 @@ for (let column =0; column<16;column++)
 
 const sprite_coat_list = [none];
 for (let column =0; column<1;column++){
-        if (column <coat_list.length)
-            sprite_coat_list.push({name: coat_list[column+1], location: "outfit/coat/coat", colour: true, asymmetrical: false,rowNum: 3,topcorner:[16*column,0]})
+        if (column <coat_list_sprite.length)
+            sprite_coat_list.push({name: coat_list_sprite[column+1], location: "outfit/coat/coat", colour: true, asymmetrical: false,rowNum: 3,topcorner:[16*column,0]})
 }
 const sprite_eyewear_list = [none]
 for (let column =0; column<2;column++){ //add colour
-    sprite_eyewear_list.push({name: eyewear_list[column+1], location: "accessories/eyewear/eyewear", colour: true, asymmetrical: false,rowNum: 2,topcorner:[16*column,0]})
+    sprite_eyewear_list.push({name: eyewear_list_sprite[column+1], location: "accessories/eyewear/eyewear", colour: true, asymmetrical: false,rowNum: 2,topcorner:[16*column,0]})
 }
-for (let column =2; column<eyewear_list.length-1;column++){
+for (let column =2; column<eyewear_list_sprite.length-1;column++){
     let asymm =  false;
-    if (eyewear_list[column] == "eye-patch")
+    if (eyewear_list_sprite[column] == "eye-patch")
         asymm = true;    
-    sprite_eyewear_list.push({name: eyewear_list[column+1], location: "accessories/eyewear/eyewear", colour: false, asymmetrical: asymm,rowNum: 2,topcorner:[16*column,0]})
+    sprite_eyewear_list.push({name: eyewear_list_sprite[column+1], location: "accessories/eyewear/eyewear", colour: false, asymmetrical: asymm,rowNum: 2,topcorner:[16*column,0]})
 }
 
 const sprite_neckwear_list = [none]
-for (let column =0; column<neckwear_names.length;column++){
-    sprite_neckwear_list.push({name: neckwear_names[column], location: "accessories/neckwear/neckwear", colour: true, asymmetrical: false,rowNum: 2,topcorner:[16*column,0]})
+for (let column =0; column<neckwear_list_sprite.length;column++){
+    sprite_neckwear_list.push({name: neckwear_list_sprite[column], location: "accessories/neckwear/neckwear", colour: true, asymmetrical: false,rowNum: 2,topcorner:[16*column,0]})
 }
 
 const sprite_earrings_list = [none];
 for (let column =0; column<2;column++)
-    sprite_earrings_list.push({name: earrings_list_sprites[column], location: "accessories/earrings/earrings", colour: false, asymmetrical: false,rowNum: 2,topcorner:[16*column,0]})
-sprite_earrings_list.push({name: earrings_list_sprites[2], location: "accessories/earrings/earrings", colour: true, asymmetrical: false,rowNum: 2,topcorner:[16*2,0]})
-sprite_earrings_list.push({name: earrings_list_sprites[3], location: "accessories/earrings/earrings", colour: true, asymmetrical: true,rowNum: 2,topcorner:[16*3,0]})
+    sprite_earrings_list.push({name: earrings_list_sprite[column], location: "accessories/earrings/earrings", colour: false, asymmetrical: false,rowNum: 2,topcorner:[16*column,0]})
+sprite_earrings_list.push({name: earrings_list_sprite[2], location: "accessories/earrings/earrings", colour: true, asymmetrical: false,rowNum: 2,topcorner:[16*2,0]})
+sprite_earrings_list.push({name: earrings_list_sprite[3], location: "accessories/earrings/earrings", colour: true, asymmetrical: true,rowNum: 2,topcorner:[16*3,0]})
 
 const sprite_facialhair_list = [none]
 for (let column =0; column<6;column++){
-    sprite_facialhair_list.push({name: facial_hair_list[column+1], location: "hair/facialhair/facialhair", colour: true, asymmetrical: false,rowNum: 2,topcorner:[16*column,0]})
+    sprite_facialhair_list.push({name: facial_hair_list_sprite[column+1], location: "hair/facialhair/facialhair", colour: true, asymmetrical: false,rowNum: 2,topcorner:[16*column,0]})
 }
 
 const sprite_hair_list = [none]
@@ -142,11 +138,11 @@ const sprite_hat_list = [none]
 for (let row =0; row<32;row++)
     for (let column =0; column<12;column++){
         let current_num = row*12+column;
-        if (current_num< hat_names.length){
+        if (current_num< hat_list_sprite.length){
             let colour = false;
             if  ([].includes(column))//can be coloured
                 colour=true;
-            sprite_hat_list.push({name: hat_names[current_num], location: "outfit/hats/hats", colour: colour, asymmetrical: false,rowNum: 4,topcorner:[16*column,128*row]})
+            sprite_hat_list.push({name: hat_list_sprite[current_num], location: "outfit/hats/hats", colour: colour, asymmetrical: false,rowNum: 4,topcorner:[16*column,128*row]})
 
         }
 }
@@ -172,17 +168,20 @@ for (let i =0; i<height_list.length;i++){
 const sprite_objects =[];
 /*
 Name: String.
-item_list: lost oif objects as above
-colour_list: list of strings
-item: number
-colour: number
+item_list: list of objects as above
+colour_list: list of strings describing whsat colour it can be
+item: index of item_list describing current item
+colour: index of colour_list describing current item's colour
+colour2: index of colour_list describing current item's secondary colour
 image: an image
 iswalk: does it have separate sprites for each part of walk cycle
 bobs: does it bob up and down (not relevant is isWalk)
+heightOffset: how many pixels to shift downwards for shorter bodies
+dimensions: how big is the sprite
 topcorner: coordinates of the top corner of the looking down standing still sprite
 */
 function add_sprite_object(name, list,name_list, colour_list,isWalk, bobs, heightOffset,dimensions, offset){
-    sprite_objects.push({name: name,item_list: list, name_list: name_list, colour_list: colour_list, item: 0,  colour: 0, image: new Image(), isWalk: isWalk, bobs: bobs, asymmetrical: false, heightOffset: heightOffset, rowNum: 3, topcorner:[0,0],dimensions: dimensions, offset: offset});
+    sprite_objects.push({name: name,item_list: list, name_list: name_list, colour_list: colour_list, item: 0,  colour: 0, colour2: 0, image: new Image(), isWalk: isWalk, bobs: bobs, asymmetrical: false, heightOffset: heightOffset, rowNum: 3, topcorner:[0,0],dimensions: dimensions, offset: offset});
 }
 
 add_sprite_object("Torso", sprite_torso_list,height_list, skin_colours,true, false, 0, [16,32],[0,0]);

@@ -1,8 +1,8 @@
 function saturation(p){
     //Returns the saturation as a number between 0 and 1, inclusive
     //p is an array of numbers between 0 and 255. 
-    let M = Math.max(...p);
-    let m = Math.min(...p);
+    let M = Math.max(p[0],p[1],p[2]);
+    let m = Math.min(p[0],p[1],p[2]);
     let d = (M - m)/255;
     let L = (M + m)/510; 
     if (L ==0){
@@ -15,7 +15,19 @@ function saturation(p){
         }
         return d/X; 
     }
-}      
+}   
+
+const rgbToLightness = (r,g,b) => 
+    1/2 * (Math.max(r,g,b) + Math.min(r,g,b));
+
+const rgbToSaturation = (r,g,b) => {
+    const L = rgbToLightness(r,g,b);
+    const max = Math.max(r,g,b);
+    const min = Math.min(r,g,b);
+    return (L === 0 || L === 1)
+     ? 0
+     : (max - min)/(1 - Math.abs(2 * L - 1));
+  };
 
 function luminance(p){
     //Returns the luminance as a number between 0 and 255
@@ -118,7 +130,7 @@ function colour_desc(colour){
                 }
             }
         else{
-            if (v < 125){c_string += "dark ";}
+            if (v < 100){c_string += "dark ";}
         }}}
 
         if (s < 0.09){
@@ -127,7 +139,7 @@ function colour_desc(colour){
             if (s >0.5){
             return c_string + hueString;}
         else{
-            if (v>125){
+            if (v>160){
                 return "light "+ hueString;}
         else{
             if (["red","orange"].includes(hueString)){
@@ -139,10 +151,10 @@ function colour_desc(colour){
         }}
 }        
 
-function fixPortSources(list){
+function fixPortSources(){
     // Fixes the "src" attribute for all images in sublist of portrait_objects
-    for (let i = 0; i < list.length; i += 1){
-        let b = list[i];
+    for (let i = 0; i < portrait_objects.length; i += 1){
+        let b = portrait_objects[i];
         for (let j = 0; j < panelNum; j += 1){ 
             if (b.colourNum==1){
                 b.image_list[j].src = "images/bases/portraits/"+b.location+"/"+b.item_list[b.value_list[j]]+".png";
@@ -156,10 +168,10 @@ function fixPortSources(list){
     }
 }
 
-function fixSpriteSources(list){
+function fixSpriteSources(){
     // Fixes the "src" attribute for all images in sublist of sprite_objects
-    for (let i = 0; i < list.length; i += 1){
-        let b = list[i];
+    for (let i = 0; i < sprite_objects.length; i += 1){
+        let b = sprite_objects[i];
         let item = b.item_list[b.item];
         if (item == none){
             b.image.src="";
@@ -302,32 +314,34 @@ function setMenu(variablelist, number){
             htmlString+=makeDropbtnString("Eye Colour", ["Eyes"], eye_colours, "setBothColour");
             htmlString+=makeDropbtnString("Hair Colour", hair_list, hair_colours, "setHairColour");
             htmlString+="</div>"
-            if (current_imageType==0){ //portraits
-                htmlString+="<div class=\"grid-choices\">"
-                htmlString+=makeDropbtnString("Head Shape", ["Head"], head_list, "setPortVariable");
-                htmlString+=makeDropbtnString("Ear Shape", ["Ears"], ears_list, "setPortVariable");
-                htmlString+=makeDropbtnString("Nose Shape", ["Nose","Nose_front"], nose_list, "setPortVariable");
-                htmlString+="</div>"
-                htmlString+="<div class=\"grid-choices\">"
-                htmlString+=makeDropbtnString("Hair back", ["Hair_back"], hair_back_list, "setPortVariable");
-                htmlString+=makeDropbtnString("Hair middle", ["Hair_middle"], hair_middle_list, "setPortVariable");
-                htmlString+=makeDropbtnString("Hair front", ["Hair_front"], hair_front_list, "setPortVariable");
-                htmlString+="</div>"  
-            }else{
-                htmlString+="<div class=\"grid-choices\">"
-                htmlString+=makeDropbtnString("Hair style", ["Hairstyle"], sprite_hair_list.map(nameOf), "setSpriteHair");
-                htmlString+=makeDropbtnString("Height", ["Torso"], ["Short","Tall"], "setHeight");
-                htmlString+=makeDropbtnString("Eyelashes", ["Eyes"], eyelash_list, "setSpriteVariable");
-                htmlString+="</div>"  
-            }
+            
             htmlString+="<div class=\"grid-choices\">"
-            htmlString+=makeDropbtnString("Facial Hair", ["Facial_hair"], facial_hair_list, "setBothVariable");
+            htmlString+=makeDropbtnString("Head Shape", ["Head"], head_list, "setPortVariable");
+            htmlString+=makeDropbtnString("Ear Shape", ["Ears"], ears_list, "setPortVariable");
+            htmlString+=makeDropbtnString("Nose Shape", ["Nose","Nose_front"], nose_list, "setPortVariable");
+            htmlString+="</div>"
+            htmlString+="<div class=\"grid-choices\">"
+            htmlString+=makeDropbtnString("Hair back", ["Hair_back"], hair_back_list, "setPortVariable");
+            htmlString+=makeDropbtnString("Hair middle", ["Hair_middle"], hair_middle_list, "setPortVariable");
+            htmlString+=makeDropbtnString("Hair front", ["Hair_front"], hair_front_list, "setPortVariable");
+            htmlString+="</div>"  
+            
+            htmlString+="<div class=\"grid-choices\">"
+            htmlString+=makeDropbtnString("Hair style", ["Hairstyle"], sprite_hair_list.map(nameOf), "setSpriteHair");
+            htmlString+=makeDropbtnString("Height", ["Torso"], ["Short","Tall"], "setHeight");
+            htmlString+=makeDropbtnString("Eyelashes", ["Eyes"], eyelash_list, "setSpriteVariable");
+            htmlString+="</div>"  
+            
+            htmlString+="<div class=\"grid-choices\">"
+            htmlString+=makeDropbtnString("Facial Hair", ["Facial_hair"], facial_hair_list_menu, "setBothVariable");
             htmlString+="</div>"
             break;    
         case 1: //editing the outfit
-            //document.getElementById("test").innerHTML = "Hello";
-            htmlString+="<div class=\"grid-choices\">"
-            htmlString+=makeDropbtnString("Shirt", ["Shirt1","Shirt2"], shirt_list, "setShirt");
+            document.getElementById("test").innerHTML = print_menu_objects();
+            htmlString+=makeDropbtnString("Shirt", ["Shirt1","Shirt2"], shirt_list_menu, "setShirt");
+
+            /*htmlString+="<div class=\"grid-choices\">"
+            htmlString+=makeDropbtnString("Shirt", ["Shirt1","Shirt2"], shirt_list_port, "setShirt");
             htmlString+=makeDropbtnString("Shirt Colour", ["Shirt1","Shirt2"], outfit_colours, "setShirtColour");
             htmlString+="<div class=\"grid-choices\">"
             htmlString+="</div>"
@@ -369,10 +383,9 @@ function setMenu(variablelist, number){
                         htmlString+="</div>"
                     } 
                 }
-            }
+            }*/
             break;    
         case 2: //editing the expression
-            if (current_imageType==0){ 
                 htmlString+="<div class=\"grid-container\"><div style=\"justify-self: end;\">"
                 htmlString+=makeDropbtnString("Panel:", ["Panel"], panel_list, "setPanel");
                 htmlString+="</div><h2 id = 'current_panel'>"+panel_list[current_panel] +"</h2></div>";
@@ -382,7 +395,6 @@ function setMenu(variablelist, number){
                 htmlString+=makeDropbtnString("Mouth", ["Mouth"], mouth_list, "setPanelVariable");
                 htmlString+="</div>"
                 break;   
-            }   
         default:
             htmlString = "Unknown value "+number;
 
@@ -394,202 +406,6 @@ function setMenu(variablelist, number){
 function setPanel(variablelist, number){
     current_panel = number;
     document.getElementById("current_panel").innerHTML = panel_list[current_panel];
-}
-
-function setPortVariable(variablelist, number){
-    for (let i = 0; i < variablelist.length; i += 1) {
-        let b = findNameMatch(portrait_objects, variablelist[i]); //the eleemnt of portrait_objects with the right vriablename
-        b.value_list=listOf(number);
-        if (back_list.includes(b.name)){
-            let b_back = findNameMatch(portrait_objects, b.name+"_back");//eg the object associated with "hat_back"
-            let list = b_back.item_list;
-            if (list.includes(b.item_list[number])){ //this is a valid type of back
-                b_back.value_list=listOf(list.indexOf(b.item_list[number])); //set to the correct index, may not match the original object   
-            } else{
-                b_back.value_list=listOf(0); //set to none
-            }
-        }
-    }
-    drawCanvas();
-}
-
-function setSpriteVariable(variablelist, number){
-    for (let i = 0; i < variablelist.length; i += 1) {
-        let b = findNameMatch(sprite_objects, variablelist[i]); //the eleemnt of portrait_objects with the right vriablename
-        b.item=number;
-    }
-    drawCanvas();
-}
-
-function setPanelVariable(variablelist, number){
-    for (let i = 0; i < variablelist.length; i += 1) {
-        let b = findNameMatch(portrait_objects, variablelist[i]); //the eleemnt of portrait_objects with the right vriablename
-        b.value_list[current_panel]=number;
-    }
-    drawCanvas();
-}
-
-function setBothColour(variablelist, number){
-    setPortColour(variablelist, number);
-    setSpriteColour(variablelist, number);
-    drawCanvas();
-}
-
-function setPortColour(variablelist, number){
-    for (let i = 0; i < variablelist.length; i += 1) {
-        let b = findNameMatch(portrait_objects, variablelist[i]); //the eleemnt of portrait_objects with the right vriablename
-        b.colour=number;
-    }
-}
-
-function setSpriteColour(variablelist, number){
-    for (let i = 0; i < variablelist.length; i += 1) {
-        let b = findNameMatch(sprite_objects, variablelist[i]); //the eleemnt of portrait_objects with the right vriablename
-        b.colour=number;
-    }
-}
-
-function setSkinColour(variablelist, number){
-    setPortColour(skin_list, number);
-    setSpriteColour(["Torso","Arms"], number);
-    drawCanvas();
-}
-
-function setHairColour(variablelist, number){
-    setPortColour(hair_list, number);
-    setSpriteColour(["Hairstyle","Facial_hair"], number);
-    drawCanvas();
-}
-
-function setShirtColour(variablelist, number){
-    setPortColour(["Shirt"], number);
-    setSpriteColour(["Shirt1","Shirt2"], number);
-    if (!hasCoatSleeves && hasShirtSleeves)
-        setSpriteColour(["Sleeves"], number);
-    drawCanvas();
-}
-
-function setCoatColour(variablelist, number){
-    setPortColour(["Coat"], number);
-    setSpriteColour(["Coat"], number);
-    if (hasCoatSleeves)
-        setSpriteColour(["Sleeves"], number);
-    drawCanvas();
-}
-
-function setFacialHair(variablelist, number){
-    setPortVariable(["Facial_hair"], number);
-    setSpriteVariable(["Facial_hair"], number);
-    drawCanvas();
-}
-
-function setBothVariable(variablelist, number){
-    setPortVariable(variablelist, number);
-    setSpriteVariable(variablelist, number);
-    drawCanvas();
-}
-
-function setShoes(variablelist, number){
-    currentShoes = number;
-    setSpriteVariable(["Shoes"], Math.max(0,2*currentShoes-1+height)); 
-    drawCanvas();
-}
-
-function setGloves(variablelist, number){
-    currentGloves = number;
-    setSpriteVariable(["Gloves"], Math.max(0,2*currentGloves-1+height)); 
-    drawCanvas();
-}
-
-function setEyewear(variablelist, number){
-    setBothVariable(variablelist, number);
-    drawCanvas();
-}
-
-function setShirt(variablelist, number){
-    if (number>0)
-        setPortVariable(["Shirt","Shirt_collar"], number);
-        if (false){ //some test for whether shirt has sleeves
-            hasShirtSleeves= true;
-            setSpriteVariable(["Sleeves"], 1);
-            if (!hasCoatSleeves){
-                let shirtcolour = findNameMatch(sprite_objects,"Shirt").colour
-                setSpriteColour(["Sleeves"], shirtcolour);
-            }
-        }
-        
-    else
-        setPortVariable(["Shirt"], 0);
-        hasShirtSleeves= false;
-        if (!hasCoatSleeves)
-            setSpriteVariable(["Sleeves"], 0);
-    setSpriteVariable(["Shirt1","Shirt2"], number);
-    drawCanvas();
-}
-
-function setCoat(variablelist, number){
-    if (number>0){
-        setPortVariable(["Coat"], 1);
-        setSpriteVariable(["Sleeves"], 1);
-        hasCoatSleeves = true;
-    }
-    else
-        setPortVariable(["Coat"], 0);
-        hasCoatSleeves = false;
-        if (!hasShirtSleeves)
-            setSpriteVariable(["Sleeves"], 0);
-    setSpriteVariable(["Coat"], number);
-    drawCanvas();
-}
-
-function setHat(variablelist, number){
-    if (number>0)
-        setPortVariable(variablelist, 1);
-    else
-        setPortVariable(variablelist, 0);
-    setSpriteVariable(variablelist, number);
-    drawCanvas();
-}
-
-function setNeckwear(variablelist, number){
-    if (number>0)
-        setPortVariable(variablelist, 1);
-    else
-        setPortVariable(variablelist, 0);
-    setSpriteVariable(variablelist, number);
-    drawCanvas();
-}
-
-function setEarrings(variablelist, number){
-    if (number>0)
-        setPortVariable(variablelist, 1);
-    else
-        setPortVariable(variablelist, 0);
-    setSpriteVariable(variablelist, number);
-    drawCanvas();
-}
-
-function setSpriteHair(variablelist, number){
-    setSpriteVariable(["Hairstyle"], number);
-    if (number ==0)
-        isBald = true;
-    else
-        isBald = false;    
-    setHeight([], height);
-}
-
-function setHeight(variablelist, number){
-    height = number;
-    setSpriteVariable(["Arms"], number);
-    setSpriteVariable(["Shoes"], Math.max(0,2*currentShoes-1+height)); 
-    setSpriteVariable(["Gloves"], Math.max(0,2*currentGloves-1+height)); 
-    document.getElementById("test").innerHTML = Math.max(0,2*currentGloves-1+height)+" "+Math.max(0,2*currentShoes-1+height);
-    if (isBald){
-        setSpriteVariable(["Torso"], 2+number);
-    }else { 
-        setSpriteVariable(["Torso"], number); 
-    } 
-    drawCanvas();
 }
 
 function oldX(obj, column){
@@ -625,8 +441,8 @@ function drawCanvas() {
     ctx = canvas.getContext("2d");
     canvas_preview = document.getElementById("previewCanvas");
     ctx_preview = canvas_preview.getContext("2d");
-    fixSpriteSources(sprite_objects);
-    fixPortSources(portrait_objects);
+    fixSpriteSources();
+    fixPortSources();
 
     //preview canvas
     canvas_preview.width = canvas_preview.width; //clears

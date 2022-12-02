@@ -4,8 +4,8 @@ const canvas_height = 768;
 let panelNum = 6; //how many panels
 let panel_width = 256; //width and height of panels in pixels
 
-let current_imageType = 0;
-let currently_editing_port = 0;
+let current_imageType = 0; //whether editing sprites or portraits
+let currently_editing_port = 0; //which element of editing list we are editing
 let currently_editing_sprites = 0;
 let current_panel = 0;
 
@@ -70,7 +70,7 @@ function newImageList(){
 
 }
 
-//Initialising data
+//Setting up portrait data
 const portrait_objects =[];
 
 function add_portrait_object(name, list){
