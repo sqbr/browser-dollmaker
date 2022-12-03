@@ -40,8 +40,10 @@ const shirt_menu_list = [ none_menu,["T-Shirt",[2,0],[1,0,0]], ["Short-sleeve Bu
 const pants_menu_list = [none_menu];
 const pants_names_all = ["briefs","trousers"].concat(pants_names)
 for (let i = 0; i < pants_names_all.length; i += 1) {
-    pants_menu_list.push([pants_names_all[i],[],[i+1]])
+    pants_menu_list.push([pants_names_all[i],[],[i+1,0]])
 }
+pants_menu_list.push(["High-waisted trousers",[],[2,1]])
+pants_menu_list.push(["Overalls",[],[2,2]])
 
 const shoes_menu_list = [none_menu];
 for (let i = 0; i < shoes_names.length; i += 1) {
@@ -61,7 +63,7 @@ add_menu_object("Eyewear", eyewear_menu_list, outfit_colours,["Eyewear"],["Eyewe
 add_menu_object("Earrings", earrings_menu_list, outfit_colours,["Earrings"],["Earrings"]);
 add_menu_object("Shirt", shirt_menu_list, outfit_colours,["Shirt","Shirt_collar"],["Shirt1","Shirt2","Shirt_sleeves"]);
 add_menu_object("Coat", coat_menu_list, outfit_colours,["Coat","Coat_back"],["Coat","Coat_sleeves"]);
-add_menu_object("Pants", pants_menu_list, outfit_colours,[],["Pants"]);
+add_menu_object("Pants", pants_menu_list, outfit_colours,[],["Pants","Pants top"]);
 add_menu_object("Shoes", shoes_menu_list, outfit_colours,[],["Shoes"]);
 add_menu_object("Gloves", gloves_menu_list, outfit_colours,[],["Gloves"]);
 
@@ -149,14 +151,6 @@ function setShirtColour(variablelist, number){
     drawCanvas();
 }
 
-function setCoatColour(variablelist, number){
-    setPortColour(["Coat"], number);
-    setSpriteColour(["Coat"], number);
-    if (hasCoatSleeves)
-        setSpriteColour(["Sleeves"], number);
-    drawCanvas();
-}
-
 function setFacialHair(variablelist, number){
     setPortVariable(["Facial_hair"], number);
     setSpriteVariable(["Facial_hair"], number);
@@ -209,21 +203,6 @@ function setClothing(variablelist, number){
     drawCanvas();
 }
 
-function setCoat(variablelist, number){
-    if (number>0){
-        setPortVariable(["Coat"], 1);
-        setSpriteVariable(["Sleeves"], 1);
-        hasCoatSleeves = true;
-    }
-    else
-        setPortVariable(["Coat"], 0);
-        hasCoatSleeves = false;
-        if (!hasShirtSleeves)
-            setSpriteVariable(["Sleeves"], 0);
-    setSpriteVariable(["Coat"], number);
-    drawCanvas();
-}
-
 function setHat(variablelist, number){
     if (number>0)
         setPortVariable(variablelist, 1);
@@ -271,6 +250,9 @@ function setHeight(variablelist, number){
     }else { 
         setSpriteVariable(["Torso"], number); 
     } 
+    let sprite_obj = findNameMatch(sprite_objects, "Pants");
+    let pants_obj = findNameMatch(sprite_obj.item_list, "trousers");
+    pants_obj.location = "outfit/pants/longpants"+height_list[height]
     drawCanvas();
 }
 

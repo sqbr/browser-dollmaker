@@ -479,14 +479,14 @@ def process_outfit_sprites():
         #process_image("eyewear", "sprites/accessories/eyewear", c, outfit_colours,"blue") 
     #    process_image("hats", "sprites/outfit/hats", c, outfit_colours,"grey")
     #    process_image("pants", "sprites/outfit/pants", c, outfit_colours,"blue")
-        process_image("briefs", "sprites/outfit/pants", c, outfit_colours,"blue")
-        process_image("longpants", "sprites/outfit/pants", c, outfit_colours,"blue")
+        #process_image("briefs", "sprites/outfit/pants", c, outfit_colours,"blue")
     #    process_image("shirts", "sprites/outfit/shirts", c, outfit_colours,"grey")
         #process_image("shirt decs", "sprites/outfit/shirts/decorations", c, outfit_colours,"grey")
         #process_image("coat", "sprites/outfit/coat", c, outfit_colours,"grey")
         #process_image("neckwear", "sprites/accessories/neckwear", c, outfit_colours,"grey")
         #process_image("earrings", "sprites/accessories/earrings", c, outfit_colours,"")
-        #for height in ["short","tall"]:
+        for height in ["short","tall"]:
+                process_image("longpants_"+height, "sprites/outfit/pants", c, outfit_colours,"blue")
         #    for shoetype in ["boots","flats","flipflops"]:
         #        process_image(height+"_"+shoetype, "sprites/outfit/shoes", c, outfit_colours,"grey") 
         #    process_image(height, "sprites/outfit/gloves", c, outfit_colours,"grey")
