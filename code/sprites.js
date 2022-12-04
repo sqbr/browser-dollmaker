@@ -149,15 +149,18 @@ for (let row =0; row<3;row++)
 }
 
 const sprite_hat_list = [none]
-for (let row =0; row<32;row++)
+for (let row =0; row<8;row++)
     for (let column =0; column<12;column++){
         let current_num = row*12+column;
         if (current_num< hat_list_sprite.length){
-            let colour = false;
-            if  ([].includes(column))//can be coloured
-                colour=true;
-            sprite_hat_list.push({name: hat_list_sprite[current_num], location: "outfit/hats/hats", colour: colour, asymmetrical: false,rowNum: 4,topcorner:[16*column,128*row]})
-
+            sprite_hat_list.push({name: hat_list_sprite[current_num], location: "outfit/hats/hats", colour: false, asymmetrical: false,rowNum: 4,topcorner:[16*column,128*row]})
+        }
+}
+for (let row =0; row<2;row++)
+    for (let column =0; column<12;column++){
+        let current_num = row*12+column;
+        if (current_num< hat_colour_names.length){
+            sprite_hat_list.push({name: hat_colour_names[current_num], location: "outfit/hats/hats_colour", colour: true, asymmetrical: false,rowNum: 4,topcorner:[16*column,128*row]})
         }
 }
 
@@ -215,6 +218,7 @@ add_sprite_object("Arms", sprite_arms_list,height_list, skin_colours,true,false,
 add_sprite_object("Gloves", sprite_gloves_list,["None"].concat(gloves_names), outfit_colours,true,false,0, [16,32],[0,0]);
 add_sprite_object("Shirt_sleeves", sprite_sleeves_list,["None"].concat(sleeves_names), outfit_colours,true,false,0, [16,32],[0,0]);
 add_sprite_object("Coat_sleeves", sprite_sleeves_list,["None"].concat(sleeves_names), outfit_colours,true,false,0, [16,32],[0,0]);
+add_sprite_object("Hairstyle_top", sprite_hair_list,sprite_hair_list.map(nameOf), hair_colours,false,true, 1,[16,32],[0,0]);
 add_sprite_object("Hat", sprite_hat_list,sprite_hat_list.map(nameOf), outfit_colours,false,true,1, [16,32],[0,0]);
 
 function print_sprite_objects(){

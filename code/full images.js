@@ -22,7 +22,7 @@ function add_menu_object(name, list_list, colour_list, port_item_list, sprite_it
 
 const none_menu = ["none",[],[]]
 
-const hat_menu_list = [ none_menu];
+const hat_menu_list = [ none_menu,["Santa Hat",[1],[26]], ["Top hat",[1],[73]]];
 
 const neckwear_menu_list = [ none_menu, ["Tie",[1],[3]]];
 

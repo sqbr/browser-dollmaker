@@ -45,8 +45,9 @@ facial_hair_list_menu = facial_hair_list_port
 
 #Different for portraits and sprites
 hat_list_port = ["none","straw"]
-hat_list_sprite = ["cowboy hat", "Bowler", "Top hat", "sombrero", "straw hat", "official cap", "blue bonnet", "Chapeau", "Skeleton mask", "Goblin Mask", "Chicken Mask", "Earmuffs", "Delicate Bow", "Tropiclip", "Butterfly Bow", "Hunter's Cap", "Trucker Hat", "Sailor's Cap", "Good Ol' Cap", "Fedora", "Cool Cap", "Lucky Bow", "Polka Bow", "Gnome's Cap", "Eye Patch", "Santa Hat", "Tiara", "Hard Hat", "Sou'wester", "Daisy", "Watermelon Band", "Mouse Ears", "Cat Ears", "Cowgal Hat", "Cowpoke Hat", "Archer's Cap", "Panda Hat", "Blue Cowboy Hat", "Red Cowboy Hat", "Cone Hat", "Living Hat", "Emily's Magic Hat", "Mushroom Cap", "Dinosaur Hat", "Totem Mask", "Logo Cap", "Dwarf Helm", "Fashion Hat", "Pumpkin Mask", "Hair Bone",]
 hat_list_menu = hat_list_port 
+hat_list_sprite = ["cowboy hat", "Bowler", "Top hat", "sombrero", "straw hat", "official cap", "blue bonnet", "Chapeau", "Skeleton mask", "Goblin Mask", "Chicken Mask", "Earmuffs", "Delicate Bow", "Tropiclip", "Butterfly Bow", "Hunter's Cap", "Trucker Hat", "Sailor's Cap", "Good Ol' Cap", "Fedora", "Cool Cap", "Lucky Bow", "Polka Bow", "Gnome's Cap", "Eye Patch", "Santa Hat", "Tiara", "Hard Hat", "Sou'wester", "Daisy", "Watermelon Band", "Mouse Ears", "Cat Ears", "Cowgal Hat", "Cowpoke Hat", "Archer's Cap", "Panda Hat", "Blue Cowboy Hat", "Red Cowboy Hat", "Cone Hat", "Living Hat", "Emily's Magic Hat", "Mushroom Cap", "Dinosaur Hat", "Totem Mask", "Logo Cap", "Dwarf Helm", "Fashion Hat", "Pumpkin Mask", "Hair Bone", "knight", "","red kerchief", "grey beanie", "red beanie", "black with feather", "", "", "", "", "wizard", "chef", "pirate", "", "", "turban", "", "gold mask", "spinner", "veil", "flat black", "witch",]
+hat_colour_names = ["top hat", "earmuffs", "flower","clip","bow","cap","backwards cap", "big bow", "cat ears", "flat cap", "wide hat", "cowboy hat", "hood", "beanie", "ribbed beanie", "turban", "hijab", "headphones",]
 
 shirt_list_port = shirt_collar_list +["tshirt"]
 shirt_list_menu =  ["none","button up"]
@@ -373,6 +374,14 @@ def colour_list_add(list_name, sublists):
         s+=l+","
     return s+ ");\n"  
 
+def write_temp():
+    content = open("temp.js","w")
+    content.write("test")
+    for i in range(len(hat_list_sprite)):
+        content.write("[\""+hat_list_sprite[i]+"\",[1],["+str(i+1)+"]], \n")
+    content.close()
+
+
 def write_variables():
     # Write all the shared variables into generated.js
 
@@ -426,6 +435,7 @@ def write_variables():
     content.write(list_string("facial_hair_list_sprite", facial_hair_list_sprite))
     content.write(list_string("facial_hair_list_menu", facial_hair_list_menu))
     content.write(list_string("hat_list_sprite", hat_list_sprite))
+    content.write(list_string("hat_colour_names", hat_colour_names))
     content.write(list_string("hat_list_menu", hat_list_menu))
     content.write(list_string("shirt_list_menu", shirt_list_menu))
     content.write(list_string("neckwear_list_sprite", neckwear_list_sprite))
@@ -480,7 +490,7 @@ def process_body_sprites():
 def process_outfit_sprites():
     for c in range(len(outfit_colours)): 
         #process_image("eyewear", "sprites/accessories/eyewear", c, outfit_colours,"blue") 
-    #    process_image("hats", "sprites/outfit/hats", c, outfit_colours,"grey")
+        process_image("hats_colour", "sprites/outfit/hats", c, outfit_colours,"blue")
     #    process_image("pants", "sprites/outfit/pants", c, outfit_colours,"blue")
         #process_image("briefs", "sprites/outfit/pants", c, outfit_colours,"blue")
     #    process_image("shirts", "sprites/outfit/shirts", c, outfit_colours,"grey")
@@ -488,8 +498,8 @@ def process_outfit_sprites():
         #process_image("coat", "sprites/outfit/coat", c, outfit_colours,"grey")
         #process_image("neckwear", "sprites/accessories/neckwear", c, outfit_colours,"grey")
         #process_image("earrings", "sprites/accessories/earrings", c, outfit_colours,"")
-        for height in ["short","tall"]:
-                process_image("longpants_"+height, "sprites/outfit/pants", c, outfit_colours,"blue")
+        #for height in ["short","tall"]:
+        #        process_image("longpants_"+height, "sprites/outfit/pants", c, outfit_colours,"blue")
         #    for shoetype in ["boots","flats","flipflops"]:
         #        process_image(height+"_"+shoetype, "sprites/outfit/shoes", c, outfit_colours,"grey") 
         #    process_image(height, "sprites/outfit/gloves", c, outfit_colours,"grey")
@@ -497,11 +507,12 @@ def process_outfit_sprites():
           
 
 
+write_temp()
 write_variables()
 #process_body_sprites()
 #process_outfit_sprites()
 for c in closet:
-    if c.name =="Pants_top":
+    if c.name =="":
         process_portrait_part(c)
 #process_all_portraits()
 #make_coat()
