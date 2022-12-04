@@ -9,7 +9,7 @@ import glob
 
 body_list = ["Torso", "Head", "Complexion","Ears", "Nose","Nose_front"]
 expression_list = ["Eyes","Eyebrows", "Mouth"]
-outfit_list_complex = ["Shirt","Coat"]
+outfit_list_complex = ["Shirt","Coat","Pants_top"]
 outfit_list_portOnly = []
 outfit_list_spriteOnly = ["Pants","Shoes","Gloves"]
 outfit_list_both = ["Neckwear","Eyewear","Earrings", "Hat"]
@@ -66,6 +66,8 @@ eyewear_list_menu = eyewear_list_port
 earrings_list_port = ["none", "studs"]
 earrings_list_sprite = ["none", "gold drop","blue drop", "studs", "single stud"]
 earrings_list_menu = earrings_list_port
+
+pants_top_list_port = ["none","overalls"]
 
 #colours
 skin_regular =["#FFE7D6","#FFD3A6","#FFD3A6","#FFDFA5","#F1A065","#DA773F","#DA874A","#B05934","#B96A2E","#853F27","#783F1A"]
@@ -139,6 +141,7 @@ add_portrait_object("Earrings", earrings_list_port,"earrings_list_port", "outfit
 add_portrait_object("Shirt", shirt_list_port,"shirt_list_port", "outfit")
 add_portrait_object("Neckwear", neckwear_list_port,"neckwear_list_port", "outfit")
 add_portrait_object("Shirt_collar", shirt_collar_list,"shirt_collar_list", "outfit/shirt")
+add_portrait_object("Pants_top", pants_top_list_port,"pants_top_list_port", "outfit")
 add_portrait_object("Coat", coat_list_port,"coat_list_port", "outfit")
 
 add_portrait_object("Facial_hair", facial_hair_list_port,"facial_hair_list_port", "body/hair")
@@ -496,9 +499,9 @@ def process_outfit_sprites():
 
 write_variables()
 #process_body_sprites()
-process_outfit_sprites()
+#process_outfit_sprites()
 for c in closet:
-    if c.name =="":
+    if c.name =="Pants_top":
         process_portrait_part(c)
 #process_all_portraits()
 #make_coat()
