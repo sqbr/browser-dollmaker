@@ -327,7 +327,7 @@ function setMenu(variablelist, number){
             htmlString+="</div>"  
             
             htmlString+="<div class=\"grid-choices\">"
-            htmlString+=makeDropbtnString("Hair style", ["Hairstyle"], sprite_hair_list.map(nameOf), "setSpriteHair");
+            htmlString+=makeDropbtnString("Hair style", ["Hairstyle","Hairstyle_top"], sprite_hair_list.map(nameOf), "setSpriteHair");
             htmlString+=makeDropbtnString("Height", ["Torso"], ["Short","Tall"], "setHeight");
             htmlString+=makeDropbtnString("Eyelashes", ["Eyes"], eyelash_list, "setSpriteVariable");
             htmlString+="</div>"  
@@ -461,6 +461,7 @@ function drawCanvas() {
         let b = sprite_objects[i];
         if (b.item_list[b.value] !=none){ 
             for (let column = 0; column < 2; column += 1) //column 1-2
+                if(b.name !="Hairstyle_top" || column >0)
                 ctx_preview.drawImage(b.image, oldX(b,0), oldY(b,column),b.dimensions[0],b.dimensions[1],64*column+b.offset[0]*4,4*(b.offset[1]+(1-height)*b.heightOffset),b.dimensions[0]*4,b.dimensions[1]*4);
             if (b.rowNum==4)
                 ctx_preview.drawImage(b.image, oldX(b,0), oldY(b,3),b.dimensions[0],b.dimensions[1],64*2+b.offset[0]*4,b.offset[1]*4,b.dimensions[0]*4,b.dimensions[1]*4);
@@ -470,9 +471,7 @@ function drawCanvas() {
             }    
         }        
     }
-    //drawing hair
-    ctx_preview.drawImage(hair.image, oldX(hair,0), oldY(hair,1),hair.dimensions[0],hair.dimensions[1],64+hair.offset[0]*4,4*(hair.offset[1]+(1-height)*hair.heightOffset),hair.dimensions[0]*4,hair.dimensions[1]*4);
-    ctx_preview.drawImage(hair.image, oldX(hair,0), oldY(hair,2),hair.dimensions[0],hair.dimensions[1],64*2+hair.offset[0]*4,hair.offset[1]*4,hair.dimensions[0]*4,hair.dimensions[1]*4);
+    //drawing portrait
     ctx_preview.drawImage(portrait_back, 256, 0);
     for (let i = 0; i < portrait_objects.length; i += 1){
         let b = portrait_objects[i];
@@ -481,7 +480,7 @@ function drawCanvas() {
         }
     }
     //main canvas
-    if (current_imageType==0){
+    if (current_imageType==0){ //portrait
         let numrows;
         let numcols;
         if (panelNum ==1){
@@ -512,7 +511,7 @@ function drawCanvas() {
                 }
             }
         }
-    } else{
+    } else{ //sprites
         canvas.height = 128;
         canvas.width =  64;
         document.getElementById("closet").innerHTML = print_sprite_objects();
@@ -522,12 +521,14 @@ function drawCanvas() {
             if (b.image.src !=""){ 
                 for (let row = 0; row < 2; row += 1){//rows 1,2   
                     for (let column = 0; column < 2; column += 1)
-                        ctx.drawImage(b.image, oldX(b,column), oldY(b,row),b.dimensions[0],b.dimensions[1],newX(b,column), newY(b,row,column),b.dimensions[0],b.dimensions[1]);//column 1
+                        if(b.name !="Hairstyle_top" || column >0)
+                            ctx.drawImage(b.image, oldX(b,column), oldY(b,row),b.dimensions[0],b.dimensions[1],newX(b,column), newY(b,row,column),b.dimensions[0],b.dimensions[1]);//column 1
                     ctx.drawImage(b.image, oldX(b,0), oldY(b,row),b.dimensions[0],b.dimensions[1],newX(b,2), newY(b,row,2),b.dimensions[0],b.dimensions[1]); //column 3  
                     ctx.drawImage(b.image, oldX(b,2), oldY(b,row),b.dimensions[0],b.dimensions[1],newX(b,3), newY(b,row,3),b.dimensions[0],b.dimensions[1]); //column 4              
                 }
                 if (b.rowNum==4){ //don't have to flip
-                    for (let column = 0; column < 4; column += 1){
+                    for (let column = 0; column < 4; column += 1)
+                        if(b.name !="Hairstyle_top" || column >0){
                             ctx.drawImage(b.image, oldX(b,0), oldY(b,3),b.dimensions[0],b.dimensions[1],newX(b,column), newY(b,2,column),b.dimensions[0],b.dimensions[1]); //3rd row
                             ctx.drawImage(b.image, oldX(b,0), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,column), newY(b,3,column),b.dimensions[0],b.dimensions[1]); //4th row                
                     }
@@ -535,7 +536,8 @@ function drawCanvas() {
                     if (b.rowNum==3){ //has a back
                         //row 3
                         for (let column = 0; column < 2; column += 1)
-                            ctx.drawImage(b.image, oldX(b,column), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,column),newY(b,2,column),b.dimensions[0],b.dimensions[1]); //3rd row cols 1-2
+                            if(b.name !="Hairstyle_top" || column >0)
+                                ctx.drawImage(b.image, oldX(b,column), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,column),newY(b,2,column),b.dimensions[0],b.dimensions[1]); //3rd row cols 1-2
                         ctx.drawImage(b.image, oldX(b,0), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,2), newY(b,2,2),b.dimensions[0],b.dimensions[1]); //column 3  
                         ctx.drawImage(b.image, oldX(b,2), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,3), newY(b,2,3),b.dimensions[0],b.dimensions[1]); //column 4   
                     }           
@@ -543,6 +545,7 @@ function drawCanvas() {
                     if (!b.asymmetrical){
                         for(let x = 0; x < b.dimensions[0]; x++){ //janky way of flipping
                             for (let column = 0; column < 2; column += 1)
+                                if(b.name !="Hairstyle_top" || column >0)
                                     ctx.drawImage(b.image, oldX(b,column)+x, oldY(b,1), 1, b.dimensions[1], newX(b,column)+b.dimensions[0] - x, newY(b,3,column), 1, b.dimensions[1]);
                             ctx.drawImage(b.image, oldX(b,0)+x, oldY(b,1), 1, b.dimensions[1], newX(b,2)+b.dimensions[0] - x, newY(b,3,2), 1, b.dimensions[1]); 
                             ctx.drawImage(b.image, oldX(b,2)+x, oldY(b,1), 1, b.dimensions[1], newX(b,3)+b.dimensions[0] - x, newY(b,3,3), 1, b.dimensions[1]);       
@@ -550,23 +553,7 @@ function drawCanvas() {
                     }   
                 }        
             }
-        }
-        if (hair.rowNum==3){ //has a back
-            //row 3
-            for (let column = 0; column < 2; column += 1)
-                ctx.drawImage(hair.image, oldX(hair,column), oldY(hair,2),hair.dimensions[0],hair.dimensions[1],newX(hair,column),newY(hair,2,column),hair.dimensions[0],hair.dimensions[1]); //3rd row cols 1-2
-            ctx.drawImage(hair.image, oldX(hair,0), oldY(hair,2),hair.dimensions[0],hair.dimensions[1],newX(hair,2), newY(hair,2,2),hair.dimensions[0],hair.dimensions[1]); //column 3  
-            ctx.drawImage(hair.image, oldX(hair,2), oldY(hair,2),hair.dimensions[0],hair.dimensions[1],newX(hair,3), newY(hair,2,3),hair.dimensions[0],hair.dimensions[1]); //column 4   
-        }           
-        //row 4
-        if (!hair.asymmetrical){
-            for(let x = 0; x < hair.dimensions[0]; x++){ //janky way of flipping
-                for (let column = 0; column < 2; column += 1)
-                        ctx.drawImage(hair.image, oldX(hair,column)+x, oldY(hair,1), 1, hair.dimensions[1], newX(hair,column)+hair.dimensions[0] - x, newY(hair,3,column), 1, hair.dimensions[1]);
-                ctx.drawImage(hair.image, oldX(hair,0)+x, oldY(hair,1), 1, hair.dimensions[1], newX(hair,2)+hair.dimensions[0] - x, newY(hair,3,2), 1, hair.dimensions[1]); 
-                ctx.drawImage(hair.image, oldX(hair,2)+x, oldY(hair,1), 1, hair.dimensions[1], newX(hair,3)+hair.dimensions[0] - x, newY(hair,3,3), 1, hair.dimensions[1]);       
-            }     
-        }   
+        }  
     }
 }
 

@@ -39,7 +39,8 @@ const outfitNum = 30; //how many clothing colours there are
 const full_body_list = body_list+hair_list;
 
 const coat_back_list = ["none","suit jacket","jacket","hoodie",];
-const hat_back_list = ["none","straw",];
+const hat_back_list = ["none","sunhat","wizard",];
+const hat_dec_list = ["none",];
 const hair_back_list = ["none","short",];
 const ears_list = ["regular",];
 const torso_list = ["medium",];
@@ -59,10 +60,11 @@ const facial_hair_list_port = ["none","beard","moustache","big moustache","goate
 const eyewear_list_port = ["none","glasses","half-glasses","shiny glasses","robot visor","sunglasses","eye-patch",];
 const hair_middle_list = ["none","sidepart",];
 const hair_front_list = ["none","emo",];
-const hat_list_port = ["none","straw",];
+const hat_list_port = ["none","sunhat","cap","headphones","wizard",];
 
 add_portrait_object("Coat_back",coat_back_list)
 add_portrait_object("Hat_back",hat_back_list)
+add_portrait_object("Hat_dec",hat_dec_list)
 add_portrait_object("Hair_back",hair_back_list)
 add_portrait_object("Ears",ears_list)
 add_portrait_object("Torso",torso_list)
@@ -88,8 +90,8 @@ add_portrait_object("Hat",hat_list_port)
 const facial_hair_list_sprite = ["none","beard","moustache","big moustache","goatee","soul patch","fluffy goatee",];
 const facial_hair_list_menu = ["none","beard","moustache","big moustache","goatee","soul patch","fluffy goatee",];
 const hat_list_sprite = ["cowboy hat","Bowler","Top hat","sombrero","straw hat","official cap","blue bonnet","Chapeau","Skeleton mask","Goblin Mask","Chicken Mask","Earmuffs","Delicate Bow","Tropiclip","Butterfly Bow","Hunter's Cap","Trucker Hat","Sailor's Cap","Good Ol' Cap","Fedora","Cool Cap","Lucky Bow","Polka Bow","Gnome's Cap","Eye Patch","Santa Hat","Tiara","Hard Hat","Sou'wester","Daisy","Watermelon Band","Mouse Ears","Cat Ears","Cowgal Hat","Cowpoke Hat","Archer's Cap","Panda Hat","Blue Cowboy Hat","Red Cowboy Hat","Cone Hat","Living Hat","Emily's Magic Hat","Mushroom Cap","Dinosaur Hat","Totem Mask","Logo Cap","Dwarf Helm","Fashion Hat","Pumpkin Mask","Hair Bone","knight","","red kerchief","grey beanie","red beanie","black with feather","","","","","wizard","chef","pirate","","","turban","","gold mask","spinner","veil","flat black","witch",];
-const hat_colour_names = ["top hat","earmuffs","flower","clip","bow","cap","backwards cap","big bow","cat ears","flat cap","wide hat","cowboy hat","hood","beanie","ribbed beanie","turban","hijab","headphones",];
-const hat_list_menu = ["none","straw",];
+const hat_colour_names = ["top hat","earmuffs","flower","clip","bow","cap","backwards cap","big bow","cat ears","flat cap","wide hat","cowboy hat","hood","beanie","ribbed beanie","turban","hijab","headphones","wizard",];
+const hat_list_menu = ["none","sunhat","cap","headphones","wizard",];
 const shirt_list_menu = ["none","button up",];
 const neckwear_list_sprite = ["none","bandana","necklace","bow-tie","tie","choker",];
 const neckwear_list_menu = ["none","tie",];

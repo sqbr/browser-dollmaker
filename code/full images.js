@@ -20,15 +20,15 @@ function add_menu_object(name, list_list, colour_list, port_item_list, sprite_it
     menu_objects.push({name: name,list_list: list_list, name_list: list_list.map(firstElement),colour_list: colour_list, port_item_list: port_item_list, sprite_item_list: sprite_item_list, item: 0,  colour: 0, colour2: 0 });
 }
 
-const none_menu = ["none",[],[]]
+const none_menu = ["none",[],[]];
 
-const hat_menu_list = [ none_menu,["Santa Hat",[1],[26]], ["Top hat",[1],[73]]];
+const hat_menu_list = [ none_menu,["Wizard",[4],[91]]];
 
 const neckwear_menu_list = [ none_menu, ["Tie",[1],[3]]];
 
 const eyewear_menu_list = [ none_menu];
 for (let i = 1; i < eyewearlist_menu.length; i += 1) {
-    eyewear_menu_list.push([eyewearlist_menu[i],[i],[i]])
+    eyewear_menu_list.push([eyewearlist_menu[i],[i],[i]]);
 }
 
 const earrings_menu_list = [ none_menu];
@@ -139,7 +139,7 @@ function setSkinColour(variablelist, number){
 
 function setHairColour(variablelist, number){
     setPortColour(hair_list, number);
-    setSpriteColour(["Hairstyle","Facial_hair"], number);
+    setSpriteColour(["Hairstyle","Hairstyle_top", "Facial_hair"], number);
     drawCanvas();
 }
 
@@ -231,7 +231,7 @@ function setEarrings(variablelist, number){
 }
 
 function setSpriteHair(variablelist, number){
-    setSpriteVariable(["Hairstyle"], number);
+    setSpriteVariable(["Hairstyle","Hairstyle_top"], number);
     if (number ==0)
         isBald = true;
     else

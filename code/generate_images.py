@@ -36,7 +36,8 @@ mouth_list = ["flat"]
 #back and fronts
 shirt_collar_list = ["none","button up"]
 coat_back_list = ["none","suit jacket","jacket","hoodie"]
-hat_back_list = ["none","straw"]
+hat_back_list = ["none","sunhat","wizard"]
+hat_dec_list = ["none"]
 
 #The same for sprites and portraits
 facial_hair_list_port = ["none", "beard", "moustache", "big moustache", "goatee", "soul patch", "fluffy goatee", ]
@@ -44,10 +45,10 @@ facial_hair_list_sprite = facial_hair_list_port
 facial_hair_list_menu = facial_hair_list_port  
 
 #Different for portraits and sprites
-hat_list_port = ["none","straw"]
+hat_list_port = ["none","sunhat", "cap", "headphones", "wizard"]
 hat_list_menu = hat_list_port 
 hat_list_sprite = ["cowboy hat", "Bowler", "Top hat", "sombrero", "straw hat", "official cap", "blue bonnet", "Chapeau", "Skeleton mask", "Goblin Mask", "Chicken Mask", "Earmuffs", "Delicate Bow", "Tropiclip", "Butterfly Bow", "Hunter's Cap", "Trucker Hat", "Sailor's Cap", "Good Ol' Cap", "Fedora", "Cool Cap", "Lucky Bow", "Polka Bow", "Gnome's Cap", "Eye Patch", "Santa Hat", "Tiara", "Hard Hat", "Sou'wester", "Daisy", "Watermelon Band", "Mouse Ears", "Cat Ears", "Cowgal Hat", "Cowpoke Hat", "Archer's Cap", "Panda Hat", "Blue Cowboy Hat", "Red Cowboy Hat", "Cone Hat", "Living Hat", "Emily's Magic Hat", "Mushroom Cap", "Dinosaur Hat", "Totem Mask", "Logo Cap", "Dwarf Helm", "Fashion Hat", "Pumpkin Mask", "Hair Bone", "knight", "","red kerchief", "grey beanie", "red beanie", "black with feather", "", "", "", "", "wizard", "chef", "pirate", "", "", "turban", "", "gold mask", "spinner", "veil", "flat black", "witch",]
-hat_colour_names = ["top hat", "earmuffs", "flower","clip","bow","cap","backwards cap", "big bow", "cat ears", "flat cap", "wide hat", "cowboy hat", "hood", "beanie", "ribbed beanie", "turban", "hijab", "headphones",]
+hat_colour_names = ["top hat", "earmuffs", "flower","clip","bow","cap","backwards cap", "big bow", "cat ears", "flat cap", "wide hat", "cowboy hat", "hood", "beanie", "ribbed beanie", "turban", "hijab", "headphones","wizard"]
 
 shirt_list_port = shirt_collar_list +["tshirt"]
 shirt_list_menu =  ["none","button up"]
@@ -125,6 +126,7 @@ def add_portrait_object(name, item_list,listname, location):
 
 add_portrait_object("Coat_back", coat_back_list, "coat_back_list","outfit/coat")
 add_portrait_object("Hat_back", hat_back_list,"hat_back_list", "outfit/hat")
+add_portrait_object("Hat_dec", hat_dec_list,"hat_dec_list", "outfit/hat")
 add_portrait_object("Hair_back", hair_back_list, "hair_back_list","body/hair")
 add_portrait_object("Ears", ears_list,"ears_list", "body")
 add_portrait_object("Torso", torso_list, "torso_list", "body")
@@ -216,6 +218,11 @@ def colour_this_skin(pixel, colour):
     if p == [249,174,137]: #base skin colour
         for i in range(3):
             p[i] = new_colour[i]      
+    elif p == [255,217,186]: #highlight
+        highlight = hex_to_rgba("#f9f4ca")
+        r = 0.5 #opacity of highlight
+        for i in range(3): #screen
+           p[i] = int((1-r)*new_colour[i] + r*(255 - (255-new_colour[i])*(255-highlight[i])/255))              
     elif p == [224,107,101]: #shading
         shadow = hex_to_rgba("#830016")
         r = 0.3 #opacity of shadow
@@ -490,7 +497,7 @@ def process_body_sprites():
 def process_outfit_sprites():
     for c in range(len(outfit_colours)): 
         #process_image("eyewear", "sprites/accessories/eyewear", c, outfit_colours,"blue") 
-        process_image("hats_colour", "sprites/outfit/hats", c, outfit_colours,"blue")
+        process_image("hats_colour", "sprites/outfit/hats", c, outfit_colours,"skin")
     #    process_image("pants", "sprites/outfit/pants", c, outfit_colours,"blue")
         #process_image("briefs", "sprites/outfit/pants", c, outfit_colours,"blue")
     #    process_image("shirts", "sprites/outfit/shirts", c, outfit_colours,"grey")
@@ -510,9 +517,9 @@ def process_outfit_sprites():
 write_temp()
 write_variables()
 #process_body_sprites()
-#process_outfit_sprites()
+process_outfit_sprites()
 for c in closet:
-    if c.name =="":
+    if c.name in ["Hat","Hat_back"]:
         process_portrait_part(c)
 #process_all_portraits()
 #make_coat()
