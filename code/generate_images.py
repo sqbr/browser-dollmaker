@@ -35,9 +35,11 @@ mouth_list = ["flat"]
 
 #back and fronts
 shirt_collar_list = ["none","button up"]
-coat_back_list = ["none","suit jacket","jacket","hoodie"]
+coat_back_list_port = ["none","suit jacket","jacket","hoodie"]
 hat_back_list = ["none","sunhat","wizard"]
 hat_dec_list = ["none"]
+
+back_list_port = [["Hair", hair_back_list],["Coat", coat_back_list_port] ]
 
 #The same for sprites and portraits
 facial_hair_list_port = ["none", "beard", "moustache", "big moustache", "goatee", "soul patch", "fluffy goatee", ]
@@ -519,7 +521,7 @@ write_variables()
 #process_body_sprites()
 process_outfit_sprites()
 for c in closet:
-    if c.name in ["Hat","Hat_back"]:
+    if c.name in []:
         process_portrait_part(c)
 #process_all_portraits()
 #make_coat()

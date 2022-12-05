@@ -57,7 +57,7 @@ for (let i = 0; i < gloves_names.length; i += 1) {
 
 
 
-add_menu_object("Hat", hat_menu_list, outfit_colours,["Hat","Hat_back"],["Hat"]);
+add_menu_object("Hat", hat_menu_list, outfit_colours,["Hat"],["Hat"]);
 add_menu_object("Neckwear", neckwear_menu_list, outfit_colours,["Neckwear"],["Neckwear"]);
 add_menu_object("Eyewear", eyewear_menu_list, outfit_colours,["Eyewear"],["Eyewear"]);
 add_menu_object("Earrings", earrings_menu_list, outfit_colours,["Earrings"],["Earrings"]);

@@ -156,13 +156,19 @@ function fixPortSources(){
     for (let i = 0; i < portrait_objects.length; i += 1){
         let b = portrait_objects[i];
         for (let j = 0; j < panelNum; j += 1){ 
+            let name = b.item_list[b.value_list[j]];
+            if (b.name =="Hat_back"){
+                obj_front = findNameMatch(portrait_objects, "Hat");
+                if (hat_back_list.includes(obj_front.item_list[obj_front.value_list[j]]))
+                    name = obj_front.item_list[obj_front.value_list[j]];
+            }
             if (b.colourNum==1){
-                b.image_list[j].src = "images/bases/portraits/"+b.location+"/"+b.item_list[b.value_list[j]]+".png";
+                b.image_list[j].src = "images/bases/portraits/"+b.location+"/"+name+".png";
             }else{
                 if (b.name =="Nose_front"){
-                    b.image_list[j].src  = "images/portraits/"+b.location+"/"+b.item_list[b.value_list[j]]+"_noshadow_"+b.colour+".png";
+                    b.image_list[j].src  = "images/portraits/"+b.location+"/"+name+"_noshadow_"+b.colour+".png";
                 }else
-                    b.image_list[j].src  = "images/portraits/"+b.location+"/"+b.item_list[b.value_list[j]]+"_"+b.colour+".png";
+                    b.image_list[j].src  = "images/portraits/"+b.location+"/"+name+"_"+b.colour+".png";
             }
         }
     }
