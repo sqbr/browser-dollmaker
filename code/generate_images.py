@@ -33,13 +33,21 @@ eyebrow_list = ["none", "flat_thick"]
 eye_list = ["medium"]
 mouth_list = ["flat"]
 
-#back and fronts
-shirt_collar_list = ["none","button up"]
-coat_back_list_port = ["none","suit jacket","jacket","hoodie"]
-hat_back_list = ["none","sunhat","wizard"]
-hat_dec_list = ["none"]
+#backs
 
-back_list_port = [["Hair", hair_back_list],["Coat", coat_back_list_port] ]
+coat_back_list_port = ["none","suit jacket","jacket","hoodie"]
+hat_back_list_port = ["none","sunhat","wizard"]
+
+back_list_port = [["Hat", hat_back_list_port],["Coat", coat_back_list_port] ]
+
+coat_back_list_sprite = ["none"]
+
+back_list_sprite = [["Coat", coat_back_list_sprite] ]
+
+#extras
+shirt_collar_list = ["none","button up"]
+hat_dec_list_port = ["none", "cap_joja"]
+shirt_dec_list_port = ["none"]
 
 #The same for sprites and portraits
 facial_hair_list_port = ["none", "beard", "moustache", "big moustache", "goatee", "soul patch", "fluffy goatee", ]
@@ -59,9 +67,9 @@ neckwear_list_port = ["none","tie"]
 neckwear_list_sprite = ["none", "bandana", "necklace", "bow-tie", "tie", "choker"]
 neckwear_list_menu = neckwear_list_port
 
-coat_list_port = coat_back_list
-coat_list_sprite = coat_back_list
-coat_list_menu = coat_back_list
+coat_list_port = coat_back_list_port
+coat_list_sprite = coat_list_port
+coat_list_menu = coat_list_port
 
 eyewear_list_port = ["none", "glasses", "half-glasses", "shiny glasses", "robot visor", "sunglasses", "eye-patch"];
 eyewear_list_sprite = eyewear_list_port
@@ -126,9 +134,9 @@ def add_portrait_object(name, item_list,listname, location):
 # #Behind eyes
 # shown_start = len(closet) # where the visible items start
 
-add_portrait_object("Coat_back", coat_back_list, "coat_back_list","outfit/coat")
-add_portrait_object("Hat_back", hat_back_list,"hat_back_list", "outfit/hat")
-add_portrait_object("Hat_dec", hat_dec_list,"hat_dec_list", "outfit/hat")
+add_portrait_object("Coat_back", coat_back_list_port, "coat_back_list_port","outfit/coat")
+add_portrait_object("Hat_back", hat_back_list_port,"hat_back_list_port", "outfit/hat")
+add_portrait_object("Hat_dec", hat_dec_list_port,"hat_dec_list_port", "outfit/hat")
 add_portrait_object("Hair_back", hair_back_list, "hair_back_list","body/hair")
 add_portrait_object("Ears", ears_list,"ears_list", "body")
 add_portrait_object("Torso", torso_list, "torso_list", "body")
@@ -144,6 +152,7 @@ add_portrait_object("Mouth", mouth_list,"mouth_list", "expression")
 # In front of face
 add_portrait_object("Earrings", earrings_list_port,"earrings_list_port", "outfit")
 add_portrait_object("Shirt", shirt_list_port,"shirt_list_port", "outfit")
+add_portrait_object("Shirt_dec", shirt_dec_list_port,"shirt_dec_list_port", "outfit/shirt")
 add_portrait_object("Neckwear", neckwear_list_port,"neckwear_list_port", "outfit")
 add_portrait_object("Shirt_collar", shirt_collar_list,"shirt_collar_list", "outfit/shirt")
 add_portrait_object("Pants_top", pants_top_list_port,"pants_top_list_port", "outfit")
@@ -385,9 +394,10 @@ def colour_list_add(list_name, sublists):
 
 def write_temp():
     content = open("temp.js","w")
-    content.write("test")
     for i in range(len(hat_list_sprite)):
         content.write("[\""+hat_list_sprite[i]+"\",[1],["+str(i+1)+"]], \n")
+    for i in range(len(hat_colour_names)):
+        content.write("[\""+hat_colour_names[i]+"\",[1],["+str(i+73)+"]], \n")    
     content.close()
 
 
@@ -439,7 +449,7 @@ def write_variables():
             content.write(name_string(c))
     content.write("\n")
     for c in closet:
-        content.write("add_portrait_object(\""+c.name+"\","+ c.listname+")\n")
+        content.write("add_portrait_object(\""+c.name+"\","+ c.listname+",\""+c.location+"\")\n")
     content.write("\n")    
     content.write(list_string("facial_hair_list_sprite", facial_hair_list_sprite))
     content.write(list_string("facial_hair_list_menu", facial_hair_list_menu))
@@ -455,6 +465,9 @@ def write_variables():
     content.write(list_string("eyewearlist_menu", eyewear_list_menu))
     content.write(list_string("earrings_list_sprite", earrings_list_sprite))
     content.write(list_string("earrings_list_menu", earrings_list_menu))
+    content.write("const back_list_port = [[\"Hat\", hat_back_list_port],[\"Coat\", coat_back_list_port] ]\n")
+    content.write(list_string("coat_back_list_sprite", coat_back_list_sprite))
+    content.write("const back_list_sprite = [[\"Coat\", coat_back_list_sprite] ]\n")
     content.write("\n")
     
     content.close()
@@ -519,7 +532,7 @@ def process_outfit_sprites():
 write_temp()
 write_variables()
 #process_body_sprites()
-process_outfit_sprites()
+#process_outfit_sprites()
 for c in closet:
     if c.name in []:
         process_portrait_part(c)

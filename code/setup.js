@@ -73,45 +73,12 @@ function newImageList(){
 //Setting up portrait data
 const portrait_objects =[];
 
-function add_portrait_object(name, list){
-    col = 2;
-    if (outfit_list.includes(name)||outfit_list_complex.includes(name)){
-        loc = "outfit";
-        col = outfitNum;
-    } else {
-        if (body_list.includes(name)){
-            loc = "body";
-            col = outfitNum;
-        } else{
-            if (expression_list.includes(name)){
-            loc = "expression";
-            col = skinNum;
-            } else{
-                if (hair_list.includes(name)){
-                    loc = "body/hair";
-                    col = hairNum;
-                }
-            }
-        }
-    }
-    if (name == "Coat_back"){
-        loc = "outfit/coat";
-        col = outfitNum;
-    }
-    if (name == "Shirt_collar"){
-        loc = "outfit/shirt";
-        col = outfitNum;
-    }
-    if (name == "Hat_back"){
-        loc = "outfit/hat";
-        col = outfitNum;
-    }
-
-    loc+="/"+name.toLowerCase();
+function add_portrait_object(name, list, location){
+    let loc=location+"/"+name.toLowerCase();
     if (name == "Nose_front")
-        loc = "body/nose";
+        loc = "body/nose"; 
 
-    portrait_objects.push({name: name,location: loc, item_list: list, colourNum: col, value_list: listOf(0),  colour: 0, image_list: newImageList()});
+    portrait_objects.push({name: name,location: loc, item_list: list, colour: true, value_list: listOf(0),  colour: 0, image_list: newImageList()});
 }
 
 function print_portrait_objects(){

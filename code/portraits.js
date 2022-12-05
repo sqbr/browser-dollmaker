@@ -38,9 +38,9 @@ const hairNum = 23; //how many hair colours there are
 const outfitNum = 30; //how many clothing colours there are
 const full_body_list = body_list+hair_list;
 
-const coat_back_list = ["none","suit jacket","jacket","hoodie",];
-const hat_back_list = ["none","sunhat","wizard",];
-const hat_dec_list = ["none",];
+const coat_back_list_port = ["none","suit jacket","jacket","hoodie",];
+const hat_back_list_port = ["none","sunhat","wizard",];
+const hat_dec_list_port = ["none","cap_joja",];
 const hair_back_list = ["none","short",];
 const ears_list = ["regular",];
 const torso_list = ["medium",];
@@ -52,6 +52,7 @@ const eye_list = ["medium",];
 const mouth_list = ["flat",];
 const earrings_list_port = ["none","studs",];
 const shirt_list_port = ["none","button up","tshirt",];
+const shirt_dec_list_port = ["none",];
 const neckwear_list_port = ["none","tie",];
 const shirt_collar_list = ["none","button up",];
 const pants_top_list_port = ["none","overalls",];
@@ -62,30 +63,31 @@ const hair_middle_list = ["none","sidepart",];
 const hair_front_list = ["none","emo",];
 const hat_list_port = ["none","sunhat","cap","headphones","wizard",];
 
-add_portrait_object("Coat_back",coat_back_list)
-add_portrait_object("Hat_back",hat_back_list)
-add_portrait_object("Hat_dec",hat_dec_list)
-add_portrait_object("Hair_back",hair_back_list)
-add_portrait_object("Ears",ears_list)
-add_portrait_object("Torso",torso_list)
-add_portrait_object("Head",head_list)
-add_portrait_object("Complexion",complexion_list)
-add_portrait_object("Nose",nose_list)
-add_portrait_object("Eyebrows",eyebrow_list)
-add_portrait_object("Eyes",eye_list)
-add_portrait_object("Mouth",mouth_list)
-add_portrait_object("Earrings",earrings_list_port)
-add_portrait_object("Shirt",shirt_list_port)
-add_portrait_object("Neckwear",neckwear_list_port)
-add_portrait_object("Shirt_collar",shirt_collar_list)
-add_portrait_object("Pants_top",pants_top_list_port)
-add_portrait_object("Coat",coat_list_port)
-add_portrait_object("Facial_hair",facial_hair_list_port)
-add_portrait_object("Nose_front",nose_list)
-add_portrait_object("Eyewear",eyewear_list_port)
-add_portrait_object("Hair_middle",hair_middle_list)
-add_portrait_object("Hair_front",hair_front_list)
-add_portrait_object("Hat",hat_list_port)
+add_portrait_object("Coat_back",coat_back_list_port,"outfit/coat")
+add_portrait_object("Hat_back",hat_back_list_port,"outfit/hat")
+add_portrait_object("Hat_dec",hat_dec_list_port,"outfit/hat")
+add_portrait_object("Hair_back",hair_back_list,"body/hair")
+add_portrait_object("Ears",ears_list,"body")
+add_portrait_object("Torso",torso_list,"body")
+add_portrait_object("Head",head_list,"body")
+add_portrait_object("Complexion",complexion_list,"body")
+add_portrait_object("Nose",nose_list,"body")
+add_portrait_object("Eyebrows",eyebrow_list,"expression")
+add_portrait_object("Eyes",eye_list,"expression")
+add_portrait_object("Mouth",mouth_list,"expression")
+add_portrait_object("Earrings",earrings_list_port,"outfit")
+add_portrait_object("Shirt",shirt_list_port,"outfit")
+add_portrait_object("Shirt_dec",shirt_dec_list_port,"outfit/shirt")
+add_portrait_object("Neckwear",neckwear_list_port,"outfit")
+add_portrait_object("Shirt_collar",shirt_collar_list,"outfit/shirt")
+add_portrait_object("Pants_top",pants_top_list_port,"outfit")
+add_portrait_object("Coat",coat_list_port,"outfit")
+add_portrait_object("Facial_hair",facial_hair_list_port,"body/hair")
+add_portrait_object("Nose_front",nose_list,"body")
+add_portrait_object("Eyewear",eyewear_list_port,"outfit")
+add_portrait_object("Hair_middle",hair_middle_list,"body/hair")
+add_portrait_object("Hair_front",hair_front_list,"body/hair")
+add_portrait_object("Hat",hat_list_port,"outfit")
 
 const facial_hair_list_sprite = ["none","beard","moustache","big moustache","goatee","soul patch","fluffy goatee",];
 const facial_hair_list_menu = ["none","beard","moustache","big moustache","goatee","soul patch","fluffy goatee",];
@@ -101,4 +103,7 @@ const eyewear_list_sprite = ["none","glasses","half-glasses","shiny glasses","ro
 const eyewearlist_menu = ["none","glasses","half-glasses","shiny glasses","robot visor","sunglasses","eye-patch",];
 const earrings_list_sprite = ["none","gold drop","blue drop","studs","single stud",];
 const earrings_list_menu = ["none","studs",];
+const back_list_port = [["Hat", hat_back_list_port],["Coat", coat_back_list_port] ]
+const coat_back_list_sprite = ["none",];
+const back_list_sprite = [["Coat", coat_back_list_sprite] ]
 

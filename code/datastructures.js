@@ -157,12 +157,15 @@ function fixPortSources(){
         let b = portrait_objects[i];
         for (let j = 0; j < panelNum; j += 1){ 
             let name = b.item_list[b.value_list[j]];
-            if (b.name =="Hat_back"){
-                obj_front = findNameMatch(portrait_objects, "Hat");
-                if (hat_back_list.includes(obj_front.item_list[obj_front.value_list[j]]))
-                    name = obj_front.item_list[obj_front.value_list[j]];
+            for (let k = 0; k < back_list_port.length; k += 1){ //code to make backs of things match the fronts
+                let front_name = back_list_port[k][0];
+                if (b.name == front_name+"_back"){
+                    obj_front = findNameMatch(portrait_objects, front_name);
+                    if (back_list_port[k][1].includes(obj_front.item_list[obj_front.value_list[j]]))
+                        name = obj_front.item_list[obj_front.value_list[j]];
+                }
             }
-            if (b.colourNum==1){
+            if (!b.colour){
                 b.image_list[j].src = "images/bases/portraits/"+b.location+"/"+name+".png";
             }else{
                 if (b.name =="Nose_front"){
@@ -186,10 +189,19 @@ function fixSpriteSources(){
         b.topcorner = item.topcorner;
         b.rowNum= item.rowNum;
         b.asymmetrical = item.asymmetrical;
+        let loc = item.location
+        for (let k = 0; k < back_list_sprite.length; k += 1){ //code to make backs of things match the fronts. Not tested.
+            let front_name = back_list_sprite[k][0];
+            if (b.name == front_name+"_back"){
+                obj_front = findNameMatch(sprite_objects, front_name);
+                if (back_list_sprite[k][1].includes(obj_front.item_list[obj_front.value_list[j]]))
+                    loc = "back/"+loc;
+            }
+        }
         if (item.colour){
-            b.image.src  = "images/sprites/"+item.location+"_"+b.colour+".png";
+            b.image.src  = "images/sprites/"+loc+"_"+b.colour+".png";
         }else{
-            b.image.src = "images/bases/sprites/"+item.location+".png";
+            b.image.src = "images/bases/sprites/"+loc+".png";
         }
     }
     }
