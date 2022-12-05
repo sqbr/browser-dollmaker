@@ -91,7 +91,7 @@ function print_portrait_objects(){
         //s+=" colourNum: "+b.colourNum;
         s+="  value_list: "+b.value_list.toString();
         //s+=" colour: "+b.colour;
-        //s+=" src: "+b.image_list[0].src;
+        s+=" src: "+b.image_list[0].src;
         s+="<br>";
     }
     return s

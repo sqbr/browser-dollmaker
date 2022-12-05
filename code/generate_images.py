@@ -136,7 +136,6 @@ def add_portrait_object(name, item_list,listname, location):
 
 add_portrait_object("Coat_back", coat_back_list_port, "coat_back_list_port","outfit/coat")
 add_portrait_object("Hat_back", hat_back_list_port,"hat_back_list_port", "outfit/hat")
-add_portrait_object("Hat_dec", hat_dec_list_port,"hat_dec_list_port", "outfit/hat")
 add_portrait_object("Hair_back", hair_back_list, "hair_back_list","body/hair")
 add_portrait_object("Ears", ears_list,"ears_list", "body")
 add_portrait_object("Torso", torso_list, "torso_list", "body")
@@ -165,6 +164,7 @@ add_portrait_object("Hair_middle", hair_middle_list,"hair_middle_list", "body/ha
 
 add_portrait_object("Hair_front", hair_front_list,"hair_front_list", "body/hair")
 add_portrait_object("Hat", hat_list_port,"hat_list_port", "outfit")
+add_portrait_object("Hat_dec", hat_dec_list_port,"hat_dec_list_port", "outfit/hat")
 
 sprite_body_list = ["tall","short","tall_bald", "short_bald"]
 
@@ -534,7 +534,7 @@ write_variables()
 #process_body_sprites()
 #process_outfit_sprites()
 for c in closet:
-    if c.name in []:
+    if c.name in ["Hat_dec"]:
         process_portrait_part(c)
 #process_all_portraits()
 #make_coat()

@@ -40,7 +40,6 @@ const full_body_list = body_list+hair_list;
 
 const coat_back_list_port = ["none","suit jacket","jacket","hoodie",];
 const hat_back_list_port = ["none","sunhat","wizard",];
-const hat_dec_list_port = ["none","cap_joja",];
 const hair_back_list = ["none","short",];
 const ears_list = ["regular",];
 const torso_list = ["medium",];
@@ -62,10 +61,10 @@ const eyewear_list_port = ["none","glasses","half-glasses","shiny glasses","robo
 const hair_middle_list = ["none","sidepart",];
 const hair_front_list = ["none","emo",];
 const hat_list_port = ["none","sunhat","cap","headphones","wizard",];
+const hat_dec_list_port = ["none","cap_joja",];
 
 add_portrait_object("Coat_back",coat_back_list_port,"outfit/coat")
 add_portrait_object("Hat_back",hat_back_list_port,"outfit/hat")
-add_portrait_object("Hat_dec",hat_dec_list_port,"outfit/hat")
 add_portrait_object("Hair_back",hair_back_list,"body/hair")
 add_portrait_object("Ears",ears_list,"body")
 add_portrait_object("Torso",torso_list,"body")
@@ -88,6 +87,7 @@ add_portrait_object("Eyewear",eyewear_list_port,"outfit")
 add_portrait_object("Hair_middle",hair_middle_list,"body/hair")
 add_portrait_object("Hair_front",hair_front_list,"body/hair")
 add_portrait_object("Hat",hat_list_port,"outfit")
+add_portrait_object("Hat_dec",hat_dec_list_port,"outfit/hat")
 
 const facial_hair_list_sprite = ["none","beard","moustache","big moustache","goatee","soul patch","fluffy goatee",];
 const facial_hair_list_menu = ["none","beard","moustache","big moustache","goatee","soul patch","fluffy goatee",];

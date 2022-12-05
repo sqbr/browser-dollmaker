@@ -165,7 +165,7 @@ function fixPortSources(){
                         name = obj_front.item_list[obj_front.value_list[j]];
                 }
             }
-            if (!b.colour){
+            if (false){//since all portrait items are coloured
                 b.image_list[j].src = "images/bases/portraits/"+b.location+"/"+name+".png";
             }else{
                 if (b.name =="Nose_front"){
