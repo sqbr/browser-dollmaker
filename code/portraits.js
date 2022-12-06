@@ -61,7 +61,7 @@ const eyewear_list_port = ["none","glasses","half-glasses","shiny glasses","robo
 const hair_middle_list = ["none","sidepart",];
 const hair_front_list = ["none","emo",];
 const hat_list_port = ["none","sunhat","cap","headphones","wizard",];
-const hat_dec_list_port = ["none","cap_joja",];
+const hat_dec_list_port = ["none","cap_joja","cap_joja2","sunhat",];
 
 add_portrait_object("Coat_back",coat_back_list_port,"outfit/coat")
 add_portrait_object("Hat_back",hat_back_list_port,"outfit/hat")
