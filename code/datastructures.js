@@ -355,7 +355,7 @@ function setMenu(variablelist, number){
             htmlString+="</div>"
             break;    
         case 1: //editing the outfit
-            document.getElementById("test").innerHTML = "boop";
+            document.getElementById("test").innerHTML = print_menu_objects();
             for (let i = 0; i < menu_object_names.length; i += 1) {
                 htmlString+="<div class=\"grid-choices\">"
                 let current_item = menu_object_names[i];
@@ -365,6 +365,7 @@ function setMenu(variablelist, number){
                 else
                     htmlString+=makeDropbtnString(current_item, [current_item], obj.name_list, "setClothing");
                 htmlString+=makeDropbtnString(current_item+" Colour", [current_item], outfit_colours, "setClothingColour");
+                htmlString+=makeDropbtnString(current_item+" Colour", [current_item], outfit_colours, "setClothing2Colour");
                 htmlString+="</div>"
             }    
             /*htmlString+="<div class=\"grid-choices\">"

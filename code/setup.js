@@ -70,6 +70,16 @@ function newImageList(){
 
 }
 
+function xor(list1,list2){
+    //return everything in list1 not in list2
+    let output = [];
+    for (let i=0;i<list1.length;i++) {
+        if(!list2.includes(list1[i]))
+            output.push(list1[i]);
+    }
+    return output;
+}
+
 //Setting up portrait data
 const portrait_objects =[];
 

@@ -17,8 +17,9 @@ ports_list: list of lists [portrait object name, item number]
 sprites_list:list of lists [sprite object name, item number]
 */
 function add_menu_object(name, list_list, colour_list, port_item_list, port_second_list, sprite_item_list, sprite_second_list){
-    //let sprite_main_list = sprite_item_list.filter(sprite_second_list.includes);
-    menu_objects.push({name: name,list_list: list_list, name_list: list_list.map(firstElement),colour_list: colour_list, port_item_list: port_item_list, sprite_item_list: sprite_item_list, port_second_list: port_second_list, sprite_second_list: sprite_second_list, item: 0,  colour: 0, colour2: 0 });
+    let sprite_main_list = xor(sprite_item_list, sprite_second_list);
+    let port_main_list = xor(port_item_list, port_second_list);
+    menu_objects.push({name: name,list_list: list_list, name_list: list_list.map(firstElement),colour_list: colour_list, port_item_list: port_item_list, sprite_item_list: sprite_item_list, port_second_list: port_second_list, sprite_second_list: sprite_second_list, sprite_main_list: sprite_main_list, port_main_list: port_main_list, item: 0,  colour: 0, colour2: 0 });
 }
 
 const none_menu = ["none",[],[]];
@@ -56,7 +57,7 @@ for (let i = 0; i < gloves_names.length; i += 1) {
     gloves_menu_list.push([gloves_names[i],[],[i+1]])
 }
 
-add_menu_object("Hat", hat_menu_list, outfit_colours,["Hat","Hat_dec"],[], ["Hat"], []);
+add_menu_object("Hat", hat_menu_list, outfit_colours,["Hat","Hat_dec"],["Hat_dec"], ["Hat"], []);
 add_menu_object("Neckwear", neckwear_menu_list, outfit_colours,["Neckwear"],[], ["Neckwear"],[]);
 add_menu_object("Eyewear", eyewear_menu_list, outfit_colours,["Eyewear"],[],["Eyewear"],[]);
 add_menu_object("Earrings", earrings_menu_list, outfit_colours,["Earrings"],[],["Earrings"],[]);
@@ -124,8 +125,17 @@ function setSpriteColour(variablelist, number){
 function setClothingColour(variablelist, number){
     for (let i = 0; i < variablelist.length; i += 1) {
         let menu_obj = findNameMatch(menu_objects, variablelist[i]);
-        setPortColour(menu_obj.port_item_list,number);
-        setSpriteColour(menu_obj.sprite_item_list,number);
+        setPortColour(menu_obj.port_main_list,number);
+        setSpriteColour(menu_obj.sprite_main_list,number);
+    } 
+    drawCanvas();
+}
+
+function setClothing2Colour(variablelist, number){
+    for (let i = 0; i < variablelist.length; i += 1) {
+        let menu_obj = findNameMatch(menu_objects, variablelist[i]);
+        setPortColour(menu_obj.port_second_list,number);
+        setSpriteColour(menu_obj.sprite_second_list,number);
     } 
     drawCanvas();
 }
@@ -260,7 +270,9 @@ function print_menu_objects(){
     for (i = 0; i < menu_objects.length; i += 1){
         b = menu_objects[i];
         s+="name: "+b.name;
-        s+=" name_list: "+b.name_list.toString();
+        s+=" port_main_list: "+b.port_main_list.toString();
+        s+=" port_second_list: "+b.port_second_list.toString();
+        //s+=" name_list: "+b.name_list.toString();
         //s+="  colour_list: "+b.colour_list.toString();
         s+=" item: "+b.item;
         //s+=" colour: "+b.colour;
@@ -274,8 +286,9 @@ function print_menu_list(listname){
     for (i = 0; i < listname.length; i += 1){
         s+="name: "+b.name;
         s+=" name_list: "+b.name_list.toString();
+        
         //s+="  colour_list: "+b.colour_list.toString();
-        s+=" item: "+b.item;
+        //s+=" item: "+b.item;
         //s+=" colour: "+b.colour;
         s+="<br>";
     }
