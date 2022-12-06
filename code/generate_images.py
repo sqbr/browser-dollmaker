@@ -512,12 +512,14 @@ def process_body_sprites():
 def process_outfit_sprites():
     for c in range(len(outfit_colours)): 
         #process_image("eyewear", "sprites/accessories/eyewear", c, outfit_colours,"blue") 
-        process_image("hats_colour", "sprites/outfit/hats", c, outfit_colours,"skin")
+        #process_image("hats_colour", "sprites/outfit/hats", c, outfit_colours,"skin")
+        process_image("hats_dec", "sprites/outfit/hats", c, outfit_colours,"skin")
     #    process_image("pants", "sprites/outfit/pants", c, outfit_colours,"blue")
         #process_image("briefs", "sprites/outfit/pants", c, outfit_colours,"blue")
     #    process_image("shirts", "sprites/outfit/shirts", c, outfit_colours,"grey")
         #process_image("shirt decs", "sprites/outfit/shirts/decorations", c, outfit_colours,"grey")
         #process_image("coat", "sprites/outfit/coat", c, outfit_colours,"grey")
+        process_image("coat_back", "sprites/outfit/coat", c, outfit_colours,"skin")
         #process_image("neckwear", "sprites/accessories/neckwear", c, outfit_colours,"grey")
         #process_image("earrings", "sprites/accessories/earrings", c, outfit_colours,"")
         #for height in ["short","tall"]:
@@ -532,9 +534,9 @@ def process_outfit_sprites():
 write_temp()
 write_variables()
 #process_body_sprites()
-#process_outfit_sprites()
+process_outfit_sprites()
 for c in closet:
-    if c.name in ["Hat_dec"]:
+    if c.name in [""]:
         process_portrait_part(c)
 #process_all_portraits()
 #make_coat()
