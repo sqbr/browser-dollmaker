@@ -47,7 +47,8 @@ back_list_sprite = [["Coat", coat_back_list_sprite] ]
 #extras
 shirt_collar_list = ["none","button up"]
 hat_dec_list_port = ["none", "cap_joja","cap_joja2","sunhat"]
-shirt_dec_list_port = ["none"]
+shirt_dec_list_port = ["none","button_up_plaid"]
+shirt_collar_dec_list_port = ["none","button_up_plaid"]
 
 #The same for sprites and portraits
 facial_hair_list_port = ["none", "beard", "moustache", "big moustache", "goatee", "soul patch", "fluffy goatee", ]
@@ -154,6 +155,7 @@ add_portrait_object("Shirt", shirt_list_port,"shirt_list_port", "outfit")
 add_portrait_object("Shirt_dec", shirt_dec_list_port,"shirt_dec_list_port", "outfit/shirt")
 add_portrait_object("Neckwear", neckwear_list_port,"neckwear_list_port", "outfit")
 add_portrait_object("Shirt_collar", shirt_collar_list,"shirt_collar_list", "outfit/shirt")
+add_portrait_object("Shirt_collar_dec", shirt_collar_dec_list_port,"shirt_collar_dec_list_port", "outfit/shirt")
 add_portrait_object("Pants_top", pants_top_list_port,"pants_top_list_port", "outfit")
 add_portrait_object("Coat", coat_list_port,"coat_list_port", "outfit")
 
@@ -462,7 +464,7 @@ def write_variables():
     content.write(list_string("coat_list_sprite", coat_list_sprite))
     content.write(list_string("coat_list_menu", coat_list_menu))
     content.write(list_string("eyewear_list_sprite", eyewear_list_sprite))
-    content.write(list_string("eyewearlist_menu", eyewear_list_menu))
+    content.write(list_string("eyewear_list_menu", eyewear_list_menu))
     content.write(list_string("earrings_list_sprite", earrings_list_sprite))
     content.write(list_string("earrings_list_menu", earrings_list_menu))
     content.write("const back_list_port = [[\"Hat\", hat_back_list_port],[\"Coat\", coat_back_list_port] ]\n")
@@ -511,12 +513,12 @@ def process_body_sprites():
 
 def process_outfit_sprites():
     for c in range(len(outfit_colours)): 
-        #process_image("eyewear", "sprites/accessories/eyewear", c, outfit_colours,"blue") 
-        process_image("hats_colour", "sprites/outfit/hats", c, outfit_colours,"skin")
+        #process_image("eyewear", "sprites/accessories/eyewear", c, outfit_colours,"skin") 
+        #process_image("hats_colour", "sprites/outfit/hats", c, outfit_colours,"skin")
         #process_image("hats_dec", "sprites/outfit/hats", c, outfit_colours,"skin")
     #    process_image("pants", "sprites/outfit/pants", c, outfit_colours,"blue")
         #process_image("briefs", "sprites/outfit/pants", c, outfit_colours,"blue")
-    #    process_image("shirts", "sprites/outfit/shirts", c, outfit_colours,"grey")
+        process_image("shirts", "sprites/outfit/shirts", c, outfit_colours,"grey")
         #process_image("shirt decs", "sprites/outfit/shirts/decorations", c, outfit_colours,"grey")
         #process_image("coat", "sprites/outfit/coat", c, outfit_colours,"grey")
         #process_image("coat_back", "sprites/outfit/coat", c, outfit_colours,"skin")
@@ -534,9 +536,9 @@ def process_outfit_sprites():
 write_temp()
 write_variables()
 #process_body_sprites()
-#process_outfit_sprites()
+process_outfit_sprites()
 for c in closet:
-    if c.name in ["Hat_dec"]:
+    if c.name in []: #["Shirt_dec","Shirt_collar_dec"]:
         process_portrait_part(c)
 #process_all_portraits()
 #make_coat()

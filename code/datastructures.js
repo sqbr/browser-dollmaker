@@ -355,7 +355,7 @@ function setMenu(variablelist, number){
             htmlString+="</div>"
             break;    
         case 1: //editing the outfit
-            document.getElementById("test").innerHTML = hat_dec_sprite_list.toString(); //print_sprite_list(sprite_hat_dec_list);
+            document.getElementById("test").innerHTML = print_sprite_list(sprite_shirt1_list);
             for (let i = 0; i < menu_object_names.length; i += 1) {
                 htmlString+="<div class=\"grid-choices\">"
                 let current_item = menu_object_names[i];

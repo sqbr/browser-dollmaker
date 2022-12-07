@@ -51,9 +51,10 @@ const eye_list = ["medium",];
 const mouth_list = ["flat",];
 const earrings_list_port = ["none","studs",];
 const shirt_list_port = ["none","button up","tshirt",];
-const shirt_dec_list_port = ["none",];
+const shirt_dec_list_port = ["none","button_up_plaid",];
 const neckwear_list_port = ["none","tie",];
 const shirt_collar_list = ["none","button up",];
+const shirt_collar_dec_list_port = ["none","button_up_plaid",];
 const pants_top_list_port = ["none","overalls",];
 const coat_list_port = ["none","suit jacket","jacket","hoodie",];
 const facial_hair_list_port = ["none","beard","moustache","big moustache","goatee","soul patch","fluffy goatee",];
@@ -79,6 +80,7 @@ add_portrait_object("Shirt",shirt_list_port,"outfit")
 add_portrait_object("Shirt_dec",shirt_dec_list_port,"outfit/shirt")
 add_portrait_object("Neckwear",neckwear_list_port,"outfit")
 add_portrait_object("Shirt_collar",shirt_collar_list,"outfit/shirt")
+add_portrait_object("Shirt_collar_dec",shirt_collar_dec_list_port,"outfit/shirt")
 add_portrait_object("Pants_top",pants_top_list_port,"outfit")
 add_portrait_object("Coat",coat_list_port,"outfit")
 add_portrait_object("Facial_hair",facial_hair_list_port,"body/hair")
@@ -100,7 +102,7 @@ const neckwear_list_menu = ["none","tie",];
 const coat_list_sprite = ["none","suit jacket","jacket","hoodie",];
 const coat_list_menu = ["none","suit jacket","jacket","hoodie",];
 const eyewear_list_sprite = ["none","glasses","half-glasses","shiny glasses","robot visor","sunglasses","eye-patch",];
-const eyewearlist_menu = ["none","glasses","half-glasses","shiny glasses","robot visor","sunglasses","eye-patch",];
+const eyewear_list_menu = ["none","glasses","half-glasses","shiny glasses","robot visor","sunglasses","eye-patch",];
 const earrings_list_sprite = ["none","gold drop","blue drop","studs","single stud",];
 const earrings_list_menu = ["none","studs",];
 const back_list_port = [["Hat", hat_back_list_port],["Coat", coat_back_list_port] ]

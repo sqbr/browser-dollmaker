@@ -26,12 +26,11 @@ const gloves_names = ["Mittens"];
 
 const sleeves_names =["Sleeves"];
 
-const coloured_shirts_names = ["Classic overalls", "Shirt", "Mint Blouse", "Dark Shirt", "Skull Shirt", 
-"Light Blue Shirt","Tan Striped Shirt","Green Overalls",'"Good Grief" Shirt',"Aquamarine Shirt","Suit Top","Green Belted Shir","Lime Green Striped Shirt","Red Striped Shirt","Skeleton Shirt","Orange Shirt","Night Sky Shirt","Mayoral Suspenders","Brown Jacket","Sailor Shirt","Green Vest","Yellow and Green Shirt"]
+const coloured_shirts_names = ["Classic overalls", "Shirt", "Mint Blouse", "Dark Shirt", "Skull Shirt", "Light Blue Shirt","Tan Striped Shirt","Green Overalls",'"Good Grief" Shirt',"Aquamarine Shirt","Suit Top","Green Belted Shir","Lime Green Striped Shirt","Red Striped Shirt","Skeleton Shirt","Orange Shirt","Night Sky Shirt","Mayoral Suspenders","Brown Jacket","Sailor Shirt","Green Vest","Yellow and Green Shirt"]
 
-const uncoloured_shirts_names = ["Striped Shirt","Tank Top (low neck)","Tank Top","Crop Tank Top (Low neck)", "Crop Tank Top","Bikini Top","80's Shirt (curvy)","Crop Top Shirt","???","Strapped Top","Button Down Shirt","Tube Top",]
+const uncoloured_shirts_names = ["Striped Shirt","Tank Top (low neck)","Tank Top","Crop Tank Top (Low neck)", "Crop Tank Top","Bikini Top","80's Shirt (curvy)","Crop Top Shirt","???","Strapped Top","Button Down Shirt","Crop top", "Tube Top","muscle T", "checked","crop m","crop f","tshirt m","tshirt f","skull","face" ]
 
-const shirt_dec_names = ["fish", "gi", "high waist", "letterman", "skeleton", "overalls", "star", "sports shoulders", "heart", "overalls2?", "collar", "necklace", "necklace2", "dot?", "dot?", "collar", "sailor", "sailor2", "bandana", "Dark Highlight Shirt", "dots", "silky", "vest sleeves", "oily?", "vest"]
+const shirt_dec_names = ["fish", "plaid", "", "","letterman", "skeleton", "", "star", "sports shoulders", "heart", "", "collar", "", "", "dot?", "dot?", "collar", "sailor under", "sailor over", "bandana", "Dark Highlight Shirt", "dots", "silky", "vest sleeves", "oily?", "vest","",""]
 
 const hat_dec_sprite_list = ["top hat", "earmuffs", "flower","clip","cap 1","cap 2","backwards cap", "big bow", "cat ears", "flat cap", "wide hat", "cowboy hat", "hood", "beanie", "ribbed beanie", "turban", "hijab", "headphones","wizard"]
 /*
@@ -84,25 +83,33 @@ sprite_pants_top_list.push({name: "high waist", location: "outfit/shirts/decorat
 sprite_pants_top_list.push({name: "overalls", location: "outfit/shirts/decorations/shirt decs", colour: true, asymmetrical: false,rowNum: 4,topcorner:[8*12,32]});
 
 const sprite_shirt1_list = [none];
-for (let column =0; column<13;column++)
-    for (let row =0; row<19;row++){
-        let current_num = 13*row+column;
+for (let row =0; row<2;row++)
+    for (let column =0; column<14;column++){
+        let current_num = 14*row+column;
         if (current_num <uncoloured_shirts_names.length)
-            sprite_shirt1_list.push({name: uncoloured_shirts_names[current_num], location: "outfit/shirts/shirts", colour: true, asymmetrical: false,rowNum: 4,topcorner:[8*column,32*row]})
+            sprite_shirt1_list.push({name: uncoloured_shirts_names[current_num]+row+","+column, location: "outfit/shirts/shirts", colour: true, asymmetrical: false,rowNum: 4,topcorner:[8*column,32*row]})
 }
 for (let column =0; column<16;column++)
     for (let row =0; row<19;row++){
         let current_num = 16*row+column;
         if (current_num <coloured_shirts_names.length)
-            sprite_shirt1_list.push({name: coloured_shirts_names[current_num], location: "outfit/shirts/shirts", colour: false, asymmetrical: false,rowNum: 4,topcorner:[8*column,8*row]})
+            sprite_shirt1_list.push({name: coloured_shirts_names[current_num], location: "outfit/shirts/shirts", colour: false, asymmetrical: false,rowNum: 4,topcorner:[8*column,32*row]})
 }
 
 const sprite_shirt2_list = [none];
-for (let column =0; column<16;column++)
-    for (let row =0; row<2;row++){
+for (let row =0; row<2;row++)
+    for (let column =0; column<16;column++){
         let current_num = 16*row+column;
         if (current_num <shirt_dec_names.length)
-            sprite_shirt2_list.push({name: shirt_dec_names[current_num], location: "outfit/shirts/decorations/shirt decs", colour: true, asymmetrical: false,rowNum: 4,topcorner:[8*column,8*row]})
+            sprite_shirt2_list.push({name: shirt_dec_names[current_num], location: "outfit/shirts/decorations/shirt decs", colour: true, asymmetrical: false,rowNum: 4,topcorner:[8*column,32*row]})
+}
+
+const sprite_shirt_dec_list = [none];
+for (let row =0; row<2;row++)
+    for (let column =0; column<16;column++){
+        let current_num = 16*row+column;
+        if (current_num <shirt_dec_names.length)
+            sprite_shirt_dec_list.push({name: shirt_dec_names[current_num], location: "outfit/shirts/decorations/shirt decs", colour: true, asymmetrical: false,rowNum: 4,topcorner:[8*column,32*row]})
 }
 
 const sprite_coat_list = [none];
@@ -224,6 +231,7 @@ add_sprite_object("Shoes", sprite_shoes_list,["None"].concat(shoes_names), outfi
 add_sprite_object("Pants", sprite_pants_list,sprite_pants_list.map(nameOf), outfit_colours,true,false,0, [16,32],[0,0]);
 add_sprite_object("Shirt1", sprite_shirt1_list,sprite_shirt1_list.map(nameOf),outfit_colours,false,true,1, [8,8],[4,15]);
 add_sprite_object("Shirt2", sprite_shirt2_list,sprite_shirt2_list.map(nameOf),outfit_colours,false,true,1, [8,8],[4,15]);
+add_sprite_object("Shirt_dec", sprite_shirt_dec_list,sprite_shirt_dec_list.map(nameOf),outfit_colours,false,true,1, [8,8],[4,15]);
 add_sprite_object("Pants top", sprite_pants_top_list,sprite_pants_top_list.map(nameOf), outfit_colours,false,true,1, [8,8],[4,15]);
 add_sprite_object("Eyewear", sprite_eyewear_list,sprite_eyewear_list.map(nameOf),outfit_colours,false,true,1, [16,16],[0,2]);
 add_sprite_object("Neckwear", sprite_neckwear_list,sprite_neckwear_list.map(nameOf), outfit_colours,false,true,1, [16,32],[0,2]);
@@ -249,8 +257,10 @@ function print_sprite_objects(){
             s+=(b.item_list[j]).name+", ";*/
         //s+="  colour_list: "+b.colour_list.toString();
         s+=" item: "+b.item;
+        s+="Current item :"+(b.item_list[b.item]).name
         //s+=" colour: "+b.colour;
-        s+=" heightOffset: "+b.heightOffset;
+        //s+=" heightOffset: "+b.heightOffset;
+        s+=" top corner: "+b.topcorner;
         s+=" src: "+b.image.src;
         s+="<br>";
     }
