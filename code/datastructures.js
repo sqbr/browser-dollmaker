@@ -164,6 +164,7 @@ function fixPortSources(){
                     obj_front = findNameMatch(portrait_objects, front_name);
                     if (back_list_port[k][1].includes(obj_front.item_list[obj_front.value_list[j]]))
                         name = obj_front.item_list[obj_front.value_list[j]];
+                        b.colour = obj_front.colour
                 }
             }
             if (false){//since all portrait items are coloured
@@ -338,15 +339,11 @@ function setMenu(variablelist, number){
             htmlString+=makeDropbtnString("Head Shape", ["Head"], head_list, "setPortVariable");
             htmlString+=makeDropbtnString("Ear Shape", ["Ears"], ears_list, "setPortVariable");
             htmlString+=makeDropbtnString("Nose Shape", ["Nose","Nose_front"], nose_list, "setPortVariable");
-            htmlString+="</div>"
-            htmlString+="<div class=\"grid-choices\">"
-            htmlString+=makeDropbtnString("Hair back", ["Hair_back"], hair_back_list, "setPortVariable");
-            htmlString+=makeDropbtnString("Hair middle", ["Hair_middle"], hair_middle_list, "setPortVariable");
-            htmlString+=makeDropbtnString("Hair front", ["Hair_front"], hair_front_list, "setPortVariable");
-            htmlString+="</div>"  
+            htmlString+="</div>" 
             
             htmlString+="<div class=\"grid-choices\">"
-            htmlString+=makeDropbtnString("Hair style", ["Hairstyle","Hairstyle_top"], sprite_hair_list.map(nameOf), "setSpriteHair");
+            let obj = findNameMatch(menu_objects, "Hairstyle");
+            htmlString+=makeDropbtnString("Hairstyle", ["Hairstyle"], obj.name_list, "setClothing");
             htmlString+=makeDropbtnString("Height", ["Torso"], ["Short","Tall"], "setHeight");
             htmlString+=makeDropbtnString("Eyelashes", ["Eyes"], eyelash_list, "setSpriteVariable");
             htmlString+="</div>"  
@@ -358,16 +355,19 @@ function setMenu(variablelist, number){
         case 1: //editing the outfit
             document.getElementById("test").innerHTML = print_sprite_list(sprite_shirt1_list);
             for (let i = 0; i < menu_object_names.length; i += 1) {
-                htmlString+="<div class=\"grid-choices\">"
                 let current_item = menu_object_names[i];
-                let obj = findNameMatch(menu_objects, current_item);
-                if (["Shoes","Gloves"].includes(current_item))
-                    htmlString+=makeDropbtnString(current_item, [current_item], obj.name_list, "set"+current_item);
-                else
-                    htmlString+=makeDropbtnString(current_item, [current_item], obj.name_list, "setClothing");
-                htmlString+=makeDropbtnString(current_item+" Colour", [current_item], outfit_colours, "setClothingColour");
-                htmlString+=makeDropbtnString(current_item+" Colour", [current_item], outfit_colours, "setClothing2Colour");
-                htmlString+="</div>"
+                if (current_item != "Hairstyle"){
+                    htmlString+="<div class=\"grid-choices\">"
+                    
+                    let obj = findNameMatch(menu_objects, current_item);
+                    if (["Shoes","Gloves"].includes(current_item))
+                        htmlString+=makeDropbtnString(current_item, [current_item], obj.name_list, "set"+current_item);
+                    else
+                        htmlString+=makeDropbtnString(current_item, [current_item], obj.name_list, "setClothing");
+                    htmlString+=makeDropbtnString(current_item+" Colour", [current_item], outfit_colours, "setClothingColour");
+                    htmlString+=makeDropbtnString(current_item+" Colour", [current_item], outfit_colours, "setClothing2Colour");
+                    htmlString+="</div>"
+                }
             }    
             break;    
         case 2: //editing the expression
@@ -543,9 +543,10 @@ function setup(){
     setSkinColour([],2);
     setBothColour(['Eyes'],0);
     setHairColour([],11);
-    //setBothVariable(['Facial_hair'],5);
-    setSpriteHair([],5);
-    setPortVariable(["Hair_back","Hair_front","Hair_middle"],1)
+    setBothVariable(['Facial_hair'],5);
+    //setSpriteHair([],5);
+    //setPortVariable(["Hair_back","Hair_front"],2)
+    setClothing(["Hairstyle"],1);
     setPortVariable(["Nose"],2)
     setPortVariable(['Head'],1)
 
@@ -556,8 +557,10 @@ function setup(){
     setClothing(["Pants"],2);
     setClothingColour(["Pants"],29);
     setClothing(["Shirt"],1);
-    setClothingColour(["Shirt"],29);
+    setClothingColour(["Shirt"],28);
     setClothing2Colour(["Shirt"],10);
+    setClothing(["Coat"],2);
+    setClothingColour(["Coat"],28);
     //setClothing(["Neckwear"],0);
     //setClothingColour(["Neckwear"],1);
     //setClothing(["Eyewear"],1);

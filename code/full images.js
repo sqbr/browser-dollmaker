@@ -26,13 +26,15 @@ const none_menu = ["none",[],[]];
 
 const hat_menu_list = [ none_menu,["Headphones",[3,0],[90,0]],["Sun Hat",[1,3],[83,11]],["Cap",[2,0],[78,0]],["Joja Cap",[2,1],[78,5]],["Joja Cap 2",[2,2],[78,6]],["Wizard",[4,0],[91,0]],];
 
+const hair_menu_list = [ none_menu,["Short Shaggy",[1,1],[5]],["Emo Bob",[2,2],[10]]];
+
 const neckwear_menu_list = [ none_menu, ["Tie",[1],[4]]];
 
 const eyewear_menu_list = [ none_menu,["Glasses",[1],[1]]];
 
 const earrings_menu_list = [ none_menu,["Studs",[1],[3]]];
 
-const coat_menu_list = [ none_menu, ["Short Coat",[1],[1,1,0]],["Hoodie",[3],[1,1,0]],["Cool Jacket",[2],[1,1,0]]];
+const coat_menu_list = [ none_menu, ["Short Coat",[1],[1,1,0]],["Hoodie",[3],[5,1,0]],["Cool Jacket",[2],[6,1,0]]];
 
 const shirt_menu_list = [ none_menu,["T-Shirt",[2,0,0,0],[19,0,0,0]], ["Short-sleeve Buttoned",[1,1,0,0],[12,0,0,0]], ["Long-sleeve Buttoned",[1,1,0,0],[12,0,0,1]],["Short-sleeve Plaid",[1,1,1,1],[12,0,2,0]], ["Long-sleeve Plaid",[1,1,1,1],[12,0,2,1]]]
 
@@ -55,6 +57,7 @@ for (let i = 0; i < gloves_names.length; i += 1) {
 }
 
 add_menu_object("Hat", hat_menu_list, outfit_colours,["Hat","Hat_dec"],["Hat_dec"], ["Hat","Hat_dec"], ["Hat_dec"]);
+add_menu_object("Hairstyle", hair_menu_list, hair_colours,["Hair_front","Hair_back"],[], ["Hairstyle"], []);
 add_menu_object("Neckwear", neckwear_menu_list, outfit_colours,["Neckwear"],[], ["Neckwear"],[]);
 add_menu_object("Eyewear", eyewear_menu_list, outfit_colours,["Eyewear"],[],["Eyewear"],[]);
 add_menu_object("Earrings", earrings_menu_list, outfit_colours,["Earrings"],[],["Earrings"],[]);

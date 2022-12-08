@@ -113,7 +113,7 @@ for (let row =0; row<2;row++)
 }
 
 const sprite_coat_list = [none];
-for (let column =0; column<1;column++){
+for (let column =0; column<8;column++){
         if (column <coat_list_sprite.length)
             sprite_coat_list.push({name: coat_list_sprite[column+1], location: "outfit/coat/coat", colour: true, asymmetrical: false,rowNum: 3,topcorner:[16*column,0]})
 }

@@ -20,9 +20,9 @@ skin_list = body_list + ["Eyebrows", "Mouth","Blush"]
 #Only in portraits
 hair_list = ["Hair_back", "Hair_middle","Hair_front","Facial_hair"]
 
-hair_front_list = ["none", "shaggy side"]
+hair_front_list = ["none", "shaggy side","emo"]
 hair_middle_list = ["none"]
-hair_back_list = ["none", "shaggy medium"]
+hair_back_list = ["none", "shaggy medium","bob"]
 
 torso_list = ["medium"]
 head_list =["square","medium","round"]
@@ -70,7 +70,7 @@ neckwear_list_sprite = ["none", "bandana", "necklace", "bow-tie", "tie", "choker
 neckwear_list_menu = neckwear_list_port
 
 coat_list_port = coat_back_list_port
-coat_list_sprite = coat_list_port
+coat_list_sprite = ["none","short coat","cape","closed","closed low cut","closed hoodie","jacket"]
 coat_list_menu = coat_list_port
 
 eyewear_list_port = ["none", "glasses", "half-glasses", "shiny glasses", "robot visor", "sunglasses", "eye-patch"];
@@ -102,7 +102,7 @@ hair_weird = ["#7034ED","#B25DF6","#1B8EF6", "#53C7FB","#469951"]
 hair_grey = ["#A59A9D", "#E9E9E9",]
 hair_blonde = ["#FCE374", "#F0B50A",]
 hair_brown = ["#641D00","#923D1F", "#8B4910", "#BB742E",]
-hair_black = ["#48356E","#4B261E", "#5B483C","#5A5A7F", "#602372","#000000"]
+hair_black = ["#391E47", "#48356E","#4B261E", "#5B483C","#5A5A7F", "#602372","#000000"]
 hair_red = ["#FE7423","#FF5565", "#DF433C","#D16132"]
 
 hair_colours = hair_blonde + hair_red+ hair_brown+ hair_black+ hair_weird + hair_grey
@@ -620,8 +620,8 @@ def process_body_sprites():
             process_image(b, "sprites/body/", c, skin_colours,"skin")
         for h in ["short","tall"]:    
             process_image("arms_"+h, "sprites/body", c, skin_colours,"skin")
-    # for c in range(len(hair_colours)):  
-    #     process_image("hairstyles", "sprites/hair", c, hair_colours,"grey")
+    for c in range(len(hair_colours)):  
+         process_image("hairstyles", "sprites/hair", c, hair_colours,"grey")
     #     process_image("hairstyles2", "sprites/hair", c, hair_colours,"grey")
     #     process_image("facialhair", "sprites/hair/facialhair", c, hair_colours,"grey")
     # for c in range(len(eye_colours)):  
@@ -635,9 +635,9 @@ def process_outfit_sprites():
         #process_image("hats_dec", "sprites/outfit/hats", c, outfit_colours,"skin")
     #    process_image("pants", "sprites/outfit/pants", c, outfit_colours,"blue")
         #process_image("briefs", "sprites/outfit/pants", c, outfit_colours,"blue")
-        process_image("shirts", "sprites/outfit/shirts", c, outfit_colours,"grey")
+        #process_image("shirts", "sprites/outfit/shirts", c, outfit_colours,"grey")
         #process_image("shirt decs", "sprites/outfit/shirts/decorations", c, outfit_colours,"grey")
-        #process_image("coat", "sprites/outfit/coat", c, outfit_colours,"grey")
+        process_image("coat", "sprites/outfit/coat", c, outfit_colours,"grey")
         #process_image("coat_back", "sprites/outfit/coat", c, outfit_colours,"skin")
         #process_image("neckwear", "sprites/accessories/neckwear", c, outfit_colours,"grey")
         #process_image("earrings", "sprites/accessories/earrings", c, outfit_colours,"")
@@ -653,9 +653,9 @@ def process_outfit_sprites():
 write_temp()
 write_variables()
 #process_body_sprites()
-#process_outfit_sprites()
+process_outfit_sprites()
 for c in closet:
-    if c.name in ["Eyes","Mouth","Eyebrows"]: #["Shirt_dec","Shirt_collar_dec"]:
+    if c.name in []: #["Shirt_dec","Shirt_collar_dec"]:
         process_portrait_part(c)
 #process_all_portraits()
 #make_coat()

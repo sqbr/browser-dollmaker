@@ -27,20 +27,20 @@ const hair_grey = ["#A59A9D","#E9E9E9",];
 const hair_blonde = ["#FCE374","#F0B50A",];
 const hair_red = ["#FE7423","#FF5565","#DF433C","#D16132",];
 const hair_brown = ["#641D00","#923D1F","#8B4910","#BB742E",];
-const hair_black = ["#48356E","#4B261E","#5B483C","#5A5A7F","#602372","#000000",];
+const hair_black = ["#391E47","#48356E","#4B261E","#5B483C","#5A5A7F","#602372","#000000",];
 const hair_colours = hair_blonde.concat(hair_red,hair_brown,hair_black,hair_weird,hair_grey,);
 
 const colourlist_list = [["yellow",outfit_yellow],["green",outfit_green],["blue",outfit_blue],["purple",outfit_purple],["red",outfit_red],["brown",outfit_brown],["grey",outfit_grey],["regular",skin_regular],["weird",skin_weird],["blonde",hair_blonde],["red",hair_red],["brown",hair_brown],["black",hair_black],["weird",hair_weird],["grey",hair_grey],];
 
 const skinNum = 15; //how many skin colours there are
 const eyeNum = 5; //how many eye colours there are
-const hairNum = 23; //how many hair colours there are
+const hairNum = 24; //how many hair colours there are
 const outfitNum = 30; //how many clothing colours there are
 const full_body_list = body_list+hair_list;
 
 const coat_back_list_port = ["none","suit jacket","jacket","hoodie",];
 const hat_back_list_port = ["none","sunhat","wizard",];
-const hair_back_list = ["none","shaggy medium",];
+const hair_back_list = ["none","shaggy medium","bob",];
 const ears_list = ["regular",];
 const torso_list = ["medium",];
 const head_list = ["square","medium","round",];
@@ -61,7 +61,7 @@ const coat_list_port = ["none","suit jacket","jacket","hoodie",];
 const facial_hair_list_port = ["none","beard","moustache","big moustache","goatee","soul patch","fluffy goatee",];
 const eyewear_list_port = ["none","glasses","half-glasses","shiny glasses","robot visor","sunglasses","eye-patch",];
 const hair_middle_list = ["none",];
-const hair_front_list = ["none","shaggy side",];
+const hair_front_list = ["none","shaggy side","emo",];
 const hat_list_port = ["none","sunhat","cap","headphones","wizard",];
 const hat_dec_list_port = ["none","cap_joja","cap_joja2","sunhat",];
 
@@ -101,7 +101,7 @@ const hat_list_menu = ["none","sunhat","cap","headphones","wizard",];
 const shirt_list_menu = ["none","button up",];
 const neckwear_list_sprite = ["none","bandana","necklace","bow-tie","tie","choker",];
 const neckwear_list_menu = ["none","tie",];
-const coat_list_sprite = ["none","suit jacket","jacket","hoodie",];
+const coat_list_sprite = ["none","short coat","cape","closed","closed low cut","closed hoodie","jacket",];
 const coat_list_menu = ["none","suit jacket","jacket","hoodie",];
 const eyewear_list_sprite = ["none","glasses","half-glasses","shiny glasses","robot visor","sunglasses","eye-patch",];
 const eyewear_list_menu = ["none","glasses","half-glasses","shiny glasses","robot visor","sunglasses","eye-patch",];
