@@ -543,26 +543,26 @@ function setup(){
     setSkinColour([],2);
     setBothColour(['Eyes'],0);
     setHairColour([],11);
-    setBothVariable(['Facial_hair'],5);
+    //setBothVariable(['Facial_hair'],5);
     setSpriteHair([],5);
     setPortVariable(["Hair_back","Hair_front","Hair_middle"],1)
     setPortVariable(["Nose"],2)
     setPortVariable(['Head'],1)
 
     setShoes([],2);
-    setClothingColour(["Shoes"],30);
-    setClothing(["Gloves"],1);
-    setClothingColour(["Gloves"],4);
+    setClothingColour(["Shoes"],29);
+    //setClothing(["Gloves"],1);
+    //setClothingColour(["Gloves"],4);
     setClothing(["Pants"],2);
-    setClothingColour(["Pants"],30);
+    setClothingColour(["Pants"],29);
     setClothing(["Shirt"],1);
-    setClothingColour(["Shirt"],30);
+    setClothingColour(["Shirt"],29);
     setClothing2Colour(["Shirt"],10);
-    setClothing(["Neckwear"],0);
-    setClothingColour(["Neckwear"],1);
-    setClothing(["Eyewear"],1);
+    //setClothing(["Neckwear"],0);
+    //setClothingColour(["Neckwear"],1);
+    //setClothing(["Eyewear"],1);
     setClothingColour(["Eyewear"],5);
-    setClothing(["Earrings"],1);
+    //setClothing(["Earrings"],1);
     setClothingColour(["Earrings"],13);
     
     current_panel = 0;
