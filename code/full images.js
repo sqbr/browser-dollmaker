@@ -30,9 +30,9 @@ const neckwear_menu_list = [ none_menu, ["Tie",[1],[4]]];
 
 const eyewear_menu_list = [ none_menu,["Glasses",[1],[1]]];
 
-const earrings_menu_list = [ none_menu];
+const earrings_menu_list = [ none_menu,["Studs",[1],[3]]];
 
-const coat_menu_list = [ none_menu, ["Short Coat",[1],[1,1,0]]];
+const coat_menu_list = [ none_menu, ["Short Coat",[1],[1,1,0]],["Hoodie",[3],[1,1,0]],["Cool Jacket",[2],[1,1,0]]];
 
 const shirt_menu_list = [ none_menu,["T-Shirt",[2,0,0,0],[19,0,0,0]], ["Short-sleeve Buttoned",[1,1,0,0],[12,0,0,0]], ["Long-sleeve Buttoned",[1,1,0,0],[12,0,0,1]],["Short-sleeve Plaid",[1,1,1,1],[12,0,2,0]], ["Long-sleeve Plaid",[1,1,1,1],[12,0,2,1]]]
 

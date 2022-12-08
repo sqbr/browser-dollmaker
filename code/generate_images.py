@@ -15,24 +15,25 @@ outfit_list_spriteOnly = ["Pants","Shoes","Gloves"]
 outfit_list_both = ["Neckwear","Eyewear","Earrings", "Hat"]
 outfit_list = outfit_list_both+ outfit_list_portOnly+ outfit_list_spriteOnly
 
-skin_list = body_list + ["Eyebrows", "Mouth"]
+skin_list = body_list + ["Eyebrows", "Mouth","Blush"]
 
 #Only in portraits
 hair_list = ["Hair_back", "Hair_middle","Hair_front","Facial_hair"]
 
-hair_front_list = ["none", "emo"]
-hair_middle_list = ["none", "sidepart"]
-hair_back_list = ["none", "short"]
+hair_front_list = ["none", "shaggy side"]
+hair_middle_list = ["none"]
+hair_back_list = ["none", "shaggy medium"]
 
 torso_list = ["medium"]
 head_list =["square","medium","round"]
 complexion_list =["none","wrinkles"]
 ears_list =["regular"]
 nose_list =["none","button", "medium", "broad","round","pointed"]
-eyebrow_list = ["none", "flat_thick"]
-eye_list = ["medium"]
-mouth_list = ["flat"]
+eyebrow_list = ["none", "slightly downward","raised","flat sad","raised sad","angry"]
+eye_list = ["medium","crescents","medium side","medium narrowed","medium angry"]
+mouth_list = ["flat","smile","frown","small frown"]
 
+blush_list = ["none","small"]
 #backs
 
 coat_back_list_port = ["none","suit jacket","jacket","hoodie"]
@@ -143,6 +144,7 @@ add_portrait_object("Torso", torso_list, "torso_list", "body")
 add_portrait_object("Head", head_list, "head_list", "body")
 
 add_portrait_object("Complexion", complexion_list,"complexion_list", "body")
+add_portrait_object("Blush", blush_list,"blush_list", "expression")
 add_portrait_object("Nose", nose_list,"nose_list", "body")
 
 add_portrait_object("Eyebrows", eyebrow_list,"eyebrow_list", "expression")
@@ -186,10 +188,100 @@ def rgb_to_hex(red, green, blue):
     return '#%02x%02x%02x' % (red, green, blue)   
 
 def luminance(p):
-    return (0.299*p[0] + 0.587*p[1] + 0.114*p[2])       
+    return (0.299*p[0] + 0.587*p[1] + 0.114*p[2])   
+
+def saturation(p):
+    M = max(p)
+    m = min(p)
+    d = (M - m)/255
+    L = (M + m)/510 
+    if L ==0:
+        return 0
+    else:    
+        X = 1 - abs(2*L-1)
+        if X == 0:
+            return 0
+        return d/X     
+
+def hue(p):
+    #returns an angle between 0 and 360
+    R = p[0]
+    G = p[1]
+    B = p[2]
+    if R==G and R==B:
+        return 0
+    elif (R>=G) and G >=B:
+        return 60*(G-B)/float(R-B)
+    elif G>R and R>= B:
+        return 60*(2-(R-B)/float(G-B))
+    elif G>=B and B> R:
+        return 60*(2+(B-R)/float(G-R))
+    elif B>G and G> R:
+        return 60*(4-(G-R)/float(B-R))   
+    elif B>R and R>= G:
+        return 60*(4+(R-G)/float(B-G))   
+    else:
+        return 60*(6-(B-G)/float(R-G))  
+    
 
 def shading(colour, shadow, r ):
     return (1-r)*colour + r*colour*shadow/255
+
+def HSL_to_RGB(h,s,l):
+
+    C = (255-abs(2*l-255)*s)
+    m = l-0.5*C
+    if h <60:
+        X = C*h/60.0
+        R = C
+        G = X
+        B = 0
+    elif h<120:
+        X = C*(120-h)/60.0
+        R = X
+        G = C
+        B = 0
+    elif h<180:
+        X = C*(h-120)/60.0
+        R = 0
+        G = C
+        B = X
+    elif h<240:
+        X = C*(240-h)/60.0
+        R = 0
+        G = X
+        B = C  
+    elif h<300:
+        X = C*(h-240)/60.0
+        R = X
+        G = 0
+        B = C
+    else:
+        X = C*(360-h)/60.0
+        R = C
+        G = 0
+        B = X
+    return [int(R+m), int(G+m), int(B+m)]
+
+def blushcolour(skincolour):
+            # Given a colour string, returns the appropriate blush colour
+            # Not very reliable
+        new_colour = hex_to_rgba(skincolour)
+        # H = hue(c)
+        # S = saturation(c)
+        # V = luminance(c)
+
+        # newH = H - 0.06
+        # newS = max(min(1.42 *S, 1),0.6)
+        # newV = min (0.77*S + 0.57* V, 1)
+        # colour = HSL_to_RGB(newH, newS, newV)
+
+        shadow = hex_to_rgba("#FF0462")
+        colour = [0,0,0]
+        r = 0.3 #opacity of shadow
+        for i in range(3): #multiply
+           colour[i] = int((1-r)*new_colour[i] + r*new_colour[i]*shadow[i]/255)   
+        return colour
 
 def colour_this(pixel, colour):
     p = [pixel[0],pixel[1],pixel[2]]
@@ -208,6 +300,25 @@ def colour_this(pixel, colour):
         for i in range(3): #screen
            p[i] = int((1-r)*new_colour[i] + r*(255 - (255-new_colour[i])*(255-highlight[i])/255))    
     return (p[0],p[1],p[2],pixel[3])
+
+def colour_this_blush(pixel, colour):
+    p = [pixel[0],pixel[1],pixel[2]]
+    new_colour = blushcolour(colour)
+    if p == [255,0,0]:
+        for i in range(3):
+            p[i] = new_colour[i]      
+    elif p == [0,0,255]: #shading
+        shadow = hex_to_rgba("#FF0428")
+        r = 0.3 #opacity of shadow
+        for i in range(3): #multiply
+           p[i] = int((1-r)*new_colour[i] + r*new_colour[i]*shadow[i]/255)    
+    elif p == [0,255,0]: #highlight
+        highlight = hex_to_rgba("#f9f4ca")
+        r = 0.5 #opacity of highlight
+        for i in range(3): #screen
+           p[i] = int((1-r)*new_colour[i] + r*(255 - (255-new_colour[i])*(255-highlight[i])/255))    
+    return (p[0],p[1],p[2],pixel[3])
+
 
 def colour_this_noshadow(pixel, colour):
     p = [pixel[0],pixel[1],pixel[2]]
@@ -323,7 +434,9 @@ def process_image(name, location, colour,colour_list,type):
                 elif type =="grey":   
                     Adata[x, y] = colour_this_grey(Adata[x, y], colour_list[colour]) 
                 elif type =="blue":   
-                    Adata[x, y] = colour_this_grey(Adata[x, y], colour_list[colour])       
+                    Adata[x, y] = colour_this_grey(Adata[x, y], colour_list[colour]) 
+                elif type =="blush":   
+                    Adata[x, y] = colour_this_blush(Adata[x, y], colour_list[colour])       
                 else:    
                     Adata[x, y] = colour_this(Adata[x, y], colour_list[colour])
     img.save(save_string)    
@@ -489,8 +602,12 @@ def process_portrait_part(obj):
         loc = "portraits/"+obj.location + "/"+(obj.name).lower()   
     for c in range(len(colour_list)):
         for item in obj.item_list:
-            if item!="none":
-                process_image(item, loc, c, colour_list,"portrait")
+            if obj.name == "Blush":
+                if item!="none":
+                    process_image(item, loc, c, colour_list,"blush")
+            else:        
+                if item!="none":
+                    process_image(item, loc, c, colour_list,"portrait")
 
 
 def process_all_portraits():
@@ -536,9 +653,9 @@ def process_outfit_sprites():
 write_temp()
 write_variables()
 #process_body_sprites()
-process_outfit_sprites()
+#process_outfit_sprites()
 for c in closet:
-    if c.name in []: #["Shirt_dec","Shirt_collar_dec"]:
+    if c.name in ["Eyes","Mouth","Eyebrows"]: #["Shirt_dec","Shirt_collar_dec"]:
         process_portrait_part(c)
 #process_all_portraits()
 #make_coat()

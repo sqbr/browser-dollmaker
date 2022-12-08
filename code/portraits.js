@@ -6,7 +6,7 @@ const outfit_list_portOnly = [];
 const outfit_list_spriteOnly = ["Pants","Shoes","Gloves",];
 const outfit_list = outfit_list_both.concat(outfit_list_spriteOnly).concat(outfit_list_portOnly);
 const body_list = ["Torso","Head","Complexion","Ears","Nose","Nose_front",];
-const skin_list = ["Torso","Head","Complexion","Ears","Nose","Nose_front","Eyebrows","Mouth",];
+const skin_list = ["Torso","Head","Complexion","Ears","Nose","Nose_front","Eyebrows","Mouth","Blush",];
 const hair_list = ["Hair_back","Hair_middle","Hair_front","Facial_hair",];
 const expression_list = ["Eyes","Eyebrows","Mouth",];
 
@@ -40,15 +40,16 @@ const full_body_list = body_list+hair_list;
 
 const coat_back_list_port = ["none","suit jacket","jacket","hoodie",];
 const hat_back_list_port = ["none","sunhat","wizard",];
-const hair_back_list = ["none","short",];
+const hair_back_list = ["none","shaggy medium",];
 const ears_list = ["regular",];
 const torso_list = ["medium",];
 const head_list = ["square","medium","round",];
 const complexion_list = ["none","wrinkles",];
+const blush_list = ["none","small",];
 const nose_list = ["none","button","medium","broad","round","pointed",];
-const eyebrow_list = ["none","flat_thick",];
-const eye_list = ["medium",];
-const mouth_list = ["flat",];
+const eyebrow_list = ["none","slightly downward","raised","flat sad","raised sad","angry",];
+const eye_list = ["medium","crescents","medium side","medium narrowed","medium angry",];
+const mouth_list = ["flat","smile","frown","small frown",];
 const earrings_list_port = ["none","studs",];
 const shirt_list_port = ["none","button up","tshirt",];
 const shirt_dec_list_port = ["none","button_up_plaid",];
@@ -59,8 +60,8 @@ const pants_top_list_port = ["none","overalls",];
 const coat_list_port = ["none","suit jacket","jacket","hoodie",];
 const facial_hair_list_port = ["none","beard","moustache","big moustache","goatee","soul patch","fluffy goatee",];
 const eyewear_list_port = ["none","glasses","half-glasses","shiny glasses","robot visor","sunglasses","eye-patch",];
-const hair_middle_list = ["none","sidepart",];
-const hair_front_list = ["none","emo",];
+const hair_middle_list = ["none",];
+const hair_front_list = ["none","shaggy side",];
 const hat_list_port = ["none","sunhat","cap","headphones","wizard",];
 const hat_dec_list_port = ["none","cap_joja","cap_joja2","sunhat",];
 
@@ -71,6 +72,7 @@ add_portrait_object("Ears",ears_list,"body")
 add_portrait_object("Torso",torso_list,"body")
 add_portrait_object("Head",head_list,"body")
 add_portrait_object("Complexion",complexion_list,"body")
+add_portrait_object("Blush",blush_list,"expression")
 add_portrait_object("Nose",nose_list,"body")
 add_portrait_object("Eyebrows",eyebrow_list,"expression")
 add_portrait_object("Eyes",eye_list,"expression")

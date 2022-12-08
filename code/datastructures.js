@@ -66,6 +66,7 @@ function hexToNum(h){
     parseInt(h,16)
 
 }
+
 function colour_desc(colour){
         //returns a text description of a hex colour string. For screenreader/colourblind support.
         let R = parseInt(colour.slice(1,3),16);
@@ -368,50 +369,6 @@ function setMenu(variablelist, number){
                 htmlString+=makeDropbtnString(current_item+" Colour", [current_item], outfit_colours, "setClothing2Colour");
                 htmlString+="</div>"
             }    
-            /*htmlString+="<div class=\"grid-choices\">"
-            htmlString+=makeDropbtnString("Shirt", ["Shirt1","Shirt2"], shirt_list_port, "setShirt");
-            htmlString+=makeDropbtnString("Shirt Colour", ["Shirt1","Shirt2"], outfit_colours, "setShirtColour");
-            htmlString+="<div class=\"grid-choices\">"
-            htmlString+="</div>"
-            htmlString+=makeDropbtnString("Coat", ["Coat"], coat_list, "setCoat");
-            htmlString+=makeDropbtnString("Coat Colour", ["Coat"], outfit_colours, "setCoatColour");
-            htmlString+="</div>"
-            for (let i = 0; i < outfit_list.length; i += 1) {
-                let current_item = outfit_list[i];
-                if (outfit_list_both.includes(current_item)){
-                    let b = findNameMatch(sprite_objects, current_item);
-                    htmlString+="<div class=\"grid-choices\">"
-                    htmlString+=makeDropbtnString(current_item, [current_item], b.item_list.map(nameOf), "set"+current_item);
-                    htmlString+=makeDropbtnString(b.name+" Colour", [b.name], outfit_colours, "setBothColour");
-                    htmlString+="</div>"
-                }
-                if (current_imageType==0){
-                    if (outfit_list_portOnly.includes(current_item)){
-                        let b = findNameMatch(portrait_objects, current_item);
-                        let edit_list = [current_item];
-                        if (back_list.includes(current_item)){
-                            edit_list.push(current_item+"_back");
-                        } 
-                        htmlString+="<div class=\"grid-choices\">"
-                        htmlString+=makeDropbtnString(current_item, [current_item], b.item_list, "setPortVariable");
-                        htmlString+=makeDropbtnString(current_item+" Colour", [current_item], outfit_colours, "setPortColour");
-                        htmlString+="</div>"
-                    }
-                }
-                else{
-                    if (outfit_list_spriteOnly.includes(current_item)){
-                        let b = findNameMatch(sprite_objects, current_item);
-                        htmlString+="<div class=\"grid-choices\">"
-                        if (["Shoes","Gloves"].includes(current_item)){
-                            htmlString+=makeDropbtnString(b.name, [b.name], b.name_list, "set"+b.name);
-                        } else{
-                            htmlString+=makeDropbtnString(b.name, [b.name], b.name_list, "setSpriteVariable");
-                        }
-                        htmlString+=makeDropbtnString(b.name+" Colour", [b.name], outfit_colours, "setSpriteColour");
-                        htmlString+="</div>"
-                    } 
-                }
-            }*/
             break;    
         case 2: //editing the expression
                 htmlString+="<div class=\"grid-container\"><div style=\"justify-self: end;\">"
@@ -581,30 +538,59 @@ function setup(){
     setImageType([],0);
 
     setHeight([],height);
-    setSkinColour([],4);
-    setBothColour(['Eyes'],3);
-    setHairColour([],3);
+
+    //Sebastian:
+    setSkinColour([],2);
+    setBothColour(['Eyes'],0);
+    setHairColour([],11);
     setBothVariable(['Facial_hair'],5);
     setSpriteHair([],5);
     setPortVariable(["Hair_back","Hair_front","Hair_middle"],1)
     setPortVariable(["Nose"],2)
+    setPortVariable(['Head'],1)
 
     setShoes([],2);
-    setClothingColour(["Shoes"],5);
+    setClothingColour(["Shoes"],30);
     setClothing(["Gloves"],1);
-    setClothingColour(["Gloves"],4)
+    setClothingColour(["Gloves"],4);
     setClothing(["Pants"],2);
-    setClothingColour(["Pants"],12)
-
-    /*
-    setBothVariable(["Eyewear"],2);
-    setSpriteColour(["Eyewear"],10);
-    setShirt(['Shirt'],1);
-    setShirtColour(['Shirt'],3);
-    coat
-    neckwear
-    hat
-;*/
+    setClothingColour(["Pants"],30);
+    setClothing(["Shirt"],1);
+    setClothingColour(["Shirt"],30);
+    setClothing2Colour(["Shirt"],10);
+    setClothing(["Neckwear"],0);
+    setClothingColour(["Neckwear"],1);
+    setClothing(["Eyewear"],1);
+    setClothingColour(["Eyewear"],5);
+    setClothing(["Earrings"],1);
+    setClothingColour(["Earrings"],13);
+    
+    current_panel = 0;
+    setPanelVariable(["Eyebrows"],1);
+    setPanelVariable(["Mouth"],0);
+    setPanelVariable(["Eyes"],0);
+    current_panel = 1;
+    setPanelVariable(["Eyebrows"],2);
+    setPanelVariable(["Mouth"],1);
+    setPanelVariable(["Eyes"],1);
+    current_panel = 2;
+    setPanelVariable(["Eyebrows"],3);
+    setPanelVariable(["Mouth"],2);
+    setPanelVariable(["Eyes"],2);
+    current_panel = 3;
+    setPanelVariable(["Eyebrows"],1);
+    setPanelVariable(["Mouth"],0);
+    setPanelVariable(["Eyes"],0);
+    current_panel = 4;
+    setPanelVariable(["Eyebrows"],4);
+    setPanelVariable(["Mouth"],1);
+    setPanelVariable(["Eyes"],3);
+    setPanelVariable(["Blush"],1);
+    current_panel = 5;
+    setPanelVariable(["Eyebrows"],5);
+    setPanelVariable(["Mouth"],3);
+    setPanelVariable(["Eyes"],4);
+    current_panel = 0;
 
     drawCanvas();
 }

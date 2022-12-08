@@ -63,7 +63,7 @@ function listOf(n){
 function newImageList(){
     //list of six images
     let x = [];
-    for (let i=0;i<panelNum;i++) {
+    for (let i=0;i<8;i++) {
         x[i]=new Image();
     }
     return x;
