@@ -53,6 +53,7 @@ const mouth_list = ["flat","smile","frown","small frown",];
 const earrings_list_port = ["none","studs",];
 const shirt_list_port = ["none","button up","tshirt",];
 const shirt_dec_list_port = ["none","button_up_plaid",];
+const overshirt_list_port = ["none",];
 const neckwear_list_port = ["none","tie",];
 const shirt_collar_list = ["none","button up",];
 const shirt_collar_dec_list_port = ["none","button_up_plaid",];
@@ -80,6 +81,7 @@ add_portrait_object("Mouth",mouth_list,"expression")
 add_portrait_object("Earrings",earrings_list_port,"outfit")
 add_portrait_object("Shirt",shirt_list_port,"outfit")
 add_portrait_object("Shirt_dec",shirt_dec_list_port,"outfit/shirt")
+add_portrait_object("Overshirt",overshirt_list_port,"outfit")
 add_portrait_object("Neckwear",neckwear_list_port,"outfit")
 add_portrait_object("Shirt_collar",shirt_collar_list,"outfit/shirt")
 add_portrait_object("Shirt_collar_dec",shirt_collar_dec_list_port,"outfit/shirt")

@@ -38,7 +38,7 @@ const coat_menu_list = [ none_menu, ["Short Coat",[1],[1,1,0]],["Hoodie",[3],[5,
 
 const overshirt_menu_list = [ none_menu];
 
-const shirt_menu_list = [ none_menu,["T-Shirt",[2,0,0,0],[19,0,0,0]], ["Short-sleeve Buttoned",[1,1,0,0],[12,0,0,0]], ["Long-sleeve Buttoned",[1,1,0,0],[12,0,0,1]],["Short-sleeve Plaid",[1,1,1,1],[12,0,2,0]], ["Long-sleeve Plaid",[1,1,1,1],[12,0,2,1]]]
+const shirt_menu_list = [ none_menu,["T-Shirt",[2,0,0,0],[19,0,0,0]], ["Short-sleeve Buttoned",[1,1,0,0],[12,0,0,0]], ["Long-sleeve Buttoned",[1,1,0,0],[12,0,0,1]],["Short-sleeve Plaid",[1,1,1,1],[12,0,2,0]], ["Long-sleeve Plaid",[1,1,1,1],[12,0,2,1]],["Vest",[2,0,0,0],[19,0,0,0]],["Boatneck",[2,0,0,0],[19,0,0,0]]]
 
 const pants_menu_list = [none_menu];
 const pants_names_all = ["briefs","trousers"].concat(pants_names)

@@ -317,6 +317,24 @@ function setImageType(variablelist, number){
 
 }
 
+function clothingChoiceString(i){
+    htmlString = "";
+    let current_item = menu_object_names[i];
+        if (current_item != "Hairstyle"){
+            htmlString+="<div class=\"grid-choices\">"
+            
+            let obj = findNameMatch(menu_objects, current_item);
+            if (["Shoes","Gloves"].includes(current_item))
+                htmlString+=makeDropbtnString(current_item, [current_item], obj.name_list, "set"+current_item);
+            else
+                htmlString+=makeDropbtnString(current_item, [current_item], obj.name_list, "setClothing");
+            htmlString+=makeDropbtnString(current_item+" Colour", [current_item], outfit_colours, "setClothingColour");
+            htmlString+=makeDropbtnString(current_item+" Colour", [current_item], outfit_colours, "setClothing2Colour");
+            htmlString+="</div>"
+        }
+    return htmlString;    
+}
+
 function setMenu(variablelist, number){
     //Setting what section we're editing eg body/expressions etc
     if (current_imageType==0){ //editing portraits
@@ -355,19 +373,7 @@ function setMenu(variablelist, number){
         case 1: //editing the outfit
             document.getElementById("test").innerHTML = print_sprite_list(sprite_shirt1_list);
             for (let i = 0; i < menu_object_names.length; i += 1) {
-                let current_item = menu_object_names[i];
-                if (current_item != "Hairstyle"){
-                    htmlString+="<div class=\"grid-choices\">"
-                    
-                    let obj = findNameMatch(menu_objects, current_item);
-                    if (["Shoes","Gloves"].includes(current_item))
-                        htmlString+=makeDropbtnString(current_item, [current_item], obj.name_list, "set"+current_item);
-                    else
-                        htmlString+=makeDropbtnString(current_item, [current_item], obj.name_list, "setClothing");
-                    htmlString+=makeDropbtnString(current_item+" Colour", [current_item], outfit_colours, "setClothingColour");
-                    htmlString+=makeDropbtnString(current_item+" Colour", [current_item], outfit_colours, "setClothing2Colour");
-                    htmlString+="</div>"
-                }
+                htmlString+=clothingChoiceString(i);
             }    
             break;    
         case 2: //editing the expression
