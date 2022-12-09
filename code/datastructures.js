@@ -263,18 +263,23 @@ function setTopbar(){
 
 function setToolbar(){
     let s = "";
-        s+='<div class="three-columns">\n';
+        if (currently_editing==1){
+            s+='<div class="four-columns">\n';
+        }else{
+            s+='<div class="three-columns">\n';
+        }
         s+='    <div id = "currently_editing_Btn" style="justify-self: end;">Secret</div>\n'; 
         s+='    <div><h2 id="editingTitle" text-align="left">errors??</h2></div>\n';
         if (currently_editing==1){
             s+='    <div id = "current_clothes_Btn" style="justify-self: end;">Secret</div>\n'; 
-            s+='    <div><h2 id="clothesTitle" text-align="left">'+current_clothing+'</h2></div>\n';     
+            s+='    <div><h2 id="clothesTitle" text-align="left">'+menu_object_names[current_clothing]+'</h2></div>\n';     
         }
         s+='</div>\n';
         document.getElementById("toolbar").innerHTML = s;
+        document.getElementById("editingTitle").innerHTML = editing_list[currently_editing];
         document.getElementById("currently_editing_Btn").innerHTML = makeDropbtnString("Editing:", ["currently_editing"], editing_list, "setMenu");
         if (currently_editing==1){
-            document.getElementById("current_clothes_Btn").innerHTML = makeDropbtnString("Editing:", ["current_clothing"], menu_object_names, "setSimpleVariable");
+            document.getElementById("current_clothes_Btn").innerHTML = makeDropbtnString("Editing:", ["current_clothing"], menu_object_names, "setCurrentClothing");
         }
 }
 
@@ -320,7 +325,8 @@ function setImageType(variablelist, number){
 function setMenu(variablelist, number){
     //Setting what section we're editing eg body/expressions etc
     currently_editing = number;
-    document.getElementById("editingTitle").innerHTML = editing_list[number];
+    //document.getElementById("editingTitle").innerHTML = editing_list[number];
+    setToolbar();
     let htmlString = "";
     switch(number){
         case 0: //editing the body

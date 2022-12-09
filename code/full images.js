@@ -76,6 +76,11 @@ function setSimpleVariable(variablelist, number){
     variablelist[0]=number;
 }
 
+function setCurrentClothing(variablelist, number){
+    current_clothing=number;
+    setMenu([], 1)
+}
+
 function setPortVariable(variablelist, number){
     for (let i = 0; i < variablelist.length; i += 1) {
         let b = findNameMatch(portrait_objects, variablelist[i]); //the eleemnt of portrait_objects with the right vriablename
