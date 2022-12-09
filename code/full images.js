@@ -239,8 +239,8 @@ function setEarrings(variablelist, number){
     drawCanvas();
 }
 
-function setSpriteHair(variablelist, number){
-    setSpriteVariable(["Hairstyle","Hairstyle_top"], number);
+function setHair(variablelist, number){
+    setClothing(["Hairstyle"],number);
     if (number ==0)
         isBald = true;
     else

@@ -343,7 +343,7 @@ function setMenu(variablelist, number){
             
             htmlString+="<div class=\"grid-choices\">"
             let obj = findNameMatch(menu_objects, "Hairstyle");
-            htmlString+=makeDropbtnString("Hairstyle", ["Hairstyle"], obj.name_list, "setClothing");
+            htmlString+=makeDropbtnString("Hairstyle", ["Hairstyle"], obj.name_list, "setHair");
             htmlString+=makeDropbtnString("Height", ["Torso"], ["Short","Tall"], "setHeight");
             htmlString+=makeDropbtnString("Eyelashes", ["Eyes"], eyelash_list, "setSpriteVariable");
             htmlString+="</div>"  
@@ -546,7 +546,7 @@ function setup(){
     setBothVariable(['Facial_hair'],5);
     //setSpriteHair([],5);
     //setPortVariable(["Hair_back","Hair_front"],2)
-    setClothing(["Hairstyle"],1);
+    setHair([],1);
     setPortVariable(["Nose"],2)
     setPortVariable(['Head'],1)
 
