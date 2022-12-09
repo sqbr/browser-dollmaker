@@ -248,103 +248,80 @@ function setPanelNum(variablelist, number){
 function setTopbar(){
     let s = '';
     //s+='<div><button onclick="exportCanvas()">Export</button></div>\n';
-    s+='<div class="grid-container">\n';
+    s+='<div class="four-columns">\n';
     s+='<div id = "image_typeBtn" style="justify-self: end;">Something</div>\n';
     s+='<div><h2 id="imageType" text-align="left">Broken</h2></div> \n';
+    s+='<div id = "panel_numBtn" style="justify-self: end;">Something</div>\n';
+    s+='<div><h2 id="panelTitle" text-align="left">Broken</h2></div> \n';
+    s+='</div>\n'; 
     s+='</div>\n';
     document.getElementById("topbar").innerHTML = s;
+    document.getElementById("panelTitle").innerHTML = panelNum;
+    document.getElementById("panel_numBtn").innerHTML = makeDropbtnString("Panels:", ["panel_num"], [1,2,3,4,5,6,7,8], "setPanelNum");
     document.getElementById("image_typeBtn").innerHTML = makeDropbtnString("Image Type:", ["current_imageType"], imageType_list, "setImageType");
 }
 
-function setToolbar(number){
+function setToolbar(){
     let s = "";
-    if (current_imageType == "Portrait"){
-        s+='<div id = "panel_numBtn" style="justify-self: end;">Something</div>\n';
-        s+='<div><h2 id="panelTitle" text-align="left">Broken</h2></div> \n';
-        s+='</div>\n'; 
-        s+='<div class="grid-container">\n';
-        s+='    <div id = "currently_editing_portBtn" style="justify-self: end;">Secret</div>\n'; 
+        s+='<div class="three-columns">\n';
+        s+='    <div id = "currently_editing_Btn" style="justify-self: end;">Secret</div>\n'; 
         s+='    <div><h2 id="editingTitle" text-align="left">errors??</h2></div>\n';
+        if (currently_editing==1){
+            s+='    <div id = "current_clothes_Btn" style="justify-self: end;">Secret</div>\n'; 
+            s+='    <div><h2 id="clothesTitle" text-align="left">'+current_clothing+'</h2></div>\n';     
+        }
         s+='</div>\n';
         document.getElementById("toolbar").innerHTML = s;
-        document.getElementById("currently_editing_portBtn").innerHTML = makeDropbtnString("Editing:", ["currently_editing_port"], editing_list_port, "setMenu");
-        document.getElementById("panel_numBtn").innerHTML = makeDropbtnString("Panels", ["panel_num"], [1,2,3,4,5,6,7,8], "setPanelNum");
-
-    } else{
-        s+='<div class="grid-container">\n';
-        s+='    <div id = "currently_editing_spritesBtn" style="justify-self: end;">Secret</div>\n'; 
-        s+='    <div><h2 id="editingTitle" text-align="left">errors??</h2></div>\n';
-        s+='</div>\n';
-        document.getElementById("toolbar").innerHTML = s;
-        document.getElementById("currently_editing_spritesBtn").innerHTML = makeDropbtnString("Editing:", ["currently_editing_sprites"], editing_list_sprites, "setMenu");
-    }
+        document.getElementById("currently_editing_Btn").innerHTML = makeDropbtnString("Editing:", ["currently_editing"], editing_list, "setMenu");
+        if (currently_editing==1){
+            document.getElementById("current_clothes_Btn").innerHTML = makeDropbtnString("Editing:", ["current_clothing"], menu_object_names, "setSimpleVariable");
+        }
 }
 
 function setImageType(variablelist, number){
     current_imageType = number;
-    document.getElementById("imageType").innerHTML = imageType_list[number];
+    //document.getElementById("imageType").innerHTML = imageType_list[number];
     let htmlString = "";
+    htmlString+='<div class="four-columns">\n';
+    htmlString+='<div id = "image_typeBtn" style="justify-self: end;">Something</div>\n';
+    htmlString+='<div><h2 id="imageType" text-align="left">Broken</h2></div> \n';
     switch(number){
         case 0: //editing portraits
-            currently_editing_port = 0;
             htmlString+='<div id = "panel_numBtn" style="justify-self: end;">Something</div>\n';
-            htmlString+='<div><h2 id="panelTitle" text-align="left">'+panelNum+'</h2></div> \n';
+            htmlString+='<div><h2 id="panelTitle" text-align="left">Broken</h2></div> \n';
             htmlString+='</div>\n'; 
-            htmlString+='<div class="grid-container">\n';
-            htmlString+='    <div id = "currently_editing_portBtn" style="justify-self: end;">Secret</div>\n'; 
-            htmlString+='    <div><h2 id="editingTitle" text-align="left">'+editing_list_port[currently_editing_port]+'</h2></div>\n';
             htmlString+='</div>\n';
-            document.getElementById("toolbar").innerHTML = htmlString; 
-            document.getElementById("currently_editing_portBtn").innerHTML = makeDropbtnString("Editing:", ["currently_editing_port"], editing_list_port, "setMenu");
-            document.getElementById("panel_numBtn").innerHTML = makeDropbtnString("Panels", ["panel_num"], [1,2,3,4,5,6,7,8], "setPanelNum");
-            setMenu([], currently_editing_port)
+            document.getElementById("topbar").innerHTML = htmlString;
+            document.getElementById("imageType").innerHTML = imageType_list[number];
+            document.getElementById("image_typeBtn").innerHTML = makeDropbtnString("Image Type:", ["current_imageType"], imageType_list, "setImageType");
+            document.getElementById("panelTitle").innerHTML = panelNum;
+            document.getElementById("panel_numBtn").innerHTML = makeDropbtnString("Panels:", ["panel_num"], [1,2,3,4,5,6,7,8], "setPanelNum");
+            
             break;
         case 1: //editing sprites
-            currently_editing_sprites = 0;
-            htmlString+='<div class="grid-container">\n';
-            htmlString+='    <div id = "currently_editing_spritesBtn" style="justify-self: end;">Editing:</div>\n'; 
-            htmlString+='    <div><h2 id="editingTitle" text-align="left">'+editing_list_sprites[currently_editing_sprites]+'</h2></div>\n';
+            htmlString+='<div id = "panel_numBtn" style="justify-self: end;">Something</div>\n';
+            htmlString+='<div><h2 id="panelTitle" text-align="left">Broken</h2></div> \n';
+            htmlString+='</div>\n'; 
             htmlString+='</div>\n';
-            document.getElementById("toolbar").innerHTML = htmlString; 
-            document.getElementById("currently_editing_spritesBtn").innerHTML = makeDropbtnString("Editing:", ["currently_editing_sprites"], editing_list_sprites, "setMenu");
-            setMenu([], currently_editing_sprites)
+            document.getElementById("topbar").innerHTML = htmlString;
+            document.getElementById("imageType").innerHTML = imageType_list[number];
+            document.getElementById("image_typeBtn").innerHTML = makeDropbtnString("Image Type:", ["current_imageType"], imageType_list, "setImageType");
+            document.getElementById("panelTitle").innerHTML = panelNum;
+            document.getElementById("panel_numBtn").innerHTML = makeDropbtnString("Panels:", ["panel_num"], [1,2,3,4,5,6,7,8], "setPanelNum");
             break;
-    
         default:
             htmlString = "Unknown value "+number;   
-            document.getElementById("toolbar").innerHTML = htmlString;  
+            document.getElementById("topbar").innerHTML = htmlString;  
+            return;   
     }   
-
-}
-
-function clothingChoiceString(i){
-    htmlString = "";
-    let current_item = menu_object_names[i];
-        if (current_item != "Hairstyle"){
-            htmlString+="<div class=\"grid-choices\">"
-            
-            let obj = findNameMatch(menu_objects, current_item);
-            if (["Shoes","Gloves"].includes(current_item))
-                htmlString+=makeDropbtnString(current_item, [current_item], obj.name_list, "set"+current_item);
-            else
-                htmlString+=makeDropbtnString(current_item, [current_item], obj.name_list, "setClothing");
-            htmlString+=makeDropbtnString(current_item+" Colour", [current_item], outfit_colours, "setClothingColour");
-            htmlString+=makeDropbtnString(current_item+" Colour", [current_item], outfit_colours, "setClothing2Colour");
-            htmlString+="</div>"
-        }
-    return htmlString;    
+    setMenu([], 0); 
 }
 
 function setMenu(variablelist, number){
     //Setting what section we're editing eg body/expressions etc
-    if (current_imageType==0){ //editing portraits
-        currently_editing_port = number;
-        document.getElementById("editingTitle").innerHTML = editing_list_port[number];
-    }else{
-        currently_editing_sprites = number;
-        document.getElementById("editingTitle").innerHTML = editing_list_sprites[number];
-    }
-        let htmlString = "";
+    currently_editing = number;
+    document.getElementById("editingTitle").innerHTML = editing_list[number];
+    let htmlString = "";
     switch(number){
         case 0: //editing the body
             htmlString+="<div class=\"grid-choices\">"
@@ -362,22 +339,32 @@ function setMenu(variablelist, number){
             htmlString+="<div class=\"grid-choices\">"
             let obj = findNameMatch(menu_objects, "Hairstyle");
             htmlString+=makeDropbtnString("Hairstyle", ["Hairstyle"], obj.name_list, "setHair");
-            htmlString+=makeDropbtnString("Height", ["Torso"], ["Short","Tall"], "setHeight");
+            htmlString+=makeDropbtnString("Facial Hair", ["Facial_hair"], facial_hair_list_menu, "setBothVariable");
             htmlString+=makeDropbtnString("Eyelashes", ["Eyes"], eyelash_list, "setSpriteVariable");
             htmlString+="</div>"  
             
             htmlString+="<div class=\"grid-choices\">"
-            htmlString+=makeDropbtnString("Facial Hair", ["Facial_hair"], facial_hair_list_menu, "setBothVariable");
+            htmlString+=makeDropbtnString("Height", ["Torso"], ["Short","Tall"], "setHeight");
             htmlString+="</div>"
             break;    
         case 1: //editing the outfit
-            document.getElementById("test").innerHTML = print_sprite_list(sprite_shirt1_list);
-            for (let i = 0; i < menu_object_names.length; i += 1) {
-                htmlString+=clothingChoiceString(i);
-            }    
+            //document.getElementById("test").innerHTML = print_sprite_list(sprite_shirt1_list);
+            let current_item = menu_object_names[current_clothing];
+            if (current_item != "Hairstyle"){
+                htmlString+="<div class=\"grid-choices\">"
+                
+                let obj = findNameMatch(menu_objects, current_item);
+                if (["Shoes","Gloves"].includes(current_item))
+                    htmlString+=makeDropbtnString(current_item, [current_item], obj.name_list, "set"+current_item);
+                else
+                    htmlString+=makeDropbtnString(current_item, [current_item], obj.name_list, "setClothing");
+                htmlString+=makeDropbtnString("Main Colour", [current_item], outfit_colours, "setClothingColour");
+                htmlString+=makeDropbtnString("Highlight Colour", [current_item], outfit_colours, "setClothing2Colour");
+                htmlString+="</div>"
+            }   
             break;    
         case 2: //editing the expression
-                htmlString+="<div class=\"grid-container\"><div style=\"justify-self: end;\">"
+                htmlString+="<div class=\"three-columns\"><div style=\"justify-self: end;\">"
                 htmlString+=makeDropbtnString("Panel:", ["Panel"], panel_list, "setPanel");
                 htmlString+="</div><h2 id = 'current_panel'>"+panel_list[current_panel] +"</h2></div>";
                 htmlString+="<div class=\"grid-choices\">"
@@ -540,8 +527,10 @@ function drawCanvas() {
 }
 
 function setup(){
-    setTopbar();
-    setImageType([],0);
+    //setTopbar();
+    setToolbar();
+    setImageType([], 0)
+    
 
     setHeight([],height);
 

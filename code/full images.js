@@ -72,6 +72,10 @@ add_menu_object("Gloves", gloves_menu_list, outfit_colours,[],[],["Gloves"],[]);
 
 const menu_object_names = menu_objects.map(nameOf);
 
+function setSimpleVariable(variablelist, number){
+    variablelist[0]=number;
+}
+
 function setPortVariable(variablelist, number){
     for (let i = 0; i < variablelist.length; i += 1) {
         let b = findNameMatch(portrait_objects, variablelist[i]); //the eleemnt of portrait_objects with the right vriablename

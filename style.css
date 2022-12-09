@@ -1,8 +1,15 @@
-.grid-container {
+.three-columns {
   display: grid;
   grid-template-columns: auto auto auto;
   gap: 10px;
   padding: 10px;
+}
+
+.four-columns {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  gap: 10px;
+  padding: 5px;
 }
 
 .grid-choices {

@@ -5,14 +5,13 @@ let panelNum = 6; //how many panels
 let panel_width = 256; //width and height of panels in pixels
 
 let current_imageType = 0; //whether editing sprites or portraits
-let currently_editing_port = 0; //which element of editing list we are editing
-let currently_editing_sprites = 0;
+let currently_editing = 0; //which element of editing list we are editing
 let current_panel = 0;
+let current_clothing = 0;
 
 const imageType_list =["Portrait","Sprite"];
 
-const editing_list_port =["Body","Outfit", "Expressions"];
-const editing_list_sprites =["Body","Outfit"];
+const editing_list =["Body","Outfit", "Expressions"];
 
 const panel_list = ["0: Neutral", "1: Happy", "2: Sad", "3: Unique", "4: Blushing", "5: Angry","6","7","8","9","10"];
 
