@@ -112,6 +112,12 @@ for (let row =0; row<2;row++)
             sprite_shirt_dec_list.push({name: shirt_dec_names[current_num], location: "outfit/shirts/decorations/shirt decs", colour: true, asymmetrical: false,rowNum: 4,topcorner:[8*column,32*row]})
 }
 
+const sprite_overshirt_list = [none];
+for (let column =0; column<8;column++){
+    if (column <coat_list_sprite.length)
+            sprite_overshirt_list.push({name: coat_list_sprite[column+1], location: "outfit/coat/coat", colour: true, asymmetrical: false,rowNum: 3,topcorner:[16*column,0]})
+}
+
 const sprite_coat_list = [none];
 for (let column =0; column<8;column++){
         if (column <coat_list_sprite.length)
@@ -233,6 +239,7 @@ add_sprite_object("Shirt1", sprite_shirt1_list,sprite_shirt1_list.map(nameOf),ou
 add_sprite_object("Shirt2", sprite_shirt2_list,sprite_shirt2_list.map(nameOf),outfit_colours,false,true,1, [8,8],[4,15]);
 add_sprite_object("Shirt_dec", sprite_shirt_dec_list,sprite_shirt_dec_list.map(nameOf),outfit_colours,false,true,1, [8,8],[4,15]);
 add_sprite_object("Pants top", sprite_pants_top_list,sprite_pants_top_list.map(nameOf), outfit_colours,false,true,1, [8,8],[4,15]);
+add_sprite_object("Overshirt", sprite_overshirt_list,sprite_overshirt_list.map(nameOf),outfit_colours,false,true,1, [16,32],[0,0]);
 add_sprite_object("Eyewear", sprite_eyewear_list,sprite_eyewear_list.map(nameOf),outfit_colours,false,true,1, [16,16],[0,2]);
 add_sprite_object("Neckwear", sprite_neckwear_list,sprite_neckwear_list.map(nameOf), outfit_colours,false,true,1, [16,32],[0,2]);
 add_sprite_object("Earrings", sprite_earrings_list,sprite_earrings_list.map(nameOf), outfit_colours,false,true,1, [16,16],[0,2]);
@@ -242,6 +249,7 @@ add_sprite_object("Hairstyle", sprite_hair_list,sprite_hair_list.map(nameOf), ha
 add_sprite_object("Arms", sprite_arms_list,height_list, skin_colours,true,false,0, [16,32],[0,0]);
 add_sprite_object("Gloves", sprite_gloves_list,["None"].concat(gloves_names), outfit_colours,true,false,0, [16,32],[0,0]);
 add_sprite_object("Shirt_sleeves", sprite_sleeves_list,["None"].concat(sleeves_names), outfit_colours,true,false,0, [16,32],[0,0]);
+add_sprite_object("Overshirt_sleeves", sprite_sleeves_list,["None"].concat(sleeves_names), outfit_colours,true,false,0, [16,32],[0,0]);
 add_sprite_object("Coat_sleeves", sprite_sleeves_list,["None"].concat(sleeves_names), outfit_colours,true,false,0, [16,32],[0,0]);
 add_sprite_object("Hairstyle_top", sprite_hair_list,sprite_hair_list.map(nameOf), hair_colours,false,true, 1,[16,32],[0,0]);
 add_sprite_object("Hat", sprite_hat_list,sprite_hat_list.map(nameOf), outfit_colours,false,true,1, [16,32],[0,0]);

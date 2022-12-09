@@ -540,12 +540,10 @@ function setup(){
     setHeight([],height);
 
     //Sebastian:
-    setSkinColour([],2);
+    /*setSkinColour([],2);
     setBothColour(['Eyes'],0);
     setHairColour([],11);
     setBothVariable(['Facial_hair'],5);
-    //setSpriteHair([],5);
-    //setPortVariable(["Hair_back","Hair_front"],2)
     setHair([],1);
     setPortVariable(["Nose"],2)
     setPortVariable(['Head'],1)
@@ -593,7 +591,62 @@ function setup(){
     setPanelVariable(["Eyebrows"],5);
     setPanelVariable(["Mouth"],3);
     setPanelVariable(["Eyes"],4);
+    current_panel = 0;*/
+
+    //Haley:
+    setSkinColour([],2);
+    setBothColour(['Eyes'],1);
+    setHairColour([],0);
+    //setBothVariable(['Facial_hair'],5);
+    setHair([],3);
+    setPortVariable(["Nose"],1)
+    setPortVariable(['Head'],1)
+
+    setShoes([],2);
+    setClothingColour(["Shoes"],29);
+    //setClothing(["Gloves"],1);
+    //setClothingColour(["Gloves"],4);
+    setClothing(["Pants"],2);
+    setClothingColour(["Pants"],29);
+    setClothing(["Shirt"],1);
+    setClothingColour(["Shirt"],28);
+    setClothing2Colour(["Shirt"],10);
+    setClothing(["Coat"],2);
+    setClothingColour(["Coat"],28);
+    //setClothing(["Neckwear"],0);
+    //setClothingColour(["Neckwear"],1);
+    //setClothing(["Eyewear"],1);
+    setClothingColour(["Eyewear"],5);
+    //setClothing(["Earrings"],1);
+    setClothingColour(["Earrings"],13);
+    
     current_panel = 0;
+    setPanelVariable(["Eyebrows"],6);
+    setPanelVariable(["Mouth"],1);
+    setPanelVariable(["Eyes"],0);
+    current_panel = 1;
+    setPanelVariable(["Eyebrows"],2);
+    setPanelVariable(["Mouth"],1);
+    setPanelVariable(["Eyes"],1);
+    current_panel = 2;
+    setPanelVariable(["Eyebrows"],3);
+    setPanelVariable(["Mouth"],2);
+    setPanelVariable(["Eyes"],2);
+    current_panel = 3;
+    setPanelVariable(["Eyebrows"],1);
+    setPanelVariable(["Mouth"],0);
+    setPanelVariable(["Eyes"],0);
+    current_panel = 4;
+    setPanelVariable(["Eyebrows"],4);
+    setPanelVariable(["Mouth"],1);
+    setPanelVariable(["Eyes"],3);
+    setPanelVariable(["Blush"],1);
+    current_panel = 5;
+    setPanelVariable(["Eyebrows"],5);
+    setPanelVariable(["Mouth"],3);
+    setPanelVariable(["Eyes"],4);
+    current_panel = 0;
+
 
     drawCanvas();
 }

@@ -20,7 +20,7 @@ skin_list = body_list + ["Eyebrows", "Mouth","Blush"]
 #Only in portraits
 hair_list = ["Hair_back", "Hair_middle","Hair_front","Facial_hair"]
 
-hair_front_list = ["none", "shaggy side","emo"]
+hair_front_list = ["none", "shaggy side","emo","princely"]
 hair_middle_list = ["none"]
 hair_back_list = ["none", "shaggy medium","bob"]
 
@@ -29,7 +29,7 @@ head_list =["square","medium","round"]
 complexion_list =["none","wrinkles"]
 ears_list =["regular"]
 nose_list =["none","button", "medium", "broad","round","pointed"]
-eyebrow_list = ["none", "slightly downward","raised","flat sad","raised sad","angry"]
+eyebrow_list = ["none", "slightly downward","raised","flat sad","raised sad","angry","neutral"]
 eye_list = ["medium","crescents","medium side","medium narrowed","medium angry"]
 mouth_list = ["flat","smile","frown","small frown"]
 
@@ -65,6 +65,9 @@ hat_colour_names = ["top hat", "earmuffs", "flower","clip","bow","cap","backward
 shirt_list_port = shirt_collar_list +["tshirt"]
 shirt_list_menu =  ["none","button up"]
 
+overshirt_list_port = ["none"]
+overshirtshirt_list_menu =  ["none"]
+
 neckwear_list_port = ["none","tie"]
 neckwear_list_sprite = ["none", "bandana", "necklace", "bow-tie", "tie", "choker"]
 neckwear_list_menu = neckwear_list_port
@@ -97,7 +100,7 @@ outfit_brown = ["#B24836","#912D20","#820000","#630F0F"]
 outfit_grey = ["#FFFFFF","#777471","#4C4C56","#482B57","#000000"]
 
 outfit_colours = outfit_yellow+outfit_green+outfit_blue+outfit_purple +outfit_red +outfit_brown +outfit_grey
-eye_colours = ["#000000","#B25DF6","#1B8EF6","#469951","#F0B50A",]
+eye_colours = ["#000000","#2E9FF7","#B25DF6","#1B8EF6","#469951","#F0B50A",]
 hair_weird = ["#7034ED","#B25DF6","#1B8EF6", "#53C7FB","#469951"]
 hair_grey = ["#A59A9D", "#E9E9E9",]
 hair_blonde = ["#FCE374", "#F0B50A",]
@@ -155,6 +158,7 @@ add_portrait_object("Mouth", mouth_list,"mouth_list", "expression")
 add_portrait_object("Earrings", earrings_list_port,"earrings_list_port", "outfit")
 add_portrait_object("Shirt", shirt_list_port,"shirt_list_port", "outfit")
 add_portrait_object("Shirt_dec", shirt_dec_list_port,"shirt_dec_list_port", "outfit/shirt")
+add_portrait_object("Overshirt", overshirt_list_port,"overshirt_list_port", "outfit")
 add_portrait_object("Neckwear", neckwear_list_port,"neckwear_list_port", "outfit")
 add_portrait_object("Shirt_collar", shirt_collar_list,"shirt_collar_list", "outfit/shirt")
 add_portrait_object("Shirt_collar_dec", shirt_collar_dec_list_port,"shirt_collar_dec_list_port", "outfit/shirt")
@@ -301,6 +305,25 @@ def colour_this(pixel, colour):
            p[i] = int((1-r)*new_colour[i] + r*(255 - (255-new_colour[i])*(255-highlight[i])/255))    
     return (p[0],p[1],p[2],pixel[3])
 
+def colour_this_eyes(pixel, colour):
+    p = [pixel[0],pixel[1],pixel[2]]
+    new_colour = hex_to_rgba(colour)
+    if p == [255,0,0]:
+        for i in range(3):
+            p[i] = new_colour[i]      
+    elif p == [0,0,255]: #shading
+        shadow = hex_to_rgba("#1f3066")
+        r = 0.3 #opacity of shadow
+        for i in range(3): #multiply
+           p[i] = int((1-r)*new_colour[i] + r*new_colour[i]*shadow[i]/255)    
+    elif p == [0,255,0]: #highlight
+        highlight = hex_to_rgba("#f9f4ca")
+        r = 0.5 #opacity of highlight
+        for i in range(3): #screen
+           p[i] = int((1-r)*new_colour[i] + r*(255 - (255-new_colour[i])*(255-highlight[i])/255))    
+    return (p[0],p[1],p[2],pixel[3])
+
+
 def colour_this_blush(pixel, colour):
     p = [pixel[0],pixel[1],pixel[2]]
     new_colour = blushcolour(colour)
@@ -433,6 +456,8 @@ def process_image(name, location, colour,colour_list,type):
                     Adata[x, y] = colour_this_skin(Adata[x, y], colour_list[colour])  
                 elif type =="grey":   
                     Adata[x, y] = colour_this_grey(Adata[x, y], colour_list[colour]) 
+                elif type =="eyes":   
+                    Adata[x, y] = colour_this_eyes(Adata[x, y], colour_list[colour])     
                 elif type =="blue":   
                     Adata[x, y] = colour_this_grey(Adata[x, y], colour_list[colour]) 
                 elif type =="blush":   
@@ -615,18 +640,18 @@ def process_all_portraits():
         process_portrait_part(c)
 
 def process_body_sprites():
-    for c in range(len(skin_colours)):
-        for b in sprite_body_list:
-            process_image(b, "sprites/body/", c, skin_colours,"skin")
-        for h in ["short","tall"]:    
-            process_image("arms_"+h, "sprites/body", c, skin_colours,"skin")
-    for c in range(len(hair_colours)):  
-         process_image("hairstyles", "sprites/hair", c, hair_colours,"grey")
+    #for c in range(len(skin_colours)):
+    #    for b in sprite_body_list:
+    #        process_image(b, "sprites/body/", c, skin_colours,"skin")
+    #    for h in ["short","tall"]:    
+    #        process_image("arms_"+h, "sprites/body", c, skin_colours,"skin")
+    #for c in range(len(hair_colours)):  
+    #     process_image("hairstyles", "sprites/hair", c, hair_colours,"grey")
     #     process_image("hairstyles2", "sprites/hair", c, hair_colours,"grey")
     #     process_image("facialhair", "sprites/hair/facialhair", c, hair_colours,"grey")
-    # for c in range(len(eye_colours)):  
-    #     process_image("short", "sprites/body/eyes", c, eye_colours,"") 
-    #     process_image("long", "sprites/body/eyes", c, eye_colours,"")  
+    for c in range(len(eye_colours)):  
+         process_image("short", "sprites/body/eyes", c, eye_colours,"eyes") 
+         process_image("long", "sprites/body/eyes", c, eye_colours,"eyes")  
 
 def process_outfit_sprites():
     for c in range(len(outfit_colours)): 
@@ -652,10 +677,10 @@ def process_outfit_sprites():
 
 write_temp()
 write_variables()
-#process_body_sprites()
-process_outfit_sprites()
+process_body_sprites()
+#process_outfit_sprites()
 for c in closet:
-    if c.name in []: #["Shirt_dec","Shirt_collar_dec"]:
+    if c.name in ["Eyebrows"]: #["Shirt_dec","Shirt_collar_dec"]:
         process_portrait_part(c)
 #process_all_portraits()
 #make_coat()
