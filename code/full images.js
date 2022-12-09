@@ -192,7 +192,7 @@ function setGloves(variablelist, number){
 function setSleeves(variablelist, number){
     switch(variablelist[0]){
         case "Coat":
-            hasCoatSleeves = true; //truth_list[number];
+            hasCoatSleeves = truth_list[number];
             break;
         case "Overshirt":
             hasOvershirtSleeves = truth_list[number];
@@ -201,6 +201,7 @@ function setSleeves(variablelist, number){
             hasShirtSleeves = truth_list[number];
             break;
     } 
+    setMenu([],currently_editing);   
     drawCanvas();
 }
 

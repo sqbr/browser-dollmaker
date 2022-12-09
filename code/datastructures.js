@@ -391,10 +391,10 @@ function setMenu(variablelist, number){
             htmlString+=makeDropbtnString("Highlight Colour", [current_item], outfit_colours, "setClothing2Colour");
             htmlString+='<div><h2 id="clothingColour2" text-align="left">'+colour_desc(obj.colour_list[obj.colour2])+'</h2></div>';
             htmlString+="</div>"
-            if (["Shirt","Coat","Overcoat"].includes(current_item)){
+            if (["Shirt","Coat","Overshirt"].includes(current_item)){
                 htmlString+="<div class=\"grid-choices\">" 
-                htmlString+=makeDropbtnString("Has Sleeves:", [current_item], truth_list_string, "setSleeves");
-                htmlString+='<div><h2 id="hasSleeves" text-align="left">'+hasCoatSleeves+'</h2></div>';
+                htmlString+=makeDropbtnString("Has Long Sleeves:", [current_item], truth_list_string, "setSleeves");
+                htmlString+='<div><h2 id="hasSleevesTitle" text-align="left">'+hasCoatSleeves+'</h2></div>';
                 htmlString+="</div>"
             }  
             
@@ -656,7 +656,7 @@ function setup(){
     setClothing(["Shirt"],1);
     setClothingColour(["Shirt"],28);
     setClothing2Colour(["Shirt"],10);
-    setClothing(["Coat"],2);
+    //setClothing(["Coat"],2);
     setClothingColour(["Coat"],28);
     //setClothing(["Neckwear"],0);
     //setClothingColour(["Neckwear"],1);
