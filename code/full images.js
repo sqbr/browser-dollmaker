@@ -34,11 +34,11 @@ const eyewear_menu_list = [ none_menu,["Glasses",[1],[1]]];
 
 const earrings_menu_list = [ none_menu,["Studs",[1],[3]]];
 
-const coat_menu_list = [ none_menu, ["Short Coat",[1],[1,1,0]],["Hoodie",[3],[5,1,0]],["Cool Jacket",[2],[6,1,0]]];
+const coat_menu_list = [ none_menu, ["Short Coat",[1],[1,0]],["Hoodie",[3],[5,0]],["Cool Jacket",[2],[6,0]]];
 
 const overshirt_menu_list = [ none_menu];
 
-const shirt_menu_list = [ none_menu,["T-Shirt",[2,0,0,0],[19,0,0,0]], ["Short-sleeve Buttoned",[1,1,0,0],[12,0,0,0]], ["Long-sleeve Buttoned",[1,1,0,0],[12,0,0,1]],["Short-sleeve Plaid",[1,1,1,1],[12,0,2,0]], ["Long-sleeve Plaid",[1,1,1,1],[12,0,2,1]],["Vest",[2,0,0,0],[19,0,0,0]],["Boatneck",[2,0,0,0],[19,0,0,0]]]
+const shirt_menu_list = [ none_menu,["T-Shirt",[2,0,0,0],[19,0,0]], ["Button-up",[1,1,0,0],[12,0,0]], ["Plaid Button-up",[1,1,1,1],[12,2,0]], ["Vest",[2,0,0,0],[19,0,0]],["Boatneck",[2,0,0,0],[19,0,0]]]
 
 const pants_menu_list = [none_menu];
 const pants_names_all = ["briefs","trousers"].concat(pants_names)
@@ -59,22 +59,19 @@ for (let i = 0; i < gloves_names.length; i += 1) {
 }
 
 add_menu_object("Hat", hat_menu_list, outfit_colours,["Hat","Hat_dec"],["Hat_dec"], ["Hat","Hat_dec"], ["Hat_dec"]);
-add_menu_object("Hairstyle", hair_menu_list, hair_colours,["Hair_front","Hair_back"],[], ["Hairstyle"], []);
 add_menu_object("Neckwear", neckwear_menu_list, outfit_colours,["Neckwear"],[], ["Neckwear"],[]);
 add_menu_object("Eyewear", eyewear_menu_list, outfit_colours,["Eyewear"],[],["Eyewear"],[]);
 add_menu_object("Earrings", earrings_menu_list, outfit_colours,["Earrings"],[],["Earrings"],[]);
-add_menu_object("Shirt", shirt_menu_list, outfit_colours,["Shirt","Shirt_collar","Shirt_dec","Shirt_collar_dec"],["Shirt_dec","Shirt_collar_dec"],["Shirt1","Shirt2","Shirt_dec", "Shirt_sleeves"],["Shirt_dec"]);
-add_menu_object("Overshirt", overshirt_menu_list, outfit_colours,["Overshirt"],[],["Overshirt","Overshirt_sleeves"],[]);
-add_menu_object("Coat", coat_menu_list, outfit_colours,["Coat"],[],["Coat","Coat_sleeves","Coat_back"],[]);
+add_menu_object("Shirt", shirt_menu_list, outfit_colours,["Shirt","Shirt_collar","Shirt_dec","Shirt_collar_dec"],["Shirt_dec","Shirt_collar_dec"],["Shirt1","Shirt2","Shirt_dec"],["Shirt_dec"]);
+add_menu_object("Overshirt", overshirt_menu_list, outfit_colours,["Overshirt"],[],["Overshirt"],[]);
+add_menu_object("Coat", coat_menu_list, outfit_colours,["Coat"],[],["Coat","Coat_back"],[]);
 add_menu_object("Pants", pants_menu_list, outfit_colours,["Pants_top"],[],["Pants","Pants top"],[]);
 add_menu_object("Shoes", shoes_menu_list, outfit_colours,[],[],["Shoes"],[]);
 add_menu_object("Gloves", gloves_menu_list, outfit_colours,[],[],["Gloves"],[]);
+// Hairstyle must be at end
+add_menu_object("Hairstyle", hair_menu_list, hair_colours,["Hair_front","Hair_back"],[], ["Hairstyle"], []);
 
 const menu_object_names = menu_objects.map(nameOf);
-
-function setSimpleVariable(variablelist, number){
-    variablelist[0]=number;
-}
 
 function setCurrentClothing(variablelist, number){
     current_clothing=number;
@@ -137,18 +134,22 @@ function setSpriteColour(variablelist, number){
 function setClothingColour(variablelist, number){
     for (let i = 0; i < variablelist.length; i += 1) {
         let menu_obj = findNameMatch(menu_objects, variablelist[i]);
+        menu_obj.colour = number;
         setPortColour(menu_obj.port_main_list,number);
         setSpriteColour(menu_obj.sprite_main_list,number);
     } 
+    setMenu(variablelist,currently_editing);
     drawCanvas();
 }
 
 function setClothing2Colour(variablelist, number){
     for (let i = 0; i < variablelist.length; i += 1) {
         let menu_obj = findNameMatch(menu_objects, variablelist[i]);
+        menu_obj.colour2 = number;
         setPortColour(menu_obj.port_second_list,number);
         setSpriteColour(menu_obj.sprite_second_list,number);
     } 
+    setMenu(variablelist,currently_editing);
     drawCanvas();
 }
 
@@ -161,14 +162,6 @@ function setSkinColour(variablelist, number){
 function setHairColour(variablelist, number){
     setPortColour(hair_list, number);
     setSpriteColour(["Hairstyle","Hairstyle_top", "Facial_hair"], number);
-    drawCanvas();
-}
-
-function setShirtColour(variablelist, number){
-    setPortColour(["Shirt"], number);
-    setSpriteColour(["Shirt1","Shirt2"], number);
-    if (!hasCoatSleeves && hasShirtSleeves)
-        setSpriteColour(["Sleeves"], number);
     drawCanvas();
 }
 
@@ -196,14 +189,25 @@ function setGloves(variablelist, number){
     drawCanvas();
 }
 
-function setEyewear(variablelist, number){
-    setBothVariable(variablelist, number);
+function setSleeves(variablelist, number){
+    switch(variablelist[0]){
+        case "Coat":
+            hasCoatSleeves = true; //truth_list[number];
+            break;
+        case "Overshirt":
+            hasOvershirtSleeves = truth_list[number];
+            break;    
+        case "Shirt":
+            hasShirtSleeves = truth_list[number];
+            break;
+    } 
     drawCanvas();
 }
 
 function setClothing(variablelist, number){
     for (let i = 0; i < variablelist.length; i += 1) {
         let menu_obj = findNameMatch(menu_objects, variablelist[i]);
+        menu_obj.item = number;
         let current = menu_obj.list_list[number]
         //document.getElementById("test").innerHTML = "found";
         for (let j = 0; j < menu_obj.port_item_list.length; j += 1) {
@@ -220,34 +224,8 @@ function setClothing(variablelist, number){
             else
                 setSpriteVariable([name],current[2][j]);
         }
-    }    
-    drawCanvas();
-}
-
-function setHat(variablelist, number){
-    if (number>0)
-        setPortVariable(variablelist, 1);
-    else
-        setPortVariable(variablelist, 0);
-    setSpriteVariable(variablelist, number);
-    drawCanvas();
-}
-
-function setNeckwear(variablelist, number){
-    if (number>0)
-        setPortVariable(variablelist, 1);
-    else
-        setPortVariable(variablelist, 0);
-    setSpriteVariable(variablelist, number);
-    drawCanvas();
-}
-
-function setEarrings(variablelist, number){
-    if (number>0)
-        setPortVariable(variablelist, 1);
-    else
-        setPortVariable(variablelist, 0);
-    setSpriteVariable(variablelist, number);
+    } 
+    setMenu(variablelist,currently_editing);   
     drawCanvas();
 }
 

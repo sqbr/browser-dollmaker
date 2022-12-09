@@ -183,10 +183,26 @@ function fixSpriteSources(){
     // Fixes the "src" attribute for all images in sublist of sprite_objects
     for (let i = 0; i < sprite_objects.length; i += 1){
         let b = sprite_objects[i];
+        if (b.name =="Sleeves"){
+            b.item = 0;
+            if (hasCoatSleeves){
+                b.colour = findNameMatch(sprite_objects, "Coat").colour;
+                b.item = height+1;
+            } else{
+                if (hasOvershirtSleeves){
+                    b.colour = findNameMatch(sprite_objects, "Overshirt").colour;
+                    b.item = height+1;
+                } else{
+                    if (hasShirtSleeves){
+                        b.colour = findNameMatch(sprite_objects, "Shirt1").colour;
+                        b.item = height+1;
+                    }
+                }
+            }
+        }
         let item = b.item_list[b.item];
         if (item == none){
             b.image.src="";
-
         }else{
         b.topcorner = item.topcorner;
         b.rowNum= item.rowNum;
@@ -196,7 +212,7 @@ function fixSpriteSources(){
             let front_name = back_list_sprite[k][0];
             if (b.name == front_name+"_back"){
                 obj_front = findNameMatch(sprite_objects, front_name);
-                if (back_list_sprite[k][1].includes(obj_front.item_list[obj_front.value_list[j]]))
+                if (back_list_sprite[k][1].includes(obj_front.item_list[obj_front.value]))
                     loc = "back/"+loc;
             }
         }
@@ -206,7 +222,7 @@ function fixSpriteSources(){
             b.image.src = "images/bases/sprites/"+loc+".png";
         }
     }
-    }
+}
 }
 
 function niceString(input){
@@ -279,7 +295,7 @@ function setToolbar(){
         document.getElementById("editingTitle").innerHTML = editing_list[currently_editing];
         document.getElementById("currently_editing_Btn").innerHTML = makeDropbtnString("Editing:", ["currently_editing"], editing_list, "setMenu");
         if (currently_editing==1){
-            document.getElementById("current_clothes_Btn").innerHTML = makeDropbtnString("Editing:", ["current_clothing"], menu_object_names, "setCurrentClothing");
+            document.getElementById("current_clothes_Btn").innerHTML = makeDropbtnString("Editing:", ["current_clothing"], menu_object_names.slice(0,menu_object_names.length-1), "setCurrentClothing");
         }
 }
 
@@ -343,8 +359,7 @@ function setMenu(variablelist, number){
             htmlString+="</div>" 
             
             htmlString+="<div class=\"grid-choices\">"
-            let obj = findNameMatch(menu_objects, "Hairstyle");
-            htmlString+=makeDropbtnString("Hairstyle", ["Hairstyle"], obj.name_list, "setHair");
+            htmlString+=makeDropbtnString("Hairstyle", ["Hairstyle"], findNameMatch(menu_objects, "Hairstyle").name_list, "setHair");
             htmlString+=makeDropbtnString("Facial Hair", ["Facial_hair"], facial_hair_list_menu, "setBothVariable");
             htmlString+=makeDropbtnString("Eyelashes", ["Eyes"], eyelash_list, "setSpriteVariable");
             htmlString+="</div>"  
@@ -354,20 +369,35 @@ function setMenu(variablelist, number){
             htmlString+="</div>"
             break;    
         case 1: //editing the outfit
-            //document.getElementById("test").innerHTML = print_sprite_list(sprite_shirt1_list);
+            //document.getElementById("test").innerHTML = print_menu_objects();
             let current_item = menu_object_names[current_clothing];
-            if (current_item != "Hairstyle"){
-                htmlString+="<div class=\"grid-choices\">"
-                
-                let obj = findNameMatch(menu_objects, current_item);
-                if (["Shoes","Gloves"].includes(current_item))
-                    htmlString+=makeDropbtnString(current_item, [current_item], obj.name_list, "set"+current_item);
-                else
-                    htmlString+=makeDropbtnString(current_item, [current_item], obj.name_list, "setClothing");
-                htmlString+=makeDropbtnString("Main Colour", [current_item], outfit_colours, "setClothingColour");
-                htmlString+=makeDropbtnString("Highlight Colour", [current_item], outfit_colours, "setClothing2Colour");
+            if (current_item == "Hairstyle")
+                document.getElementById("test").innerHTML = "Oops why is this editing the hairstyle??"
+            htmlString+="<div class=\"grid-choices\">"
+            
+            let obj = findNameMatch(menu_objects, current_item);
+            if (["Shoes","Gloves"].includes(current_item))
+                htmlString+=makeDropbtnString(current_item, [current_item], obj.name_list, "set"+current_item);
+            else
+                htmlString+=makeDropbtnString(current_item, [current_item], obj.name_list, "setClothing");
+            htmlString+='<div><h2 id="clothingTitle" text-align="left">'+obj.name_list[obj.item]+'</h2></div>';
+            htmlString+="</div>" 
+            htmlString+="<div class=\"grid-choices\">"    
+            htmlString+=makeDropbtnString("Main Colour", [current_item], outfit_colours, "setClothingColour");
+            htmlString+='<canvas id="clothingCanvas" width="20" height="20"></canvas>';
+            htmlString+='<div><h2 id="clothingColour" text-align="left">'+colour_desc(obj.colour_list[obj.colour])+'</h2></div>';
+            htmlString+="</div>" 
+            htmlString+="<div class=\"grid-choices\">" 
+            htmlString+=makeDropbtnString("Highlight Colour", [current_item], outfit_colours, "setClothing2Colour");
+            htmlString+='<div><h2 id="clothingColour2" text-align="left">'+colour_desc(obj.colour_list[obj.colour2])+'</h2></div>';
+            htmlString+="</div>"
+            if (["Shirt","Coat","Overcoat"].includes(current_item)){
+                htmlString+="<div class=\"grid-choices\">" 
+                htmlString+=makeDropbtnString("Has Sleeves:", [current_item], truth_list_string, "setSleeves");
+                htmlString+='<div><h2 id="hasSleeves" text-align="left">'+hasCoatSleeves+'</h2></div>';
                 htmlString+="</div>"
-            }   
+            }  
+            
             break;    
         case 2: //editing the expression
                 htmlString+="<div class=\"three-columns\"><div style=\"justify-self: end;\">"
@@ -384,6 +414,20 @@ function setMenu(variablelist, number){
 
     }
     document.getElementById("controls").innerHTML = htmlString;
+    updateMenuCanvases();
+}
+
+function updateMenuCanvases(){
+    switch(currently_editing){
+        case 1: 
+            let current_item = menu_object_names[current_clothing];
+            let obj = findNameMatch(menu_objects, current_item);
+            var canvas = document.getElementById("clothingCanvas");
+            var ctx = canvas.getContext("2d");
+            ctx.fillStyle = obj.colour_list[obj.colour];
+            ctx.fillRect(0, 0, 20, 20);
+            break;
+    }
 }
 
 

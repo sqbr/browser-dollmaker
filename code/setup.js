@@ -15,7 +15,10 @@ const editing_list =["Body","Outfit", "Expressions"];
 
 const panel_list = ["0: Neutral", "1: Happy", "2: Sad", "3: Unique", "4: Blushing", "5: Angry","6","7","8","9","10"];
 
-back_list = ["Hat","Coat"]; //have a back
+const back_list = ["Hat","Coat"]; //have a back
+
+const truth_list = [false,true]
+const truth_list_string = ["False","True"];
 
 let canvas;
 let canvas_preview;
