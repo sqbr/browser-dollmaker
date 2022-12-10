@@ -183,23 +183,34 @@ function fixSpriteSources(){
     // Fixes the "src" attribute for all images in sublist of sprite_objects
     for (let i = 0; i < sprite_objects.length; i += 1){
         let b = sprite_objects[i];
+
+        //Fixing sleeves to match uppermost long sleeved clothing
         if (b.name =="Sleeves"){
             b.item = 0;
-            if (hasCoatSleeves){
-                b.colour = findNameMatch(sprite_objects, "Coat").colour;
+            let sleeve_obj=findNameMatch(sprite_objects, "Coat");
+            if (hasCoatSleeves &&sleeve_obj.item!=0){
+                b.colour = sleeve_obj.colour;
                 b.item = height+1;
             } else{
-                if (hasOvershirtSleeves){
-                    b.colour = findNameMatch(sprite_objects, "Overshirt").colour;
+                let sleeve_obj=findNameMatch(sprite_objects, "Overshirt");
+                if (hasOvershirtSleeves &&sleeve_obj.item!=0){
+                    b.colour = sleeve_obj.colour;
                     b.item = height+1;
                 } else{
-                    if (hasShirtSleeves){
-                        b.colour = findNameMatch(sprite_objects, "Shirt1").colour;
+                    let sleeve_obj=findNameMatch(sprite_objects, "Shirt1");
+                    if (hasShirtSleeves && sleeve_obj.item!=0){
+                        b.colour = sleeve_obj.colour;
                         b.item = height+1;
                     }
                 }
             }
         }
+        if (b.name =="Hair_top"){
+            let hair_obj=findNameMatch(sprite_objects, "Hairstyle");
+            b.item =hair_obj.item;
+            b.colour = hair_obj.colour;
+        }
+
         let item = b.item_list[b.item];
         if (item == none){
             b.image.src="";
@@ -208,7 +219,9 @@ function fixSpriteSources(){
         b.rowNum= item.rowNum;
         b.asymmetrical = item.asymmetrical;
         let loc = item.location
-        for (let k = 0; k < back_list_sprite.length; k += 1){ //code to make backs of things match the fronts. Not tested.
+
+        //code to make backs of things match the fronts. Not tested.
+        for (let k = 0; k < back_list_sprite.length; k += 1){ 
             let front_name = back_list_sprite[k][0];
             if (b.name == front_name+"_back"){
                 obj_front = findNameMatch(sprite_objects, front_name);
@@ -216,6 +229,7 @@ function fixSpriteSources(){
                     loc = "back/"+loc;
             }
         }
+        //set colour
         if (item.colour){
             b.image.src  = "images/sprites/"+loc+"_"+b.colour+".png";
         }else{
