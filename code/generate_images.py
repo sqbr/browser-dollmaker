@@ -20,18 +20,18 @@ skin_list = body_list + ["Eyebrows", "Mouth","Blush"]
 #Only in portraits
 hair_list = ["Hair_back", "Hair_middle","Hair_front","Facial_hair"]
 
-hair_front_list = ["none", "shaggy side","emo","princely"]
-hair_middle_list = ["none"]
-hair_back_list = ["none", "shaggy medium","bob"]
+hair_front_list = ["none", "shaggy side","emo","princely","locs bun","long wavy"]
+hair_middle_list = ["none","tendrils"]
+hair_back_list = ["none", "shaggy medium","bob","locs bob","long wavy"]
 
 torso_list = ["medium"]
 head_list =["square","medium","round"]
 complexion_list =["none","wrinkles"]
 ears_list =["regular"]
 nose_list =["none","button", "medium", "broad","round","pointed"]
-eyebrow_list = ["none", "slightly downward","raised","flat sad","raised sad","angry","neutral"]
-eye_list = ["medium","crescents","medium side","medium narrowed","medium angry"]
-mouth_list = ["flat","smile","frown","small frown"]
+eyebrow_list = ["none", "slightly downward","raised","flat sad","raised sad","angry","neutral","raised up"]
+eye_list = ["medium","crescents","medium side","medium narrowed","medium angry","big crescents"]
+mouth_list = ["flat","smile","frown","small frown","slight smile","small laugh"]
 
 blush_list = ["none","small"]
 #backs
@@ -63,10 +63,9 @@ hat_list_sprite = ["cowboy hat", "Bowler", "Top hat", "sombrero", "straw hat", "
 hat_colour_names = ["top hat", "earmuffs", "flower","clip","bow","cap","backwards cap", "big bow", "cat ears", "flat cap", "wide hat", "cowboy hat", "hood", "beanie", "ribbed beanie", "turban", "hijab", "headphones","wizard"]
 
 shirt_list_port = shirt_collar_list +["tshirt","vest","boatneck"]
-shirt_list_menu =  ["none","button up"]
 
 overshirt_list_port = ["none"]
-overshirtshirt_list_menu =  ["none"]
+overshirt_list_sprite = ["none", "loose shirt","waistcoat","cardigan","suspenders"]
 
 neckwear_list_port = ["none","tie"]
 neckwear_list_sprite = ["none", "bandana", "necklace", "bow-tie", "tie", "choker"]
@@ -122,16 +121,17 @@ class ClothingItem:
     # location: string describing where the image files are,
     #           eg "clothes" because hat images are stored in the folder clothes/hat
 
-    def __init__(self,name,item_list,listname, location):
+    def __init__(self,name,item_list,listname, location,offset):
         self.name =  name
         self.item_list = item_list
         self.listname = listname
         self.location = location
+        self.offset = offset
 
-def add_portrait_object(name, item_list,listname, location):
+def add_portrait_object(name, item_list,listname, location,offset):
     # Add an item type to the closet
     global  closet
-    closet.append(ClothingItem(name, item_list, listname, location))
+    closet.append(ClothingItem(name, item_list, listname, location,offset))
 
 # Not automatically shown
 # add_portrait_object("cheeks", cheeks_list, "cheeks_list", "face")
@@ -139,40 +139,40 @@ def add_portrait_object(name, item_list,listname, location):
 # #Behind eyes
 # shown_start = len(closet) # where the visible items start
 
-add_portrait_object("Coat_back", coat_back_list_port, "coat_back_list_port","outfit/coat")
-add_portrait_object("Hat_back", hat_back_list_port,"hat_back_list_port", "outfit/hat")
-add_portrait_object("Hair_back", hair_back_list, "hair_back_list","body/hair")
-add_portrait_object("Ears", ears_list,"ears_list", "body")
-add_portrait_object("Torso", torso_list, "torso_list", "body")
-add_portrait_object("Head", head_list, "head_list", "body")
+add_portrait_object("Coat_back", coat_back_list_port, "coat_back_list_port","outfit/coat",0)
+add_portrait_object("Hat_back", hat_back_list_port,"hat_back_list_port", "outfit/hat",0)
+add_portrait_object("Hair_back", hair_back_list, "hair_back_list","body/hair",0)
+add_portrait_object("Ears", ears_list,"ears_list", "body",0)
+add_portrait_object("Torso", torso_list, "torso_list", "body",-7)
+add_portrait_object("Head", head_list, "head_list", "body",0)
 
-add_portrait_object("Complexion", complexion_list,"complexion_list", "body")
-add_portrait_object("Blush", blush_list,"blush_list", "expression")
-add_portrait_object("Nose", nose_list,"nose_list", "body")
+add_portrait_object("Complexion", complexion_list,"complexion_list", "body",0)
+add_portrait_object("Blush", blush_list,"blush_list", "expression",0)
+add_portrait_object("Nose", nose_list,"nose_list", "body",0)
 
-add_portrait_object("Eyebrows", eyebrow_list,"eyebrow_list", "expression")
-add_portrait_object("Eyes", eye_list,"eye_list", "expression")
-add_portrait_object("Mouth", mouth_list,"mouth_list", "expression")
+add_portrait_object("Eyebrows", eyebrow_list,"eyebrow_list", "expression",0)
+add_portrait_object("Eyes", eye_list,"eye_list", "expression",0)
+add_portrait_object("Mouth", mouth_list,"mouth_list", "expression",0)
 
 # In front of face
-add_portrait_object("Earrings", earrings_list_port,"earrings_list_port", "outfit")
-add_portrait_object("Shirt", shirt_list_port,"shirt_list_port", "outfit")
-add_portrait_object("Shirt_dec", shirt_dec_list_port,"shirt_dec_list_port", "outfit/shirt")
-add_portrait_object("Overshirt", overshirt_list_port,"overshirt_list_port", "outfit")
-add_portrait_object("Neckwear", neckwear_list_port,"neckwear_list_port", "outfit")
-add_portrait_object("Shirt_collar", shirt_collar_list,"shirt_collar_list", "outfit/shirt")
-add_portrait_object("Shirt_collar_dec", shirt_collar_dec_list_port,"shirt_collar_dec_list_port", "outfit/shirt")
-add_portrait_object("Pants_top", pants_top_list_port,"pants_top_list_port", "outfit")
-add_portrait_object("Coat", coat_list_port,"coat_list_port", "outfit")
+add_portrait_object("Earrings", earrings_list_port,"earrings_list_port", "outfit",0)
+add_portrait_object("Shirt", shirt_list_port,"shirt_list_port", "outfit",0)
+add_portrait_object("Shirt_dec", shirt_dec_list_port,"shirt_dec_list_port", "outfit/shirt",0)
+add_portrait_object("Overshirt", overshirt_list_port,"overshirt_list_port", "outfit",0)
+add_portrait_object("Neckwear", neckwear_list_port,"neckwear_list_port", "outfit",0)
+add_portrait_object("Shirt_collar", shirt_collar_list,"shirt_collar_list", "outfit/shirt",0)
+add_portrait_object("Shirt_collar_dec", shirt_collar_dec_list_port,"shirt_collar_dec_list_port", "outfit/shirt",0)
+add_portrait_object("Pants_top", pants_top_list_port,"pants_top_list_port", "outfit",0)
+add_portrait_object("Coat", coat_list_port,"coat_list_port", "outfit",0)
 
-add_portrait_object("Facial_hair", facial_hair_list_port,"facial_hair_list_port", "body/hair")
-add_portrait_object("Nose_front", nose_list,"nose_list", "body")
-add_portrait_object("Eyewear", eyewear_list_port,"eyewear_list_port", "outfit")
-add_portrait_object("Hair_middle", hair_middle_list,"hair_middle_list", "body/hair")
+add_portrait_object("Facial_hair", facial_hair_list_port,"facial_hair_list_port", "body/hair",0)
+add_portrait_object("Nose_front", nose_list,"nose_list", "body",0)
+add_portrait_object("Eyewear", eyewear_list_port,"eyewear_list_port", "outfit",0)
+add_portrait_object("Hair_middle", hair_middle_list,"hair_middle_list", "body/hair",0)
 
-add_portrait_object("Hair_front", hair_front_list,"hair_front_list", "body/hair")
-add_portrait_object("Hat", hat_list_port,"hat_list_port", "outfit")
-add_portrait_object("Hat_dec", hat_dec_list_port,"hat_dec_list_port", "outfit/hat")
+add_portrait_object("Hair_front", hair_front_list,"hair_front_list", "body/hair",0)
+add_portrait_object("Hat", hat_list_port,"hat_list_port", "outfit",0)
+add_portrait_object("Hat_dec", hat_dec_list_port,"hat_dec_list_port", "outfit/hat",0)
 
 sprite_body_list = ["tall","short","tall_bald", "short_bald"]
 
@@ -589,14 +589,13 @@ def write_variables():
             content.write(name_string(c))
     content.write("\n")
     for c in closet:
-        content.write("add_portrait_object(\""+c.name+"\","+ c.listname+",\""+c.location+"\")\n")
+        content.write("add_portrait_object(\""+c.name+"\","+ c.listname+",\""+c.location+"\","+str(c.offset)+")\n")
     content.write("\n")    
     content.write(list_string("facial_hair_list_sprite", facial_hair_list_sprite))
     content.write(list_string("facial_hair_list_menu", facial_hair_list_menu))
     content.write(list_string("hat_list_sprite", hat_list_sprite))
     content.write(list_string("hat_colour_names", hat_colour_names))
     content.write(list_string("hat_list_menu", hat_list_menu))
-    content.write(list_string("shirt_list_menu", shirt_list_menu))
     content.write(list_string("neckwear_list_sprite", neckwear_list_sprite))
     content.write(list_string("neckwear_list_menu", neckwear_list_menu))
     content.write(list_string("coat_list_sprite", coat_list_sprite))
@@ -645,13 +644,13 @@ def process_body_sprites():
     #        process_image(b, "sprites/body/", c, skin_colours,"skin")
     #    for h in ["short","tall"]:    
     #        process_image("arms_"+h, "sprites/body", c, skin_colours,"skin")
-    #for c in range(len(hair_colours)):  
-    #     process_image("hairstyles", "sprites/hair", c, hair_colours,"grey")
+    for c in range(len(hair_colours)):  
+         process_image("hairstyles", "sprites/hair", c, hair_colours,"grey")
     #     process_image("hairstyles2", "sprites/hair", c, hair_colours,"grey")
     #     process_image("facialhair", "sprites/hair/facialhair", c, hair_colours,"grey")
-    for c in range(len(eye_colours)):  
-         process_image("short", "sprites/body/eyes", c, eye_colours,"eyes") 
-         process_image("long", "sprites/body/eyes", c, eye_colours,"eyes")  
+    #for c in range(len(eye_colours)):  
+    #     process_image("short", "sprites/body/eyes", c, eye_colours,"eyes") 
+    #     process_image("long", "sprites/body/eyes", c, eye_colours,"eyes")  
 
 def process_outfit_sprites():
     for c in range(len(outfit_colours)): 
@@ -659,28 +658,30 @@ def process_outfit_sprites():
         #process_image("hats_colour", "sprites/outfit/hats", c, outfit_colours,"skin")
         #process_image("hats_dec", "sprites/outfit/hats", c, outfit_colours,"skin")
     #    process_image("pants", "sprites/outfit/pants", c, outfit_colours,"blue")
+        process_image("pants_top", "sprites/outfit/pants_top", c, outfit_colours,"skin")
         #process_image("briefs", "sprites/outfit/pants", c, outfit_colours,"blue")
         #process_image("shirts", "sprites/outfit/shirts", c, outfit_colours,"grey")
+        process_image("overshirt", "sprites/outfit/overshirt", c, outfit_colours,"grey")
         #process_image("shirt decs", "sprites/outfit/shirts/decorations", c, outfit_colours,"grey")
-        process_image("coat", "sprites/outfit/coat", c, outfit_colours,"grey")
+        #process_image("coat", "sprites/outfit/coat", c, outfit_colours,"grey")
         #process_image("coat_back", "sprites/outfit/coat", c, outfit_colours,"skin")
         #process_image("neckwear", "sprites/accessories/neckwear", c, outfit_colours,"grey")
         #process_image("earrings", "sprites/accessories/earrings", c, outfit_colours,"")
-        for height in ["short","tall"]:
+        #for height in ["short","tall"]:
         #        process_image("longpants_"+height, "sprites/outfit/pants", c, outfit_colours,"blue")
         #    for shoetype in ["boots","flats","flipflops"]:
         #        process_image(height+"_"+shoetype, "sprites/outfit/shoes", c, outfit_colours,"grey") 
         #    process_image(height, "sprites/outfit/gloves", c, outfit_colours,"grey")
-            process_image(height, "sprites/outfit/sleeves", c, outfit_colours,"grey") 
+        #    process_image(height, "sprites/outfit/sleeves", c, outfit_colours,"grey") 
           
 
 
 write_temp()
 write_variables()
-process_body_sprites()
+#process_body_sprites()
 #process_outfit_sprites()
 for c in closet:
-    if c.name in ["Shirt"]: #["Shirt_dec","Shirt_collar_dec"]:
+    if c.name in []:#["Hair_front","Hair_middle","Hair_back"]: #["Shirt_dec","Shirt_collar_dec"]:
         process_portrait_part(c)
-#process_all_portraits()
+process_all_portraits()
 #make_coat()

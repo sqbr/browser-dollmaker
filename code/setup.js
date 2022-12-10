@@ -8,12 +8,18 @@ let current_imageType = 0; //whether editing sprites or portraits
 let currently_editing = 0; //which element of editing list we are editing
 let current_panel = 0;
 let current_clothing = 0;
+let current_sprite_preset = 0;
+let port_offset = 1;
 
 const imageType_list =["Portrait","Sprite"];
 
 const editing_list =["Body","Outfit", "Expressions"];
 
+const torso_offset_list = ["Torso","Shirt","Shirt_collar","Shirt_dec","Shirt_collar_dec","Coat","Coat_back","Pants_top","Overshirt","Neckwear"];
+
 const panel_list = ["0: Neutral", "1: Happy", "2: Sad", "3: Unique", "4: Blushing", "5: Angry","6","7","8","9","10"];
+
+const sprite_presets = ["Walk Sprites", "Female Love Interest","Male Love Interest"];
 
 const back_list = ["Hat","Coat"]; //have a back
 
@@ -85,12 +91,12 @@ function xor(list1,list2){
 //Setting up portrait data
 const portrait_objects =[];
 
-function add_portrait_object(name, list, location){
+function add_portrait_object(name, list, location,offset){
     let loc=location+"/"+name.toLowerCase();
     if (name == "Nose_front")
         loc = "body/nose"; 
 
-    portrait_objects.push({name: name,location: loc, item_list: list, colour: true, value_list: listOf(0),  colour: 0, image_list: newImageList()});
+    portrait_objects.push({name: name,location: loc, item_list: list, offset: offset, colour: true, value_list: listOf(0),  colour: 0, image_list: newImageList()});
 }
 
 function print_portrait_objects(){
@@ -98,6 +104,7 @@ function print_portrait_objects(){
     for (i = 0; i < portrait_objects.length; i += 1){
         b = portrait_objects[i];
         s+="name: "+b.name;
+        s+="offset: "+b.offset;
         s+=" location: "+b.location;
         s+=" item_list: "+b.item_list.toString();
         //s+=" colourNum: "+b.colourNum;

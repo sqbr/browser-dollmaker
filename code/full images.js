@@ -26,7 +26,7 @@ const none_menu = ["none",[],[]];
 
 const hat_menu_list = [ none_menu,["Headphones",[3,0],[90,0]],["Sun Hat",[1,3],[83,11]],["Cap",[2,0],[78,0]],["Joja Cap",[2,1],[78,5]],["Joja Cap 2",[2,2],[78,6]],["Wizard",[4,0],[91,0]],];
 
-const hair_menu_list = [ none_menu,["Short Shaggy",[1,1],[5]],["Emo Bob",[2,2],[10]], ["Princely",[3,0],[24]]];
+const hair_menu_list = [ none_menu,["Short Shaggy",[1,0,1],[5]],["Emo Bob",[2,0,2],[10]], ["Princely",[3,0,0],[24]],["Half-up locs",[4,0,3],[7]],["Long Wavy",[5,1,4],[25]]];
 
 const neckwear_menu_list = [ none_menu, ["Tie",[1],[4]]];
 
@@ -38,15 +38,16 @@ const coat_menu_list = [ none_menu, ["Short Coat",[1],[1,0]],["Hoodie",[3],[5,0]
 
 const overshirt_menu_list = [ none_menu];
 
-const shirt_menu_list = [ none_menu,["T-Shirt",[2,0,0,0],[19,0,0]], ["Button-up",[1,1,0,0],[12,0,0]], ["Plaid Button-up",[1,1,1,1],[12,2,0]], ["Vest",[2,0,0,0],[19,0,0]],["Boatneck",[2,0,0,0],[19,0,0]]]
+const shirt_menu_list = [ none_menu,["T-Shirt",[2,0,0,0],[19,0,0]], ["Button-up",[1,1,0,0],[12,0,0]], ["Plaid Button-up",[1,1,1,1],[12,0,2]], ["Vest",[3,0,0,0],[2,0,0]],["Vest (Curvy)",[3,0,0,0],[3,0,0]],["Boatneck",[4,0,0,0],[23,0,0]]]
 
 const pants_menu_list = [none_menu];
 const pants_names_all = ["briefs","trousers"].concat(pants_names)
 for (let i = 0; i < pants_names_all.length; i += 1) {
     pants_menu_list.push([pants_names_all[i],[0],[i+1,0]])
 }
-pants_menu_list.push(["High-waisted trousers",[0],[2,1]])
-pants_menu_list.push(["Overalls",[1],[2,2]])
+pants_menu_list.push(["Overalls",[1],[2,1]])
+//pants_menu_list.push(["High-waisted trousers",[0],[2,2]])
+
 
 const shoes_menu_list = [none_menu];
 for (let i = 0; i < shoes_names.length; i += 1) {
@@ -69,7 +70,7 @@ add_menu_object("Pants", pants_menu_list, outfit_colours,["Pants_top"],[],["Pant
 add_menu_object("Shoes", shoes_menu_list, outfit_colours,[],[],["Shoes"],[]);
 add_menu_object("Gloves", gloves_menu_list, outfit_colours,[],[],["Gloves"],[]);
 // Hairstyle must be at end
-add_menu_object("Hairstyle", hair_menu_list, hair_colours,["Hair_front","Hair_back"],[], ["Hairstyle"], []);
+add_menu_object("Hairstyle", hair_menu_list, hair_colours,["Hair_front","Hair_middle", "Hair_back"],[], ["Hairstyle"], []);
 
 const menu_object_names = menu_objects.map(nameOf);
 
@@ -254,6 +255,28 @@ function setHeight(variablelist, number){
     let pants_obj = findNameMatch(sprite_obj.item_list, "trousers");
     pants_obj.location = "outfit/pants/longpants_"+height_list[height]
     drawCanvas();
+}
+
+function getOffset(name){
+    let obj = findNameMatch(portrait_objects, "Head");
+    let head = head_list[obj.value_list[0]];
+    switch(head){
+        case "round":
+            if (torso_offset_list.includes(name))   
+                return -9;
+            if (["Nose","Facial_hair"].includes(name))  
+                return -3;
+            break;
+        case "square":  
+            if (torso_offset_list.includes(name))   
+                return 2;
+            if (["Facial_hair"].includes(name))  
+                return 4;
+            if (["Mouth"].includes(name))  
+                return 3;    
+            break;          
+    }    
+    return 0;    
 }
 
 function print_menu_objects(){

@@ -267,14 +267,19 @@ function setTopbar(){
     s+='<div class="four-columns">\n';
     s+='<div id = "image_typeBtn" style="justify-self: end;">Something</div>\n';
     s+='<div><h2 id="imageType" text-align="left">Broken</h2></div> \n';
-    s+='<div id = "panel_numBtn" style="justify-self: end;">Something</div>\n';
-    s+='<div><h2 id="panelTitle" text-align="left">Broken</h2></div> \n';
-    s+='</div>\n'; 
+    if (current_imageType==0){
+        s+='<div id = "panel_numBtn" style="justify-self: end;">Something</div>\n';
+        s+='<div><h2 id="panelTitle" text-align="left">Broken</h2></div> \n';
+        s+='</div>\n'; 
+    }
     s+='</div>\n';
     document.getElementById("topbar").innerHTML = s;
-    document.getElementById("panelTitle").innerHTML = panelNum;
-    document.getElementById("panel_numBtn").innerHTML = makeDropbtnString("Panels:", ["panel_num"], [1,2,3,4,5,6,7,8], "setPanelNum");
     document.getElementById("image_typeBtn").innerHTML = makeDropbtnString("Image Type:", ["current_imageType"], imageType_list, "setImageType");
+    if (current_imageType==0){
+        document.getElementById("panelTitle").innerHTML = panelNum;
+        document.getElementById("panel_numBtn").innerHTML = makeDropbtnString("Panels:", ["panel_num"], [1,2,3,4,5,6,7,8], "setPanelNum");
+    }    
+    
 }
 
 function setToolbar(){
@@ -495,7 +500,7 @@ function drawCanvas() {
     for (let i = 0; i < portrait_objects.length; i += 1){
         let b = portrait_objects[i];
         if (b.item_list[b.value_list[current_panel]] !="none"){ 
-            ctx_preview.drawImage(b.image_list[current_panel], 256, 0);
+            ctx_preview.drawImage(b.image_list[current_panel], 256, getOffset(b.name));
         }
     }
     //main canvas
@@ -638,13 +643,13 @@ function setup(){
     setPanelVariable(["Eyes"],4);
     current_panel = 0;*/
 
-    //Haley:
-    setSkinColour([],2);
-    setBothColour(['Eyes'],1);
-    setHairColour([],0);
+    //Maru:
+    setSkinColour([],8);
+    setBothColour(['Eyes'],0);
+    setHairColour([],10);
     //setBothVariable(['Facial_hair'],5);
     setHair([],3);
-    setPortVariable(["Nose"],1)
+    setPortVariable(["Nose"],2)
     setPortVariable(['Head'],1)
 
     setShoes([],2);
@@ -652,9 +657,9 @@ function setup(){
     //setClothing(["Gloves"],1);
     //setClothingColour(["Gloves"],4);
     setClothing(["Pants"],2);
-    setClothingColour(["Pants"],29);
-    setClothing(["Shirt"],1);
-    setClothingColour(["Shirt"],28);
+    setClothingColour(["Pants"],10);
+    setClothing(["Shirt"],0);
+    setClothingColour(["Shirt"],0);
     setClothing2Colour(["Shirt"],10);
     //setClothing(["Coat"],2);
     setClothingColour(["Coat"],28);

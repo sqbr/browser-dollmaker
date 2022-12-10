@@ -29,7 +29,7 @@ const sleeves_names =["Sleeves"];
 
 const coloured_shirts_names = ["Classic overalls", "Shirt", "Mint Blouse", "Dark Shirt", "Skull Shirt", "Light Blue Shirt","Tan Striped Shirt","Green Overalls",'"Good Grief" Shirt',"Aquamarine Shirt","Suit Top","Green Belted Shir","Lime Green Striped Shirt","Red Striped Shirt","Skeleton Shirt","Orange Shirt","Night Sky Shirt","Mayoral Suspenders","Brown Jacket","Sailor Shirt","Green Vest","Yellow and Green Shirt"]
 
-const uncoloured_shirts_names = ["Striped Shirt","Tank Top (low neck)","Tank Top","Crop Tank Top (Low neck)", "Crop Tank Top","Bikini Top","80's Shirt (curvy)","Crop Top Shirt","???","Strapped Top","Button Down Shirt","Crop top", "Tube Top","muscle T", "checked","crop m","crop f","tshirt m","tshirt f","skull","face" ]
+const uncoloured_shirts_names = ["Striped Shirt","Tank Top (low neck)","Tank Top","Crop Tank Top (Low neck)", "Crop Tank Top","Bikini Top","80's Shirt (curvy)","Crop Top Shirt","???","Strapped Top","Button Down Shirt","Crop top", "Tube Top","muscle T", "checked","crop m","crop f","tshirt m","tshirt f","skull","face","boatneck m","boatneck f" ]
 
 const shirt_dec_names = ["fish", "plaid", "", "","letterman", "skeleton", "", "star", "sports shoulders", "heart", "", "collar", "", "", "dot?", "dot?", "collar", "sailor under", "sailor over", "bandana", "Dark Highlight Shirt", "dots", "silky", "vest sleeves", "oily?", "vest","",""]
 
@@ -80,8 +80,9 @@ for (let row =0; row<2;row++)
 }
 
 const sprite_pants_top_list = [none];
-sprite_pants_top_list.push({name: "high waist", location: "outfit/shirts/decorations/shirt decs", colour: true, asymmetrical: false,rowNum: 4,topcorner:[8*3,0]});
-sprite_pants_top_list.push({name: "overalls", location: "outfit/shirts/decorations/shirt decs", colour: true, asymmetrical: false,rowNum: 4,topcorner:[8*12,32]});
+sprite_pants_top_list.push({name: "overalls", location: "outfit/pants_top/pants_top", colour: true, asymmetrical: false,rowNum: 4,topcorner:[0,0]});
+sprite_pants_top_list.push({name: "high waist", location: "outfit/pants_top/pants_top", colour: true, asymmetrical: false,rowNum: 4,topcorner:[8,0]});
+
 
 const sprite_shirt1_list = [none];
 for (let row =0; row<2;row++)
