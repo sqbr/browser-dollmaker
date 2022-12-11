@@ -91,12 +91,12 @@ function xor(list1,list2){
 //Setting up portrait data
 const portrait_objects =[];
 
-function add_portrait_object(name, list, location,offset){
+function add_portrait_object(name, list, location){
     let loc=location+"/"+name.toLowerCase();
     if (name == "Nose_front")
         loc = "body/nose"; 
 
-    portrait_objects.push({name: name,location: loc, item_list: list, offset: offset, colour: true, value_list: listOf(0),  colour: 0, image_list: newImageList()});
+    portrait_objects.push({name: name,location: loc, item_list: list, colour: true, value_list: listOf(0),  colour: 0, image_list: newImageList()});
 }
 
 function print_portrait_objects(){
@@ -104,7 +104,6 @@ function print_portrait_objects(){
     for (i = 0; i < portrait_objects.length; i += 1){
         b = portrait_objects[i];
         s+="name: "+b.name;
-        s+="offset: "+b.offset;
         s+=" location: "+b.location;
         s+=" item_list: "+b.item_list.toString();
         //s+=" colourNum: "+b.colourNum;

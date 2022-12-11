@@ -26,19 +26,19 @@ const none_menu = ["none",[],[]];
 
 const hat_menu_list = [ none_menu,["Headphones",[3,0],[90,0]],["Sun Hat",[1,3],[83,11]],["Cap",[2,0],[78,0]],["Joja Cap",[2,1],[78,5]],["Joja Cap 2",[2,2],[78,6]],["Wizard",[4,0],[91,0]],];
 
-const hair_menu_list = [ none_menu,["Short Shaggy",[1,0,1],[5]],["Emo Bob",[2,0,2],[10]], ["Princely",[3,0,0],[24]],["Half-up locs",[4,0,3],[7]],["Long Wavy",[5,1,4],[25]]];
+const hair_menu_list = [ none_menu,["Short Shaggy",[1,0,1],[5]],["Emo Bob",[2,0,2],[10]], ["Princely",[3,0,0],[24]],["Half-up locs",[4,0,3],[7]],["Long Wavy",[5,1,4],[9]],["Curly Bob",[6,0,6],[11]],["Curly Mop",[6,0,7],[32]],["Curly Ponytail",[6,0,5],[29]],["Spiky",[7,0,7],[43]]];
 
 const neckwear_menu_list = [ none_menu, ["Tie",[1],[4]]];
 
-const eyewear_menu_list = [ none_menu,["Glasses",[1],[1]]];
+const eyewear_menu_list = [ none_menu,["Glasses",[1],[1]], ["Square Glasses",[2],[1]],["Round Glasses",[3],[1]],["Sunglasses",[4],[5]]];
 
-const earrings_menu_list = [ none_menu,["Studs",[1],[3]]];
+const earrings_menu_list = [ none_menu,["Studs",[1],[3]],["Single Stud",[2],[4]],["Small Hoops",[4],[3]],["Single Hoop",[3],[4]],["Punk",[5],[3]],["Drops",[6],[1]]];
 
-const coat_menu_list = [ none_menu, ["Short Coat",[1],[1,0]],["Hoodie",[3],[5,0]],["Cool Jacket",[2],[6,0]]];
+const coat_menu_list = [ none_menu, ["Short Coat",[1],[1,0]],["Hoodie",[3],[5,0]],["Open Hoodie",[4],[7,0]],["Cool Jacket",[2],[6,0]]];
 
 const overshirt_menu_list = [ none_menu];
 
-const shirt_menu_list = [ none_menu,["T-Shirt",[2,0,0,0],[19,0,0]], ["Button-up",[1,1,0,0],[12,0,0]], ["Plaid Button-up",[1,1,1,1],[12,0,2]], ["Vest",[3,0,0,0],[2,0,0]],["Vest (Curvy)",[3,0,0,0],[3,0,0]],["Boatneck",[4,0,0,0],[23,0,0]]]
+const shirt_menu_list = [ none_menu,["T-Shirt",[2,0,0,0],[19,0,0]], ["Button-up",[1,1,0,0],[12,0,0]], ["Plaid Button-up",[1,1,1,1],[12,0,2]],["Stripe Button-up",[1,1,2,0],[12,0,3]], ["Vest",[3,0,0,0],[2,0,0]],["Vest (Curvy)",[3,0,0,0],[3,0,0]],["Boatneck",[4,0,0,0],[23,0,0]]]
 
 const pants_menu_list = [none_menu];
 const pants_names_all = ["briefs","trousers"].concat(pants_names)
@@ -161,14 +161,24 @@ function setSkinColour(variablelist, number){
 }
 
 function setHairColour(variablelist, number){
+    
     setPortColour(hair_list, number);
     setSpriteColour(["Hairstyle","Hairstyle_top", "Facial_hair"], number);
     drawCanvas();
 }
 
 function setFacialHair(variablelist, number){
+    if (number<facial_hair_list_port.length){
     setPortVariable(["Facial_hair"], number);
     setSpriteVariable(["Facial_hair"], number);
+    setPortVariable(["Stubble"], 0);
+    } 
+    /*else{ //facial hair
+        setPortVariable(["Facial_hair"], 0);
+        setSpriteVariable(["Facial_hair"], 0);
+        let current_head = findNameMatch(portrait_objects, "Head").value_list[0];
+        setPortVariable(["Stubble"], current_head+1);
+    }*/
     drawCanvas();
 }
 
@@ -261,6 +271,18 @@ function getOffset(name){
     let obj = findNameMatch(portrait_objects, "Head");
     let head = head_list[obj.value_list[0]];
     switch(head){
+        case "medium":
+            if (torso_offset_list.includes(name))   
+                return -1;
+            if (["Nose","Facial_hair"].includes(name))  
+                return -1;
+            break;
+        case "oval":
+            if (torso_offset_list.includes(name))   
+                return -6;
+            if (["Nose","Facial_hair"].includes(name))  
+                return -2;
+            break;
         case "round":
             if (torso_offset_list.includes(name))   
                 return -9;
@@ -268,6 +290,7 @@ function getOffset(name){
                 return -3;
             break;
         case "square":  
+        case "pointed":  
             if (torso_offset_list.includes(name))   
                 return 2;
             if (["Facial_hair"].includes(name))  

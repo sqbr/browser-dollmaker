@@ -205,6 +205,7 @@ function fixSpriteSources(){
                 }
             }
         }
+        //Make Hair_top match Hairstyle
         if (b.name =="Hair_top"){
             let hair_obj=findNameMatch(sprite_objects, "Hairstyle");
             b.item =hair_obj.item;

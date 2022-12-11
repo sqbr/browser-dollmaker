@@ -31,7 +31,7 @@ const coloured_shirts_names = ["Classic overalls", "Shirt", "Mint Blouse", "Dark
 
 const uncoloured_shirts_names = ["Striped Shirt","Tank Top (low neck)","Tank Top","Crop Tank Top (Low neck)", "Crop Tank Top","Bikini Top","80's Shirt (curvy)","Crop Top Shirt","???","Strapped Top","Button Down Shirt","Crop top", "Tube Top","muscle T", "checked","crop m","crop f","tshirt m","tshirt f","skull","face","boatneck m","boatneck f" ]
 
-const shirt_dec_names = ["fish", "plaid", "", "","letterman", "skeleton", "", "star", "sports shoulders", "heart", "", "collar", "", "", "dot?", "dot?", "collar", "sailor under", "sailor over", "bandana", "Dark Highlight Shirt", "dots", "silky", "vest sleeves", "oily?", "vest","",""]
+const shirt_dec_names = ["fish", "plaid", "stripe", "","letterman", "skeleton", "", "star", "sports shoulders", "heart", "", "collar", "", "", "dot?", "dot?", "collar", "sailor under", "sailor over", "bandana", "Dark Highlight Shirt", "dots", "silky", "vest sleeves", "oily?", "vest","",""]
 
 const hat_dec_sprite_list = ["top hat", "earmuffs", "flower","clip","cap 1","cap 2","backwards cap", "big bow", "cat ears", "flat cap", "wide hat", "cowboy hat", "hood", "beanie", "ribbed beanie", "turban", "hijab", "headphones","wizard"]
 /*
@@ -132,14 +132,11 @@ for (let column =0; column<1;column++){
             sprite_coat_back_list.push({name: coat_list_sprite[column+1], location: "outfit/coat/coat_back", colour: true, asymmetrical: false,rowNum: 3,topcorner:[16*column,0]})
 }
 const sprite_eyewear_list = [none]
-for (let column =0; column<2;column++){ //add colour
-    sprite_eyewear_list.push({name: eyewear_list_sprite[column+1], location: "accessories/eyewear/eyewear", colour: true, asymmetrical: false,rowNum: 2,topcorner:[16*column,0]})
-}
-for (let column =2; column<eyewear_list_sprite.length-1;column++){
+for (let column =0; column<eyewear_list_sprite.length-1;column++){
     let asymm =  false;
     if (eyewear_list_sprite[column] == "eye-patch")
         asymm = true;    
-    sprite_eyewear_list.push({name: eyewear_list_sprite[column+1], location: "accessories/eyewear/eyewear", colour: false, asymmetrical: asymm,rowNum: 2,topcorner:[16*column,0]})
+    sprite_eyewear_list.push({name: eyewear_list_sprite[column+1], location: "accessories/eyewear/eyewear", colour: true, asymmetrical: asymm,rowNum: 2,topcorner:[16*column,0]})
 }
 
 const sprite_neckwear_list = [none]
@@ -148,10 +145,10 @@ for (let column =0; column<neckwear_list_sprite.length;column++){
 }
 
 const sprite_earrings_list = [none];
-for (let column =0; column<2;column++)
-    sprite_earrings_list.push({name: earrings_list_sprite[column], location: "accessories/earrings/earrings", colour: false, asymmetrical: false,rowNum: 2,topcorner:[16*column,0]})
-sprite_earrings_list.push({name: earrings_list_sprite[2], location: "accessories/earrings/earrings", colour: true, asymmetrical: false,rowNum: 2,topcorner:[16*2,0]})
-sprite_earrings_list.push({name: earrings_list_sprite[3], location: "accessories/earrings/earrings", colour: true, asymmetrical: true,rowNum: 2,topcorner:[16*3,0]})
+for (let column =0; column<4;column++)
+    sprite_earrings_list.push({name: earrings_list_sprite[column], location: "accessories/earrings/earrings", colour: true, asymmetrical: false,rowNum: 2,topcorner:[16*column,0]})
+//sprite_earrings_list.push({name: earrings_list_sprite[2], location: "accessories/earrings/earrings", colour: true, asymmetrical: false,rowNum: 2,topcorner:[16*2,0]})
+//sprite_earrings_list.push({name: earrings_list_sprite[3], location: "accessories/earrings/earrings", colour: true, asymmetrical: true,rowNum: 2,topcorner:[16*3,0]})
 
 const sprite_facialhair_list = [none]
 for (let column =0; column<6;column++){
