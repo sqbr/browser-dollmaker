@@ -380,7 +380,7 @@ function setMenu(variablelist, number){
             
             htmlString+="<div class=\"grid-choices\">"
             htmlString+=makeDropbtnString("Hairstyle", ["Hairstyle"], findNameMatch(menu_objects, "Hairstyle").name_list, "setHair");
-            htmlString+=makeDropbtnString("Facial Hair", ["Facial_hair"], facial_hair_list_menu, "setBothVariable");
+            htmlString+=makeDropbtnString("Facial Hair", ["Facial_hair"], facial_hair_list_menu, "setFacialHair");
             htmlString+=makeDropbtnString("Eyelashes", ["Eyes"], eyelash_list, "setSpriteVariable");
             htmlString+="</div>"  
             
@@ -544,7 +544,8 @@ function drawCanvas() {
                     for (let i = 0; i < portrait_objects.length; i += 1){
                         let b = portrait_objects[i];
                         if (b.item_list[b.value_list[row*2+column]] !="none"){ 
-                            ctx.drawImage(b.image_list[row*2+column], xpos, ypos);
+                            //sourceX, sourceY, sourceWidth, sourceHeight, destWidth and destHeight 
+                            ctx.drawImage(b.image_list[row*2+column],0,-getOffset(b.name),256,256, xpos, ypos,256,256);
                         }
                     }
                 }

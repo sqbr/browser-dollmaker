@@ -173,12 +173,12 @@ function setFacialHair(variablelist, number){
     setSpriteVariable(["Facial_hair"], number);
     setPortVariable(["Stubble"], 0);
     } 
-    /*else{ //facial hair
+    else{ //facial hair
         setPortVariable(["Facial_hair"], 0);
         setSpriteVariable(["Facial_hair"], 0);
         let current_head = findNameMatch(portrait_objects, "Head").value_list[0];
         setPortVariable(["Stubble"], current_head+1);
-    }*/
+    }
     drawCanvas();
 }
 
