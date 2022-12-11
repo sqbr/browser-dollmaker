@@ -20,7 +20,7 @@ skin_list = body_list + ["Eyebrows", "Mouth","Blush"]
 #Only in portraits
 hair_list = ["Hair_back", "Hair_middle","Hair_front","Facial_hair"]
 
-hair_front_list = ["none", "shaggy side","emo","princely","locs bun","long wavy","curly pixie","spiky"]
+hair_front_list = ["none", "shaggy side","emo","princely","locs bun","long wavy","curly pixie","spiky","short side"]
 hair_middle_list = ["none","tendrils"]
 hair_back_list = ["none", "shaggy medium","bob","locs bob","long wavy","curly pony","curly bob","spiky"]
 
@@ -54,8 +54,8 @@ shirt_collar_dec_list_port = ["none","button_up_plaid"]
 #The same for sprites and portraits
 facial_hair_list_port = ["none", "beard", "moustache", "big moustache", "goatee", "soul patch", "fluffy goatee", ]
 facial_hair_list_sprite = facial_hair_list_port
-facial_hair_list_menu = facial_hair_list_port  +["stubble"] #stubble must be at end!
-stubble_list = ["none"]+head_list
+facial_hair_list_menu = facial_hair_list_port#  +["stubble"] #stubble must be at end!
+stubble_list = ["none"]+ head_list
 
 #Different for portraits and sprites
 hat_list_port = ["none","sunhat", "cap", "headphones", "wizard"]
@@ -147,7 +147,7 @@ add_portrait_object("Torso", torso_list, "torso_list", "body")
 add_portrait_object("Head", head_list, "head_list", "body")
 
 add_portrait_object("Complexion", complexion_list,"complexion_list", "body")
-add_portrait_object("Stubble", stubble_list, "stubble_list", "body")
+#add_portrait_object("Stubble", stubble_list, "stubble_list", "body")
 add_portrait_object("Blush", blush_list,"blush_list", "expression")
 add_portrait_object("Nose", nose_list,"nose_list", "body")
 
@@ -679,10 +679,10 @@ def process_outfit_sprites():
 
 write_temp()
 write_variables()
-#process_body_sprites()
+process_body_sprites()
 #process_outfit_sprites()
 for c in closet:
-    if c.name in []:#["Hair_front","Hair_middle","Hair_back"]: #["Shirt_dec","Shirt_collar_dec"]:
+    if c.name in [""]:#["Hair_front","Hair_middle","Hair_back"]: #["Shirt_dec","Shirt_collar_dec"]:
         process_portrait_part(c)
 #process_all_portraits()
 #make_coat()

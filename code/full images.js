@@ -26,7 +26,7 @@ const none_menu = ["none",[],[]];
 
 const hat_menu_list = [ none_menu,["Headphones",[3,0],[90,0]],["Sun Hat",[1,3],[83,11]],["Cap",[2,0],[78,0]],["Joja Cap",[2,1],[78,5]],["Joja Cap 2",[2,2],[78,6]],["Wizard",[4,0],[91,0]],];
 
-const hair_menu_list = [ none_menu,["Short Shaggy",[1,0,1],[5]],["Emo Bob",[2,0,2],[10]], ["Princely",[3,0,0],[24]],["Half-up locs",[4,0,3],[7]],["Long Wavy",[5,1,4],[9]],["Curly Bob",[6,0,6],[11]],["Curly Mop",[6,0,7],[32]],["Curly Ponytail",[6,0,5],[29]],["Spiky",[7,0,7],[43]]];
+const hair_menu_list = [ none_menu,["Short Side-part",[8,0,0],[3]],["Short Shaggy",[1,0,1],[5]],["Emo Bob",[2,0,2],[10]], ["Princely",[3,0,0],[24]],["Half-up locs",[4,0,3],[7]],["Long Wavy",[5,1,4],[9]],["Curly Bob",[6,0,6],[11]],["Curly Mop",[6,0,7],[32]],["Curly Ponytail",[6,0,5],[29]],["Spiky",[7,0,7],[43]]];
 
 const neckwear_menu_list = [ none_menu, ["Tie",[1],[4]]];
 
@@ -171,14 +171,13 @@ function setFacialHair(variablelist, number){
     if (number<facial_hair_list_port.length){
     setPortVariable(["Facial_hair"], number);
     setSpriteVariable(["Facial_hair"], number);
-    setPortVariable(["Stubble"], 0);
+    //setPortVariable(["Stubble"], 0);
     } 
-    else{ //facial hair
+    /*else{ //facial hair
         setPortVariable(["Facial_hair"], 0);
         setSpriteVariable(["Facial_hair"], 0);
-        let current_head = findNameMatch(portrait_objects, "Head").value_list[0];
-        setPortVariable(["Stubble"], current_head+1);
-    }
+        setPortVariable(["Stubble"],1);
+    }*/
     drawCanvas();
 }
 

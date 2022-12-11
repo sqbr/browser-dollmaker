@@ -45,7 +45,6 @@ const ears_list = ["regular",];
 const torso_list = ["medium",];
 const head_list = ["square","medium","round","pointed","oval",];
 const complexion_list = ["none","wrinkles",];
-const stubble_list = ["none","square","medium","round","pointed","oval",];
 const blush_list = ["none","small",];
 const nose_list = ["none","button","medium","broad","round","pointed",];
 const eyebrow_list = ["none","slightly downward","raised","flat sad","raised sad","angry","neutral","raised up",];
@@ -63,7 +62,7 @@ const coat_list_port = ["none","suit jacket","jacket","hoodie","open hoodie",];
 const facial_hair_list_port = ["none","beard","moustache","big moustache","goatee","soul patch","fluffy goatee",];
 const eyewear_list_port = ["none","glasses","square glasses","round glasses","sunglasses","eye-patch",];
 const hair_middle_list = ["none","tendrils",];
-const hair_front_list = ["none","shaggy side","emo","princely","locs bun","long wavy","curly pixie","spiky",];
+const hair_front_list = ["none","shaggy side","emo","princely","locs bun","long wavy","curly pixie","spiky","short side",];
 const hat_list_port = ["none","sunhat","cap","headphones","wizard",];
 const hat_dec_list_port = ["none","cap_joja","cap_joja2","sunhat",];
 
@@ -74,7 +73,6 @@ add_portrait_object("Ears",ears_list,"body")
 add_portrait_object("Torso",torso_list,"body")
 add_portrait_object("Head",head_list,"body")
 add_portrait_object("Complexion",complexion_list,"body")
-add_portrait_object("Stubble",stubble_list,"body")
 add_portrait_object("Blush",blush_list,"expression")
 add_portrait_object("Nose",nose_list,"body")
 add_portrait_object("Eyebrows",eyebrow_list,"expression")
@@ -98,7 +96,7 @@ add_portrait_object("Hat",hat_list_port,"outfit")
 add_portrait_object("Hat_dec",hat_dec_list_port,"outfit/hat")
 
 const facial_hair_list_sprite = ["none","beard","moustache","big moustache","goatee","soul patch","fluffy goatee",];
-const facial_hair_list_menu = ["none","beard","moustache","big moustache","goatee","soul patch","fluffy goatee","stubble",];
+const facial_hair_list_menu = ["none","beard","moustache","big moustache","goatee","soul patch","fluffy goatee",];
 const hat_list_sprite = ["cowboy hat","Bowler","Top hat","sombrero","straw hat","official cap","blue bonnet","Chapeau","Skeleton mask","Goblin Mask","Chicken Mask","Earmuffs","Delicate Bow","Tropiclip","Butterfly Bow","Hunter's Cap","Trucker Hat","Sailor's Cap","Good Ol' Cap","Fedora","Cool Cap","Lucky Bow","Polka Bow","Gnome's Cap","Eye Patch","Santa Hat","Tiara","Hard Hat","Sou'wester","Daisy","Watermelon Band","Mouse Ears","Cat Ears","Cowgal Hat","Cowpoke Hat","Archer's Cap","Panda Hat","Blue Cowboy Hat","Red Cowboy Hat","Cone Hat","Living Hat","Emily's Magic Hat","Mushroom Cap","Dinosaur Hat","Totem Mask","Logo Cap","Dwarf Helm","Fashion Hat","Pumpkin Mask","Hair Bone","knight","","red kerchief","grey beanie","red beanie","black with feather","","","","","wizard","chef","pirate","","","turban","","gold mask","spinner","veil","flat black","witch",];
 const hat_colour_names = ["top hat","earmuffs","flower","clip","bow","cap","backwards cap","big bow","cat ears","flat cap","wide hat","cowboy hat","hood","beanie","ribbed beanie","turban","hijab","headphones","wizard",];
 const hat_list_menu = ["none","sunhat","cap","headphones","wizard",];

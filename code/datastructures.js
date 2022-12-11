@@ -158,6 +158,7 @@ function fixPortSources(){
         let b = portrait_objects[i];
         for (let j = 0; j < panelNum; j += 1){ 
             let name = b.item_list[b.value_list[j]];
+
             for (let k = 0; k < back_list_port.length; k += 1){ //code to make backs of things match the fronts
                 let front_name = back_list_port[k][0];
                 if (b.name == front_name+"_back"){
