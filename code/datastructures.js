@@ -159,6 +159,11 @@ function fixPortSources(){
         for (let j = 0; j < panelNum; j += 1){ 
             let name = b.item_list[b.value_list[j]];
 
+            if (b.name =="Stubble"){
+                let obj = findNameMatch(portrait_objects, "Head");
+                name = head_list[obj.value_list[0]];
+            }
+
             for (let k = 0; k < back_list_port.length; k += 1){ //code to make backs of things match the fronts
                 let front_name = back_list_port[k][0];
                 if (b.name == front_name+"_back"){
@@ -186,7 +191,7 @@ function fixSpriteSources(){
         let b = sprite_objects[i];
 
         //Fixing sleeves to match uppermost long sleeved clothing
-        if (b.name =="Sleeves"){
+        /*if (b.name =="Sleeves"){
             b.item = 0;
             let sleeve_obj=findNameMatch(sprite_objects, "Coat");
             if (hasCoatSleeves &&sleeve_obj.item!=0){
@@ -198,14 +203,14 @@ function fixSpriteSources(){
                     b.colour = sleeve_obj.colour;
                     b.item = height+1;
                 } else{
-                    let sleeve_obj=findNameMatch(sprite_objects, "Shirt1");
+                    let sleeve_obj=findNameMatch(sprite_objects, "Shirt");
                     if (hasShirtSleeves && sleeve_obj.item!=0){
                         b.colour = sleeve_obj.colour;
                         b.item = height+1;
                     }
                 }
             }
-        }
+        }*/
         //Make Hair_top match Hairstyle
         if (b.name =="Hair_top"){
             let hair_obj=findNameMatch(sprite_objects, "Hairstyle");
@@ -375,7 +380,8 @@ function setMenu(variablelist, number){
             
             htmlString+="<div class=\"grid-choices\">"
             htmlString+=makeDropbtnString("Head Shape", ["Head"], head_list, "setPortVariable");
-            htmlString+=makeDropbtnString("Ear Shape", ["Ears"], ears_list, "setPortVariable");
+            //htmlString+=makeDropbtnString("Ear Shape", ["Ears"], ears_list, "setPortVariable");
+            htmlString+=makeDropbtnString("Height", ["Torso"], ["Short","Tall"], "setHeight");
             htmlString+=makeDropbtnString("Nose Shape", ["Nose","Nose_front"], nose_list, "setPortVariable");
             htmlString+="</div>" 
             
@@ -386,7 +392,7 @@ function setMenu(variablelist, number){
             htmlString+="</div>"  
             
             htmlString+="<div class=\"grid-choices\">"
-            htmlString+=makeDropbtnString("Height", ["Torso"], ["Short","Tall"], "setHeight");
+            htmlString+=makeDropbtnString("Complexion", ["Complexion"], complexion_list, "setPortVariable");
             htmlString+="</div>"
             break;    
         case 1: //editing the outfit
@@ -412,12 +418,13 @@ function setMenu(variablelist, number){
             htmlString+=makeDropbtnString("Highlight Colour", [current_item], outfit_colours, "setClothing2Colour");
             htmlString+='<div><h2 id="clothingColour2" text-align="left">'+colour_desc(obj.colour_list[obj.colour2])+'</h2></div>';
             htmlString+="</div>"
-            if (["Shirt","Coat","Overshirt"].includes(current_item)){
+            /*if (["Shirt","Coat","Overshirt"].includes(current_item)){
+                let sleeve_obj = findNameMatch(sprite_objects, current_item+"_sleeves");
                 htmlString+="<div class=\"grid-choices\">" 
-                htmlString+=makeDropbtnString("Has Long Sleeves:", [current_item], truth_list_string, "setSleeves");
-                htmlString+='<div><h2 id="hasSleevesTitle" text-align="left">'+hasCoatSleeves+'</h2></div>';
+                htmlString+=makeDropbtnString("Sleeves:", [current_item+"_sleeves"], sleeves_names, "setSleeves");
+                htmlString+='<div><h2 id="hasSleevesTitle" text-align="left">'+sleeves_names[sleeve_obj.base_item]+'</h2></div>';
                 htmlString+="</div>"
-            }  
+            }  */
             
             break;    
         case 2: //editing the expression

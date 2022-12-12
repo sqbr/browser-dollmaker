@@ -24,21 +24,21 @@ function add_menu_object(name, list_list, colour_list, port_item_list, port_seco
 
 const none_menu = ["none",[],[]];
 
-const hat_menu_list = [ none_menu,["Headphones",[3,0],[90,0]],["Sun Hat",[1,3],[83,11]],["Cap",[2,0],[78,0]],["Joja Cap",[2,1],[78,5]],["Joja Cap 2",[2,2],[78,6]],["Wizard",[4,0],[91,0]],];
+const hat_menu_list = [ none_menu,["Bow",[5,0],[77,0]],["Headphones",[3,0],[90,0]],["Sun Hat",[1,3],[92,20]],["Cap",[2,0],[78,0]],["Joja Cap",[2,1],[78,5]],["Joja Cap 2",[2,2],[78,6]],["Wizard",[4,0],[91,0]],];
 
-const hair_menu_list = [ none_menu,["Short Side-part",[8,0,0],[3]],["Short Shaggy",[1,0,1],[5]],["Emo Bob",[2,0,2],[10]], ["Princely",[3,0,0],[24]],["Half-up locs",[4,0,3],[7]],["Long Wavy",[5,1,4],[9]],["Curly Bob",[6,0,6],[11]],["Curly Mop",[6,0,7],[32]],["Curly Ponytail",[6,0,5],[29]],["Spiky",[7,0,7],[43]]];
+const hair_menu_list = [ none_menu,["Twintails",[9,0,13],[31]], ["Tufts",[15,0,12],[52]],["Bangs Bun",[9,0,11],[23]], ["Bun",[14,0,11],[23]],["Short Spiky",[13,0,10],[1]],["Long Locks",[12,0,9],[51]], ["Afro",[11,0,0],[21]],["Hi-top",[10,0,0],[12]],["Twin Braids",[9,0,8],[35]],["Short Side-part",[8,0,0],[3]],["Short Shaggy",[1,0,1],[5]],["Emo Bob",[2,0,2],[10]], ["Princely",[3,0,0],[24]],["Half-up locs",[4,0,3],[7]],["Long Wavy",[5,1,4],[9]],["Curly Bob",[6,0,6],[11]],["Curly Mop",[6,0,7],[32]],["Curly Ponytail",[6,0,5],[29]],["Spiky",[7,0,7],[43]]];
 
-const neckwear_menu_list = [ none_menu, ["Tie",[1],[4]]];
+const neckwear_menu_list = [ none_menu, ["Tie",[1],[4]],["Beads",[2],[6]]];
 
 const eyewear_menu_list = [ none_menu,["Glasses",[1],[1]], ["Square Glasses",[2],[1]],["Round Glasses",[3],[1]],["Sunglasses",[4],[5]]];
 
-const earrings_menu_list = [ none_menu,["Studs",[1],[3]],["Single Stud",[2],[4]],["Small Hoops",[4],[3]],["Single Hoop",[3],[4]],["Punk",[5],[3]],["Drops",[6],[1]]];
+const earrings_menu_list = [ none_menu,["Studs",[1],[3]],["Single Stud",[2],[4]],["Small Hoops",[4],[3]],["Single Small Hoop",[3],[4]],["Hoops",[7],[1]],["Single Hoop",[8],[5]],["Punk",[5],[3]],["Drops",[6],[1]]];
 
-const coat_menu_list = [ none_menu, ["Short Coat",[1],[1,0]],["Hoodie",[3],[5,0]],["Open Hoodie",[4],[7,0]],["Cool Jacket",[2],[6,0]]];
+const coat_menu_list = [ none_menu, ["Leaves",[5],[8,0]],["Short Coat",[1],[1,0]],["Business Jacket",[1],[6,0]], ["Hoodie",[3],[5,0]],["Open Hoodie",[4],[7,0]],["Cool Jacket",[2],[6,0]]];
 
 const overshirt_menu_list = [ none_menu];
 
-const shirt_menu_list = [ none_menu,["T-Shirt",[2,0,0,0],[19,0,0]], ["Button-up",[1,1,0,0],[12,0,0]], ["Plaid Button-up",[1,1,1,1],[12,0,2]],["Stripe Button-up",[1,1,2,0],[12,0,3]], ["Vest",[3,0,0,0],[2,0,0]],["Vest (Curvy)",[3,0,0,0],[3,0,0]],["Boatneck",[4,0,0,0],[23,0,0]]]
+const shirt_menu_list = [ none_menu,["Open Shirt With Vest",[2,2,3,0],[24,0,25]], ["Open Shirt",[2,2,0,0],[25,0,0]],["Bikini",[6,0,0,0],[7,0,0]],["Strappy Vest",[6,0,0,0],[2,0,0]],["Strappy Vest (Curvy)",[6,0,0,0],[3,0,0]], ["T-Shirt",[3,0,0,0],[19,0,0]], ["Button-up",[1,1,0,0],[12,0,0]], ["Plaid Button-up",[1,1,1,1],[12,0,2]],["Stripe Button-up",[1,1,2,0],[12,0,3]], ["Vest",[4,0,0,0],[2,0,0]],["Vest (Curvy)",[4,0,0,0],[3,0,0]],["Boatneck",[5,0,0,0],[23,0,0]]]
 
 const pants_menu_list = [none_menu];
 const pants_names_all = ["briefs","trousers"].concat(pants_names)
@@ -63,7 +63,7 @@ add_menu_object("Hat", hat_menu_list, outfit_colours,["Hat","Hat_dec"],["Hat_dec
 add_menu_object("Neckwear", neckwear_menu_list, outfit_colours,["Neckwear"],[], ["Neckwear"],[]);
 add_menu_object("Eyewear", eyewear_menu_list, outfit_colours,["Eyewear"],[],["Eyewear"],[]);
 add_menu_object("Earrings", earrings_menu_list, outfit_colours,["Earrings"],[],["Earrings"],[]);
-add_menu_object("Shirt", shirt_menu_list, outfit_colours,["Shirt","Shirt_collar","Shirt_dec","Shirt_collar_dec"],["Shirt_dec","Shirt_collar_dec"],["Shirt1","Shirt2","Shirt_dec"],["Shirt_dec"]);
+add_menu_object("Shirt", shirt_menu_list, outfit_colours,["Shirt","Shirt_collar","Shirt_dec","Shirt_collar_dec"],["Shirt_dec","Shirt_collar_dec"],["Shirt","Shirt2","Shirt_dec"],["Shirt_dec"]);
 add_menu_object("Overshirt", overshirt_menu_list, outfit_colours,["Overshirt"],[],["Overshirt"],[]);
 add_menu_object("Coat", coat_menu_list, outfit_colours,["Coat"],[],["Coat","Coat_back"],[]);
 add_menu_object("Pants", pants_menu_list, outfit_colours,["Pants_top"],[],["Pants","Pants top"],[]);
@@ -100,6 +100,16 @@ function setSpriteVariable(variablelist, number){
     for (let i = 0; i < variablelist.length; i += 1) {
         let b = findNameMatch(sprite_objects, variablelist[i]); //the eleemnt of portrait_objects with the right vriablename
         b.item=number;
+    }
+    drawCanvas();
+}
+
+function setBaseSpriteVariable(variablelist, number){
+    // sprite which has two versions for each height
+    for (let i = 0; i < variablelist.length; i += 1) {
+        let b = findNameMatch(sprite_objects, variablelist[i]); //the eleemnt of portrait_objects with the right vriablename
+        b.base_item = number; 
+        b.item=2*number-1+height;
     }
     drawCanvas();
 }
@@ -171,13 +181,13 @@ function setFacialHair(variablelist, number){
     if (number<facial_hair_list_port.length){
     setPortVariable(["Facial_hair"], number);
     setSpriteVariable(["Facial_hair"], number);
-    //setPortVariable(["Stubble"], 0);
+    setPortVariable(["Stubble"], 0);
     } 
-    /*else{ //facial hair
+    else{ //facial hair
         setPortVariable(["Facial_hair"], 0);
         setSpriteVariable(["Facial_hair"], 0);
         setPortVariable(["Stubble"],1);
-    }*/
+    }
     drawCanvas();
 }
 
@@ -200,18 +210,7 @@ function setGloves(variablelist, number){
 }
 
 function setSleeves(variablelist, number){
-    switch(variablelist[0]){
-        case "Coat":
-            hasCoatSleeves = truth_list[number];
-            break;
-        case "Overshirt":
-            hasOvershirtSleeves = truth_list[number];
-            break;    
-        case "Shirt":
-            hasShirtSleeves = truth_list[number];
-            break;
-    } 
-    setMenu([],currently_editing);   
+    setBaseSpriteVariable(variablelist, number); 
     drawCanvas();
 }
 
@@ -242,7 +241,7 @@ function setClothing(variablelist, number){
 
 function setHair(variablelist, number){
     setClothing(["Hairstyle"],number);
-    if (number ==0)
+    if ([0,52].includes(number)) //all bald hairstyles
         isBald = true;
     else
         isBald = false;    
@@ -270,25 +269,45 @@ function getOffset(name){
     let obj = findNameMatch(portrait_objects, "Head");
     let head = head_list[obj.value_list[0]];
     switch(head){
-        case "medium":
+        case "round":
             if (torso_offset_list.includes(name))   
-                return -1;
-            if (["Nose","Facial_hair"].includes(name))  
-                return -1;
+                return -9;
+            if (["Nose","Nose_front", "Facial_hair"].includes(name))  
+                return -3;
             break;
+        case "jowly": 
+        if (torso_offset_list.includes(name))   
+            return -9;
+        if (["Nose","Nose_front", "Facial_hair"].includes(name))  
+            return -2;
+    break;   
         case "oval":
+        
             if (torso_offset_list.includes(name))   
                 return -6;
             if (["Nose","Facial_hair"].includes(name))  
                 return -2;
             break;
-        case "round":
+        case "medium":
             if (torso_offset_list.includes(name))   
-                return -9;
+                return -1;
             if (["Nose","Facial_hair"].includes(name))  
-                return -3;
-            break;
-        case "square":  
+                return -1;
+            break; 
+        case "square":
+            if (torso_offset_list.includes(name))   
+                return -1;
+            if (["Nose","Facial_hair"].includes(name))  
+                return -1;
+            break;     
+        case "rectangular":  
+            if (torso_offset_list.includes(name))   
+                return 2;
+            if (["Facial_hair"].includes(name))  
+                return 4;
+            if (["Mouth"].includes(name))  
+                return 3;    
+            break;     
         case "pointed":  
             if (torso_offset_list.includes(name))   
                 return 2;
@@ -296,7 +315,7 @@ function getOffset(name){
                 return 4;
             if (["Mouth"].includes(name))  
                 return 3;    
-            break;          
+            break;               
     }    
     return 0;    
 }
