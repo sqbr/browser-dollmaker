@@ -20,7 +20,7 @@ skin_list = body_list + ["Eyebrows", "Mouth","Blush"]
 #Only in portraits
 hair_list = ["Hair_back", "Hair_middle","Hair_front","Facial_hair"]
 
-hair_front_list = ["none", "shaggy side","emo","princely","locs bun","long wavy","curly pixie","spiky","short side","smooth bangs","hi-top","afro","long locks","short spiky","centre part","tufts","perm"]
+hair_front_list = ["none", "shaggy side","emo","princely","locs bun","long wavy","curly pixie","spiky","short side","smooth bangs","hi-top","afro","long locks","short spiky","centre part","tufts","perm","shaved"]
 hair_middle_list = ["none","tendrils"]
 hair_back_list = ["none", "shaggy medium","bob","locs bob","long wavy","curly pony","curly bob","spiky","twin braids","long locks","short spiky","bun","tufts","twintails","perm"]
 
@@ -694,13 +694,14 @@ process_outfit_sprites()
 
 #["Hair_front","Hair_middle","Hair_back"]:
 # []:
+#["Hat","Hat_back","Hat_dec"]:
 # ["Shirt_collar", "Shirt" ,"Shirt_dec","Shirt_collar_dec"]:
 #["Coat","Coat_back"]:
 #["Overshirt","Overshirt_dec"]:
 
 
 for c in closet:
-    if c.name in ["Head","Ears"]:
+    if c.name in ["Hat","Hat_back","Hat_dec"]:
         process_portrait_part(c)
 #process_all_portraits()
 #make_coat()

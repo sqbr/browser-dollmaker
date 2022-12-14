@@ -24,9 +24,9 @@ function add_menu_object(name, list_list, colour_list, port_item_list, port_seco
 
 const none_menu = ["none",[],[]];
 
-const hat_menu_list = [ none_menu,["Beanie",[8,6],[87,0]],["Broad Hat",[7,5],[83,11]],["Bobble Hat",[6,4],[93,21]],["Bow",[5,0],[77,0]],["Headphones",[3,0],[90,0]],["Sun Hat",[1,3],[92,20]],["Cap",[2,0],[78,0]],["Joja Cap",[2,1],[78,5]],["Joja Cap 2",[2,2],[78,6]],["Wizard",[4,0],[91,0]],];
+const hat_menu_list = [ none_menu,["Beanie",[8,6],[87,0]],["Broad Hat",[7,5],[83,11]],["Bobble Hat",[6,4],[93,21]],["Bow",[5,0],[77,0]],["Headphones",[3,0],[90,0]],["Sun Hat",[1,3],[92,20]],["Cap",[2,0],[78,0]],["Joja Cap",[2,1],[78,5]],["Wizard",[4,0],[91,0]],];
 
-const hair_menu_list = [ none_menu,["Twintails",[9,0,13],[31]], ["Tufts",[15,0,12],[52]],["Bangs Bun",[9,0,11],[23]], ["Bun",[14,0,11],[23]],["Short Spiky",[13,0,10],[1]],["Long Locks",[12,0,9],[51]], ["Afro",[11,0,0],[21]],["Hi-top",[10,0,0],[12]],["Twin Braids",[9,0,8],[35]],["Short Side-part",[8,0,0],[3]],["Short Shaggy",[1,0,1],[5]],["Emo Bob",[2,0,2],[10]], ["Princely",[3,0,0],[24]],["Half-up locs",[4,0,3],[7]],["Long Wavy",[5,1,4],[9]],["Curly Bob",[6,0,6],[11]],["Curly Mop",[6,0,7],[32]],["Curly Ponytail",[6,0,5],[29]],["Spiky",[7,0,7],[43]]];
+const hair_menu_list = [ none_menu,["Shaved",[17,0,0],[56]], ["Perm",[16,0,14],[53]],["Twintails",[9,0,13],[31]], ["Tufts",[15,0,12],[52]],["Bangs Bun",[9,0,11],[23]], ["Bun",[14,0,11],[23]],["Short Spiky",[13,0,10],[1]],["Long Locks",[12,0,9],[51]], ["Afro",[11,0,0],[21]],["Hi-top",[10,0,0],[12]],["Twin Braids",[9,0,8],[35]],["Short Side-part",[8,0,0],[3]],["Short Shaggy",[1,0,1],[5]],["Emo Bob",[2,0,2],[10]], ["Princely",[3,0,0],[24]],["Half-up locs",[4,0,3],[7]],["Long Wavy",[5,1,4],[9]],["Curly Bob",[6,0,6],[11]],["Curly Mop",[6,0,7],[32]],["Curly Ponytail",[6,0,5],[29]],["Spiky",[7,0,7],[68]]];
 
 const neckwear_menu_list = [ none_menu, ["Tie",[1],[4]],["Beads",[2],[6]]];
 

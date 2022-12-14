@@ -170,8 +170,7 @@ for (let column =0; column<6;column++){
 const sprite_hair_list = [none]
 for (let row =0; row<7;row++)
     for (let column =0; column<8;column++){
-        if (row*8+column< hairstyles_names.length)
-            sprite_hair_list.push({name: hairstyles_names[row*8+column], location: "hair/hairstyles", colour: true, asymmetrical: false,rowNum: 3,topcorner:[16*column,96*row]})
+            sprite_hair_list.push({name: "", location: "hair/hairstyles", colour: true, asymmetrical: false,rowNum: 3,topcorner:[16*column,96*row]})
 }
 for (let row =0; row<3;row++)
     for (let column =0; column<8;column++){

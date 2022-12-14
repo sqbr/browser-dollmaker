@@ -64,7 +64,7 @@ const coat_list_port = ["none","suit jacket","jacket","hoodie","open hoodie","le
 const facial_hair_list_port = ["none","beard","moustache","big moustache","goatee","soul patch","fluffy goatee",];
 const eyewear_list_port = ["none","glasses","square glasses","round glasses","sunglasses","eye-patch","coloured glasses",];
 const hair_middle_list = ["none","tendrils",];
-const hair_front_list = ["none","shaggy side","emo","princely","locs bun","long wavy","curly pixie","spiky","short side","smooth bangs","hi-top","afro","long locks","short spiky","centre part","tufts","perm",];
+const hair_front_list = ["none","shaggy side","emo","princely","locs bun","long wavy","curly pixie","spiky","short side","smooth bangs","hi-top","afro","long locks","short spiky","centre part","tufts","perm","shaved",];
 const hat_list_port = ["none","sunhat","cap","headphones","wizard","ribbon","night cap","broad hat","beanie",];
 const hat_dec_list_port = ["none","cap_joja","cap_joja2","sunhat","night cap","broad hat",];
 
