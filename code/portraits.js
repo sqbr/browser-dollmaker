@@ -38,9 +38,9 @@ const hairNum = 24; //how many hair colours there are
 const outfitNum = 30; //how many clothing colours there are
 const full_body_list = body_list+hair_list;
 
-const coat_back_list_port = ["none","suit jacket","jacket","hoodie","open hoodie","leaves",];
-const hat_back_list_port = ["none","sunhat","wizard",];
-const hair_back_list = ["none","shaggy medium","bob","locs bob","long wavy","curly pony","curly bob","spiky","twin braids","long locks","short spiky","bun","tufts","twintails",];
+const coat_back_list_port = ["none","suit jacket","jacket","hoodie","open hoodie","leaves","chinese collar",];
+const hat_back_list_port = ["none","sunhat","wizard","night cap","broad hat","beanie",];
+const hair_back_list = ["none","shaggy medium","bob","locs bob","long wavy","curly pony","curly bob","spiky","twin braids","long locks","short spiky","bun","tufts","twintails","perm",];
 const ears_list = ["regular",];
 const torso_list = ["medium",];
 const head_list = ["rectangular","pointed","square","medium","oval","round","jowly",];
@@ -52,20 +52,21 @@ const eyebrow_list = ["none","slightly downward","raised","flat sad","raised sad
 const eye_list = ["medium","crescents","medium side","medium narrowed","medium angry","big crescents","sleepy",];
 const mouth_list = ["flat","smile","frown","small frown","slight smile","small laugh","wobbly smile",];
 const earrings_list_port = ["none","studs","single stud","single small hoop","small hoops","punk","drops","hoops","single hoop",];
-const shirt_list_port = ["none","button up","open shirt","tshirt","vest","boatneck","strappy",];
+const shirt_list_port = ["none","button up","open shirt","tshirt","vest","boatneck","strappy","chinese collar","turtleneck",];
 const shirt_dec_list_port = ["none","button_up_plaid","button_up_stripe","open shirt vest",];
-const overshirt_list_port = ["none",];
 const neckwear_list_port = ["none","tie","beads",];
+const overshirt_list_port = ["none","v-neck","sweater vest","sweater","open sweater",];
+const overshirt_dec_list_port = ["none","sweater vest","argyle vest",];
 const shirt_collar_list = ["none","button up","open shirt",];
 const shirt_collar_dec_list_port = ["none","button_up_plaid",];
 const pants_top_list_port = ["none","overalls",];
-const coat_list_port = ["none","suit jacket","jacket","hoodie","open hoodie","leaves",];
+const coat_list_port = ["none","suit jacket","jacket","hoodie","open hoodie","leaves","chinese collar",];
 const facial_hair_list_port = ["none","beard","moustache","big moustache","goatee","soul patch","fluffy goatee",];
-const eyewear_list_port = ["none","glasses","square glasses","round glasses","sunglasses","eye-patch",];
+const eyewear_list_port = ["none","glasses","square glasses","round glasses","sunglasses","eye-patch","coloured glasses",];
 const hair_middle_list = ["none","tendrils",];
-const hair_front_list = ["none","shaggy side","emo","princely","locs bun","long wavy","curly pixie","spiky","short side","smooth bangs","hi-top","afro","long locks","short spiky","centre part","tufts",];
-const hat_list_port = ["none","sunhat","cap","headphones","wizard","ribbon",];
-const hat_dec_list_port = ["none","cap_joja","cap_joja2","sunhat",];
+const hair_front_list = ["none","shaggy side","emo","princely","locs bun","long wavy","curly pixie","spiky","short side","smooth bangs","hi-top","afro","long locks","short spiky","centre part","tufts","perm",];
+const hat_list_port = ["none","sunhat","cap","headphones","wizard","ribbon","night cap","broad hat","beanie",];
+const hat_dec_list_port = ["none","cap_joja","cap_joja2","sunhat","night cap","broad hat",];
 
 add_portrait_object("Coat_back",coat_back_list_port,"outfit/coat")
 add_portrait_object("Hat_back",hat_back_list_port,"outfit/hat")
@@ -83,8 +84,9 @@ add_portrait_object("Mouth",mouth_list,"expression")
 add_portrait_object("Earrings",earrings_list_port,"outfit")
 add_portrait_object("Shirt",shirt_list_port,"outfit")
 add_portrait_object("Shirt_dec",shirt_dec_list_port,"outfit/shirt")
-add_portrait_object("Overshirt",overshirt_list_port,"outfit")
 add_portrait_object("Neckwear",neckwear_list_port,"outfit")
+add_portrait_object("Overshirt",overshirt_list_port,"outfit")
+add_portrait_object("Overshirt_dec",overshirt_dec_list_port,"outfit/overshirt")
 add_portrait_object("Shirt_collar",shirt_collar_list,"outfit/shirt")
 add_portrait_object("Shirt_collar_dec",shirt_collar_dec_list_port,"outfit/shirt")
 add_portrait_object("Pants_top",pants_top_list_port,"outfit")
@@ -100,14 +102,14 @@ add_portrait_object("Hat_dec",hat_dec_list_port,"outfit/hat")
 const facial_hair_list_sprite = ["none","beard","moustache","big moustache","goatee","soul patch","fluffy goatee",];
 const facial_hair_list_menu = ["none","beard","moustache","big moustache","goatee","soul patch","fluffy goatee","stubble",];
 const hat_list_sprite = ["cowboy hat","Bowler","Top hat","sombrero","straw hat","official cap","blue bonnet","Chapeau","Skeleton mask","Goblin Mask","Chicken Mask","Earmuffs","Delicate Bow","Tropiclip","Butterfly Bow","Hunter's Cap","Trucker Hat","Sailor's Cap","Good Ol' Cap","Fedora","Cool Cap","Lucky Bow","Polka Bow","Gnome's Cap","Eye Patch","Santa Hat","Tiara","Hard Hat","Sou'wester","Daisy","Watermelon Band","Mouse Ears","Cat Ears","Cowgal Hat","Cowpoke Hat","Archer's Cap","Panda Hat","Blue Cowboy Hat","Red Cowboy Hat","Cone Hat","Living Hat","Emily's Magic Hat","Mushroom Cap","Dinosaur Hat","Totem Mask","Logo Cap","Dwarf Helm","Fashion Hat","Pumpkin Mask","Hair Bone","knight","","red kerchief","grey beanie","red beanie","black with feather","","","","","wizard","chef","pirate","","","turban","","gold mask","spinner","veil","flat black","witch",];
-const hat_colour_names = ["top hat","earmuffs","flower","clip","bow","cap","backwards cap","big bow","cat ears","flat cap","wide hat","cowboy hat","hood","beanie","ribbed beanie","turban","hijab","headphones","wizard","sunhat",];
-const hat_list_menu = ["none","sunhat","cap","headphones","wizard","ribbon",];
+const hat_colour_names = ["top hat","earmuffs","flower","clip","bow","cap","backwards cap","big bow","cat ears","flat cap","wide hat","cowboy hat","hood","beanie","ribbed beanie","turban","hijab","headphones","wizard","sunhat","night cap",];
+const hat_list_menu = ["none","sunhat","cap","headphones","wizard","ribbon","night cap","broad hat","beanie",];
 const neckwear_list_sprite = ["none","bandana","necklace","bow-tie","tie","choker","beads",];
 const neckwear_list_menu = ["none","tie","beads",];
-const coat_list_sprite = ["none","short coat","cape","closed","closed low cut","closed hoodie","jacket","open hoodie","leaves",];
-const coat_list_menu = ["none","suit jacket","jacket","hoodie","open hoodie","leaves",];
-const eyewear_list_sprite = ["none","glasses","square glasses","round glasses","sunglasses","eye-patch",];
-const eyewear_list_menu = ["none","glasses","square glasses","round glasses","sunglasses","eye-patch",];
+const coat_list_sprite = ["none","short coat","cape","closed","closed low cut","closed hoodie","jacket","open hoodie","leaves","vest",];
+const coat_list_menu = ["none","suit jacket","jacket","hoodie","open hoodie","leaves","chinese collar",];
+const eyewear_list_sprite = ["none","glasses","square glasses","round glasses","sunglasses","eye-patch","coloured glasses",];
+const eyewear_list_menu = ["none","glasses","square glasses","round glasses","sunglasses","eye-patch","coloured glasses",];
 const earrings_list_sprite = ["none","drops","hoops","studs","single stud",];
 const earrings_list_menu = ["none","studs","single stud","single small hoop","small hoops","punk","drops","hoops","single hoop",];
 const back_list_port = [["Hat", hat_back_list_port],["Coat", coat_back_list_port] ]

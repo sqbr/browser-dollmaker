@@ -15,7 +15,7 @@ const imageType_list =["Portrait","Sprite"];
 
 const editing_list =["Body","Outfit", "Expressions"];
 
-const torso_offset_list = ["Torso","Shirt","Shirt_collar","Shirt_dec","Shirt_collar_dec","Coat","Coat_back","Pants_top","Overshirt","Neckwear"];
+const torso_offset_list = ["Torso","Shirt","Shirt_collar","Shirt_dec","Shirt_collar_dec","Coat","Coat_back","Pants_top","Overshirt","Overshirt_dec","Neckwear"];
 
 const panel_list = ["0: Neutral", "1: Happy", "2: Sad", "3: Unique", "4: Blushing", "5: Angry","6","7","8","9","10"];
 

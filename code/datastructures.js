@@ -361,7 +361,7 @@ function setImageType(variablelist, number){
             document.getElementById("topbar").innerHTML = htmlString;  
             return;   
     }   
-    setMenu([], 0); 
+    setMenu([], currently_editing); 
 }
 
 function setMenu(variablelist, number){
@@ -411,7 +411,7 @@ function setMenu(variablelist, number){
             htmlString+="</div>" 
             htmlString+="<div class=\"grid-choices\">"    
             htmlString+=makeDropbtnString("Main Colour", [current_item], outfit_colours, "setClothingColour");
-            htmlString+='<canvas id="clothingCanvas" width="20" height="20"></canvas>';
+            //htmlString+='<canvas id="clothingCanvas" width="20" height="20"></canvas>';
             htmlString+='<div><h2 id="clothingColour" text-align="left">'+colour_desc(obj.colour_list[obj.colour])+'</h2></div>';
             htmlString+="</div>" 
             htmlString+="<div class=\"grid-choices\">" 
@@ -442,10 +442,11 @@ function setMenu(variablelist, number){
 
     }
     document.getElementById("controls").innerHTML = htmlString;
-    updateMenuCanvases();
+    //updateMenuCanvases();
 }
 
 function updateMenuCanvases(){
+    //updates the little canvas in the colour select screen
     switch(currently_editing){
         case 1: 
             let current_item = menu_object_names[current_clothing];
