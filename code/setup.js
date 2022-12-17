@@ -26,6 +26,9 @@ const back_list = ["Hat","Coat"]; //have a back
 const truth_list = [false,true]
 const truth_list_string = ["False","True"];
 
+const sleeve_havers = ["Shirt","Overshirt","Coat"]
+const sleeve_list = [0,0,0]
+
 let canvas;
 let canvas_preview;
 let ctx_preview;

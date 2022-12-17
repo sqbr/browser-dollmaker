@@ -159,12 +159,14 @@ function fixPortSources(){
         for (let j = 0; j < panelNum; j += 1){ 
             let name = b.item_list[b.value_list[j]];
 
+            //stubble
             if (b.name =="Stubble"){
                 let obj = findNameMatch(portrait_objects, "Head");
                 name = head_list[obj.value_list[0]];
             }
 
-            for (let k = 0; k < back_list_port.length; k += 1){ //code to make backs of things match the fronts
+            //code to make backs of things match the fronts
+            for (let k = 0; k < back_list_port.length; k += 1){ 
                 let front_name = back_list_port[k][0];
                 if (b.name == front_name+"_back"){
                     obj_front = findNameMatch(portrait_objects, front_name);
@@ -173,6 +175,24 @@ function fixPortSources(){
                         b.colour = obj_front.colour
                 }
             }
+
+            //code for sleeves
+            for (let k = 0; k < sleeve_list_port.length; k += 1){ 
+                let front_name = sleeve_list_port[k][0]; //eg "Shirt", "Coat" etc
+                if (b.name == front_name+"_sleeves"){ //this is "Shirt_sleeves" etc
+                    obj_front = findNameMatch(portrait_objects, front_name); //what shirt etc we are wearing
+                    name = "none"
+                    if (sleeve_list_port[k][1].includes(obj_front.item_list[obj_front.value_list[j]])){ //the current shirt etc can have sleeves
+                            let current_sleeves = sleeve_list[k] //what current sleeve length is
+                            if (current_sleeves==0)
+                                name = "zilch"
+                            else
+                                name = "long"    
+                            b.colour = obj_front.colour
+                    }
+                }
+            }
+
             if (false){//since all portrait items are coloured
                 b.image_list[j].src = "images/bases/portraits/"+b.location+"/"+name+".png";
             }else{
@@ -418,13 +438,12 @@ function setMenu(variablelist, number){
             htmlString+=makeDropbtnString("Highlight Colour", [current_item], outfit_colours, "setClothing2Colour");
             htmlString+='<div><h2 id="clothingColour2" text-align="left">'+colour_desc(obj.colour_list[obj.colour2])+'</h2></div>';
             htmlString+="</div>"
-            /*if (["Shirt","Coat","Overshirt"].includes(current_item)){
-                let sleeve_obj = findNameMatch(sprite_objects, current_item+"_sleeves");
+            if (sleeve_havers.includes(current_item)){
                 htmlString+="<div class=\"grid-choices\">" 
                 htmlString+=makeDropbtnString("Sleeves:", [current_item+"_sleeves"], sleeves_names, "setSleeves");
-                htmlString+='<div><h2 id="hasSleevesTitle" text-align="left">'+sleeves_names[sleeve_obj.base_item]+'</h2></div>';
+                htmlString+='<div><h2 id="hasSleevesTitle" text-align="left">'+sleeves_names[sleeve_havers.indexOf(current_item)]+'</h2></div>';
                 htmlString+="</div>"
-            }  */
+            }  
             
             break;    
         case 2: //editing the expression

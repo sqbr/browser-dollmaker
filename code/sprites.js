@@ -198,8 +198,8 @@ const sprite_hat_dec_list = [none]
 for (let row =0; row<2;row++)
     for (let column =0; column<12;column++){
         let current_num = row*12+column;
-        if (current_num< hat_dec_sprite_list.length){
-            sprite_hat_dec_list.push({name: hat_dec_sprite_list[current_num], location: "outfit/hats/hats_dec", colour: true, asymmetrical: false,rowNum: 4,topcorner:[16*column,128*row]})
+        if (current_num< hat_colour_names.length){
+            sprite_hat_dec_list.push({name: hat_colour_names[current_num], location: "outfit/hats/hats_dec", colour: true, asymmetrical: false,rowNum: 4,topcorner:[16*column,128*row]})
         }
 }
 
