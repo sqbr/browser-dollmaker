@@ -122,7 +122,7 @@ const overshirt_sleeve_list_port = ["v-neck","sweater","open sweater",];
 const overshirt_sleeves_dec_list_port = ["none","argyle",];
 const coat_sleeve_list_port = ["suit jacket","jacket","hoodie","open hoodie","chinese collar",];
 const coat_sleeves_dec_list_port = ["none",];
-const sleeve_list_port = [["Shirt", shirt_sleeve_list_port,shirt_sleeves_dec_list_port],["Overshirt", overshirt_sleeve_list_port,overshirt_sleeves_dec_list_port],["Coat", coat_sleeve_list_port,coat_sleeves_dec_list_port] ];
+const sleeve_list_port = [{name: "Shirt", sleeves_list: shirt_sleeve_list_port,dec_list: shirt_sleeves_dec_list_port},{name: "Overshirt", sleeves_list: overshirt_sleeve_list_port,dec_list:overshirt_sleeves_dec_list_port},{name: "Coat", sleeves_list: coat_sleeve_list_port,dec_list:coat_sleeves_dec_list_port} ];
 const coat_back_list_sprite = ["none",];
 const back_list_sprite = [["Coat", coat_back_list_sprite] ];
 

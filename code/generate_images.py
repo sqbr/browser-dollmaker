@@ -638,7 +638,7 @@ def write_variables():
     content.write(list_string("overshirt_sleeves_dec_list_port", overshirt_sleeves_dec_list_port))
     content.write(list_string("coat_sleeve_list_port", coat_sleeve_list_port))
     content.write(list_string("coat_sleeves_dec_list_port", coat_sleeves_dec_list_port))
-    content.write("const sleeve_list_port = [[\"Shirt\", shirt_sleeve_list_port,shirt_sleeves_dec_list_port],[\"Overshirt\", overshirt_sleeve_list_port,overshirt_sleeves_dec_list_port],[\"Coat\", coat_sleeve_list_port,coat_sleeves_dec_list_port] ];\n")
+    content.write("const sleeve_list_port = [{name: \"Shirt\", sleeves_list: shirt_sleeve_list_port,dec_list: shirt_sleeves_dec_list_port},{name: \"Overshirt\", sleeves_list: overshirt_sleeve_list_port,dec_list:overshirt_sleeves_dec_list_port},{name: \"Coat\", sleeves_list: coat_sleeve_list_port,dec_list:coat_sleeves_dec_list_port} ];\n")
     content.write(list_string("coat_back_list_sprite", coat_back_list_sprite))
     content.write("const back_list_sprite = [[\"Coat\", coat_back_list_sprite] ];\n")
     content.write("\n")
