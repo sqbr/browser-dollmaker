@@ -183,16 +183,22 @@ function fixPortSources(){
                     obj_front = findNameMatch(portrait_objects, front_name); //what shirt etc we are wearing
                     name = "none";
                     current_sleeves_list = sleeve_list_port[k].sleeves_list;
-                    if (current_sleeves_list.includes(obj_front.item_list[obj_front.value_list[j]])){ //the current shirt etc can have sleeves
+                    current_item = obj_front.item_list[obj_front.value_list[j]];
+                    if (current_sleeves_list.includes(current_item)){ //the current shirt etc can have sleeves
                         //document.getElementById("test").innerHTML = k+" - "+sleeve_list_port[k].toString();
                             let current_sleeves = sleeve_list[k] //what current sleeve length is
                             if (current_sleeves==0){
-                                b.item_list[j] = 0
-                                name = "zilch"
+                                b.item_list[j] = 0;
+                                name = "zilch";
                             }
                             else{
-                                b.item_list[j] = 1
-                                name = "long"   
+                                b.item_list[j] = 1;
+                                if (sleeve_list_port[k].sharp_sleeves.includes(current_item)){
+                                    name = "sharp";   
+                                }else{
+                                    name = "round";   
+                                }
+                                
                             } 
                             b.colour = obj_front.colour
                     }
@@ -202,18 +208,23 @@ function fixPortSources(){
                     obj_dec = findNameMatch(portrait_objects, front_name+"_dec"); //what shirt decoration etc we are wearing
                     name = "none";
                     current_sleeves_list = sleeve_list_port[k].sleeves_list;
-                    document.getElementById("test").innerHTML = k+" - "+sleeve_list_port[k].toString();
+                    current_item = obj_front.item_list[obj_front.value_list[j]];
+                    //document.getElementById("test").innerHTML = k+" - "+sleeve_list_port[k].toString();
                     if (current_sleeves_list.includes(obj_front.item_list[obj_front.value_list[j]])){ //the current shirt etc can have sleeves
                         let current_dec = sleeve_list_port[k].dec_list[obj_dec.value_list[j]]
                         let current_sleeves = sleeve_list[k]  //what current sleeve length is
-                        document.getElementById("test").innerHTML = k+" - "+sleeve_list_port[k].toString();
+                        //document.getElementById("test").innerHTML = k+" - "+sleeve_list_port[k].toString();
                         if (current_sleeves==0){
                             b.item_list[j] = 0
                             name = current_dec+" zilch"
                         }
                         else{
                             b.item_list[j] = 1
-                            name = current_dec+" long"   
+                            if (sleeve_list_port[k].sharp_sleeves.includes(current_item)){
+                                name = current_dec+" sharp";   
+                            }else{
+                                name = current_dec+" round";   
+                            }
                         } 
                         b.colour = obj_dec.colour
                     }
@@ -468,6 +479,7 @@ function setMenu(variablelist, number){
             if (sleeve_havers.includes(current_item)){
                 htmlString+="<div class=\"grid-choices\">" 
                 htmlString+=makeDropbtnString("Sleeves:", [current_item], sleeves_names, "setSleeves");
+                document.getElementById("test").innerHTML = sleeve_list.toString();
                 htmlString+='<div><h2 id="hasSleevesTitle" text-align="left">'+sleeves_names[sleeve_list[sleeve_havers.indexOf(current_item)]]+'</h2></div>';
                 htmlString+="</div>"
             }  

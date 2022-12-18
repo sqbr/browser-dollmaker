@@ -42,7 +42,7 @@ facial_hair_list_menu = facial_hair_list_port  +["stubble"] #stubble must be at 
 stubble_list = ["none"]+ head_list
 
 #stuff with sleeves and collars
-sleeve_names_port = ["none", "zilch","long"]
+sleeve_names_port = ["none", "zilch","round","sharp"]
 
 def addSleeves(listname):
     output = []
@@ -72,7 +72,7 @@ coat_back_list_port = ["none","suit jacket","jacket","hoodie","open hoodie","lea
 coat_back_list_sprite = ["none"]
 coat_list_port = coat_back_list_port
 coat_list_sprite = ["none","short coat","cape","closed","closed low cut","closed hoodie","jacket","open hoodie","leaves","vest"]
-coat_sleeve_list_port = [x for x in coat_list_port if not x in ["leaves","none"]] #items with sleeves
+coat_sleeve_list_port = [x for x in coat_list_port if not x in ["leaves","cape","none"]] #items with sleeves
 coat_list_menu = coat_list_port
 
 #hats
@@ -157,9 +157,10 @@ def add_portrait_object(name, item_list,listname, location):
 # #Behind eyes
 # shown_start = len(closet) # where the visible items start
 
+add_portrait_object("Hair_back", hair_back_list, "hair_back_list","body/hair")
 add_portrait_object("Coat_back", coat_back_list_port, "coat_back_list_port","outfit/coat")
 add_portrait_object("Hat_back", hat_back_list_port,"hat_back_list_port", "outfit/hat")
-add_portrait_object("Hair_back", hair_back_list, "hair_back_list","body/hair")
+
 add_portrait_object("Ears", ears_list,"ears_list", "body")
 add_portrait_object("Torso", torso_list, "torso_list", "body")
 add_portrait_object("Head", head_list, "head_list", "body")
@@ -187,6 +188,7 @@ add_portrait_object("Shirt_collar", shirt_collar_list,"shirt_collar_list", "outf
 add_portrait_object("Shirt_collar_dec", shirt_collar_dec_list_port,"shirt_collar_dec_list_port", "outfit/shirt")
 add_portrait_object("Pants_top", pants_top_list_port,"pants_top_list_port", "outfit")
 add_portrait_object("Coat", coat_list_port,"coat_list_port", "outfit")
+add_portrait_object("Coat_sleeves", sleeve_names_port,"coat_sleeves_port", "outfit/coat")
 
 add_portrait_object("Facial_hair", facial_hair_list_port,"facial_hair_list_port", "body/hair")
 add_portrait_object("Nose_front", nose_list,"nose_list", "body")
@@ -638,7 +640,7 @@ def write_variables():
     content.write(list_string("overshirt_sleeves_dec_list_port", overshirt_sleeves_dec_list_port))
     content.write(list_string("coat_sleeve_list_port", coat_sleeve_list_port))
     content.write(list_string("coat_sleeves_dec_list_port", coat_sleeves_dec_list_port))
-    content.write("const sleeve_list_port = [{name: \"Shirt\", sleeves_list: shirt_sleeve_list_port,dec_list: shirt_sleeves_dec_list_port},{name: \"Overshirt\", sleeves_list: overshirt_sleeve_list_port,dec_list:overshirt_sleeves_dec_list_port},{name: \"Coat\", sleeves_list: coat_sleeve_list_port,dec_list:coat_sleeves_dec_list_port} ];\n")
+    content.write("const sleeve_list_port = [{name: \"Shirt\", sleeves_list: shirt_sleeve_list_port,dec_list: shirt_sleeves_dec_list_port, sharp_sleeves: []},{name: \"Overshirt\", sleeves_list: overshirt_sleeve_list_port,dec_list:overshirt_sleeves_dec_list_port,sharp_sleeves: []},{name: \"Coat\", sleeves_list: coat_sleeve_list_port,dec_list:coat_sleeves_dec_list_port,sharp_sleeves: [\"suit jacket\",\"jacket\"]} ];\n")
     content.write(list_string("coat_back_list_sprite", coat_back_list_sprite))
     content.write("const back_list_sprite = [[\"Coat\", coat_back_list_sprite] ];\n")
     content.write("\n")
@@ -722,7 +724,7 @@ process_outfit_sprites()
 #["Hat","Hat_back","Hat_dec"]:
 # ["Shirt_collar", "Shirt" ,"Shirt_dec","Shirt_collar_dec"]:
 #["Coat","Coat_back"]:
-#["Overshirt","Overshirt_dec"]:
+#["Overshirt","Overshirt_dec","Overshirt_sleeves","Overshirt_sleeves_dec"]:
 
 
 for c in closet:
