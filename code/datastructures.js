@@ -196,6 +196,25 @@ function fixPortSources(){
                             b.colour = obj_front.colour
                     }
                 }
+                if (b.name == front_name+"_sleeves_dec"){ //this is "Shirt_sleeves_dec" etc
+                    obj_front = findNameMatch(portrait_objects, front_name); //what shirt etc we are wearing
+                    obj_dec = findNameMatch(portrait_objects, front_name+"_dec"); //what shirt decoration etc we are wearing
+                    name = "none"
+                    if (sleeve_list_port[k][1].includes(obj_front.item_list[obj_front.value_list[j]])){ //the current shirt etc can have sleeves
+                        let current_dec = sleeve_list_port[k][2][obj_dec.value_list[j]]
+                        let current_sleeves = sleeve_list[k]  //what current sleeve length is
+                        document.getElementById("test").innerHTML = k+" - "+sleeve_list_port[k][1].toString()+" - "+obj_front.item_list[obj_front.value_list[j]];
+                        if (current_sleeves==0){
+                            b.item_list[j] = 0
+                            name = current_dec+" zilch"
+                        }
+                        else{
+                            b.item_list[j] = 1
+                            name = current_dec+" long"   
+                        } 
+                        b.colour = obj_dec.colour
+                    }
+                }
             }
 
             if (false){//since all portrait items are coloured

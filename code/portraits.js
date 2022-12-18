@@ -56,8 +56,9 @@ const shirt_list_port = ["none","button up","open shirt","tshirt","boatneck","st
 const shirt_dec_list_port = ["none","button_up_plaid","button_up_stripe","open shirt vest",];
 const neckwear_list_port = ["none","tie","beads","choker","scarf","bowtie",];
 const overshirt_sleeves_port = ["none","zilch","long",];
+const overshirt_sleeves_dec_list_port_full = ["none","none","none","none","argyle zilch","argyle long",];
 const overshirt_list_port = ["none","v-neck","sweater","open sweater",];
-const overshirt_dec_list_port = ["none","sweater vest","argyle vest",];
+const overshirt_dec_list_port = ["none","argyle v-neck",];
 const shirt_collar_list = ["none","button up","open shirt",];
 const shirt_collar_dec_list_port = ["none","button_up_plaid",];
 const pants_top_list_port = ["none","overalls",];
@@ -87,6 +88,7 @@ add_portrait_object("Shirt",shirt_list_port,"outfit")
 add_portrait_object("Shirt_dec",shirt_dec_list_port,"outfit/shirt")
 add_portrait_object("Neckwear",neckwear_list_port,"outfit")
 add_portrait_object("Overshirt_sleeves",overshirt_sleeves_port,"outfit/overshirt")
+add_portrait_object("Overshirt_sleeves_dec",overshirt_sleeves_dec_list_port_full,"outfit/overshirt")
 add_portrait_object("Overshirt",overshirt_list_port,"outfit")
 add_portrait_object("Overshirt_dec",overshirt_dec_list_port,"outfit/overshirt")
 add_portrait_object("Shirt_collar",shirt_collar_list,"outfit/shirt")
@@ -115,9 +117,12 @@ const earrings_list_sprite = ["none","drops","hoops","studs","single stud",];
 const earrings_list_menu = ["none","studs","single stud","single small hoop","small hoops","punk","drops","hoops","single hoop",];
 const back_list_port = [["Hat", hat_back_list_port],["Coat", coat_back_list_port] ]
 const shirt_sleeve_list_port = ["button up","open shirt","tshirt","boatneck","chinese collar","turtleneck",];
+const shirt_sleeves_dec_list_port = ["none",];
 const overshirt_sleeve_list_port = ["v-neck","sweater","open sweater",];
+const overshirt_sleeves_dec_list_port = ["none","argyle",];
 const coat_sleeve_list_port = ["suit jacket","jacket","hoodie","open hoodie","chinese collar",];
-const sleeve_list_port = [["Shirt", shirt_sleeve_list_port],["Overshirt", overshirt_sleeve_list_port],["Coat", coat_sleeve_list_port] ]
+const coat_sleeves_dec_list_port = ["none",];
+const sleeve_list_port = [["Shirt", shirt_sleeve_list_port,shirt_sleeves_dec_list_port],["Overshirt", overshirt_sleeve_list_port,overshirt_sleeves_dec_list_port],["Coat", coat_sleeve_list_port,coat_sleeves_dec_list_port] ];
 const coat_back_list_sprite = ["none",];
-const back_list_sprite = [["Coat", coat_back_list_sprite] ]
+const back_list_sprite = [["Coat", coat_back_list_sprite] ];
 

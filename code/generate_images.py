@@ -44,18 +44,30 @@ stubble_list = ["none"]+ head_list
 #stuff with sleeves and collars
 sleeve_names_port = ["none", "zilch","long"]
 
+def addSleeves(listname):
+    output = []
+    for l in listname:
+        for s in sleeve_names_port:
+            if l =="none" or s=="none":
+                output.append("none")
+            else:    
+                output.append(l+" "+s)
+    return output        
+
 shirt_collar_list = ["none","button up","open shirt"]
 shirt_dec_list_port = ["none","button_up_plaid","button_up_stripe","open shirt vest"]
 shirt_collar_dec_list_port = ["none","button_up_plaid"]
+shirt_sleeves_dec_list_port = ["none"]
 shirt_list_port = shirt_collar_list +["tshirt","boatneck","strappy","chinese collar","turtleneck"]
 shirt_sleeve_list_port = [x for x in shirt_list_port if not x in ["strappy","none"]] #items with sleeves
 
-overshirt_dec_list_port = ["none","sweater vest","argyle vest",]
+overshirt_dec_list_port = ["none","argyle v-neck",]
+overshirt_sleeves_dec_list_port = ["none","argyle"]
 overshirt_list_port = ["none","v-neck","sweater","open sweater"]
 overshirt_list_sprite = ["none", "loose shirt","waistcoat","cardigan","suspenders"]
 overshirt_sleeve_list_port = [x for x in overshirt_list_port if not x in ["none"]] #items with sleeves 
-overshirt_sleeve_dec_list_port = ["argyle zilch","argyle long"]
 
+coat_sleeves_dec_list_port = ["none"]
 coat_back_list_port = ["none","suit jacket","jacket","hoodie","open hoodie","leaves","chinese collar"]
 coat_back_list_sprite = ["none"]
 coat_list_port = coat_back_list_port
@@ -137,7 +149,7 @@ class ClothingItem:
 def add_portrait_object(name, item_list,listname, location):
     # Add an item type to the closet
     global  closet
-    closet.append(ClothingItem(name, item_list, listname, location))
+    closet.append(ClothingItem(name, item_list, listname, location))    
 
 # Not automatically shown
 # add_portrait_object("cheeks", cheeks_list, "cheeks_list", "face")
@@ -167,6 +179,7 @@ add_portrait_object("Shirt", shirt_list_port,"shirt_list_port", "outfit")
 add_portrait_object("Shirt_dec", shirt_dec_list_port,"shirt_dec_list_port", "outfit/shirt")
 add_portrait_object("Neckwear", neckwear_list_port,"neckwear_list_port", "outfit")
 add_portrait_object("Overshirt_sleeves", sleeve_names_port,"overshirt_sleeves_port", "outfit/overshirt")
+add_portrait_object("Overshirt_sleeves_dec", addSleeves(overshirt_sleeves_dec_list_port),"overshirt_sleeves_dec_list_port_full", "outfit/overshirt")
 add_portrait_object("Overshirt", overshirt_list_port,"overshirt_list_port", "outfit")
 add_portrait_object("Overshirt_dec", overshirt_dec_list_port,"overshirt_dec_list_port", "outfit/overshirt")
 
@@ -620,11 +633,14 @@ def write_variables():
     content.write(list_string("earrings_list_menu", earrings_list_menu))
     content.write("const back_list_port = [[\"Hat\", hat_back_list_port],[\"Coat\", coat_back_list_port] ]\n")
     content.write(list_string("shirt_sleeve_list_port", shirt_sleeve_list_port))
+    content.write(list_string("shirt_sleeves_dec_list_port", shirt_sleeves_dec_list_port))
     content.write(list_string("overshirt_sleeve_list_port", overshirt_sleeve_list_port))
+    content.write(list_string("overshirt_sleeves_dec_list_port", overshirt_sleeves_dec_list_port))
     content.write(list_string("coat_sleeve_list_port", coat_sleeve_list_port))
-    content.write("const sleeve_list_port = [[\"Shirt\", shirt_sleeve_list_port],[\"Overshirt\", overshirt_sleeve_list_port],[\"Coat\", coat_sleeve_list_port] ]\n")
+    content.write(list_string("coat_sleeves_dec_list_port", coat_sleeves_dec_list_port))
+    content.write("const sleeve_list_port = [[\"Shirt\", shirt_sleeve_list_port,shirt_sleeves_dec_list_port],[\"Overshirt\", overshirt_sleeve_list_port,overshirt_sleeves_dec_list_port],[\"Coat\", coat_sleeve_list_port,coat_sleeves_dec_list_port] ];\n")
     content.write(list_string("coat_back_list_sprite", coat_back_list_sprite))
-    content.write("const back_list_sprite = [[\"Coat\", coat_back_list_sprite] ]\n")
+    content.write("const back_list_sprite = [[\"Coat\", coat_back_list_sprite] ];\n")
     content.write("\n")
     
     content.close()
