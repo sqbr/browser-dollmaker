@@ -183,11 +183,16 @@ function fixPortSources(){
                     obj_front = findNameMatch(portrait_objects, front_name); //what shirt etc we are wearing
                     name = "none"
                     if (sleeve_list_port[k][1].includes(obj_front.item_list[obj_front.value_list[j]])){ //the current shirt etc can have sleeves
+                            document.getElementById("test").innerHTML = k+" - "+sleeve_list_port[k][1].toString()+" - "+obj_front.item_list[obj_front.value_list[j]];
                             let current_sleeves = sleeve_list[k] //what current sleeve length is
-                            if (current_sleeves==0)
+                            if (current_sleeves==0){
+                                b.item_list[j] = 0
                                 name = "zilch"
-                            else
-                                name = "long"    
+                            }
+                            else{
+                                b.item_list[j] = 1
+                                name = "long"   
+                            } 
                             b.colour = obj_front.colour
                     }
                 }
@@ -440,8 +445,8 @@ function setMenu(variablelist, number){
             htmlString+="</div>"
             if (sleeve_havers.includes(current_item)){
                 htmlString+="<div class=\"grid-choices\">" 
-                htmlString+=makeDropbtnString("Sleeves:", [current_item+"_sleeves"], sleeves_names, "setSleeves");
-                htmlString+='<div><h2 id="hasSleevesTitle" text-align="left">'+sleeves_names[sleeve_havers.indexOf(current_item)]+'</h2></div>';
+                htmlString+=makeDropbtnString("Sleeves:", [current_item], sleeves_names, "setSleeves");
+                htmlString+='<div><h2 id="hasSleevesTitle" text-align="left">'+sleeves_names[sleeve_list[sleeve_havers.indexOf(current_item)]]+'</h2></div>';
                 htmlString+="</div>"
             }  
             
