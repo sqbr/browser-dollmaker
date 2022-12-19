@@ -52,8 +52,10 @@ const eyebrow_list = ["none","slightly downward","raised","flat sad","raised sad
 const eye_list = ["medium","crescents","medium side","medium narrowed","medium angry","big crescents","sleepy",];
 const mouth_list = ["flat","smile","frown","small frown","slight smile","small laugh","wobbly smile",];
 const earrings_list_port = ["none","studs","single stud","single small hoop","small hoops","punk","drops","hoops","single hoop",];
-const shirt_list_port = ["none","button up","open shirt","tshirt","boatneck","strappy","chinese collar","turtleneck",];
-const shirt_dec_list_port = ["none","button_up_plaid","button_up_stripe","open shirt vest",];
+const shirt_sleeves_port = ["none","zilch","round","sharp",];
+const shirt_sleeves_dec_list_port_full = ["none","none","none","none","none","plaid zilch","plaid round","plaid sharp","none","stripe zilch","stripe round","stripe sharp","none","none","none","none","none","stripe zilch","stripe round","stripe sharp",];
+const shirt_list_port = ["none","button up","open shirt","tshirt","boatneck","strappy","chinese collar","turtleneck","low cut","v neck",];
+const shirt_dec_list_port = ["none","button_up_plaid","button_up_stripe","open shirt vest","v neck stripe",];
 const neckwear_list_port = ["none","tie","beads","choker","scarf","bowtie",];
 const overshirt_sleeves_port = ["none","zilch","round","sharp",];
 const overshirt_sleeves_dec_list_port_full = ["none","none","none","none","none","argyle zilch","argyle round","argyle sharp",];
@@ -85,6 +87,8 @@ add_portrait_object("Eyebrows",eyebrow_list,"expression")
 add_portrait_object("Eyes",eye_list,"expression")
 add_portrait_object("Mouth",mouth_list,"expression")
 add_portrait_object("Earrings",earrings_list_port,"outfit")
+add_portrait_object("Shirt_sleeves",shirt_sleeves_port,"outfit/shirt")
+add_portrait_object("Shirt_sleeves_dec",shirt_sleeves_dec_list_port_full,"outfit/shirt")
 add_portrait_object("Shirt",shirt_list_port,"outfit")
 add_portrait_object("Shirt_dec",shirt_dec_list_port,"outfit/shirt")
 add_portrait_object("Neckwear",neckwear_list_port,"outfit")
@@ -118,13 +122,13 @@ const eyewear_list_menu = ["none","glasses","square glasses","round glasses","su
 const earrings_list_sprite = ["none","drops","hoops","studs","single stud",];
 const earrings_list_menu = ["none","studs","single stud","single small hoop","small hoops","punk","drops","hoops","single hoop",];
 const back_list_port = [["Hat", hat_back_list_port],["Coat", coat_back_list_port] ]
-const shirt_sleeve_list_port = ["button up","open shirt","tshirt","boatneck","chinese collar","turtleneck",];
-const shirt_sleeves_dec_list_port = ["none",];
+const shirt_sleeve_list_port = ["button up","open shirt","tshirt","boatneck","chinese collar","turtleneck","low cut","v neck",];
+const shirt_sleeves_dec_list_port = ["none","plaid","stripe","none","stripe",];
 const overshirt_sleeve_list_port = ["v-neck","sweater","open sweater",];
 const overshirt_sleeves_dec_list_port = ["none","argyle",];
 const coat_sleeve_list_port = ["suit jacket","jacket","hoodie","open hoodie","chinese collar",];
 const coat_sleeves_dec_list_port = ["none",];
-const sleeve_list_port = [{name: "Shirt", sleeves_list: shirt_sleeve_list_port,dec_list: shirt_sleeves_dec_list_port, sharp_sleeves: []},{name: "Overshirt", sleeves_list: overshirt_sleeve_list_port,dec_list:overshirt_sleeves_dec_list_port,sharp_sleeves: []},{name: "Coat", sleeves_list: coat_sleeve_list_port,dec_list:coat_sleeves_dec_list_port,sharp_sleeves: ["suit jacket","jacket"]} ];
+const sleeve_list_port = [{name: "Shirt", sleeves_list: shirt_sleeve_list_port,dec_list: shirt_sleeves_dec_list_port, sharp_sleeves: ["button up","open shirt"]},{name: "Overshirt", sleeves_list: overshirt_sleeve_list_port,dec_list:overshirt_sleeves_dec_list_port,sharp_sleeves: []},{name: "Coat", sleeves_list: coat_sleeve_list_port,dec_list:coat_sleeves_dec_list_port,sharp_sleeves: ["suit jacket","jacket"]} ];
 const coat_back_list_sprite = ["none",];
 const back_list_sprite = [["Coat", coat_back_list_sprite] ];
 

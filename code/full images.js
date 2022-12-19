@@ -38,7 +38,7 @@ const coat_menu_list = [ none_menu, ["Chinese collar",[6],[3,0]],["Leaves",[5],[
 
 const overshirt_menu_list = [ none_menu,["V-neck",[1,0],[3,0]],["Argyle V-neck",[1,1],[3,0]], ["Sweater",[2,0],[3,0]],["Open Sweater",[3,0],[3,0]]];
 
-const shirt_menu_list = [ none_menu,["Turtleneck",[8,0,0,0],[26,0,0]],["Chinese Collar",[7,0,0,0],[26,0,0]], ["Open Shirt With Vest",[2,2,3,0],[24,0,25]], ["Open Shirt",[2,2,0,0],[25,0,0]],["Bikini",[6,0,0,0],[7,0,0]],["Strappy Vest",[6,0,0,0],[2,0,0]],["Strappy Vest (Curvy)",[6,0,0,0],[3,0,0]], ["T-Shirt",[3,0,0,0],[19,0,0]], ["Button-up",[1,1,0,0],[12,0,0]], ["Plaid Button-up",[1,1,1,1],[12,0,2]],["Stripe Button-up",[1,1,2,0],[12,0,3]], ["Vest",[4,0,0,0],[2,0,0]],["Vest (Curvy)",[4,0,0,0],[3,0,0]],["Boatneck",[5,0,0,0],[23,0,0]]]
+const shirt_menu_list = [ none_menu,["Striped V-neck",[9,0,4,0],[26,0,0]],["V-neck",[9,0,0,0],[26,0,0]],["Low Cut",[8,0,0,0],[26,0,0]],["Turtleneck",[7,0,0,0],[26,0,0]],["Chinese Collar",[6,0,0,0],[26,0,0]], ["Open Shirt With Vest",[2,2,3,0],[24,0,25]], ["Open Shirt",[2,2,0,0],[25,0,0]],["Bikini",[5,0,0,0],[7,0,0]],["Strappy Vest",[5,0,0,0],[2,0,0]], ["T-Shirt",[3,0,0,0],[19,0,0]], ["Button-up",[1,1,0,0],[12,0,0]], ["Plaid Button-up",[1,1,1,1],[12,0,2]],["Stripe Button-up",[1,1,2,0],[12,0,3]],["Boatneck",[5,0,0,0],[23,0,0]]]
 
 const pants_menu_list = [none_menu];
 const pants_names_all = ["briefs","trousers"].concat(pants_names)

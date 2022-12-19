@@ -55,10 +55,10 @@ def addSleeves(listname):
     return output        
 
 shirt_collar_list = ["none","button up","open shirt"]
-shirt_dec_list_port = ["none","button_up_plaid","button_up_stripe","open shirt vest"]
+shirt_dec_list_port = ["none","button_up_plaid","button_up_stripe","open shirt vest","v neck stripe"]
 shirt_collar_dec_list_port = ["none","button_up_plaid"]
-shirt_sleeves_dec_list_port = ["none"]
-shirt_list_port = shirt_collar_list +["tshirt","boatneck","strappy","chinese collar","turtleneck"]
+shirt_sleeves_dec_list_port = ["none","plaid","stripe","none","stripe"]
+shirt_list_port = shirt_collar_list +["tshirt","boatneck","strappy","chinese collar","turtleneck","low cut","v neck"]
 shirt_sleeve_list_port = [x for x in shirt_list_port if not x in ["strappy","none"]] #items with sleeves
 
 overshirt_dec_list_port = ["none","argyle v-neck",]
@@ -176,6 +176,8 @@ add_portrait_object("Mouth", mouth_list,"mouth_list", "expression")
 
 # In front of face
 add_portrait_object("Earrings", earrings_list_port,"earrings_list_port", "outfit")
+add_portrait_object("Shirt_sleeves", sleeve_names_port,"shirt_sleeves_port", "outfit/shirt")
+add_portrait_object("Shirt_sleeves_dec", addSleeves(shirt_sleeves_dec_list_port),"shirt_sleeves_dec_list_port_full", "outfit/shirt")
 add_portrait_object("Shirt", shirt_list_port,"shirt_list_port", "outfit")
 add_portrait_object("Shirt_dec", shirt_dec_list_port,"shirt_dec_list_port", "outfit/shirt")
 add_portrait_object("Neckwear", neckwear_list_port,"neckwear_list_port", "outfit")
@@ -640,7 +642,7 @@ def write_variables():
     content.write(list_string("overshirt_sleeves_dec_list_port", overshirt_sleeves_dec_list_port))
     content.write(list_string("coat_sleeve_list_port", coat_sleeve_list_port))
     content.write(list_string("coat_sleeves_dec_list_port", coat_sleeves_dec_list_port))
-    content.write("const sleeve_list_port = [{name: \"Shirt\", sleeves_list: shirt_sleeve_list_port,dec_list: shirt_sleeves_dec_list_port, sharp_sleeves: []},{name: \"Overshirt\", sleeves_list: overshirt_sleeve_list_port,dec_list:overshirt_sleeves_dec_list_port,sharp_sleeves: []},{name: \"Coat\", sleeves_list: coat_sleeve_list_port,dec_list:coat_sleeves_dec_list_port,sharp_sleeves: [\"suit jacket\",\"jacket\"]} ];\n")
+    content.write("const sleeve_list_port = [{name: \"Shirt\", sleeves_list: shirt_sleeve_list_port,dec_list: shirt_sleeves_dec_list_port, sharp_sleeves: [\"button up\",\"open shirt\"]},{name: \"Overshirt\", sleeves_list: overshirt_sleeve_list_port,dec_list:overshirt_sleeves_dec_list_port,sharp_sleeves: []},{name: \"Coat\", sleeves_list: coat_sleeve_list_port,dec_list:coat_sleeves_dec_list_port,sharp_sleeves: [\"suit jacket\",\"jacket\"]} ];\n")
     content.write(list_string("coat_back_list_sprite", coat_back_list_sprite))
     content.write("const back_list_sprite = [[\"Coat\", coat_back_list_sprite] ];\n")
     content.write("\n")
@@ -722,7 +724,7 @@ process_outfit_sprites()
 #["Hair_front","Hair_middle","Hair_back"]:
 # []:
 #["Hat","Hat_back","Hat_dec"]:
-# ["Shirt_collar", "Shirt" ,"Shirt_dec","Shirt_collar_dec"]:
+# ["Shirt_collar", "Shirt" ,"Shirt_dec","Shirt_collar_dec","Shirt_sleeves","Shirt_sleeves_dec"]:
 #["Coat","Coat_back"]:
 #["Overshirt","Overshirt_dec","Overshirt_sleeves","Overshirt_sleeves_dec"]:
 
