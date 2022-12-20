@@ -172,7 +172,11 @@ function fixPortSources(){
                     obj_front = findNameMatch(portrait_objects, front_name);
                     if (back_list_port[k][1].includes(obj_front.item_list[obj_front.value_list[j]]))
                         name = obj_front.item_list[obj_front.value_list[j]];
-                        b.colour = obj_front.colour
+                        if (front_name =="Coat" && coat_dec_back_list_port.includes(name)){
+                            obj_dec = findNameMatch(portrait_objects, front_name+"_dec");
+                            b.colour = obj_dec.colour;
+                        }else
+                            b.colour = obj_front.colour;
                 }
             }
 

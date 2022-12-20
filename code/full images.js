@@ -24,19 +24,19 @@ function add_menu_object(name, list_list, colour_list, port_item_list, port_seco
 
 const none_menu = ["none",[],[]];
 
-const hat_menu_list = [ none_menu,["Flower Crown",[10,0],[94,0]],["Top Hat",[9,6],[73,1]],["Fedora",[9,6],[96,24]], ["Bowler",[9,6],[95,23]],["Beanie",[8,0],[87,0]],["Broad Hat",[7,5],[83,11]],["Bobble Hat",[6,4],[93,21]],["Bow",[5,0],[77,0]],["Headphones",[3,0],[90,0]],["Sun Hat",[1,3],[92,20]],["Cap",[2,0],[78,0]],["Joja Cap",[2,1],[78,5]],["Wizard",[4,0],[91,0]],];
+const hat_menu_list = [ none_menu,["Turban",[14,0,0],[94,0]],["Helmet",[13,0,0],[94,0]],["Witch",[12,0,0],[94,0]],["Soft Cap",[11,0,0],[94,0]],["Hijab",[0,0,1],[94,0]],["Flower Crown",[10,0,0],[94,0]],["Top Hat",[9,6,0],[73,1]],["Fedora",[9,6,0],[96,24]], ["Bowler",[9,6,0],[95,23]],["Beanie",[8,0,0],[87,0]],["Broad Hat",[7,5,0],[83,11]],["Bobble Hat",[6,4,0],[93,21]],["Bow",[5,0,0],[77,0]],["Headphones",[3,0,0],[90,0]],["Sun Hat",[1,3,0],[92,20]],["Cap",[2,0,0],[78,0]],["Joja Cap",[2,1,0],[78,5]],["Wizard",[4,0,0],[91,0]],];
 
-const hair_menu_list = [ none_menu,["Shaved",[17,0,0],[56]], ["Perm",[16,0,14],[53]],["Twintails",[9,0,13],[31]], ["Tufts",[15,0,12],[52]],["Bangs Bun",[9,0,11],[23]], ["Bun",[14,0,11],[23]],["Short Spiky",[13,0,10],[1]],["Long Locks",[12,0,9],[51]], ["Afro",[11,0,0],[21]],["Hi-top",[10,0,0],[12]],["Twin Braids",[9,0,8],[35]],["Short Side-part",[8,0,0],[3]],["Short Shaggy",[1,0,1],[5]],["Emo Bob",[2,0,2],[10]], ["Princely",[3,0,0],[24]],["Half-up locs",[4,0,3],[7]],["Long Wavy",[5,1,4],[9]],["Curly Bob",[6,0,6],[11]],["Curly Mop",[6,0,7],[32]],["Curly Ponytail",[6,0,5],[29]],["Spiky",[7,0,7],[68]]];
+const hair_menu_list = [ none_menu,["Long Curly",[25,19],[31]],["Long Straight",[9,16],[31]], ["Floppy side part",[24,0],[56]],["Neat bob",[23,17],[56]],["Short",[22,0],[56]],["Side Braid",[20,18],[56]],["Curly Updo",[21,15],[56]],["Straight Updo",[19,15],[56]],["Buzzcut",[18,0],[56]],["Shaved",[17,0],[56]], ["Perm",[16,14],[53]],["Twintails",[9,13],[31]], ["Tufts",[15,12],[52]],["Bangs Bun",[9,11],[23]], ["Bun",[14,11],[23]],["Short Spiky",[13,10],[1]],["Long Locks",[12,9],[51]], ["Afro",[11,0],[21]],["Hi-top",[10,0],[12]],["Twin Braids",[9,8],[35]],["Short Side-part",[8,0],[3]],["Short Shaggy",[1,1],[5]],["Emo Bob",[2,2],[10]], ["Princely",[3,0],[24]],["Half-up locs",[4,3],[7]],["Long Wavy",[9,4],[9]],["Curly Bob",[6,6],[11]],["Curly Mop",[6,7],[32]],["Curly Ponytail",[6,5],[29]],["Spiky",[7,7],[68]]];
 
-const neckwear_menu_list = [ none_menu, ["Bowtie",[5],[3]],["Choker",[3],[5]], ["Tie",[1],[4]],["Beads",[2],[6]]];
+const neckwear_menu_list = [ none_menu,["Cravat",[7,0,0],[4]], ["Pendant",[6,0,0],[5]],["Scarf",[0,0,4],[3]],["Bowtie",[0,5,0],[3]],["Choker",[3,0,0],[5]], ["Tie",[1,0,0],[4]],["Beads",[2,0,0],[6]]];
 
-const eyewear_menu_list = [ none_menu,["Coloured Glasses",[6],[3]],["Glasses",[1],[1]], ["Square Glasses",[2],[1]],["Round Glasses",[3],[1]],["Sunglasses",[4],[5]]];
+const eyewear_menu_list = [ none_menu,["Eye-patch",[5],[3]],["Coloured Glasses",[6],[3]],["Glasses",[1],[1]], ["Square Glasses",[2],[1]],["Round Glasses",[3],[1]],["Sunglasses",[4],[5]]];
 
 const earrings_menu_list = [ none_menu,["Studs",[1],[3]],["Single Stud",[2],[4]],["Small Hoops",[4],[3]],["Single Small Hoop",[3],[4]],["Hoops",[7],[1]],["Single Hoop",[8],[5]],["Punk",[5],[3]],["Drops",[6],[1]]];
 
-const coat_menu_list = [ none_menu, ["Chinese collar",[6],[3,0]],["Leaves",[5],[8,0]],["Short Coat",[1],[1,0]],["Business Jacket",[1],[6,0]], ["Hoodie",[3],[5,0]],["Open Hoodie",[4],[7,0]],["Cool Jacket",[2],[6,0]]];
+const coat_menu_list = [ none_menu, ["Letterman",[9,3],[3,0]],["Fur Coat",[8,2],[3,0]],["Cape with collar",[7,1],[3,0]],["Cape",[9,1],[3,0]], ["Chinese collar",[6,0],[3,0]],["Leaves",[5,0],[8,0]],["Short Coat",[1,0],[1,0]],["Business Jacket",[1,0],[6,0]], ["Hoodie",[3,0],[5,0]],["Open Hoodie",[4,0],[7,0]],["Cool Jacket",[2,0],[6,0]]];
 
-const overshirt_menu_list = [ none_menu,["V-neck",[1,0],[3,0]],["Argyle V-neck",[1,1],[3,0]], ["Sweater",[2,0],[3,0]],["Open Sweater",[3,0],[3,0]]];
+const overshirt_menu_list = [ none_menu,["Suspenders",[4,0],[3,0]],["V-neck",[1,0],[3,0]],["Argyle V-neck",[1,1],[3,0]], ["Sweater",[2,0],[3,0]],["Open Sweater",[3,0],[3,0]]];
 
 const shirt_menu_list = [ none_menu,["Striped V-neck",[9,0,4,0],[26,0,0]],["V-neck",[9,0,0,0],[26,0,0]],["Low Cut",[8,0,0,0],[26,0,0]],["Turtleneck",[7,0,0,0],[26,0,0]],["Chinese Collar",[6,0,0,0],[26,0,0]], ["Open Shirt With Vest",[2,2,3,0],[24,0,25]], ["Open Shirt",[2,2,0,0],[25,0,0]],["Bikini",[5,0,0,0],[7,0,0]],["Strappy Vest",[5,0,0,0],[2,0,0]], ["T-Shirt",[3,0,0,0],[19,0,0]], ["Button-up",[1,1,0,0],[12,0,0]], ["Plaid Button-up",[1,1,1,1],[12,0,2]],["Stripe Button-up",[1,1,2,0],[12,0,3]],["Boatneck",[5,0,0,0],[23,0,0]]]
 
@@ -59,18 +59,18 @@ for (let i = 0; i < gloves_names.length; i += 1) {
     gloves_menu_list.push([gloves_names[i],[],[i+1]])
 }
 
-add_menu_object("Hat", hat_menu_list, outfit_colours,["Hat","Hat_dec"],["Hat_dec"], ["Hat","Hat_dec"], ["Hat_dec"]);
-add_menu_object("Neckwear", neckwear_menu_list, outfit_colours,["Neckwear"],[], ["Neckwear"],[]);
+add_menu_object("Hat", hat_menu_list, outfit_colours,["Hat","Hat_dec","Hijab"],["Hat_dec"], ["Hat","Hat_dec"], ["Hat_dec"]);
+add_menu_object("Neckwear", neckwear_menu_list, outfit_colours,["Neckwear","Neckwear2","Neckwear3"],[], ["Neckwear"],[]);
 add_menu_object("Eyewear", eyewear_menu_list, outfit_colours,["Eyewear"],[],["Eyewear"],[]);
 add_menu_object("Earrings", earrings_menu_list, outfit_colours,["Earrings"],[],["Earrings"],[]);
 add_menu_object("Shirt", shirt_menu_list, outfit_colours,["Shirt","Shirt_collar","Shirt_dec","Shirt_collar_dec"],["Shirt_dec","Shirt_collar_dec"],["Shirt","Shirt2","Shirt_dec"],["Shirt_dec"]);
 add_menu_object("Overshirt", overshirt_menu_list, outfit_colours,["Overshirt","Overshirt_dec"],["Overshirt_dec"],["Overshirt","Overshirt_dec"],["Overshirt_dec"]);
-add_menu_object("Coat", coat_menu_list, outfit_colours,["Coat"],[],["Coat","Coat_back"],[]);
+add_menu_object("Coat", coat_menu_list, outfit_colours,["Coat","Coat_dec"],["Coat_dec"],["Coat","Coat_back"],[]);
 add_menu_object("Pants", pants_menu_list, outfit_colours,["Pants_top"],[],["Pants","Pants top"],[]);
 add_menu_object("Shoes", shoes_menu_list, outfit_colours,[],[],["Shoes"],[]);
 add_menu_object("Gloves", gloves_menu_list, outfit_colours,[],[],["Gloves"],[]);
 // Hairstyle must be at end
-add_menu_object("Hairstyle", hair_menu_list, hair_colours,["Hair_front","Hair_middle", "Hair_back"],[], ["Hairstyle"], []);
+add_menu_object("Hairstyle", hair_menu_list, hair_colours,["Hair_front", "Hair_back"],[], ["Hairstyle"], []);
 
 const menu_object_names = menu_objects.map(nameOf);
 
