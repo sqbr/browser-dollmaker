@@ -194,14 +194,14 @@ function setFacialHair(variablelist, number){
 function setEyeType(variablelist, number){
     eye_type = number;
     let b = findNameMatch(portrait_objects, "Eyes");
-    b.value_list[current_panel] = eye_type*eye_type_list_port.length + number;
+    b.value_list[current_panel] = eye_type*eye_expressions.length + eye_expressions[current_panel];
     drawCanvas();
 }
 
 function setEyeExpression(variablelist, number){
     let b = findNameMatch(portrait_objects, "Eyes"); //the eleemnt of portrait_objects with the right vriablename
     eye_expressions[current_panel]=number;
-    b.value_list[current_panel] = eye_type*eye_type_list_port.length + number;
+    b.value_list[current_panel] = eye_type*eye_expressions.length + number;
     drawCanvas();
 }
 
@@ -292,30 +292,36 @@ function getOffset(name){
                 return -9;
             if (["Nose","Nose_front", "Facial_hair"].includes(name))  
                 return -3;
+            if (["Mouth"].includes(name))  
+                return -2;     
             break;
         case "jowly": 
         if (torso_offset_list.includes(name))   
             return -9;
         if (["Nose","Nose_front", "Facial_hair"].includes(name))  
             return -2;
+        if (["Mouth"].includes(name))  
+            return -1;     
     break;   
         case "oval":
         
             if (torso_offset_list.includes(name))   
                 return -6;
-            if (["Nose","Facial_hair"].includes(name))  
+            if (["Nose",,"Nose_front","Facial_hair"].includes(name))  
                 return -2;
+            if (["Mouth"].includes(name))  
+                return -1;        
             break;
         case "medium":
             if (torso_offset_list.includes(name))   
                 return -1;
-            if (["Nose","Facial_hair"].includes(name))  
+            if (["Nose",,"Nose_front","Facial_hair"].includes(name))  
                 return -1;
             break; 
         case "square":
             if (torso_offset_list.includes(name))   
                 return -1;
-            if (["Nose","Facial_hair"].includes(name))  
+            if (["Nose",,"Nose_front","Facial_hair"].includes(name))  
                 return -1;
             break;     
         case "rectangular":  
@@ -323,6 +329,8 @@ function getOffset(name){
                 return 2;
             if (["Facial_hair"].includes(name))  
                 return 4;
+            if (["Nose",,"Nose_front","Facial_hair"].includes(name))  
+                return -1;    
             if (["Mouth"].includes(name))  
                 return 3;    
             break;     

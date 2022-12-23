@@ -29,7 +29,7 @@ complexion_list =["none","light wrinkles","wrinkles"]
 ears_list =["regular"]
 nose_list =["none","button", "medium", "broad","round","pointed"]
 eyebrow_list = ["none", "slightly downward","raised","flat sad","raised sad","angry","neutral","raised up","half raised","soft","slightly angry","raised soft"]
-eye_expression_list_port = ["neutral","side","crescents","narrowed","happy","widish","shock","angry","angry side","sleepy",]
+eye_expression_list_port = ["neutral","side","crescents","narrowed","happy","wide","shock","angry","angry side","sleepy",]
 eye_type_list_port = ["androgynous","flat","long"]
 
 eye_list = []
@@ -37,7 +37,7 @@ for type in eye_type_list_port:
     for exp in eye_expression_list_port:
         eye_list.append(type+ " "+exp)
 
-mouth_list = ["flat","smile","frown","small frown","slight smile","small laugh","wobbly smile","shock","wobbly frown","pout","grin","sneer","toothy smile","ooh","clenched"]
+mouth_list = ["toothy smile","grin","small laugh","wobbly smile","smile","slight smile","small smile", "flat","small frown","wobbly frown","frown","pout","sneer","clenched","shock","ooh",]
 
 blush_list = ["none","small"]
 
@@ -750,7 +750,7 @@ process_outfit_sprites()
 
 
 for c in closet:
-    if c.name in ["Eyes"]:
+    if c.name in ["Mouth"]:
         process_portrait_part(c)
 #process_all_portraits()
 #make_coat()
