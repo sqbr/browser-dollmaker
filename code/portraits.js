@@ -9,6 +9,8 @@ const body_list = ["Torso","Head","Complexion","Ears","Nose","Nose_front",];
 const skin_list = ["Torso","Head","Complexion","Ears","Nose","Nose_front","Eyebrows","Mouth","Blush",];
 const hair_list = ["Hair_back","Hair_front","Facial_hair",];
 const expression_list = ["Eyes","Eyebrows","Mouth",];
+const eye_expression_list_port = ["neutral","side","crescents","narrowed","happy","widish","shock","angry","angry side","sleepy",];
+const eye_type_list_port = ["androgynous","flat","long",];
 
 const eye_colours = ["#000000","#2E9FF7","#B25DF6","#1B8EF6","#469951","#F0B50A",];
 const outfit_yellow = ["#FFE201","#FF9F02","#FFDBB6","#F7BE4F",];
@@ -38,7 +40,7 @@ const hairNum = 24; //how many hair colours there are
 const outfitNum = 30; //how many clothing colours there are
 const full_body_list = body_list+hair_list;
 
-const hair_back_list = ["none","shaggy medium","bob","locs bob","long wavy","curly pony","curly bob","spiky","twin braids","long locks","short spiky","bun","tufts","twintails","perm","updo","long straight","neat bob","side braid","long curly",];
+const hair_back_list = ["none","shaggy medium","bob","locs bob","long wavy","curly pony","curly bob","spiky","twin braids","long locks","short spiky","bun","tufts","twintails","perm","updo","long straight","neat bob","side braid","long curly","wavy bob",];
 const coat_back_list_port = ["none","suit jacket","jacket","hoodie","open hoodie","leaves","chinese collar","cape collar","fur coat","letterman",];
 const hat_back_list_port = ["none","sunhat","wizard","night cap","broad hat","beanie","witch","helmet",];
 const torso_list = ["medium",];
@@ -66,13 +68,13 @@ const complexion_list = ["none","light wrinkles","wrinkles",];
 const stubble_list = ["none","rectangular","pointed","square","medium","oval","round","jowly",];
 const blush_list = ["none","small",];
 const nose_list = ["none","button","medium","broad","round","pointed",];
-const eyebrow_list = ["none","slightly downward","raised","flat sad","raised sad","angry","neutral","raised up",];
-const eye_list = ["medium","crescents","medium side","medium narrowed","medium angry","big crescents","sleepy",];
-const mouth_list = ["flat","smile","frown","small frown","slight smile","small laugh","wobbly smile",];
+const eyebrow_list = ["none","slightly downward","raised","flat sad","raised sad","angry","neutral","raised up","half raised","soft","slightly angry","raised soft",];
+const eye_list = ["androgynous neutral","androgynous side","androgynous crescents","androgynous narrowed","androgynous happy","androgynous widish","androgynous shock","androgynous angry","androgynous angry side","androgynous sleepy","flat neutral","flat side","flat crescents","flat narrowed","flat happy","flat widish","flat shock","flat angry","flat angry side","flat sleepy","long neutral","long side","long crescents","long narrowed","long happy","long widish","long shock","long angry","long angry side","long sleepy",];
+const mouth_list = ["flat","smile","frown","small frown","slight smile","small laugh","wobbly smile","shock","wobbly frown","pout","grin","sneer","toothy smile","ooh","clenched",];
 const earrings_list_port = ["none","studs","single stud","single small hoop","small hoops","punk","drops","hoops","single hoop",];
 const facial_hair_list_port = ["none","beard","moustache","big moustache","goatee","soul patch","fluffy goatee",];
 const eyewear_list_port = ["none","glasses","square glasses","round glasses","sunglasses","eye-patch","coloured glasses",];
-const hair_front_list = ["none","shaggy side","emo","princely","locs bun","long wavy","curly pixie","spiky","short side","smooth bangs","hi-top","afro","long locks","short spiky","centre part","tufts","perm","shaved","buzzcut","jodi","side braid","curly up","short","neat bob","morris","long curly",];
+const hair_front_list = ["none","shaggy side","emo","princely","locs bun","long wavy","curly pixie","spiky","short side","smooth bangs","hi-top","afro","long locks","short spiky","centre part","tufts","perm","shaved","buzzcut","jodi","side braid","curly up","short","neat bob","morris","long curly","wavy bob",];
 const hat_list_port = ["none","sunhat","cap","headphones","wizard","ribbon","night cap","broad hat","beanie","bowler","flower crown","soft cap","witch","helmet","turban",];
 const hat_dec_list_port = ["none","cap_joja","cap_joja2","sunhat","night cap","broad hat","bowler",];
 

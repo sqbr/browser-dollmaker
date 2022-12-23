@@ -450,7 +450,7 @@ function setMenu(variablelist, number){
             htmlString+="<div class=\"grid-choices\">"
             htmlString+=makeDropbtnString("Hairstyle", ["Hairstyle"], findNameMatch(menu_objects, "Hairstyle").name_list, "setHair");
             htmlString+=makeDropbtnString("Facial Hair", ["Facial_hair"], facial_hair_list_menu, "setFacialHair");
-            htmlString+=makeDropbtnString("Eyelashes", ["Eyes"], eyelash_list, "setSpriteVariable");
+            htmlString+=makeDropbtnString("Eye Type", ["Eyes"], eye_type_list_port, "setEyeType");
             htmlString+="</div>"  
             
             htmlString+="<div class=\"grid-choices\">"
@@ -495,7 +495,7 @@ function setMenu(variablelist, number){
                 htmlString+="</div><h2 id = 'current_panel'>"+panel_list[current_panel] +"</h2></div>";
                 htmlString+="<div class=\"grid-choices\">"
                 htmlString+=makeDropbtnString("Eyebrows", ["Eyebrows"], eyebrow_list, "setPanelVariable");
-                htmlString+=makeDropbtnString("Eyes", ["Eyes"], eye_list, "setPanelVariable");
+                htmlString+=makeDropbtnString("Eyes", ["Eyes"], eye_expression_list_port, "setEyeExpression");
                 htmlString+=makeDropbtnString("Mouth", ["Mouth"], mouth_list, "setPanelVariable");
                 htmlString+="</div>"
                 break;   

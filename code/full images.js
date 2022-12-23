@@ -26,7 +26,7 @@ const none_menu = ["none",[],[]];
 
 const hat_menu_list = [ none_menu,["Turban",[14,0,0],[94,0]],["Helmet",[13,0,0],[94,0]],["Witch",[12,0,0],[94,0]],["Soft Cap",[11,0,0],[94,0]],["Hijab",[0,0,1],[94,0]],["Flower Crown",[10,0,0],[94,0]],["Top Hat",[9,6,0],[73,1]],["Fedora",[9,6,0],[96,24]], ["Bowler",[9,6,0],[95,23]],["Beanie",[8,0,0],[87,0]],["Broad Hat",[7,5,0],[83,11]],["Bobble Hat",[6,4,0],[93,21]],["Bow",[5,0,0],[77,0]],["Headphones",[3,0,0],[90,0]],["Sun Hat",[1,3,0],[92,20]],["Cap",[2,0,0],[78,0]],["Joja Cap",[2,1,0],[78,5]],["Wizard",[4,0,0],[91,0]],];
 
-const hair_menu_list = [ none_menu,["Long Curly",[25,19],[31]],["Long Straight",[9,16],[31]], ["Floppy side part",[24,0],[56]],["Neat bob",[23,17],[56]],["Short",[22,0],[56]],["Side Braid",[20,18],[56]],["Curly Updo",[21,15],[56]],["Straight Updo",[19,15],[56]],["Buzzcut",[18,0],[56]],["Shaved",[17,0],[56]], ["Perm",[16,14],[53]],["Twintails",[9,13],[31]], ["Tufts",[15,12],[52]],["Bangs Bun",[9,11],[23]], ["Bun",[14,11],[23]],["Short Spiky",[13,10],[1]],["Long Locks",[12,9],[51]], ["Afro",[11,0],[21]],["Hi-top",[10,0],[12]],["Twin Braids",[9,8],[35]],["Short Side-part",[8,0],[3]],["Short Shaggy",[1,1],[5]],["Emo Bob",[2,2],[10]], ["Princely",[3,0],[24]],["Half-up locs",[4,3],[7]],["Long Wavy",[9,4],[9]],["Curly Bob",[6,6],[11]],["Curly Mop",[6,7],[32]],["Curly Ponytail",[6,5],[29]],["Spiky",[7,7],[68]]];
+const hair_menu_list = [ none_menu,["Wavy Bob",[26,20],[31]],["Long Curly",[25,19],[31]],["Long Straight",[9,16],[31]], ["Floppy side part",[24,0],[56]],["Neat bob",[23,17],[56]],["Short",[22,0],[56]],["Side Braid",[20,18],[56]],["Curly Updo",[21,15],[56]],["Straight Updo",[19,15],[56]],["Buzzcut",[18,0],[56]],["Shaved",[17,0],[56]], ["Perm",[16,14],[53]],["Twintails",[9,13],[31]], ["Tufts",[15,12],[52]],["Bangs Bun",[9,11],[23]], ["Bun",[14,11],[23]],["Short Spiky",[13,10],[1]],["Long Locks",[12,9],[51]], ["Afro",[11,0],[21]],["Hi-top",[10,0],[12]],["Twin Braids",[9,8],[35]],["Short Side-part",[8,0],[3]],["Short Shaggy",[1,1],[5]],["Emo Bob",[2,2],[10]], ["Princely",[3,0],[24]],["Half-up locs",[4,3],[7]],["Long Wavy",[9,4],[9]],["Curly Bob",[6,6],[11]],["Curly Mop",[6,7],[32]],["Curly Ponytail",[6,5],[29]],["Spiky",[7,7],[68]]];
 
 const neckwear_menu_list = [ none_menu,["Cravat",[7,0,0],[4]], ["Pendant",[6,0,0],[5]],["Scarf",[0,0,4],[3]],["Bowtie",[0,5,0],[3]],["Choker",[3,0,0],[5]], ["Tie",[1,0,0],[4]],["Beads",[2,0,0],[6]]];
 
@@ -188,6 +188,20 @@ function setFacialHair(variablelist, number){
         setSpriteVariable(["Facial_hair"], 0);
         setPortVariable(["Stubble"],1);
     }
+    drawCanvas();
+}
+
+function setEyeType(variablelist, number){
+    eye_type = number;
+    let b = findNameMatch(portrait_objects, "Eyes");
+    b.value_list[current_panel] = eye_type*eye_type_list_port.length + number;
+    drawCanvas();
+}
+
+function setEyeExpression(variablelist, number){
+    let b = findNameMatch(portrait_objects, "Eyes"); //the eleemnt of portrait_objects with the right vriablename
+    eye_expressions[current_panel]=number;
+    b.value_list[current_panel] = eye_type*eye_type_list_port.length + number;
     drawCanvas();
 }
 

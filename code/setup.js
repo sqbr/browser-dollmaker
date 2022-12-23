@@ -11,6 +11,18 @@ let current_clothing = 0;
 let current_sprite_preset = 0;
 let port_offset = 1;
 
+let height = 0;
+
+let isBald = true;
+let currentShoes = 0;
+let currentGloves = 0;
+let hasShirtSleeves = false;
+let hasOvershirtSleeves = false;
+let hasCoatSleeves = false;
+
+let eye_type = 0;
+let eye_expressions = listOf(0);
+
 const imageType_list =["Portrait","Sprite"];
 
 const editing_list =["Body","Outfit", "Expressions"];
@@ -22,9 +34,6 @@ const panel_list = ["0: Neutral", "1: Happy", "2: Sad", "3: Unique", "4: Blushin
 const sprite_presets = ["Walk Sprites", "Female Love Interest","Male Love Interest"];
 
 const back_list = ["Hat","Coat"]; //have a back
-
-const truth_list = [false,true]
-const truth_list_string = ["False","True"];
 
 const sleeve_havers = ["Shirt","Overshirt","Coat"]
 const sleeve_list = [0,0,0]
@@ -64,7 +73,7 @@ function range(n){
 function listOf(n){
     // return [n,n,n,n,n,n]
     let x = [];
-    for (let i=0;i<panelNum;i++) {
+    for (let i=0;i<10;i++) {
         x[i]=n;
     }
     return x;
@@ -74,7 +83,7 @@ function listOf(n){
 function newImageList(){
     //list of six images
     let x = [];
-    for (let i=0;i<8;i++) {
+    for (let i=0;i<10;i++) {
         x[i]=new Image();
     }
     return x;

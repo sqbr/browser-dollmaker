@@ -20,17 +20,24 @@ skin_list = body_list + ["Eyebrows", "Mouth","Blush"]
 #Only in portraits
 hair_list = ["Hair_back", "Hair_front","Facial_hair"]
 
-hair_front_list = ["none", "shaggy side","emo","princely","locs bun","long wavy","curly pixie","spiky","short side","smooth bangs","hi-top","afro","long locks","short spiky","centre part","tufts","perm","shaved","buzzcut","jodi","side braid","curly up","short","neat bob","morris","long curly"]
-hair_back_list = ["none", "shaggy medium","bob","locs bob","long wavy","curly pony","curly bob","spiky","twin braids","long locks","short spiky","bun","tufts","twintails","perm","updo","long straight","neat bob","side braid","long curly"]
+hair_front_list = ["none", "shaggy side","emo","princely","locs bun","long wavy","curly pixie","spiky","short side","smooth bangs","hi-top","afro","long locks","short spiky","centre part","tufts","perm","shaved","buzzcut","jodi","side braid","curly up","short","neat bob","morris","long curly","wavy bob"]
+hair_back_list = ["none", "shaggy medium","bob","locs bob","long wavy","curly pony","curly bob","spiky","twin braids","long locks","short spiky","bun","tufts","twintails","perm","updo","long straight","neat bob","side braid","long curly","wavy bob"]
 
 torso_list = ["medium"]
 head_list =["rectangular","pointed","square","medium","oval","round","jowly",]
 complexion_list =["none","light wrinkles","wrinkles"]
 ears_list =["regular"]
 nose_list =["none","button", "medium", "broad","round","pointed"]
-eyebrow_list = ["none", "slightly downward","raised","flat sad","raised sad","angry","neutral","raised up"]
-eye_list = ["medium","crescents","medium side","medium narrowed","medium angry","big crescents","sleepy"]
-mouth_list = ["flat","smile","frown","small frown","slight smile","small laugh","wobbly smile"]
+eyebrow_list = ["none", "slightly downward","raised","flat sad","raised sad","angry","neutral","raised up","half raised","soft","slightly angry","raised soft"]
+eye_expression_list_port = ["neutral","side","crescents","narrowed","happy","widish","shock","angry","angry side","sleepy",]
+eye_type_list_port = ["androgynous","flat","long"]
+
+eye_list = []
+for type in eye_type_list_port:
+    for exp in eye_expression_list_port:
+        eye_list.append(type+ " "+exp)
+
+mouth_list = ["flat","smile","frown","small frown","slight smile","small laugh","wobbly smile","shock","wobbly frown","pout","grin","sneer","toothy smile","ooh","clenched"]
 
 blush_list = ["none","small"]
 
@@ -596,6 +603,8 @@ def write_variables():
     content.write(list_string("skin_list", skin_list))
     content.write(list_string("hair_list", hair_list))
     content.write(list_string("expression_list", expression_list))
+    content.write(list_string("eye_expression_list_port", eye_expression_list_port))
+    content.write(list_string("eye_type_list_port", eye_type_list_port))
     content.write("\n")
     content.write(list_string("eye_colours", eye_colours))
     content.write(list_string("outfit_yellow", outfit_yellow))
@@ -737,10 +746,11 @@ process_outfit_sprites()
 # ["Shirt_collar", "Shirt" ,"Shirt_dec","Shirt_collar_dec","Shirt_sleeves","Shirt_sleeves_dec"]:
 #["Coat","Coat_back","Coat_dec","Coat_dec_back","Coat_sleeves"]:
 #["Overshirt","Overshirt_dec","Overshirt_sleeves","Overshirt_sleeves_dec"]:
+#["Eyes","Mouth","Eyebrows"]:
 
 
 for c in closet:
-    if c.name in ["Hair_front","Hair_back"]:
+    if c.name in ["Eyes"]:
         process_portrait_part(c)
 #process_all_portraits()
 #make_coat()

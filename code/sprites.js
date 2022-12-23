@@ -4,15 +4,6 @@ const height_list = ["short","tall"];
 
 const eyelash_list = ["short","long"];
 
-let height = 0;
-
-let isBald = true;
-let currentShoes = 0;
-let currentGloves = 0;
-let hasShirtSleeves = false;
-let hasOvershirtSleeves = false;
-let hasCoatSleeves = false;
-
 const none = {name:"None",location: "", colour: false, rowNum: 3, topcorner:[0,0]}
 
 const hairstyles_names = ["Short shaggy", "Pageboy", "side-part", "Afro", "Mod", "Fauxhawk", "Pompador", "Comb-over", "Shaggy", "Emo", "spiky", "Hi-top", "ponytail", "Short spiky", "Comma", "Curtained", "High ponytail", "Flip", "Devil flip", "Little buns", "Short fro", "Little low twintails", "Bun", "Pixie", "Long side-part", "Medium bangs", "Long centre-part", "Medium side-part", "Ponytail centre-part", "Long bangs", "Little high twintails", "Double bun", "French twist", "Double braids long", "Double braids", "Ponytail medium", "Long over shoulder", "Curly twintails", "Bob no bangs","Headband", "Fluffy medium", "Wavy medium", "Frosted tips", "Richie rich", "Mop", "Short cornrows", "Short", "Long bangs", "Mullet", "Mohawk", "Long tonsure", "Short tonsure", "Shaved curl", "Shaved shaggy", "Shaved neat" ]
