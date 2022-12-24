@@ -2,7 +2,7 @@ const sprite_body_list = ["short","tall","short_bald","tall_bald"];
 
 const height_list = ["short","tall"];
 
-const eyelash_list = ["short","long"];
+const eyelash_list = eye_type_list_port;
 
 const none = {name:"None",location: "", colour: false, rowNum: 3, topcorner:[0,0]}
 
@@ -45,8 +45,8 @@ for (let i =0; i<sprite_body_list.length;i++){
 const sprite_body_names = ["Short","Tall"]
 
 const sprite_eyes_list = []
-for (let i =0; i<height_list.length;i++){
-    b= eyelash_list[i];
+for (let i =0; i<eye_type_list_port.length;i++){
+    b= eye_type_list_port[i];
     sprite_eyes_list.push({name: b, location: "body/eyes/"+b, colour: true, asymmetrical: false,rowNum: 3,topcorner:[0,0]})
 }
 

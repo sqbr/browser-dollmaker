@@ -274,7 +274,7 @@ function fixSpriteSources(){
             }
         }*/
         //Make Hair_top match Hairstyle
-        if (b.name =="Hair_top"){
+        if (b.name =="Hairstyle_top"){
             let hair_obj=findNameMatch(sprite_objects, "Hairstyle");
             b.item =hair_obj.item;
             b.colour = hair_obj.colour;
@@ -671,7 +671,7 @@ function drawCanvas() {
 }
 
 function setup(){
-    document.getElementById("test").innerHTML = print_sprite_objects();
+    //document.getElementById("test").innerHTML = print_sprite_objects();
     //setTopbar();
     setToolbar();
     setImageType([], 0)

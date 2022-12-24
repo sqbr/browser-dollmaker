@@ -705,9 +705,9 @@ def process_body_sprites():
          process_image("hairstyles", "sprites/hair", c, hair_colours,"grey")
          process_image("hairstyles2", "sprites/hair", c, hair_colours,"grey")
          process_image("facialhair", "sprites/hair/facialhair", c, hair_colours,"grey")
-    #for c in range(len(eye_colours)):  
-    #     process_image("short", "sprites/body/eyes", c, eye_colours,"eyes") 
-    #     process_image("long", "sprites/body/eyes", c, eye_colours,"eyes")  
+    for c in range(len(eye_colours)): 
+        for e in eye_type_list_port: 
+            process_image(e, "sprites/body/eyes", c, eye_colours,"eyes") 
 
 def process_outfit_sprites():
     for c in range(len(outfit_colours)): 

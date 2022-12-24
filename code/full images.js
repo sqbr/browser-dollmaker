@@ -194,7 +194,9 @@ function setFacialHair(variablelist, number){
 
 function setEyeType(variablelist, number){
     eye_type = number;
-    let b = findNameMatch(portrait_objects, "Eyes");
+    let b = findNameMatch(sprite_objects, "Eyes");
+    b.item = number;
+    b = findNameMatch(portrait_objects, "Eyes");
     b.value_list[current_panel] = eye_type*eye_expressions.length + eye_expressions[current_panel];
     drawCanvas();
 }
