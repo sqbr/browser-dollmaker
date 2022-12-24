@@ -76,9 +76,9 @@ overshirt_sleeve_list_port = [x for x in overshirt_list_port if not x in ["none"
 coat_sleeves_dec_list_port = ["none"]
 coat_dec_back_list_port = ["none","fur coat","letterman"]
 coat_back_list_port = ["none","suit jacket","jacket","hoodie","open hoodie","leaves","chinese collar","cape collar","fur coat","letterman"]
-coat_back_list_sprite = ["none"]
+coat_back_list_sprite = ["none","cape","cape collar"]
 coat_list_port = coat_back_list_port+["cape"]
-coat_list_sprite = ["none","short coat","cape","closed","closed low cut","closed hoodie","jacket","open hoodie","leaves","vest","cape collar", ]
+coat_list_sprite = ["none","short coat","cape","closed","closed low cut","closed hoodie","jacket","open hoodie","leaves","vest","open", ]
 coat_sleeve_list_port = [x for x in coat_list_port if not x in ["leaves","cape","cape collar","none"]] #items with sleeves
 coat_list_menu = coat_list_port
 coat_dec_list_port = ["none", "cape","fur coat","letterman"]
@@ -111,6 +111,7 @@ pants_top_list_port = ["none","overalls"]
 #Combos
 back_list_port = [["Hat", hat_back_list_port],["Coat", coat_back_list_port] ]
 back_list_sprite = [["Coat", coat_back_list_sprite] ]
+front_list_sprite = [["Coat", coat_back_list_sprite] ]
 
 #colours
 skin_regular =["#FFE7D6","#FFD3A6","#FFD3A6","#FFDFA5","#F1A065","#DA773F","#DA874A","#B05934","#B96A2E","#853F27","#783F1A"]
@@ -663,6 +664,7 @@ def write_variables():
     content.write("const sleeve_list_port = [{name: \"Shirt\", sleeves_list: shirt_sleeve_list_port,dec_list: shirt_sleeves_dec_list_port, sharp_sleeves: [\"button up\",\"open shirt\"]},{name: \"Overshirt\", sleeves_list: overshirt_sleeve_list_port,dec_list:overshirt_sleeves_dec_list_port,sharp_sleeves: []},{name: \"Coat\", sleeves_list: coat_sleeve_list_port,dec_list:coat_sleeves_dec_list_port,sharp_sleeves: [\"suit jacket\",\"jacket\"]} ];\n")
     content.write(list_string("coat_back_list_sprite", coat_back_list_sprite))
     content.write("const back_list_sprite = [[\"Coat\", coat_back_list_sprite] ];\n")
+    content.write("const front_list_sprite = [[\"Coat\", coat_back_list_sprite] ];\n")
     content.write("\n")
     
     content.close()
@@ -716,11 +718,12 @@ def process_outfit_sprites():
     #    process_image("pants", "sprites/outfit/pants", c, outfit_colours,"blue")
         #process_image("pants_top", "sprites/outfit/pants_top", c, outfit_colours,"skin")
         #process_image("briefs", "sprites/outfit/pants", c, outfit_colours,"blue")
-        process_image("shirts", "sprites/outfit/shirts", c, outfit_colours,"grey")
+        #process_image("shirts", "sprites/outfit/shirts", c, outfit_colours,"grey")
         #process_image("overshirt", "sprites/outfit/overshirt", c, outfit_colours,"grey")
-        process_image("shirt decs", "sprites/outfit/shirts/decorations", c, outfit_colours,"grey")
-        #process_image("coat", "sprites/outfit/coat", c, outfit_colours,"grey")
-        #process_image("coat_back", "sprites/outfit/coat", c, outfit_colours,"skin")
+        #process_image("shirt decs", "sprites/outfit/shirts/decorations", c, outfit_colours,"grey")
+        process_image("coat", "sprites/outfit/coat", c, outfit_colours,"skin")
+        process_image("coat_dec", "sprites/outfit/coat", c, outfit_colours,"skin")
+        process_image("coat_back", "sprites/outfit/coat", c, outfit_colours,"skin")
         #process_image("neckwear", "sprites/accessories/neckwear", c, outfit_colours,"grey")
         #process_image("earrings", "sprites/accessories/earrings", c, outfit_colours,"")
         for height in ["short","tall"]:

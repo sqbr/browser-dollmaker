@@ -123,7 +123,7 @@ const hat_list_sprite = ["cowboy hat","Bowler","Top hat","sombrero","straw hat",
 const hat_colour_names = ["top hat","earmuffs","flower","clip","bow","cap","backwards cap","big bow","cat ears","flat cap","wide hat","cowboy hat","hood","beanie","ribbed beanie","turban","hijab","headphones","wizard","sunhat","night cap","flower crown","bowler","fedora","helmet","witches hat",];
 const neckwear_list_sprite = ["none","bandana","necklace","bow-tie","tie","choker","beads","scarf","pendant",];
 const neckwear_list_menu = ["none","tie","beads","choker","scarf","bowtie","pendant","cravat",];
-const coat_list_sprite = ["none","short coat","cape","closed","closed low cut","closed hoodie","jacket","open hoodie","leaves","vest","cape collar",];
+const coat_list_sprite = ["none","short coat","cape","closed","closed low cut","closed hoodie","jacket","open hoodie","leaves","vest","open",];
 const coat_list_menu = ["none","suit jacket","jacket","hoodie","open hoodie","leaves","chinese collar","cape collar","fur coat","letterman","cape",];
 const coat_dec_back_list_port = ["none","fur coat","letterman",];
 const eyewear_list_sprite = ["none","glasses","square glasses","round glasses","sunglasses","eye-patch","coloured glasses",];
@@ -138,6 +138,7 @@ const overshirt_sleeves_dec_list_port = ["none","argyle",];
 const coat_sleeve_list_port = ["suit jacket","jacket","hoodie","open hoodie","chinese collar","fur coat","letterman",];
 const coat_sleeves_dec_list_port = ["none",];
 const sleeve_list_port = [{name: "Shirt", sleeves_list: shirt_sleeve_list_port,dec_list: shirt_sleeves_dec_list_port, sharp_sleeves: ["button up","open shirt"]},{name: "Overshirt", sleeves_list: overshirt_sleeve_list_port,dec_list:overshirt_sleeves_dec_list_port,sharp_sleeves: []},{name: "Coat", sleeves_list: coat_sleeve_list_port,dec_list:coat_sleeves_dec_list_port,sharp_sleeves: ["suit jacket","jacket"]} ];
-const coat_back_list_sprite = ["none",];
+const coat_back_list_sprite = ["none","cape","cape collar",];
 const back_list_sprite = [["Coat", coat_back_list_sprite] ];
+const front_list_sprite = [["Coat", coat_back_list_sprite] ];
 

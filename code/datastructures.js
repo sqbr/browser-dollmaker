@@ -291,7 +291,18 @@ function fixSpriteSources(){
             if (b.name == front_name+"_back"){
                 obj_front = findNameMatch(sprite_objects, front_name);
                 if (back_list_sprite[k][1].includes(obj_front.item_list[obj_front.value]))
-                    loc = "back/"+loc;
+                    b.item = obj_front.item;
+                    b.colour = obj_front.colour;
+            }
+        }
+        //code to make backs of things match the fronts. Not tested.
+        for (let k = 0; k < front_list_sprite.length; k += 1){ 
+            let front_name = front_list_sprite[k][0];
+            if (b.name == front_name+"_front"){
+                obj_front = findNameMatch(sprite_objects, front_name);
+                if (front_list_sprite[k][1].includes(obj_front.item_list[obj_front.value]))
+                    b.item = obj_front.item;
+                    b.colour = obj_front.colour;
             }
         }
         //set colour
