@@ -20,8 +20,8 @@ skin_list = body_list + ["Eyebrows", "Mouth","Blush"]
 #Only in portraits
 hair_list = ["Hair_back", "Hair_front","Facial_hair"]
 
-hair_front_list = ["none", "shaggy side","emo","princely","locs bun","long wavy","curly pixie","spiky","short side","smooth bangs","hi-top","afro","long locks","short spiky","centre part","tufts","perm","shaved","buzzcut","jodi","side braid","curly up","short","neat bob","morris","long curly","wavy bob"]
-hair_back_list = ["none", "shaggy medium","bob","locs bob","long wavy","curly pony","curly bob","spiky","twin braids","long locks","short spiky","bun","tufts","twintails","perm","updo","long straight","neat bob","side braid","long curly","wavy bob"]
+hair_front_list = ["none", "shaggy side","emo","princely","locs bun","long wavy","curly pixie","spiky","short side","smooth bangs","hi-top","afro","long locks","short spiky","centre part","tufts","perm","shaved","buzzcut","jodi","side braid","curly up","short","neat bob","morris","long curly","wavy bob","short back and sides","straight up","neat side"]
+hair_back_list = ["none", "shaggy medium","bob","locs bob","long wavy","curly pony","curly bob","spiky","twin braids","long locks","short spiky","bun","tufts","twintails","perm","updo","long straight","neat bob","side braid","long curly","wavy bob","twin puffs","half up","straight pony low","straight pony high","curly pony high"]
 
 torso_list = ["medium"]
 head_list =["rectangular","pointed","square","medium","oval","round","jowly",]
@@ -703,7 +703,7 @@ def process_body_sprites():
     #        process_image("arms_"+h, "sprites/body", c, skin_colours,"skin")
     for c in range(len(hair_colours)):  
          process_image("hairstyles", "sprites/hair", c, hair_colours,"grey")
-    #     process_image("hairstyles2", "sprites/hair", c, hair_colours,"grey")
+         process_image("hairstyles2", "sprites/hair", c, hair_colours,"grey")
          process_image("facialhair", "sprites/hair/facialhair", c, hair_colours,"grey")
     #for c in range(len(eye_colours)):  
     #     process_image("short", "sprites/body/eyes", c, eye_colours,"eyes") 
@@ -750,7 +750,7 @@ process_outfit_sprites()
 
 
 for c in closet:
-    if c.name in ["Mouth"]:
+    if c.name in [""]:
         process_portrait_part(c)
 #process_all_portraits()
 #make_coat()

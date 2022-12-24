@@ -552,6 +552,8 @@ function newY(obj, row,column){
     if (obj.bobs){
         bob =column%2;
     }
+    if (row == 3)
+        bob+=obj.backOffset;
     return row*32+obj.offset[1]+bob+(1-height)*obj.heightOffset;
 }
 
@@ -572,7 +574,7 @@ function drawCanvas() {
         if (b.item_list[b.value] !=none){ 
             for (let column = 0; column < 2; column += 1) //column 1-2
                 if(b.name !="Hairstyle_top" || column >0)
-                ctx_preview.drawImage(b.image, oldX(b,0), oldY(b,column),b.dimensions[0],b.dimensions[1],64*column+b.offset[0]*4,4*(b.offset[1]+(1-height)*b.heightOffset),b.dimensions[0]*4,b.dimensions[1]*4);
+                    ctx_preview.drawImage(b.image, oldX(b,0), oldY(b,column),b.dimensions[0],b.dimensions[1],64*column+b.offset[0]*4,4*(b.offset[1]+(1-height)*b.heightOffset),b.dimensions[0]*4,b.dimensions[1]*4);
             if (b.rowNum==4)
                 ctx_preview.drawImage(b.image, oldX(b,0), oldY(b,3),b.dimensions[0],b.dimensions[1],64*2+b.offset[0]*4,b.offset[1]*4,b.dimensions[0]*4,b.dimensions[1]*4);
             else{
@@ -669,6 +671,7 @@ function drawCanvas() {
 }
 
 function setup(){
+    document.getElementById("test").innerHTML = print_sprite_objects();
     //setTopbar();
     setToolbar();
     setImageType([], 0)

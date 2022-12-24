@@ -40,7 +40,7 @@ const hairNum = 24; //how many hair colours there are
 const outfitNum = 30; //how many clothing colours there are
 const full_body_list = body_list+hair_list;
 
-const hair_back_list = ["none","shaggy medium","bob","locs bob","long wavy","curly pony","curly bob","spiky","twin braids","long locks","short spiky","bun","tufts","twintails","perm","updo","long straight","neat bob","side braid","long curly","wavy bob",];
+const hair_back_list = ["none","shaggy medium","bob","locs bob","long wavy","curly pony","curly bob","spiky","twin braids","long locks","short spiky","bun","tufts","twintails","perm","updo","long straight","neat bob","side braid","long curly","wavy bob","twin puffs","half up","straight pony low","straight pony high","curly pony high",];
 const coat_back_list_port = ["none","suit jacket","jacket","hoodie","open hoodie","leaves","chinese collar","cape collar","fur coat","letterman",];
 const hat_back_list_port = ["none","sunhat","wizard","night cap","broad hat","beanie","witch","helmet",];
 const torso_list = ["medium",];
@@ -74,7 +74,7 @@ const mouth_list = ["toothy smile","grin","small laugh","wobbly smile","smile","
 const earrings_list_port = ["none","studs","single stud","single small hoop","small hoops","punk","drops","hoops","single hoop",];
 const facial_hair_list_port = ["none","beard","moustache","big moustache","goatee","soul patch","fluffy goatee",];
 const eyewear_list_port = ["none","glasses","square glasses","round glasses","sunglasses","eye-patch","coloured glasses",];
-const hair_front_list = ["none","shaggy side","emo","princely","locs bun","long wavy","curly pixie","spiky","short side","smooth bangs","hi-top","afro","long locks","short spiky","centre part","tufts","perm","shaved","buzzcut","jodi","side braid","curly up","short","neat bob","morris","long curly","wavy bob",];
+const hair_front_list = ["none","shaggy side","emo","princely","locs bun","long wavy","curly pixie","spiky","short side","smooth bangs","hi-top","afro","long locks","short spiky","centre part","tufts","perm","shaved","buzzcut","jodi","side braid","curly up","short","neat bob","morris","long curly","wavy bob","short back and sides","straight up","neat side",];
 const hat_list_port = ["none","sunhat","cap","headphones","wizard","ribbon","night cap","broad hat","beanie","bowler","flower crown","soft cap","witch","helmet","turban",];
 const hat_dec_list_port = ["none","cap_joja","cap_joja2","sunhat","night cap","broad hat","bowler",];
 
