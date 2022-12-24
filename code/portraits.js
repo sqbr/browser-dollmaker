@@ -76,7 +76,7 @@ const facial_hair_list_port = ["none","beard","moustache","big moustache","goate
 const eyewear_list_port = ["none","glasses","square glasses","round glasses","sunglasses","eye-patch","coloured glasses",];
 const hair_front_list = ["none","shaggy side","emo","princely","locs bun","long wavy","curly pixie","spiky","short side","smooth bangs","hi-top","afro","long locks","short spiky","centre part","tufts","perm","shaved","buzzcut","jodi","side braid","curly up","short","neat bob","morris","long curly","wavy bob","short back and sides","straight up","neat side",];
 const hat_list_port = ["none","sunhat","cap","headphones","wizard","ribbon","night cap","broad hat","beanie","bowler","flower crown","soft cap","witch","helmet","turban",];
-const hat_dec_list_port = ["none","cap_joja","cap_joja2","sunhat","night cap","broad hat","bowler",];
+const hat_dec_list_port = ["none","cap_joja","cap_joja2","sunhat","night cap","broad hat","bowler","witch",];
 
 add_portrait_object("Hair_back",hair_back_list,"body/hair")
 add_portrait_object("Coat_back",coat_back_list_port,"outfit/coat")
@@ -120,15 +120,15 @@ add_portrait_object("Hat_dec",hat_dec_list_port,"outfit/hat")
 const facial_hair_list_sprite = ["none","beard","moustache","big moustache","goatee","soul patch","fluffy goatee",];
 const facial_hair_list_menu = ["none","beard","moustache","big moustache","goatee","soul patch","fluffy goatee","stubble",];
 const hat_list_sprite = ["cowboy hat","Bowler","Top hat","sombrero","straw hat","official cap","blue bonnet","Chapeau","Skeleton mask","Goblin Mask","Chicken Mask","Earmuffs","Delicate Bow","Tropiclip","Butterfly Bow","Hunter's Cap","Trucker Hat","Sailor's Cap","Good Ol' Cap","Fedora","Cool Cap","Lucky Bow","Polka Bow","Gnome's Cap","Eye Patch","Santa Hat","Tiara","Hard Hat","Sou'wester","Daisy","Watermelon Band","Mouse Ears","Cat Ears","Cowgal Hat","Cowpoke Hat","Archer's Cap","Panda Hat","Blue Cowboy Hat","Red Cowboy Hat","Cone Hat","Living Hat","Emily's Magic Hat","Mushroom Cap","Dinosaur Hat","Totem Mask","Logo Cap","Dwarf Helm","Fashion Hat","Pumpkin Mask","Hair Bone","knight","","red kerchief","grey beanie","red beanie","black with feather","","","","","wizard","chef","pirate","","","turban","","gold mask","spinner","veil","flat black","witch",];
-const hat_colour_names = ["top hat","earmuffs","flower","clip","bow","cap","backwards cap","big bow","cat ears","flat cap","wide hat","cowboy hat","hood","beanie","ribbed beanie","turban","hijab","headphones","wizard","sunhat","night cap","flower crown","bowler","fedora",];
-const neckwear_list_sprite = ["none","bandana","necklace","bow-tie","tie","choker","beads",];
+const hat_colour_names = ["top hat","earmuffs","flower","clip","bow","cap","backwards cap","big bow","cat ears","flat cap","wide hat","cowboy hat","hood","beanie","ribbed beanie","turban","hijab","headphones","wizard","sunhat","night cap","flower crown","bowler","fedora","helmet","witches hat",];
+const neckwear_list_sprite = ["none","bandana","necklace","bow-tie","tie","choker","beads","scarf","pendant",];
 const neckwear_list_menu = ["none","tie","beads","choker","scarf","bowtie","pendant","cravat",];
 const coat_list_sprite = ["none","short coat","cape","closed","closed low cut","closed hoodie","jacket","open hoodie","leaves","vest","cape collar",];
 const coat_list_menu = ["none","suit jacket","jacket","hoodie","open hoodie","leaves","chinese collar","cape collar","fur coat","letterman","cape",];
 const coat_dec_back_list_port = ["none","fur coat","letterman",];
 const eyewear_list_sprite = ["none","glasses","square glasses","round glasses","sunglasses","eye-patch","coloured glasses",];
 const eyewear_list_menu = ["none","glasses","square glasses","round glasses","sunglasses","eye-patch","coloured glasses",];
-const earrings_list_sprite = ["none","drops","hoops","studs","single stud",];
+const earrings_list_sprite = ["none","drops","hoops","studs","single stud","single hoop",];
 const earrings_list_menu = ["none","studs","single stud","single small hoop","small hoops","punk","drops","hoops","single hoop",];
 const back_list_port = [["Hat", hat_back_list_port],["Coat", coat_back_list_port] ]
 const shirt_sleeve_list_port = ["button up","open shirt","tshirt","boatneck","chinese collar","turtleneck","low cut","v neck",];

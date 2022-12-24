@@ -252,27 +252,23 @@ function fixSpriteSources(){
     for (let i = 0; i < sprite_objects.length; i += 1){
         let b = sprite_objects[i];
 
-        //Fixing sleeves to match uppermost long sleeved clothing
-        /*if (b.name =="Sleeves"){
-            b.item = 0;
-            let sleeve_obj=findNameMatch(sprite_objects, "Coat");
-            if (hasCoatSleeves &&sleeve_obj.item!=0){
-                b.colour = sleeve_obj.colour;
-                b.item = height+1;
-            } else{
-                let sleeve_obj=findNameMatch(sprite_objects, "Overshirt");
-                if (hasOvershirtSleeves &&sleeve_obj.item!=0){
-                    b.colour = sleeve_obj.colour;
-                    b.item = height+1;
+        //code for sleeves
+        for (let k = 0; k < sleeve_list_port.length; k += 1){ 
+            let front_name = sleeve_list_port[k].name; //eg "Shirt", "Coat" etc
+            if (b.name == front_name+"_sleeves"){ //this is "Shirt_sleeves" etc
+                obj_front = findNameMatch(portrait_objects, front_name); //what shirt etc we are wearing
+                current_sleeves_list = sleeve_list_port[k].sleeves_list;
+                current_item = obj_front.item_list[obj_front.value_list[0]];
+                if (current_sleeves_list.includes(current_item)){ //the current shirt etc can have sleeves
+                    //document.getElementById("test").innerHTML = k+" - "+sleeve_list_port[k].toString();
+                        b.item =sleeve_list[k]; //what current sleeve length is
+                        b.colour = obj_front.colour
                 } else{
-                    let sleeve_obj=findNameMatch(sprite_objects, "Shirt");
-                    if (hasShirtSleeves && sleeve_obj.item!=0){
-                        b.colour = sleeve_obj.colour;
-                        b.item = height+1;
-                    }
+                    b.item = 0;
+                }
                 }
             }
-        }*/
+        
         //Make Hair_top match Hairstyle
         if (b.name =="Hairstyle_top"){
             let hair_obj=findNameMatch(sprite_objects, "Hairstyle");
