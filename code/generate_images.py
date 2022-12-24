@@ -752,7 +752,7 @@ process_outfit_sprites()
 
 
 for c in closet:
-    if c.name in []:
+    if c.name in ["Coat_dec"]:
         process_portrait_part(c)
 #process_all_portraits()
 #make_coat()
