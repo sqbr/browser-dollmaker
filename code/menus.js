@@ -136,31 +136,62 @@ var reader; //GLOBAL File Reader object for demo purpose only
       var portrait_objects_load = load_object.portrait_objects_save;
       var sprite_objects_load = load_object.sprite_objects_save;
       //document.getElementById("test").innerHTML = temp_object.toString();
+      for(let i = 0; i < portrait_objects.length; i++){
+          var oldm =portrait_objects[i]; 
+          var newm = portrait_objects_load[i];
+          oldm.colour = newm.colour;
+          oldm.colour2 = newm.colour2;
+          oldm.value_list = newm.value_list;
+      }
+      for(let i = 0; i < sprite_objects.length; i++){
+        var oldm =sprite_objects[i]; 
+        var newm = sprite_objects_load[i];
+        oldm.colour = newm.colour;
+        oldm.colour2 = newm.colour2;
+        oldm.item = newm.item;   
+      } 
+      for(let i = 0; i < menu_objects.length; i++){
+        var oldm =menu_objects[i]; 
+        var newm = menu_objects_load[i];
+        oldm.colour = newm.colour;
+        oldm.colour2 = newm.colour2;
+        oldm.item = newm.item;    
+      }  
+
 
       setImageType([], load_object.ImageType)
       setEyeType([],load_object.eye_type)
       setHeight([],load_object.height);
 
-      setSkinColour([],findNameMatch(portrait_objects_load, "Torso").colour);
-      setBothColour(['Eyes'],findNameMatch(portrait_objects_load, "Eyes").colour);
-      setHairColour([],findNameMatch(portrait_objects_load, "Hair_front").colour);
-      setBothVariable(['Facial_hair'],findNameMatch(sprite_objects_load, "Facial_hair").item);
+      //setSkinColour([],findNameMatch(portrait_objects_load, "Torso").colour);
+      //setBothColour(['Eyes'],findNameMatch(portrait_objects_load, "Eyes").colour);
+      //setHairColour([],findNameMatch(portrait_objects_load, "Hair_front").colour);
+      //setBothVariable(['Facial_hair'],findNameMatch(sprite_objects_load, "Facial_hair").item);
       setHair([],findNameMatch(menu_objects_load, "Hairstyle").item);
-      setPortVariable(["Nose","Nose_front"],findNameMatch(portrait_objects_load, "Nose").value_list[0])
-      setPortVariable(['Head'],findNameMatch(portrait_objects_load, "Head").value_list[0])
-      setPortVariable(['Complexion'],findNameMatch(portrait_objects_load, "Complexion").value_list[0])
+      //setPortVariable(["Nose","Nose_front"],findNameMatch(portrait_objects_load, "Nose").value_list[0])
+      //setPortVariable(['Head'],findNameMatch(portrait_objects_load, "Head").value_list[0])
+      //setPortVariable(['Complexion'],findNameMatch(portrait_objects_load, "Complexion").value_list[0])
       
-      setShoes([],load_object.currentShoes);
-      setGloves([],load_object.currentGloves);
+      currentShoes = load_object.currentShoes;
+      currentGloves= load_object.currentGloves;
+      sleeve_list = load_object.sleeve_list;
 
-      for(let i = 0; i < menu_objects.length; i++){
+      /*for(let i = 0; i < menu_objects.length; i++){
         var oldm =menu_objects[i]; 
         if (oldm.name !="Hairstyle"){
           var newm = menu_objects_load[i];
           setClothingColour([oldm.name],newm.colour);
           setClothing2Colour([oldm.name],newm.colour2);
-
-        }
-        
+          if (!["Shoes","Gloves"].includes(oldm.name))
+            setClothing([oldm.name],newm.item);
+        } 
       }
+      oldm = findNameMatch(portrait_objects, "Eyebrows");
+      newm = findNameMatch(portrait_objects_load, "Eyebrows");
+      oldm.value_list = newm.value_list;
+      oldm = findNameMatch(portrait_objects, "Mouth");
+      newm = findNameMatch(portrait_objects_load, "Mouth");
+      oldm.value_list = newm.value_list;*/
+      setMenu([],currently_editing);
+
     }   
