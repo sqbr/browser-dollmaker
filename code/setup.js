@@ -38,6 +38,9 @@ const back_list = ["Hat","Coat"]; //have a back
 const sleeve_havers = ["Shirt","Overshirt","Coat"]
 const sleeve_list = [0,0,0]
 
+const sprite_clothes = ["Shoes","Gloves","Pants"];
+
+
 let canvas;
 let canvas_preview;
 let ctx_preview;

@@ -359,7 +359,6 @@ function setSpritePreset(variablelist, number){
 
 function setTopbar(){
     let s = '';
-    //s+='<div><button onclick="exportCanvas()">Export</button></div>\n';
     s+='<div class="four-columns">\n';
     s+='<div id = "image_typeBtn" style="justify-self: end;">Something</div>\n';
     s+='<div><h2 id="imageType" text-align="left">'+imageType_list[current_imageType]+'</h2></div> \n';
@@ -388,24 +387,34 @@ function setTopbar(){
 
 function setToolbar(){
     let s = "";
-        if (currently_editing==1){
-            s+='<div class="four-columns">\n';
-        }else{
-            s+='<div class="three-columns">\n';
-        }
-        s+='    <div id = "currently_editing_Btn" style="justify-self: end;">Secret</div>\n'; 
-        s+='    <div><h2 id="editingTitle" text-align="left">errors??</h2></div>\n';
-        if (currently_editing==1){
-            s+='    <div id = "current_clothes_Btn" style="justify-self: end;">Secret</div>\n'; 
-            s+='    <div><h2 id="clothesTitle" text-align="left">'+menu_object_names[current_clothing]+'</h2></div>\n';     
-        }
-        s+='</div>\n';
-        document.getElementById("toolbar").innerHTML = s;
-        document.getElementById("editingTitle").innerHTML = editing_list[currently_editing];
-        document.getElementById("currently_editing_Btn").innerHTML = makeDropbtnString("Editing:", ["currently_editing"], editing_list, "setMenu");
-        if (currently_editing==1){
-            document.getElementById("current_clothes_Btn").innerHTML = makeDropbtnString("Editing:", ["current_clothing"], menu_object_names.slice(0,menu_object_names.length-1), "setCurrentClothing");
-        }
+    s+='<div><button onclick="download()">Export</button></div>\n';
+    s+='    <input type="file" onchange=\'readText(this)\' />'
+    /*s+='<div id="container">'    
+    s+='    <input type="file" onchange=\'readText(this)\' />'
+    s+='    <br/>'
+    s+='    <hr/>'   
+    s+='    <h3>Contents of the Text file:</h3>'
+    s+='    <div id="main">'
+    s+='    </div>'
+    s+='</div>'*/
+    if (currently_editing==1){
+        s+='<div class="four-columns">\n';
+    }else{
+        s+='<div class="three-columns">\n';
+    }
+    s+='    <div id = "currently_editing_Btn" style="justify-self: end;">Secret</div>\n'; 
+    s+='    <div><h2 id="editingTitle" text-align="left">errors??</h2></div>\n';
+    if (currently_editing==1){
+        s+='    <div id = "current_clothes_Btn" style="justify-self: end;">Secret</div>\n'; 
+        s+='    <div><h2 id="clothesTitle" text-align="left">'+menu_object_names[current_clothing]+'</h2></div>\n';     
+    }
+    s+='</div>\n';
+    document.getElementById("toolbar").innerHTML = s;
+    document.getElementById("editingTitle").innerHTML = editing_list[currently_editing];
+    document.getElementById("currently_editing_Btn").innerHTML = makeDropbtnString("Editing:", ["currently_editing"], editing_list, "setMenu");
+    if (currently_editing==1){
+        document.getElementById("current_clothes_Btn").innerHTML = makeDropbtnString("Editing:", ["current_clothing"], menu_object_names.slice(0,menu_object_names.length-1), "setCurrentClothing");
+    }
 }
 
 function setImageType(variablelist, number){
@@ -661,13 +670,80 @@ function drawCanvas() {
 function setup(){
     //document.getElementById("test").innerHTML = print_sprite_objects();
     //setTopbar();
+
+    checkFileAPI();
     setToolbar();
-    setImageType([], 0)
+
+    load_variables = {ImageType: 0, height: height, SkinColour: 8, EyeColour: 0, HairColour: 10, Facial_hair: 0, Hair: 3,Nose: 2, Head: 1, EyeType: 0, }    
+
+    setImageType([], load_variables.ImageType)
     
+    setHeight([],load_variables.height);
 
-    setHeight([],height);
+    //Maru:
+    setSkinColour([],load_variables.SkinColour);
+    setBothColour(['Eyes'],load_variables.EyeColour);
+    setHairColour([],load_variables.HairColour);
+    setBothVariable(['Facial_hair'],load_variables.Facial_hair);
+    setHair([],load_variables.Hair);
+    setPortVariable(["Nose"],load_variables.Nose)
+    setPortVariable(['Head'],load_variables.Head)
+    setEyeType([''],load_variables.EyeType)
 
-    //Sebastian:
+    setShoes([],2);
+    setClothingColour(["Shoes"],29);
+    setClothing(["Gloves"],0);
+    setClothingColour(["Gloves"],0);
+    setClothing(["Pants"],2);
+    setClothingColour(["Pants"],10);
+    setClothing(["Neckwear"],0);
+    setClothingColour(["Neckwear"],1);
+    setClothing(["Eyewear"],1);
+    setClothingColour(["Eyewear"],5);
+    setClothing(["Earrings"],1);
+    setClothingColour(["Earrings"],13);
+
+    setClothing(["Shirt"],1);
+    setClothingColour(["Shirt"],0);
+    setClothing2Colour(["Shirt"],10);
+    setSleeves(["Shirt"],1);
+    setClothing(["Overshirt"],1);
+    setClothingColour(["Overshirt"],0);
+    setClothing2Colour(["Overshirt"],10);
+    setSleeves(["Overshirt"],1);
+    setClothing(["Coat"],0);
+    setClothingColour(["Coat"],28);
+    setClothing2Colour(["Coat"],10);
+    setSleeves(["Coat"],1);
+    
+    current_panel = 0;
+    setPanelVariable(["Eyebrows"],6);
+    setPanelVariable(["Mouth"],1);
+    setEyeExpression(["Eyes"],0);
+    current_panel = 1;
+    setPanelVariable(["Eyebrows"],2);
+    setPanelVariable(["Mouth"],1);
+    setEyeExpression(["Eyes"],1);
+    current_panel = 2;
+    setPanelVariable(["Eyebrows"],3);
+    setPanelVariable(["Mouth"],2);
+    setEyeExpression(["Eyes"],2);
+    current_panel = 3;
+    setPanelVariable(["Eyebrows"],1);
+    setPanelVariable(["Mouth"],0);
+    setEyeExpression(["Eyes"],0);
+    current_panel = 4;
+    setPanelVariable(["Eyebrows"],4);
+    setPanelVariable(["Mouth"],1);
+    setPanelVariable(["Eyes"],3);
+    setEyeExpression(["Blush"],1);
+    current_panel = 5;
+    setPanelVariable(["Eyebrows"],5);
+    setPanelVariable(["Mouth"],3);
+    setEyeExpression(["Eyes"],4);
+    current_panel = 0;
+
+//Sebastian:
     /*setSkinColour([],2);
     setBothColour(['Eyes'],0);
     setHairColour([],11);
@@ -720,63 +796,6 @@ function setup(){
     setPanelVariable(["Mouth"],3);
     setPanelVariable(["Eyes"],4);
     current_panel = 0;*/
-
-    //Maru:
-    setSkinColour([],8);
-    setBothColour(['Eyes'],0);
-    setHairColour([],10);
-    //setBothVariable(['Facial_hair'],5);
-    setHair([],3);
-    setPortVariable(["Nose"],2)
-    setPortVariable(['Head'],1)
-    setEyeType([''],0)
-
-    setShoes([],2);
-    setClothingColour(["Shoes"],29);
-    //setClothing(["Gloves"],1);
-    //setClothingColour(["Gloves"],4);
-    setClothing(["Pants"],2);
-    setClothingColour(["Pants"],10);
-    setClothing(["Shirt"],0);
-    setClothingColour(["Shirt"],0);
-    setClothing2Colour(["Shirt"],10);
-    //setClothing(["Coat"],2);
-    setClothingColour(["Coat"],28);
-    //setClothing(["Neckwear"],0);
-    //setClothingColour(["Neckwear"],1);
-    //setClothing(["Eyewear"],1);
-    setClothingColour(["Eyewear"],5);
-    //setClothing(["Earrings"],1);
-    setClothingColour(["Earrings"],13);
-    
-    current_panel = 0;
-    setPanelVariable(["Eyebrows"],6);
-    setPanelVariable(["Mouth"],1);
-    setEyeExpression(["Eyes"],0);
-    current_panel = 1;
-    setPanelVariable(["Eyebrows"],2);
-    setPanelVariable(["Mouth"],1);
-    setEyeExpression(["Eyes"],1);
-    current_panel = 2;
-    setPanelVariable(["Eyebrows"],3);
-    setPanelVariable(["Mouth"],2);
-    setEyeExpression(["Eyes"],2);
-    current_panel = 3;
-    setPanelVariable(["Eyebrows"],1);
-    setPanelVariable(["Mouth"],0);
-    setEyeExpression(["Eyes"],0);
-    current_panel = 4;
-    setPanelVariable(["Eyebrows"],4);
-    setPanelVariable(["Mouth"],1);
-    setPanelVariable(["Eyes"],3);
-    setEyeExpression(["Blush"],1);
-    current_panel = 5;
-    setPanelVariable(["Eyebrows"],5);
-    setPanelVariable(["Mouth"],3);
-    setEyeExpression(["Eyes"],4);
-    current_panel = 0;
-
-
     drawCanvas();
 }
 let portrait_back = new Image();
