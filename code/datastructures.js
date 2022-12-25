@@ -352,24 +352,37 @@ function setPanelNum(variablelist, number){
     document.getElementById("panelTitle").innerHTML = panelNum;
 }
 
+function setSpritePreset(variablelist, number){
+    current_sprite_preset = number;
+    document.getElementById("panelTitle").innerHTML = sprite_presets[current_sprite_preset];
+}
+
 function setTopbar(){
     let s = '';
     //s+='<div><button onclick="exportCanvas()">Export</button></div>\n';
     s+='<div class="four-columns">\n';
     s+='<div id = "image_typeBtn" style="justify-self: end;">Something</div>\n';
-    s+='<div><h2 id="imageType" text-align="left">Broken</h2></div> \n';
+    s+='<div><h2 id="imageType" text-align="left">'+imageType_list[current_imageType]+'</h2></div> \n';
     if (current_imageType==0){
         s+='<div id = "panel_numBtn" style="justify-self: end;">Something</div>\n';
         s+='<div><h2 id="panelTitle" text-align="left">Broken</h2></div> \n';
         s+='</div>\n'; 
+    } else{
+        s+='<div id = "sprite_presetBtn" style="justify-self: end;">Something</div>\n';
+        s+='<div><h2 id="panelTitle" text-align="left">Broken</h2></div> \n';
+        s+='</div>\n';
     }
     s+='</div>\n';
     document.getElementById("topbar").innerHTML = s;
     document.getElementById("image_typeBtn").innerHTML = makeDropbtnString("Image Type:", ["current_imageType"], imageType_list, "setImageType");
     if (current_imageType==0){
         document.getElementById("panelTitle").innerHTML = panelNum;
-        document.getElementById("panel_numBtn").innerHTML = makeDropbtnString("Panels:", ["panel_num"], [1,2,3,4,5,6,7,8], "setPanelNum");
-    }    
+        document.getElementById("panel_numBtn").innerHTML = makeDropbtnString("Panels:", ["panel_num"], [1,2,3,4,5,6,7,8,9,10], "setPanelNum");
+    } else{
+        document.getElementById("panelTitle").innerHTML = sprite_presets[current_sprite_preset];
+        document.getElementById("sprite_presetBtn").innerHTML = makeDropbtnString("Spritesheet:", ["current_sprite_preset"], sprite_presets, "setSpritePreset");
+
+    }   
     
 }
 
@@ -397,40 +410,7 @@ function setToolbar(){
 
 function setImageType(variablelist, number){
     current_imageType = number;
-    //document.getElementById("imageType").innerHTML = imageType_list[number];
-    let htmlString = "";
-    htmlString+='<div class="four-columns">\n';
-    htmlString+='<div id = "image_typeBtn" style="justify-self: end;">Something</div>\n';
-    htmlString+='<div><h2 id="imageType" text-align="left">Broken</h2></div> \n';
-    switch(number){
-        case 0: //editing portraits
-            htmlString+='<div id = "panel_numBtn" style="justify-self: end;">Something</div>\n';
-            htmlString+='<div><h2 id="panelTitle" text-align="left">Broken</h2></div> \n';
-            htmlString+='</div>\n'; 
-            htmlString+='</div>\n';
-            document.getElementById("topbar").innerHTML = htmlString;
-            document.getElementById("imageType").innerHTML = imageType_list[number];
-            document.getElementById("image_typeBtn").innerHTML = makeDropbtnString("Image Type:", ["current_imageType"], imageType_list, "setImageType");
-            document.getElementById("panelTitle").innerHTML = panelNum;
-            document.getElementById("panel_numBtn").innerHTML = makeDropbtnString("Panels:", ["panel_num"], [1,2,3,4,5,6,7,8], "setPanelNum");
-            
-            break;
-        case 1: //editing sprites
-            htmlString+='<div id = "panel_numBtn" style="justify-self: end;">Something</div>\n';
-            htmlString+='<div><h2 id="panelTitle" text-align="left">Broken</h2></div> \n';
-            htmlString+='</div>\n'; 
-            htmlString+='</div>\n';
-            document.getElementById("topbar").innerHTML = htmlString;
-            document.getElementById("imageType").innerHTML = imageType_list[number];
-            document.getElementById("image_typeBtn").innerHTML = makeDropbtnString("Image Type:", ["current_imageType"], imageType_list, "setImageType");
-            document.getElementById("panelTitle").innerHTML = panelNum;
-            document.getElementById("panel_numBtn").innerHTML = makeDropbtnString("Panels:", ["panel_num"], [1,2,3,4,5,6,7,8], "setPanelNum");
-            break;
-        default:
-            htmlString = "Unknown value "+number;   
-            document.getElementById("topbar").innerHTML = htmlString;  
-            return;   
-    }   
+    setTopbar(); 
     setMenu([], currently_editing); 
 }
 
@@ -749,6 +729,7 @@ function setup(){
     setHair([],3);
     setPortVariable(["Nose"],2)
     setPortVariable(['Head'],1)
+    setEyeType([''],0)
 
     setShoes([],2);
     setClothingColour(["Shoes"],29);
@@ -771,28 +752,28 @@ function setup(){
     current_panel = 0;
     setPanelVariable(["Eyebrows"],6);
     setPanelVariable(["Mouth"],1);
-    setPanelVariable(["Eyes"],0);
+    setEyeExpression(["Eyes"],0);
     current_panel = 1;
     setPanelVariable(["Eyebrows"],2);
     setPanelVariable(["Mouth"],1);
-    setPanelVariable(["Eyes"],1);
+    setEyeExpression(["Eyes"],1);
     current_panel = 2;
     setPanelVariable(["Eyebrows"],3);
     setPanelVariable(["Mouth"],2);
-    setPanelVariable(["Eyes"],2);
+    setEyeExpression(["Eyes"],2);
     current_panel = 3;
     setPanelVariable(["Eyebrows"],1);
     setPanelVariable(["Mouth"],0);
-    setPanelVariable(["Eyes"],0);
+    setEyeExpression(["Eyes"],0);
     current_panel = 4;
     setPanelVariable(["Eyebrows"],4);
     setPanelVariable(["Mouth"],1);
     setPanelVariable(["Eyes"],3);
-    setPanelVariable(["Blush"],1);
+    setEyeExpression(["Blush"],1);
     current_panel = 5;
     setPanelVariable(["Eyebrows"],5);
     setPanelVariable(["Mouth"],3);
-    setPanelVariable(["Eyes"],4);
+    setEyeExpression(["Eyes"],4);
     current_panel = 0;
 
 
