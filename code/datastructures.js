@@ -694,6 +694,7 @@ function setup(){
     setClothingColour(["Shoes"],29);
     setClothing(["Gloves"],0);
     setClothingColour(["Gloves"],0);
+
     setClothing(["Pants"],2);
     setClothingColour(["Pants"],10);
     setClothing(["Neckwear"],0);

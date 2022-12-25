@@ -35,17 +35,28 @@ function exportCanvas(){ //broken
 function download() {
   //from https://stackoverflow.com/questions/13405129/create-and-save-a-file-with-javascript
   var data = "";
-  var filename = "dollmaker";
+  var filename = "dollmaker_save.json";
   var type = "";
 
-  var clothes = [];
-  for(let i = 0; i < sprite_clothes.length; i++){
-    clothes.push({name: sprite_clothes[i], item:findNameMatch(sprite_objects,sprite_clothes[i]).item,colour: findNameMatch(sprite_objects,sprite_clothes[i]).colour,colour2: findNameMatch(sprite_objects,sprite_clothes[i]).colour2})
+  var menu_objects_save = [];
+  for(let i = 0; i < menu_objects.length; i++){
+    m = menu_objects[i];
+    menu_objects_save.push({name: m.name, item:m.item,colour: m.colour,colour2: m.colour2})
+  }
+  var portrait_objects_save = [];
+  for(let i = 0; i < portrait_objects.length; i++){
+    m = portrait_objects[i];
+    portrait_objects_save.push({name: m.name, value_list:m.value_list,colour: m.colour,colour2: m.colour2})
+  }
+  var sprite_objects_save = [];
+  for(let i = 0; i < sprite_objects.length; i++){
+    m = sprite_objects[i];
+    sprite_objects_save.push({name: m.name, item:m.item,colour: m.colour,colour2: m.colour2})
   }
 
   var load_variables = {
-    ImageType: current_imageType, height: height, SkinColour: findNameMatch(portrait_objects,"Torso").colour, EyeColour: findNameMatch(portrait_objects,"Eyes").colour, HairColour: findNameMatch(portrait_objects,"Hair_front").colour, Facial_hair: findNameMatch(portrait_objects,"Facial_hair").colour, Hair: findNameMatch(portrait_objects,"Facial_hair").value_list[0],Nose: findNameMatch(portrait_objects,"Nose").value_list[0], Head: findNameMatch(portrait_objects,"Head").value_list[0], EyeType: eye_type, 
-    clothes: clothes,  
+    ImageType: current_imageType, height: height, eye_type: eye_type, sleeve_list: sleeve_list, currentShoes: currentShoes,currentGloves: currentGloves,
+    menu_objects_save: menu_objects_save,  portrait_objects_save: portrait_objects_save, sprite_objects_save: sprite_objects_save
   }    
   
   data = JSON.stringify(load_variables);
@@ -120,6 +131,36 @@ var reader; //GLOBAL File Reader object for demo purpose only
      * load user selected file
      */
     function loadContents(txt) {
-        var el = document.getElementById('test'); 
-        el.innerHTML = txt; //display output in DOM
+      var load_object = JSON.parse(txt);
+      var menu_objects_load = load_object.menu_objects_save;
+      var portrait_objects_load = load_object.portrait_objects_save;
+      var sprite_objects_load = load_object.sprite_objects_save;
+      //document.getElementById("test").innerHTML = temp_object.toString();
+
+      setImageType([], load_object.ImageType)
+      setEyeType([],load_object.eye_type)
+      setHeight([],load_object.height);
+
+      setSkinColour([],findNameMatch(portrait_objects_load, "Torso").colour);
+      setBothColour(['Eyes'],findNameMatch(portrait_objects_load, "Eyes").colour);
+      setHairColour([],findNameMatch(portrait_objects_load, "Hair_front").colour);
+      setBothVariable(['Facial_hair'],findNameMatch(sprite_objects_load, "Facial_hair").item);
+      setHair([],findNameMatch(menu_objects_load, "Hairstyle").item);
+      setPortVariable(["Nose","Nose_front"],findNameMatch(portrait_objects_load, "Nose").value_list[0])
+      setPortVariable(['Head'],findNameMatch(portrait_objects_load, "Head").value_list[0])
+      setPortVariable(['Complexion'],findNameMatch(portrait_objects_load, "Complexion").value_list[0])
+      
+      setShoes([],load_object.currentShoes);
+      setGloves([],load_object.currentGloves);
+
+      for(let i = 0; i < menu_objects.length; i++){
+        var oldm =menu_objects[i]; 
+        if (oldm.name !="Hairstyle"){
+          var newm = menu_objects_load[i];
+          setClothingColour([oldm.name],newm.colour);
+          setClothing2Colour([oldm.name],newm.colour2);
+
+        }
+        
+      }
     }   
