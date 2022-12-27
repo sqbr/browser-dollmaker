@@ -1,6 +1,7 @@
 const sprite_body_list = ["short","tall","short_bald","tall_bald"];
 
 const height_list = ["short","tall"];
+const sprite_body_names = ["Short","Tall"]
 
 const eyelash_list = eye_type_list_port;
 
@@ -38,12 +39,18 @@ topcorner: coordinates of the top corner of the looking down standing still spri
 */
 
 const sprite_torso_list = []
-for (let i =0; i<sprite_body_list.length;i++){
-    b= sprite_body_list[i];
+for (let i =0; i<height_list.length;i++){
+    b= height_list[i];
     sprite_torso_list.push({name: b, location: "body/"+b, colour: true, asymmetrical: false,  rowNum: 3,topcorner:[0,0]})
 }
 
-const sprite_body_names = ["Short","Tall"]
+const head_name_list_sprite = ["regular","bald"]
+
+const sprite_head_list = []
+for (let i =0; i<head_name_list_sprite.length;i++){
+    b= head_name_list_sprite[i];
+    sprite_head_list.push({name: b, location: "body/head", colour: true, asymmetrical: false,  rowNum: 3,topcorner:[0,0]})
+}
 
 const sprite_eyes_list = []
 for (let i =0; i<eye_type_list_port.length;i++){
@@ -110,8 +117,8 @@ for (let row =0; row<2;row++)
 
 const sprite_overshirt_list = [none];
 for (let column =0; column<16;column++){
-    if (column <coat_list_sprite.length)
-            sprite_overshirt_list.push({name: coat_list_sprite[column+1], location: "outfit/coat/coat", colour: true, asymmetrical: false,rowNum: 3,topcorner:[16*column,0]})
+    if (column <overshirt_list_sprite.length)
+            sprite_overshirt_list.push({name: overshirt_list_sprite[column+1], location: "outfit/overshirt/overshirt", colour: true, asymmetrical: false,rowNum: 4,topcorner:[8*column,0]})
 }
 
 const sprite_overshirt_dec_list = [none];
@@ -245,17 +252,18 @@ function add_sprite_object(name, list,name_list, colour_list,isWalk, bobs, heigh
 
 add_sprite_object("Coat_back", sprite_coat_back_list,sprite_coat_back_list.map(nameOf),outfit_colours,false,true,1,1, [16,32],[0,0]);
 add_sprite_object("Torso", sprite_torso_list,height_list, skin_colours,true, false, 0,0, [16,32],[0,0]);
+add_sprite_object("Head", sprite_head_list,sprite_head_list.map(nameOf),skin_colours,false,true,1,0, [12,12],[2,3]);
 add_sprite_object("Eyes", sprite_eyes_list,eyelash_list, eye_colours,true,false,1,0, [16,32],[0,0]);
 add_sprite_object("Shoes", sprite_shoes_list,["None"].concat(shoes_names), outfit_colours,true,false,0,0, [16,32],[0,0]);
 add_sprite_object("Pants", sprite_pants_list,sprite_pants_list.map(nameOf), outfit_colours,true,false,0,0, [16,32],[0,0]);
 add_sprite_object("Shirt", sprite_shirt1_list,sprite_shirt1_list.map(nameOf),outfit_colours,false,true,1,1, [8,8],[4,15]);
 add_sprite_object("Shirt2", sprite_shirt2_list,sprite_shirt2_list.map(nameOf),outfit_colours,false,true,1,1, [8,8],[4,15]);
 add_sprite_object("Shirt_dec", sprite_shirt_dec_list,sprite_shirt_dec_list.map(nameOf),outfit_colours,false,true,1,1, [8,8],[4,15]);
+add_sprite_object("Neckwear", sprite_neckwear_list,sprite_neckwear_list.map(nameOf), outfit_colours,false,true,1,1, [16,32],[0,2]);
 add_sprite_object("Pants top", sprite_pants_top_list,sprite_pants_top_list.map(nameOf), outfit_colours,false,true,1,-1, [8,8],[4,15]);
-add_sprite_object("Overshirt", sprite_overshirt_list,sprite_overshirt_list.map(nameOf),outfit_colours,false,true,1,1, [16,32],[0,0]);
+add_sprite_object("Overshirt", sprite_overshirt_list,sprite_overshirt_list.map(nameOf),outfit_colours,false,true,1,1, [8,8],[4,15]);
 add_sprite_object("Overshirt_dec", sprite_overshirt_dec_list,sprite_overshirt_dec_list.map(nameOf),outfit_colours,false,true,1,1, [8,8],[4,15]);
 add_sprite_object("Eyewear", sprite_eyewear_list,sprite_eyewear_list.map(nameOf),outfit_colours,false,true,1,1, [16,16],[0,2]);
-add_sprite_object("Neckwear", sprite_neckwear_list,sprite_neckwear_list.map(nameOf), outfit_colours,false,true,1,1, [16,32],[0,2]);
 add_sprite_object("Earrings", sprite_earrings_list,sprite_earrings_list.map(nameOf), outfit_colours,false,true,1,1, [16,16],[0,2]);
 add_sprite_object("Coat", sprite_coat_list,sprite_coat_list.map(nameOf),outfit_colours,false,true,1,1, [16,32],[0,0]);
 add_sprite_object("Coat_dec", sprite_coat_dec_list,sprite_coat_list.map(nameOf),outfit_colours,false,true,1,1, [16,32],[0,0]);

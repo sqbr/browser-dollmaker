@@ -36,7 +36,7 @@ const sprite_presets = ["Walk Sprites", "Female Love Interest","Male Love Intere
 const back_list = ["Hat","Coat"]; //have a back
 
 const sleeve_havers = ["Shirt","Overshirt","Coat"]
-const sleeve_list = [0,0,0]
+let sleeve_list = [0,0,0]
 
 const sprite_clothes = ["Shoes","Gloves","Pants"];
 

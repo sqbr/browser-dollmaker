@@ -20,15 +20,15 @@ skin_list = body_list + ["Eyebrows", "Mouth","Blush"]
 #Only in portraits
 hair_list = ["Hair_back", "Hair_front","Facial_hair"]
 
-hair_front_list = ["none", "shaggy side","emo","princely","locs bun","long wavy","curly pixie","spiky","short side","smooth bangs","hi-top","afro","long locks","short spiky","centre part","tufts","perm","shaved","buzzcut","jodi","side braid","curly up","short","neat bob","morris","long curly","wavy bob","short back and sides","straight up","neat side"]
-hair_back_list = ["none", "shaggy medium","bob","locs bob","long wavy","curly pony","curly bob","spiky","twin braids","long locks","short spiky","bun","tufts","twintails","perm","updo","long straight","neat bob","side braid","long curly","wavy bob","twin puffs","half up","straight pony low","straight pony high","curly pony high"]
+hair_front_list = ["None", "shaggy side","emo","princely","locs bun","long wavy","curly pixie","spiky","short side","smooth bangs","hi-top","afro","long locks","short spiky","centre part","tufts","perm","shaved","buzzcut","jodi","side braid","curly up","short","neat bob","morris","long curly","wavy bob","short back and sides","straight up","neat side"]
+hair_back_list = ["None", "shaggy medium","bob","locs bob","long wavy","curly pony","curly bob","spiky","twin braids","long locks","short spiky","bun","tufts","twintails","perm","updo","long straight","neat bob","side braid","long curly","wavy bob","twin puffs","half up","straight pony low","straight pony high","curly pony high"]
 
 torso_list = ["medium"]
 head_list =["rectangular","pointed","square","medium","oval","round","jowly",]
-complexion_list =["none","light wrinkles","wrinkles"]
+complexion_list =["None","light wrinkles","wrinkles"]
 ears_list =["regular"]
-nose_list =["none","button", "medium", "broad","round","pointed"]
-eyebrow_list = ["none", "slightly downward","raised","flat sad","raised sad","angry","neutral","raised up","half raised","soft","slightly angry","raised soft"]
+nose_list =["None","button", "medium", "broad","round","pointed"]
+eyebrow_list = ["None", "slightly downward","raised","flat sad","raised sad","angry","neutral","raised up","half raised","soft","slightly angry","raised soft"]
 eye_expression_list_port = ["neutral","side","crescents","narrowed","happy","wide","shock","angry","angry side","sleepy",]
 eye_type_list_port = ["androgynous","flat","long"]
 
@@ -39,74 +39,74 @@ for type in eye_type_list_port:
 
 mouth_list = ["toothy smile","grin","small laugh","wobbly smile","smile","slight smile","small smile", "flat","small frown","wobbly frown","frown","pout","sneer","clenched","shock","ooh",]
 
-blush_list = ["none","small"]
+blush_list = ["None","small"]
 
 #The same for sprites and portraits
-facial_hair_list_port = ["none", "beard", "moustache", "big moustache", "goatee", "soul patch", "fluffy goatee", ]
+facial_hair_list_port = ["None", "beard", "moustache", "big moustache", "goatee", "soul patch", "fluffy goatee", ]
 facial_hair_list_sprite = facial_hair_list_port
 facial_hair_list_menu = facial_hair_list_port  +["stubble"] #stubble must be at end!
-stubble_list = ["none"]+ head_list
+stubble_list = ["None"]+ head_list
 
 #stuff with sleeves and collars
-sleeve_names_port = ["none", "zilch","round","sharp"]
+sleeve_names_port = ["None", "zilch","round","sharp"]
 
 def addSleeves(listname):
     output = []
     for l in listname:
         for s in sleeve_names_port:
-            if l =="none" or s=="none":
-                output.append("none")
+            if l =="None" or s=="None":
+                output.append("None")
             else:    
                 output.append(l+" "+s)
     return output        
 
-shirt_collar_list = ["none","button up","open shirt"]
-shirt_dec_list_port = ["none","button_up_plaid","button_up_stripe","open shirt vest","v neck stripe"]
-shirt_collar_dec_list_port = ["none","button_up_plaid"]
-shirt_sleeves_dec_list_port = ["none","plaid","stripe","none","stripe"]
+shirt_collar_list = ["None","button up","open shirt"]
+shirt_dec_list_port = ["None","button_up_plaid","button_up_stripe","open shirt vest","v neck stripe"]
+shirt_collar_dec_list_port = ["None","button_up_plaid"]
+shirt_sleeves_dec_list_port = ["None","plaid","stripe","None","stripe"]
 shirt_list_port = shirt_collar_list +["tshirt","boatneck","strappy","chinese collar","turtleneck","low cut","v neck"]
-shirt_sleeve_list_port = [x for x in shirt_list_port if not x in ["strappy","none"]] #items with sleeves
+shirt_sleeve_list_port = [x for x in shirt_list_port if not x in ["strappy","None"]] #items with sleeves
 
-overshirt_dec_list_port = ["none","argyle v-neck",]
-overshirt_sleeves_dec_list_port = ["none","argyle"]
-overshirt_list_port = ["none","v-neck","sweater","open sweater","suspenders"]
-overshirt_list_sprite = ["none", "loose shirt","waistcoat","cardigan","suspenders"]
-overshirt_sleeve_list_port = [x for x in overshirt_list_port if not x in ["none","suspenders"]] #items with sleeves 
+overshirt_dec_list_port = ["None","argyle v-neck",]
+overshirt_sleeves_dec_list_port = ["None","argyle"]
+overshirt_list_port = ["None","v-neck","sweater","open sweater","suspenders","waistcoat"]
+overshirt_list_sprite = ["None", "loose shirt","waistcoat","cardigan","suspenders","v-neck"]
+overshirt_sleeve_list_port = [x for x in overshirt_list_port if not x in ["None","suspenders"]] #items with sleeves 
 
-coat_sleeves_dec_list_port = ["none"]
-coat_dec_back_list_port = ["none","fur coat","letterman"]
-coat_back_list_port = ["none","suit jacket","jacket","hoodie","open hoodie","leaves","chinese collar","cape collar","fur coat","letterman"]
-coat_back_list_sprite = ["none","cape","cape collar"]
+coat_sleeves_dec_list_port = ["None"]
+coat_dec_back_list_port = ["None","fur coat","letterman"]
+coat_back_list_port = ["None","suit jacket","jacket","hoodie","open hoodie","leaves","chinese collar","cape collar","fur coat","letterman"]
+coat_back_list_sprite = ["None","cape","cape collar"]
 coat_list_port = coat_back_list_port+["cape"]
-coat_list_sprite = ["none","short coat","cape","closed","closed low cut","closed hoodie","jacket","open hoodie","leaves","vest","open", ]
-coat_sleeve_list_port = [x for x in coat_list_port if not x in ["leaves","cape","cape collar","none"]] #items with sleeves
+coat_list_sprite = ["None","short coat","cape","closed","closed low cut","closed hoodie","jacket","open hoodie","leaves","vest","open", ]
+coat_sleeve_list_port = [x for x in coat_list_port if not x in ["leaves","cape","cape collar","None"]] #items with sleeves
 coat_list_menu = coat_list_port
-coat_dec_list_port = ["none", "cape","fur coat","letterman"]
+coat_dec_list_port = ["None", "cape","fur coat","letterman"]
 
 #hats
 
-hat_back_list_port = ["none","sunhat","wizard","night cap","broad hat","beanie","witch","helmet"]
-hat_dec_list_port = ["none", "cap_joja","cap_joja2","sunhat","night cap","broad hat","bowler","witch"]
-hat_list_port = ["none","sunhat", "cap", "headphones", "wizard","ribbon","night cap","broad hat","beanie","bowler","flower crown","soft cap","witch","helmet","turban"]
+hat_back_list_port = ["None","sunhat","wizard","night cap","broad hat","beanie","witch","helmet"]
+hat_dec_list_port = ["None", "cap_joja","cap_joja2","sunhat","night cap","broad hat","bowler","witch"]
+hat_list_port = ["None","sunhat", "cap", "headphones", "wizard","ribbon","night cap","broad hat","beanie","bowler","flower crown","soft cap","witch","helmet","turban"]
 hat_list_sprite = ["cowboy hat", "Bowler", "Top hat", "sombrero", "straw hat", "official cap", "blue bonnet", "Chapeau", "Skeleton mask", "Goblin Mask", "Chicken Mask", "Earmuffs", "Delicate Bow", "Tropiclip", "Butterfly Bow", "Hunter's Cap", "Trucker Hat", "Sailor's Cap", "Good Ol' Cap", "Fedora", "Cool Cap", "Lucky Bow", "Polka Bow", "Gnome's Cap", "Eye Patch", "Santa Hat", "Tiara", "Hard Hat", "Sou'wester", "Daisy", "Watermelon Band", "Mouse Ears", "Cat Ears", "Cowgal Hat", "Cowpoke Hat", "Archer's Cap", "Panda Hat", "Blue Cowboy Hat", "Red Cowboy Hat", "Cone Hat", "Living Hat", "Emily's Magic Hat", "Mushroom Cap", "Dinosaur Hat", "Totem Mask", "Logo Cap", "Dwarf Helm", "Fashion Hat", "Pumpkin Mask", "Hair Bone", "knight", "","red kerchief", "grey beanie", "red beanie", "black with feather", "", "", "", "", "wizard", "chef", "pirate", "", "", "turban", "", "gold mask", "spinner", "veil", "flat black", "witch",]
 hat_colour_names = ["top hat", "earmuffs", "flower","clip","bow","cap","backwards cap", "big bow", "cat ears", "flat cap", "wide hat", "cowboy hat", "hood", "beanie", "ribbed beanie", "turban", "hijab", "headphones","wizard","sunhat","night cap","flower crown","bowler","fedora","helmet","witches hat"]
 
-hijab_list_port = ["none","hijab"]
+hijab_list_port = ["None","hijab"]
 #Different for portraits and sprites
 
-neckwear_list_port = ["none","tie","beads","choker","scarf","bowtie","pendant","cravat"]
-neckwear_list_sprite = ["none", "bandana", "necklace", "bow-tie", "tie", "choker","beads","scarf","pendant"]
+neckwear_list_port = ["None","tie","beads","choker","scarf","bowtie","pendant","cravat"]
+neckwear_list_sprite = ["None", "bandana", "necklace", "bow-tie", "tie", "choker","beads","scarf","pendant"]
 neckwear_list_menu = neckwear_list_port
 
-eyewear_list_port = ["none", "glasses", "square glasses", "round glasses", "sunglasses", "eye-patch","coloured glasses"]
+eyewear_list_port = ["None", "glasses", "square glasses", "round glasses", "sunglasses", "eye-patch","coloured glasses"]
 eyewear_list_sprite = eyewear_list_port
 eyewear_list_menu = eyewear_list_port
 
-earrings_list_port = ["none", "studs","single stud","single small hoop","small hoops","punk","drops","hoops","single hoop",]
-earrings_list_sprite = ["none", "drops","hoops", "studs", "single stud","single hoop"]
+earrings_list_port = ["None", "studs","single stud","single small hoop","small hoops","punk","drops","hoops","single hoop",]
+earrings_list_sprite = ["None", "drops","hoops", "studs", "single stud","single hoop"]
 earrings_list_menu = earrings_list_port
 
-pants_top_list_port = ["none","overalls"]
+pants_top_list_port = ["None","overalls"]
 
 #Combos
 back_list_port = [["Hat", hat_back_list_port],["Coat", coat_back_list_port] ]
@@ -648,6 +648,7 @@ def write_variables():
     content.write(list_string("neckwear_list_sprite", neckwear_list_sprite))
     content.write(list_string("neckwear_list_menu", neckwear_list_menu))
     content.write(list_string("coat_list_sprite", coat_list_sprite))
+    content.write(list_string("overshirt_list_sprite", coat_list_sprite))
     content.write(list_string("coat_list_menu", coat_list_menu))
     content.write(list_string("coat_dec_back_list_port", coat_dec_back_list_port))
     content.write(list_string("eyewear_list_sprite", eyewear_list_sprite))
@@ -685,10 +686,10 @@ def process_portrait_part(obj):
     for c in range(len(colour_list)):
         for item in obj.item_list:
             if obj.name == "Blush":
-                if item!="none":
+                if item!="None":
                     process_image(item, loc, c, colour_list,"blush")
             else:        
-                if item!="none":
+                if item!="None":
                     process_image(item, loc, c, colour_list,"portrait")
 
 
@@ -697,10 +698,12 @@ def process_all_portraits():
         process_portrait_part(c)
 
 def process_body_sprites():
-    #for c in range(len(skin_colours)):
+    for c in range(len(skin_colours)):
+        process_image("head", "sprites/body/", c, skin_colours,"skin")
     #    for b in sprite_body_list:
     #        process_image(b, "sprites/body/", c, skin_colours,"skin")
-    #    for h in ["short","tall"]:    
+        for h in ["short","tall"]: 
+            process_image(h, "sprites/body", c, skin_colours,"skin")   
     #        process_image("arms_"+h, "sprites/body", c, skin_colours,"skin")
     for c in range(len(hair_colours)):  
          process_image("hairstyles", "sprites/hair", c, hair_colours,"grey")
@@ -719,12 +722,12 @@ def process_outfit_sprites():
         #process_image("pants_top", "sprites/outfit/pants_top", c, outfit_colours,"skin")
         #process_image("briefs", "sprites/outfit/pants", c, outfit_colours,"blue")
         #process_image("shirts", "sprites/outfit/shirts", c, outfit_colours,"grey")
-        #process_image("overshirt", "sprites/outfit/overshirt", c, outfit_colours,"grey")
-        #process_image("shirt decs", "sprites/outfit/shirts/decorations", c, outfit_colours,"grey")
-        process_image("coat", "sprites/outfit/coat", c, outfit_colours,"skin")
-        process_image("coat_dec", "sprites/outfit/coat", c, outfit_colours,"skin")
-        process_image("coat_back", "sprites/outfit/coat", c, outfit_colours,"skin")
-        #process_image("neckwear", "sprites/accessories/neckwear", c, outfit_colours,"grey")
+        process_image("shirt decs", "sprites/outfit/shirts/decorations", c, outfit_colours,"grey")
+        process_image("overshirt", "sprites/outfit/overshirt", c, outfit_colours,"grey")
+        #process_image("coat", "sprites/outfit/coat", c, outfit_colours,"skin")
+        #process_image("coat_dec", "sprites/outfit/coat", c, outfit_colours,"skin")
+        #process_image("coat_back", "sprites/outfit/coat", c, outfit_colours,"skin")
+        process_image("neckwear", "sprites/accessories/neckwear", c, outfit_colours,"grey")
         #process_image("earrings", "sprites/accessories/earrings", c, outfit_colours,"")
         for height in ["short","tall"]:
         #        process_image("longpants_"+height, "sprites/outfit/pants", c, outfit_colours,"blue")
@@ -749,10 +752,11 @@ process_outfit_sprites()
 #["Coat","Coat_back","Coat_dec","Coat_dec_back","Coat_sleeves"]:
 #["Overshirt","Overshirt_dec","Overshirt_sleeves","Overshirt_sleeves_dec"]:
 #["Eyes","Mouth","Eyebrows"]:
+# "Neckwear"
 
 
 for c in closet:
-    if c.name in ["Coat_dec"]:
+    if c.name in []:
         process_portrait_part(c)
 #process_all_portraits()
 #make_coat()

@@ -22,7 +22,7 @@ function add_menu_object(name, list_list, colour_list, port_item_list, port_seco
     menu_objects.push({name: name,list_list: list_list, name_list: list_list.map(firstElement),colour_list: colour_list, port_item_list: port_item_list, sprite_item_list: sprite_item_list, port_second_list: port_second_list, sprite_second_list: sprite_second_list, sprite_main_list: sprite_main_list, port_main_list: port_main_list, item: 0,  colour: 0, colour2: 0 });
 }
 
-const none_menu = ["none",[],[]];
+const none_menu = ["None",[],[]];
 
 const hat_menu_list = [ none_menu,["Turban",[14,0,0],[88,0]],["Helmet",[13,0,0],[97,0]],["Witch",[12,7,0],[98,26]],["Soft Cap",[11,0,0],[82,0]],["Hijab",[0,0,1],[89,0]],["Flower Crown",[10,0,0],[94,0]],["Top Hat",[9,6,0],[73,1]],["Fedora",[9,6,0],[96,24]], ["Bowler",[9,6,0],[95,23]],["Beanie",[8,0,0],[87,0]],["Broad Hat",[7,5,0],[83,11]],["Bobble Hat",[6,4,0],[93,21]],["Bow",[5,0,0],[77,0]],["Headphones",[3,0,0],[90,0]],["Sun Hat",[1,3,0],[92,20]],["Cap",[2,0,0],[78,0]],["Joja Cap",[2,1,0],[78,5]],["Wizard",[4,0,0],[91,0]],];
 
@@ -38,7 +38,7 @@ const earrings_menu_list = [ none_menu,["Studs",[1],[3]],["Single Stud",[2],[4]]
 const coat_menu_list = [ none_menu, ["Letterman",[9,3],[10,0,3]],["Fur Coat",[8,2],[10,0,1]], ["Chinese collar",[6,0],[3,0,0]],["Leaves",[5,0],[8,0,0]],["Short Coat",[1,0],[1,0,0]],["Business Jacket",[1,0],[6,0,0]], ["Hoodie",[3,0],[5,0,0]],["Open Hoodie",[4,0],[7,0,0]],["Cool Jacket",[2,0],[6,0,0]]];
 //["Cape with collar",[7,1],[2,2,2]],["Cape",[9,1],[2,0,2]],
 
-const overshirt_menu_list = [ none_menu,["Suspenders",[4,0],[3,0]],["V-neck",[1,0],[3,0]],["Argyle V-neck",[1,1],[3,0]], ["Sweater",[2,0],[3,0]],["Open Sweater",[3,0],[3,0]]];
+const overshirt_menu_list = [ none_menu,["Button up V-neck",[5,0],[2,0]],["Suspenders",[4,0],[5,0]],["V-neck",[1,0],[6,0]],["Argyle V-neck",[1,1],[6,28]], ["Sweater",[2,0],[4,0]],["Open Sweater",[3,0],[1,0]]];
 
 const shirt_menu_list = [ none_menu,["Striped V-neck",[9,0,4,0],[26,0,4]],["V-neck",[9,0,0,0],[26,0,0]],["Low Cut",[8,0,0,0],[27,0,0]],["Turtleneck",[7,0,0,0],[21,0,0]],["Chinese Collar",[6,0,0,0],[21,0,0]], ["Open Shirt With Vest",[2,2,3,0],[24,0,25]], ["Open Shirt",[2,2,0,0],[25,0,0]],["Bikini",[5,0,0,0],[7,0,0]],["Strappy Vest",[5,0,0,0],[2,0,0]], ["T-Shirt",[3,0,0,0],[19,0,0]], ["Button-up",[1,1,0,0],[12,0,0]], ["Plaid Button-up",[1,1,1,1],[12,0,2]],["Stripe Button-up",[1,1,2,0],[12,0,4]],["Boatneck",[4,0,0,0],[23,0,0]]]
 
@@ -168,7 +168,7 @@ function setClothing2Colour(variablelist, number){
 
 function setSkinColour(variablelist, number){
     setPortColour(skin_list, number);
-    setSpriteColour(["Torso","Arms"], number);
+    setSpriteColour(["Torso","Arms","Head"], number);
     drawCanvas();
 }
 
@@ -263,10 +263,14 @@ function setClothing(variablelist, number){
 
 function setHair(variablelist, number){
     setClothing(["Hairstyle"],number);
-    if ([0,52].includes(number)) //all bald hairstyles
+    if ([0,52].includes(number)){ //all bald hairstyles
         isBald = true;
-    else
-        isBald = false;    
+        setSpriteVariable(["Head"], 1);
+    }
+    else{
+        isBald = false; 
+        setSpriteVariable(["Head"], 0);
+    }   
     setHeight([], height);
 }
 
@@ -276,11 +280,7 @@ function setHeight(variablelist, number){
     setSpriteVariable(["Shoes"], Math.max(0,2*currentShoes-1+height)); 
     setSpriteVariable(["Gloves"], Math.max(0,2*currentGloves-1+height)); 
     //document.getElementById("test").innerHTML = Math.max(0,2*currentGloves-1+height)+" "+Math.max(0,2*currentShoes-1+height);
-    if (isBald){
-        setSpriteVariable(["Torso"], 2+number);
-    }else { 
-        setSpriteVariable(["Torso"], number); 
-    } 
+    setSpriteVariable(["Torso"], number); 
     let sprite_obj = findNameMatch(sprite_objects, "Pants");
     let pants_obj = findNameMatch(sprite_obj.item_list, "trousers");
     pants_obj.location = "outfit/pants/longpants_"+height_list[height]

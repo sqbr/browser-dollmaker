@@ -79,31 +79,31 @@ function colour_desc(colour){
 
         //return colour +" H:"+h.toFixed(2)+" "+s.toFixed(3)+" "+v.toFixed(2)
 
-        let hueString = "unknown";
+        let hueString = "Unknown";
 
         //Algorithmic values 
         if (h < 14.4){
            if (s >0.5){
-            hueString = "red";
+            hueString = "Red";
            }
            else{
-            hueString = "brown";
+            hueString = "Brown";
            }
         }    
         else{   
-            if (h < 46.8){hueString = "orange";}
+            if (h < 46.8){hueString = "Orange";}
         else{
-            if (h < 64.8){hueString = "yellow";}
+            if (h < 64.8){hueString = "Yellow";}
         else{ 
-            if (h < 172.8) {hueString = "green";}
+            if (h < 172.8) {hueString = "Green";}
         else{
-            if (h < 262.8){hueString = "blue";}
+            if (h < 262.8){hueString = "Blue";}
         else{
-        if (h < 320.4) {hueString = "purple";}
+        if (h < 320.4) {hueString = "Purple";}
         else {
-            if (s >0.5) {hueString = "red";}
+            if (s >0.5) {hueString = "Red";}
         else{
-            hueString = "brown";}
+            hueString = "Brown";}
         }}}}}}      
 
         //Using the names in colourlist_list where possible
@@ -119,34 +119,34 @@ function colour_desc(colour){
 
         let c_string = "";
         if (v ==0){
-            return "black"}
+            return "Black"}
         else{
-            if (v == 255 && s==0){return "white";}
+            if (v == 255 && s==0){return "White";}
         else{
             if (v < 51){
-                if (["red","orange"].includes(hueString)){
-                    return "rich dark brown"
+                if (["Red","Orange"].includes(hueString)){
+                    return "Rich Dark Brown"
                 } else{
-                    return hueString + "-black";
+                    return hueString + "-Black";
                 }
             }
         else{
-            if (v < 100){c_string += "dark ";}
+            if (v < 100){c_string += "Dark ";}
         }}}
 
         if (s < 0.09){
-            return c_string+ "grey";}
+            return c_string+ "Grey";}
         else{
             if (s >0.5){
             return c_string + hueString;}
         else{
             if (v>160){
-                return "light "+ hueString;}
+                return "Light "+ hueString;}
         else{
-            if (["red","orange"].includes(hueString)){
-                return "dark brown"
+            if (["Red","Orange"].includes(hueString)){
+                return "Dark Brown"
             } else{
-                return "dark grey-"+hueString;
+                return "Dark Grey-"+hueString;
             }
             }
         }}
@@ -185,7 +185,7 @@ function fixPortSources(){
                 let front_name = sleeve_list_port[k].name; //eg "Shirt", "Coat" etc
                 if (b.name == front_name+"_sleeves"){ //this is "Shirt_sleeves" etc
                     obj_front = findNameMatch(portrait_objects, front_name); //what shirt etc we are wearing
-                    name = "none";
+                    name = "None";
                     current_sleeves_list = sleeve_list_port[k].sleeves_list;
                     current_item = obj_front.item_list[obj_front.value_list[j]];
                     if (current_sleeves_list.includes(current_item)){ //the current shirt etc can have sleeves
@@ -209,7 +209,7 @@ function fixPortSources(){
                 if (b.name == front_name+"_sleeves_dec"){ //this is "Shirt_sleeves_dec" etc
                     obj_front = findNameMatch(portrait_objects, front_name); //what shirt etc we are wearing
                     obj_dec = findNameMatch(portrait_objects, front_name+"_dec"); //what shirt decoration etc we are wearing
-                    name = "none";
+                    name = "None";
                     current_sleeves_list = sleeve_list_port[k].sleeves_list;
                     current_item = obj_front.item_list[obj_front.value_list[j]];
                     if (current_sleeves_list.includes(obj_front.item_list[obj_front.value_list[j]])){ //the current shirt etc can have sleeves
@@ -387,16 +387,8 @@ function setTopbar(){
 
 function setToolbar(){
     let s = "";
-    s+='<div><button onclick="download()">Export</button></div>\n';
-    s+='    <input type="file" onchange=\'readText(this)\' />'
-    /*s+='<div id="container">'    
-    s+='    <input type="file" onchange=\'readText(this)\' />'
-    s+='    <br/>'
-    s+='    <hr/>'   
-    s+='    <h3>Contents of the Text file:</h3>'
-    s+='    <div id="main">'
-    s+='    </div>'
-    s+='</div>'*/
+    s+='<div><button onclick="download()">Export</button>';
+    s+='<input type="file" onchange=\'readText(this)\' /></div>'
     if (currently_editing==1){
         s+='<div class="four-columns">\n';
     }else{
@@ -439,7 +431,6 @@ function setMenu(variablelist, number){
             
             htmlString+="<div class=\"grid-choices\">"
             htmlString+=makeDropbtnString("Head Shape", ["Head"], head_list, "setPortVariable");
-            //htmlString+=makeDropbtnString("Ear Shape", ["Ears"], ears_list, "setPortVariable");
             htmlString+=makeDropbtnString("Height", ["Torso"], ["Short","Tall"], "setHeight");
             htmlString+=makeDropbtnString("Nose Shape", ["Nose","Nose_front"], nose_list, "setPortVariable");
             htmlString+="</div>" 
@@ -462,15 +453,21 @@ function setMenu(variablelist, number){
             htmlString+="<div class=\"grid-choices\">"
             
             let obj = findNameMatch(menu_objects, current_item);
-            if (["Shoes","Gloves"].includes(current_item))
+            if (["Shoes","Gloves"].includes(current_item)){
                 htmlString+=makeDropbtnString(current_item, [current_item], obj.name_list, "set"+current_item);
-            else
-                htmlString+=makeDropbtnString(current_item, [current_item], obj.name_list, "setClothing");
-            htmlString+='<div><h2 id="clothingTitle" text-align="left">'+obj.name_list[obj.item]+'</h2></div>';
+                if (current_item=="Shoes")
+                    var current_value = currentShoes;
+                else  
+                    var current_value = currentGloves;
+            }
+            else{
+                htmlString+=makeDropbtnString(current_item, [current_item], obj.name_list, "setClothing"); 
+                var current_value = obj.item;
+            }
+            htmlString+='<div><h2 id="clothingTitle" text-align="left">'+obj.name_list[current_value]+'</h2></div>';
             htmlString+="</div>" 
             htmlString+="<div class=\"grid-choices\">"    
             htmlString+=makeDropbtnString("Main Colour", [current_item], outfit_colours, "setClothingColour");
-            //htmlString+='<canvas id="clothingCanvas" width="20" height="20"></canvas>';
             htmlString+='<div><h2 id="clothingColour" text-align="left">'+colour_desc(obj.colour_list[obj.colour])+'</h2></div>';
             htmlString+="</div>" 
             htmlString+="<div class=\"grid-choices\">" 
@@ -488,7 +485,7 @@ function setMenu(variablelist, number){
             break;    
         case 2: //editing the expression
                 htmlString+="<div class=\"three-columns\"><div style=\"justify-self: end;\">"
-                htmlString+=makeDropbtnString("Panel:", ["Panel"], panel_list, "setPanel");
+                htmlString+=makeDropbtnString("Panel:", ["Panel"], panel_list.slice(0,panelNum), "setPanel");
                 htmlString+="</div><h2 id = 'current_panel'>"+panel_list[current_panel] +"</h2></div>";
                 htmlString+="<div class=\"grid-choices\">"
                 htmlString+=makeDropbtnString("Eyebrows", ["Eyebrows"], eyebrow_list, "setPanelVariable");
@@ -584,7 +581,7 @@ function drawCanvas() {
     ctx_preview.drawImage(portrait_back, 256, 0);
     for (let i = 0; i < portrait_objects.length; i += 1){
         let b = portrait_objects[i];
-        if (b.item_list[b.value_list[current_panel]] !="none"){ 
+        if (b.item_list[b.value_list[current_panel]] !="None"){ 
             ctx_preview.drawImage(b.image_list[current_panel], 256, getOffset(b.name));
         }
     }
@@ -613,7 +610,7 @@ function drawCanvas() {
                     let ypos = panel_width*row;
                     for (let i = 0; i < portrait_objects.length; i += 1){
                         let b = portrait_objects[i];
-                        if (b.item_list[b.value_list[row*2+column]] !="none"){ 
+                        if (b.item_list[b.value_list[row*2+column]] !="None"){ 
                             //sourceX, sourceY, sourceWidth, sourceHeight, destWidth and destHeight 
                             ctx.drawImage(b.image_list[row*2+column],0,-getOffset(b.name),256,256, xpos, ypos,256,256);
                         }
@@ -743,60 +740,6 @@ function setup(){
     setPanelVariable(["Mouth"],3);
     setEyeExpression(["Eyes"],4);
     current_panel = 0;
-
-//Sebastian:
-    /*setSkinColour([],2);
-    setBothColour(['Eyes'],0);
-    setHairColour([],11);
-    setBothVariable(['Facial_hair'],5);
-    setHair([],1);
-    setPortVariable(["Nose"],2)
-    setPortVariable(['Head'],1)
-
-    setShoes([],2);
-    setClothingColour(["Shoes"],29);
-    //setClothing(["Gloves"],1);
-    //setClothingColour(["Gloves"],4);
-    setClothing(["Pants"],2);
-    setClothingColour(["Pants"],29);
-    setClothing(["Shirt"],1);
-    setClothingColour(["Shirt"],28);
-    setClothing2Colour(["Shirt"],10);
-    setClothing(["Coat"],2);
-    setClothingColour(["Coat"],28);
-    //setClothing(["Neckwear"],0);
-    //setClothingColour(["Neckwear"],1);
-    //setClothing(["Eyewear"],1);
-    setClothingColour(["Eyewear"],5);
-    //setClothing(["Earrings"],1);
-    setClothingColour(["Earrings"],13);
-    
-    current_panel = 0;
-    setPanelVariable(["Eyebrows"],1);
-    setPanelVariable(["Mouth"],0);
-    setPanelVariable(["Eyes"],0);
-    current_panel = 1;
-    setPanelVariable(["Eyebrows"],2);
-    setPanelVariable(["Mouth"],1);
-    setPanelVariable(["Eyes"],1);
-    current_panel = 2;
-    setPanelVariable(["Eyebrows"],3);
-    setPanelVariable(["Mouth"],2);
-    setPanelVariable(["Eyes"],2);
-    current_panel = 3;
-    setPanelVariable(["Eyebrows"],1);
-    setPanelVariable(["Mouth"],0);
-    setPanelVariable(["Eyes"],0);
-    current_panel = 4;
-    setPanelVariable(["Eyebrows"],4);
-    setPanelVariable(["Mouth"],1);
-    setPanelVariable(["Eyes"],3);
-    setPanelVariable(["Blush"],1);
-    current_panel = 5;
-    setPanelVariable(["Eyebrows"],5);
-    setPanelVariable(["Mouth"],3);
-    setPanelVariable(["Eyes"],4);
-    current_panel = 0;*/
     drawCanvas();
 }
 let portrait_back = new Image();
