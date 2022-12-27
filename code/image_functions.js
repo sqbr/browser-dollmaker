@@ -282,7 +282,6 @@ function fixSpriteSources(){
         }else{
         b.topcorner = item.topcorner;
         b.rowNum= item.rowNum;
-        b.asymmetrical = item.asymmetrical;
         let loc = item.location
 
         //code to make backs of things match the fronts. 

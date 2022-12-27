@@ -524,7 +524,6 @@ def process_image(name, location, colour,colour_list,type):
                     Adata[x, y] = colour_this_noshadow(Adata[x, y], colour_list[colour])  
         img.save(save_string)        
 
-
 def trimhats():
     image_string = "../images/bases/sprites/hats/hats_original.png"
     save_string = "../images/bases/sprites/hats/hats.png"
@@ -534,7 +533,29 @@ def trimhats():
         for column in range(12):
             region = im_old.crop((column*20+2, row*20+3,column*20+18,row*20+20))
             im_new.paste(region,(column*16, row*32, column*16+16,row*32+17))
-    im_new.save(save_string)   
+    im_new.save(save_string)  
+
+def fliphair():
+    image_string = "../images/bases/sprites/hair/hairstyles_base.png"
+    save_string = "../images/bases/sprites/hair/temp.png"
+    im_old = Image.open(image_string) 
+    im_new = Image.new("RGBA", (128, 896))
+    for meta_row in range(7):
+        #rows 1 and 2
+        region = im_old.crop((0, meta_row*96,128,meta_row*96+64))
+        im_new.paste(region,(0, meta_row*128,128,meta_row*128+64))
+
+        #row 3
+        for column in range(8):
+            for x in range(16):
+                region = im_old.crop((column*16+x, meta_row*96+32,column*16+x+1,meta_row*96+64))
+                im_new.paste(region,(column*16+16-x, meta_row*128+64, column*16+17-x,meta_row*128+96))
+
+        #row 4
+        region = im_old.crop((0, meta_row*96+64,128,meta_row*96+96))
+        im_new.paste(region,(0, meta_row*128+96,128,meta_row*128+128))
+            
+    im_new.save(save_string)       
 
 def make_coat():
     image_string = "../images/bases/sprites/outfit/shirts/decorations/shirt decs_base.png"
@@ -700,39 +721,37 @@ def process_all_portraits():
 def process_body_sprites():
     for c in range(len(skin_colours)):
         process_image("head", "sprites/body/", c, skin_colours,"skin")
-    #    for b in sprite_body_list:
-    #        process_image(b, "sprites/body/", c, skin_colours,"skin")
         for h in ["short","tall"]: 
             process_image(h, "sprites/body", c, skin_colours,"skin")   
-    #        process_image("arms_"+h, "sprites/body", c, skin_colours,"skin")
+            process_image("arms_"+h, "sprites/body", c, skin_colours,"skin")
     for c in range(len(hair_colours)):  
          process_image("hairstyles", "sprites/hair", c, hair_colours,"grey")
-         #process_image("hairstyles2", "sprites/hair", c, hair_colours,"grey")
-         #process_image("facialhair", "sprites/hair/facialhair", c, hair_colours,"grey")
+         process_image("hairstyles2", "sprites/hair", c, hair_colours,"grey")
+         process_image("facialhair", "sprites/hair/facialhair", c, hair_colours,"grey")
     for c in range(len(eye_colours)): 
         process_image("eyes", "sprites/body", c, eye_colours,"eyes") 
 
 def process_outfit_sprites():
     for c in range(len(outfit_colours)): 
-        #process_image("eyewear", "sprites/accessories/eyewear", c, outfit_colours,"skin") 
+        process_image("eyewear", "sprites/accessories/eyewear", c, outfit_colours,"skin") 
         #process_image("hats_colour", "sprites/outfit/hats", c, outfit_colours,"skin")
         #process_image("hats_dec", "sprites/outfit/hats", c, outfit_colours,"skin")
     #    process_image("pants", "sprites/outfit/pants", c, outfit_colours,"blue")
         #process_image("pants_top", "sprites/outfit/pants_top", c, outfit_colours,"skin")
         #process_image("briefs", "sprites/outfit/pants", c, outfit_colours,"blue")
         #process_image("shirts", "sprites/outfit/shirts", c, outfit_colours,"grey")
-        process_image("shirt decs", "sprites/outfit/shirts/decorations", c, outfit_colours,"grey")
-        process_image("overshirt", "sprites/outfit/overshirt", c, outfit_colours,"grey")
-        #process_image("coat", "sprites/outfit/coat", c, outfit_colours,"skin")
-        #process_image("coat_dec", "sprites/outfit/coat", c, outfit_colours,"skin")
+        #process_image("shirt decs", "sprites/outfit/shirts/decorations", c, outfit_colours,"grey")
+        #process_image("overshirt", "sprites/outfit/overshirt", c, outfit_colours,"grey")
+        process_image("coat", "sprites/outfit/coat", c, outfit_colours,"skin")
+        process_image("coat_dec", "sprites/outfit/coat", c, outfit_colours,"skin")
         #process_image("coat_back", "sprites/outfit/coat", c, outfit_colours,"skin")
         process_image("neckwear", "sprites/accessories/neckwear", c, outfit_colours,"grey")
-        #process_image("earrings", "sprites/accessories/earrings", c, outfit_colours,"")
+        process_image("earrings", "sprites/accessories/earrings", c, outfit_colours,"")
         for height in ["short","tall"]:
         #        process_image("longpants_"+height, "sprites/outfit/pants", c, outfit_colours,"blue")
         #    for shoetype in ["boots","flats","flipflops"]:
         #        process_image(height+"_"+shoetype, "sprites/outfit/shoes", c, outfit_colours,"grey") 
-        #    process_image(height, "sprites/outfit/gloves", c, outfit_colours,"grey")
+            process_image(height, "sprites/outfit/gloves", c, outfit_colours,"grey")
             for sleevetype in ["short","long"]:
                 process_image(height+"_"+sleevetype, "sprites/outfit/sleeves", c, outfit_colours,"grey") 
           
@@ -742,7 +761,7 @@ write_temp()
 write_variables()
 
 process_body_sprites()
-process_outfit_sprites()
+#process_outfit_sprites()
 
 #["Hair_front","Hair_back"]:
 # []:

@@ -301,8 +301,13 @@ function drawCanvas() {
             }
         }
     } else{ //sprites
-        canvas.height = 128;
         canvas.width =  64;
+        if (current_sprite_preset == 0)
+            canvas.height = 128;
+        else    
+            canvas.height = 600;
+            canvas.width =  100;
+        
         document.getElementById("closet").innerHTML = print_sprite_objects();
         //sourceX, sourceY, sourceWidth, sourceHeight, destWidth and destHeight   
         for (let i = 0; i < sprite_objects.length; i += 1){
@@ -331,16 +336,23 @@ function drawCanvas() {
                         ctx.drawImage(b.image, oldX(b,2), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,3), newY(b,2,3),b.dimensions[0],b.dimensions[1]); //column 4   
                     }           
                     //row 4
-                    if (!b.asymmetrical){
-                        for(let x = 0; x < b.dimensions[0]; x++){ //janky way of flipping
-                            for (let column = 0; column < 2; column += 1)
-                                if(b.name !="Hairstyle_top" || column >0)
-                                    ctx.drawImage(b.image, oldX(b,column)+x, oldY(b,1), 1, b.dimensions[1], newX(b,column)+b.dimensions[0] - x, newY(b,3,column), 1, b.dimensions[1]);
-                            ctx.drawImage(b.image, oldX(b,0)+x, oldY(b,1), 1, b.dimensions[1], newX(b,2)+b.dimensions[0] - x, newY(b,3,2), 1, b.dimensions[1]); 
-                            ctx.drawImage(b.image, oldX(b,2)+x, oldY(b,1), 1, b.dimensions[1], newX(b,3)+b.dimensions[0] - x, newY(b,3,3), 1, b.dimensions[1]);       
-                        }     
-                    }   
-                }        
+                    for(let x = 0; x < b.dimensions[0]; x++){ //janky way of flipping
+                        for (let column = 0; column < 2; column += 1)
+                            if(b.name !="Hairstyle_top" || column >0)
+                                ctx.drawImage(b.image, oldX(b,column)+x, oldY(b,1), 1, b.dimensions[1], newX(b,column)+b.dimensions[0] - x, newY(b,3,column), 1, b.dimensions[1]);
+                        ctx.drawImage(b.image, oldX(b,0)+x, oldY(b,1), 1, b.dimensions[1], newX(b,2)+b.dimensions[0] - x, newY(b,3,2), 1, b.dimensions[1]); 
+                        ctx.drawImage(b.image, oldX(b,2)+x, oldY(b,1), 1, b.dimensions[1], newX(b,3)+b.dimensions[0] - x, newY(b,3,3), 1, b.dimensions[1]);       
+                    }       
+                } 
+                if (current_sprite_preset ==1){//female love interest
+                    if (sprite_special_list.includes(b.name)){
+                        //ctx.drawImage(b.image, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0), newY(b,0,0)+288,b.dimensions[0],b.dimensions[1]);//facing forward
+                        //ctx.drawImage(b.image, oldX(b,0), oldY(b,3),b.dimensions[0],b.dimensions[1],newX(b,0)+16, newY(b,3,0)+288-96,b.dimensions[0],b.dimensions[1]);
+                        ctx.drawImage(b.image, oldX(b,0), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,0)+16, newY(b,3,0)+288-96,b.dimensions[0],b.dimensions[1]);
+                    }    
+
+                }
+                
             }
         }  
     }
