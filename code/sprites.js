@@ -55,7 +55,7 @@ for (let i =0; i<head_name_list_sprite.length;i++){
 const sprite_eyes_list = []
 for (let i =0; i<eye_type_list_port.length;i++){
     b= eye_type_list_port[i];
-    sprite_eyes_list.push({name: b, location: "body/eyes/"+b, colour: true, asymmetrical: false,rowNum: 3,topcorner:[0,0]})
+    sprite_eyes_list.push({name: b, location: "body/eyes", colour: true, asymmetrical: false,rowNum: 3,topcorner:[12*i,0]})
 }
 
 const sprite_shoes_list = [none]
@@ -253,7 +253,7 @@ function add_sprite_object(name, list,name_list, colour_list,isWalk, bobs, heigh
 add_sprite_object("Coat_back", sprite_coat_back_list,sprite_coat_back_list.map(nameOf),outfit_colours,false,true,1,1, [16,32],[0,0]);
 add_sprite_object("Torso", sprite_torso_list,height_list, skin_colours,true, false, 0,0, [16,32],[0,0]);
 add_sprite_object("Head", sprite_head_list,sprite_head_list.map(nameOf),skin_colours,false,true,1,0, [12,12],[2,3]);
-add_sprite_object("Eyes", sprite_eyes_list,eyelash_list, eye_colours,true,false,1,0, [16,32],[0,0]);
+add_sprite_object("Eyes", sprite_eyes_list,eyelash_list, eye_colours,false,true,1,0, [12,12],[2,3]);
 add_sprite_object("Shoes", sprite_shoes_list,["None"].concat(shoes_names), outfit_colours,true,false,0,0, [16,32],[0,0]);
 add_sprite_object("Pants", sprite_pants_list,sprite_pants_list.map(nameOf), outfit_colours,true,false,0,0, [16,32],[0,0]);
 add_sprite_object("Shirt", sprite_shirt1_list,sprite_shirt1_list.map(nameOf),outfit_colours,false,true,1,1, [8,8],[4,15]);
