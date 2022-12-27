@@ -264,12 +264,10 @@ function setClothing(variablelist, number){
 function setHair(variablelist, number){
     setClothing(["Hairstyle"],number);
     if ([0,52].includes(number)){ //all bald hairstyles
-        isBald = true;
-        setSpriteVariable(["Head"], 1);
+        setSpriteVariable(["Head"], 0);
     }
     else{
-        isBald = false; 
-        setSpriteVariable(["Head"], 0);
+        setSpriteVariable(["Head"], 1);
     }   
     setHeight([], height);
 }

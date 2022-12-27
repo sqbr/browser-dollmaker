@@ -44,12 +44,12 @@ for (let i =0; i<height_list.length;i++){
     sprite_torso_list.push({name: b, location: "body/"+b, colour: true, asymmetrical: false,  rowNum: 3,topcorner:[0,0]})
 }
 
-const head_name_list_sprite = ["regular","bald"]
+const head_name_list_sprite = ["bald","regular"]
 
 const sprite_head_list = []
 for (let i =0; i<head_name_list_sprite.length;i++){
     b= head_name_list_sprite[i];
-    sprite_head_list.push({name: b, location: "body/head", colour: true, asymmetrical: false,  rowNum: 3,topcorner:[0,0]})
+    sprite_head_list.push({name: b, location: "body/head", colour: true, asymmetrical: false,  rowNum: 3,topcorner:[12*i,0]})
 }
 
 const sprite_eyes_list = []
