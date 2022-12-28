@@ -36,6 +36,20 @@ function setPanelNum(variablelist, number){
 
 function setSpritePreset(variablelist, number){
     current_sprite_preset = number;
+    let dance_object = findNameMatch(special_sprite_objects,"Flower dance");
+    let wedding_object = findNameMatch(special_sprite_objects,"Wedding");
+    if (current_sprite_preset==1){ //female love interest
+        current_gender = 0;
+        dance_object.dimensions = [64,64];
+        dance_object.heightOffset = 320;
+        wedding_object.heightOffset = 288;
+    } else{
+        current_gender = 1;
+        dance_object.dimensions = [64,32];
+        dance_object.heightOffset = 352;
+        wedding_object.heightOffset = 384;
+
+    }
     document.getElementById("panelTitle").innerHTML = sprite_presets[current_sprite_preset];
 }
 
@@ -356,35 +370,31 @@ function drawCanvas() {
                     }       
                 } 
                 if (current_sprite_preset >0){
-                    var wedding_height = 288;
-                    var dance_height = 320;
-                    if (current_sprite_preset==2){//male love interest
-                        wedding_height = 384;
-                        dance_height = 352;
-                    }
+                    
                         
                       
                     if (sprite_special_list.includes(b.name)){
                         //wedding heads  
                         ctx.drawImage(b.image, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0), newY(b,0,0)+wedding_height,b.dimensions[0],b.dimensions[1]);//facing forward
-                        ctx.drawImage(b.image, oldX(b,0), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,0)+16, newY(b,2,0)+wedding_height-64,b.dimensions[0],b.dimensions[1]);
+                        ctx.drawImage(b.image, oldX(b,0), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,0)+15, newY(b,2,0)+wedding_height-63,b.dimensions[0],b.dimensions[1]);
                         if (b.name !="Eyes")
-                            ctx.drawImage(b.image, oldX(b,0), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,0)+30, newY(b,2,0)+wedding_height-64,b.dimensions[0],b.dimensions[1]);
+                            ctx.drawImage(b.image, oldX(b,0), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,0)+30, newY(b,2,0)+wedding_height-63,b.dimensions[0],b.dimensions[1]);
 
                         if (current_sprite_preset==1){
                             //female 
                             //dance heads
-                            for (let column = 0; column < 3; column++)
+                            for (let column = 0; column < 2; column++)
                                 ctx.drawImage(b.image, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0)+column*16, newY(b,0,0)+dance_height,b.dimensions[0],b.dimensions[1]);
+                            ctx.drawImage(b.image, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0)+2*16-1, newY(b,0,0)+dance_height,b.dimensions[0],b.dimensions[1]);    
                             ctx.drawImage(b.image, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0)+3*16, newY(b,0,0)+dance_height+1,b.dimensions[0],b.dimensions[1]);  
                             for (let column = 0; column < 2; column++)
                                 ctx.drawImage(b.image, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0)+column*16, newY(b,0,0)+dance_height+33,b.dimensions[0],b.dimensions[1]);  
                             ctx.drawImage(b.image, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0)+2*16, newY(b,0,0)+dance_height+32,b.dimensions[0],b.dimensions[1]);  
                             ctx.drawImage(b.image, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0)+3*16, newY(b,0,0)+dance_height+33,b.dimensions[0],b.dimensions[1]);  
                         } else{
-                            for (let column = 0; column < 3; column++)
-                                ctx.drawImage(b.image, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0)+column*16, newY(b,0,0)+dance_height,b.dimensions[0],b.dimensions[1]);
-                            ctx.drawImage(b.image, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0)+3*16, newY(b,0,0)+dance_height+1,b.dimensions[0],b.dimensions[1]);  
+                            ctx.drawImage(b.image, oldX(b,0), oldY(b,3),b.dimensions[0],b.dimensions[1],newX(b,0), newY(b,2,0)+dance_height-64,b.dimensions[0],b.dimensions[1]);
+                            for (let column = 1; column < 4; column++)
+                                ctx.drawImage(b.image, oldX(b,0), oldY(b,3),b.dimensions[0],b.dimensions[1],newX(b,0)+column*16, newY(b,2,0)+dance_height-63,b.dimensions[0],b.dimensions[1]);  
 
                         }   
                     }    
@@ -394,8 +404,41 @@ function drawCanvas() {
             }
         }  
         if (current_sprite_preset >0){
-            //closed eyes
-            ctx.drawImage(closed_eyes_image, 36, 24,12,12,32, wedding_height+3,12,12);
+            var wedding_height = 288;
+            var dance_height = 320;
+            if (current_sprite_preset==2){//male love interest
+                wedding_height = 384;
+                dance_height = 352;
+            }
+
+            //heads behind clothes
+
+            for (let i = 0; i < sprite_objects.length; i += 1){
+                let b = sprite_objects[i];
+                if (b.image.src !=""){ 
+                    if (sprite_special_list.includes(b.name)){
+                        //wedding heads  
+                        ctx.drawImage(b.image, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0), newY(b,0,0)+wedding_height,b.dimensions[0],b.dimensions[1]);//facing forward
+                        ctx.drawImage(b.image, oldX(b,0), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,0)+15, newY(b,2,0)+wedding_height-63,b.dimensions[0],b.dimensions[1]);
+                        if (b.name !="Eyes")
+                            ctx.drawImage(b.image, oldX(b,0), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,0)+30, newY(b,2,0)+wedding_height-63,b.dimensions[0],b.dimensions[1]);
+
+                        if (current_sprite_preset==1){
+                            //female 
+                            //dance heads
+                            for (let column = 0; column < 2; column++)
+                                ctx.drawImage(b.image, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0)+column*16, newY(b,0,0)+dance_height,b.dimensions[0],b.dimensions[1]);
+                            ctx.drawImage(b.image, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0)+2*16-1, newY(b,0,0)+dance_height,b.dimensions[0],b.dimensions[1]);    
+                            ctx.drawImage(b.image, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0)+3*16, newY(b,0,0)+dance_height+1,b.dimensions[0],b.dimensions[1]);  
+                            for (let column = 0; column < 2; column++)
+                                ctx.drawImage(b.image, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0)+column*16, newY(b,0,0)+dance_height+33,b.dimensions[0],b.dimensions[1]);  
+                            ctx.drawImage(b.image, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0)+2*16, newY(b,0,0)+dance_height+32,b.dimensions[0],b.dimensions[1]);  
+                            ctx.drawImage(b.image, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0)+3*16, newY(b,0,0)+dance_height+33,b.dimensions[0],b.dimensions[1]);  
+                        } 
+                    }
+                }
+            }
+            
 
             fixSpecialSpriteSources();
             for (let i = 0; i < special_sprite_objects.length; i += 1){
@@ -404,6 +447,27 @@ function drawCanvas() {
                     ctx.drawImage(b.image, 0, 0,b.dimensions[0],b.dimensions[1],0, b.heightOffset,b.dimensions[0],b.dimensions[1]);
                 }
             }
+
+            //heads in front of clothes
+
+            for (let i = 0; i < sprite_objects.length; i += 1){
+                let b = sprite_objects[i];
+                if (b.image.src !=""){ 
+                    if (sprite_special_list.includes(b.name)){
+                        if (current_sprite_preset==2){
+                            //male 
+                            //dance heads
+                            ctx.drawImage(b.image, oldX(b,0), oldY(b,3),b.dimensions[0],b.dimensions[1],newX(b,0), newY(b,2,0)+dance_height-64,b.dimensions[0],b.dimensions[1]);
+                            for (let column = 1; column < 4; column++)
+                                ctx.drawImage(b.image, oldX(b,0), oldY(b,3),b.dimensions[0],b.dimensions[1],newX(b,0)+column*16, newY(b,2,0)+dance_height-63,b.dimensions[0],b.dimensions[1]);  
+                        }   
+                    }
+                }
+            }
+            
+
+            //closed eyes
+            ctx.drawImage(closed_eyes_image, 36, 24,12,12,32, wedding_height+4,12,12);
         }
     }
 }
