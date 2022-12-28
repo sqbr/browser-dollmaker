@@ -106,6 +106,14 @@ function setSpriteVariable(variablelist, number){
     drawCanvas();
 }
 
+function setSpecialSpriteVariable(variablelist, number){
+    for (let i = 0; i < variablelist.length; i += 1) {
+        let b = findNameMatch(special_sprite_objects, variablelist[i]); //the eleemnt of portrait_objects with the right vriablename
+        b.item=number;
+    }
+    drawCanvas();
+}
+
 function setBaseSpriteVariable(variablelist, number){
     // sprite which has two versions for each height
     for (let i = 0; i < variablelist.length; i += 1) {
@@ -144,6 +152,13 @@ function setSpriteColour(variablelist, number){
     }
 }
 
+function setSpecialSpriteColour(variablelist, number){
+    for (let i = 0; i < special_sprite_objects.length; i += 1) {
+        let b = findNameMatch(special_sprite_objects, variablelist[i]); //the eleemnt of portrait_objects with the right vriablename
+        b.colour=number;
+    }
+}
+
 function setClothingColour(variablelist, number){
     for (let i = 0; i < variablelist.length; i += 1) {
         let menu_obj = findNameMatch(menu_objects, variablelist[i]);
@@ -169,6 +184,7 @@ function setClothing2Colour(variablelist, number){
 function setSkinColour(variablelist, number){
     setPortColour(skin_list, number);
     setSpriteColour(["Torso","Arms","Head"], number);
+    setSpecialSpriteColour(["Wedding","Flower dance"], number);
     drawCanvas();
 }
 
@@ -224,6 +240,23 @@ function setShoes(variablelist, number){
 function setGloves(variablelist, number){
     currentGloves = number;
     setSpriteVariable(["Gloves"], Math.max(0,2*currentGloves-1+height)); 
+    drawCanvas();
+}
+
+function updateSpecialSprites(){
+    setSpecialSpriteVariable(["Flower dance"], Math.max(0,4*current_dance_clothes+2*current_gender+height));
+    setSpecialSpriteVariable(["Wedding"], Math.max(0,2*current_wedding_clothes+height)); 
+}
+
+function setWeddingClothes(variablelist, number){
+    current_wedding_clothes = number;
+    updateSpecialSprites();
+    drawCanvas();
+}
+
+function setDanceClothes(variablelist, number){
+    current_dance_clothes = number;
+    updateSpecialSprites();
     drawCanvas();
 }
 

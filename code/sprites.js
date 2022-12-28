@@ -153,7 +153,7 @@ for (let column =0; column<coat_list_sprite.length;column++){
 }
 const sprite_eyewear_list = [none]
 for (let column =0; column<eyewear_list_sprite.length-1;column++){   
-    sprite_eyewear_list.push({name: eyewear_list_sprite[column+1], location: "accessories/eyewear/eyewear", colour: false,rowNum: 4,topcorner:[16*column,0]})
+    sprite_eyewear_list.push({name: eyewear_list_sprite[column+1], location: "accessories/eyewear/eyewear", colour: true,rowNum: 4,topcorner:[16*column,0]})
 }
 
 const sprite_neckwear_list = [none]
@@ -219,14 +219,46 @@ for (let i =0; i<height_list.length;i++){
     sprite_gloves_list.push({name: b, location: "outfit/gloves/"+b, colour: true,rowNum: 4,topcorner:[0,0]});
 }
 
-const sprite_sleeves_list = [none]
+const sprite_sleeves_list = [none];
+for (let j =0; j<sleeves_length.length;j++){
 for (let i =0; i<height_list.length;i++){
-    for (let j =0; j<sleeves_length.length;j++){
         b= height_list[i]+"_"+sleeves_length[j];
         sprite_sleeves_list.push({name: b, location: "outfit/sleeves/"+b, colour: true,rowNum: 4,topcorner:[0,0]});
 }}
 
+const wedding_clothes_list = ["dress","suit"];
+const dance_clothes_list = ["dress","suit"];
+let current_wedding_clothes = 0;
+let current_dance_clothes = 0;
+const gender_list = ["female","male"];
+let current_gender = 0;
+
+const sprite_wedding_list = [];
+for (let j =0; j<wedding_clothes_list.length;j++){
+    w = wedding_clothes_list[j]
+    for (let i =0; i<height_list.length;i++){
+        h = height_list[i]; 
+        sprite_wedding_list.push({name: h+" "+w, location: "wedding/"+w+"_"+h, colour: true});
+    }
+}
+
+const sprite_dance_list = [];
+for (let j =0; j<dance_clothes_list.length;j++){
+    w = dance_clothes_list[j];
+    for (let k =0; k<gender_list.length;k++){
+        g = gender_list[k];
+        for (let i =0; i<height_list.length;i++){
+            h = height_list[i];
+            sprite_dance_list.push({name: g+" "+h+" "+w, location: "flower dance/"+g+"_"+w+"_"+h, colour: true});
+        }
+    }
+}
+
+let closed_eyes_image = new Image();
+closed_eyes_image.src = "images/bases/sprites/body/eyes_base.png";
+
 const sprite_objects =[];
+const special_sprite_objects = [];
 /*
 Name: String.
 item_list: list of objects as above
@@ -243,6 +275,10 @@ topcorner: coordinates of the top corner of the looking down standing still spri
 */
 function add_sprite_object(name, list,name_list, colour_list,isWalk, bobs, heightOffset,backOffset, dimensions, offset){
     sprite_objects.push({name: name,item_list: list, name_list: name_list, colour_list: colour_list, item: 0,  base_item: 0, colour: 0, colour2: 0, image: new Image(), isWalk: isWalk, bobs: bobs, heightOffset: heightOffset, backOffset: backOffset, rowNum: 3, topcorner:[0,0],dimensions: dimensions, offset: offset});
+}
+
+function add_special_sprite_object(name, list,name_list, colour_list,dimensions,heightOffset){
+    special_sprite_objects.push({name: name,item_list: list, name_list: name_list, colour_list: colour_list, item: 0,  base_item: 0, colour: 0, colour2: 0, image: new Image(),dimensions: dimensions,heightOffset: heightOffset});
 }
 
 add_sprite_object("Coat_back", sprite_coat_back_list,sprite_coat_back_list.map(nameOf),outfit_colours,false,true,1,1, [16,32],[0,0]);
@@ -274,6 +310,9 @@ add_sprite_object("Hairstyle_top", sprite_hair_list,sprite_hair_list.map(nameOf)
 add_sprite_object("Hat", sprite_hat_list,sprite_hat_list.map(nameOf), outfit_colours,false,true,1,1, [16,32],[0,0]);
 add_sprite_object("Hat_dec", sprite_hat_dec_list,sprite_hat_dec_list.map(nameOf), outfit_colours,false,true,1,1, [16,32],[0,0]);
 
+add_special_sprite_object("Wedding", sprite_wedding_list,sprite_wedding_list.map(nameOf), skin_colours,[73,40],288);
+add_special_sprite_object("Flower dance", sprite_dance_list,sprite_dance_list.map(nameOf), skin_colours,[68,68],320);
+
 function print_sprite_objects(){
     let s = "";
     for (i = 0; i < sprite_objects.length; i += 1){
@@ -293,6 +332,20 @@ function print_sprite_objects(){
         //s+=" Offset: "+b.offset.toString();
         s+="<br>";
     }
+    for (i = 0; i < special_sprite_objects.length; i += 1){
+        let b = special_sprite_objects[i];
+        s+="name: "+b.name;
+        s+=" item_list: "
+        for (j = 0; j < b.item_list.length; j += 1)
+            s+=(b.item_list[j]).name+", ";
+        //s+="  colour_list: "+b.colour_list.toString();
+        s+=" item: "+b.item;
+        s+="Current item :"+(b.item_list[b.item]).name
+        //s+=" colour: "+b.colour;
+        s+=" src: "+b.image.src;
+        s+=" dimensions: "+b.dimensions.toString();
+        s+="<br>";
+    }
     return s
 }
 
@@ -306,3 +359,4 @@ function print_sprite_list(listname){
     }
     return s
 }
+

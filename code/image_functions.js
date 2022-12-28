@@ -260,7 +260,7 @@ function fixSpriteSources(){
                     b.item = 2;
                 } else{
                 if (current_sleeves_list.includes(current_item)){ //the current shirt etc can have sleeves
-                        b.item =sleeve_list[k]; //what current sleeve length is
+                        b.item =Math.max(0,2*sleeve_list[k]-1+height); //what current sleeve length is
                         b.colour = obj_front.colour
                 } else{
                         b.item = 0;
@@ -313,4 +313,22 @@ function fixSpriteSources(){
         }
     }
 }
+}
+
+function fixSpecialSpriteSources(){
+    for (let i = 0; i < special_sprite_objects.length; i += 1){
+        let b = special_sprite_objects[i];
+        let item = b.item_list[b.item];
+        if (item == none){
+            b.image.src="";
+        }else{
+        let loc = item.location;
+        if (item.colour){
+            b.image.src  = "images/sprites/"+loc+"_"+b.colour+".png";
+        }else{
+            b.image.src = "images/bases/sprites/"+loc+".png";
+        }
+
+        }
+    }
 }
