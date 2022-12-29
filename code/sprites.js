@@ -7,7 +7,7 @@ const sprite_special_list = ["Head","Eyes","Hat","Hat_dec","Earrings","Eyewear",
 
 const eyelash_list = eye_type_list_port;
 
-const none = {name:"None",location: "", colour: false, rowNum: 3, topcorner:[0,0]}
+const none = {name:"None",location: "", colour: false, rowNum: 4, topcorner:[0,0]}
 
 const hairstyles_names = ["Short shaggy", "Pageboy", "side-part", "Afro", "Mod", "Fauxhawk", "Pompador", "Comb-over", "Shaggy", "Emo", "spiky", "Hi-top", "ponytail", "Short spiky", "Comma", "Curtained", "High ponytail", "Flip", "Devil flip", "Little buns", "Short fro", "Little low twintails", "Bun", "Pixie", "Long side-part", "Medium bangs", "Long centre-part", "Medium side-part", "Ponytail centre-part", "Long bangs", "Little high twintails", "Double bun", "French twist", "Double braids long", "Double braids", "Ponytail medium", "Long over shoulder", "Curly twintails", "Bob no bangs","Headband", "Fluffy medium", "Wavy medium", "Frosted tips", "Richie rich", "Mop", "Short cornrows", "Short", "Long bangs", "Mullet", "Mohawk", "Long tonsure", "Short tonsure", "Shaved curl", "Shaved shaggy", "Shaved neat" ]
 
@@ -42,7 +42,7 @@ topcorner: coordinates of the top corner of the looking down standing still spri
 const sprite_torso_list = []
 for (let i =0; i<height_list.length;i++){
     b= height_list[i];
-    sprite_torso_list.push({name: b, location: "body/"+b, colour: true,  rowNum: 3,topcorner:[0,0]})
+    sprite_torso_list.push({name: b, location: "body/"+b, colour: true,  rowNum: 4,topcorner:[0,0]})
 }
 
 const head_name_list_sprite = ["bald","regular"]
@@ -64,20 +64,20 @@ for (let j =0; j<shoes_names.length;j++){
     for (let i =0; i<height_list.length;i++){
         let h= height_list[i];
         let s = shoes_names[j];
-        sprite_shoes_list.push({name: h+"_"+s, location: "outfit/shoes/"+h+"_"+s.toLowerCase().replace("-",""), colour: true,rowNum: 3,topcorner:[0,0]})
+        sprite_shoes_list.push({name: h+"_"+s, location: "outfit/shoes/"+h+"_"+s.toLowerCase().replace("-",""), colour: true,rowNum: 4,topcorner:[0,0]})
     }
 }
 
 const sprite_pants_list = [none]
-sprite_pants_list.push({name: "briefs", location: "outfit/pants/briefs", colour: true,rowNum: 3,topcorner:[0,0]});
-sprite_pants_list.push({name: "trousers", location: "outfit/pants/longpants", colour: true,rowNum: 3,topcorner:[0,0]});
+sprite_pants_list.push({name: "briefs", location: "outfit/pants/briefs", colour: true,rowNum: 4,topcorner:[0,0]});
+sprite_pants_list.push({name: "trousers", location: "outfit/pants/longpants", colour: true,rowNum: 4,topcorner:[0,0]});
 for (let row =0; row<2;row++)
     for (let column =0; column<10;column++){
         if (row*10+column< pants_names.length){
             let colour = true;
             if  ([5,6,7].includes(column))//already coloured
                 colour=false;
-            sprite_pants_list.push({name: pants_names[row*10+column], location: "outfit/pants/pants", colour: colour,rowNum: 3,topcorner:[192*column,688*row]});
+            sprite_pants_list.push({name: pants_names[row*10+column], location: "outfit/pants/pants", colour: colour,rowNum: 4,topcorner:[64*column,128*row]});
         }
 }
 
@@ -233,7 +233,7 @@ let current_dance_clothes = 0;
 const gender_list = ["female","male"];
 let current_gender = 0;
 
-const sprite_wedding_list = [];
+const sprite_wedding_list = [none];
 for (let j =0; j<wedding_clothes_list.length;j++){
     w = wedding_clothes_list[j]
     for (let i =0; i<height_list.length;i++){
@@ -274,7 +274,7 @@ dimensions: how big is the sprite
 topcorner: coordinates of the top corner of the looking down standing still sprite
 */
 function add_sprite_object(name, list,name_list, colour_list,isWalk, bobs, heightOffset,backOffset, dimensions, offset){
-    sprite_objects.push({name: name,item_list: list, name_list: name_list, colour_list: colour_list, item: 0,  base_item: 0, colour: 0, colour2: 0, image: new Image(), isWalk: isWalk, bobs: bobs, heightOffset: heightOffset, backOffset: backOffset, rowNum: 3, topcorner:[0,0],dimensions: dimensions, offset: offset});
+    sprite_objects.push({name: name,item_list: list, name_list: name_list, colour_list: colour_list, item: 0,  base_item: 0, colour: 0, colour2: 0, image: new Image(), isWalk: isWalk, bobs: bobs, heightOffset: heightOffset, backOffset: backOffset, rowNum: 4, topcorner:[0,0],dimensions: dimensions, offset: offset});
 }
 
 function add_special_sprite_object(name, list,name_list, colour_list,dimensions,heightOffset){

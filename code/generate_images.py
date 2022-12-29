@@ -558,7 +558,38 @@ def fliphair():
         region = im_old.crop((0, meta_row*96+64,128,meta_row*96+96))
         im_new.paste(region,(0, meta_row*128+96,128,meta_row*128+128))
             
-    im_new.save(save_string)       
+    im_new.save(save_string)   
+
+def flipImage():
+    image_string = "../images/bases/sprites/outfit/pants/pants_base.png"
+    save_string = "../images/bases/sprites/temp.png"
+    original_meta_row_height = 688
+    original_meta_col_width = 192
+    new_meta_col_width = 64
+    num_meta_rows = 2
+    num_meta_cols = 10
+    num_cols_inside =4 #four for walk sprites, 1 otherwise
+    new_col_width = 16
+
+    im_old = Image.open(image_string) 
+    im_new = Image.new("RGBA", (num_meta_cols*new_meta_col_width, num_meta_rows*128))
+    for meta_row in range(num_meta_rows):
+        for meta_column in range(num_meta_cols):
+            #rows 1 and 2
+            region = im_old.crop((original_meta_col_width*meta_column, meta_row*original_meta_row_height,new_meta_col_width+original_meta_col_width*meta_column,meta_row*original_meta_row_height+64))
+            im_new.paste(region,(new_meta_col_width*meta_column, meta_row*128,new_meta_col_width*meta_column+new_meta_col_width,meta_row*128+64))
+
+            #row 3
+            for column in range(num_cols_inside):
+                for x in range(new_col_width):
+                    region = im_old.crop((original_meta_col_width*meta_column+column*new_col_width+x, meta_row*original_meta_row_height+32,original_meta_col_width*meta_column+column*new_col_width+x+1,meta_row*original_meta_row_height+64))
+                    im_new.paste(region,(new_meta_col_width*meta_column+new_col_width+column*new_col_width-x, meta_row*128+64, new_meta_col_width*meta_column+new_col_width+column*new_col_width-x+1,meta_row*128+96))
+
+            # #row 4
+            region = im_old.crop((original_meta_col_width*meta_column, meta_row*original_meta_row_height+64,new_meta_col_width+original_meta_col_width*meta_column,meta_row*original_meta_row_height+96))
+            im_new.paste(region,(new_meta_col_width*meta_column, meta_row*128+96,new_meta_col_width*meta_column+new_meta_col_width,meta_row*128+128))
+                
+    im_new.save(save_string)           
 
 def make_coat():
     image_string = "../images/bases/sprites/outfit/shirts/decorations/shirt decs_base.png"
@@ -725,7 +756,7 @@ def process_body_sprites():
     for c in range(len(skin_colours)):
     #    process_image("head", "sprites/body/", c, skin_colours,"skin")
         for h in ["short","tall"]: 
-    #        process_image(h, "sprites/body", c, skin_colours,"skin")   
+            process_image(h, "sprites/body", c, skin_colours,"skin")   
     #        process_image("arms_"+h, "sprites/body", c, skin_colours,"skin")
             for w in wedding_clothes_list:
                 process_image(w+"_"+h, "sprites/wedding", c, skin_colours,"skin") 
@@ -745,7 +776,7 @@ def process_outfit_sprites():
         process_image("eyewear", "sprites/accessories/eyewear", c, outfit_colours,"skin") 
         #process_image("hats_colour", "sprites/outfit/hats", c, outfit_colours,"skin")
         #process_image("hats_dec", "sprites/outfit/hats", c, outfit_colours,"skin")
-    #    process_image("pants", "sprites/outfit/pants", c, outfit_colours,"blue")
+        #process_image("pants", "sprites/outfit/pants", c, outfit_colours,"blue")
         #process_image("pants_top", "sprites/outfit/pants_top", c, outfit_colours,"skin")
         #process_image("briefs", "sprites/outfit/pants", c, outfit_colours,"blue")
         #process_image("shirts", "sprites/outfit/shirts", c, outfit_colours,"grey")
@@ -757,12 +788,12 @@ def process_outfit_sprites():
         #process_image("neckwear", "sprites/accessories/neckwear", c, outfit_colours,"grey")
         #process_image("earrings", "sprites/accessories/earrings", c, outfit_colours,"")
         for height in ["short","tall"]:
-        #        process_image("longpants_"+height, "sprites/outfit/pants", c, outfit_colours,"blue")
-        #    for shoetype in ["boots","flats","flipflops"]:
-        #        process_image(height+"_"+shoetype, "sprites/outfit/shoes", c, outfit_colours,"grey") 
+            #process_image("longpants_"+height, "sprites/outfit/pants", c, outfit_colours,"blue")
+            for shoetype in ["boots","flats","flipflops"]:
+                process_image(height+"_"+shoetype, "sprites/outfit/shoes", c, outfit_colours,"grey") 
             #process_image(height, "sprites/outfit/gloves", c, outfit_colours,"grey")
-            for sleevetype in ["short","long"]:
-                process_image(height+"_"+sleevetype, "sprites/outfit/sleeves", c, outfit_colours,"grey") 
+            #for sleevetype in ["short","long"]:
+            #    process_image(height+"_"+sleevetype, "sprites/outfit/sleeves", c, outfit_colours,"grey") 
 
 
 
@@ -771,6 +802,7 @@ write_variables()
 
 process_body_sprites()
 process_outfit_sprites()
+#flipImage()
 
 #["Hair_front","Hair_back"]:
 # []:

@@ -245,7 +245,7 @@ function setGloves(variablelist, number){
 
 function updateSpecialSprites(){
     setSpecialSpriteVariable(["Flower dance"], Math.max(0,4*current_dance_clothes+2*current_gender+height));
-    setSpecialSpriteVariable(["Wedding"], Math.max(0,2*current_wedding_clothes+height)); 
+    setSpecialSpriteVariable(["Wedding"], Math.max(0,2*current_wedding_clothes-1+height)); 
 }
 
 function setWeddingClothes(variablelist, number){
