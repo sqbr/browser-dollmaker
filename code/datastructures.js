@@ -420,7 +420,9 @@ function drawCanvas() {
                         //wedding heads  
                         ctx.drawImage(b.image, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0), newY(b,0,0)+wedding_height,b.dimensions[0],b.dimensions[1]);//facing forward
                         ctx.drawImage(b.image, oldX(b,0), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,0)+15, newY(b,2,0)+wedding_height-63,b.dimensions[0],b.dimensions[1]);
-                        if (b.name !="Eyes")
+                        if (b.name =="Eyes")
+                            ctx.drawImage(closed_eyes_image, 36, 24,12,12,32, wedding_height+4,12,12);
+                        else    
                             ctx.drawImage(b.image, oldX(b,0), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,0)+30, newY(b,2,0)+wedding_height-63,b.dimensions[0],b.dimensions[1]);
 
                         if (current_sprite_preset==1){
@@ -467,7 +469,7 @@ function drawCanvas() {
             
 
             //closed eyes
-            ctx.drawImage(closed_eyes_image, 36, 24,12,12,32, wedding_height+4,12,12);
+            
         }
     }
 }

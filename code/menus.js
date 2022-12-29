@@ -54,9 +54,15 @@ function download() {
     sprite_objects_save.push({name: m.name, item:m.item,colour: m.colour,colour2: m.colour2})
   }
 
+  var special_sprite_objects_save = [];
+  for(let i = 0; i < special_sprite_objects.length; i++){
+    m = special_sprite_objects[i];
+    special_sprite_objects_save.push({name: m.name, item:m.item,colour: m.colour,colour2: m.colour2})
+  }
+
   var load_variables = {
-    ImageType: current_imageType, height: height, eye_type: eye_type, sleeve_list: sleeve_list, currentShoes: currentShoes,currentGloves: currentGloves,
-    menu_objects_save: menu_objects_save,  portrait_objects_save: portrait_objects_save, sprite_objects_save: sprite_objects_save
+    ImageType: current_imageType, height: height, eye_type: eye_type, sleeve_list: sleeve_list, currentShoes: currentShoes,currentGloves: currentGloves, current_wedding_clothes: current_wedding_clothes, current_dance_clothes: current_dance_clothes, current_gender: current_gender,
+    menu_objects_save: menu_objects_save,  portrait_objects_save: portrait_objects_save, sprite_objects_save: sprite_objects_save,special_sprite_objects_save: special_sprite_objects_save
   }    
   
   data = JSON.stringify(load_variables);
@@ -135,6 +141,7 @@ var reader; //GLOBAL File Reader object for demo purpose only
       var menu_objects_load = load_object.menu_objects_save;
       var portrait_objects_load = load_object.portrait_objects_save;
       var sprite_objects_load = load_object.sprite_objects_save;
+      var special_sprite_objects_load = load_object.special_sprite_objects_save;
       //document.getElementById("test").innerHTML = temp_object.toString();
       for(let i = 0; i < portrait_objects.length; i++){
           var oldm =portrait_objects[i]; 
@@ -150,6 +157,13 @@ var reader; //GLOBAL File Reader object for demo purpose only
         oldm.colour2 = newm.colour2;
         oldm.item = newm.item;   
       } 
+      for(let i = 0; i < special_sprite_objects.length; i++){
+        var oldm =special_sprite_objects[i]; 
+        var newm = special_sprite_objects_load[i];
+        oldm.colour = newm.colour;
+        oldm.colour2 = newm.colour2;
+        oldm.item = newm.item;   
+      } 
       for(let i = 0; i < menu_objects.length; i++){
         var oldm =menu_objects[i]; 
         var newm = menu_objects_load[i];
@@ -161,6 +175,9 @@ var reader; //GLOBAL File Reader object for demo purpose only
       currentShoes = load_object.currentShoes;
       currentGloves= load_object.currentGloves;
       sleeve_list = load_object.sleeve_list;
+      current_wedding_clothes =  load_object.current_wedding_clothes;
+      current_dance_clothes= load_object.current_dance_clothes;
+      current_gender= load_object.current_gender;
 
       setImageType([], load_object.ImageType)
       setEyeType([],load_object.eye_type)
