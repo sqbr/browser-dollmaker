@@ -106,14 +106,31 @@ function colour_desc(colour){
             hueString = "Brown";}
         }}}}}}      
 
-        //Using the names in colourlist_list where possible
+        if (skin_colours.includes(colour) && (h<50||h>325)&& v>0 ){
+            let i = skin_colours.indexOf(colour);
+            if (i ==0)
+                return "Very Pale";
+            else{
 
-        /*for (let i = 0; i < colourlist_list.length; i += 1){
-            sublist = colourlist_list[i];
-           if (sublist[1].includes(colour)){
-            hueString = sublist[0]+"in list"
-           }
-        }*/
+                if (i%2 !=0){
+                    hueString = "Peach";
+                }
+                else{
+                    hueString = "Olive";
+
+                }
+                if (i<3){
+                    return "Pale "+hueString;
+                }else{
+                    if (i>6)
+                        return "Dark "+hueString;
+                    else
+                    return hueString;
+                }
+            }    
+        }
+        
+        
 
         //Adding "dark"/"light" etc.       
 

@@ -27,7 +27,7 @@ torso_list = ["medium"]
 head_list =["rectangular","pointed","square","medium","oval","round","jowly",]
 complexion_list =["None","light wrinkles","wrinkles"]
 ears_list =["regular"]
-nose_list =["None","button", "medium", "broad","round","pointed"]
+nose_list =["None","small","button", "medium", "broad","round","bulbous","pointed","hooked"]
 eyebrow_list = ["None", "slightly downward","raised","flat sad","raised sad","angry","neutral","raised up","half raised","soft","slightly angry","raised soft"]
 eye_expression_list_port = ["neutral","side","crescents","narrowed","happy","wide","shock","angry","angry side","sleepy",]
 eye_type_list_port = ["androgynous","flat","long"]
@@ -117,7 +117,7 @@ front_list_sprite = [["Coat", coat_back_list_sprite] ]
 wedding_clothes_list = ["suit","dress"]
 
 #colours
-skin_regular =["#FFE7D6","#FFD3A6","#FFD3A6","#FFDFA5","#F1A065","#DA773F","#DA874A","#B05934","#B96A2E","#853F27","#783F1A"]
+skin_regular =["#FFE7D6","#FFD3A6","#FFDFA5","#F1B265","#F1A065","#DA773F","#DA874A","#B05934","#B96A2E","#853F27","#783F1A"]
 skin_weird = ["#C3FFFA","#41AD60","#000000","#9BB681"]
 skin_colours =skin_regular + skin_weird
 
@@ -130,7 +130,7 @@ outfit_brown = ["#B24836","#912D20","#820000","#630F0F"]
 outfit_grey = ["#FFFFFF","#777471","#4C4C56","#482B57","#000000"]
 
 outfit_colours = outfit_yellow+outfit_green+outfit_blue+outfit_purple +outfit_red +outfit_brown +outfit_grey
-eye_colours = ["#000000","#2E9FF7","#B25DF6","#1B8EF6","#469951","#F0B50A",]
+eye_colours = ["#000000","#AEB655","#14AC34","#20514C","#29B4C4","#008891","#2E9FF7","#3D2C64","#B200F1","#F39EFF","#E55773","#D24525","#FF8F2B","#DB8200","#8E3300","#999999","#ffffff"]
 hair_weird = ["#7034ED","#B25DF6","#1B8EF6", "#53C7FB","#469951"]
 hair_grey = ["#A59A9D", "#E9E9E9",]
 hair_blonde = ["#FCE374", "#F0B50A",]
@@ -410,6 +410,7 @@ def colour_this_noshadow(pixel, colour):
            p[i] = int((1-r)*new_colour[i] + r*(255 - (255-new_colour[i])*(255-highlight[i])/255))    
     return (p[0],p[1],p[2],alpha)
 
+
 def colour_this_skin(pixel, colour):
     p = [pixel[0],pixel[1],pixel[2]]
     new_colour = hex_to_rgba(colour)
@@ -453,7 +454,7 @@ def colour_this_skin(pixel, colour):
            p[i] = int((1-r)*new_colour[i] + r*new_colour[i]*shadow[i]/255)           
     return (p[0],p[1],p[2],pixel[3])    
 
-def colour_this_grey(pixel, colour):
+def colour_this_hair(pixel, colour):
     p = [pixel[0],pixel[1],pixel[2]]
     new_colour = hex_to_rgba(colour)
     highlight = hex_to_rgba("#f9f4ca")
@@ -472,28 +473,73 @@ def colour_this_grey(pixel, colour):
        
     return (p[0],p[1],p[2],pixel[3]) 
 
-def colour_this_blue(pixel, colour):
+def colour_this_grey(pixel, colour):
     p = [pixel[0],pixel[1],pixel[2]]
     new_colour = hex_to_rgba(colour)
-    if p == [255,253,252]: #base skin colour
+    shadow = hex_to_rgba("#5C3C83")
+    
+    l = luminance(p) #opacity of shadow
+    s = saturation(p)
+    h =  hue(p)
+
+    if l ==255:
         for i in range(3):
-            p[i] = new_colour[i]      
-    elif p == [176,180,193]: #shading
-        shadow = hex_to_rgba("#830016")
-        r = 0.3 #opacity of shadow
-        for i in range(3): #multiply
-           p[i] = int((1-r)*new_colour[i] + r*new_colour[i]*shadow[i]/255)   
-    elif p == [110,113,121]: #shading 2
-        shadow = hex_to_rgba("#6D0036")
-        r = 0.5 #opacity of shadow
-        for i in range(3): #multiply
-           p[i] = int((1-r)*new_colour[i] + r*new_colour[i]*shadow[i]/255)           
-    elif p == [42,42,57]: #edge
-        shadow = hex_to_rgba("#560055")
-        r = 0.8 #opacity of shadow
-        for i in range(3): #multiply
-           p[i] = int((1-r)*new_colour[i] + r*new_colour[i]*shadow[i]/255)           
+            p[i] = new_colour[i]
+        return (p[0],p[1],p[2],pixel[3])      
+
+    shadow1 = new_colour  
+    if h <60: #red-orange
+        shadow2 = hex_to_rgba("#4B0019")
+    elif h<120: #yellow
+        shadow2 = hex_to_rgba("#004B13")
+    elif h<180: #yellow-green
+        shadow2 = hex_to_rgba("#00264B")
+    elif h<240: #aqua
+        shadow2 = hex_to_rgba("#00024B")
+    elif h<300: #blue
+        shadow2 = hex_to_rgba("#00024B")
+    else: #purple
+        shadow2 = hex_to_rgba("#34004B")
+
+    if s==0:
+        shadow1 = hex_to_rgba("#6862BB")     
+        shadow2 = hex_to_rgba("#2B276A")     
+    if (l <3):
+        r=1
+    else:
+        r = 0.8*l/255 + 0.2
+    for i in range(3): #multiply
+        p[i] = p[i] = int(r*new_colour[i] + (1-r)*new_colour[i]*(r*shadow1[i]+(1-r)*shadow2[i])/255)    
+       
     return (p[0],p[1],p[2],pixel[3]) 
+
+def colour_this_skin_grey(pixel, colour):  
+    p = [pixel[0],pixel[1],pixel[2]]
+    new_colour = hex_to_rgba(colour)
+    shadow1 = hex_to_rgba("#5C3C83")
+    shadow2 = hex_to_rgba("#181632")   
+
+    if p in [[249,174,137],[255,217,186],[224,107,101],[166,54,80],[142,31,12],[112,23,24],[107,0,58],[74,12,6]]:
+
+        # if p == [249,174,137]: #base skin colour
+        #     for i in range(3):
+        #         p[i] = new_colour[i]
+        #         return (p[0],p[1],p[2],pixel[3])    
+        return colour_this_grey(pixel, colour) 
+        
+        l_top = luminance(hex_to_rgba("#F9AE89"))
+        l_bottom = luminance(hex_to_rgba("#420024"))
+        
+        l = luminance(p)/255 #(luminance(p)-l_bottom)/(l_top-l_bottom) 
+        if (l <0.1):
+            r=1
+        else:
+            r = 0.8*l + 0.2
+        for i in range(3): #multiply
+            p[i] = int(r*new_colour[i] + (1-r)*new_colour[i]*(r*shadow1[i]+(1-r)*shadow2[i])/255)    
+        
+    return (p[0],p[1],p[2],pixel[3]) 
+
 
 def process_image(name, location, colour,colour_list,type):
     image_string = "../images/bases/"+location+"/"+name+"_base.png"
@@ -504,13 +550,17 @@ def process_image(name, location, colour,colour_list,type):
         for x in range(img.size[0]):
             if Adata[x, y][3] !=0:
                 if type == "skin":
-                    Adata[x, y] = colour_this_skin(Adata[x, y], colour_list[colour])  
+                    Adata[x, y] = colour_this_skin(Adata[x, y], colour_list[colour]) 
+                elif type == "hair":
+                    Adata[x, y] = colour_this_hair(Adata[x, y], colour_list[colour])     
+                elif type == "skin_grey":
+                    Adata[x, y] = colour_this_skin_grey(Adata[x, y], colour_list[colour]) 
+                elif type =="blue":   
+                    Adata[x, y] = colour_this_grey(Adata[x, y], colour_list[colour])          
                 elif type =="grey":   
                     Adata[x, y] = colour_this_grey(Adata[x, y], colour_list[colour]) 
                 elif type =="eyes":   
                     Adata[x, y] = colour_this_eyes(Adata[x, y], colour_list[colour])     
-                elif type =="blue":   
-                    Adata[x, y] = colour_this_grey(Adata[x, y], colour_list[colour]) 
                 elif type =="blush":   
                     Adata[x, y] = colour_this_blush(Adata[x, y], colour_list[colour])       
                 else:    
@@ -754,54 +804,55 @@ def process_all_portraits():
 
 def process_body_sprites():
     for c in range(len(skin_colours)):
-    #    process_image("head", "sprites/body/", c, skin_colours,"skin")
+        process_image("head", "sprites/body/", c, skin_colours,"skin")
         for h in ["short","tall"]: 
             process_image(h, "sprites/body", c, skin_colours,"skin")   
-    #        process_image("arms_"+h, "sprites/body", c, skin_colours,"skin")
+            process_image("arms_"+h, "sprites/body", c, skin_colours,"skin")
             for w in wedding_clothes_list:
                 process_image(w+"_"+h, "sprites/wedding", c, skin_colours,"skin") 
                 for g in ["female","male"]:
                     process_image(g+"_"+w+"_"+h, "sprites/flower dance", c, skin_colours,"skin") 
 
-    #for c in range(len(hair_colours)):  
-    #     process_image("hairstyles", "sprites/hair", c, hair_colours,"grey")
-    #     process_image("hairstyles2", "sprites/hair", c, hair_colours,"grey")
-    #     process_image("facialhair", "sprites/hair/facialhair", c, hair_colours,"grey")
+    for c in range(len(hair_colours)):  
+         process_image("hairstyles", "sprites/hair", c, hair_colours,"hair")
+         process_image("hairstyles2", "sprites/hair", c, hair_colours,"hair")
+         #process_image("facialhair", "sprites/hair/facialhair", c, hair_colours,"hair")
     for c in range(len(eye_colours)): 
         process_image("eyes", "sprites/body", c, eye_colours,"eyes") 
         
 
 def process_outfit_sprites():
     for c in range(len(outfit_colours)): 
-        process_image("eyewear", "sprites/accessories/eyewear", c, outfit_colours,"skin") 
-        #process_image("hats_colour", "sprites/outfit/hats", c, outfit_colours,"skin")
-        #process_image("hats_dec", "sprites/outfit/hats", c, outfit_colours,"skin")
+        process_image("eyewear", "sprites/accessories/eyewear", c, outfit_colours,"skin_grey") 
+        process_image("hats_colour", "sprites/outfit/hats", c, outfit_colours,"skin_grey")
+        process_image("hats_dec", "sprites/outfit/hats", c, outfit_colours,"skin_grey")
         #process_image("pants", "sprites/outfit/pants", c, outfit_colours,"blue")
-        #process_image("pants_top", "sprites/outfit/pants_top", c, outfit_colours,"skin")
+        #process_image("pants_top", "sprites/outfit/pants_top", c, outfit_colours,"skin_grey")
         #process_image("briefs", "sprites/outfit/pants", c, outfit_colours,"blue")
         #process_image("shirts", "sprites/outfit/shirts", c, outfit_colours,"grey")
         #process_image("shirt decs", "sprites/outfit/shirts/decorations", c, outfit_colours,"grey")
-        #process_image("overshirt", "sprites/outfit/overshirt", c, outfit_colours,"grey")
-        #process_image("coat", "sprites/outfit/coat", c, outfit_colours,"skin")
-        #process_image("coat_dec", "sprites/outfit/coat", c, outfit_colours,"skin")
-        #process_image("coat_back", "sprites/outfit/coat", c, outfit_colours,"skin")
-        #process_image("neckwear", "sprites/accessories/neckwear", c, outfit_colours,"grey")
-        #process_image("earrings", "sprites/accessories/earrings", c, outfit_colours,"")
+        process_image("overshirt", "sprites/outfit/overshirt", c, outfit_colours,"grey")
+        process_image("coat", "sprites/outfit/coat", c, outfit_colours,"skin_grey")
+        process_image("coat_dec", "sprites/outfit/coat", c, outfit_colours,"skin_grey")
+        process_image("coat_back", "sprites/outfit/coat", c, outfit_colours,"skin_grey")
+        process_image("neckwear", "sprites/accessories/neckwear", c, outfit_colours,"grey")
+        process_image("earrings", "sprites/accessories/earrings", c, outfit_colours,"")
         for height in ["short","tall"]:
-            #process_image("longpants_"+height, "sprites/outfit/pants", c, outfit_colours,"blue")
-            for shoetype in ["boots","flats","flipflops"]:
-                process_image(height+"_"+shoetype, "sprites/outfit/shoes", c, outfit_colours,"grey") 
+            process_image("longpants_"+height, "sprites/outfit/pants", c, outfit_colours,"blue")
+            #for shoetype in ["boots","flats","flipflops"]:
+            #    process_image(height+"_"+shoetype, "sprites/outfit/shoes", c, outfit_colours,"grey") 
             #process_image(height, "sprites/outfit/gloves", c, outfit_colours,"grey")
             #for sleevetype in ["short","long"]:
             #    process_image(height+"_"+sleevetype, "sprites/outfit/sleeves", c, outfit_colours,"grey") 
-
-
 
 write_temp()
 write_variables()
 
 process_body_sprites()
 process_outfit_sprites()
+
+
+
 #flipImage()
 
 #["Hair_front","Hair_back"]:
@@ -815,7 +866,7 @@ process_outfit_sprites()
 
 
 for c in closet:
-    if c.name in []:
+    if c.name in [""]:
         process_portrait_part(c)
 #process_all_portraits()
 #make_coat()

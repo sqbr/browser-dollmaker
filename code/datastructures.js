@@ -83,13 +83,14 @@ function setTopbar(){
 
 function setToolbar(){
     let s = "";
-    s+='<div><button onclick="download()">Export</button>';
-    s+='<input type="file" onchange=\'readText(this)\' /></div>'
+    s+='<div><button onclick="download()">Export</button></div>';
+    s+='<h2 style="justify-self: end;">Load:</h2><input type="file" onchange=\'readText(this)\' />'
     if (currently_editing==1){
         s+='<div class="four-columns">\n';
     }else{
         s+='<div class="three-columns">\n';
     }
+    
     s+='    <div id = "currently_editing_Btn" style="justify-self: end;">Secret</div>\n'; 
     s+='    <div><h2 id="editingTitle" text-align="left">errors??</h2></div>\n';
     if (currently_editing==1){
@@ -234,23 +235,28 @@ function oldX(obj, column){
 }
 
 function oldY(obj, row){
-    //return the X coordinate of the row of the original image
+    //return the Y coordinate of the row of the original image
     return obj.topcorner[1]+row*obj.dimensions[1];
 }
 
-function newX(obj, column){
-    //return the X coordinate of the row of the new image
-    return 16*column+obj.offset[0];
+function newX(obj, row, column){
+    //return the X coordinate of the column of the new image
+    if ((obj.name.includes("Hairstyle")) && (row==3))
+        return 16*column+obj.offset[0]-1;
+    else    
+        return 16*column+obj.offset[0];
 }
 
 function newY(obj, row,column){
-    //return the X coordinate of the row of the new image
+    //return the Y coordinate of the row of the new image
     let bob = 0;
     if (obj.bobs){
         bob =column%2;
     }
-    if (row == 3)
+    if (row == 2)
         bob+=obj.backOffset;
+    if ((obj.name.includes("Hairstyle")) && [1,3].includes(row))
+        bob-=1;
     return row*32+obj.offset[1]+bob+(1-height)*obj.heightOffset;
 }
 
@@ -271,16 +277,15 @@ function drawCanvas() {
         if (b.item_list[b.value] !=none){ 
             for (let column = 0; column < 2; column += 1) //column 1-2
                 if(b.name !="Hairstyle_top" || column >0)
-                    ctx_preview.drawImage(b.image, oldX(b,0), oldY(b,column),b.dimensions[0],b.dimensions[1],64*column+b.offset[0]*4,4*(b.offset[1]+(1-height)*b.heightOffset),b.dimensions[0]*4,b.dimensions[1]*4);
-            if (b.rowNum==4)
-                ctx_preview.drawImage(b.image, oldX(b,0), oldY(b,3),b.dimensions[0],b.dimensions[1],64*2+b.offset[0]*4,b.offset[1]*4,b.dimensions[0]*4,b.dimensions[1]*4);
-            else{
-                if (b.rowNum==3)
-                    ctx_preview.drawImage(b.image, oldX(b,0), oldY(b,2),b.dimensions[0],b.dimensions[1],64*2+b.offset[0]*4,b.offset[1]*4,b.dimensions[0]*4,b.dimensions[1]*4);
-            }    
+                    ctx_preview.drawImage(b.image, oldX(b,0), oldY(b,column),b.dimensions[0],b.dimensions[1],4*newX(b,0,column),4*newY(b,0,column),b.dimensions[0]*4,b.dimensions[1]*4);
+            ctx_preview.drawImage(b.image, oldX(b,0), oldY(b,3),b.dimensions[0],b.dimensions[1],4*newX(b,2,2),4*(newY(b,2,2)-64),b.dimensions[0]*4,b.dimensions[1]*4);
+            // else{
+            //     if (b.rowNum==3)
+            //         ctx_preview.drawImage(b.image, oldX(b,0), oldY(b,2),b.dimensions[0],b.dimensions[1],64*2+b.offset[0]*4,b.offset[1]*4,b.dimensions[0]*4,b.dimensions[1]*4);
+            // }    
         }        
     }
-    //drawing portrait
+    //portrait preview
     ctx_preview.drawImage(portrait_back, 256, 0);
     for (let i = 0; i < portrait_objects.length; i += 1){
         let b = portrait_objects[i];
@@ -336,19 +341,19 @@ function drawCanvas() {
                 for (let row = 0; row < 2; row += 1){//rows 1,2   
                     for (let column = 0; column < 2; column += 1)
                         if(b.name !="Hairstyle_top" || column >0)
-                            ctx.drawImage(b.image, oldX(b,column), oldY(b,row),b.dimensions[0],b.dimensions[1],newX(b,column), newY(b,row,column),b.dimensions[0],b.dimensions[1]);//column 1
-                    ctx.drawImage(b.image, oldX(b,0), oldY(b,row),b.dimensions[0],b.dimensions[1],newX(b,2), newY(b,row,2),b.dimensions[0],b.dimensions[1]); //column 3  
-                    ctx.drawImage(b.image, oldX(b,2), oldY(b,row),b.dimensions[0],b.dimensions[1],newX(b,3), newY(b,row,3),b.dimensions[0],b.dimensions[1]); //column 4              
+                            ctx.drawImage(b.image, oldX(b,column), oldY(b,row),b.dimensions[0],b.dimensions[1],newX(b,row,column), newY(b,row,column),b.dimensions[0],b.dimensions[1]);//column 1
+                    ctx.drawImage(b.image, oldX(b,0), oldY(b,row),b.dimensions[0],b.dimensions[1],newX(b,row, 2), newY(b,row,2),b.dimensions[0],b.dimensions[1]); //column 3  
+                    ctx.drawImage(b.image, oldX(b,2), oldY(b,row),b.dimensions[0],b.dimensions[1],newX(b,row,3), newY(b,row,3),b.dimensions[0],b.dimensions[1]); //column 4              
                 }
                 if (b.rowNum==4){ //don't have to flip
                         for (let column = 0; column < 2; column += 1){
-                            ctx.drawImage(b.image, oldX(b,column), oldY(b,3),b.dimensions[0],b.dimensions[1],newX(b,column), newY(b,2,column),b.dimensions[0],b.dimensions[1]);//ROW 3
-                            ctx.drawImage(b.image, oldX(b,column), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,column), newY(b,3,column),b.dimensions[0],b.dimensions[1]);//ROW 4
+                            ctx.drawImage(b.image, oldX(b,column), oldY(b,3),b.dimensions[0],b.dimensions[1],newX(b,2,column), newY(b,2,column),b.dimensions[0],b.dimensions[1]);//ROW 3
+                            ctx.drawImage(b.image, oldX(b,column), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,3,column), newY(b,3,column),b.dimensions[0],b.dimensions[1]);//ROW 4
                         }
-                        ctx.drawImage(b.image, oldX(b,0), oldY(b,3),b.dimensions[0],b.dimensions[1],newX(b,2), newY(b,2,2),b.dimensions[0],b.dimensions[1]); //column 3 row 3 
-                        ctx.drawImage(b.image, oldX(b,2), oldY(b,3),b.dimensions[0],b.dimensions[1],newX(b,3), newY(b,2,3),b.dimensions[0],b.dimensions[1]); //column 4  row 3 
-                        ctx.drawImage(b.image, oldX(b,0), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,2), newY(b,3,2),b.dimensions[0],b.dimensions[1]); //column 3 row 4 
-                        ctx.drawImage(b.image, oldX(b,2), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,3), newY(b,3,3),b.dimensions[0],b.dimensions[1]); //column 4  row 4             
+                        ctx.drawImage(b.image, oldX(b,0), oldY(b,3),b.dimensions[0],b.dimensions[1],newX(b,2,2), newY(b,2,2),b.dimensions[0],b.dimensions[1]); //column 3 row 3 
+                        ctx.drawImage(b.image, oldX(b,2), oldY(b,3),b.dimensions[0],b.dimensions[1],newX(b,2,3), newY(b,2,3),b.dimensions[0],b.dimensions[1]); //column 4  row 3 
+                        ctx.drawImage(b.image, oldX(b,0), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,3,2), newY(b,3,2),b.dimensions[0],b.dimensions[1]); //column 3 row 4 
+                        ctx.drawImage(b.image, oldX(b,2), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,3,3), newY(b,3,3),b.dimensions[0],b.dimensions[1]); //column 4  row 4             
     
                 }/*else{ //code for flipping, not used any more
                     if (b.rowNum==3){ //has a back
@@ -372,26 +377,26 @@ function drawCanvas() {
                     
                     if (sprite_special_list.includes(b.name)){
                         //wedding heads  
-                        ctx.drawImage(b.image, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0), newY(b,0,0)+wedding_height,b.dimensions[0],b.dimensions[1]);//facing forward
-                        ctx.drawImage(b.image, oldX(b,0), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,0)+15, newY(b,2,0)+wedding_height-63,b.dimensions[0],b.dimensions[1]);
+                        ctx.drawImage(b.image, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0,0), newY(b,0,0)+wedding_height,b.dimensions[0],b.dimensions[1]);//facing forward
+                        ctx.drawImage(b.image, oldX(b,0), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,0,0)+15, newY(b,2,0)+wedding_height-63,b.dimensions[0],b.dimensions[1]);
                         if (b.name !="Eyes")
-                            ctx.drawImage(b.image, oldX(b,0), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,0)+30, newY(b,2,0)+wedding_height-63,b.dimensions[0],b.dimensions[1]);
+                            ctx.drawImage(b.image, oldX(b,0), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,2,0)+30, newY(b,2,0)+wedding_height-63,b.dimensions[0],b.dimensions[1]);
 
                         if (current_sprite_preset==1){
                             //female 
                             //dance heads
                             for (let column = 0; column < 2; column++)
-                                ctx.drawImage(b.image, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0)+column*16, newY(b,0,0)+dance_height,b.dimensions[0],b.dimensions[1]);
-                            ctx.drawImage(b.image, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0)+2*16-1, newY(b,0,0)+dance_height,b.dimensions[0],b.dimensions[1]);    
-                            ctx.drawImage(b.image, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0)+3*16, newY(b,0,0)+dance_height+1,b.dimensions[0],b.dimensions[1]);  
+                                ctx.drawImage(b.image, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0,0)+column*16, newY(b,0,0)+dance_height,b.dimensions[0],b.dimensions[1]);
+                            ctx.drawImage(b.image, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0,0)+2*16-1, newY(b,0,0)+dance_height,b.dimensions[0],b.dimensions[1]);    
+                            ctx.drawImage(b.image, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0,0)+3*16, newY(b,0,0)+dance_height+1,b.dimensions[0],b.dimensions[1]);  
                             for (let column = 0; column < 2; column++)
-                                ctx.drawImage(b.image, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0)+column*16, newY(b,0,0)+dance_height+33,b.dimensions[0],b.dimensions[1]);  
-                            ctx.drawImage(b.image, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0)+2*16, newY(b,0,0)+dance_height+32,b.dimensions[0],b.dimensions[1]);  
-                            ctx.drawImage(b.image, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0)+3*16, newY(b,0,0)+dance_height+33,b.dimensions[0],b.dimensions[1]);  
+                                ctx.drawImage(b.image, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0,0)+column*16, newY(b,0,0)+dance_height+33,b.dimensions[0],b.dimensions[1]);  
+                            ctx.drawImage(b.image, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0,0)+2*16, newY(b,0,0)+dance_height+32,b.dimensions[0],b.dimensions[1]);  
+                            ctx.drawImage(b.image, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0,0)+3*16, newY(b,0,0)+dance_height+33,b.dimensions[0],b.dimensions[1]);  
                         } else{
-                            ctx.drawImage(b.image, oldX(b,0), oldY(b,3),b.dimensions[0],b.dimensions[1],newX(b,0), newY(b,2,0)+dance_height-64,b.dimensions[0],b.dimensions[1]);
+                            ctx.drawImage(b.image, oldX(b,0), oldY(b,3),b.dimensions[0],b.dimensions[1],newX(b,2,0), newY(b,2,0)+dance_height-64,b.dimensions[0],b.dimensions[1]);
                             for (let column = 1; column < 4; column++)
-                                ctx.drawImage(b.image, oldX(b,0), oldY(b,3),b.dimensions[0],b.dimensions[1],newX(b,0)+column*16, newY(b,2,0)+dance_height-63,b.dimensions[0],b.dimensions[1]);  
+                                ctx.drawImage(b.image, oldX(b,0), oldY(b,3),b.dimensions[0],b.dimensions[1],newX(b,2,0)+column*16, newY(b,2,0)+dance_height-63,b.dimensions[0],b.dimensions[1]);  
 
                         }   
                     }    
@@ -416,37 +421,37 @@ function drawCanvas() {
                 if (b.image.src !=""){ 
                     if (sprite_special_list.includes(b.name) || noWeddingOutfit){
                         //wedding  
-                        ctx.drawImage(b.image, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0), newY(b,0,0)+wedding_height,b.dimensions[0],b.dimensions[1]);//facing forward
-                        ctx.drawImage(b.image, oldX(b,0), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,0)+15, newY(b,2,0)+wedding_height-63,b.dimensions[0],b.dimensions[1]);
+                        ctx.drawImage(b.image, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0,0), newY(b,0,0)+wedding_height,b.dimensions[0],b.dimensions[1]);//facing forward
+                        ctx.drawImage(b.image, oldX(b,0), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,2,0)+15, newY(b,2,0)+wedding_height-63,b.dimensions[0],b.dimensions[1]);
                         if (b.name =="Eyes")
                             ctx.drawImage(closed_eyes_image, 36, 24,12,12,32, wedding_height+4,12,12);
                         else  
                             if (b.name=="Arms" || b.name.includes("sleeves"))  //shonky 'reaching forward' arm
-                                ctx.drawImage(b.image, oldX(b,2), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,0)+29, newY(b,2,0)+wedding_height-63,b.dimensions[0],b.dimensions[1]);
+                                ctx.drawImage(b.image, oldX(b,2), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,2,0)+29, newY(b,2,0)+wedding_height-63,b.dimensions[0],b.dimensions[1]);
                                 else
-                                    ctx.drawImage(b.image, oldX(b,0), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,0)+30, newY(b,2,0)+wedding_height-63,b.dimensions[0],b.dimensions[1]);
+                                    ctx.drawImage(b.image, oldX(b,0), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,2,0)+30, newY(b,2,0)+wedding_height-63,b.dimensions[0],b.dimensions[1]);
                     }
                     //sleeping
                     if (b.name =="Eyes")
                         ctx.drawImage(closed_eyes_image, 36, 24,12,12,-1, sleeping_height+4,12,12);
                     else  
                         if (b.name=="Arms" || b.name.includes("sleeves"))  //shonky 'reaching forward' arm
-                            ctx.drawImage(b.image, oldX(b,2), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,0)-4, newY(b,2,0)+sleeping_height-63,b.dimensions[0],b.dimensions[1]);
+                            ctx.drawImage(b.image, oldX(b,2), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,2,0)-4, newY(b,2,0)+sleeping_height-63,b.dimensions[0],b.dimensions[1]);
                             else
-                                ctx.drawImage(b.image, oldX(b,0), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,0)-3, newY(b,2,0)+sleeping_height-63,b.dimensions[0],b.dimensions[1]);
+                                ctx.drawImage(b.image, oldX(b,0), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,2,0)-3, newY(b,2,0)+sleeping_height-63,b.dimensions[0],b.dimensions[1]);
 
                     if (sprite_special_list.includes(b.name)){    
                         if (current_sprite_preset==1){
                             //female 
                             //dance heads
                             for (let column = 0; column < 2; column++)
-                                ctx.drawImage(b.image, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0)+column*16, newY(b,0,0)+dance_height,b.dimensions[0],b.dimensions[1]);
-                            ctx.drawImage(b.image, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0)+2*16-1, newY(b,0,0)+dance_height,b.dimensions[0],b.dimensions[1]);    
-                            ctx.drawImage(b.image, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0)+3*16, newY(b,0,0)+dance_height+1,b.dimensions[0],b.dimensions[1]);  
+                                ctx.drawImage(b.image, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0,0)+column*16, newY(b,0,0)+dance_height,b.dimensions[0],b.dimensions[1]);
+                            ctx.drawImage(b.image, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0,0)+2*16-1, newY(b,0,0)+dance_height,b.dimensions[0],b.dimensions[1]);    
+                            ctx.drawImage(b.image, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0,0)+3*16, newY(b,0,0)+dance_height+1,b.dimensions[0],b.dimensions[1]);  
                             for (let column = 0; column < 2; column++)
-                                ctx.drawImage(b.image, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0)+column*16, newY(b,0,0)+dance_height+33,b.dimensions[0],b.dimensions[1]);  
-                            ctx.drawImage(b.image, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0)+2*16, newY(b,0,0)+dance_height+32,b.dimensions[0],b.dimensions[1]);  
-                            ctx.drawImage(b.image, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0)+3*16, newY(b,0,0)+dance_height+33,b.dimensions[0],b.dimensions[1]);  
+                                ctx.drawImage(b.image, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0,0)+column*16, newY(b,0,0)+dance_height+33,b.dimensions[0],b.dimensions[1]);  
+                            ctx.drawImage(b.image, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0,0)+2*16, newY(b,0,0)+dance_height+32,b.dimensions[0],b.dimensions[1]);  
+                            ctx.drawImage(b.image, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0,0)+3*16, newY(b,0,0)+dance_height+33,b.dimensions[0],b.dimensions[1]);  
                         } 
                     }
                 }
@@ -470,9 +475,9 @@ function drawCanvas() {
                         if (current_sprite_preset==2){
                             //male 
                             //dance heads
-                            ctx.drawImage(b.image, oldX(b,0), oldY(b,3),b.dimensions[0],b.dimensions[1],newX(b,0), newY(b,2,0)+dance_height-64,b.dimensions[0],b.dimensions[1]);
+                            ctx.drawImage(b.image, oldX(b,0), oldY(b,3),b.dimensions[0],b.dimensions[1],newX(b,2,0), newY(b,2,0)+dance_height-64,b.dimensions[0],b.dimensions[1]);
                             for (let column = 1; column < 4; column++)
-                                ctx.drawImage(b.image, oldX(b,0), oldY(b,3),b.dimensions[0],b.dimensions[1],newX(b,0)+column*16, newY(b,2,0)+dance_height-63,b.dimensions[0],b.dimensions[1]);  
+                                ctx.drawImage(b.image, oldX(b,0), oldY(b,3),b.dimensions[0],b.dimensions[1],newX(b,2,0)+column*16, newY(b,2,0)+dance_height-63,b.dimensions[0],b.dimensions[1]);  
                         }   
                     }
                 }
