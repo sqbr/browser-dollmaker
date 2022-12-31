@@ -214,7 +214,9 @@ function setEyeType(variablelist, number){
     let b = findNameMatch(sprite_objects, "Eyes");
     b.item = number;
     b = findNameMatch(portrait_objects, "Eyes");
-    b.value_list[current_panel] = eye_type*eye_expressions.length + eye_expressions[current_panel];
+    for (let i = 0; i < 10; i += 1) {
+        b.value_list[i] = eye_type*eye_expressions.length + eye_expressions[i];
+    }
     drawCanvas();
 }
 
@@ -296,7 +298,7 @@ function setClothing(variablelist, number){
 
 function setHair(variablelist, number){
     setClothing(["Hairstyle"],number);
-    if ([0,52].includes(number)){ //all bald hairstyles
+    if ([0,50,51,52,53].includes(number)){ //all bald hairstyles
         setSpriteVariable(["Head"], 0);
     }
     else{

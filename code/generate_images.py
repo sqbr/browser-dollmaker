@@ -829,7 +829,7 @@ def process_outfit_sprites():
         #process_image("pants", "sprites/outfit/pants", c, outfit_colours,"blue")
         #process_image("pants_top", "sprites/outfit/pants_top", c, outfit_colours,"skin_grey")
         #process_image("briefs", "sprites/outfit/pants", c, outfit_colours,"blue")
-        #process_image("shirts", "sprites/outfit/shirts", c, outfit_colours,"grey")
+        process_image("shirts", "sprites/outfit/shirts", c, outfit_colours,"grey")
         #process_image("shirt decs", "sprites/outfit/shirts/decorations", c, outfit_colours,"grey")
         process_image("overshirt", "sprites/outfit/overshirt", c, outfit_colours,"grey")
         process_image("coat", "sprites/outfit/coat", c, outfit_colours,"skin_grey")

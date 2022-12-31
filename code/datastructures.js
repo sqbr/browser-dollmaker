@@ -241,10 +241,10 @@ function oldY(obj, row){
 
 function newX(obj, row, column){
     //return the X coordinate of the column of the new image
+    let gap = 0;
     if ((obj.name.includes("Hairstyle")) && (row==3))
-        return 16*column+obj.offset[0]-1;
-    else    
-        return 16*column+obj.offset[0];
+        gap =-1;
+    return 16*column+obj.offset[0]+gap;
 }
 
 function newY(obj, row,column){
@@ -252,9 +252,11 @@ function newY(obj, row,column){
     let bob = 0;
     if (obj.bobs){
         bob =column%2;
+        if (row == 2)
+            bob-=1;
     }
-    if (row == 2)
-        bob+=obj.backOffset;
+    /*if (row == 2)
+        bob+=obj.backOffset;*/
     if ((obj.name.includes("Hairstyle")) && [1,3].includes(row))
         bob-=1;
     return row*32+obj.offset[1]+bob+(1-height)*obj.heightOffset;
@@ -378,9 +380,9 @@ function drawCanvas() {
                     if (sprite_special_list.includes(b.name)){
                         //wedding heads  
                         ctx.drawImage(b.image, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0,0), newY(b,0,0)+wedding_height,b.dimensions[0],b.dimensions[1]);//facing forward
-                        ctx.drawImage(b.image, oldX(b,0), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,0,0)+15, newY(b,2,0)+wedding_height-63,b.dimensions[0],b.dimensions[1]);
+                        ctx.drawImage(b.image, oldX(b,0), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,0,0)+15, newY(b,2,0)+wedding_height-62,b.dimensions[0],b.dimensions[1]);
                         if (b.name !="Eyes")
-                            ctx.drawImage(b.image, oldX(b,0), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,2,0)+30, newY(b,2,0)+wedding_height-63,b.dimensions[0],b.dimensions[1]);
+                            ctx.drawImage(b.image, oldX(b,0), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,2,0)+30, newY(b,2,0)+wedding_height-62,b.dimensions[0],b.dimensions[1]);
 
                         if (current_sprite_preset==1){
                             //female 
@@ -421,25 +423,29 @@ function drawCanvas() {
                 if (b.image.src !=""){ 
                     if (sprite_special_list.includes(b.name) || noWeddingOutfit){
                         //wedding  
+                        let wedding_offset =0;
+                        if (sprite_special_list.includes(b.name))
+                            wedding_offset =1;
                         ctx.drawImage(b.image, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0,0), newY(b,0,0)+wedding_height,b.dimensions[0],b.dimensions[1]);//facing forward
-                        ctx.drawImage(b.image, oldX(b,0), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,2,0)+15, newY(b,2,0)+wedding_height-63,b.dimensions[0],b.dimensions[1]);
+                        ctx.drawImage(b.image, oldX(b,0), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,2,0)+15, newY(b,2,0)+wedding_height-63+wedding_offset,b.dimensions[0],b.dimensions[1]);
                         if (b.name =="Eyes")
                             ctx.drawImage(closed_eyes_image, 36, 24,12,12,32, wedding_height+4,12,12);
-                        else  
-                            if (b.name=="Arms" || b.name.includes("sleeves"))  //shonky 'reaching forward' arm
+                        else{  
+                            if (b.name=="Arms" || b.name.includes("sleeves")|| b.name=="Gloves")   //shonky 'reaching forward' arm
                                 ctx.drawImage(b.image, oldX(b,2), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,2,0)+29, newY(b,2,0)+wedding_height-63,b.dimensions[0],b.dimensions[1]);
-                                else
-                                    ctx.drawImage(b.image, oldX(b,0), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,2,0)+30, newY(b,2,0)+wedding_height-63,b.dimensions[0],b.dimensions[1]);
-                    }
-                    //sleeping
-                    if (b.name =="Eyes")
-                        ctx.drawImage(closed_eyes_image, 36, 24,12,12,-1, sleeping_height+4,12,12);
-                    else  
-                        if (b.name=="Arms" || b.name.includes("sleeves"))  //shonky 'reaching forward' arm
-                            ctx.drawImage(b.image, oldX(b,2), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,2,0)-4, newY(b,2,0)+sleeping_height-63,b.dimensions[0],b.dimensions[1]);
                             else
-                                ctx.drawImage(b.image, oldX(b,0), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,2,0)-3, newY(b,2,0)+sleeping_height-63,b.dimensions[0],b.dimensions[1]);
-
+                                ctx.drawImage(b.image, oldX(b,0), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,2,0)+30, newY(b,2,0)+wedding_height-63+wedding_offset,b.dimensions[0],b.dimensions[1]);
+                        }
+                    }
+                    //sleeping/kissing
+                    if (b.name =="Eyes")
+                        ctx.drawImage(closed_eyes_image, 36, 24,12,12,-1, sleeping_height+3,12,12);
+                    else { 
+                        if (b.name=="Arms" || b.name.includes("sleeves")|| b.name=="Gloves")  //shonky 'reaching forward' arm
+                            ctx.drawImage(b.image, oldX(b,2), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,2,0)-4, newY(b,2,0)+sleeping_height-63,b.dimensions[0],b.dimensions[1]);
+                        else
+                            ctx.drawImage(b.image, oldX(b,0), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,2,0)-3, newY(b,2,0)+sleeping_height-63,b.dimensions[0],b.dimensions[1]);
+                    }    
                     if (sprite_special_list.includes(b.name)){    
                         if (current_sprite_preset==1){
                             //female 
