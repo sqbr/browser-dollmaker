@@ -57,7 +57,7 @@ function setTopbar(){
     let s = '';
     s+='<div class="four-columns">\n';
     s+='<div id = "image_typeBtn" style="justify-self: end;">Something</div>\n';
-    s+='<div><h2 id="imageType" text-align="left">'+imageType_list[current_imageType]+'</h2></div> \n';
+    s+='<div><h2 id="imageType" text-align="left">'+niceString(imageType_list[current_imageType])+'</h2></div> \n';
     if (current_imageType==0){
         s+='<div id = "panel_numBtn" style="justify-self: end;">Something</div>\n';
         s+='<div><h2 id="panelTitle" text-align="left">Broken</h2></div> \n';
@@ -74,7 +74,7 @@ function setTopbar(){
         document.getElementById("panelTitle").innerHTML = panelNum;
         document.getElementById("panel_numBtn").innerHTML = makeDropbtnString("Panels:", ["panel_num"], [1,2,3,4,5,6,7,8,9,10], "setPanelNum");
     } else{
-        document.getElementById("panelTitle").innerHTML = sprite_presets[current_sprite_preset];
+        document.getElementById("panelTitle").innerHTML = niceString(sprite_presets[current_sprite_preset]);
         document.getElementById("sprite_presetBtn").innerHTML = makeDropbtnString("Spritesheet:", ["current_sprite_preset"], sprite_presets, "setSpritePreset");
 
     }   
@@ -95,11 +95,11 @@ function setToolbar(){
     s+='    <div><h2 id="editingTitle" text-align="left">errors??</h2></div>\n';
     if (currently_editing==1){
         s+='    <div id = "current_clothes_Btn" style="justify-self: end;">Secret</div>\n'; 
-        s+='    <div><h2 id="clothesTitle" text-align="left">'+menu_object_names[current_clothing]+'</h2></div>\n';     
+        s+='    <div><h2 id="clothesTitle" text-align="left">'+niceString(menu_object_names[current_clothing])+'</h2></div>\n';     
     }
     s+='</div>\n';
     document.getElementById("toolbar").innerHTML = s;
-    document.getElementById("editingTitle").innerHTML = editing_list[currently_editing];
+    document.getElementById("editingTitle").innerHTML = niceString(editing_list[currently_editing]);
     document.getElementById("currently_editing_Btn").innerHTML = makeDropbtnString("Editing:", ["currently_editing"], editing_list, "setMenu");
     if (currently_editing==1){
         document.getElementById("current_clothes_Btn").innerHTML = makeDropbtnString("Editing:", ["current_clothing"], menu_object_names.slice(0,menu_object_names.length-1), "setCurrentClothing");
@@ -161,21 +161,21 @@ function setMenu(variablelist, number){
                 htmlString+=makeDropbtnString(current_item, [current_item], obj.name_list, "setClothing"); 
                 var current_value = obj.item;
             }
-            htmlString+='<div><h2 id="clothingTitle" text-align="left">'+obj.name_list[current_value]+'</h2></div>';
+            htmlString+='<div><h2 id="clothingTitle" text-align="left">'+niceString(obj.name_list[current_value])+'</h2></div>';
             htmlString+="</div>" 
             htmlString+="<div class=\"grid-choices\">"    
             htmlString+=makeDropbtnString("Main Colour", [current_item], outfit_colours, "setClothingColour");
-            htmlString+='<div><h2 id="clothingColour" text-align="left">'+colour_desc(obj.colour_list[obj.colour])+'</h2></div>';
+            htmlString+='<div><h2 id="clothingColour" text-align="left">'+niceString(colour_desc(obj.colour_list[obj.colour]))+'</h2></div>';
             htmlString+="</div>" 
             htmlString+="<div class=\"grid-choices\">" 
             htmlString+=makeDropbtnString("Highlight Colour", [current_item], outfit_colours, "setClothing2Colour");
-            htmlString+='<div><h2 id="clothingColour2" text-align="left">'+colour_desc(obj.colour_list[obj.colour2])+'</h2></div>';
+            htmlString+='<div><h2 id="clothingColour2" text-align="left">'+niceString(colour_desc(obj.colour_list[obj.colour2]))+'</h2></div>';
             htmlString+="</div>"
             if (sleeve_havers.includes(current_item)){
                 htmlString+="<div class=\"grid-choices\">" 
                 htmlString+=makeDropbtnString("Sleeves:", [current_item], sleeves_names, "setSleeves");
                 //document.getElementById("test").innerHTML = sleeve_list.toString();
-                htmlString+='<div><h2 id="hasSleevesTitle" text-align="left">'+sleeves_names[sleeve_list[sleeve_havers.indexOf(current_item)]]+'</h2></div>';
+                htmlString+='<div><h2 id="hasSleevesTitle" text-align="left">'+niceString(sleeves_names[sleeve_list[sleeve_havers.indexOf(current_item)]])+'</h2></div>';
                 htmlString+="</div>"
             }  
             
@@ -183,7 +183,7 @@ function setMenu(variablelist, number){
         case 2: //editing the expression
                 htmlString+="<div class=\"three-columns\"><div style=\"justify-self: end;\">"
                 htmlString+=makeDropbtnString("Panel:", ["Panel"], panel_list.slice(0,panelNum), "setPanel");
-                htmlString+="</div><h2 id = 'current_panel'>"+panel_list[current_panel] +"</h2></div>";
+                htmlString+="</div><h2 id = 'current_panel'>"+niceString(panel_list[current_panel]) +"</h2></div>";
                 htmlString+="<div class=\"grid-choices\">"
                 htmlString+=makeDropbtnString("Eyebrows", ["Eyebrows"], eyebrow_list, "setPanelVariable");
                 htmlString+=makeDropbtnString("Eyes", ["Eyes"], eye_expression_list_port, "setEyeExpression");

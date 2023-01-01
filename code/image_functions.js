@@ -273,8 +273,9 @@ function fixSpriteSources(){
                 obj_front = findNameMatch(portrait_objects, front_name); //what shirt etc we are wearing
                 current_sleeves_list = sleeve_list_port[k].sleeves_list;
                 current_item = obj_front.item_list[obj_front.value_list[0]];
-                if (current_item =="letterman"){
-                    b.item = 2;
+                if (false){//(current_item =="letterman"){
+                    b.item = Math.max(0,2*2-1+height);
+                    b.colour = obj_front.colour
                 } else{
                 if (current_sleeves_list.includes(current_item)){ //the current shirt etc can have sleeves
                         b.item =Math.max(0,2*sleeve_list[k]-1+height); //what current sleeve length is
@@ -333,6 +334,7 @@ function fixSpriteSources(){
 }
 
 function fixSpecialSpriteSources(){
+    updateSpecialSprites();
     for (let i = 0; i < special_sprite_objects.length; i += 1){
         let b = special_sprite_objects[i];
         let item = b.item_list[b.item];

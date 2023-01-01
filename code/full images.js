@@ -111,7 +111,7 @@ function setSpecialSpriteVariable(variablelist, number){
         let b = findNameMatch(special_sprite_objects, variablelist[i]); //the eleemnt of portrait_objects with the right vriablename
         b.item=number;
     }
-    drawCanvas();
+    //drawCanvas();
 }
 
 function setBaseSpriteVariable(variablelist, number){
@@ -252,7 +252,7 @@ function updateSpecialSprites(){
 
 function setWeddingClothes(variablelist, number){
     current_wedding_clothes = number;
-    updateSpecialSprites();
+    //updateSpecialSprites();
     drawCanvas();
 }
 
