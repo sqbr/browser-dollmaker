@@ -181,13 +181,15 @@ function setMenu(variablelist, number){
             
             break;    
         case 2: //editing the expression
-                htmlString+="<div class=\"three-columns\"><div style=\"justify-self: end;\">"
+                htmlString+="<div class=\"grid-pair\">" 
+                htmlString+="<div style=\"justify-self: end;\">"
                 htmlString+=makeDropbtnString("Panel:", ["Panel"], panel_list.slice(0,panelNum), "setPanel");
-                htmlString+="</div><h2 id = 'current_panel'>"+niceString(panel_list[current_panel]) +"</h2></div>";
-                htmlString+="<div class=\"grid-choices\">"
+                htmlString+="</div><div><h2 id = 'current_panel'>"+niceString(panel_list[current_panel]) +"</h2></div></div>";
+                htmlString+="<div class=\"four-columns\">"
                 htmlString+=makeDropbtnString("Eyebrows", ["Eyebrows"], eyebrow_list, "setPanelVariable");
                 htmlString+=makeDropbtnString("Eyes", ["Eyes"], eye_expression_list_port, "setEyeExpression");
                 htmlString+=makeDropbtnString("Mouth", ["Mouth"], mouth_list, "setPanelVariable");
+                htmlString+=makeDropbtnString("Blush", ["Blush"], blush_list, "setPanelVariable");
                 htmlString+="</div>"
                 break;   
         case 3: //editing the wedding outfit
@@ -269,10 +271,11 @@ function drawCanvas() {
     ctx_preview = canvas_preview.getContext("2d");
     fixSpriteSources();
     fixPortSources();
+    fixSpecialSpriteSources();
 
     //preview canvas
     canvas_preview.width = canvas_preview.width; //clears
-    document.getElementById("closet").innerHTML = print_portrait_objects();
+    //document.getElementById("closet").innerHTML = print_portrait_objects();
     let hair = findNameMatch(sprite_objects, "Hairstyle");
     for (let i = 0; i < sprite_objects.length; i += 1){ //sprite preview
         let b = sprite_objects[i];
@@ -333,9 +336,9 @@ function drawCanvas() {
         if (current_sprite_preset == 0)
             canvas.height = 128;
         else    
-            canvas.height = 600;
+            canvas.height = 416;
         
-        document.getElementById("closet").innerHTML = print_sprite_objects();
+        //document.getElementById("closet").innerHTML = print_sprite_objects();
         //sourceX, sourceY, sourceWidth, sourceHeight, destWidth and destHeight   
         for (let i = 0; i < sprite_objects.length; i += 1){
             let b = sprite_objects[i];
@@ -357,52 +360,6 @@ function drawCanvas() {
                         ctx.drawImage(b.image, oldX(b,0), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,3,2), newY(b,3,2),b.dimensions[0],b.dimensions[1]); //column 3 row 4 
                         ctx.drawImage(b.image, oldX(b,2), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,3,3), newY(b,3,3),b.dimensions[0],b.dimensions[1]); //column 4  row 4             
     
-                }/*else{ //code for flipping, not used any more
-                    if (b.rowNum==3){ //has a back
-                        //row 3
-                        for (let column = 0; column < 2; column += 1)
-                            if(b.name !="Hairstyle_top" || column >0)
-                                ctx.drawImage(b.image, oldX(b,column), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,column),newY(b,2,column),b.dimensions[0],b.dimensions[1]); //3rd row cols 1-2
-                        ctx.drawImage(b.image, oldX(b,0), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,2), newY(b,2,2),b.dimensions[0],b.dimensions[1]); //column 3  
-                        ctx.drawImage(b.image, oldX(b,2), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,3), newY(b,2,3),b.dimensions[0],b.dimensions[1]); //column 4   
-                    }           
-                    //row 4
-                    for(let x = 0; x < b.dimensions[0]; x++){ //janky way of flipping
-                        for (let column = 0; column < 2; column += 1)
-                            if(b.name !="Hairstyle_top" || column >0)
-                                ctx.drawImage(b.image, oldX(b,column)+x, oldY(b,1), 1, b.dimensions[1], newX(b,column)+b.dimensions[0] - x, newY(b,3,column), 1, b.dimensions[1]);
-                        ctx.drawImage(b.image, oldX(b,0)+x, oldY(b,1), 1, b.dimensions[1], newX(b,2)+b.dimensions[0] - x, newY(b,3,2), 1, b.dimensions[1]); 
-                        ctx.drawImage(b.image, oldX(b,2)+x, oldY(b,1), 1, b.dimensions[1], newX(b,3)+b.dimensions[0] - x, newY(b,3,3), 1, b.dimensions[1]);       
-                    }       
-                } */
-                if (current_sprite_preset >0){
-                    
-                    if (sprite_special_list.includes(b.name)){
-                        //wedding heads  
-                        ctx.drawImage(b.image, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0,0), newY(b,0,0)+wedding_height,b.dimensions[0],b.dimensions[1]);//facing forward
-                        ctx.drawImage(b.image, oldX(b,0), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,0,0)+15, newY(b,2,0)+wedding_height-62,b.dimensions[0],b.dimensions[1]);
-                        if (b.name !="Eyes")
-                            ctx.drawImage(b.image, oldX(b,0), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,2,0)+30, newY(b,2,0)+wedding_height-62,b.dimensions[0],b.dimensions[1]);
-
-                        if (current_sprite_preset==1){
-                            //female 
-                            //dance heads
-                            for (let column = 0; column < 2; column++)
-                                ctx.drawImage(b.image, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0,0)+column*16, newY(b,0,0)+dance_height,b.dimensions[0],b.dimensions[1]);
-                            ctx.drawImage(b.image, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0,0)+2*16-1, newY(b,0,0)+dance_height,b.dimensions[0],b.dimensions[1]);    
-                            ctx.drawImage(b.image, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0,0)+3*16, newY(b,0,0)+dance_height+1,b.dimensions[0],b.dimensions[1]);  
-                            for (let column = 0; column < 2; column++)
-                                ctx.drawImage(b.image, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0,0)+column*16, newY(b,0,0)+dance_height+33,b.dimensions[0],b.dimensions[1]);  
-                            ctx.drawImage(b.image, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0,0)+2*16, newY(b,0,0)+dance_height+32,b.dimensions[0],b.dimensions[1]);  
-                            ctx.drawImage(b.image, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0,0)+3*16, newY(b,0,0)+dance_height+33,b.dimensions[0],b.dimensions[1]);  
-                        } else{
-                            ctx.drawImage(b.image, oldX(b,0), oldY(b,3),b.dimensions[0],b.dimensions[1],newX(b,2,0), newY(b,2,0)+dance_height-64,b.dimensions[0],b.dimensions[1]);
-                            for (let column = 1; column < 4; column++)
-                                ctx.drawImage(b.image, oldX(b,0), oldY(b,3),b.dimensions[0],b.dimensions[1],newX(b,2,0)+column*16, newY(b,2,0)+dance_height-63,b.dimensions[0],b.dimensions[1]);  
-
-                        }   
-                    }    
-
                 }
                 
             }
@@ -427,14 +384,14 @@ function drawCanvas() {
                         if (sprite_special_list.includes(b.name))
                             wedding_offset =1;
                         ctx.drawImage(b.image, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0,0), newY(b,0,0)+wedding_height,b.dimensions[0],b.dimensions[1]);//facing forward
-                        ctx.drawImage(b.image, oldX(b,0), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,2,0)+15, newY(b,2,0)+wedding_height-63+wedding_offset,b.dimensions[0],b.dimensions[1]);
+                        ctx.drawImage(b.image, oldX(b,0), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,3,0)+15, newY(b,3,0)+wedding_height-96+wedding_offset,b.dimensions[0],b.dimensions[1]); //sideways not kissing
                         if (b.name =="Eyes")
                             ctx.drawImage(closed_eyes_image, 36, 24,12,12,32, wedding_height+4,12,12);
-                        else{  
+                        else{  //sideways, kissing 
                             if (b.name=="Arms" || b.name.includes("sleeves")|| b.name=="Gloves")   //shonky 'reaching forward' arm
-                                ctx.drawImage(b.image, oldX(b,2), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,2,0)+29, newY(b,2,0)+wedding_height-63,b.dimensions[0],b.dimensions[1]);
+                                ctx.drawImage(b.image, oldX(b,2), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,3,0)+29, newY(b,3,0)+wedding_height-96,b.dimensions[0],b.dimensions[1]);
                             else
-                                ctx.drawImage(b.image, oldX(b,0), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,2,0)+30, newY(b,2,0)+wedding_height-63+wedding_offset,b.dimensions[0],b.dimensions[1]);
+                                ctx.drawImage(b.image, oldX(b,0), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,3,0)+30, newY(b,3,0)+wedding_height-96+wedding_offset,b.dimensions[0],b.dimensions[1]);
                         }
                     }
                     //sleeping/kissing
@@ -442,9 +399,9 @@ function drawCanvas() {
                         ctx.drawImage(closed_eyes_image, 36, 24,12,12,-1, sleeping_height+3,12,12);
                     else { 
                         if (b.name=="Arms" || b.name.includes("sleeves")|| b.name=="Gloves")  //shonky 'reaching forward' arm
-                            ctx.drawImage(b.image, oldX(b,2), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,2,0)-4, newY(b,2,0)+sleeping_height-63,b.dimensions[0],b.dimensions[1]);
+                            ctx.drawImage(b.image, oldX(b,2), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,3,0)-4, newY(b,3,0)+sleeping_height-96,b.dimensions[0],b.dimensions[1]);
                         else
-                            ctx.drawImage(b.image, oldX(b,0), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,2,0)-3, newY(b,2,0)+sleeping_height-63,b.dimensions[0],b.dimensions[1]);
+                            ctx.drawImage(b.image, oldX(b,0), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,3,0)-3, newY(b,3,0)+sleeping_height-96,b.dimensions[0],b.dimensions[1]);
                     }    
                     if (sprite_special_list.includes(b.name)){    
                         if (current_sprite_preset==1){
@@ -462,9 +419,6 @@ function drawCanvas() {
                     }
                 }
             }
-            
-
-            fixSpecialSpriteSources();
             for (let i = 0; i < special_sprite_objects.length; i += 1){
                 let b = special_sprite_objects[i];
                 if (b.image.src !=""){ 
@@ -498,80 +452,58 @@ function drawCanvas() {
 
 function setup(){
     //document.getElementById("test").innerHTML = print_sprite_objects();
-    //setTopbar();
+    setTopbar();
 
     checkFileAPI();
     setToolbar();
 
-    load_variables = {ImageType: 0, height: height, SkinColour: 8, EyeColour: 0, HairColour: 10, Facial_hair: 0, Hair: 3,Nose: 2, Head: 1, EyeType: 0, }    
-
-    setImageType([], load_variables.ImageType)
-    
-    setHeight([],load_variables.height);
-
-    //Maru:
-    setSkinColour([],load_variables.SkinColour);
-    setBothColour(['Eyes'],load_variables.EyeColour);
-    setHairColour([],load_variables.HairColour);
-    setBothVariable(['Facial_hair'],load_variables.Facial_hair);
-    setHair([],load_variables.Hair);
-    setPortVariable(["Nose"],load_variables.Nose)
-    setPortVariable(['Head'],load_variables.Head)
-    setEyeType([''],load_variables.EyeType)
-
-    setShoes([],2);
-    setClothingColour(["Shoes"],29);
-    setClothing(["Gloves"],0);
-    setClothingColour(["Gloves"],0);
+    setEyeType([],0);
+    setSkinColour([],4);
+    setBothColour(['Eyes'],13);
+    setHairColour([],8);
+    setHair([],11);
+    setPortVariable(["Nose"],3);
+    setPortVariable(["Head"],3)
 
     setClothing(["Pants"],2);
     setClothingColour(["Pants"],10);
-    setClothing(["Neckwear"],0);
-    setClothingColour(["Neckwear"],1);
-    setClothing(["Eyewear"],1);
-    setClothingColour(["Eyewear"],5);
-    setClothing(["Earrings"],1);
-    setClothingColour(["Earrings"],13);
-
-    setClothing(["Shirt"],1);
+    
+    setClothing(["Shirt"],3);
     setClothingColour(["Shirt"],0);
-    setClothing2Colour(["Shirt"],10);
-    setSleeves(["Shirt"],1);
-    setClothing(["Overshirt"],1);
-    setClothingColour(["Overshirt"],0);
-    setClothing2Colour(["Overshirt"],10);
-    setSleeves(["Overshirt"],1);
-    setClothing(["Coat"],0);
-    setClothingColour(["Coat"],28);
-    setClothing2Colour(["Coat"],10);
-    setSleeves(["Coat"],1);
     
     current_panel = 0;
     setPanelVariable(["Eyebrows"],6);
-    setPanelVariable(["Mouth"],1);
+    setPanelVariable(["Mouth"],5);
     setEyeExpression(["Eyes"],0);
     current_panel = 1;
     setPanelVariable(["Eyebrows"],2);
     setPanelVariable(["Mouth"],1);
-    setEyeExpression(["Eyes"],1);
+    setEyeExpression(["Eyes"],2);
     current_panel = 2;
     setPanelVariable(["Eyebrows"],3);
-    setPanelVariable(["Mouth"],2);
-    setEyeExpression(["Eyes"],2);
+    setPanelVariable(["Mouth"],10);
+    setEyeExpression(["Eyes"],1);
     current_panel = 3;
     setPanelVariable(["Eyebrows"],1);
     setPanelVariable(["Mouth"],0);
     setEyeExpression(["Eyes"],0);
     current_panel = 4;
     setPanelVariable(["Eyebrows"],4);
-    setPanelVariable(["Mouth"],1);
-    setPanelVariable(["Eyes"],3);
-    setEyeExpression(["Blush"],1);
+    setPanelVariable(["Mouth"],3);
+    setEyeExpression(["Eyes"],3);
+    setPanelVariable(["Blush"],1);
     current_panel = 5;
     setPanelVariable(["Eyebrows"],5);
-    setPanelVariable(["Mouth"],3);
+    setPanelVariable(["Mouth"],12);
     setEyeExpression(["Eyes"],4);
+    for (current_panel = 6; current_panel < 10; current_panel += 1){ 
+        setPanelVariable(["Eyebrows"],6);
+        setPanelVariable(["Mouth"],5);
+        setEyeExpression(["Eyes"],0);
+    }
+
     current_panel = 0;
+
     drawCanvas();
 }
 let portrait_back = new Image();

@@ -2,7 +2,7 @@ const sprite_body_list = ["short","tall","short_bald","tall_bald"];
 
 const height_list = ["short","tall"];
 const sprite_body_names = ["Short","Tall"];
-const sprite_special_list = ["Head","Eyes","Hat","Hat_dec","Earrings","Eyewear","Facial_hair","Hairstyle","Hairstyle_front"]; //show up in flower dance and wedding
+const sprite_special_list = ["Head","Eyes","Hat","Hat_dec","Earrings","Eyewear","Facial_hair","Hairstyle","Hairstyle_top"]; //show up in flower dance and wedding
 
 
 const eyelash_list = eye_type_list_port;

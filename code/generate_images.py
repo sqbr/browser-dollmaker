@@ -39,7 +39,7 @@ for type in eye_type_list_port:
 
 mouth_list = ["toothy smile","grin","small laugh","wobbly smile","smile","slight smile","small smile", "flat","small frown","wobbly frown","frown","pout","sneer","clenched","shock","ooh",]
 
-blush_list = ["None","small"]
+blush_list = ["None","small","big"]
 
 #The same for sprites and portraits
 facial_hair_list_port = ["None", "beard", "moustache", "big moustache", "goatee", "soul patch", "fluffy goatee", ]
@@ -866,7 +866,7 @@ process_outfit_sprites()
 
 
 for c in closet:
-    if c.name in [""]:
+    if c.name in ["Blush"]:
         process_portrait_part(c)
 #process_all_portraits()
 #make_coat()
