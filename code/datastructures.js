@@ -244,8 +244,6 @@ function oldY(obj, row){
 function newX(obj, row, column){
     //return the X coordinate of the column of the new image
     let gap = 0;
-    if ((obj.name.includes("Hairstyle")) && (row==3))
-        gap =-1;
     return 16*column+obj.offset[0]+gap;
 }
 
@@ -257,8 +255,6 @@ function newY(obj, row,column){
         if (row == 2)
             bob-=1;
     }
-    /*if (row == 2)
-        bob+=obj.backOffset;*/
     if ((obj.name.includes("Hairstyle")) && [1,3].includes(row))
         bob-=1;
     return row*32+obj.offset[1]+bob+(1-height)*obj.heightOffset;

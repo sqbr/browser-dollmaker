@@ -22,7 +22,7 @@
 
 .grid-pair {
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: auto auto;
   column-gap: 0px;
   padding: 10px;
 }
