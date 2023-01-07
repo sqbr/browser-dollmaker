@@ -22,6 +22,16 @@ function dropBtnClose(){
       }
 }
 
+function exportCanvas(){ //broken
+    let mycanvas = document.getElementById("exportCanvas");
+    let img = mycanvas.toDataURL();
+    //window.open(img,"","width="+canvas_width+",height="+canvas_height);
+    //const a = document.createElement("a");
+    //a.href = img;
+    //a.setAttribute("download", "SketchDownload");
+    //a.click();
+}
+
 function download() {
   //from https://stackoverflow.com/questions/13405129/create-and-save-a-file-with-javascript
   var data = "";

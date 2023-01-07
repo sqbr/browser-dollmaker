@@ -204,6 +204,21 @@ function setMenu(variablelist, number){
 
     }
     document.getElementById("controls").innerHTML = htmlString;
+    //updateMenuCanvases();
+}
+
+function updateMenuCanvases(){
+    //updates the little canvas in the colour select screen
+    switch(currently_editing){
+        case 1: 
+            let current_item = menu_object_names[current_clothing];
+            let obj = findNameMatch(menu_objects, current_item);
+            var canvas = document.getElementById("clothingCanvas");
+            var ctx = canvas.getContext("2d");
+            ctx.fillStyle = obj.colour_list[obj.colour];
+            ctx.fillRect(0, 0, 20, 20);
+            break;
+    }
 }
 
 
@@ -433,10 +448,10 @@ function drawCanvas() {
 
 function setup(){
     //document.getElementById("test").innerHTML = print_sprite_objects();
-    //setTopbar();
+    setTopbar();
 
     checkFileAPI();
-    //setToolbar();
+    setToolbar();
 
     setEyeType([],0);
     setSkinColour([],4);
