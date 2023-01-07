@@ -21,27 +21,48 @@
 <div class="container text-center">
     <div class="row">
       <div class="col">
-        <a href="credits.html">Credits and Information</a>
+        <a href="credits.html">Credits</a>
       </div>
       <div class="col">
-        <button onclick="download()">Export</button>
+        <a href="about.html">About</a>
+      </div>
+      <div class="col">
+        <button class="btn btn-primary" onclick="download()">Export</button>
       </div>
       <div class="col">
         <div>
-          <input type="file" onchange='readText(this)' /></div>
+          <input type="file" onchange='readText(this)' class="form-control me-2"/></div>
       </div>
     </div>
   </div>
 <hr>
-<div class="container text-center">
+<div class="container text-center" x-data="{ html_imageType: 0,panelNum: 6,current_sprite_preset : 0,sprite_presets = ['Walk Sprites', 'Female Love Interest','Male Love Interest'] }">
   <div class="row">
-    <div class="col"><!-- column 1 -->
+    <div class="col"><!-- column 1, canvases -->
     <div><h2>Preview:</h2></div> 
     <canvas id="previewCanvas" width="512" height="256">
         Your browser does not support HTML5 Canvas. Try downloading latest Chrome, Firefox, Safari, Opera or Internet explorer.
     </canvas> 
     <hr>
-    <div class="container text-center"></div>
+    <div class="container text-center"> <!-- choices between canvases -->
+      <div  class="dropdown"><!-- image type choice -->
+        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" x-text="sprite_presets[current_imageType]">
+        </button>
+        <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#" x-on:click="current_imageType= 0, html_imageType=0" x-text="sprite_presets[0]"></a></li> 
+            <li><a class="dropdown-item" href="#" x-on:click="current_imageType= 1" x-text="sprite_presets[1]"></a></li> 
+            <li><a class="dropdown-item" href="#" x-on:click="current_imageType= 2" x-text="sprite_presets[2]"></a></li> 
+        </template>
+        </ul>
+      </div>
+
+    <div x-show="current_imageType === 0" class="dropdown">
+      Lorem ipsum description.
+    </div>
+    <div x-show="current_imageType === 1"class="dropdown" >
+      Lorem ipsum reviews.
+      </div>
+    </div>
     <hr>
     <h2 id="canvasName">Right Click to Save:</h2> 
     <canvas id="exportCanvas" width="512" height="768">
