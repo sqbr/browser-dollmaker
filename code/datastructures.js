@@ -102,7 +102,7 @@ function setTopbar(){
 
     }   
     
-}*/
+}
 
 function setToolbar(){
     let s = "";
@@ -133,7 +133,7 @@ function setImageType(variablelist, number){
     current_imageType = number;
     setTopbar(); 
     setMenu([], currently_editing); 
-}
+}*/
 
 function setMenu(variablelist, number){
     //Setting what section we're editing eg body/expressions etc

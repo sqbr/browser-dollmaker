@@ -30,7 +30,7 @@ let panel_width = 256; //width and height of panels in pixels
 
 const imageType_list =["Portrait","Sprite"];
 
-const editing_list =["Body","Outfit", "Expressions","Wedding","Flower Dance"];
+const editing_list =["Body","Outfit", "Expressions","Occasions"];
 
 const torso_offset_list = ["Torso","Shirt","Shirt_collar","Shirt_dec","Shirt_collar_dec","Shirt_sleeves","Shirt_sleeves_dec","Coat","Coat_sleeves","Coat_dec","Coat_sleeves_dec","Coat_back","Pants_top","Overshirt","Overshirt_dec","Overshirt_sleeves","Overshirt_sleeves_dec","Neckwear","Neckwear2","Neckwear3"];
 

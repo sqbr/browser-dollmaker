@@ -109,13 +109,12 @@
     </canvas>
     </div>
     <div class="col"><!-- column 2 -->
-    <div class="container text-center">
-      <div class="row">
-        <div class="col">
-          Tabs
-          </div>
-      </div>
-      </div>
+      <ul class="nav nav-tabs">
+        <template x-for="(edit_type, index) in editing_list">
+          <li class="nav-item">
+            <a x-bind:class="currently_editing==index ? 'nav-link active' : 'nav-link'" href="#" x-text="edit_type" x-on:click="currently_editing= index; setVariables($data);"></a></li>
+        </template>  
+      </ul>
       <hr>
 
       <div class="container text-center">
