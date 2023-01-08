@@ -51,7 +51,7 @@ function makeDropbtnString(name, variablelist, list, functionName){
     drop_string +='</div></div>';
     return drop_string;
 }
-
+/*
 function setPanelNum(variablelist, number){
     panelNum = number+1;
     document.getElementById("panelTitle").innerHTML = panelNum;
@@ -102,7 +102,7 @@ function setTopbar(){
 
     }   
     
-}
+}*/
 
 function setToolbar(){
     let s = "";

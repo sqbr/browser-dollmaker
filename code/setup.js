@@ -3,10 +3,12 @@
 let panelNum =6; //how many panels
 
 let current_imageType =0; //whether editing sprites or portraits
+let current_sprite_preset = 0;
+
 let currently_editing = 0; //which element of editing list we are editing
 let current_panel = 0;
 let current_clothing = 0;
-let current_sprite_preset = 0;
+
 let port_offset = 1;
 
 let height = 0;
