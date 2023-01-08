@@ -36,7 +36,6 @@
     </div>
   </div>
 <hr>
-<div class="container text-center" x-data="{ html_imageType: 0,panelNum: 6,current_sprite_preset : 0,sprite_presets = ['Walk Sprites', 'Female Love Interest','Male Love Interest'] }">
   <div class="row">
     <div class="col"><!-- column 1, canvases -->
     <div><h2>Preview:</h2></div> 
@@ -44,24 +43,29 @@
         Your browser does not support HTML5 Canvas. Try downloading latest Chrome, Firefox, Safari, Opera or Internet explorer.
     </canvas> 
     <hr>
-    <div class="container text-center"> <!-- choices between canvases -->
-      <div  class="dropdown"><!-- image type choice -->
+    <div class="container text-center" x-data> <!-- choices between canvases -->
+      <row>
+        <col>
+       <div  class="dropdown"><!-- image type choice -->
         <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" x-text="sprite_presets[current_imageType]">
         </button>
         <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#" x-on:click="current_imageType= 0, html_imageType=0" x-text="sprite_presets[0]"></a></li> 
+            <li><a class="dropdown-item" href="#" x-on:click="current_imageType= 0" x-text="sprite_presets[0]"></a></li> 
             <li><a class="dropdown-item" href="#" x-on:click="current_imageType= 1" x-text="sprite_presets[1]"></a></li> 
             <li><a class="dropdown-item" href="#" x-on:click="current_imageType= 2" x-text="sprite_presets[2]"></a></li> 
         </template>
         </ul>
       </div>
-
+    </col>
+    <col>
     <div x-show="current_imageType === 0" class="dropdown">
       Lorem ipsum description.
     </div>
     <div x-show="current_imageType === 1"class="dropdown" >
       Lorem ipsum reviews.
       </div>
+    </col>
+    </row>  
     </div>
     <hr>
     <h2 id="canvasName">Right Click to Save:</h2> 
