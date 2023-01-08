@@ -1,10 +1,8 @@
-const canvas_width = 512;
-const canvas_height = 768;
+//player controlled
 
-let panelNum = 6; //how many panels
-let panel_width = 256; //width and height of panels in pixels
+let panelNum =6; //how many panels
 
-let current_imageType = 0; //whether editing sprites or portraits
+let current_imageType =0; //whether editing sprites or portraits
 let currently_editing = 0; //which element of editing list we are editing
 let current_panel = 0;
 let current_clothing = 0;
@@ -21,6 +19,12 @@ let hasCoatSleeves = false;
 
 let eye_type = 0;
 let eye_expressions = listOf(0);
+
+//internal
+
+const canvas_width = 512;
+const canvas_height = 768;
+let panel_width = 256; //width and height of panels in pixels
 
 const imageType_list =["Portrait","Sprite"];
 

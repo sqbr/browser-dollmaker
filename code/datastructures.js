@@ -1,3 +1,26 @@
+function setVariables(data_object){
+    panelNum =data_object.panelNum; 
+
+    current_imageType = data_object.current_imageType; //whether editing sprites or portraits
+    currently_editing = data_object.currently_editing; //which element of editing list we are editing
+    current_panel = data_object.current_panel;
+    current_clothing = data_object.current_clothing;
+    current_sprite_preset = data_object.current_sprite_preset;
+    port_offset = data_object.port_offset;
+
+    height = data_object.height;
+
+    currentShoes = data_object.currentShoes;
+    currentGloves = data_object.currentGloves;
+    hasShirtSleeves = data_object.hasShirtSleeves;
+    hasOvershirtSleeves = data_object.hasOvershirtSleeves;
+    hasCoatSleeves = data_object.hasCoatSleeves;
+
+    eye_type = data_object.eye_type;
+
+    eye_expressions = data_object.eye_expressions; 
+}
+
 function niceString(input){
     //the text to put in a button
     let output = input.toString();

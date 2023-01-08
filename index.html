@@ -8,7 +8,27 @@
         <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
         <link href="style.css" rel="stylesheet" type = "text/css">
             </head>
-<body>
+<body x-data = "{ 
+  panelNum : 6,
+  current_imageType : 0,
+  currently_editing : 0,
+  current_panel : 0,
+  current_clothing : 0,
+  current_sprite_preset : 0,
+  port_offset : 1,
+
+  height : 0,
+
+  currentShoes : 0,
+  currentGloves : 0,
+  hasShirtSleeves : false,
+  hasOvershirtSleeves : false,
+  hasCoatSleeves : false,
+
+  eye_type : 0,
+  eye_expressions : listOf(0),
+}">
+
 <script src="code/setup.js"></script>
 <script src="code/portraits.js"></script>
 <script src="code/sprites.js"></script>
@@ -44,28 +64,35 @@
     </canvas> 
     <hr>
     <div class="container text-center" x-data> <!-- choices between canvases -->
-      <row>
-        <col>
+      <div class="row">
+        <div class="col">
        <div  class="dropdown"><!-- image type choice -->
-        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" x-text="sprite_presets[current_imageType]">
+        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" x-text="imageType_list[current_imageType]">
         </button>
         <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#" x-on:click="current_imageType= 0" x-text="sprite_presets[0]"></a></li> 
-            <li><a class="dropdown-item" href="#" x-on:click="current_imageType= 1" x-text="sprite_presets[1]"></a></li> 
-            <li><a class="dropdown-item" href="#" x-on:click="current_imageType= 2" x-text="sprite_presets[2]"></a></li> 
+          <template x-for="(preset, index) in imageType_list">
+            <li><a class="dropdown-item" href="#" x-on:click="current_imageType= index" x-text="preset"></a></li> 
         </template>
         </ul>
       </div>
-    </col>
-    <col>
+    </div>
+    <div class="col">
     <div x-show="current_imageType === 0" class="dropdown">
       Lorem ipsum description.
     </div>
     <div x-show="current_imageType === 1"class="dropdown" >
-      Lorem ipsum reviews.
+      <div  class="dropdown"><!-- image type choice -->
+        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" x-text="sprite_presets[current_sprite_preset]">
+        </button>
+        <ul class="dropdown-menu">
+          <template x-for="(preset, index) in sprite_presets">
+            <li><a class="dropdown-item" href="#" x-on:click="current_sprite_preset= index; setVariables($data)" x-text="preset"></a></li> 
+        </template>
+        </ul>
       </div>
-    </col>
-    </row>  
+      </div>
+    </div>
+  </div>  
     </div>
     <hr>
     <h2 id="canvasName">Right Click to Save:</h2> 
