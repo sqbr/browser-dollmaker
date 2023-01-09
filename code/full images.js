@@ -76,11 +76,6 @@ add_menu_object("Hairstyle", hair_menu_list, hair_colours,["Hair_front", "Hair_b
 
 const menu_object_names = menu_objects.map(nameOf);
 
-function setCurrentClothing(variablelist, number){
-    current_clothing=number;
-    setMenu([], 1)
-}
-
 function setPortVariable(variablelist, number){
     for (let i = 0; i < variablelist.length; i += 1) {
         let b = findNameMatch(portrait_objects, variablelist[i]); //the eleemnt of portrait_objects with the right vriablename
@@ -95,7 +90,6 @@ function setPortVariable(variablelist, number){
             }
         }
     }
-    drawCanvas();
 }
 
 function setSpriteVariable(variablelist, number){
@@ -103,7 +97,6 @@ function setSpriteVariable(variablelist, number){
         let b = findNameMatch(sprite_objects, variablelist[i]); //the eleemnt of portrait_objects with the right vriablename
         b.item=number;
     }
-    drawCanvas();
 }
 
 function setSpecialSpriteVariable(variablelist, number){
@@ -111,17 +104,6 @@ function setSpecialSpriteVariable(variablelist, number){
         let b = findNameMatch(special_sprite_objects, variablelist[i]); //the eleemnt of portrait_objects with the right vriablename
         b.item=number;
     }
-    //drawCanvas();
-}
-
-function setBaseSpriteVariable(variablelist, number){
-    // sprite which has two versions for each height
-    for (let i = 0; i < variablelist.length; i += 1) {
-        let b = findNameMatch(sprite_objects, variablelist[i]); //the eleemnt of portrait_objects with the right vriablename
-        b.base_item = number; 
-        b.item=2*number-1+height;
-    }
-    drawCanvas();
 }
 
 function setPanelVariable(variablelist, number){
@@ -129,13 +111,11 @@ function setPanelVariable(variablelist, number){
         let b = findNameMatch(portrait_objects, variablelist[i]); //the eleemnt of portrait_objects with the right vriablename
         b.value_list[current_panel]=number;
     }
-    drawCanvas();
 }
 
 function setBothColour(variablelist, number){
     setPortColour(variablelist, number);
     setSpriteColour(variablelist, number);
-    drawCanvas();
 }
 
 function setPortColour(variablelist, number){
@@ -181,7 +161,7 @@ function setClothing2Colour(variablelist, number){
     drawCanvas();
 }
 
-function setSkinColour(variablelist, number){
+/*function setSkinColour(variablelist, number){
     setPortColour(skin_list, number);
     setSpriteColour(["Torso","Arms","Head"], number);
     setSpecialSpriteColour(["Wedding","Flower dance"], number);
@@ -218,7 +198,7 @@ function setEyeType(variablelist, number){
         b.value_list[i] = eye_type*eye_expressions.length + eye_expressions[i];
     }
     drawCanvas();
-}
+}*/
 
 function setEyeExpression(variablelist, number){
     let b = findNameMatch(portrait_objects, "Eyes"); //the eleemnt of portrait_objects with the right vriablename
@@ -232,7 +212,7 @@ function setBothVariable(variablelist, number){
     setSpriteVariable(variablelist, number);
     drawCanvas();
 }
-
+/*
 function setShoes(variablelist, number){
     currentShoes = number;
     setSpriteVariable(["Shoes"], Math.max(0,2*currentShoes-1+height)); 
@@ -243,7 +223,7 @@ function setGloves(variablelist, number){
     currentGloves = number;
     setSpriteVariable(["Gloves"], Math.max(0,2*currentGloves-1+height)); 
     drawCanvas();
-}
+}*/
 
 function updateSpecialSprites(){
     setSpecialSpriteVariable(["Flower dance"], Math.max(0,4*current_dance_clothes+2*current_gender+height));
@@ -292,10 +272,8 @@ function setClothing(variablelist, number){
                 setSpriteVariable([name],current[2][j]);
         }
     } 
-    setMenu(variablelist,currently_editing);   
-    drawCanvas();
 }
-
+/*
 function setHair(variablelist, number){
     setClothing(["Hairstyle"],number);
     if ([0,50,51,52,53].includes(number)){ //all bald hairstyles
@@ -318,7 +296,7 @@ function setHeight(variablelist, number){
     let pants_obj = findNameMatch(sprite_obj.item_list, "trousers");
     pants_obj.location = "outfit/pants/longpants_"+height_list[height]
     drawCanvas();
-}
+}*/
 
 function getOffset(name){
     let obj = findNameMatch(portrait_objects, "Head");

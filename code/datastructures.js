@@ -9,6 +9,12 @@ function setVariables(data_object){
     port_offset = data_object.port_offset;
 
     height = data_object.height;
+    skinColour = data_object.current_skinColour;
+    hairColour = data_object.current_hairColour;
+    eyeColour = data_object.current_eyeColour;
+
+    hairStyle = data_object.current_hair;
+    current_Facialhair = data_object.current_Facialhair
 
     currentShoes = data_object.currentShoes;
     currentGloves = data_object.currentGloves;
@@ -21,23 +27,82 @@ function setVariables(data_object){
     eye_expressions = data_object.eye_expressions; 
 
     setPortVariable(["Head"],data_object.current_head);
+    setPortVariable(["Complexion"],data_object.current_complexion);
+    setPortVariable(["Nose","Nose_front"],data_object.current_nose);
+    setSpriteVariable(["Arms"], height);
+    setSpriteVariable(["Torso"], height); 
+    
+    setPortColour(skin_list, skinColour);
+    setPortColour(hair_list, hairColour);
+    setSpriteColour(["Hairstyle","Hairstyle_top", "Facial_hair"], hairColour);
+    setBothColour(["Eyes"], eyeColour);
+    setSpriteColour(["Torso","Arms","Head"], skinColour);
+    setSpecialSpriteColour(["Wedding","Flower dance"], skinColour);
+
+    setClothing(["Hairstyle"],hairStyle);
+    if ([0].includes(hairStyle)){ //all bald hairstyles
+        setSpriteVariable(["Head"], 0);
+    }
+    else{
+        setSpriteVariable(["Head"], 1);
+    } 
+
+    if (current_Facialhair<facial_hair_list_port.length){
+        setPortVariable(["Facial_hair"], current_Facialhair);
+        setSpriteVariable(["Facial_hair"], current_Facialhair);
+        setPortVariable(["Stubble"], 0);
+        } 
+    else{ //stubble
+        setPortVariable(["Facial_hair"], 0);
+        setSpriteVariable(["Facial_hair"], 0);
+        setPortVariable(["Stubble"],1);
+    }
+
+    let b = findNameMatch(sprite_objects, "Eyes");
+    b.item = eye_type;
+    b = findNameMatch(portrait_objects, "Eyes");
+    for (let i = 0; i < 10; i += 1) {
+        b.value_list[i] = eye_type*eye_expressions.length + eye_expressions[i];
+    }
+    
+    /*
+    setSpriteVariable(["Shoes"], Math.max(0,2*currentShoes-1+height)); 
+    setSpriteVariable(["Gloves"], Math.max(0,2*currentGloves-1+height));
+    let sprite_obj = findNameMatch(sprite_objects, "Pants");
+    let pants_obj = findNameMatch(sprite_obj.item_list, "trousers");
+    pants_obj.location = "outfit/pants/longpants_"+height_list[height];*/
+    drawCanvas();
 }
 
 document.addEventListener('alpine:init', () => {
-    Alpine.data('dropdown', (titleInput = "",valueNameInput = "",listNameInput = "[]") => ({
+    Alpine.data('dropdown', (titleInput = "",buttonNameInput = "",valueNameInput = "",listNameInput = "[]") => ({
       valueName: valueNameInput,
       listName: listNameInput,
       title: titleInput,
+      buttonName: buttonNameInput,
   
       dropbtn: {
           ['x-html']() {
-              output = '<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" x-text="'+'\''+this.title+'\'+niceString('+this.listName+"["+this.valueName+"])"+'"></button>';
-              output +='<ul class="dropdown-menu"> <template x-for=" (preset, index) in '+ this.listName+'">'; 
-              output +='<li><a class="dropdown-item" href="#" x-on:click="'+this.valueName+'=index;setVariables($data);" x-text="niceString(preset)"></a></li>'; 
-              output +='</template>'
-              return output 
+            output = "";
+            if (this.title!="")
+                output += this.title+': ';   
+            output +='<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" x-text="'+'\''+this.buttonName+'\'+niceString('+this.listName+"["+this.valueName+"])"+'"></button>';
+            output +='<ul class="dropdown-menu"> <template x-for=" (preset, index) in '+ this.listName+'">'; 
+            output +='<li><a class="dropdown-item" href="#" x-on:click="'+this.valueName+'=index;setVariables($data);" x-text="niceString(preset)"></a></li>'; 
+            output +='</template>'
+            return output 
           },
       },
+      colourbtn: {
+        ['x-html']() {
+            output = this.title+': '; 
+            output +='<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" x-text="'+'\''+this.buttonName+'\'+niceString(colour_desc('+this.listName+"["+this.valueName+"]))"+'"></button>';
+            output +='<ul class="dropdown-menu"> <template x-for=" (preset, index) in '+ this.listName+'">'; 
+            output +='<li><a class="dropdown-item" href="#" x-on:click="'+this.valueName+'=index;setVariables($data);" x-text="niceString(colour_desc(preset))"></a></li>'; 
+            output +='</template>'
+            return output 
+        },
+    },
   }))
   })
 
@@ -48,143 +113,9 @@ function niceString(input){
     return output.charAt(0).toUpperCase()+output.slice(1)
 
 }
-function makeDropbtnString(name, variablelist, list, functionName){
-    //Create a dropdown menu which is called name, and sets all the entires in variablelist to whatever value of list is chosen 
-    let id = name+functionName+'Dropdown';
-    
-    let drop_string = '<div class="dropdown">';
-    drop_string +='<button onclick="dropFunction(\''+id+'\')" class="dropbtn">'+name+'</button>';
-    drop_string +='<div id="'+id+'" class="dropdown-content">';
-    for (row = 0; row < list.length; row += 1) {
-        drop_string +='<button onclick="'+functionName+'(['
-        for (i = 0; i < variablelist.length; i += 1){
-            drop_string +="\'"+variablelist[i]+"\',"
-        }
-        drop_string +='],'+row+')" >'
-        if (functionName.includes("Colour")){
-            drop_string +=niceString(colour_desc(list[row]))
-        }else{
-            drop_string +=niceString(list[row]); //name of button
-        }
-        drop_string +='</button>';
-    }
-    drop_string +='</div></div>';
-    return drop_string;
-}
-/*
-function setPanelNum(variablelist, number){
-    panelNum = number+1;
-    document.getElementById("panelTitle").innerHTML = panelNum;
-}
-
-function setSpritePreset(variablelist, number){
-    current_sprite_preset = number;
-    let dance_object = findNameMatch(special_sprite_objects,"Flower dance");
-    let wedding_object = findNameMatch(special_sprite_objects,"Wedding");
-    if (current_sprite_preset==1){ //female love interest
-        current_gender = 0;
-        dance_object.dimensions = [64,64];
-        dance_object.heightOffset = 320;
-        wedding_object.heightOffset = 288;
-    } else{
-        current_gender = 1;
-        dance_object.dimensions = [64,32];
-        dance_object.heightOffset = 352;
-        wedding_object.heightOffset = 384;
-
-    }
-    document.getElementById("panelTitle").innerHTML = sprite_presets[current_sprite_preset];
-}
-
-function setTopbar(){
-    let s = '';
-    s+='<div class="four-columns">\n';
-    s+='<div id = "image_typeBtn" style="justify-self: end;">Something</div>\n';
-    s+='<div><h2 id="imageType" text-align="left">'+niceString(imageType_list[current_imageType])+'</h2></div> \n';
-    if (current_imageType==0){
-        s+='<div id = "panel_numBtn" style="justify-self: end;">Something</div>\n';
-        s+='<div><h2 id="panelTitle" text-align="left">Broken</h2></div> \n';
-        s+='</div>\n'; 
-    } else{
-        s+='<div id = "sprite_presetBtn" style="justify-self: end;">Something</div>\n';
-        s+='<div><h2 id="panelTitle" text-align="left">Broken</h2></div> \n';
-        s+='</div>\n';
-    }
-    s+='</div>\n';
-    document.getElementById("topbar").innerHTML = s;
-    document.getElementById("image_typeBtn").innerHTML = makeDropbtnString("Image Type:", ["current_imageType"], imageType_list, "setImageType");
-    if (current_imageType==0){
-        document.getElementById("panelTitle").innerHTML = panelNum;
-        document.getElementById("panel_numBtn").innerHTML = makeDropbtnString("Panels:", ["panel_num"], [1,2,3,4,5,6,7,8,9,10], "setPanelNum");
-    } else{
-        document.getElementById("panelTitle").innerHTML = niceString(sprite_presets[current_sprite_preset]);
-        document.getElementById("sprite_presetBtn").innerHTML = makeDropbtnString("Spritesheet:", ["current_sprite_preset"], sprite_presets, "setSpritePreset");
-
-    }   
-    
-}
-
-function setToolbar(){
-    let s = "";
-    s+='<div><button onclick="download()">Export</button></div>';
-    s+='<h2 style="justify-self: end;">Load:</h2><input type="file" onchange=\'readText(this)\' />'
-    if (currently_editing==1){
-        s+='<div class="four-columns">\n';
-    }else{
-        s+='<div class="three-columns">\n';
-    }
-    
-    s+='    <div id = "currently_editing_Btn" style="justify-self: end;">Secret</div>\n'; 
-    s+='    <div><h2 id="editingTitle" text-align="left">errors??</h2></div>\n';
-    if (currently_editing==1){
-        s+='    <div id = "current_clothes_Btn" style="justify-self: end;">Secret</div>\n'; 
-        s+='    <div><h2 id="clothesTitle" text-align="left">'+niceString(menu_object_names[current_clothing])+'</h2></div>\n';     
-    }
-    s+='</div>\n';
-    document.getElementById("toolbar").innerHTML = s;
-    document.getElementById("editingTitle").innerHTML = niceString(editing_list[currently_editing]);
-    document.getElementById("currently_editing_Btn").innerHTML = makeDropbtnString("Editing:", ["currently_editing"], editing_list, "setMenu");
-    if (currently_editing==1){
-        document.getElementById("current_clothes_Btn").innerHTML = makeDropbtnString("Editing:", ["current_clothing"], menu_object_names.slice(0,menu_object_names.length-1), "setCurrentClothing");
-    }
-}
-
-function setImageType(variablelist, number){
-    current_imageType = number;
-    setTopbar(); 
-    setMenu([], currently_editing); 
-}*/
 
 function setMenu(variablelist, number){
-    //Setting what section we're editing eg body/expressions etc
-    currently_editing = number;
-    //document.getElementById("editingTitle").innerHTML = editing_list[number];
-    setToolbar();
-    let htmlString = "";
     switch(number){
-        case 0: //editing the body
-            htmlString+="<div class=\"grid-choices\">"
-            htmlString+=makeDropbtnString("Skin Colour", skin_list, skin_colours, "setSkinColour");
-            htmlString+=makeDropbtnString("Eye Colour", ["Eyes"], eye_colours, "setBothColour");
-            htmlString+=makeDropbtnString("Hair Colour", hair_list, hair_colours, "setHairColour");
-            htmlString+="</div>"
-            
-            htmlString+="<div class=\"grid-choices\">"
-            htmlString+=makeDropbtnString("Head Shape", ["Head"], head_list, "setPortVariable");
-            htmlString+=makeDropbtnString("Height", ["Torso"], ["Short","Tall"], "setHeight");
-            htmlString+=makeDropbtnString("Nose Shape", ["Nose","Nose_front"], nose_list, "setPortVariable");
-            htmlString+="</div>" 
-            
-            htmlString+="<div class=\"grid-choices\">"
-            htmlString+=makeDropbtnString("Hairstyle", ["Hairstyle"], findNameMatch(menu_objects, "Hairstyle").name_list, "setHair");
-            htmlString+=makeDropbtnString("Facial Hair", ["Facial_hair"], facial_hair_list_menu, "setFacialHair");
-            htmlString+=makeDropbtnString("Eye Type", ["Eyes"], eye_type_list_port, "setEyeType");
-            htmlString+="</div>"  
-            
-            htmlString+="<div class=\"grid-choices\">"
-            htmlString+=makeDropbtnString("Complexion", ["Complexion"], complexion_list, "setPortVariable");
-            htmlString+="</div>"
-            break;    
         case 1: //editing the outfit
             //document.getElementById("test").innerHTML = print_menu_objects();
             let current_item = menu_object_names[current_clothing];

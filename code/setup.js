@@ -13,6 +13,10 @@ let port_offset = 1;
 
 let height = 0;
 
+let skinColour;
+let eyeColour;
+let hairColour;
+
 let currentShoes = 0;
 let currentGloves = 0;
 let hasShirtSleeves = false;
