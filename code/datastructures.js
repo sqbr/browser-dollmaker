@@ -46,7 +46,10 @@ function setVariables(data_object){
                 setClothing([current_item], data_object.current_menu_objects[i].item);
         }
         setClothingColour([current_item], data_object.current_menu_objects[i].colour1);
-        //setClothingColour2([current_item], data_object.current_menu_objects[i].colour2);
+        setClothingColour2([current_item], data_object.current_menu_objects[i].colour2);
+        if (sleeve_havers.indexOf(current_item)>-1){//this item has sleeves
+            sleeve_list[sleeve_havers.indexOf(current_item)] = data_object.current_menu_objects[i].sleeves;
+        }
     }
 
 
@@ -137,15 +140,6 @@ function niceString(input){
 function setMenu(variablelist, number){
     switch(number){
         case 1: //editing the outfit
-            //document.getElementById("test").innerHTML = print_menu_objects();
-               
-            htmlString+=makeDropbtnString("Main Colour", [current_item], outfit_colours, "setClothingColour");
-            htmlString+='<div><h2 id="clothingColour" text-align="left">'+niceString(colour_desc(obj.colour_list[obj.colour]))+'</h2></div>';
-            htmlString+="</div>" 
-            htmlString+="<div class=\"grid-choices\">" 
-            htmlString+=makeDropbtnString("Highlight Colour", [current_item], outfit_colours, "setClothing2Colour");
-            htmlString+='<div><h2 id="clothingColour2" text-align="left">'+niceString(colour_desc(obj.colour_list[obj.colour2]))+'</h2></div>';
-            htmlString+="</div>"
             if (sleeve_havers.includes(current_item)){
                 htmlString+="<div class=\"grid-choices\">" 
                 htmlString+=makeDropbtnString("Sleeves:", [current_item], sleeves_names, "setSleeves");

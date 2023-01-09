@@ -144,8 +144,6 @@ function setClothingColour(variablelist, number){
         setPortColour(menu_obj.port_main_list,number);
         setSpriteColour(menu_obj.sprite_main_list,number);
     } 
-    setMenu(variablelist,currently_editing);
-    drawCanvas();
 }
 
 function setClothingColour2(variablelist, number){
@@ -155,8 +153,6 @@ function setClothingColour2(variablelist, number){
         setPortColour(menu_obj.port_second_list,number);
         setSpriteColour(menu_obj.sprite_second_list,number);
     } 
-    setMenu(variablelist,currently_editing);
-    drawCanvas();
 }
 
 function setBothVariable(variablelist, number){
@@ -177,7 +173,6 @@ function setSleeves(variablelist, number){
     }
     else
         document.getElementById("test").innerHTML = "Unknown sleeve object"
-    drawCanvas();
 }
 
 function setClothing(variablelist, number){
@@ -202,30 +197,6 @@ function setClothing(variablelist, number){
         }
     } 
 }
-/*
-function setHair(variablelist, number){
-    setClothing(["Hairstyle"],number);
-    if ([0,50,51,52,53].includes(number)){ //all bald hairstyles
-        setSpriteVariable(["Head"], 0);
-    }
-    else{
-        setSpriteVariable(["Head"], 1);
-    }   
-    setHeight([], height);
-}
-
-function setHeight(variablelist, number){
-    height = number;
-    setSpriteVariable(["Arms"], number);
-    setSpriteVariable(["Shoes"], Math.max(0,2*currentShoes-1+height)); 
-    setSpriteVariable(["Gloves"], Math.max(0,2*currentGloves-1+height)); 
-    //document.getElementById("test").innerHTML = Math.max(0,2*currentGloves-1+height)+" "+Math.max(0,2*currentShoes-1+height);
-    setSpriteVariable(["Torso"], number); 
-    let sprite_obj = findNameMatch(sprite_objects, "Pants");
-    let pants_obj = findNameMatch(sprite_obj.item_list, "trousers");
-    pants_obj.location = "outfit/pants/longpants_"+height_list[height]
-    drawCanvas();
-}*/
 
 function getOffset(name){
     let obj = findNameMatch(portrait_objects, "Head");
