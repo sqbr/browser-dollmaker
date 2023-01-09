@@ -22,18 +22,24 @@ function setVariables(data_object){
     hasOvershirtSleeves = data_object.hasOvershirtSleeves;
     hasCoatSleeves = data_object.hasCoatSleeves;
 
-    eye_type = data_object.eye_type;
+    eye_type = data_object.current_eyeType;
 
     eye_expressions = data_object.eye_expressions; 
 
+    current_wedding_clothes = data_object.current_wedding_clothes; 
+    current_dance_clothes = data_object.current_dance_clothes;
+
     setValuelist("Eyebrows",data_object.eyebrow_expressions);
-    setValuelist("Eyes",data_object.eye_expressions);
     setValuelist("Mouth",data_object.mouth_expressions);
     setValuelist("Blush",data_object.blush_expressions);
 
     setPortVariable(["Head"],data_object.current_head);
     setPortVariable(["Complexion"],data_object.current_complexion);
     setPortVariable(["Nose","Nose_front"],data_object.current_nose);
+
+
+
+    //calculated from other variables
     setSpriteVariable(["Arms"], height);
     setSpriteVariable(["Torso"], height); 
     
@@ -70,7 +76,6 @@ function setVariables(data_object){
         b.value_list[i] = eye_type*eye_expressions.length + eye_expressions[i];
     }
 
-    
     
     /*
     setSpriteVariable(["Shoes"], Math.max(0,2*currentShoes-1+height)); 
@@ -161,14 +166,6 @@ function setMenu(variablelist, number){
             }  
             
             break;    
-        case 2: //editing the expression
-                
-                htmlString+=makeDropbtnString("Eyebrows", ["Eyebrows"], eyebrow_list, "setPanelVariable");
-                htmlString+=makeDropbtnString("Eyes", ["Eyes"], eye_expression_list_port, "setEyeExpression");
-                htmlString+=makeDropbtnString("Mouth", ["Mouth"], mouth_list, "setPanelVariable");
-                htmlString+=makeDropbtnString("Blush", ["Blush"], blush_list, "setPanelVariable");
-                htmlString+="</div>"
-                break;   
         case 3: //editing the wedding outfit
             htmlString+=makeDropbtnString("Wedding Outfit", ["current_wedding_clothes"], ["Regular outfit"].concat(wedding_clothes_list), "setWeddingClothes");
             break;   

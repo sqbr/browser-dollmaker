@@ -106,13 +106,6 @@ function setSpecialSpriteVariable(variablelist, number){
     }
 }
 
-function setPanelVariable(variablelist, number){
-    for (let i = 0; i < variablelist.length; i += 1) {
-        let b = findNameMatch(portrait_objects, variablelist[i]); //the eleemnt of portrait_objects with the right vriablename
-        b.value_list[current_panel]=number;
-    }
-}
-
 function setValuelist(variable, list){
     let b = findNameMatch(portrait_objects, variable); //the eleemnt of portrait_objects with the right vriablename
     b.value_list=list;
@@ -166,45 +159,6 @@ function setClothing2Colour(variablelist, number){
     drawCanvas();
 }
 
-/*function setSkinColour(variablelist, number){
-    setPortColour(skin_list, number);
-    setSpriteColour(["Torso","Arms","Head"], number);
-    setSpecialSpriteColour(["Wedding","Flower dance"], number);
-    drawCanvas();
-}
-
-function setHairColour(variablelist, number){
-    
-    setPortColour(hair_list, number);
-    setSpriteColour(["Hairstyle","Hairstyle_top", "Facial_hair"], number);
-    drawCanvas();
-}
-
-function setFacialHair(variablelist, number){
-    if (number<facial_hair_list_port.length){
-    setPortVariable(["Facial_hair"], number);
-    setSpriteVariable(["Facial_hair"], number);
-    setPortVariable(["Stubble"], 0);
-    } 
-    else{ //facial hair
-        setPortVariable(["Facial_hair"], 0);
-        setSpriteVariable(["Facial_hair"], 0);
-        setPortVariable(["Stubble"],1);
-    }
-    drawCanvas();
-}
-
-function setEyeType(variablelist, number){
-    eye_type = number;
-    let b = findNameMatch(sprite_objects, "Eyes");
-    b.item = number;
-    b = findNameMatch(portrait_objects, "Eyes");
-    for (let i = 0; i < 10; i += 1) {
-        b.value_list[i] = eye_type*eye_expressions.length + eye_expressions[i];
-    }
-    drawCanvas();
-}*/
-
 function setEyeExpression(variablelist, number){
     let b = findNameMatch(portrait_objects, "Eyes"); //the eleemnt of portrait_objects with the right vriablename
     eye_expressions[current_panel]=number;
@@ -235,17 +189,6 @@ function updateSpecialSprites(){
     setSpecialSpriteVariable(["Wedding"], Math.max(0,2*current_wedding_clothes-1+height)); 
 }
 
-function setWeddingClothes(variablelist, number){
-    current_wedding_clothes = number;
-    //updateSpecialSprites();
-    drawCanvas();
-}
-
-function setDanceClothes(variablelist, number){
-    current_dance_clothes = number;
-    updateSpecialSprites();
-    drawCanvas();
-}
 
 function setSleeves(variablelist, number){
     if (sleeve_havers.indexOf(variablelist[0])>-1){//this item has sleeves

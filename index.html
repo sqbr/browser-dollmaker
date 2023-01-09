@@ -28,7 +28,7 @@
   current_hair :11,
   current_Facialhair : 0,
   current_nose :3,
-  eye_type : 0,
+  current_eyeType : 0,
 
   currentShoes : 1,
   currentGloves : 0,
@@ -40,6 +40,9 @@
   eye_expressions : [0,2,1,0,3,4,0,0,0,0],
   mouth_expressions : [5,1,10,0,3,12,5,5,5,5],
   blush_expressions : [0,0,0,0,1,0,0,0,0,0],
+
+  current_wedding_clothes : 0,
+  current_dance_clothes : 0,
 
 }" x-init="setVariables($data)">
 
@@ -130,7 +133,7 @@
               <div class="row row-cols-2 gy-2">
                 <div class="col"><div x-data="dropdown('Head Shape','','current_head','head_list')" x-bind="dropbtn" ></div></div>
                 <div class="col"><div x-data="dropdown('Nose Shape','','current_nose','nose_list')" x-bind="dropbtn" ></div></div>
-                <div class="col"><div x-data="dropdown('Eye Type','','eye_type','eye_type_list_port')" x-bind="dropbtn" ></div></div>
+                <div class="col"><div x-data="dropdown('Eye Type','','current_eyeType','eye_type_list_port')" x-bind="dropbtn" ></div></div>
                 <div class="col"><div x-data="dropdown('Complexion','','current_complexion','complexion_list')" x-bind="dropbtn" ></div></div>
                 <div class="col"><div x-data="dropdown('Height','','height','[\'Short\',\'Tall\']')" x-bind="dropbtn" ></div></div>
               </div>
@@ -154,7 +157,10 @@
             </div>
 
             <div x-show="currently_editing === 3" ><!-- special -->
-              special
+              <div class="row row-cols-2 gy-2">
+              <div class="col"><div x-data="dropdown('Wedding Outfit','','current_wedding_clothes','[\'Regular outfit\'].concat(wedding_clothes_list)')" x-bind="dropbtn" ></div></div>
+              <div class="col"><div x-data="dropdown('Flower Dance Outfit','','current_dance_clothes','dance_clothes_list')" x-bind="dropbtn" ></div></div>
+              </div>  
 
             </div>
         </div>
