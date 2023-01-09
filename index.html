@@ -36,7 +36,11 @@
   hasOvershirtSleeves : false,
   hasCoatSleeves : false,
 
-  eye_expressions : listOf(0),
+  eyebrow_expressions : [6,2,3,1,4,5,6,6,6,6],
+  eye_expressions : [0,2,1,0,3,4,0,0,0,0],
+  mouth_expressions : [5,1,10,0,3,12,5,5,5,5],
+  blush_expressions : [0,0,0,0,1,0,0,0,0,0],
+
 }" x-init="setVariables($data)">
 
 <script src="code/setup.js"></script>
@@ -138,8 +142,14 @@
 
             </div>
 
-            <div x-show="currently_editing === 2" ><!-- expressions -->
-              expressions
+            <div class="row gy-2" x-show="currently_editing === 2" ><!-- expressions -->
+              <div x-data="dropdown('Panel','','current_panel','panel_list.slice(0,panelNum)')" x-bind="dropbtn" ></div>
+              <div class="row row-cols-2 gy-2">
+                <div class="col"><div x-data="dropdown('Eyebrows','','eyebrow_expressions[current_panel]','eyebrow_list')" x-bind="dropbtn" ></div></div>
+                <div class="col"><div x-data="dropdown('Eyes','','eye_expressions[current_panel]','eye_expression_list_port')" x-bind="dropbtn" ></div></div>
+                <div class="col"><div x-data="dropdown('Mouth','','mouth_expressions[current_panel]','mouth_list')" x-bind="dropbtn" ></div></div>
+                <div class="col"><div x-data="dropdown('Blush','','blush_expressions[current_panel]','blush_list')" x-bind="dropbtn" ></div></div>
+              </div>
 
             </div>
 

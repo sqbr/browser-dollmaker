@@ -113,6 +113,11 @@ function setPanelVariable(variablelist, number){
     }
 }
 
+function setValuelist(variable, list){
+    let b = findNameMatch(portrait_objects, variable); //the eleemnt of portrait_objects with the right vriablename
+    b.value_list=list;
+}
+
 function setBothColour(variablelist, number){
     setPortColour(variablelist, number);
     setSpriteColour(variablelist, number);

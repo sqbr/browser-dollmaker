@@ -26,6 +26,11 @@ function setVariables(data_object){
 
     eye_expressions = data_object.eye_expressions; 
 
+    setValuelist("Eyebrows",data_object.eyebrow_expressions);
+    setValuelist("Eyes",data_object.eye_expressions);
+    setValuelist("Mouth",data_object.mouth_expressions);
+    setValuelist("Blush",data_object.blush_expressions);
+
     setPortVariable(["Head"],data_object.current_head);
     setPortVariable(["Complexion"],data_object.current_complexion);
     setPortVariable(["Nose","Nose_front"],data_object.current_nose);
@@ -64,6 +69,8 @@ function setVariables(data_object){
     for (let i = 0; i < 10; i += 1) {
         b.value_list[i] = eye_type*eye_expressions.length + eye_expressions[i];
     }
+
+    
     
     /*
     setSpriteVariable(["Shoes"], Math.max(0,2*currentShoes-1+height)); 
@@ -155,11 +162,7 @@ function setMenu(variablelist, number){
             
             break;    
         case 2: //editing the expression
-                htmlString+="<div class=\"grid-pair\">" 
-                htmlString+="<div style=\"justify-self: end;\">"
-                htmlString+=makeDropbtnString("Panel:", ["Panel"], panel_list.slice(0,panelNum), "setPanel");
-                htmlString+="</div><div><h2 id = 'current_panel'>"+niceString(panel_list[current_panel]) +"</h2></div></div>";
-                htmlString+="<div class=\"four-columns\">"
+                
                 htmlString+=makeDropbtnString("Eyebrows", ["Eyebrows"], eyebrow_list, "setPanelVariable");
                 htmlString+=makeDropbtnString("Eyes", ["Eyes"], eye_expression_list_port, "setEyeExpression");
                 htmlString+=makeDropbtnString("Mouth", ["Mouth"], mouth_list, "setPanelVariable");
@@ -178,12 +181,6 @@ function setMenu(variablelist, number){
 
     }
     document.getElementById("controls").innerHTML = htmlString;
-}
-
-
-function setPanel(variablelist, number){
-    current_panel = number;
-    document.getElementById("current_panel").innerHTML = panel_list[current_panel];
 }
 
 function oldX(obj, column){
