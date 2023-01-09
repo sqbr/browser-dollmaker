@@ -16,8 +16,6 @@ function setVariables(data_object){
     hairStyle = data_object.current_hair;
     current_Facialhair = data_object.current_Facialhair
 
-    currentShoes = data_object.currentShoes;
-    currentGloves = data_object.currentGloves;
     hasShirtSleeves = data_object.hasShirtSleeves;
     hasOvershirtSleeves = data_object.hasOvershirtSleeves;
     hasCoatSleeves = data_object.hasCoatSleeves;
@@ -37,11 +35,23 @@ function setVariables(data_object){
     setPortVariable(["Complexion"],data_object.current_complexion);
     setPortVariable(["Nose","Nose_front"],data_object.current_nose);
 
+    for (let i = 0; i < menu_objects.length-1; i += 1){
+        current_item = data_object.current_menu_objects[i].name; 
+        if (current_item=="Shoes")
+            currentShoes = data_object.current_menu_objects[i].item;
+        else{
+            if (current_item=="Gloves")
+                currentGloves = data_object.current_menu_objects[i].item;
+            else
+                setClothing([current_item], data_object.current_menu_objects[i].item);
+        }
+        setClothingColour([current_item], data_object.current_menu_objects[i].colour1);
+        //setClothingColour2([current_item], data_object.current_menu_objects[i].colour2);
+    }
 
 
     //calculated from other variables
-    setSpriteVariable(["Arms"], height);
-    setSpriteVariable(["Torso"], height); 
+    setSpriteVariable(["Arms","Torso"], height);
     
     setPortColour(skin_list, skinColour);
     setPortColour(hair_list, hairColour);
@@ -51,7 +61,7 @@ function setVariables(data_object){
     setSpecialSpriteColour(["Wedding","Flower dance"], skinColour);
 
     setClothing(["Hairstyle"],hairStyle);
-    if ([0].includes(hairStyle)){ //all bald hairstyles
+    if ([0,51].includes(hairStyle)){ //all bald hairstyles
         setSpriteVariable(["Head"], 0);
     }
     else{
@@ -76,13 +86,11 @@ function setVariables(data_object){
         b.value_list[i] = eye_type*eye_expressions.length + eye_expressions[i];
     }
 
-    
-    /*
     setSpriteVariable(["Shoes"], Math.max(0,2*currentShoes-1+height)); 
     setSpriteVariable(["Gloves"], Math.max(0,2*currentGloves-1+height));
     let sprite_obj = findNameMatch(sprite_objects, "Pants");
     let pants_obj = findNameMatch(sprite_obj.item_list, "trousers");
-    pants_obj.location = "outfit/pants/longpants_"+height_list[height];*/
+    pants_obj.location = "outfit/pants/longpants_"+height_list[height];
     drawCanvas();
 }
 
@@ -130,26 +138,7 @@ function setMenu(variablelist, number){
     switch(number){
         case 1: //editing the outfit
             //document.getElementById("test").innerHTML = print_menu_objects();
-            let current_item = menu_object_names[current_clothing];
-            if (current_item == "Hairstyle")
-                document.getElementById("test").innerHTML = "Oops why is this editing the hairstyle??"
-            htmlString+="<div class=\"grid-choices\">"
-            
-            let obj = findNameMatch(menu_objects, current_item);
-            if (["Shoes","Gloves"].includes(current_item)){
-                htmlString+=makeDropbtnString(current_item, [current_item], obj.name_list, "set"+current_item);
-                if (current_item=="Shoes")
-                    var current_value = currentShoes;
-                else  
-                    var current_value = currentGloves;
-            }
-            else{
-                htmlString+=makeDropbtnString(current_item, [current_item], obj.name_list, "setClothing"); 
-                var current_value = obj.item;
-            }
-            htmlString+='<div><h2 id="clothingTitle" text-align="left">'+niceString(obj.name_list[current_value])+'</h2></div>';
-            htmlString+="</div>" 
-            htmlString+="<div class=\"grid-choices\">"    
+               
             htmlString+=makeDropbtnString("Main Colour", [current_item], outfit_colours, "setClothingColour");
             htmlString+='<div><h2 id="clothingColour" text-align="left">'+niceString(colour_desc(obj.colour_list[obj.colour]))+'</h2></div>';
             htmlString+="</div>" 
@@ -166,19 +155,8 @@ function setMenu(variablelist, number){
             }  
             
             break;    
-        case 3: //editing the wedding outfit
-            htmlString+=makeDropbtnString("Wedding Outfit", ["current_wedding_clothes"], ["Regular outfit"].concat(wedding_clothes_list), "setWeddingClothes");
-            break;   
-        case 4: //editing the dance outfit
-            htmlString+=makeDropbtnString("Flower Dance Outfit", ["current_dance_clothes"], dance_clothes_list, "setDanceClothes");
-            break;   
-
-        default:
-            htmlString = "Unknown value "+number;
-
+        }
     }
-    document.getElementById("controls").innerHTML = htmlString;
-}
 
 function oldX(obj, column){
     //return the X coordinate of the column of the original image

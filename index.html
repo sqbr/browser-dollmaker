@@ -30,8 +30,6 @@
   current_nose :3,
   current_eyeType : 0,
 
-  currentShoes : 1,
-  currentGloves : 0,
   hasShirtSleeves : true,
   hasOvershirtSleeves : false,
   hasCoatSleeves : false,
@@ -40,6 +38,19 @@
   eye_expressions : [0,2,1,0,3,4,0,0,0,0],
   mouth_expressions : [5,1,10,0,3,12,5,5,5,5],
   blush_expressions : [0,0,0,0,1,0,0,0,0,0],
+
+  current_menu_objects : [
+  {name: 'Hat', item: 0, colour1: 0,colour2: 0},
+  {name: 'Neckwear', item: 0, colour1: 0,colour2: 0},
+  {name: 'Eyewear', item: 0, colour1: 0,colour2: 0},
+  {name: 'Earrings', item: 0, colour1: 0,colour2: 0},
+  {name: 'Shirt', item: 3, colour1: 0,colour2: 0},
+  {name: 'Overshirt', item: 0, colour1: 0,colour2: 0},
+  {name: 'Coat', item: 0, colour1: 0,colour2: 0},
+  {name: 'Pants', item: 2, colour1: 10,colour2: 0},
+  {name: 'Shoes', item: 1, colour1: 3,colour2: 0},
+  {name: 'Gloves', item: 0, colour1: 0,colour2: 0},
+  ],
 
   current_wedding_clothes : 0,
   current_dance_clothes : 0,
@@ -142,7 +153,13 @@
 
             <div class="row gy-2" x-show="currently_editing === 1" x-data = "{current_item : menu_object_names[current_clothing]}"><!-- outfit -->
               <div class="col"><div x-data="dropdown('Clothing Item','','current_clothing','menu_object_names')" x-bind="dropbtn" ></div></div>
-
+              <div class="row row-cols-2 gy-2">
+                <div class="col"><div x-data="dropdown('Style','','current_menu_objects[current_clothing].item','menu_objects[current_clothing].name_list')" x-bind="dropbtn" ></div></div>
+              </div>
+              <div class="row row-cols-2 gy-2">
+                <!--<div class="col"><div x-data="dropdown('Main Colour','','current_menu_objects[current_clothing].colour','outfit_colours')" x-bind="colourbtn" ></div></div>
+                <div class="col"><div x-data="dropdown('Highlight Colour','','current_menu_objects[current_clothing].colour2','outfit_colours')" x-bind="colourbtn" ></div></div>-->
+              </div>
             </div>
 
             <div class="row gy-2" x-show="currently_editing === 2" ><!-- expressions -->

@@ -148,7 +148,7 @@ function setClothingColour(variablelist, number){
     drawCanvas();
 }
 
-function setClothing2Colour(variablelist, number){
+function setClothingColour2(variablelist, number){
     for (let i = 0; i < variablelist.length; i += 1) {
         let menu_obj = findNameMatch(menu_objects, variablelist[i]);
         menu_obj.colour2 = number;
@@ -159,30 +159,11 @@ function setClothing2Colour(variablelist, number){
     drawCanvas();
 }
 
-function setEyeExpression(variablelist, number){
-    let b = findNameMatch(portrait_objects, "Eyes"); //the eleemnt of portrait_objects with the right vriablename
-    eye_expressions[current_panel]=number;
-    b.value_list[current_panel] = eye_type*eye_expressions.length + number;
-    drawCanvas();
-}
-
 function setBothVariable(variablelist, number){
     setPortVariable(variablelist, number);
     setSpriteVariable(variablelist, number);
     drawCanvas();
 }
-/*
-function setShoes(variablelist, number){
-    currentShoes = number;
-    setSpriteVariable(["Shoes"], Math.max(0,2*currentShoes-1+height)); 
-    drawCanvas();
-}
-
-function setGloves(variablelist, number){
-    currentGloves = number;
-    setSpriteVariable(["Gloves"], Math.max(0,2*currentGloves-1+height)); 
-    drawCanvas();
-}*/
 
 function updateSpecialSprites(){
     setSpecialSpriteVariable(["Flower dance"], Math.max(0,4*current_dance_clothes+2*current_gender+height));
