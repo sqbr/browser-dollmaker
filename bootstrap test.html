@@ -25,16 +25,17 @@
         }
       }
 
+
       document.addEventListener('alpine:init', () => {
-        Alpine.data('dropdown', (listNameInput = "[]", valueNameInput = "") => ({
-          listName: listNameInput,
+        Alpine.data('dropdown', (valueNameInput = "",listNameInput = "[]") => ({
           valueName: valueNameInput,
-       
+          listName: listNameInput,
+      
           dropbtn: {
               ['x-html']() {
                   output = '<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" x-text="'+this.listName+"["+this.valueName+"]"+'"></button>';
                   output +='<ul class="dropdown-menu"> <template x-for=" (preset, index) in '+ this.listName+'">'; 
-                  output +='<li><a class="dropdown-item" href="#" x-on:click="'+this.valueName+'= index;" x-text="preset"></a></li>'; 
+                  output +='<li><a class="dropdown-item" href="#" x-on:click="'+this.valueName+'=index;" x-text="preset"></a></li>'; 
                   output +='</template>'
                   return output 
               },
@@ -48,8 +49,7 @@
       <button @click="display = ! display; drawCanvas($data);" x-text="display"></button>
     </div>
     
-    <div x-data="dropdown('test_array','currentValue')">
-      <div x-bind="dropbtn" ></div>
+    <div x-data="dropdown('currentValue','test_array')" x-bind="dropbtn"></div>
 
 
   </div>

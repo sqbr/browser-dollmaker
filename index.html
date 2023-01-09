@@ -19,6 +19,8 @@
 
   height : 0,
 
+  current_head :0,
+
   currentShoes : 0,
   currentGloves : 0,
   hasShirtSleeves : false,
@@ -66,38 +68,22 @@
     <div class="container text-center" x-data> <!-- choices between canvases -->
       <div class="row">
         <div class="col">
-       <div  class="dropdown"><!-- image type choice -->
-        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" x-text="imageType_list[current_imageType]">
-        </button>
-        <ul class="dropdown-menu">
-          <template x-for="(preset, index) in imageType_list">
-            <li><a class="dropdown-item" href="#" x-on:click="current_imageType= index;setVariables($data);" x-text="preset"></a></li> 
-        </template>
-        </ul>
-      </div>
+          <div x-data="dropdown('','current_imageType','imageType_list')" x-bind="dropbtn"></div>
     </div>
     <div class="col">
     <div x-show="current_imageType === 0" class="dropdown">
-      <div  class="dropdown"><!-- number of panels choice -->
-        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" x-text="'Number of panels:'+panelNum">
+       <div  class="dropdown"><!--number of panels choice-->
+        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" x-text="'Number of panels: '+panelNum">
         </button>
         <ul class="dropdown-menu">
           <template x-for="index in 10">
             <li><a class="dropdown-item" href="#" x-on:click="panelNum= index; setVariables($data);" x-text="index"></a></li> 
         </template>
         </ul>
-      </div>
+      </div> 
     </div>
     <div x-show="current_imageType === 1"class="dropdown" >
-      <div  class="dropdown"><!-- image type choice -->
-        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" x-text="sprite_presets[current_sprite_preset]">
-        </button>
-        <ul class="dropdown-menu">
-          <template x-for="(preset, index) in sprite_presets">
-            <li><a class="dropdown-item" href="#" x-on:click="current_sprite_preset= index; setVariables($data);" x-text="preset"></a></li> 
-        </template>
-        </ul>
-      </div>
+      <div x-data="dropdown('','current_sprite_preset','sprite_presets')" x-bind="dropbtn"></div>
       </div>
     </div>
   </div>  
@@ -119,8 +105,24 @@
 
       <div class="container text-center">
         <div class="row">
-          <div class="col">
-            <div x-data="drop-button"></div>
+            <div class="col"x-show="currently_editing === 0" > <!-- body -->
+              <div x-data="dropdown('','current_head','head_list')" x-bind="dropbtn"></div>
+
+            </div>
+
+            <div x-show="currently_editing === 1" ><!-- outfit -->
+              outfit
+
+            </div>
+
+            <div x-show="currently_editing === 2" ><!-- expressions -->
+              expressions
+
+            </div>
+
+            <div x-show="currently_editing === 3" ><!-- special -->
+              special
+
             </div>
         </div>
         </div> 

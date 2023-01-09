@@ -19,7 +19,27 @@ function setVariables(data_object){
     eye_type = data_object.eye_type;
 
     eye_expressions = data_object.eye_expressions; 
+
+    setPortVariable(["Head"],data_object.current_head);
 }
+
+document.addEventListener('alpine:init', () => {
+    Alpine.data('dropdown', (titleInput = "",valueNameInput = "",listNameInput = "[]") => ({
+      valueName: valueNameInput,
+      listName: listNameInput,
+      title: titleInput,
+  
+      dropbtn: {
+          ['x-html']() {
+              output = '<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" x-text="'+'\''+this.title+'\'+niceString('+this.listName+"["+this.valueName+"])"+'"></button>';
+              output +='<ul class="dropdown-menu"> <template x-for=" (preset, index) in '+ this.listName+'">'; 
+              output +='<li><a class="dropdown-item" href="#" x-on:click="'+this.valueName+'=index;setVariables($data);" x-text="niceString(preset)"></a></li>'; 
+              output +='</template>'
+              return output 
+          },
+      },
+  }))
+  })
 
 function niceString(input){
     //the text to put in a button
@@ -457,7 +477,7 @@ function drawCanvas() {
 function setup(){
     //document.getElementById("test").innerHTML = print_sprite_objects();
     //setTopbar();
-
+    /*
     checkFileAPI();
     //setToolbar();
 
@@ -506,7 +526,7 @@ function setup(){
         setEyeExpression(["Eyes"],0);
     }
 
-    current_panel = 0;
+    current_panel = 0;*/
 
     drawCanvas();
 }
