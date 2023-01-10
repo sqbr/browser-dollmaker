@@ -248,7 +248,7 @@ function fixPortSources(){
                     }
                 }
             }
-            if (name =="none"){
+            if (["none","None"].includes(name)){
                 b.image_list[j].src  ="";
 
             } else{

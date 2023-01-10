@@ -107,18 +107,20 @@ document.addEventListener('alpine:init', () => {
                 output += this.title+': ';   
             output +='<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" x-text="'+'\''+this.buttonName+'\'+niceString('+this.listName+"[$store.alpineData."+this.valueName+"])"+'"></button>';
             output +='<ul class="dropdown-menu"> <template x-for=" (preset, index) in '+ this.listName+'">'; 
-            output +='<li><a class="dropdown-item" href="#" x-on:click="$store.alpineData.'+this.valueName+'=index;setVariables(Alpine.store(\'alpineData\'));" x-text="niceString(preset)"></a></li>'; 
-            output +='</template>'
+            output +='<li><button class="dropdown-item" x-on:click="$store.alpineData.'+this.valueName+'=index;setVariables(Alpine.store(\'alpineData\'));" x-text="niceString(preset)"></a></li>'; 
+            output +='</template></ul>'
             return output 
           },
       },
       colourbtn: {
         ['x-html']() {
-            output = this.title+': '; 
+            output = this.title+': ';
+
             output +='<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" x-text="'+'\''+this.buttonName+'\'+niceString(colour_desc('+this.listName+"[$store.alpineData."+this.valueName+"]))"+'"></button>';
             output +='<ul class="dropdown-menu"> <template x-for=" (preset, index) in '+ this.listName+'">'; 
-            output +='<li><a class="dropdown-item" href="#" x-on:click="$store.alpineData.'+this.valueName+'=index;setVariables(Alpine.store(\'alpineData\'));" x-text="niceString(colour_desc(preset))"></a></li>'; 
-            output +='</template>'
+            output +='<li><button class="dropdown-item" x-on:click="$store.alpineData.'+this.valueName+'=index;setVariables(Alpine.store(\'alpineData\'));" x-text="niceString(colour_desc(preset))"></a></li>'; 
+            //'+this.listName+'[$store.alpineData.'+this.valueName+']
+            output +='</template></ul>'
             return output 
         },
     },
@@ -252,7 +254,7 @@ function drawCanvas() {
 
     //preview canvas
     canvas_preview.width = canvas_preview.width; //clears
-    //document.getElementById("closet").innerHTML = print_portrait_objects();
+    document.getElementById("closet").innerHTML = print_portrait_objects();
     let hair = findNameMatch(sprite_objects, "Hairstyle");
     for (let i = 0; i < sprite_objects.length; i += 1){ //sprite preview
         let b = sprite_objects[i];
