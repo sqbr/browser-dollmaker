@@ -577,39 +577,6 @@ def process_image(name, location, colour,colour_list,type):
                     Adata[x, y] = colour_this_noshadow(Adata[x, y], colour_list[colour])  
         img.save(save_string)        
 
-def trimhats():
-    image_string = "../images/bases/sprites/hats/hats_original.png"
-    save_string = "../images/bases/sprites/hats/hats.png"
-    im_old = Image.open(image_string) 
-    im_new = Image.new("RGBA", (12*16, 32*32))
-    for row in range(32):
-        for column in range(12):
-            region = im_old.crop((column*20+2, row*20+3,column*20+18,row*20+20))
-            im_new.paste(region,(column*16, row*32, column*16+16,row*32+17))
-    im_new.save(save_string)  
-
-def fliphair():
-    image_string = "../images/bases/sprites/hair/hairstyles_base.png"
-    save_string = "../images/bases/sprites/hair/temp.png"
-    im_old = Image.open(image_string) 
-    im_new = Image.new("RGBA", (128, 896))
-    for meta_row in range(7):
-        #rows 1 and 2
-        region = im_old.crop((0, meta_row*96,128,meta_row*96+64))
-        im_new.paste(region,(0, meta_row*128,128,meta_row*128+64))
-
-        #row 3
-        for column in range(8):
-            for x in range(16):
-                region = im_old.crop((column*16+x, meta_row*96+32,column*16+x+1,meta_row*96+64))
-                im_new.paste(region,(column*16+16-x, meta_row*128+64, column*16+17-x,meta_row*128+96))
-
-        #row 4
-        region = im_old.crop((0, meta_row*96+64,128,meta_row*96+96))
-        im_new.paste(region,(0, meta_row*128+96,128,meta_row*128+128))
-            
-    im_new.save(save_string)   
-
 def flipImage():
     image_string = "../images/bases/sprites/outfit/pants/pants_base.png"
     save_string = "../images/bases/sprites/temp.png"
@@ -639,24 +606,25 @@ def flipImage():
             region = im_old.crop((original_meta_col_width*meta_column, meta_row*original_meta_row_height+64,new_meta_col_width+original_meta_col_width*meta_column,meta_row*original_meta_row_height+96))
             im_new.paste(region,(new_meta_col_width*meta_column, meta_row*128+96,new_meta_col_width*meta_column+new_meta_col_width,meta_row*128+128))
                 
-    im_new.save(save_string)           
+    im_new.save(save_string)            
 
-def make_coat():
-    image_string = "../images/bases/sprites/outfit/shirts/decorations/shirt decs_base.png"
-    save_string = "../images/bases/temp.png"
-    im_old = Image.open(image_string) 
-    im_new = Image.new("RGBA", (16*4, 32*4))
-    for column in range(4):
-        for row in range(3):
-            oldx = 32+8*row
-            if row ==2:
-                oldx = 32+8*3
-            region = im_old.crop((88, oldx,88+8,oldx+8))
-            x = column*16 +4
-            y = row*32 +15  
-            im_new.paste(region,(x, y, x+8,y+8))
-    im_new.save(save_string)   
-
+def makeSwatches(list,filepath ):
+    square_width = 32
+    width = 5
+    height = int(len(list)/width)+1
+    save_string = "../images/"+filepath+".png"
+    swatch = Image.new("RGBA", (square_width*width, square_width*height))
+    Adata = swatch.load()    
+    for i in range(width):
+        for j in range(height):
+            current = j*width+i
+            if current > len(list) - 1:
+                break
+            current_colour = list[current] 
+            for x in range(square_width):
+                for y in range(square_width):
+                    Adata[square_width*i+x,square_width*j+y] = hex_to_rgba(current_colour)
+    swatch.save(save_string)
 
 def list_string(listname, list):
     # Creates a string to define a list for generated.js
@@ -848,10 +816,13 @@ def process_outfit_sprites():
 write_temp()
 write_variables()
 
-process_body_sprites()
-process_outfit_sprites()
+#process_body_sprites()
+#process_outfit_sprites()
 
-
+makeSwatches(eye_colours,"eye_colours" )
+makeSwatches(outfit_colours,"outfit" )
+makeSwatches(skin_colours,"skin_colours" )
+makeSwatches(hair_colours,"hair_colours" )
 
 #flipImage()
 
