@@ -19,9 +19,6 @@ let hairColour;
 
 let currentShoes = 0;
 let currentGloves = 0;
-let hasShirtSleeves = false;
-let hasOvershirtSleeves = false;
-let hasCoatSleeves = false;
 
 let eye_type = 0;
 let eye_expressions = listOf(0);

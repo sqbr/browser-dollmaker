@@ -15,7 +15,6 @@
   current_panel : 0,
   current_clothing : 0,
   current_sprite_preset : 0,
-  port_offset : 1,
 
   current_skinColour: 4,
   current_eyeColour: 13,
@@ -29,10 +28,6 @@
   current_Facialhair : 0,
   current_nose :3,
   current_eyeType : 0,
-
-  hasShirtSleeves : true,
-  hasOvershirtSleeves : false,
-  hasCoatSleeves : false,
 
   eyebrow_expressions : [6,2,3,1,4,5,6,6,6,6],
   eye_expressions : [0,2,1,0,3,4,0,0,0,0],
@@ -79,7 +74,7 @@
       </div>
       <div class="col">
         <div>
-          <input type="file" onchange='readText(this)' class="form-control me-2"/></div>
+          <input type="file" @input='readText(Object.values($event.target.files)[0],$data)'  class="form-control me-2"/></div>
       </div>
     </div>
   </div>

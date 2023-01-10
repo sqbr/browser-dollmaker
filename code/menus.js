@@ -1,58 +1,31 @@
-/* When the user clicks on the button, 
-toggle between hiding and showing the dropdown content */
-function dropFunction(id) {
-    document.getElementById(id).classList.toggle("show");
-  }
-  
-  // Close the dropdown if the user clicks outside of it
-  window.onclick = function(event) {
-    if (!event.target.matches('.dropbtn')) {
-        dropBtnClose()
-    }
-  }
-
-function dropBtnClose(){
-    let dropdowns = document.getElementsByClassName("dropdown-content");
-      let i;
-      for (i = 0; i < dropdowns.length; i++) {
-        let openDropdown = dropdowns[i];
-        if (openDropdown.classList.contains('show')) {
-          openDropdown.classList.remove('show');
-        }
-      }
-}
-
 function download() {
   //from https://stackoverflow.com/questions/13405129/create-and-save-a-file-with-javascript
   var data = "";
   var filename = "dollmaker_save.json";
   var type = "";
 
-  var menu_objects_save = [];
+  var current_menu_objects = [];
   for(let i = 0; i < menu_objects.length; i++){
     m = menu_objects[i];
-    menu_objects_save.push({name: m.name, item:m.item,colour: m.colour,colour2: m.colour2})
-  }
-  var portrait_objects_save = [];
-  for(let i = 0; i < portrait_objects.length; i++){
-    m = portrait_objects[i];
-    portrait_objects_save.push({name: m.name, value_list:m.value_list,colour: m.colour,colour2: m.colour2})
-  }
-  var sprite_objects_save = [];
-  for(let i = 0; i < sprite_objects.length; i++){
-    m = sprite_objects[i];
-    sprite_objects_save.push({name: m.name, item:m.item,colour: m.colour,colour2: m.colour2})
-  }
+    var sleeves = 0;
+    var item = m.item;
+    if (m.name =="Shoes")
+      item=currentShoes;
+    if (m.name =="Gloves")
+      item=currentGloves;  
+    if (sleeve_havers.indexOf(m.name)>-1)//this item has sleeves
+      sleeves = sleeve_list[sleeve_havers.indexOf(m.name)] ; 
 
-  var special_sprite_objects_save = [];
-  for(let i = 0; i < special_sprite_objects.length; i++){
-    m = special_sprite_objects[i];
-    special_sprite_objects_save.push({name: m.name, item:m.item,colour: m.colour,colour2: m.colour2})
+    current_menu_objects.push({name: m.name, item:item,colour1: m.colour,colour2: m.colour2, sleeves: sleeves})
   }
 
   var load_variables = {
-    ImageType: current_imageType, height: height, eye_type: eye_type, sleeve_list: sleeve_list, currentShoes: currentShoes,currentGloves: currentGloves, current_wedding_clothes: current_wedding_clothes, current_dance_clothes: current_dance_clothes, current_gender: current_gender,
-    menu_objects_save: menu_objects_save,  portrait_objects_save: portrait_objects_save, sprite_objects_save: sprite_objects_save,special_sprite_objects_save: special_sprite_objects_save
+    panelNum: panelNum, current_imageType: current_imageType, current_panel: current_panel, height: height, current_eyeType: eye_type, current_wedding_clothes: current_wedding_clothes, current_dance_clothes: current_dance_clothes,
+    current_skinColour: findNameMatch(sprite_objects,"Head").colour,current_eyeColour: findNameMatch(sprite_objects,"Eyes").colour,current_hairColour: findNameMatch(sprite_objects,"Hairstyle").colour,
+    current_complexion: findNameMatch(portrait_objects,"Complexion").value_list[0],current_head: findNameMatch(portrait_objects,"Head").value_list[0], current_nose: findNameMatch(portrait_objects,"Nose").value_list[0],
+    eye_expressions : findNameMatch(portrait_objects,"Eyes").value_list, eyebrow_expressions : findNameMatch(portrait_objects,"Eyebrows").value_list,mouth_expressions : findNameMatch(portrait_objects,"Mouth").value_list,blush_expressions : findNameMatch(portrait_objects,"Blush").value_list,
+    current_hair: findNameMatch(menu_objects, "Hairstyle").item,current_Facialhair :current_Facialhair, 
+    current_menu_objects: current_menu_objects, 
   }    
   
   data = JSON.stringify(load_variables);
@@ -93,88 +66,23 @@ var reader; //GLOBAL File Reader object for demo purpose only
     /**
      * read text input
      */
-    function readText(filePath) {
+    function readText(filePath,data_object) {
         var output = ""; //placeholder for text output
-        if(filePath.files && filePath.files[0]) {           
-            reader.onload = function (e) {
-                output = e.target.result;
-                loadContents(output);
-            };//end onload()
-            reader.readAsText(filePath.files[0]);
-        }//end if html5 filelist support
-        else if(ActiveXObject && filePath) { //fallback to IE 6-8 support via ActiveX
-            try {
-                reader = new ActiveXObject("Scripting.FileSystemObject");
-                var file = reader.OpenTextFile(filePath, 1); //ActiveX File Object
-                output = file.ReadAll(); //text contents of file
-                file.Close(); //close file "input stream"
-                loadContents(output);
-            } catch (e) {
-                if (e.number == -2146827859) {
-                    alert('Unable to access local files due to browser security settings. ' + 
-                     'To overcome this, go to Tools->Internet Options->Security->Custom Level. ' + 
-                     'Find the setting for "Initialize and script ActiveX controls not marked as safe" and change it to "Enable" or "Prompt"'); 
-                }
-            }       
-        }
-        else { //this is where you could fallback to Java Applet, Flash or similar
-            return false;
-        }       
+        console.log(filePath);
+        reader.onload = function (e) {
+            output = e.target.result;
+            loadContents(output,data_object);
+          };//end onload()
+        reader.readAsText(filePath);
         return true;
     }   
 
     /**
      * load user selected file
      */
-    function loadContents(txt) {
+    function loadContents(txt,data_object) {
       var load_object = JSON.parse(txt);
-      var menu_objects_load = load_object.menu_objects_save;
-      var portrait_objects_load = load_object.portrait_objects_save;
-      var sprite_objects_load = load_object.sprite_objects_save;
-      var special_sprite_objects_load = load_object.special_sprite_objects_save;
-      //document.getElementById("test").innerHTML = temp_object.toString();
-      for(let i = 0; i < portrait_objects.length; i++){
-          var oldm =portrait_objects[i]; 
-          var newm = portrait_objects_load[i];
-          oldm.colour = newm.colour;
-          oldm.colour2 = newm.colour2;
-          oldm.value_list = newm.value_list;
-      }
-      for(let i = 0; i < sprite_objects.length; i++){
-        var oldm =sprite_objects[i]; 
-        var newm = sprite_objects_load[i];
-        oldm.colour = newm.colour;
-        oldm.colour2 = newm.colour2;
-        oldm.item = newm.item;   
-      } 
-      for(let i = 0; i < special_sprite_objects.length; i++){
-        var oldm =special_sprite_objects[i]; 
-        var newm = special_sprite_objects_load[i];
-        oldm.colour = newm.colour;
-        oldm.colour2 = newm.colour2;
-        oldm.item = newm.item;   
-      } 
-      for(let i = 0; i < menu_objects.length; i++){
-        var oldm =menu_objects[i]; 
-        var newm = menu_objects_load[i];
-        oldm.colour = newm.colour;
-        oldm.colour2 = newm.colour2;
-        oldm.item = newm.item;    
-      }  
-
-      currentShoes = load_object.currentShoes;
-      currentGloves= load_object.currentGloves;
-      sleeve_list = load_object.sleeve_list;
-      current_wedding_clothes =  load_object.current_wedding_clothes;
-      current_dance_clothes= load_object.current_dance_clothes;
-      current_gender= load_object.current_gender;
-
-      setImageType([], load_object.ImageType)
-      setEyeType([],load_object.eye_type)
-      setHeight([],load_object.height);
-
-      setHair([],findNameMatch(menu_objects_load, "Hairstyle").item);
-
-      setMenu([],currently_editing);
+      data_object = load_object;
+      setVariables(data_object);
 
     }   

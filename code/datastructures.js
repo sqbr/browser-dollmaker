@@ -16,10 +16,6 @@ function setVariables(data_object){
     hairStyle = data_object.current_hair;
     current_Facialhair = data_object.current_Facialhair
 
-    hasShirtSleeves = data_object.hasShirtSleeves;
-    hasOvershirtSleeves = data_object.hasOvershirtSleeves;
-    hasCoatSleeves = data_object.hasCoatSleeves;
-
     eye_type = data_object.current_eyeType;
 
     eye_expressions = data_object.eye_expressions; 
@@ -126,7 +122,10 @@ document.addEventListener('alpine:init', () => {
             return output 
         },
     },
-  }))
+  })),
+  Alpine.data('test', () => ({
+    open: true
+}))
   })
 
 function niceString(input){
@@ -136,21 +135,6 @@ function niceString(input){
     return output.charAt(0).toUpperCase()+output.slice(1)
 
 }
-
-function setMenu(variablelist, number){
-    switch(number){
-        case 1: //editing the outfit
-            if (sleeve_havers.includes(current_item)){
-                htmlString+="<div class=\"grid-choices\">" 
-                htmlString+=makeDropbtnString("Sleeves:", [current_item], sleeves_names, "setSleeves");
-                //document.getElementById("test").innerHTML = sleeve_list.toString();
-                htmlString+='<div><h2 id="hasSleevesTitle" text-align="left">'+niceString(sleeves_names[sleeve_list[sleeve_havers.indexOf(current_item)]])+'</h2></div>';
-                htmlString+="</div>"
-            }  
-            
-            break;    
-        }
-    }
 
 function oldX(obj, column){
     //return the X coordinate of the column of the original image
@@ -196,7 +180,7 @@ function drawCanvas() {
 
     //preview canvas
     canvas_preview.width = canvas_preview.width; //clears
-    //document.getElementById("closet").innerHTML = print_portrait_objects();
+    document.getElementById("closet").innerHTML = print_portrait_objects();
     let hair = findNameMatch(sprite_objects, "Hairstyle");
     for (let i = 0; i < sprite_objects.length; i += 1){ //sprite preview
         let b = sprite_objects[i];
@@ -205,10 +189,6 @@ function drawCanvas() {
                 if(b.name !="Hairstyle_top" || column >0)
                     ctx_preview.drawImage(b.image, oldX(b,0), oldY(b,column),b.dimensions[0],b.dimensions[1],4*newX(b,0,column),4*newY(b,0,column),b.dimensions[0]*4,b.dimensions[1]*4);
             ctx_preview.drawImage(b.image, oldX(b,0), oldY(b,3),b.dimensions[0],b.dimensions[1],4*newX(b,2,2),4*(newY(b,2,2)-64),b.dimensions[0]*4,b.dimensions[1]*4);
-            // else{
-            //     if (b.rowNum==3)
-            //         ctx_preview.drawImage(b.image, oldX(b,0), oldY(b,2),b.dimensions[0],b.dimensions[1],64*2+b.offset[0]*4,b.offset[1]*4,b.dimensions[0]*4,b.dimensions[1]*4);
-            // }    
         }        
     }
     //portrait preview
@@ -364,67 +344,13 @@ function drawCanvas() {
                 }
             }
             
-
-            //closed eyes
-            
         }
     }
 }
 
 function setup(){
     //document.getElementById("test").innerHTML = print_sprite_objects();
-    //setTopbar();
-    /*
     checkFileAPI();
-    //setToolbar();
-
-    setEyeType([],0);
-    setSkinColour([],4);
-    setBothColour(['Eyes'],13);
-    setHairColour([],8);
-    setHair([],11);
-    setPortVariable(["Nose"],3);
-    setPortVariable(["Head"],3)
-
-    setClothing(["Pants"],2);
-    setClothingColour(["Pants"],10);
-    
-    setClothing(["Shirt"],3);
-    setClothingColour(["Shirt"],0);
-    
-    current_panel = 0;
-    setPanelVariable(["Eyebrows"],6);
-    setPanelVariable(["Mouth"],5);
-    setEyeExpression(["Eyes"],0);
-    current_panel = 1;
-    setPanelVariable(["Eyebrows"],2);
-    setPanelVariable(["Mouth"],1);
-    setEyeExpression(["Eyes"],2);
-    current_panel = 2;
-    setPanelVariable(["Eyebrows"],3);
-    setPanelVariable(["Mouth"],10);
-    setEyeExpression(["Eyes"],1);
-    current_panel = 3;
-    setPanelVariable(["Eyebrows"],1);
-    setPanelVariable(["Mouth"],0);
-    setEyeExpression(["Eyes"],0);
-    current_panel = 4;
-    setPanelVariable(["Eyebrows"],4);
-    setPanelVariable(["Mouth"],3);
-    setEyeExpression(["Eyes"],3);
-    setPanelVariable(["Blush"],1);
-    current_panel = 5;
-    setPanelVariable(["Eyebrows"],5);
-    setPanelVariable(["Mouth"],12);
-    setEyeExpression(["Eyes"],4);
-    for (current_panel = 6; current_panel < 10; current_panel += 1){ 
-        setPanelVariable(["Eyebrows"],6);
-        setPanelVariable(["Mouth"],5);
-        setEyeExpression(["Eyes"],0);
-    }
-
-    current_panel = 0;*/
-
     drawCanvas();
 }
 let portrait_back = new Image();
