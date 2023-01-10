@@ -99,7 +99,7 @@ document.addEventListener('alpine:init', () => {
       listName: listNameInput,
       title: titleInput,
       buttonName: buttonNameInput,
-  
+
       dropbtn: {
           ['x-html']() {
             output = "";
@@ -107,7 +107,7 @@ document.addEventListener('alpine:init', () => {
                 output += this.title+': ';   
             output +='<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" x-text="'+'\''+this.buttonName+'\'+niceString('+this.listName+"["+this.valueName+"])"+'"></button>';
             output +='<ul class="dropdown-menu"> <template x-for=" (preset, index) in '+ this.listName+'">'; 
-            output +='<li><a class="dropdown-item" href="#" x-on:click="'+this.valueName+'=index;setVariables($data);" x-text="niceString(preset)"></a></li>'; 
+            output +='<li><a class="dropdown-item" href="#" x-on:click="$store.alpineData.'+this.valueName+'=index;setVariables(Alpine.store(\'alpineData\'));" x-text="niceString(preset)"></a></li>'; 
             output +='</template>'
             return output 
           },
@@ -117,15 +117,87 @@ document.addEventListener('alpine:init', () => {
             output = this.title+': '; 
             output +='<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" x-text="'+'\''+this.buttonName+'\'+niceString(colour_desc('+this.listName+"["+this.valueName+"]))"+'"></button>';
             output +='<ul class="dropdown-menu"> <template x-for=" (preset, index) in '+ this.listName+'">'; 
-            output +='<li><a class="dropdown-item" href="#" x-on:click="'+this.valueName+'=index;setVariables($data);" x-text="niceString(colour_desc(preset))"></a></li>'; 
+            output +='<li><a class="dropdown-item" href="#" x-on:click="$store.alpineData.'+this.valueName+'=index;setVariables(Alpine.store(\'alpineData\'));" x-text="niceString(colour_desc(preset))"></a></li>'; 
             output +='</template>'
             return output 
         },
     },
-  })),
-  Alpine.data('test', () => ({
-    open: true
-}))
+  }))
+  Alpine.store('alpineData', {
+    panelNum : 6,
+    current_imageType : 0,
+    currently_editing : 0,
+    current_panel : 0,
+    current_clothing : 0,
+    current_sprite_preset : 0,
+
+    current_skinColour: 4,
+    current_eyeColour: 13,
+    current_hairColour: 8,
+
+    height : 0,
+    current_complexion: 0,
+
+    current_head :3,
+    current_hair :11,
+    current_Facialhair : 0,
+    current_nose :3,
+    current_eyeType : 0,
+
+    eyebrow_expressions : [6,2,3,1,4,5,6,6,6,6],
+    eye_expressions : [0,2,1,0,3,4,0,0,0,0],
+    mouth_expressions : [5,1,10,0,3,12,5,5,5,5],
+    blush_expressions : [0,0,0,0,1,0,0,0,0,0],
+
+    current_menu_objects : [
+    {name: 'Hat', item: 0, colour1: 0,colour2: 0, sleeves: 0},
+    {name: 'Neckwear', item: 0, colour1: 0,colour2: 0, sleeves: 0},
+    {name: 'Eyewear', item: 0, colour1: 0,colour2: 0, sleeves: 0},
+    {name: 'Earrings', item: 0, colour1: 0,colour2: 0, sleeves: 0},
+    {name: 'Shirt', item: 3, colour1: 0,colour2: 0, sleeves: 0},
+    {name: 'Overshirt', item: 0, colour1: 0,colour2: 0, sleeves: 0},
+    {name: 'Coat', item: 0, colour1: 0,colour2: 0, sleeves: 0},
+    {name: 'Pants', item: 2, colour1: 10,colour2: 0, sleeves: 0},
+    {name: 'Shoes', item: 1, colour1: 3,colour2: 0, sleeves: 0},
+    {name: 'Gloves', item: 0, colour1: 0,colour2: 0, sleeves: 0},
+    ],
+
+    current_wedding_clothes : 0,
+    current_dance_clothes : 0,
+    fixAlpine() {
+        for(let i = 0; i < menu_objects.length; i++){
+            m = menu_objects[i];
+            var sleeves = 0;
+            var item = m.item;
+            if (m.name =="Shoes")
+              item=currentShoes;
+            if (m.name =="Gloves")
+              item=currentGloves;  
+            if (sleeve_havers.indexOf(m.name)>-1)//this item has sleeves
+              sleeves = sleeve_list[sleeve_havers.indexOf(m.name)] ; 
+        
+            this.current_menu_objects[i]={name: m.name, item:item,colour1: m.colour,colour2: m.colour2, sleeves: sleeves};
+          }
+        
+            this.height= height;
+            this.current_eyeType= eye_type;
+            this.current_wedding_clothes= current_wedding_clothes;
+            this.current_dance_clothes= current_dance_clothes;
+            this.current_skinColour= findNameMatch(sprite_objects,"Head").colour;
+            this.current_eyeColour= findNameMatch(sprite_objects,"Eyes").colour;
+            this.current_hairColour= findNameMatch(sprite_objects,"Hairstyle").colour;
+            this.current_complexion= findNameMatch(portrait_objects,"Complexion").value_list[0];
+            this.current_head= findNameMatch(portrait_objects,"Head").value_list[0];
+            this.current_nose= findNameMatch(portrait_objects,"Nose").value_list[0];
+            this.eye_expressions = findNameMatch(portrait_objects,"Eyes").value_list;
+            this.eyebrow_expressions = findNameMatch(portrait_objects,"Eyebrows").value_list;
+            this.mouth_expressions = findNameMatch(portrait_objects,"Mouth").value_list;
+            this.blush_expressions = findNameMatch(portrait_objects,"Blush").value_list;
+            this.current_hair= findNameMatch(menu_objects,"Hairstyle").item;
+            this.current_Facialhair =current_Facialhair;
+            
+    }
+})
   })
 
 function niceString(input){

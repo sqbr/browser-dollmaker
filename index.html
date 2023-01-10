@@ -50,7 +50,7 @@
   current_wedding_clothes : 0,
   current_dance_clothes : 0,
 
-}" x-init="setVariables($data)">
+}" x-init="setVariables(Alpine.store('alpineData'))">
 
 <script src="code/setup.js"></script>
 <script src="code/portraits.js"></script>
@@ -98,7 +98,7 @@
         </button>
         <ul class="dropdown-menu">
           <template x-for="index in 10">
-            <li><a class="dropdown-item" href="#" x-on:click="panelNum= index; setVariables($data);" x-text="index"></a></li> 
+            <li><a class="dropdown-item" href="#" x-on:click="panelNum= index; setVariables(Alpine.store('alpineData'));" x-text="index"></a></li> 
         </template>
         </ul>
       </div> 
@@ -119,7 +119,7 @@
       <ul class="nav nav-tabs">
         <template x-for="(edit_type, index) in editing_list">
           <li class="nav-item">
-            <a x-bind:class="currently_editing==index ? 'nav-link active' : 'nav-link'" href="#" x-text="edit_type" x-on:click="currently_editing= index; setVariables($data);"></a></li>
+            <a x-bind:class="currently_editing==index ? 'nav-link active' : 'nav-link'" href="#" x-text="edit_type" x-on:click="currently_editing= index; setVariables(Alpine.store('alpineData'));"></a></li>
         </template>  
       </ul>
       <hr>

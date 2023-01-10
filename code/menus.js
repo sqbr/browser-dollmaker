@@ -82,7 +82,7 @@ var reader; //GLOBAL File Reader object for demo purpose only
      */
     function loadContents(txt,data_object) {
       var load_object = JSON.parse(txt);
-      data_object = load_object;
-      setVariables(data_object);
+      setVariables(load_object);
+      Alpine.store('alpineData').fixAlpine();
 
     }   
