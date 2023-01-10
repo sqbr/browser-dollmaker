@@ -248,14 +248,18 @@ function fixPortSources(){
                     }
                 }
             }
+            if (name =="none"){
+                b.image_list[j].src  ="";
 
-            if (false){//since all portrait items are coloured
-                b.image_list[j].src = "images/bases/portraits/"+b.location+"/"+name+".png";
-            }else{
-                if (b.name =="Nose_front"){
-                    b.image_list[j].src  = "images/portraits/"+b.location+"/"+name+"_noshadow_"+b.colour+".png";
-                }else
-                    b.image_list[j].src  = "images/portraits/"+b.location+"/"+name+"_"+b.colour+".png";
+            } else{
+                if (false){//since all portrait items are coloured
+                    b.image_list[j].src = "images/bases/portraits/"+b.location+"/"+name+".png";
+                }else{
+                    if (b.name =="Nose_front"){
+                        b.image_list[j].src  = "images/portraits/"+b.location+"/"+name+"_noshadow_"+b.colour+".png";
+                    }else
+                        b.image_list[j].src  = "images/portraits/"+b.location+"/"+name+"_"+b.colour+".png";
+                }
             }
         }
     }
