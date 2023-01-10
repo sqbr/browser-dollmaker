@@ -105,7 +105,7 @@ document.addEventListener('alpine:init', () => {
             output = "";
             if (this.title!="")
                 output += this.title+': ';   
-            output +='<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" x-text="'+'\''+this.buttonName+'\'+niceString('+this.listName+"["+this.valueName+"])"+'"></button>';
+            output +='<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" x-text="'+'\''+this.buttonName+'\'+niceString('+this.listName+"[$store.alpineData."+this.valueName+"])"+'"></button>';
             output +='<ul class="dropdown-menu"> <template x-for=" (preset, index) in '+ this.listName+'">'; 
             output +='<li><a class="dropdown-item" href="#" x-on:click="$store.alpineData.'+this.valueName+'=index;setVariables(Alpine.store(\'alpineData\'));" x-text="niceString(preset)"></a></li>'; 
             output +='</template>'
@@ -115,7 +115,7 @@ document.addEventListener('alpine:init', () => {
       colourbtn: {
         ['x-html']() {
             output = this.title+': '; 
-            output +='<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" x-text="'+'\''+this.buttonName+'\'+niceString(colour_desc('+this.listName+"["+this.valueName+"]))"+'"></button>';
+            output +='<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" x-text="'+'\''+this.buttonName+'\'+niceString(colour_desc('+this.listName+"[$store.alpineData."+this.valueName+"]))"+'"></button>';
             output +='<ul class="dropdown-menu"> <template x-for=" (preset, index) in '+ this.listName+'">'; 
             output +='<li><a class="dropdown-item" href="#" x-on:click="$store.alpineData.'+this.valueName+'=index;setVariables(Alpine.store(\'alpineData\'));" x-text="niceString(colour_desc(preset))"></a></li>'; 
             output +='</template>'
@@ -189,7 +189,7 @@ document.addEventListener('alpine:init', () => {
             this.current_complexion= findNameMatch(portrait_objects,"Complexion").value_list[0];
             this.current_head= findNameMatch(portrait_objects,"Head").value_list[0];
             this.current_nose= findNameMatch(portrait_objects,"Nose").value_list[0];
-            this.eye_expressions = findNameMatch(portrait_objects,"Eyes").value_list;
+            this.eye_expressions = eye_expressions;
             this.eyebrow_expressions = findNameMatch(portrait_objects,"Eyebrows").value_list;
             this.mouth_expressions = findNameMatch(portrait_objects,"Mouth").value_list;
             this.blush_expressions = findNameMatch(portrait_objects,"Blush").value_list;
