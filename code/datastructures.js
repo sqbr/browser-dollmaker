@@ -116,9 +116,9 @@ document.addEventListener('alpine:init', () => {
         ['x-html']() {
             output = this.title+': ';
 
-            output +='<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" x-text="'+'\''+this.buttonName+'\'+niceString(colour_desc('+this.listName+"[$store.alpineData."+this.valueName+"]))"+'"></button>';
+            output +='<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" x-text="'+'\''+this.buttonName+'\'+niceString(colour_desc('+this.listName+"[$store.alpineData."+this.valueName+"]))"+'" x-bind:style="{ background:'+this.listName+'[$store.alpineData.'+this.valueName+']}"></button>';
             output +='<ul class="dropdown-menu"> <template x-for=" (preset, index) in '+ this.listName+'">'; 
-            output +='<li><button class="dropdown-item" x-on:click="$store.alpineData.'+this.valueName+'=index;setVariables(Alpine.store(\'alpineData\'));" x-text="niceString(colour_desc(preset))"></a></li>'; 
+            output +='<li><button x-bind:style="{ background:'+ this.listName+'[index]}" class="dropdown-item" x-on:click="$store.alpineData.'+this.valueName+'=index;setVariables(Alpine.store(\'alpineData\'));" x-text="niceString(colour_desc(preset))"></a></li>'; 
             //'+this.listName+'[$store.alpineData.'+this.valueName+']
             output +='</template></ul>'
             return output 
