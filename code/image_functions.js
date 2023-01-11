@@ -148,7 +148,12 @@ function colour_desc(colour){
                 }
             }
         else{
-            if (v < 100){c_string += "Dark ";}
+            if (v < 100){
+                if (hueString =="Orange" && s >0.5)
+                    return "Brown"
+                else    
+                    c_string += "Dark ";
+            }
         }}}
 
         if (s < 0.09){
@@ -167,7 +172,22 @@ function colour_desc(colour){
             }
             }
         }}
-}        
+} 
+
+function colorContrast(colour){
+    let R = parseInt(colour.slice(1,3),16);
+    let G = parseInt(colour.slice(3,5),16);
+    let B = parseInt(colour.slice(5,7),16);
+    let p = [R,G,B]
+    let h = findHue(p);
+    let s = saturation(p);
+    let v = luminance(p);
+
+    if (v<125)
+        return "#FFFFFF"
+    return "#000000"
+
+}
 
 function fixPortSources(){
     // Fixes the "src" attribute for all images in sublist of portrait_objects

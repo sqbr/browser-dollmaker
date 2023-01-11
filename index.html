@@ -39,7 +39,8 @@
 <hr>
   <div class="row">
     <div class="col"><!-- column 1, canvases -->
-    <div><h2>Preview:</h2></div> 
+    <div class="container text-center"> 
+    <div><h3>Preview</h3></div> 
     <canvas id="previewCanvas" width="512" height="256">
         Your browser does not support HTML5 Canvas. Try downloading latest Chrome, Firefox, Safari, Opera or Internet explorer.
     </canvas> 
@@ -48,31 +49,31 @@
       <div class="row">
         <div class="col">
           <div x-data="dropdown('','','current_imageType','imageType_list')" x-bind="dropbtn"></div>
-    </div>
-    <div class="col">
-    <div x-show="$store.alpineData.current_imageType === 0" class="dropdown">
-       <div  class="dropdown"><!--number of panels choice-->
-        <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" x-text="'Number of panels: '+$store.alpineData.panelNum">
-        </button>
-        <ul class="dropdown-menu">
-          <template x-for="index in 10">
-            <li><a class="dropdown-item" href="#" x-on:click="$store.alpineData.panelNum= index; setVariables(Alpine.store('alpineData'));" x-text="index"></a></li> 
-        </template>
-        </ul>
-      </div> 
-    </div>
-    <div x-show="$store.alpineData.current_imageType === 1"class="dropdown" >
-      <div x-data="dropdown('','','current_sprite_preset','sprite_presets')" x-bind="dropbtn"></div>
-      </div>
-    </div>
-  </div>  
+        </div>
+        <div class="col">
+        <div x-show="$store.alpineData.current_imageType === 0" class="dropdown">
+          <div  class="dropdown"><!--number of panels choice-->
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" x-text="'Number of panels: '+$store.alpineData.panelNum">
+            </button>
+            <ul class="dropdown-menu">
+              <template x-for="index in 10">
+                <li><a class="dropdown-item" href="#" x-on:click="$store.alpineData.panelNum= index; setVariables(Alpine.store('alpineData'));" x-text="index"></a></li> 
+            </template>
+            </ul>
+          </div> 
+        </div>
+        <div x-show="$store.alpineData.current_imageType === 1"class="dropdown" >
+          <div x-data="dropdown('','','current_sprite_preset','sprite_presets')" x-bind="dropbtn"></div>
+          </div>
+        </div>
+      </div>  
     </div>
     <hr>
-    <h2 id="canvasName">Right Click to Save:</h2> 
+    <h3 id="canvasName">Right Click to Save</h3> 
     <canvas id="exportCanvas" width="512" height="768">
     Your browser does not support HTML5 Canvas. Try downloading latest Chrome, Firefox, Safari, Opera or Internet explorer.
     </canvas>
-    </div>
+    </div></div>
     <div class="col"><!-- column 2 -->
       <ul class="nav nav-tabs">
         <template x-for="(edit_type, index) in editing_list">
@@ -80,21 +81,20 @@
             <a x-bind:class="$store.alpineData.currently_editing==index ? 'nav-link active' : 'nav-link'" href="#" x-text="edit_type" x-on:click="$store.alpineData.currently_editing= index; setVariables(Alpine.store('alpineData'));"></a></li>
         </template>  
       </ul>
-      <hr>
 
-      <div class="container text-center">
+      <div class="container text-left">
         <div class="row">
             <div class="row gy-2" x-show="$store.alpineData.currently_editing === 0" > <!-- body -->
-              <div class="row row-cols-2 gy-2">
+              <div class="row row-cols-2 gy-3">
                 <div class="col"><div x-data="dropdown('Skin Colour','','current_skinColour','skin_colours')" x-bind="colourbtn" ></div></div>
                 <div class="col"><div x-data="dropdown('Eye Colour','','current_eyeColour','eye_colours')" x-bind="colourbtn" ></div></div>
                 <div class="col"><div x-data="dropdown('Hair Colour','','current_hairColour','hair_colours')" x-bind="colourbtn" ></div></div>
               </div>
-              <div class="row row-cols-2 gy-2">
+              <div class="row row-cols-2 gy-3">
                 <div class="col"><div x-data="dropdown('Hairstyle','','current_hair','findNameMatch(menu_objects, \'Hairstyle\').name_list')" x-bind="dropbtn" ></div></div>
                 <div class="col"><div x-data="dropdown('Facial Hair','','current_Facialhair','facial_hair_list_menu')" x-bind="dropbtn" ></div></div>
               </div>
-              <div class="row row-cols-2 gy-2">
+              <div class="row row-cols-2 gy-3">
                 <div class="col"><div x-data="dropdown('Head Shape','','current_head','head_list')" x-bind="dropbtn" ></div></div>
                 <div class="col"><div x-data="dropdown('Nose Shape','','current_nose','nose_list')" x-bind="dropbtn" ></div></div>
                 <div class="col"><div x-data="dropdown('Eye Type','','current_eyeType','eye_type_list_port')" x-bind="dropbtn" ></div></div>
@@ -104,21 +104,21 @@
               
             </div>
 
-            <div class="row gy-2" x-show="$store.alpineData.currently_editing === 1" ><!-- outfit -->
+            <div class="row gy-3" x-show="$store.alpineData.currently_editing === 1" ><!-- outfit -->
               <div class="col"><div x-data="dropdown('Clothing Item','','current_clothing','menu_object_names')" x-bind="dropbtn" ></div></div>
-              <div class="row row-cols-2 gy-2">
+              <div class="row row-cols-2 gy-3">
                 <div class="col"><div x-data="dropdown('Style','','current_menu_objects[$store.alpineData.current_clothing].item','menu_objects[$store.alpineData.current_clothing].name_list')" x-bind="dropbtn" ></div></div>
                 <div class="col"><div x-show="sleeve_havers.includes(menu_object_names[$store.alpineData.current_clothing])" x-data="dropdown('Sleeves','','current_menu_objects[$store.alpineData.current_clothing].sleeves','sleeves_names')" x-bind="dropbtn" ></div></div>
               </div>
-              <div class="row row-cols-2 gy-2">
+              <div class="row row-cols-2 gy-3">
                 <div class="col"><div x-data="dropdown('Main Colour','','current_menu_objects[$store.alpineData.current_clothing].colour1','outfit_colours')" x-bind="colourbtn" ></div></div>
                 <div class="col"><div x-data="dropdown('Highlight Colour','','current_menu_objects[$store.alpineData.current_clothing].colour2','outfit_colours')" x-bind="colourbtn" ></div></div>
               </div>
             </div>
 
-            <div class="row gy-2" x-show="$store.alpineData.currently_editing === 2" ><!-- expressions -->
+            <div class="row gy-3" x-show="$store.alpineData.currently_editing === 2" ><!-- expressions -->
               <div x-data="dropdown('Panel','','current_panel','panel_list.slice(0,$store.alpineData.panelNum)')" x-bind="dropbtn" ></div>
-              <div class="row row-cols-2 gy-2">
+              <div class="row row-cols-2 gy-3">
                 <div class="col"><div x-data="dropdown('Eyebrows','','eyebrow_expressions[$store.alpineData.current_panel]','eyebrow_list')" x-bind="dropbtn" ></div></div>
                 <div class="col"><div x-data="dropdown('Eyes','','eye_expressions[$store.alpineData.current_panel]','eye_expression_list_port')" x-bind="dropbtn" ></div></div>
                 <div class="col"><div x-data="dropdown('Mouth','','mouth_expressions[$store.alpineData.current_panel]','mouth_list')" x-bind="dropbtn" ></div></div>
@@ -128,17 +128,16 @@
             </div>
 
             <div x-show="$store.alpineData.currently_editing === 3" ><!-- special -->
-              <div class="row row-cols-2 gy-2">
-              <div class="col"><div x-data="dropdown('Wedding Outfit','','current_wedding_clothes','[\'Regular outfit\'].concat(wedding_clothes_list)')" x-bind="dropbtn" ></div></div>
-              <div class="col"><div x-data="dropdown('Flower Dance Outfit','','current_dance_clothes','dance_clothes_list')" x-bind="dropbtn" ></div></div>
+              <div class="row row-cols-2 gy-3">
+                <div class="col"><div x-data="dropdown('Wedding Outfit','','current_wedding_clothes','[\'Regular outfit\'].concat(wedding_clothes_list)')" x-bind="dropbtn" ></div></div>
+                <div class="col"><div x-data="dropdown('Flower Dance Outfit','','current_dance_clothes','dance_clothes_list')" x-bind="dropbtn" ></div></div>
               </div>  
 
             </div>
         </div>
         </div> 
     <hr>
-    <div id="test">No errors</div>
-    <hr>
+    <div id="test"></div>
     <div id="closet"></div>
 </div> <!-- end of row -->   
 </div> <!-- end of whole column structure -->  
