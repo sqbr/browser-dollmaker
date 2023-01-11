@@ -105,7 +105,7 @@
             </div>
 
             <div class="row gy-3" x-show="$store.alpineData.currently_editing === 1" ><!-- outfit -->
-              <div class="col"><div x-data="dropdown('Clothing Item','','current_clothing','menu_object_names')" x-bind="dropbtn" ></div></div>
+              <div class="col"><div x-data="dropdown('Clothing Item','','current_clothing','menu_object_names.slice(0,menu_object_names.length-1)')" x-bind="dropbtn" ></div></div>
               <div class="row row-cols-2 gy-3">
                 <div class="col"><div x-data="dropdown('Style','','current_menu_objects[$store.alpineData.current_clothing].item','menu_objects[$store.alpineData.current_clothing].name_list')" x-bind="dropbtn" ></div></div>
                 <div class="col"><div x-show="sleeve_havers.includes(menu_object_names[$store.alpineData.current_clothing])" x-data="dropdown('Sleeves','','current_menu_objects[$store.alpineData.current_clothing].sleeves','sleeves_names')" x-bind="dropbtn" ></div></div>
