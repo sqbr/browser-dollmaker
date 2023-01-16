@@ -82,7 +82,7 @@ function setVariables(data_object){
     b.item = eye_type;
     b = findNameMatch(portrait_objects, "Eyes");
     for (let i = 0; i < 10; i += 1) {
-        b.value_list[i] = eye_type*eye_expressions.length + eye_expressions[i];
+        b.value_list[i] = eye_type*eye_expression_list_port.length + eye_expressions[i];
     }
 
     setSpriteVariable(["Shoes"], Math.max(0,2*currentShoes-1+height)); 
