@@ -108,27 +108,22 @@ function colour_desc(colour){
 
         if (skin_colours.includes(colour) && (h<50||h>325)&& v>0 ){
             let i = skin_colours.indexOf(colour);
-            if (i ==0)
-                return "Very Pale";
-            else{
-
-                if (i%2 !=0){
+            if (i%2 ==0){
                     hueString = "Peach";
-                }
-                else{
-                    hueString = "Olive";
+            }
+            else{
+                hueString = "Olive";
 
-                }
-                if (i<3){
-                    return "Pale "+hueString;
-                }else{
-                    if (i>6)
-                        return "Dark "+hueString;
-                    else
-                    return hueString;
-                }
-            }    
-        }
+            }
+            if (i<4){
+                return "Pale "+hueString;
+            }else{
+                if (i>7)
+                    return "Dark "+hueString;
+                else
+                return hueString;
+            }
+        }    
         
         
 
@@ -351,7 +346,7 @@ function fixSpriteSources(){
         if (item.colour){
             b.image.src  = "images/sprites/"+loc+"_"+b.colour+".png";
         }else{
-            b.image.src = "images/bases/sprites/"+loc+".png";
+            b.image.src = "images/bases/sprites/"+loc+"_base.png";
         }
     }
 }

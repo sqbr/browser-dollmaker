@@ -19,17 +19,17 @@ sprites_list:list of lists [sprite object name, item number]
 function add_menu_object(name, list_list, colour_list, port_item_list, port_second_list, sprite_item_list, sprite_second_list){
     let sprite_main_list = xor(sprite_item_list, sprite_second_list);
     let port_main_list = xor(port_item_list, port_second_list);
-    menu_objects.push({name: name,list_list: list_list, name_list: list_list.map(firstElement),colour_list: colour_list, port_item_list: port_item_list, sprite_item_list: sprite_item_list, port_second_list: port_second_list, sprite_second_list: sprite_second_list, sprite_main_list: sprite_main_list, port_main_list: port_main_list, item: 0,  colour: 0, colour2: 0 });
+    menu_objects.push({name: name,list_list: list_list, name_list: list_list.map(firstElement),colour_list: colour_list, port_item_list: port_item_list, sprite_item_list: sprite_item_list, port_second_list: port_second_list, sprite_second_list: sprite_second_list, sprite_main_list: sprite_main_list, port_main_list: port_main_list, sleeves: 0, item: 0,  colour: 0, colour2: 0 });
 }
 
 const none_menu = ["None",[],[]];
 
-const hat_menu_list = [ none_menu,["Bow",[5,0,0],[77,0]],["Headphones",[3,0,0],[90,0]],["Flower Crown",[10,0,0],[94,0]],["Soft Cap",[11,0,0],[82,0]],["Cap",[2,0,0],[78,0]],["Joja Cap",[2,1,0],[78,5]],["Turban",[14,0,0],[88,0]],["Helmet",[13,0,0],[97,0]],["Beanie",[8,0,0],[87,0]],["Hijab",[0,0,1],[89,0]],["Top Hat",[9,6,0],[73,1]],["Fedora",[9,6,0],[96,24]], ["Bowler",[9,6,0],[95,23]],["Broad Hat",[7,5,0],[83,11]],["Bobble Hat",[6,4,0],[93,21]],["Sun Hat",[1,3,0],[92,20]],["Wizard",[4,0,0],[91,0]],["Witch",[12,7,0],[98,26]],];
+const hat_menu_list = [ none_menu,["Flower",[20,0,0],[3,0]],["Head Band",[17,0,0],[28,0]],["Cat Ears",[18,0,0],[9,0]],["Bandanna",[19,0,0],[29,0]],["Bow",[5,0,0],[5,0]],["Headphones",[3,0,0],[18,0]],["Ear muffs",[16,0,0],[27,0]],["Flower Crown",[10,0,0],[22,0]],["Soft Cap",[11,0,0],[10,0]],["Cap",[2,0,0],[6,0]],["Joja Cap",[2,1,0],[6,5]],["Turban",[14,0,0],[16,0]],["Helmet",[13,0,0],[25,0]],["Beanie",[8,0,0],[15,0]],["Hijab",[0,0,1],[17,0]],["Bobble Hat",[6,3,0],[21,21]],["Fedora",[9,5,0],[24,24]], ["Bowler",[9,5,0],[23,23]],["Top Hat",[9,5,0],[1,1]],["Cowboy Hat",[15,5,0],[12,12]],["Broad Hat",[7,4,0],[11,11]],["Sun Hat",[1,2,0],[20,20]],["Wizard",[4,0,0],[19,0]],["Witch",[12,0,0],[26,0]],];
 
-const hair_menu_list = [ none_menu,["Shaved",[17,0],[56]],["Buzzcut",[18,0],[47]],["Balding",[15,12],[52]],["Short",[22,0],[45]],["Short Side-part",[8,0],[3]],["Neat Side-part",[29,0],[8]],["Floppy side part",[24,0],[79]],["Hi-top",[10,0],[12]],["Short Back and Sides",[27,0],[43]],["Short Spiky",[13,10],[1]],["Curly Mop",[6,7],[32]],["Princely",[3,0],[24]],["Short Shaggy",[1,1],[5]], ["Afro",[11,0],[21]],["Curly Bob",[6,6],[11]],["Emo Bob",[2,2],[10]],["Wavy Bob",[26,20],[42]],["Neat bob",[23,17],[11]],["Perm",[16,14],[53]],["Spiky",[7,7],[68]],["Curly Pony",[21,25],[6]],["Half-up locs",[4,3],[7]],["Half-up Wavy",[28,22],[7]],["Straight Pony Low",[28,23],[13]],["Straight Pony High",[28,24],[36]],["Twin Puffs",[21,21],[50]], ["Side Braid",[20,18],[37]], ["Twintails",[9,13],[31]], ["Bangs Bun",[9,11],[23]], ["Bun",[14,11],[23]],["Twin Braids",[9,8],[35]], ["Long Wavy",[9,4],[9]],["Long Locks",[12,9],[51]],["Long Straight",[9,16],[51]],["Long Curly",[25,19],[54]],];
+const hair_menu_list = [ none_menu,["Shaved",[17,0],[56]],["Buzzcut",[18,0],[47]],["Balding",[15,12],[52]],["Short",[22,0],[45]],["Short Side-part",[8,0],[3]],["Neat Side-part",[29,0],[8]],["Floppy side part",[24,0],[79]],["Hi-top",[10,0],[12]],["Short Back and Sides",[27,0],[43]],["Short Spiky",[13,10],[1]],["Curly Mop",[6,7],[32]],["Princely",[3,0],[24]],["Short Shaggy",[1,1],[5]], ["Afro",[11,0],[21]],["Curly Bob",[6,6],[11]],["Emo Bob",[2,2],[10]],["Wavy Bob",[26,19],[42]],["Neat bob",[23,16],[26]],["Perm",[16,14],[53]],["Spiky",[7,7],[68]],["Curly Pony",[21,24],[6]],["Half-up locs",[4,3],[7]],["Half-up Wavy",[28,21],[7]],["Straight Pony Low",[28,22],[13]],["Straight Pony High",[28,23],[36]],["Twin Puffs",[21,20],[50]], ["Side Braid",[20,17],[37]], ["Twintails",[9,13],[31]], ["Bangs Bun",[9,11],[23]], ["Bun",[14,11],[23]],["Twin Braids",[9,8],[35]], ["Long Wavy",[9,4],[9]],["Long Locks",[12,9],[51]],["Long Straight",[9,15],[59]],["Long Curly",[25,18],[54]],];
 //["Curly Updo",[21,15],[56]],["Straight Updo",[19,15],[56]],
 
-const neckwear_menu_list = [ none_menu,["Pendant",[6,0,0],[8]],["Choker",[3,0,0],[5]], ["Beads",[2,0,0],[6]],["Bowtie",[0,5,0],[3]],["Tie",[1,0,0],[4]],["Cravat",[7,0,0],[4]], ["Scarf",[0,0,4],[7]],];
+const neckwear_menu_list = [ none_menu,["Pendant",[6,0,0],[8]],["Choker",[3,0,0],[5]], ["Beads",[2,0,0],[6]],["Bowtie",[0,5,0],[3]],["Tie",[1,0,0],[4]],["Cravat",[7,0,0],[4]],["Bandanna",[8,0,0],[7]], ["Scarf",[0,0,4],[7]],];
 
 const eyewear_menu_list = [ none_menu,["Glasses",[1],[1]], ["Square Glasses",[2],[1]],["Round Glasses",[3],[1]],["Sunglasses",[4],[5]],["Coloured Glasses",[6],[3]],["Eye-patch",[5],[6]],];
 
@@ -40,7 +40,7 @@ const coat_menu_list = [ none_menu, ["Fur Coat",[8,2],[10,0,1]],["Letterman",[9,
 
 const overshirt_menu_list = [ none_menu,["Button up V-neck",[5,0],[2,0]],["V-neck",[1,0],[6,0]],["Argyle V-neck",[1,1],[6,28]], ["Sweater",[2,0],[4,0]],["Open Sweater",[3,0],[1,0]],["Suspenders",[4,0],[5,0]],];
 
-const shirt_menu_list = [ none_menu,["Bikini",[5,0,0,0],[7,0,0]],["Strappy Vest",[5,0,0,0],[2,0,0]],["T-Shirt",[3,0,0,0],[19,0,0]],["Striped V-neck",[9,0,4,0],[26,0,4]],["V-neck",[9,0,0,0],[26,0,0]],["Low Cut",[8,0,0,0],[27,0,0]],["Boatneck",[4,0,0,0],[23,0,0]],["Turtleneck",[7,0,0,0],[21,0,0]],["Chinese Collar",[6,0,0,0],[21,0,0]], ["Open Shirt With Vest",[2,2,3,0],[24,0,25]], ["Open Shirt",[2,2,0,0],[25,0,0]],  ["Button-up",[1,1,0,0],[12,0,0]], ["Plaid Button-up",[1,1,1,1],[12,0,2]],["Stripe Button-up",[1,1,2,0],[12,0,4]],]
+const shirt_menu_list = [ none_menu,["Bikini",[5,0,0,0],[7,0,0]],["Strappy Vest",[10,0,0,0],[2,0,0]],["Halter-neck",[11,0,0,0],[2,0,0]],["Bodice",[12,0,0,0],[14,0,0]],["Sleeved Bodice",[13,0,0,0],[14,0,0]],["T-Shirt",[3,0,0,0],[19,0,0]],["Striped V-neck",[9,0,4,0],[26,0,4]],["V-neck",[9,0,0,0],[26,0,0]],["Low Cut",[8,0,0,0],[27,0,0]],["Boatneck",[4,0,0,0],[23,0,0]],["Turtleneck",[7,0,0,0],[21,0,0]],["Chinese Collar",[6,0,0,0],[21,0,0]], ["Open Shirt With Vest",[2,2,3,0],[24,0,25]], ["Open Shirt",[2,2,0,0],[25,0,0]],  ["Button-up",[1,1,0,0],[12,0,0]], ["Plaid Button-up",[1,1,1,1],[12,0,2]],["Stripe Button-up",[1,1,2,0],[12,0,4]],]
 
 const pants_menu_list = [none_menu];
 const pants_names_all = ["briefs","trousers"].concat(pants_names)
@@ -168,6 +168,7 @@ function updateSpecialSprites(){
 
 
 function setSleeves(variablelist, number){
+
     if (sleeve_havers.indexOf(variablelist[0])>-1){//this item has sleeves
         sleeve_list[sleeve_havers.indexOf(variablelist[0])] = number;
     }

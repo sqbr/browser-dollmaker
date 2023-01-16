@@ -21,23 +21,23 @@ skin_list = body_list + ["Eyebrows", "Mouth","Blush"]
 hair_list = ["Hair_back", "Hair_front","Facial_hair"]
 
 hair_front_list = ["None", "shaggy side","emo","princely","locs bun","long wavy","curly pixie","spiky","short side","smooth bangs","hi-top","afro","long locks","short spiky","centre part","tufts","perm","shaved","buzzcut","jodi","side braid","curly up","short","neat bob","morris","long curly","wavy bob","short back and sides","straight up","neat side"]
-hair_back_list = ["None", "shaggy medium","bob","locs bob","long wavy","curly pony","curly bob","spiky","twin braids","long locks","short spiky","bun","tufts","twintails","perm","updo","long straight","neat bob","side braid","long curly","wavy bob","twin puffs","half up","straight pony low","straight pony high","curly pony high"]
+hair_back_list = ["None", "shaggy medium","bob","locs bob","long wavy","curly pony","curly bob","spiky","twin braids","long locks","short spiky","bun","tufts","twintails","perm","long straight","neat bob","side braid","long curly","wavy bob","twin puffs","half up","straight pony low","straight pony high","curly pony high"]
 
 torso_list = ["medium"]
 head_list =["rectangular","pointed","square","medium","oval","round","jowly",]
-complexion_list =["None","light wrinkles","wrinkles"]
+complexion_list =["None","light wrinkles","wrinkles","mole","freckles"]
 ears_list =["regular"]
 nose_list =["None","small","button", "medium", "broad","round","bulbous","pointed","hooked"]
 eyebrow_list = ["None", "slightly downward","raised","flat sad","raised sad","angry","neutral","raised up","half raised","soft","slightly angry","raised soft"]
-eye_expression_list_port = ["neutral","side","crescents","narrowed","happy","wide","shock","angry","angry side","sleepy",]
-eye_type_list_port = ["androgynous","flat","long"]
+eye_expression_list_port = ["neutral","side","crescents","narrowed","happy","wide","shock","angry","angry side","sleepy","wink"]
+eye_type_list_port = ["androgynous","flat","long","catty","snake"]
 
 eye_list = []
 for type in eye_type_list_port:
     for exp in eye_expression_list_port:
         eye_list.append(type+ " "+exp)
 
-mouth_list = ["toothy smile","grin","small laugh","wobbly smile","smile","slight smile","small smile", "flat","small frown","wobbly frown","frown","pout","sneer","clenched","shock","ooh",]
+mouth_list = ["toothy smile","grin","big smile", "small laugh","wobbly smile","smile","slight smile","small smile", "flat","small frown","wobbly frown","frown","pout","dubious", "big frown", "sneer","clenched","shock","ooh",]
 
 blush_list = ["None","small","big"]
 
@@ -64,8 +64,8 @@ shirt_collar_list = ["None","button up","open shirt"]
 shirt_dec_list_port = ["None","button_up_plaid","button_up_stripe","open shirt vest","v neck stripe"]
 shirt_collar_dec_list_port = ["None","button_up_plaid"]
 shirt_sleeves_dec_list_port = ["None","plaid","stripe","None","stripe"]
-shirt_list_port = shirt_collar_list +["tshirt","boatneck","strappy","chinese collar","turtleneck","low cut","v neck"]
-shirt_sleeve_list_port = [x for x in shirt_list_port if not x in ["strappy","None"]] #items with sleeves
+shirt_list_port = shirt_collar_list +["tshirt","boatneck","strappy","chinese collar","turtleneck","low cut","v neck","thick strappy","halterneck","bodice","bodice sleeved"]
+shirt_sleeve_list_port = [x for x in shirt_list_port if not x in ["strappy","None","thick strappy","halterneck","bodice"]] #items with sleeves
 
 overshirt_dec_list_port = ["None","argyle v-neck",]
 overshirt_sleeves_dec_list_port = ["None","argyle"]
@@ -86,15 +86,15 @@ coat_dec_list_port = ["None", "cape","fur coat","letterman"]
 #hats
 
 hat_back_list_port = ["None","sunhat","wizard","night cap","broad hat","beanie","witch","helmet"]
-hat_dec_list_port = ["None", "cap_joja","cap_joja2","sunhat","night cap","broad hat","bowler","witch"]
-hat_list_port = ["None","sunhat", "cap", "headphones", "wizard","ribbon","night cap","broad hat","beanie","bowler","flower crown","soft cap","witch","helmet","turban"]
-hat_list_sprite = ["cowboy hat", "Bowler", "Top hat", "sombrero", "straw hat", "official cap", "blue bonnet", "Chapeau", "Skeleton mask", "Goblin Mask", "Chicken Mask", "Earmuffs", "Delicate Bow", "Tropiclip", "Butterfly Bow", "Hunter's Cap", "Trucker Hat", "Sailor's Cap", "Good Ol' Cap", "Fedora", "Cool Cap", "Lucky Bow", "Polka Bow", "Gnome's Cap", "Eye Patch", "Santa Hat", "Tiara", "Hard Hat", "Sou'wester", "Daisy", "Watermelon Band", "Mouse Ears", "Cat Ears", "Cowgal Hat", "Cowpoke Hat", "Archer's Cap", "Panda Hat", "Blue Cowboy Hat", "Red Cowboy Hat", "Cone Hat", "Living Hat", "Emily's Magic Hat", "Mushroom Cap", "Dinosaur Hat", "Totem Mask", "Logo Cap", "Dwarf Helm", "Fashion Hat", "Pumpkin Mask", "Hair Bone", "knight", "","red kerchief", "grey beanie", "red beanie", "black with feather", "", "", "", "", "wizard", "chef", "pirate", "", "", "turban", "", "gold mask", "spinner", "veil", "flat black", "witch",]
-hat_colour_names = ["top hat", "earmuffs", "flower","clip","bow","cap","backwards cap", "big bow", "cat ears", "flat cap", "wide hat", "cowboy hat", "hood", "beanie", "ribbed beanie", "turban", "hijab", "headphones","wizard","sunhat","night cap","flower crown","bowler","fedora","helmet","witches hat"]
+hat_dec_list_port = ["None", "cap_joja","sunhat","night cap","broad hat","bowler","cowboy"]
+hat_list_port = ["None","sunhat", "cap", "headphones", "wizard","ribbon","night cap","broad hat","beanie","bowler","flower crown","soft cap","witch","helmet","turban","cowboy", "ear muffs","headband","cat ears","bandanna","flower"]
+#hat_list_sprite = ["cowboy hat", "Bowler", "Top hat", "sombrero", "straw hat", "official cap", "blue bonnet", "Chapeau", "Skeleton mask", "Goblin Mask", "Chicken Mask", "Earmuffs", "Delicate Bow", "Tropiclip", "Butterfly Bow", "Hunter's Cap", "Trucker Hat", "Sailor's Cap", "Good Ol' Cap", "Fedora", "Cool Cap", "Lucky Bow", "Polka Bow", "Gnome's Cap", "Eye Patch", "Santa Hat", "Tiara", "Hard Hat", "Sou'wester", "Daisy", "Watermelon Band", "Mouse Ears", "Cat Ears", "Cowgal Hat", "Cowpoke Hat", "Archer's Cap", "Panda Hat", "Blue Cowboy Hat", "Red Cowboy Hat", "Cone Hat", "Living Hat", "Emily's Magic Hat", "Mushroom Cap", "Dinosaur Hat", "Totem Mask", "Logo Cap", "Dwarf Helm", "Fashion Hat", "Pumpkin Mask", "Hair Bone", "knight", "","red kerchief", "grey beanie", "red beanie", "black with feather", "", "", "", "", "wizard", "chef", "pirate", "", "", "turban", "", "gold mask", "spinner", "veil", "flat black", "witch",]
+hat_list_sprite = ["top hat", "earmuffs", "flower","clip","bow","cap","backwards cap", "big bow", "cat ears", "flat cap", "wide hat", "cowboy hat", "hood", "beanie", "ribbed beanie", "turban", "hijab", "headphones","wizard","sunhat","night cap","flower crown","bowler","fedora","helmet","witches hat", "ear muffs","head band","bandanna"]
 
 hijab_list_port = ["None","hijab"]
 #Different for portraits and sprites
 
-neckwear_list_port = ["None","tie","beads","choker","scarf","bowtie","pendant","cravat"]
+neckwear_list_port = ["None","tie","beads","choker","scarf","bowtie","pendant","cravat","bandanna"]
 neckwear_list_sprite = ["None", "bandana", "necklace", "bow-tie", "tie", "choker","beads","scarf","pendant"]
 neckwear_list_menu = neckwear_list_port
 
@@ -117,20 +117,20 @@ front_list_sprite = [["Coat", coat_back_list_sprite] ]
 wedding_clothes_list = ["suit","dress"]
 
 #colours
-skin_regular =["#FFE7D6","#FFD3A6","#FFDFA5","#F1B265","#F1A065","#DA773F","#DA874A","#B05934","#B96A2E","#853F27","#783F1A"]
-skin_weird = ["#C3FFFA","#41AD60","#000000","#9BB681"]
+skin_regular =["#FFE7D6","#FFECD6","#FFD3A6","#FFDFA5","#F1A065","#F1B265","#DA773F","#DA874A","#B05934","#B96A2E","#853F27","#783F1A"]
+skin_weird = ["#C3FFFA","#9BB681","#41AD60","#000000"]
 skin_colours =skin_regular + skin_weird
 
-outfit_yellow = ["#FFE201","#FF9F02","#FFDBB6","#F7BE4F"]
-outfit_green = ["#73D080","#4F8B20","#8CC54E","#277032","#56AA04","#7CA838"]
-outfit_blue = ["#477BC8","#3C92ED","#1FDBFF","#2E4D91"]
-outfit_purple = ["#BF2C92","#D361A7","#A46FE2","#9431C6"]
-outfit_red = ["#F0303C","#B71B00","#E55773"]
-outfit_brown = ["#B24836","#912D20","#820000","#630F0F"]
-outfit_grey = ["#FFFFFF","#777471","#4C4C56","#482B57","#000000"]
+outfit_yellow = ["#F8EABC","#FFE201","#FFCC98","#F7BE4F","#FF9F02"]
+outfit_green = ["#73D080","#8CC54E","#56AA04","#277032","#4F8B20","#7CA838","#8C8A2D"]
+outfit_blue = ["#A6E7CD", "#008186", "#477BC8","#3C92ED","#1FDBFF","#2E4D91"]
+outfit_purple = ["#A46FE2","#9431C6", "#BF2C92","#D361A7","#A01B54"]
+outfit_red = ["#FF8B91", "#E55773", "#F0303C","#B71B00",]
+outfit_brown = ["#B24836","#8E4A17","#912D20","#820000","#630F0F"]
+outfit_grey = ["#FFFFFF","#A8ADAE", "#777471","#4C4C56","#482B57","#000000"]
 
 outfit_colours = outfit_yellow+outfit_green+outfit_blue+outfit_purple +outfit_red +outfit_brown +outfit_grey
-eye_colours = ["#000000","#AEB655","#14AC34","#20514C","#29B4C4","#008891","#2E9FF7","#3D2C64","#B200F1","#F39EFF","#E55773","#D24525","#FF8F2B","#DB8200","#8E3300","#999999","#ffffff"]
+eye_colours = ["#000000","#AEB655","#14AC34","#20514C","#29B4C4","#008891","#2E9FF7","#3D2C64","#B200F1","#F39EFF","#FE023A","#D24525","#FF8F2B","#DB8200","#8E3300","#999999","#ffffff"]
 hair_weird = ["#7034ED","#B25DF6","#1B8EF6", "#53C7FB","#469951"]
 hair_grey = ["#A59A9D", "#E9E9E9",]
 hair_blonde = ["#FCE374", "#F0B50A",]
@@ -138,7 +138,7 @@ hair_brown = ["#641D00","#923D1F", "#8B4910", "#BB742E",]
 hair_black = ["#391E47", "#48356E","#4B261E", "#5B483C","#5A5A7F", "#602372","#000000"]
 hair_red = ["#FE7423","#FF5565", "#DF433C","#D16132"]
 
-hair_colours = hair_blonde + hair_red+ hair_brown+ hair_black+ hair_weird + hair_grey
+hair_colours = hair_blonde + hair_red+ hair_brown+ hair_grey+ hair_black+ hair_weird
 
 #Object stuff
 
@@ -169,10 +169,11 @@ def add_portrait_object(name, item_list,listname, location):
 # #Behind eyes
 # shown_start = len(closet) # where the visible items start
 
+add_portrait_object("Hat_back", hat_back_list_port,"hat_back_list_port", "outfit/hat")
 add_portrait_object("Hair_back", hair_back_list, "hair_back_list","body/hair")
 add_portrait_object("Coat_back", coat_back_list_port, "coat_back_list_port","outfit/coat")
 #add_portrait_object("Coat_dec_back", coat_dec_back_list_port, "coat_dec_back_list_port","outfit/coat")
-add_portrait_object("Hat_back", hat_back_list_port,"hat_back_list_port", "outfit/hat")
+
 
 add_portrait_object("Torso", torso_list, "torso_list", "body")
 
@@ -313,25 +314,32 @@ def HSL_to_RGB(h,s,l):
         B = X
     return [int(R+m), int(G+m), int(B+m)]
 
+def frecklecolour(skincolour):
+            # Given a colour string, returns the appropriate blush colour
+            # Not very reliable
+        if (skincolour=="#000000"):
+            return [100,100,100]    
+        new_colour = hex_to_rgba(skincolour)
+        
+        shadow = hex_to_rgba("#854C2C")
+        colour = [0,0,0]
+        r = 0.5 #opacity of shadow
+        for i in range(3): #multiply
+           colour[i] = int((1-r)*new_colour[i] + r*new_colour[i]*shadow[i]/255)   
+        return colour
+
 def blushcolour(skincolour):
             # Given a colour string, returns the appropriate blush colour
             # Not very reliable
+        if (skincolour=="#000000"):
+            skincolour="#525252"    
         new_colour = hex_to_rgba(skincolour)
-        # H = hue(c)
-        # S = saturation(c)
-        # V = luminance(c)
-
-        # newH = H - 0.06
-        # newS = max(min(1.42 *S, 1),0.6)
-        # newV = min (0.77*S + 0.57* V, 1)
-        # colour = HSL_to_RGB(newH, newS, newV)
-
         shadow = hex_to_rgba("#FF0462")
         colour = [0,0,0]
         r = 0.3 #opacity of shadow
         for i in range(3): #multiply
            colour[i] = int((1-r)*new_colour[i] + r*new_colour[i]*shadow[i]/255)   
-        return colour
+        return colour        
 
 def colour_this(pixel, colour):
     p = [pixel[0],pixel[1],pixel[2]]
@@ -348,7 +356,8 @@ def colour_this(pixel, colour):
         shadow = hex_to_rgba("#1f3066")
         r = 0.3 #opacity of shadow
         for i in range(3): #multiply
-           p[i] = int((1-r)*new_colour[i] + r*new_colour[i]*shadow[i]/255)    
+           p[i] = int((1-r)*new_colour[i] + r*new_colour[i]*shadow[i]/255)  
+        return colour_this_grey([0,180,255,pixel[3]], colour)   
     elif p == [0,255,0]: #highlight
         highlight = hex_to_rgba("#f9f4ca")
         r = 0.5 #opacity of highlight
@@ -392,6 +401,15 @@ def colour_this_blush(pixel, colour):
         for i in range(3): #screen
            p[i] = int((1-r)*new_colour[i] + r*(255 - (255-new_colour[i])*(255-highlight[i])/255))    
     return (p[0],p[1],p[2],pixel[3])
+
+def colour_this_freckles(pixel, colour):
+    p = [pixel[0],pixel[1],pixel[2]]
+    new_colour = frecklecolour(colour)
+    if p == [255,0,0]:
+        for i in range(3):
+            p[i] = new_colour[i]      
+    return (p[0],p[1],p[2],pixel[3])
+
 
 
 def colour_this_noshadow(pixel, colour):
@@ -488,18 +506,32 @@ def colour_this_grey(pixel, colour):
         return (p[0],p[1],p[2],pixel[3])      
 
     shadow1 = new_colour  
-    if h <60: #red-orange
-        shadow2 = hex_to_rgba("#4B0019")
-    elif h<120: #yellow
-        shadow2 = hex_to_rgba("#004B13")
-    elif h<180: #yellow-green
-        shadow2 = hex_to_rgba("#00264B")
-    elif h<240: #aqua
-        shadow2 = hex_to_rgba("#00024B")
-    elif h<300: #blue
-        shadow2 = hex_to_rgba("#00024B")
-    else: #purple
-        shadow2 = hex_to_rgba("#34004B")
+    if l < 125:
+        if h <62: #red-orange
+            shadow2 = hex_to_rgba("#4B0019")
+        elif h<120: #yellow
+            shadow2 = hex_to_rgba("#004B13")
+        elif h<180: #yellow-green
+            shadow2 = hex_to_rgba("#00264B")
+        elif h<240: #aqua
+            shadow2 = hex_to_rgba("#00024B")
+        elif h<300: #blue
+            shadow2 = hex_to_rgba("#00024B")
+        else: #purple
+            shadow2 = hex_to_rgba("#34004B")
+    else:
+        if h <62: #red-orange
+            shadow2 = hex_to_rgba("#A50037")
+        elif h<120: #yellow
+            shadow2 = hex_to_rgba("#00A52A")
+        elif h<180: #yellow-green
+            shadow2 = hex_to_rgba("#0066C9")
+        elif h<240: #aqua
+            shadow2 = hex_to_rgba("#2D31DA")
+        elif h<300: #blue
+            shadow2 = hex_to_rgba("#272BDA")
+        else: #purple
+            shadow2 = hex_to_rgba("#7C00B4")
 
     if s==0:
         shadow1 = hex_to_rgba("#6862BB")     
@@ -510,6 +542,7 @@ def colour_this_grey(pixel, colour):
         r = 0.8*l/255 + 0.2
     for i in range(3): #multiply
         p[i] = p[i] = int(r*new_colour[i] + (1-r)*new_colour[i]*(r*shadow1[i]+(1-r)*shadow2[i])/255)    
+        #p[i] = p[i] = int(r*new_colour[i] + (1-r)*new_colour[i]*(shadow2[i])/255)    
        
     return (p[0],p[1],p[2],pixel[3]) 
 
@@ -562,7 +595,9 @@ def process_image(name, location, colour,colour_list,type):
                 elif type =="eyes":   
                     Adata[x, y] = colour_this_eyes(Adata[x, y], colour_list[colour])     
                 elif type =="blush":   
-                    Adata[x, y] = colour_this_blush(Adata[x, y], colour_list[colour])       
+                    Adata[x, y] = colour_this_blush(Adata[x, y], colour_list[colour]) 
+                elif type =="freckles":   
+                    Adata[x, y] = colour_this_freckles(Adata[x, y], colour_list[colour])       
                 else:    
                     Adata[x, y] = colour_this(Adata[x, y], colour_list[colour])
     img.save(save_string)    
@@ -656,9 +691,7 @@ def colour_list_add(list_name, sublists):
 def write_temp():
     content = open("temp.js","w")
     for i in range(len(hat_list_sprite)):
-        content.write("[\""+hat_list_sprite[i]+"\",[1],["+str(i+1)+"]], \n")
-    for i in range(len(hat_colour_names)):
-        content.write("[\""+hat_colour_names[i]+"\",["+str(i+1)+"],["+str(i+73)+"]], \n")    
+        content.write("[\""+hat_list_sprite[i]+"\",["+str(i+1)+"],["+str(i+73)+"]], \n")    
     content.close()
 
 
@@ -680,24 +713,9 @@ def write_variables():
     content.write(list_string("eye_type_list_port", eye_type_list_port))
     content.write("\n")
     content.write(list_string("eye_colours", eye_colours))
-    content.write(list_string("outfit_yellow", outfit_yellow))
-    content.write(list_string("outfit_green", outfit_green))
-    content.write(list_string("outfit_blue", outfit_blue))
-    content.write(list_string("outfit_purple", outfit_purple))
-    content.write(list_string("outfit_red", outfit_red))
-    content.write(list_string("outfit_brown", outfit_brown))
-    content.write(list_string("outfit_grey", outfit_grey))
-    content.write(colour_list_add("outfit_colours", "outfit_yellow+outfit_green+outfit_blue+outfit_purple+outfit_red+outfit_brown+outfit_grey"))
-    content.write(list_string("skin_regular", skin_regular))
-    content.write(list_string("skin_weird", skin_weird))
-    content.write(colour_list_add("skin_colours", "skin_regular+skin_weird"))
-    content.write(list_string("hair_weird", hair_weird))
-    content.write(list_string("hair_grey", hair_grey))
-    content.write(list_string("hair_blonde", hair_blonde))
-    content.write(list_string("hair_red", hair_red))
-    content.write(list_string("hair_brown", hair_brown))
-    content.write(list_string("hair_black", hair_black))
-    content.write(colour_list_add("hair_colours","hair_blonde+hair_red+hair_brown+hair_black+hair_weird+hair_grey"))
+    content.write(list_string("outfit_colours", outfit_colours))
+    content.write(list_string("skin_colours", skin_colours))
+    content.write(list_string("hair_colours",hair_colours))
     content.write("\n")
     content.write(colourlist_list_string+"];\n")
     content.write("\n")
@@ -717,7 +735,6 @@ def write_variables():
     content.write(list_string("facial_hair_list_sprite", facial_hair_list_sprite))
     content.write(list_string("facial_hair_list_menu", facial_hair_list_menu))
     content.write(list_string("hat_list_sprite", hat_list_sprite))
-    content.write(list_string("hat_colour_names", hat_colour_names))
     content.write(list_string("neckwear_list_sprite", neckwear_list_sprite))
     content.write(list_string("neckwear_list_menu", neckwear_list_menu))
     content.write(list_string("coat_list_sprite", coat_list_sprite))
@@ -761,68 +778,84 @@ def process_portrait_part(obj):
             if obj.name == "Blush":
                 if item!="None":
                     process_image(item, loc, c, colour_list,"blush")
-            else:        
+            elif (obj.name == "Complexion" and item=="freckles"): 
+                process_image(item, loc, c, colour_list,"freckles")       
+            elif (not (obj.name == "Eyes" and item=="wink")):     
                 if item!="None":
                     process_image(item, loc, c, colour_list,"portrait")
+
+def makeWinks():
+    for eye_type in eye_type_list_port:
+        for c in range(len(eye_colours)):
+            loc = "../images/portraits/expression/eyes/"+eye_type+" "
+            save_string = loc+"wink_"+str(c)+".png"
+            im_happy = Image.open(loc+"happy_"+str(c)+".png") 
+            im_wink = Image.new("RGBA", (256, 268))
+            region = im_happy.crop((0,0,125,268))
+            im_wink.paste(region,(0,0,125,268))
+            im_happy = Image.open(loc+"crescents_"+str(c)+".png") 
+            region = im_happy.crop((126,0,256,268))
+            im_wink.paste(region,(126,0,256,268))
+            im_wink.save(save_string)
+
+
+        
+
 
 
 def process_all_portraits():
     for c in closet:
         process_portrait_part(c)
+    makeWinks()     
 
 def process_body_sprites():
     for c in range(len(skin_colours)):
-        process_image("head", "sprites/body/", c, skin_colours,"skin")
-        for h in ["short","tall"]: 
-            process_image(h, "sprites/body", c, skin_colours,"skin")   
-            process_image("arms_"+h, "sprites/body", c, skin_colours,"skin")
-            for w in wedding_clothes_list:
-                process_image(w+"_"+h, "sprites/wedding", c, skin_colours,"skin") 
-                for g in ["female","male"]:
-                    process_image(g+"_"+w+"_"+h, "sprites/flower dance", c, skin_colours,"skin") 
+         process_image("head", "sprites/body/", c, skin_colours,"skin")
+         for h in ["short","tall"]: 
+             process_image(h, "sprites/body", c, skin_colours,"skin")   
+             process_image("arms_"+h, "sprites/body", c, skin_colours,"skin")
+             for w in wedding_clothes_list:
+                 process_image(w+"_"+h, "sprites/wedding", c, skin_colours,"skin") 
+                 for g in ["female","male"]:
+                     process_image(g+"_"+w+"_"+h, "sprites/flower dance", c, skin_colours,"skin") 
 
     for c in range(len(hair_colours)):  
          process_image("hairstyles", "sprites/hair", c, hair_colours,"hair")
          process_image("hairstyles2", "sprites/hair", c, hair_colours,"hair")
-         #process_image("facialhair", "sprites/hair/facialhair", c, hair_colours,"hair")
+         process_image("facialhair", "sprites/hair/facialhair", c, hair_colours,"hair")
     for c in range(len(eye_colours)): 
         process_image("eyes", "sprites/body", c, eye_colours,"eyes") 
         
 
 def process_outfit_sprites():
     for c in range(len(outfit_colours)): 
-        process_image("eyewear", "sprites/accessories/eyewear", c, outfit_colours,"skin_grey") 
-        process_image("hats_colour", "sprites/outfit/hats", c, outfit_colours,"skin_grey")
-        process_image("hats_dec", "sprites/outfit/hats", c, outfit_colours,"skin_grey")
-        #process_image("pants", "sprites/outfit/pants", c, outfit_colours,"blue")
-        #process_image("pants_top", "sprites/outfit/pants_top", c, outfit_colours,"skin_grey")
-        #process_image("briefs", "sprites/outfit/pants", c, outfit_colours,"blue")
+        # process_image("eyewear", "sprites/accessories/eyewear", c, outfit_colours,"skin_grey") 
+        #process_image("hats", "sprites/outfit/hats", c, outfit_colours,"skin_grey")
+        #process_image("hats_dec", "sprites/outfit/hats", c, outfit_colours,"skin_grey")
+        process_image("pants", "sprites/outfit/pants", c, outfit_colours,"blue")
+        # process_image("pants_top", "sprites/outfit/pants_top", c, outfit_colours,"skin_grey")
+        # process_image("briefs", "sprites/outfit/pants", c, outfit_colours,"blue")
         process_image("shirts", "sprites/outfit/shirts", c, outfit_colours,"grey")
-        #process_image("shirt decs", "sprites/outfit/shirts/decorations", c, outfit_colours,"grey")
-        process_image("overshirt", "sprites/outfit/overshirt", c, outfit_colours,"grey")
+        process_image("shirt decs", "sprites/outfit/shirts/decorations", c, outfit_colours,"grey")
+        #process_image("overshirt", "sprites/outfit/overshirt", c, outfit_colours,"grey")
         process_image("coat", "sprites/outfit/coat", c, outfit_colours,"skin_grey")
         process_image("coat_dec", "sprites/outfit/coat", c, outfit_colours,"skin_grey")
         process_image("coat_back", "sprites/outfit/coat", c, outfit_colours,"skin_grey")
-        process_image("neckwear", "sprites/accessories/neckwear", c, outfit_colours,"grey")
-        process_image("earrings", "sprites/accessories/earrings", c, outfit_colours,"")
-        for height in ["short","tall"]:
-            process_image("longpants_"+height, "sprites/outfit/pants", c, outfit_colours,"blue")
-            #for shoetype in ["boots","flats","flipflops"]:
-            #    process_image(height+"_"+shoetype, "sprites/outfit/shoes", c, outfit_colours,"grey") 
-            #process_image(height, "sprites/outfit/gloves", c, outfit_colours,"grey")
-            #for sleevetype in ["short","long"]:
-            #    process_image(height+"_"+sleevetype, "sprites/outfit/sleeves", c, outfit_colours,"grey") 
+        #process_image("neckwear", "sprites/accessories/neckwear", c, outfit_colours,"grey")
+        # process_image("earrings", "sprites/accessories/earrings", c, outfit_colours,"")
+        # for height in ["short","tall"]:
+        #     process_image("longpants_"+height, "sprites/outfit/pants", c, outfit_colours,"blue")
+        #     for shoetype in ["boots","flats","flipflops"]:
+        #         process_image(height+"_"+shoetype, "sprites/outfit/shoes", c, outfit_colours,"grey") 
+        #     process_image(height, "sprites/outfit/gloves", c, outfit_colours,"grey")
+        #     for sleevetype in ["short","long"]:
+        #         process_image(height+"_"+sleevetype, "sprites/outfit/sleeves", c, outfit_colours,"grey") 
 
 write_temp()
 write_variables()
 
 #process_body_sprites()
-#process_outfit_sprites()
-
-makeSwatches(eye_colours,"eye_colours" )
-makeSwatches(outfit_colours,"outfit" )
-makeSwatches(skin_colours,"skin_colours" )
-makeSwatches(hair_colours,"hair_colours" )
+process_outfit_sprites()
 
 #flipImage()
 
@@ -837,7 +870,9 @@ makeSwatches(hair_colours,"hair_colours" )
 
 
 for c in closet:
-    if c.name in [""]:
+    if c.name in []:
         process_portrait_part(c)
+#makeWinks() 
+       
 #process_all_portraits()
 #make_coat()

@@ -60,7 +60,7 @@ function setVariables(data_object){
     setSpecialSpriteColour(["Wedding","Flower dance"], skinColour);
 
     setClothing(["Hairstyle"],hairStyle);
-    if ([0,51].includes(hairStyle)){ //all bald hairstyles
+    if ([0,52].includes(hairStyle)){ //all bald hairstyles
         setSpriteVariable(["Head"], 0);
     }
     else{
@@ -148,7 +148,7 @@ document.addEventListener('alpine:init', () => {
 
     eyebrow_expressions : [6,2,3,1,4,5,6,6,6,6],
     eye_expressions : [0,2,1,0,3,4,0,0,0,0],
-    mouth_expressions : [5,1,10,0,3,12,5,5,5,5],
+    mouth_expressions : [5,1,10,0,3,11,5,5,5,5],
     blush_expressions : [0,0,0,0,1,0,0,0,0,0],
 
     current_menu_objects : [
@@ -156,11 +156,11 @@ document.addEventListener('alpine:init', () => {
     {name: 'Neckwear', item: 0, colour1: 0,colour2: 0, sleeves: 0},
     {name: 'Eyewear', item: 0, colour1: 0,colour2: 0, sleeves: 0},
     {name: 'Earrings', item: 0, colour1: 0,colour2: 0, sleeves: 0},
-    {name: 'Shirt', item: 3, colour1: 0,colour2: 0, sleeves: 0},
+    {name: 'Shirt', item: 6, colour1: 5,colour2: 0, sleeves: 0},
     {name: 'Overshirt', item: 0, colour1: 0,colour2: 0, sleeves: 0},
     {name: 'Coat', item: 0, colour1: 0,colour2: 0, sleeves: 0},
-    {name: 'Pants', item: 2, colour1: 10,colour2: 0, sleeves: 0},
-    {name: 'Shoes', item: 1, colour1: 3,colour2: 0, sleeves: 0},
+    {name: 'Pants', item: 2, colour1: 14,colour2: 0, sleeves: 0},
+    {name: 'Shoes', item: 1, colour1: 28,colour2: 0, sleeves: 0},
     {name: 'Gloves', item: 0, colour1: 0,colour2: 0, sleeves: 0},
     ],
 

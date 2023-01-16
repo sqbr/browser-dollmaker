@@ -13,7 +13,7 @@ const hairstyles_names = ["Short shaggy", "Pageboy", "side-part", "Afro", "Mod",
 
 const hairstyles2_names = ["Flippy", "Wavy", "Long", "loose pony", "high braid", "Over shoulder", "Wavy over shoulder", "short bob", "short", "80s bob", "Half shaved", "short spiky", "Short wavy", "short centre part", "Short bangs", "blowout", "short centre part", "short shaggy", "wavy long", "shaggy medium", "blowout","half shaved medium", "side part medium"]
 
-const pants_names = ["capris","shorts", "long dress", "short skirt", "pleated skirt", "Dinosaur Pants", "yellow grass skirt", "green grass skirt", "pantaloons", "tight pants", "baggy pants", "simple dress", "relaxed fit pants", "relaxed fit shorts"];
+const pants_names = ["capris","shorts", "long dress", "short skirt", "pleated skirt", "Dinosaur Pants", "yellow grass skirt", "green grass skirt", "pantaloons", "midi skirt", "baggy pants", "simple dress", "relaxed fit pants", "relaxed fit shorts"];
 
 const shoes_names =["Boots","Flats","Flip-flops"];
 
@@ -55,8 +55,12 @@ for (let i =0; i<head_name_list_sprite.length;i++){
 
 const sprite_eyes_list = []
 for (let i =0; i<eye_type_list_port.length;i++){
+    if (i ==3)
+        col  = 1
+    else
+        col = i     
     b= eye_type_list_port[i];
-    sprite_eyes_list.push({name: b, location: "body/eyes", colour: true,rowNum: 4,topcorner:[12*i,0]})
+    sprite_eyes_list.push({name: b, location: "body/eyes", colour: true,rowNum: 4,topcorner:[12*col,0]})
 }
 
 const sprite_shoes_list = [none]
@@ -92,12 +96,6 @@ for (let row =0; row<2;row++)
         let current_num = 14*row+column;
         if (current_num <uncoloured_shirts_names.length)
             sprite_shirt1_list.push({name: uncoloured_shirts_names[current_num]+row+","+column, location: "outfit/shirts/shirts", colour: true,rowNum: 4,topcorner:[8*column,32*row]})
-}
-for (let column =0; column<16;column++)
-    for (let row =0; row<19;row++){
-        let current_num = 16*row+column;
-        if (current_num <coloured_shirts_names.length)
-            sprite_shirt1_list.push({name: coloured_shirts_names[current_num], location: "outfit/shirts/shirts", colour: false,rowNum: 4,topcorner:[8*column,32*row]})
 }
 
 const sprite_shirt2_list = [none];
@@ -183,18 +181,11 @@ for (let row =0; row<3;row++)
 }
 
 const sprite_hat_list = [none]
-for (let row =0; row<8;row++)
-    for (let column =0; column<12;column++){
-        let current_num = row*12+column;
-        if (current_num< hat_list_sprite.length){
-            sprite_hat_list.push({name: hat_list_sprite[current_num], location: "outfit/hats/hats", colour: false,rowNum: 4,topcorner:[16*column,128*row]})
-        }
-}
 for (let row =0; row<3;row++)
     for (let column =0; column<12;column++){
         let current_num = row*12+column;
-        if (current_num< hat_colour_names.length){
-            sprite_hat_list.push({name: hat_colour_names[current_num], location: "outfit/hats/hats_colour", colour: true,rowNum: 4,topcorner:[16*column,128*row]})
+        if (current_num< hat_list_sprite.length){
+            sprite_hat_list.push({name: hat_list_sprite[current_num], location: "outfit/hats/hats", colour: true,rowNum: 4,topcorner:[16*column,128*row]})
         }
 }
 
@@ -202,8 +193,8 @@ const sprite_hat_dec_list = [none]
 for (let row =0; row<3;row++)
     for (let column =0; column<12;column++){
         let current_num = row*12+column;
-        if (current_num< hat_colour_names.length){
-            sprite_hat_dec_list.push({name: hat_colour_names[current_num], location: "outfit/hats/hats_dec", colour: true,rowNum: 4,topcorner:[16*column,128*row]})
+        if (current_num< hat_list_sprite.length){
+            sprite_hat_dec_list.push({name: hat_list_sprite[current_num], location: "outfit/hats/hats_dec", colour: true,rowNum: 4,topcorner:[16*column,128*row]})
         }
 }
 
