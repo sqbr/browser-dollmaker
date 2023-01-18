@@ -40,7 +40,7 @@ const coat_menu_list = [ none_menu, ["Fur Coat",[8,2],[10,0,1]],["Letterman",[9,
 
 const overshirt_menu_list = [ none_menu,["Button up V-neck",[5,0],[2,0]],["V-neck",[1,0],[6,0]],["Argyle V-neck",[1,1],[6,28]], ["Sweater",[2,0],[4,0]],["Open Sweater",[3,0],[1,0]],["Suspenders",[4,0],[5,0]],];
 
-const shirt_menu_list = [ none_menu,["Bikini",[5,0,0,0],[7,0,0]],["Strappy Vest",[10,0,0,0],[2,0,0]],["Halter-neck",[11,0,0,0],[2,0,0]],["Bodice",[12,0,0,0],[14,0,0]],["Sleeved Bodice",[13,0,0,0],[14,0,0]],["T-Shirt",[3,0,0,0],[19,0,0]],["Striped V-neck",[9,0,4,0],[26,0,4]],["V-neck",[9,0,0,0],[26,0,0]],["Low Cut",[8,0,0,0],[27,0,0]],["Boatneck",[4,0,0,0],[23,0,0]],["Turtleneck",[7,0,0,0],[21,0,0]],["Chinese Collar",[6,0,0,0],[21,0,0]], ["Open Shirt With Vest",[2,2,3,0],[24,0,25]], ["Open Shirt",[2,2,0,0],[25,0,0]],  ["Button-up",[1,1,0,0],[12,0,0]], ["Plaid Button-up",[1,1,1,1],[12,0,2]],["Stripe Button-up",[1,1,2,0],[12,0,4]],]
+const shirt_menu_list = [ none_menu,["Bikini",[5,0,0,0],[7,0]],["Strappy Vest",[10,0,0,0],[2,0]],["Halter-neck",[11,0,0,0],[2,0]],["Bodice",[12,0,0,0],[14,0]],["Sleeved Bodice",[13,0,0,0],[14,0]],["T-Shirt",[3,0,0,0],[19,0]],["Striped V-neck",[9,0,4,0],[26,4]],["V-neck",[9,0,0,0],[26,0]],["Low Cut",[8,0,0,0],[27,0]],["Boatneck",[4,0,0,0],[23,0]],["Turtleneck",[7,0,0,0],[21,0]],["Chinese Collar",[6,0,0,0],[21,0]], ["Open Shirt With Vest",[2,2,3,0],[24,25]], ["Open Shirt",[2,2,0,0],[25,0]],  ["Button-up",[1,1,0,0],[12,0]], ["Plaid Button-up",[1,1,1,1],[12,2]],["Stripe Button-up",[1,1,2,0],[12,4]],]
 
 const pants_menu_list = [none_menu];
 const pants_names_all = ["briefs","trousers"].concat(pants_names)
@@ -65,7 +65,7 @@ add_menu_object("Hat", hat_menu_list, outfit_colours,["Hat","Hat_dec","Hijab"],[
 add_menu_object("Neckwear", neckwear_menu_list, outfit_colours,["Neckwear","Neckwear2","Neckwear3"],[], ["Neckwear"],[]);
 add_menu_object("Eyewear", eyewear_menu_list, outfit_colours,["Eyewear"],[],["Eyewear"],[]);
 add_menu_object("Earrings", earrings_menu_list, outfit_colours,["Earrings"],[],["Earrings"],[]);
-add_menu_object("Shirt", shirt_menu_list, outfit_colours,["Shirt","Shirt_collar","Shirt_dec","Shirt_collar_dec"],["Shirt_dec","Shirt_collar_dec"],["Shirt","Shirt2","Shirt_dec"],["Shirt_dec"]);
+add_menu_object("Shirt", shirt_menu_list, outfit_colours,["Shirt","Shirt_collar","Shirt_dec","Shirt_collar_dec"],["Shirt_dec","Shirt_collar_dec"],["Shirt","Shirt_dec"],["Shirt_dec"]);
 add_menu_object("Overshirt", overshirt_menu_list, outfit_colours,["Overshirt","Overshirt_dec"],["Overshirt_dec"],["Overshirt","Overshirt_dec"],["Overshirt_dec"]);
 add_menu_object("Coat", coat_menu_list, outfit_colours,["Coat","Coat_dec"],["Coat_dec"],["Coat","Coat_back","Coat_dec"],["Coat_dec"]);
 add_menu_object("Pants", pants_menu_list, outfit_colours,["Pants_top"],[],["Pants","Pants top"],[]);

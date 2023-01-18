@@ -338,7 +338,6 @@ function fixSpriteSources(){
     // Fixes the "src" attribute for all images in sublist of sprite_objects
     for (let i = 0; i < sprite_objects.length; i += 1){
         let b = sprite_objects[i];
-
         //code for sleeves
         for (let k = 0; k < sleeve_list_port.length; k += 1){ 
             let front_name = sleeve_list_port[k].name; //eg "Shirt", "Coat" etc
@@ -354,7 +353,7 @@ function fixSpriteSources(){
                         b.item =Math.max(0,2*sleeve_list[k]-1+height); //what current sleeve length is
                         b.colour1 = obj_front.colour1
                 } else{
-                        b.item = 0;
+                        b.item = 0;  
                 }
                 }
             }
@@ -368,48 +367,51 @@ function fixSpriteSources(){
         }
 
         let item = b.item_list[b.item];
-        if (item == none){
+        if (item != none){
+            b.topcorner = item.topcorner;
+            b.rowNum= item.rowNum;
+
+            //code to make backs of things match the fronts. 
+            for (let k = 0; k < back_list_sprite.length; k += 1){ 
+                let front_name = back_list_sprite[k][0];
+                if (b.name == front_name+"_back"){
+                    obj_front = findNameMatch(sprite_objects, front_name);
+                    if (back_list_sprite[k][1].includes(obj_front.item_list[obj_front.value]))
+                        b.item = obj_front.item;
+                        b.colour1 = obj_front.colour1;
+                }
+            }
+            //code to make fronts of things match the backs. 
+            for (let k = 0; k < front_list_sprite.length; k += 1){ 
+                let front_name = front_list_sprite[k][0];
+                if (b.name == front_name+"_front"){
+                    obj_front = findNameMatch(sprite_objects, front_name);
+                    if (front_list_sprite[k][1].includes(obj_front.item_list[obj_front.value]))
+                        
+                        b.item = obj_front.item;
+                        b.colour1 = obj_front.colour1;
+                }
+            }
+        }
+        if (b.item_list[b.item].name.includes("None")||b.item_list[b.item].name.includes("none")){
             b.base_image.src="";
             b.multiply_image.src="";
             b.highlight_image.src="";
             b.overlay_image.src="";
-        }else{
-        b.topcorner = item.topcorner;
-        b.rowNum= item.rowNum;
-        let loc = item.location
-
-        //code to make backs of things match the fronts. 
-        for (let k = 0; k < back_list_sprite.length; k += 1){ 
-            let front_name = back_list_sprite[k][0];
-            if (b.name == front_name+"_back"){
-                obj_front = findNameMatch(sprite_objects, front_name);
-                if (back_list_sprite[k][1].includes(obj_front.item_list[obj_front.value]))
-                    b.item = obj_front.item;
-                    b.colour1 = obj_front.colour1;
+        } else{
+            loc = b.item_list[b.item].location;
+            
+            //set colour
+            if (item.colour){
+                loc_string = "images/sprites/"+loc;
+            }else{
+                loc_string = "images/bases/sprites/"+loc; 
             }
+            b.base_image.src  =loc_string+"_base.png";
+            b.multiply_image.src  =loc_string+"_multiply.png";
+            b.highlight_image.src  =loc_string+"_highlight.png";
+            b.overlay_image.src  =loc_string+"_overlay.png";
         }
-        //code to make fronts of things match the backs. 
-        for (let k = 0; k < front_list_sprite.length; k += 1){ 
-            let front_name = front_list_sprite[k][0];
-            if (b.name == front_name+"_front"){
-                obj_front = findNameMatch(sprite_objects, front_name);
-                if (front_list_sprite[k][1].includes(obj_front.item_list[obj_front.value]))
-                    
-                    b.item = obj_front.item;
-                    b.colour1 = obj_front.colour1;
-            }
-        }
-        //set colour
-        if (item.colour){
-             loc_string = "images/sprites/"+loc;
-        }else{
-            loc_string = "images/bases/sprites/"+loc; 
-        }
-        b.base_image.src  =loc_string+"_base.png";
-        b.multiply_image.src  =loc_string+"_multiply_.png";
-        b.highlight_image.src  =loc_string+"_highlight.png";
-        b.overlay_image.src  =loc_string+"_overlay.png";
-    }
 }
 }
 
@@ -431,7 +433,7 @@ function fixSpecialSpriteSources(){
                 loc_string = "images/bases/sprites/"+loc; 
             }
             b.base_image.src  =loc_string+"_base.png";
-            b.multiply_image.src  =loc_string+"_multiply_.png";
+            b.multiply_image.src  =loc_string+"_multiply.png";
             b.highlight_image.src  =loc_string+"_highlight.png";
             b.overlay_image.src  =loc_string+"_overlay.png";
 
@@ -463,31 +465,25 @@ function draw_coloured_port(obj, index, colour, ctx, sourceX, sourceY, xpos, ypo
 }
 
 function draw_coloured_sprite(obj, ctx, colour, sourceX, sourceY, sourcewidth,sourceheight,xpos, ypos,width,height){
-    /*sourcewidth = 16
-    sourceheight = 16
-    sourceX = 0
-    sourceY = 0
-    width = 16
-    height = 16
-    xpos = 0
-    ypos = 0
+
+    if (obj.name =="Shirt_dec"){
+    off_ctx.globalCompositeOperation = "source-over";
     off_ctx.fillStyle = colour;
     off_ctx.fillRect(0, 0, sourcewidth,sourceheight);
 
     off_ctx.globalCompositeOperation = "destination-in";
-    off_ctx.drawImage(obj.base_image,sourceX,sourceY,sourcewidth,sourceheight, xpos, ypos,sourcewidth,sourceheight);
-    /*
+    off_ctx.drawImage(obj.base_image,sourceX,sourceY,sourcewidth,sourceheight, 0, 0,sourcewidth,sourceheight);
+    
     off_ctx.globalCompositeOperation = "multiply";
     
     off_ctx.drawImage(obj.multiply_image,sourceX,sourceY,sourcewidth,sourceheight, 0, 0,sourcewidth,sourceheight);
-    /*
+    
     off_ctx.globalCompositeOperation = "screen";
     off_ctx.drawImage(obj.highlight_image,sourceX,sourceY,sourcewidth,sourceheight, 0, 0,sourcewidth,sourceheight);
     
     off_ctx.globalCompositeOperation = "source-over"; 
-    off_ctx.drawImage(obj.overlay_image,sourceX,sourceY,sourcewidth,sourceheight, 0, 0,sourcewidth,sourceheight);*/
+    off_ctx.drawImage(obj.overlay_image,sourceX,sourceY,sourcewidth,sourceheight, 0, 0,sourcewidth,sourceheight);
     
-    //ctx.drawImage(off_canvas,0,0,sourcewidth,sourceheight, xpos, ypos,width,height);
-    ctx.drawImage(obj.base_image,sourceX, sourceY, sourcewidth,sourceheight,xpos, ypos,width,height);
-
+    ctx.drawImage(off_canvas,0,0,sourcewidth,sourceheight, xpos, ypos,width,height);
+    }
 }
