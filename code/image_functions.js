@@ -270,10 +270,10 @@ function fixPortSources(){
                 if (false){//since all portrait items are coloured
                     b.image_list[j].src = "images/bases/portraits/"+b.location+"/"+name+".png";
                 }else{
-                    if (b.name =="Nose_front"){
-                        b.image_list[j].src  = "images/portraits/"+b.location+"/"+name+"_noshadow_"+b.colour+".png";
+                    if (false){//(b.name =="Nose_front"){
+                        b.image_list[j].src  = "images/portraits/"+b.location+"/"+name+"_noshadow_base.png";
                     }else
-                        b.image_list[j].src  = "images/portraits/"+b.location+"/"+name+"_"+b.colour+".png";
+                        b.image_list[j].src  = "images/portraits/"+b.location+"/"+name+"_base.png";
                 }
             }
         }
@@ -344,7 +344,7 @@ function fixSpriteSources(){
         }
         //set colour
         if (item.colour){
-            b.image.src  = "images/sprites/"+loc+"_"+b.colour+".png";
+            b.image.src  = "images/sprites/"+loc+"_base.png";
         }else{
             b.image.src = "images/bases/sprites/"+loc+"_base.png";
         }
@@ -369,4 +369,14 @@ function fixSpecialSpriteSources(){
 
         }
     }
+}
+
+function draw_coloured_port(obj, index, colour, ctx, sourceX, sourceY, xpos, ypos){
+    ctx.drawImage(obj.image_list[index],sourceX,sourceY,256,256, xpos, ypos,256,256);
+
+}
+
+function draw_coloured_sprite(obj, ctx, colour, sourceX, sourceY, sourcewidth,sourceheight,xpos, ypos,width,height){
+    ctx.drawImage(obj.image,sourceX,sourceY,sourcewidth,sourceheight, xpos, ypos,width,height);
+
 }

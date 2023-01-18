@@ -15,6 +15,13 @@ outfit_list_spriteOnly = ["Pants","Shoes","Gloves"]
 outfit_list_both = ["Neckwear","Neckwear2","Neckwear3","Eyewear","Earrings", "Hat"]
 outfit_list = outfit_list_both+ outfit_list_portOnly+ outfit_list_spriteOnly
 
+render_list = ["Torso", "Head", "Complexion","Ears", "Nose","Nose_front"]+expression_list+["Neckwear","Eyewear","Earrings"]
+render_list +=["Hair_front","Hair_back"]
+render_list +=["Hat","Hat_back","Hat_dec"]
+render_list +=["Shirt_collar", "Shirt" ,"Shirt_dec","Shirt_collar_dec","Shirt_sleeves","Shirt_sleeves_dec"]
+render_list +=["Coat","Coat_back","Coat_dec","Coat_dec_back","Coat_sleeves"]
+render_list +=["Overshirt","Overshirt_dec","Overshirt_sleeves","Overshirt_sleeves_dec"]
+
 skin_list = body_list + ["Eyebrows", "Mouth","Blush"]
 
 #Only in portraits
@@ -341,77 +348,6 @@ def blushcolour(skincolour):
            colour[i] = int((1-r)*new_colour[i] + r*new_colour[i]*shadow[i]/255)   
         return colour        
 
-def colour_this(pixel, colour):
-    p = [pixel[0],pixel[1],pixel[2]]
-    new_colour = hex_to_rgba(colour)
-    if p == [255,0,0]:
-        for i in range(3):
-            p[i] = new_colour[i] 
-    elif p == [0,0,111]: #edge
-        shadow = hex_to_rgba("#22252E")
-        r = 0.7 #opacity of shadow
-        for i in range(3): #multiply
-           p[i] = int((1-r)*new_colour[i] + r*shadow[i])                 
-    elif p == [0,0,255]: #shading
-        shadow = hex_to_rgba("#1f3066")
-        r = 0.3 #opacity of shadow
-        for i in range(3): #multiply
-           p[i] = int((1-r)*new_colour[i] + r*new_colour[i]*shadow[i]/255)  
-        return colour_this_grey([0,180,255,pixel[3]], colour)   
-    elif p == [0,255,0]: #highlight
-        highlight = hex_to_rgba("#f9f4ca")
-        r = 0.5 #opacity of highlight
-        for i in range(3): #screen
-           p[i] = int((1-r)*new_colour[i] + r*(255 - (255-new_colour[i])*(255-highlight[i])/255))    
-    return (p[0],p[1],p[2],pixel[3])
-
-def colour_this_eyes(pixel, colour):
-    p = [pixel[0],pixel[1],pixel[2]]
-    new_colour = hex_to_rgba(colour)
-    if p == [255,0,0]:
-        for i in range(3):
-            p[i] = new_colour[i]      
-    elif p == [0,0,255]: #shading
-        shadow = hex_to_rgba("#1f3066")
-        r = 0.3 #opacity of shadow
-        for i in range(3): #multiply
-           p[i] = int((1-r)*new_colour[i] + r*new_colour[i]*shadow[i]/255)    
-    elif p == [0,255,0]: #highlight
-        highlight = hex_to_rgba("#f9f4ca")
-        r = 0.5 #opacity of highlight
-        for i in range(3): #screen
-           p[i] = int((1-r)*new_colour[i] + r*(255 - (255-new_colour[i])*(255-highlight[i])/255))    
-    return (p[0],p[1],p[2],pixel[3])
-
-
-def colour_this_blush(pixel, colour):
-    p = [pixel[0],pixel[1],pixel[2]]
-    new_colour = blushcolour(colour)
-    if p == [255,0,0]:
-        for i in range(3):
-            p[i] = new_colour[i]      
-    elif p == [0,0,255]: #shading
-        shadow = hex_to_rgba("#FF0428")
-        r = 0.3 #opacity of shadow
-        for i in range(3): #multiply
-           p[i] = int((1-r)*new_colour[i] + r*new_colour[i]*shadow[i]/255)    
-    elif p == [0,255,0]: #highlight
-        highlight = hex_to_rgba("#f9f4ca")
-        r = 0.5 #opacity of highlight
-        for i in range(3): #screen
-           p[i] = int((1-r)*new_colour[i] + r*(255 - (255-new_colour[i])*(255-highlight[i])/255))    
-    return (p[0],p[1],p[2],pixel[3])
-
-def colour_this_freckles(pixel, colour):
-    p = [pixel[0],pixel[1],pixel[2]]
-    new_colour = frecklecolour(colour)
-    if p == [255,0,0]:
-        for i in range(3):
-            p[i] = new_colour[i]      
-    return (p[0],p[1],p[2],pixel[3])
-
-
-
 def colour_this_noshadow(pixel, colour):
     p = [pixel[0],pixel[1],pixel[2]]
     alpha = pixel[3]
@@ -428,189 +364,45 @@ def colour_this_noshadow(pixel, colour):
            p[i] = int((1-r)*new_colour[i] + r*(255 - (255-new_colour[i])*(255-highlight[i])/255))    
     return (p[0],p[1],p[2],alpha)
 
-
-def colour_this_skin(pixel, colour):
-    p = [pixel[0],pixel[1],pixel[2]]
-    new_colour = hex_to_rgba(colour)
-    if p == [249,174,137]: #base skin colour
-        for i in range(3):
-            p[i] = new_colour[i]      
-    elif p == [255,217,186]: #highlight
-        highlight = hex_to_rgba("#f9f4ca")
-        r = 0.5 #opacity of highlight
-        for i in range(3): #screen
-           p[i] = int((1-r)*new_colour[i] + r*(255 - (255-new_colour[i])*(255-highlight[i])/255))              
-    elif p == [224,107,101]: #shading
-        shadow = hex_to_rgba("#830016")
-        r = 0.3 #opacity of shadow
-        for i in range(3): #multiply
-           p[i] = int((1-r)*new_colour[i] + r*new_colour[i]*shadow[i]/255)   
-    elif p == [166,54,80]: #shading 2
-        shadow = hex_to_rgba("#6D0036")
-        r = 0.5 #opacity of shadow
-        for i in range(3): #multiply
-           p[i] = int((1-r)*new_colour[i] + r*new_colour[i]*shadow[i]/255)     
-    elif p == [142,31,12]: #shading 3
-        shadow = hex_to_rgba("#760031")
-        r = 0.7 #opacity of shadow
-        for i in range(3): #multiply
-           p[i] = int((1-r)*new_colour[i] + r*new_colour[i]*shadow[i]/255) 
-    elif p == [112,23,24]: #shading 4
-        shadow = hex_to_rgba("#760031")
-        r = 0.7 #opacity of shadow
-        for i in range(3): #multiply
-           p[i] = int((1-r)*new_colour[i] + r*new_colour[i]*shadow[i]/255)                               
-    elif p == [107,0,58]: #edge
-        shadow = hex_to_rgba("#560055")
-        r = 0.8 #opacity of shadow
-        for i in range(3): #multiply
-           p[i] = int((1-r)*new_colour[i] + r*new_colour[i]*shadow[i]/255)   
-    elif p == [74,12,6]: #edge2
-        shadow = hex_to_rgba("#370030")
-        r = 0.85 #opacity of shadow
-        for i in range(3): #multiply
-           p[i] = int((1-r)*new_colour[i] + r*new_colour[i]*shadow[i]/255)           
-    return (p[0],p[1],p[2],pixel[3])    
-
-def colour_this_hair(pixel, colour):
-    p = [pixel[0],pixel[1],pixel[2]]
-    new_colour = hex_to_rgba(colour)
-    highlight = hex_to_rgba("#f9f4ca")
-    shadow1 = hex_to_rgba("#830016")
-    shadow2 = hex_to_rgba("#2D0037")
-    
-    l = luminance(p)/255 #opacity of shadow
-    if l <0.65:
-        r = l/0.65
-        for i in range(3): #multiply
-            p[i] = int(r*new_colour[i] + (1-r)*new_colour[i]*(r*shadow1[i]+(1-r)*shadow2[i])/255)    
-    else:
-        r = (l-0.65)
-        for i in range(3): #screen
-           p[i] = int((1-r)*new_colour[i] + r*(255 - (255-new_colour[i])*(255-highlight[i])/255))    
-       
-    return (p[0],p[1],p[2],pixel[3]) 
-
-def colour_this_grey(pixel, colour):
-    p = [pixel[0],pixel[1],pixel[2]]
-    new_colour = hex_to_rgba(colour)
-    shadow = hex_to_rgba("#5C3C83")
-    
-    l = luminance(p) #opacity of shadow
-    s = saturation(p)
-    h =  hue(p)
-
-    if l ==255:
-        for i in range(3):
-            p[i] = new_colour[i]
-        return (p[0],p[1],p[2],pixel[3])      
-
-    shadow1 = new_colour  
-    if l < 125:
-        if h <62: #red-orange
-            shadow2 = hex_to_rgba("#4B0019")
-        elif h<120: #yellow
-            shadow2 = hex_to_rgba("#004B13")
-        elif h<180: #yellow-green
-            shadow2 = hex_to_rgba("#00264B")
-        elif h<240: #aqua
-            shadow2 = hex_to_rgba("#00024B")
-        elif h<300: #blue
-            shadow2 = hex_to_rgba("#00024B")
-        else: #purple
-            shadow2 = hex_to_rgba("#34004B")
-    else:
-        if h <62: #red-orange
-            shadow2 = hex_to_rgba("#A50037")
-        elif h<120: #yellow
-            shadow2 = hex_to_rgba("#00A52A")
-        elif h<180: #yellow-green
-            shadow2 = hex_to_rgba("#0066C9")
-        elif h<240: #aqua
-            shadow2 = hex_to_rgba("#2D31DA")
-        elif h<300: #blue
-            shadow2 = hex_to_rgba("#272BDA")
-        else: #purple
-            shadow2 = hex_to_rgba("#7C00B4")
-
-    if s==0:
-        shadow1 = hex_to_rgba("#6862BB")     
-        shadow2 = hex_to_rgba("#2B276A")     
-    if (l <3):
-        r=1
-    else:
-        r = 0.8*l/255 + 0.2
-    for i in range(3): #multiply
-        p[i] = p[i] = int(r*new_colour[i] + (1-r)*new_colour[i]*(r*shadow1[i]+(1-r)*shadow2[i])/255)    
-        #p[i] = p[i] = int(r*new_colour[i] + (1-r)*new_colour[i]*(shadow2[i])/255)    
-       
-    return (p[0],p[1],p[2],pixel[3]) 
-
-def colour_this_skin_grey(pixel, colour):  
-    p = [pixel[0],pixel[1],pixel[2]]
-    new_colour = hex_to_rgba(colour)
-    shadow1 = hex_to_rgba("#5C3C83")
-    shadow2 = hex_to_rgba("#181632")   
-
-    if p in [[249,174,137],[255,217,186],[224,107,101],[166,54,80],[142,31,12],[112,23,24],[107,0,58],[74,12,6]]:
-
-        # if p == [249,174,137]: #base skin colour
-        #     for i in range(3):
-        #         p[i] = new_colour[i]
-        #         return (p[0],p[1],p[2],pixel[3])    
-        return colour_this_grey(pixel, colour) 
-        
-        l_top = luminance(hex_to_rgba("#F9AE89"))
-        l_bottom = luminance(hex_to_rgba("#420024"))
-        
-        l = luminance(p)/255 #(luminance(p)-l_bottom)/(l_top-l_bottom) 
-        if (l <0.1):
-            r=1
-        else:
-            r = 0.8*l + 0.2
-        for i in range(3): #multiply
-            p[i] = int(r*new_colour[i] + (1-r)*new_colour[i]*(r*shadow1[i]+(1-r)*shadow2[i])/255)    
-        
-    return (p[0],p[1],p[2],pixel[3]) 
-
-
-def process_image(name, location, colour,colour_list,type):
+def process_image(name, location,type):
     image_string = "../images/bases/"+location+"/"+name+"_base.png"
-    save_string = "../images/"+location+"/"+name+"_"+str(colour)+".png"
+    save_string = "../images/"+location+"/"+name+"_base.png"
+    save_string_overlay = "../images/"+location+"/"+name+"_overlay.png"
     img = Image.open(image_string) 
-    Adata = img.load()       
+    Adata = img.load()   
+    colour_exclusions = [hex_to_rgba("#FF0000"),hex_to_rgba("#00FF00"),hex_to_rgba("#0000FF")]
+    if type in ["skin"]:
+        colour_exclusions = [[249,174,137],[255,217,186],[224,107,101],[166,54,80],[142,31,12],[112,23,24],[107,0,58],[74,12,6]]
     for y in range(img.size[1]):
         for x in range(img.size[0]):
             if Adata[x, y][3] !=0:
-                if type == "skin":
-                    Adata[x, y] = colour_this_skin(Adata[x, y], colour_list[colour]) 
-                elif type == "hair":
-                    Adata[x, y] = colour_this_hair(Adata[x, y], colour_list[colour])     
-                elif type == "skin_grey":
-                    Adata[x, y] = colour_this_skin_grey(Adata[x, y], colour_list[colour]) 
-                elif type =="blue":   
-                    Adata[x, y] = colour_this_grey(Adata[x, y], colour_list[colour])          
-                elif type =="grey":   
-                    Adata[x, y] = colour_this_grey(Adata[x, y], colour_list[colour]) 
-                elif type =="eyes":   
-                    Adata[x, y] = colour_this_eyes(Adata[x, y], colour_list[colour])     
-                elif type =="blush":   
-                    Adata[x, y] = colour_this_blush(Adata[x, y], colour_list[colour]) 
-                elif type =="freckles":   
-                    Adata[x, y] = colour_this_freckles(Adata[x, y], colour_list[colour])       
-                else:    
-                    Adata[x, y] = colour_this(Adata[x, y], colour_list[colour])
+                pixel = Adata[x, y]
+                p = [pixel[0],pixel[1],pixel[2]]
+                l = luminance(p)/255
+                shadow = hex_to_rgba("#5C3C83")
+                if False: #Adata(x,y) not in colour_exclusions:
+                    Bdata[x,y] = []
+                else:
+                    if type in ["skin","skin_grey","grey","blue"]:
+                        for i in range(3):
+                            p[i] = int(l*255 + (1-l)*(shadow[i]))   
+                        Adata[x, y] = (p[0],p[1],p[2],pixel[3]) 
+                    else:   
+                        if p == [255,0,0]: 
+                            Adata[x, y] = (255,255,255,pixel[3]) 
+                        elif p == [0,0,255]:  
+                            Adata[x, y] = (shadow[0],shadow[1],shadow[2],pixel[3]) 
     img.save(save_string)    
-    if location =="portraits/body/nose":
-        image_string = "../images/bases/"+location+"/"+name+"_base.png"
-        save_string = "../images/"+location+"/"+name+"_noshadow_"+str(colour)+".png"
-        img = Image.open(image_string) 
-        Adata = img.load()       
-        for y in range(img.size[1]):
-            for x in range(img.size[0]):
-                if Adata[x, y][3] !=0:
-                    Adata[x, y] = colour_this_noshadow(Adata[x, y], colour_list[colour])  
-        img.save(save_string)        
+    # if location =="portraits/body/nose":
+    #     image_string = "../images/bases/"+location+"/"+name+"_base.png"
+    #     save_string = "../images/"+location+"/"+name+"_noshadow_base.png"
+    #     img = Image.open(image_string) 
+    #     Adata = img.load()       
+    #     for y in range(img.size[1]):
+    #         for x in range(img.size[0]):
+    #             if Adata[x, y][3] !=0:
+    #                 Adata[x, y] = colour_this_noshadow(Adata[x, y], colour_list[colour])  
+    #     img.save(save_string)        
 
 def flipImage():
     image_string = "../images/bases/sprites/outfit/pants/pants_base.png"
@@ -642,24 +434,6 @@ def flipImage():
             im_new.paste(region,(new_meta_col_width*meta_column, meta_row*128+96,new_meta_col_width*meta_column+new_meta_col_width,meta_row*128+128))
                 
     im_new.save(save_string)            
-
-def makeSwatches(list,filepath ):
-    square_width = 32
-    width = 5
-    height = int(len(list)/width)+1
-    save_string = "../images/"+filepath+".png"
-    swatch = Image.new("RGBA", (square_width*width, square_width*height))
-    Adata = swatch.load()    
-    for i in range(width):
-        for j in range(height):
-            current = j*width+i
-            if current > len(list) - 1:
-                break
-            current_colour = list[current] 
-            for x in range(square_width):
-                for y in range(square_width):
-                    Adata[square_width*i+x,square_width*j+y] = hex_to_rgba(current_colour)
-    swatch.save(save_string)
 
 def list_string(listname, list):
     # Creates a string to define a list for generated.js
@@ -761,100 +535,83 @@ def write_variables():
     content.close()
 
 def process_portrait_part(obj):
-    if obj.name in skin_list:
-        colour_list = skin_colours
-    elif obj.name =="Eyes":
-        colour_list = eye_colours
-    elif obj.name in hair_list:
-        colour_list = hair_colours        
-    else:
-        colour_list = outfit_colours
     if obj.name == "Nose_front":
         loc = "portraits/"+obj.location + "/nose"   
     else:       
         loc = "portraits/"+obj.location + "/"+(obj.name).lower()   
-    for c in range(len(colour_list)):
-        for item in obj.item_list:
-            if obj.name == "Blush":
-                if item!="None":
-                    process_image(item, loc, c, colour_list,"blush")
-            elif (obj.name == "Complexion" and item=="freckles"): 
-                process_image(item, loc, c, colour_list,"freckles")       
-            elif (not (obj.name == "Eyes" and item=="wink")):     
-                if item!="None":
-                    process_image(item, loc, c, colour_list,"portrait")
+    for item in obj.item_list:
+        if obj.name == "Blush":
+            if item!="None":
+                process_image(item, loc,"blush")
+        elif (obj.name == "Complexion" and item=="freckles"): 
+            process_image(item, loc,"freckles")       
+        elif (obj.name != "Eyes" or item.find("wink")<0):     
+            if item!="None":
+                print(obj.name+" "+item)
+                process_image(item, loc,"portrait")
 
 def makeWinks():
     for eye_type in eye_type_list_port:
-        for c in range(len(eye_colours)):
             loc = "../images/portraits/expression/eyes/"+eye_type+" "
-            save_string = loc+"wink_"+str(c)+".png"
-            im_happy = Image.open(loc+"happy_"+str(c)+".png") 
+            save_string = loc+"wink_base.png"
+            im_happy = Image.open(loc+"happy_base.png") 
             im_wink = Image.new("RGBA", (256, 268))
             region = im_happy.crop((0,0,125,268))
             im_wink.paste(region,(0,0,125,268))
-            im_happy = Image.open(loc+"crescents_"+str(c)+".png") 
+            im_happy = Image.open(loc+"crescents_base.png") 
             region = im_happy.crop((126,0,256,268))
             im_wink.paste(region,(126,0,256,268))
             im_wink.save(save_string)
 
-
-        
-
-
-
 def process_all_portraits():
     for c in closet:
-        process_portrait_part(c)
+        if c.name in render_list:
+            process_portrait_part(c)
     makeWinks()     
 
 def process_body_sprites():
-    for c in range(len(skin_colours)):
-         process_image("head", "sprites/body/", c, skin_colours,"skin")
-         for h in ["short","tall"]: 
-             process_image(h, "sprites/body", c, skin_colours,"skin")   
-             process_image("arms_"+h, "sprites/body", c, skin_colours,"skin")
-             for w in wedding_clothes_list:
-                 process_image(w+"_"+h, "sprites/wedding", c, skin_colours,"skin") 
-                 for g in ["female","male"]:
-                     process_image(g+"_"+w+"_"+h, "sprites/flower dance", c, skin_colours,"skin") 
-
-    for c in range(len(hair_colours)):  
-         process_image("hairstyles", "sprites/hair", c, hair_colours,"hair")
-         process_image("hairstyles2", "sprites/hair", c, hair_colours,"hair")
-         process_image("facialhair", "sprites/hair/facialhair", c, hair_colours,"hair")
-    for c in range(len(eye_colours)): 
-        process_image("eyes", "sprites/body", c, eye_colours,"eyes") 
+    process_image("head", "sprites/body/","skin")
+    for h in ["short","tall"]: 
+        process_image(h, "sprites/body","skin")   
+        process_image("arms_"+h, "sprites/body","skin")
+        for w in wedding_clothes_list:
+            process_image(w+"_"+h, "sprites/wedding","skin") 
+            for g in ["female","male"]:
+                process_image(g+"_"+w+"_"+h, "sprites/flower dance","skin") 
+ 
+    process_image("hairstyles", "sprites/hair","hair")
+    process_image("hairstyles2", "sprites/hair","hair")
+    process_image("facialhair", "sprites/hair/facialhair","hair")
+    process_image("eyes", "sprites/body","eyes") 
         
 
 def process_outfit_sprites():
-    for c in range(len(outfit_colours)): 
-        # process_image("eyewear", "sprites/accessories/eyewear", c, outfit_colours,"skin_grey") 
-        #process_image("hats", "sprites/outfit/hats", c, outfit_colours,"skin_grey")
-        #process_image("hats_dec", "sprites/outfit/hats", c, outfit_colours,"skin_grey")
-        process_image("pants", "sprites/outfit/pants", c, outfit_colours,"blue")
-        # process_image("pants_top", "sprites/outfit/pants_top", c, outfit_colours,"skin_grey")
-        # process_image("briefs", "sprites/outfit/pants", c, outfit_colours,"blue")
-        process_image("shirts", "sprites/outfit/shirts", c, outfit_colours,"grey")
-        process_image("shirt decs", "sprites/outfit/shirts/decorations", c, outfit_colours,"grey")
-        #process_image("overshirt", "sprites/outfit/overshirt", c, outfit_colours,"grey")
-        process_image("coat", "sprites/outfit/coat", c, outfit_colours,"skin_grey")
-        process_image("coat_dec", "sprites/outfit/coat", c, outfit_colours,"skin_grey")
-        process_image("coat_back", "sprites/outfit/coat", c, outfit_colours,"skin_grey")
-        #process_image("neckwear", "sprites/accessories/neckwear", c, outfit_colours,"grey")
-        # process_image("earrings", "sprites/accessories/earrings", c, outfit_colours,"")
-        # for height in ["short","tall"]:
-        #     process_image("longpants_"+height, "sprites/outfit/pants", c, outfit_colours,"blue")
-        #     for shoetype in ["boots","flats","flipflops"]:
-        #         process_image(height+"_"+shoetype, "sprites/outfit/shoes", c, outfit_colours,"grey") 
-        #     process_image(height, "sprites/outfit/gloves", c, outfit_colours,"grey")
-        #     for sleevetype in ["short","long"]:
-        #         process_image(height+"_"+sleevetype, "sprites/outfit/sleeves", c, outfit_colours,"grey") 
+        process_image("eyewear", "sprites/accessories/eyewear","skin_grey") 
+        process_image("hats", "sprites/outfit/hats","skin_grey")
+        process_image("hats_dec", "sprites/outfit/hats","skin_grey")
+        process_image("pants", "sprites/outfit/pants", "blue")
+        process_image("pants_top", "sprites/outfit/pants_top","skin_grey")
+        process_image("briefs", "sprites/outfit/pants","blue")
+        process_image("shirts", "sprites/outfit/shirts","grey")
+        process_image("shirt decs", "sprites/outfit/shirts/decorations","grey")
+        process_image("overshirt", "sprites/outfit/overshirt","grey")
+        process_image("coat", "sprites/outfit/coat","skin_grey")
+        process_image("coat_dec", "sprites/outfit/coat", "skin_grey")
+        process_image("coat_back", "sprites/outfit/coat", "skin_grey")
+        process_image("neckwear", "sprites/accessories/neckwear","grey")
+        process_image("earrings", "sprites/accessories/earrings","")
+        for height in ["short","tall"]:
+             process_image("longpants_"+height, "sprites/outfit/pants","blue")
+             for shoetype in ["boots","flats","flipflops"]:
+                 process_image(height+"_"+shoetype, "sprites/outfit/shoes","grey") 
+             process_image(height, "sprites/outfit/gloves","grey")
+             for sleevetype in ["short","long"]:
+                 process_image(height+"_"+sleevetype, "sprites/outfit/sleeves","grey") 
 
 write_temp()
 write_variables()
 
-#process_body_sprites()
+process_body_sprites()
 process_outfit_sprites()
 
 #flipImage()
@@ -874,5 +631,5 @@ for c in closet:
         process_portrait_part(c)
 #makeWinks() 
        
-#process_all_portraits()
+process_all_portraits()
 #make_coat()
