@@ -111,47 +111,47 @@ function setValuelist(variable, list){
     b.value_list=list;
 }
 
-function setBothColour(variablelist, number){
-    setPortColour(variablelist, number);
-    setSpriteColour(variablelist, number);
+function setBothColour(variablelist, colour){
+    setPortColour(variablelist, colour);
+    setSpriteColour(variablelist, colour);
 }
 
-function setPortColour(variablelist, number){
+function setPortColour(variablelist, colour){
     for (let i = 0; i < variablelist.length; i += 1) {
         let b = findNameMatch(portrait_objects, variablelist[i]); //the eleemnt of portrait_objects with the right vriablename
-        b.colour=number;
+        b.colour1=colour;
     }
 }
 
-function setSpriteColour(variablelist, number){
+function setSpriteColour(variablelist, colour){
     for (let i = 0; i < variablelist.length; i += 1) {
         let b = findNameMatch(sprite_objects, variablelist[i]); //the eleemnt of portrait_objects with the right vriablename
-        b.colour=number;
+        b.colour1=colour;
     }
 }
 
-function setSpecialSpriteColour(variablelist, number){
+function setSpecialSpriteColour(variablelist, colour){
     for (let i = 0; i < special_sprite_objects.length; i += 1) {
         let b = findNameMatch(special_sprite_objects, variablelist[i]); //the eleemnt of portrait_objects with the right vriablename
-        b.colour=number;
+        b.colour1=colour;
     }
 }
 
-function setClothingColour(variablelist, number){
+function setClothingColour(variablelist, colour){
     for (let i = 0; i < variablelist.length; i += 1) {
         let menu_obj = findNameMatch(menu_objects, variablelist[i]);
-        menu_obj.colour = number;
-        setPortColour(menu_obj.port_main_list,number);
-        setSpriteColour(menu_obj.sprite_main_list,number);
+        menu_obj.colour1 = colour;
+        setPortColour(menu_obj.port_main_list,colour);
+        setSpriteColour(menu_obj.sprite_main_list,colour);
     } 
 }
 
-function setClothingColour2(variablelist, number){
+function setClothingColour2(variablelist, colour){
     for (let i = 0; i < variablelist.length; i += 1) {
         let menu_obj = findNameMatch(menu_objects, variablelist[i]);
-        menu_obj.colour2 = number;
-        setPortColour(menu_obj.port_second_list,number);
-        setSpriteColour(menu_obj.sprite_second_list,number);
+        menu_obj.colour2 = colour;
+        setPortColour(menu_obj.port_second_list,colour);
+        setSpriteColour(menu_obj.sprite_second_list,colour);
     } 
 }
 
@@ -272,7 +272,7 @@ function print_menu_objects(){
         //s+=" name_list: "+b.name_list.toString();
         //s+="  colour_list: "+b.colour_list.toString();
         s+=" item: "+b.item;
-        //s+=" colour: "+b.colour;
+        //s+=" colour: "+b.colour1;
         s+="<br>";
     }
     return s
@@ -286,7 +286,7 @@ function print_menu_list(listname){
         
         //s+="  colour_list: "+b.colour_list.toString();
         //s+=" item: "+b.item;
-        //s+=" colour: "+b.colour;
+        //s+=" colour: "+b.colour1;
         s+="<br>";
     }
     return s

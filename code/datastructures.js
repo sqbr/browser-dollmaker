@@ -1,4 +1,5 @@
 function setVariables(data_object){
+    //transfer data from webpage to internal javascript
     panelNum =data_object.panelNum; 
 
     current_imageType = data_object.current_imageType; //whether editing sprites or portraits
@@ -133,9 +134,9 @@ document.addEventListener('alpine:init', () => {
     current_clothing : 0,
     current_sprite_preset : 0,
 
-    current_skinColour: 4,
-    current_eyeColour: 13,
-    current_hairColour: 8,
+    current_skinColour: "#F9AE89",
+    current_eyeColour: "#31AE2A",
+    current_hairColour: "#893C3E",
 
     height : 0,
     current_complexion: 0,
@@ -152,16 +153,16 @@ document.addEventListener('alpine:init', () => {
     blush_expressions : [0,0,0,0,1,0,0,0,0,0],
 
     current_menu_objects : [
-    {name: 'Hat', item: 0, colour1: 0,colour2: 0, sleeves: 0},
-    {name: 'Neckwear', item: 0, colour1: 0,colour2: 0, sleeves: 0},
-    {name: 'Eyewear', item: 0, colour1: 0,colour2: 0, sleeves: 0},
-    {name: 'Earrings', item: 0, colour1: 0,colour2: 0, sleeves: 0},
-    {name: 'Shirt', item: 6, colour1: 5,colour2: 0, sleeves: 0},
-    {name: 'Overshirt', item: 0, colour1: 0,colour2: 0, sleeves: 0},
-    {name: 'Coat', item: 0, colour1: 0,colour2: 0, sleeves: 0},
-    {name: 'Pants', item: 2, colour1: 14,colour2: 0, sleeves: 0},
-    {name: 'Shoes', item: 1, colour1: 28,colour2: 0, sleeves: 0},
-    {name: 'Gloves', item: 0, colour1: 0,colour2: 0, sleeves: 0},
+    {name: 'Hat', item: 0, colour1: "#FEFF00",colour2: outfit_colours[0], sleeves: 0},
+    {name: 'Neckwear', item: 0, colour1: "#46FF00",colour2: outfit_colours[2], sleeves: 0},
+    {name: 'Eyewear', item: 0, colour1: "#00FF43",colour2: outfit_colours[4], sleeves: 0},
+    {name: 'Earrings', item: 0, colour1: "#00FFC5",colour2: outfit_colours[6], sleeves: 0},
+    {name: 'Shirt', item: 6, colour1: "#008CFF",colour2: outfit_colours[8], sleeves: 0},
+    {name: 'Overshirt', item: 0, colour1: "#0018FF",colour2: outfit_colours[10], sleeves: 0},
+    {name: 'Coat', item: 0, colour1: "#C200FF",colour2: outfit_colours[12], sleeves: 0},
+    {name: 'Pants', item: 2, colour1: "#FF0098",colour2: outfit_colours[14], sleeves: 0},
+    {name: 'Shoes', item: 1, colour1: "#FF001D",colour2: outfit_colours[16], sleeves: 0},
+    {name: 'Gloves', item: 0, colour1: "#FF8E00",colour2: outfit_colours[18], sleeves: 0},
     ],
 
     current_wedding_clothes : 0,
@@ -178,16 +179,16 @@ document.addEventListener('alpine:init', () => {
             if (sleeve_havers.indexOf(m.name)>-1)//this item has sleeves
               sleeves = sleeve_list[sleeve_havers.indexOf(m.name)] ; 
         
-            this.current_menu_objects[i]={name: m.name, item:item,colour1: m.colour,colour2: m.colour2, sleeves: sleeves};
+            this.current_menu_objects[i]={name: m.name, item:item,colour1: m.colour1,colour2: m.colour2, sleeves: sleeves};
           }
         
             this.height= height;
             this.current_eyeType= eye_type;
             this.current_wedding_clothes= current_wedding_clothes;
             this.current_dance_clothes= current_dance_clothes;
-            this.current_skinColour= findNameMatch(sprite_objects,"Head").colour;
-            this.current_eyeColour= findNameMatch(sprite_objects,"Eyes").colour;
-            this.current_hairColour= findNameMatch(sprite_objects,"Hairstyle").colour;
+            this.current_skinColour= findNameMatch(sprite_objects,"Head").colour1;
+            this.current_eyeColour= findNameMatch(sprite_objects,"Eyes").colour1;
+            this.current_hairColour= findNameMatch(sprite_objects,"Hairstyle").colour1;
             this.current_complexion= findNameMatch(portrait_objects,"Complexion").value_list[0];
             this.current_head= findNameMatch(portrait_objects,"Head").value_list[0];
             this.current_nose= findNameMatch(portrait_objects,"Nose").value_list[0];
@@ -254,15 +255,15 @@ function drawCanvas() {
 
     //preview canvas
     canvas_preview.width = canvas_preview.width; //clears
-    //document.getElementById("closet").innerHTML = print_portrait_objects();
+    document.getElementById("closet").innerHTML = print_portrait_objects();
     let hair = findNameMatch(sprite_objects, "Hairstyle");
     for (let i = 0; i < sprite_objects.length; i += 1){ //sprite preview
         let b = sprite_objects[i];
         if (b.item_list[b.value] !=none){ 
             for (let column = 0; column < 2; column += 1) //column 1-2
                 if(b.name !="Hairstyle_top" || column >0)
-                    draw_coloured_sprite(b, ctx_preview, b.colour, oldX(b,0), oldY(b,column),b.dimensions[0],b.dimensions[1],4*newX(b,0,column),4*newY(b,0,column),b.dimensions[0]*4,b.dimensions[1]*4);
-            draw_coloured_sprite(b, ctx_preview, b.colour, oldX(b,0), oldY(b,3),b.dimensions[0],b.dimensions[1],4*newX(b,2,2),4*(newY(b,2,2)-64),b.dimensions[0]*4,b.dimensions[1]*4);
+                    draw_coloured_sprite(b, ctx_preview, b.colour1, oldX(b,0), oldY(b,column),b.dimensions[0],b.dimensions[1],4*newX(b,0,column),4*newY(b,0,column),b.dimensions[0]*4,b.dimensions[1]*4);
+            draw_coloured_sprite(b, ctx_preview, b.colour1, oldX(b,0), oldY(b,3),b.dimensions[0],b.dimensions[1],4*newX(b,2,2),4*(newY(b,2,2)-64),b.dimensions[0]*4,b.dimensions[1]*4);
         }        
     }
     //portrait preview
@@ -270,7 +271,7 @@ function drawCanvas() {
     for (let i = 0; i < portrait_objects.length; i += 1){
         let b = portrait_objects[i];
         if (b.item_list[b.value_list[current_panel]] !="None"){ 
-            ctx_preview.drawImage(b.image_list[current_panel], 256, getOffset(b.name));
+            draw_coloured_port(b,current_panel,b.colour1,ctx_preview, 0,0,256, getOffset(b.name));
         }
     }
     //main canvas
@@ -299,7 +300,7 @@ function drawCanvas() {
                     for (let i = 0; i < portrait_objects.length; i += 1){
                         let b = portrait_objects[i];
                         if (b.item_list[b.value_list[row*2+column]] !="None"){ 
-                            draw_coloured_port(b,row*2+column,b.colour,ctx, 0,-getOffset(b.name), xpos, ypos);
+                            draw_coloured_port(b,row*2+column,b.colour1,ctx, 0,-getOffset(b.name), xpos, ypos);
                         }
                     }
                 }
@@ -320,19 +321,19 @@ function drawCanvas() {
                 for (let row = 0; row < 2; row += 1){//rows 1,2   
                     for (let column = 0; column < 2; column += 1)
                         if(b.name !="Hairstyle_top" || column >0)
-                            draw_coloured_sprite(b, ctx, b.colour, oldX(b,column), oldY(b,row),b.dimensions[0],b.dimensions[1],newX(b,row,column), newY(b,row,column),b.dimensions[0],b.dimensions[1]);//column 1
-                    draw_coloured_sprite(b, ctx, b.colour,oldX(b,0), oldY(b,row),b.dimensions[0],b.dimensions[1],newX(b,row, 2), newY(b,row,2),b.dimensions[0],b.dimensions[1]); //column 3  
-                    draw_coloured_sprite(b, ctx, b.colour, oldX(b,2), oldY(b,row),b.dimensions[0],b.dimensions[1],newX(b,row,3), newY(b,row,3),b.dimensions[0],b.dimensions[1]); //column 4              
+                            draw_coloured_sprite(b, ctx, b.colour1, oldX(b,column), oldY(b,row),b.dimensions[0],b.dimensions[1],newX(b,row,column), newY(b,row,column),b.dimensions[0],b.dimensions[1]);//column 1
+                    draw_coloured_sprite(b, ctx, b.colour1,oldX(b,0), oldY(b,row),b.dimensions[0],b.dimensions[1],newX(b,row, 2), newY(b,row,2),b.dimensions[0],b.dimensions[1]); //column 3  
+                    draw_coloured_sprite(b, ctx, b.colour1, oldX(b,2), oldY(b,row),b.dimensions[0],b.dimensions[1],newX(b,row,3), newY(b,row,3),b.dimensions[0],b.dimensions[1]); //column 4              
                 }
                 if (b.rowNum==4){ //don't have to flip
                         for (let column = 0; column < 2; column += 1){
-                            draw_coloured_sprite(b, ctx, b.colour, oldX(b,column), oldY(b,3),b.dimensions[0],b.dimensions[1],newX(b,2,column), newY(b,2,column),b.dimensions[0],b.dimensions[1]);//ROW 3
-                            draw_coloured_sprite(b, ctx, b.colour, oldX(b,column), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,3,column), newY(b,3,column),b.dimensions[0],b.dimensions[1]);//ROW 4
+                            draw_coloured_sprite(b, ctx, b.colour1, oldX(b,column), oldY(b,3),b.dimensions[0],b.dimensions[1],newX(b,2,column), newY(b,2,column),b.dimensions[0],b.dimensions[1]);//ROW 3
+                            draw_coloured_sprite(b, ctx, b.colour1, oldX(b,column), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,3,column), newY(b,3,column),b.dimensions[0],b.dimensions[1]);//ROW 4
                         }
-                        draw_coloured_sprite(b, ctx, b.colour, oldX(b,0), oldY(b,3),b.dimensions[0],b.dimensions[1],newX(b,2,2), newY(b,2,2),b.dimensions[0],b.dimensions[1]); //column 3 row 3 
-                        draw_coloured_sprite(b, ctx, b.colour, oldX(b,2), oldY(b,3),b.dimensions[0],b.dimensions[1],newX(b,2,3), newY(b,2,3),b.dimensions[0],b.dimensions[1]); //column 4  row 3 
-                        draw_coloured_sprite(b, ctx, b.colour, oldX(b,0), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,3,2), newY(b,3,2),b.dimensions[0],b.dimensions[1]); //column 3 row 4 
-                        draw_coloured_sprite(b, ctx, b.colour, oldX(b,2), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,3,3), newY(b,3,3),b.dimensions[0],b.dimensions[1]); //column 4  row 4             
+                        draw_coloured_sprite(b, ctx, b.colour1, oldX(b,0), oldY(b,3),b.dimensions[0],b.dimensions[1],newX(b,2,2), newY(b,2,2),b.dimensions[0],b.dimensions[1]); //column 3 row 3 
+                        draw_coloured_sprite(b, ctx, b.colour1, oldX(b,2), oldY(b,3),b.dimensions[0],b.dimensions[1],newX(b,2,3), newY(b,2,3),b.dimensions[0],b.dimensions[1]); //column 4  row 3 
+                        draw_coloured_sprite(b, ctx, b.colour1, oldX(b,0), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,3,2), newY(b,3,2),b.dimensions[0],b.dimensions[1]); //column 3 row 4 
+                        draw_coloured_sprite(b, ctx, b.colour1, oldX(b,2), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,3,3), newY(b,3,3),b.dimensions[0],b.dimensions[1]); //column 4  row 4             
     
                 }
                 
@@ -357,15 +358,15 @@ function drawCanvas() {
                         let wedding_offset =0;
                         if (sprite_special_list.includes(b.name))
                             wedding_offset =1;
-                        draw_coloured_sprite(b, ctx, b.colour, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0,0), newY(b,0,0)+wedding_height,b.dimensions[0],b.dimensions[1]);//facing forward
-                        draw_coloured_sprite(b, ctx, b.colour, oldX(b,0), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,3,0)+15, newY(b,3,0)+wedding_height-96+wedding_offset,b.dimensions[0],b.dimensions[1]); //sideways not kissing
+                        draw_coloured_sprite(b, ctx, b.colour1, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0,0), newY(b,0,0)+wedding_height,b.dimensions[0],b.dimensions[1]);//facing forward
+                        draw_coloured_sprite(b, ctx, b.colour1, oldX(b,0), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,3,0)+15, newY(b,3,0)+wedding_height-96+wedding_offset,b.dimensions[0],b.dimensions[1]); //sideways not kissing
                         if (b.name =="Eyes")
                             ctx.drawImage(closed_eyes_image, 36, 24,12,12,32, wedding_height+4,12,12);
                         else{  //sideways, kissing 
                             if (b.name=="Arms" || b.name.includes("sleeves")|| b.name=="Gloves")   //shonky 'reaching forward' arm
-                                draw_coloured_sprite(b, ctx, b.colour, oldX(b,2), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,3,0)+29, newY(b,3,0)+wedding_height-96,b.dimensions[0],b.dimensions[1]);
+                                draw_coloured_sprite(b, ctx, b.colour1, oldX(b,2), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,3,0)+29, newY(b,3,0)+wedding_height-96,b.dimensions[0],b.dimensions[1]);
                             else
-                                draw_coloured_sprite(b, ctx, b.colour, oldX(b,0), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,3,0)+30, newY(b,3,0)+wedding_height-96+wedding_offset,b.dimensions[0],b.dimensions[1]);
+                                draw_coloured_sprite(b, ctx, b.colour1, oldX(b,0), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,3,0)+30, newY(b,3,0)+wedding_height-96+wedding_offset,b.dimensions[0],b.dimensions[1]);
                         }
                     }
                     //sleeping/kissing
@@ -373,22 +374,22 @@ function drawCanvas() {
                         ctx.drawImage(closed_eyes_image, 36, 24,12,12,-1, sleeping_height+3,12,12);
                     else { 
                         if (b.name=="Arms" || b.name.includes("sleeves")|| b.name=="Gloves")  //shonky 'reaching forward' arm
-                            draw_coloured_sprite(b, ctx, b.colour, oldX(b,2), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,3,0)-4, newY(b,3,0)+sleeping_height-96,b.dimensions[0],b.dimensions[1]);
+                            draw_coloured_sprite(b, ctx, b.colour1, oldX(b,2), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,3,0)-4, newY(b,3,0)+sleeping_height-96,b.dimensions[0],b.dimensions[1]);
                         else
-                            draw_coloured_sprite(b, ctx, b.colour, oldX(b,0), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,3,0)-3, newY(b,3,0)+sleeping_height-96,b.dimensions[0],b.dimensions[1]);
+                            draw_coloured_sprite(b, ctx, b.colour1, oldX(b,0), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,3,0)-3, newY(b,3,0)+sleeping_height-96,b.dimensions[0],b.dimensions[1]);
                     }    
                     if (sprite_special_list.includes(b.name)){    
                         if (current_sprite_preset==1){
                             //female 
                             //dance heads
                             for (let column = 0; column < 2; column++)
-                                draw_coloured_sprite(b, ctx, b.colour, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0,0)+column*16, newY(b,0,0)+dance_height,b.dimensions[0],b.dimensions[1]);
-                            draw_coloured_sprite(b, ctx, b.colour, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0,0)+2*16-1, newY(b,0,0)+dance_height,b.dimensions[0],b.dimensions[1]);    
-                            draw_coloured_sprite(b, ctx, b.colour, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0,0)+3*16, newY(b,0,0)+dance_height+1,b.dimensions[0],b.dimensions[1]);  
+                                draw_coloured_sprite(b, ctx, b.colour1, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0,0)+column*16, newY(b,0,0)+dance_height,b.dimensions[0],b.dimensions[1]);
+                            draw_coloured_sprite(b, ctx, b.colour1, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0,0)+2*16-1, newY(b,0,0)+dance_height,b.dimensions[0],b.dimensions[1]);    
+                            draw_coloured_sprite(b, ctx, b.colour1, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0,0)+3*16, newY(b,0,0)+dance_height+1,b.dimensions[0],b.dimensions[1]);  
                             for (let column = 0; column < 2; column++)
-                                draw_coloured_sprite(b, ctx, b.colour, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0,0)+column*16, newY(b,0,0)+dance_height+33,b.dimensions[0],b.dimensions[1]);  
-                            draw_coloured_sprite(b, ctx, b.colour, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0,0)+2*16, newY(b,0,0)+dance_height+32,b.dimensions[0],b.dimensions[1]);  
-                            draw_coloured_sprite(b, ctx, b.colour, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0,0)+3*16, newY(b,0,0)+dance_height+33,b.dimensions[0],b.dimensions[1]);  
+                                draw_coloured_sprite(b, ctx, b.colour1, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0,0)+column*16, newY(b,0,0)+dance_height+33,b.dimensions[0],b.dimensions[1]);  
+                            draw_coloured_sprite(b, ctx, b.colour1, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0,0)+2*16, newY(b,0,0)+dance_height+32,b.dimensions[0],b.dimensions[1]);  
+                            draw_coloured_sprite(b, ctx, b.colour1, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0,0)+3*16, newY(b,0,0)+dance_height+33,b.dimensions[0],b.dimensions[1]);  
                         } 
                     }
                 }
@@ -396,7 +397,7 @@ function drawCanvas() {
             for (let i = 0; i < special_sprite_objects.length; i += 1){
                 let b = special_sprite_objects[i];
                 if (b.image.src !=""){ 
-                    draw_coloured_sprite(b, ctx, b.colour, 0, 0,b.dimensions[0],b.dimensions[1],0, b.heightOffset,b.dimensions[0],b.dimensions[1]);
+                    draw_coloured_sprite(b, ctx, b.colour1, 0, 0,b.dimensions[0],b.dimensions[1],0, b.heightOffset,b.dimensions[0],b.dimensions[1]);
                 }
             }
 
@@ -409,9 +410,9 @@ function drawCanvas() {
                         if (current_sprite_preset==2){
                             //male 
                             //dance heads
-                            draw_coloured_sprite(b, ctx, b.colour, oldX(b,0), oldY(b,3),b.dimensions[0],b.dimensions[1],newX(b,2,0), newY(b,2,0)+dance_height-64,b.dimensions[0],b.dimensions[1]);
+                            draw_coloured_sprite(b, ctx, b.colour1, oldX(b,0), oldY(b,3),b.dimensions[0],b.dimensions[1],newX(b,2,0), newY(b,2,0)+dance_height-64,b.dimensions[0],b.dimensions[1]);
                             for (let column = 1; column < 4; column++)
-                                draw_coloured_sprite(b, ctx, b.colour, oldX(b,0), oldY(b,3),b.dimensions[0],b.dimensions[1],newX(b,2,0)+column*16, newY(b,2,0)+dance_height-63,b.dimensions[0],b.dimensions[1]);  
+                                draw_coloured_sprite(b, ctx, b.colour1, oldX(b,0), oldY(b,3),b.dimensions[0],b.dimensions[1],newX(b,2,0)+column*16, newY(b,2,0)+dance_height-63,b.dimensions[0],b.dimensions[1]);  
                         }   
                     }
                 }
@@ -427,7 +428,9 @@ function setup(){
     drawCanvas();
 }
 let portrait_back = new Image();
-portrait_back.src = "images/portrait_back.png"
+portrait_back.src = "images/portrait_back.png";
+const off_canvas = new OffscreenCanvas(256, 256);
+const off_ctx = off_canvas.getContext("2d");
 window.onload = setup;
 var game = setInterval(drawCanvas, 100);//Update canvas every 100 miliseconds
 

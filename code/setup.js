@@ -121,7 +121,7 @@ function add_portrait_object(name, list, location){
     if (name == "Nose_front")
         loc = "body/nose"; 
 
-    portrait_objects.push({name: name,location: loc, item_list: list, colour: true, value_list: listOf(0),  colour: 0, image_list: newImageList()});
+    portrait_objects.push({name: name,location: loc, item_list: list, colour: true, value_list: listOf(0),  colour1_index: 0,colour2_index: 0, colour1: hair_colours[portrait_objects.length],colour2: "#00FF00", image_list: newImageList()});
 }
 
 function print_portrait_objects(){
@@ -130,11 +130,11 @@ function print_portrait_objects(){
         b = portrait_objects[i];
         s+="name: "+b.name;
         s+=" location: "+b.location;
-        s+=" item_list: "+b.item_list.toString();
+        //s+=" item_list: "+b.item_list.toString();
         //s+=" colourNum: "+b.colourNum;
-        s+="  value_list: "+b.value_list.toString();
-        //s+=" colour: "+b.colour;
-        s+=" src: "+b.image_list[0].src;
+        //s+="  value_list: "+b.value_list.toString();
+        s+=" colour: "+b.colour1;
+        //s+=" src: "+b.image_list[0].src;
         s+="<br>";
     }
     return s

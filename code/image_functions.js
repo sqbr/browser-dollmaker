@@ -206,9 +206,9 @@ function fixPortSources(){
                         name = obj_front.item_list[obj_front.value_list[j]];
                         if (front_name =="Coat" && coat_dec_back_list_port.includes(name)){
                             obj_dec = findNameMatch(portrait_objects, front_name+"_dec");
-                            b.colour = obj_dec.colour;
+                            b.colour1 = obj_dec.colour1;
                         }else
-                            b.colour = obj_front.colour;
+                            b.colour1 = obj_front.colour1;
                 }
             }
 
@@ -235,31 +235,33 @@ function fixPortSources(){
                                 }
                                 
                             } 
-                            b.colour = obj_front.colour
+                            b.colour1 = obj_front.colour1
                     }
                 }
                 if (b.name == front_name+"_sleeves_dec"){ //this is "Shirt_sleeves_dec" etc
                     obj_front = findNameMatch(portrait_objects, front_name); //what shirt etc we are wearing
                     obj_dec = findNameMatch(portrait_objects, front_name+"_dec"); //what shirt decoration etc we are wearing
                     name = "None";
-                    current_sleeves_list = sleeve_list_port[k].sleeves_list;
-                    current_item = obj_front.item_list[obj_front.value_list[j]];
-                    if (current_sleeves_list.includes(obj_front.item_list[obj_front.value_list[j]])){ //the current shirt etc can have sleeves
-                        let current_dec = sleeve_list_port[k].dec_list[obj_dec.value_list[j]]
-                        let current_sleeves = sleeve_list[k]  //what current sleeve length is
-                        if (current_sleeves==0){
-                            b.item_list[j] = 0
-                            name = current_dec+" zilch"
-                        }
-                        else{
-                            b.item_list[j] = 1
-                            if (sleeve_list_port[k].sharp_sleeves.includes(current_item)){
-                                name = current_dec+" sharp";   
-                            }else{
-                                name = current_dec+" round";   
+                    if (obj_dec.value_list[j]!=0){ //item is decorated
+                        current_sleeves_list = sleeve_list_port[k].sleeves_list;
+                        current_item = obj_front.item_list[obj_front.value_list[j]];
+                        if (current_sleeves_list.includes(obj_front.item_list[obj_front.value_list[j]])){ //the current shirt etc can have sleeves
+                            let current_dec = sleeve_list_port[k].dec_list[obj_dec.value_list[j]]
+                            let current_sleeves = sleeve_list[k]  //what current sleeve length is
+                            if (current_sleeves==0){
+                                b.item_list[j] = 0
+                                name = current_dec+" zilch"
                             }
-                        } 
-                        b.colour = obj_dec.colour
+                            else{
+                                b.item_list[j] = 1
+                                if (sleeve_list_port[k].sharp_sleeves.includes(current_item)){
+                                    name = current_dec+" sharp";   
+                                }else{
+                                    name = current_dec+" round";   
+                                }
+                            } 
+                            b.colour1 = obj_dec.colour1
+                        }
                     }
                 }
             }
@@ -270,8 +272,8 @@ function fixPortSources(){
                 if (false){//since all portrait items are coloured
                     b.image_list[j].src = "images/bases/portraits/"+b.location+"/"+name+".png";
                 }else{
-                    if (false){//(b.name =="Nose_front"){
-                        b.image_list[j].src  = "images/portraits/"+b.location+"/"+name+"_noshadow_base.png";
+                    if (b.name =="Nose_front"){
+                        b.image_list[j].src  = "images/portraits/"+b.location+"/"+name+"_noshadow.png";
                     }else
                         b.image_list[j].src  = "images/portraits/"+b.location+"/"+name+"_base.png";
                 }
@@ -294,11 +296,11 @@ function fixSpriteSources(){
                 current_item = obj_front.item_list[obj_front.value_list[0]];
                 if (false){//(current_item =="letterman"){
                     b.item = Math.max(0,2*2-1+height);
-                    b.colour = obj_front.colour
+                    b.colour1 = obj_front.colour1
                 } else{
                 if (current_sleeves_list.includes(current_item)){ //the current shirt etc can have sleeves
                         b.item =Math.max(0,2*sleeve_list[k]-1+height); //what current sleeve length is
-                        b.colour = obj_front.colour
+                        b.colour1 = obj_front.colour1
                 } else{
                         b.item = 0;
                 }
@@ -310,7 +312,7 @@ function fixSpriteSources(){
         if (b.name =="Hairstyle_top"){
             let hair_obj=findNameMatch(sprite_objects, "Hairstyle");
             b.item =hair_obj.item;
-            b.colour = hair_obj.colour;
+            b.colour1 = hair_obj.colour1;
         }
 
         let item = b.item_list[b.item];
@@ -328,7 +330,7 @@ function fixSpriteSources(){
                 obj_front = findNameMatch(sprite_objects, front_name);
                 if (back_list_sprite[k][1].includes(obj_front.item_list[obj_front.value]))
                     b.item = obj_front.item;
-                    b.colour = obj_front.colour;
+                    b.colour1 = obj_front.colour1;
             }
         }
         //code to make fronts of things match the backs. 
@@ -339,7 +341,7 @@ function fixSpriteSources(){
                 if (front_list_sprite[k][1].includes(obj_front.item_list[obj_front.value]))
                     
                     b.item = obj_front.item;
-                    b.colour = obj_front.colour;
+                    b.colour1 = obj_front.colour1;
             }
         }
         //set colour
@@ -362,7 +364,7 @@ function fixSpecialSpriteSources(){
         }else{
         let loc = item.location;
         if (item.colour){
-            b.image.src  = "images/sprites/"+loc+"_"+b.colour+".png";
+            b.image.src  = "images/sprites/"+loc+"_base.png";
         }else{
             b.image.src = "images/bases/sprites/"+loc+".png";
         }
@@ -372,7 +374,14 @@ function fixSpecialSpriteSources(){
 }
 
 function draw_coloured_port(obj, index, colour, ctx, sourceX, sourceY, xpos, ypos){
-    ctx.drawImage(obj.image_list[index],sourceX,sourceY,256,256, xpos, ypos,256,256);
+    off_ctx.fillStyle = colour;
+    off_ctx.fillRect(0, 0, 256, 256);
+    off_ctx.globalCompositeOperation = "destination-in";
+    off_ctx.drawImage(obj.image_list[index],sourceX,sourceY,256,256, 0, 0,256,256);
+    off_ctx.globalCompositeOperation = "multiply";
+    off_ctx.drawImage(obj.image_list[index],sourceX,sourceY,256,256, 0, 0,256,256);
+    off_ctx.globalCompositeOperation = "source-over"; 
+    ctx.drawImage(off_canvas,0,0,256,256, xpos, ypos,256,256);
 
 }
 

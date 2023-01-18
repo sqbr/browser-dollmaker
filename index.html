@@ -86,9 +86,9 @@
         <div class="row">
             <div class="row gy-2" x-show="$store.alpineData.currently_editing === 0" > <!-- body -->
               <div class="row row-cols-2 gy-3">
-                <div class="col"><div x-data="dropdown('Skin Colour','','current_skinColour','skin_colours')" x-bind="colourbtn" ></div></div>
+                <!-- <div class="col"><div x-data="dropdown('Skin Colour','','current_skinColour','skin_colours')" x-bind="colourbtn" ></div></div>
                 <div class="col"><div x-data="dropdown('Eye Colour','','current_eyeColour','eye_colours')" x-bind="colourbtn" ></div></div>
-                <div class="col"><div x-data="dropdown('Hair Colour','','current_hairColour','hair_colours')" x-bind="colourbtn" ></div></div>
+                <div class="col"><div x-data="dropdown('Hair Colour','','current_hairColour','hair_colours')" x-bind="colourbtn" ></div></div>-->
               </div>
               <div class="row row-cols-2 gy-3">
                 <div class="col"><div x-data="dropdown('Hairstyle','','current_hair','findNameMatch(menu_objects, \'Hairstyle\').name_list')" x-bind="dropbtn" ></div></div>
@@ -111,8 +111,8 @@
                 <div class="col"><div x-show="sleeve_havers.includes(menu_object_names[$store.alpineData.current_clothing])" x-data="dropdown('Sleeves','','current_menu_objects[$store.alpineData.current_clothing].sleeves','sleeves_names')" x-bind="dropbtn" ></div></div>
               </div>
               <div class="row row-cols-2 gy-3">
-                <div class="col"><div x-data="dropdown('Main Colour','','current_menu_objects[$store.alpineData.current_clothing].colour1','outfit_colours')" x-bind="colourbtn" ></div></div>
-                <div class="col"><div x-data="dropdown('Highlight Colour','','current_menu_objects[$store.alpineData.current_clothing].colour2','outfit_colours')" x-bind="colourbtn" ></div></div>
+                <!--<div class="col"><div x-data="dropdown('Main Colour','','current_menu_objects[$store.alpineData.current_clothing].colour1_index','outfit_colours')" x-bind="colourbtn" ></div></div>
+                <div class="col"><div x-data="dropdown('Highlight Colour','','current_menu_objects[$store.alpineData.current_clothing].colour2_index','outfit_colours')" x-bind="colourbtn" ></div></div>-->
               </div>
             </div>
 

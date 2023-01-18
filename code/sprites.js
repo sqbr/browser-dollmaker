@@ -315,7 +315,7 @@ function print_sprite_objects(){
         //s+="  colour_list: "+b.colour_list.toString();
         s+=" item: "+b.item;
         s+="Current item :"+(b.item_list[b.item]).name
-        //s+=" colour: "+b.colour;
+        //s+=" colour: "+b.colour1;
         //s+=" heightOffset: "+b.heightOffset;
         s+=" top corner: "+b.topcorner;
         s+=" src: "+b.image.src;
@@ -332,7 +332,7 @@ function print_sprite_objects(){
         //s+="  colour_list: "+b.colour_list.toString();
         s+=" item: "+b.item;
         s+="Current item :"+(b.item_list[b.item]).name
-        //s+=" colour: "+b.colour;
+        //s+=" colour: "+b.colour1;
         s+=" src: "+b.image.src;
         s+=" dimensions: "+b.dimensions.toString();
         s+="<br>";

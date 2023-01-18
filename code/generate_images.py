@@ -15,12 +15,7 @@ outfit_list_spriteOnly = ["Pants","Shoes","Gloves"]
 outfit_list_both = ["Neckwear","Neckwear2","Neckwear3","Eyewear","Earrings", "Hat"]
 outfit_list = outfit_list_both+ outfit_list_portOnly+ outfit_list_spriteOnly
 
-render_list = ["Torso", "Head", "Complexion","Ears", "Nose","Nose_front"]+expression_list+["Neckwear","Eyewear","Earrings"]
-render_list +=["Hair_front","Hair_back"]
-render_list +=["Hat","Hat_back","Hat_dec"]
-render_list +=["Shirt_collar", "Shirt" ,"Shirt_dec","Shirt_collar_dec","Shirt_sleeves","Shirt_sleeves_dec"]
-render_list +=["Coat","Coat_back","Coat_dec","Coat_dec_back","Coat_sleeves"]
-render_list +=["Overshirt","Overshirt_dec","Overshirt_sleeves","Overshirt_sleeves_dec"]
+no_render_list = ["Neckwear2","Neckwear3"]
 
 skin_list = body_list + ["Eyebrows", "Mouth","Blush"]
 
@@ -380,6 +375,7 @@ def process_image(name, location,type):
                 p = [pixel[0],pixel[1],pixel[2]]
                 l = luminance(p)/255
                 shadow = hex_to_rgba("#5C3C83")
+                port_shadow = hex_to_rgba("#976ACD")
                 if False: #Adata(x,y) not in colour_exclusions:
                     Bdata[x,y] = []
                 else:
@@ -387,22 +383,29 @@ def process_image(name, location,type):
                         for i in range(3):
                             p[i] = int(l*255 + (1-l)*(shadow[i]))   
                         Adata[x, y] = (p[0],p[1],p[2],pixel[3]) 
-                    else:   
+                    else:  
+                         
                         if p == [255,0,0]: 
                             Adata[x, y] = (255,255,255,pixel[3]) 
                         elif p == [0,0,255]:  
-                            Adata[x, y] = (shadow[0],shadow[1],shadow[2],pixel[3]) 
+                            Adata[x, y] = (port_shadow[0],port_shadow[1],port_shadow[2],pixel[3]) 
     img.save(save_string)    
-    # if location =="portraits/body/nose":
-    #     image_string = "../images/bases/"+location+"/"+name+"_base.png"
-    #     save_string = "../images/"+location+"/"+name+"_noshadow_base.png"
-    #     img = Image.open(image_string) 
-    #     Adata = img.load()       
-    #     for y in range(img.size[1]):
-    #         for x in range(img.size[0]):
-    #             if Adata[x, y][3] !=0:
-    #                 Adata[x, y] = colour_this_noshadow(Adata[x, y], colour_list[colour])  
-    #     img.save(save_string)        
+    if location =="portraits/body/nose":
+        image_string = "../images/bases/"+location+"/"+name+"_base.png"
+        save_string = "../images/"+location+"/"+name+"_noshadow.png"
+        img = Image.open(image_string) 
+        Adata = img.load()       
+        for y in range(img.size[1]):
+            for x in range(img.size[0]):
+                if Adata[x, y][3] !=0:
+                    pixel = Adata[x, y]
+                    p = [pixel[0],pixel[1],pixel[2]]
+                    if p == [255,0,0]: 
+                            Adata[x, y] = (255,255,255,pixel[3]) 
+                    elif p == [0,0,255]:  
+                            Adata[x, y] = (0,0,0,0) 
+
+        img.save(save_string)        
 
 def flipImage():
     image_string = "../images/bases/sprites/outfit/pants/pants_base.png"
@@ -565,7 +568,7 @@ def makeWinks():
 
 def process_all_portraits():
     for c in closet:
-        if c.name in render_list:
+        if not (c.name in no_render_list):
             process_portrait_part(c)
     makeWinks()     
 
