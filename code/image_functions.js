@@ -76,7 +76,13 @@ function hex_to_rgb(colour){
 
 function rgb_to_hex(colour){
 //Return color as #rrggbb for the given color values.
-    return '#%02x%02x%02x' % (colour[0], colour[1], colour[2]) 
+    var s = '#';
+    for (let i = 0; i < 3; i += 1){
+        if (colour[i]< 16)
+            s+="0"; //pad with a zero
+        s+=(+colour[i]).toString(16).toUpperCase();
+    }
+    return s
 }
 
 function blushcolour(skincolour){
@@ -90,7 +96,24 @@ function blushcolour(skincolour){
         r = 0.3 //opacity of shadow
         for (let i = 0; i < 3; i += 1) // #multiply
            colour[i] = parseInt((1-r)*new_colour[i] + r*new_colour[i]*shadow[i]/255);   
-        return rgb_to_hex([255,0,0])//colour) 
+        return rgb_to_hex(colour) 
+}
+
+function frecklecolour(skincolour){
+    //Given a colour string, returns the appropriate freckle colour
+    //Not very reliable
+
+    if (skincolour=="#000000")
+        return "#646464" 
+    new_colour = hex_to_rgb(skincolour)
+    
+    shadow = hex_to_rgb("#854C2C")
+    colour = [0,0,0]
+    r = 0.5 //opacity of shadow
+    for (let i = 0; i < 3; i += 1) // #multiply
+        colour[i] = parseInt((1-r)*new_colour[i] + r*new_colour[i]*shadow[i]/255);   
+    return rgb_to_hex(colour) 
+
 }
 
 function colorContrast(colour){
@@ -405,8 +428,12 @@ function fixSpecialSpriteSources(){
 function draw_coloured_port(obj, index, colour, ctx, sourceX, sourceY, xpos, ypos){
     if (obj.name =="Blush")
         off_ctx.fillStyle = blushcolour(colour);
-    else
-        off_ctx.fillStyle = colour;
+    else{
+        if (obj.name == "Complexion"&& obj.item_list[obj.value_list[0]])
+            off_ctx.fillStyle = frecklecolour(colour);
+        else
+            off_ctx.fillStyle = colour;
+    }
     off_ctx.fillRect(0, 0, 256, 256);
 
     off_ctx.globalCompositeOperation = "destination-in";

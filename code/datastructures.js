@@ -55,6 +55,7 @@ function setVariables(data_object){
     
     setPortColour(skin_list, skinColour);
     setPortColour(hair_list, hairColour);
+    setPortColour(["Stubble"], hairColour);
     setSpriteColour(["Hairstyle","Hairstyle_top", "Facial_hair"], hairColour);
     setBothColour(["Eyes"], eyeColour);
     setSpriteColour(["Torso","Arms","Head"], skinColour);
