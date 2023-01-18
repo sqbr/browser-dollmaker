@@ -67,6 +67,47 @@ function hexToNum(h){
 
 }
 
+function hex_to_rgb(colour){
+    let R = parseInt(colour.slice(1,3),16);
+    let G = parseInt(colour.slice(3,5),16);
+    let B = parseInt(colour.slice(5,7),16);
+    return [R,G,B];
+}
+
+function rgb_to_hex(colour){
+//Return color as #rrggbb for the given color values.
+    return '#%02x%02x%02x' % (colour[0], colour[1], colour[2]) 
+}
+
+function blushcolour(skincolour){
+        //Given a colour string, returns the appropriate blush colour
+        //Not very reliable
+        if (skincolour=="#000000")
+            skincolour="#525252";    
+        new_colour = hex_to_rgb(skincolour);
+        shadow = hex_to_rgb("#FF0462");
+        colour = [0,0,0];
+        r = 0.3 //opacity of shadow
+        for (let i = 0; i < 3; i += 1) // #multiply
+           colour[i] = parseInt((1-r)*new_colour[i] + r*new_colour[i]*shadow[i]/255);   
+        return rgb_to_hex([255,0,0])//colour) 
+}
+
+function colorContrast(colour){
+    let R = parseInt(colour.slice(1,3),16);
+    let G = parseInt(colour.slice(3,5),16);
+    let B = parseInt(colour.slice(5,7),16);
+    let p = [R,G,B]
+    let h = findHue(p);
+    let s = saturation(p);
+    let v = luminance(p);
+
+    if (v<125)
+        return "#FFFFFF"
+    return "#000000"
+
+}
+
 function colour_desc(colour){
         //returns a text description of a hex colour string. For screenreader/colourblind support.
         let R = parseInt(colour.slice(1,3),16);
@@ -169,21 +210,6 @@ function colour_desc(colour){
         }}
 } 
 
-function colorContrast(colour){
-    let R = parseInt(colour.slice(1,3),16);
-    let G = parseInt(colour.slice(3,5),16);
-    let B = parseInt(colour.slice(5,7),16);
-    let p = [R,G,B]
-    let h = findHue(p);
-    let s = saturation(p);
-    let v = luminance(p);
-
-    if (v<125)
-        return "#FFFFFF"
-    return "#000000"
-
-}
-
 function fixPortSources(){
     // Fixes the "src" attribute for all images in sublist of portrait_objects
     for (let i = 0; i < portrait_objects.length; i += 1){
@@ -266,17 +292,20 @@ function fixPortSources(){
                 }
             }
             if (name.includes("None")||name.includes("none")){
-                b.image_list[j].src  ="";
+                b.base_image_list[j].src  ="";
+                b.multiply_image_list[j].src  ="";
+                b.highlight_image_list[j].src  ="";
+                b.overlay_image_list[j].src  ="";
 
-            } else{
-                if (false){//since all portrait items are coloured
-                    b.image_list[j].src = "images/bases/portraits/"+b.location+"/"+name+".png";
-                }else{
-                    if (b.name =="Nose_front"){
-                        b.image_list[j].src  = "images/portraits/"+b.location+"/"+name+"_noshadow.png";
-                    }else
-                        b.image_list[j].src  = "images/portraits/"+b.location+"/"+name+"_base.png";
-                }
+            } else
+            {
+                if (b.name =="Nose_front")
+                    name+="_noshadow";
+                save_string = "images/portraits/"+b.location+"/"+name    
+                b.base_image_list[j].src  = save_string+"_base.png";
+                b.multiply_image_list[j].src  = save_string+"_multiply.png";
+                b.highlight_image_list[j].src  = save_string+"_highlight.png";
+                b.overlay_image_list[j].src  = save_string+"_overlay.png";
             }
         }
     }
@@ -374,15 +403,22 @@ function fixSpecialSpriteSources(){
 }
 
 function draw_coloured_port(obj, index, colour, ctx, sourceX, sourceY, xpos, ypos){
-    off_ctx.fillStyle = colour;
+    if (obj.name =="Blush")
+        off_ctx.fillStyle = blushcolour(colour);
+    else
+        off_ctx.fillStyle = colour;
     off_ctx.fillRect(0, 0, 256, 256);
-    off_ctx.globalCompositeOperation = "destination-in";
-    off_ctx.drawImage(obj.image_list[index],sourceX,sourceY,256,256, 0, 0,256,256);
-    off_ctx.globalCompositeOperation = "multiply";
-    off_ctx.drawImage(obj.image_list[index],sourceX,sourceY,256,256, 0, 0,256,256);
-    off_ctx.globalCompositeOperation = "source-over"; 
-    ctx.drawImage(off_canvas,0,0,256,256, xpos, ypos,256,256);
 
+    off_ctx.globalCompositeOperation = "destination-in";
+    off_ctx.drawImage(obj.base_image_list[index],sourceX,sourceY,256,256, 0, 0,256,256);
+
+    off_ctx.globalCompositeOperation = "multiply";
+    off_ctx.drawImage(obj.multiply_image_list[index],sourceX,sourceY,256,256, 0, 0,256,256);
+    off_ctx.globalCompositeOperation = "screen";
+    off_ctx.drawImage(obj.highlight_image_list[index],sourceX,sourceY,256,256, 0, 0,256,256);
+    off_ctx.globalCompositeOperation = "source-over"; 
+    off_ctx.drawImage(obj.overlay_image_list[index],sourceX,sourceY,256,256, 0, 0,256,256);
+    ctx.drawImage(off_canvas,0,0,256,256, xpos, ypos,256,256);
 }
 
 function draw_coloured_sprite(obj, ctx, colour, sourceX, sourceY, sourcewidth,sourceheight,xpos, ypos,width,height){

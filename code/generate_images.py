@@ -343,69 +343,65 @@ def blushcolour(skincolour):
            colour[i] = int((1-r)*new_colour[i] + r*new_colour[i]*shadow[i]/255)   
         return colour        
 
-def colour_this_noshadow(pixel, colour):
-    p = [pixel[0],pixel[1],pixel[2]]
-    alpha = pixel[3]
-    new_colour = hex_to_rgba(colour)
-    if p == [255,0,0]:
-        for i in range(3):
-            p[i] = new_colour[i]      
-    elif p == [0,0,255]: #shading
-        alpha = 0
-    elif p == [0,255,0]: #highlight
-        highlight = hex_to_rgba("#f9f4ca")
-        r = 0.5 #opacity of highlight
-        for i in range(3): #screen
-           p[i] = int((1-r)*new_colour[i] + r*(255 - (255-new_colour[i])*(255-highlight[i])/255))    
-    return (p[0],p[1],p[2],alpha)
-
 def process_image(name, location,type):
     image_string = "../images/bases/"+location+"/"+name+"_base.png"
-    save_string = "../images/"+location+"/"+name+"_base.png"
-    save_string_overlay = "../images/"+location+"/"+name+"_overlay.png"
-    img = Image.open(image_string) 
-    Adata = img.load()   
-    colour_exclusions = [hex_to_rgba("#FF0000"),hex_to_rgba("#00FF00"),hex_to_rgba("#0000FF")]
+    if type == "noshadow":
+        save_string = "../images/"+location+"/"+name+"_noshadow"
+    else:    
+        save_string = "../images/"+location+"/"+name
+    save_string_base = save_string +"_base.png"
+    save_string_overlay = save_string+"_overlay.png"
+    save_string_highlight = save_string+"_highlight.png"
+    save_string_multiply = save_string+"_multiply.png"
+
+    img_base = Image.open(image_string) 
+    base_data = img_base.load() 
+
+    img_overlay = Image.new("RGBA", (img_base.size[0], img_base.size[1]))
+    overlay_data = img_overlay.load()
+
+    img_highlight = Image.new("RGBA", (img_base.size[0], img_base.size[1]))
+    highlight_data = img_highlight.load() 
+
+    img_multiply = Image.new("RGBA", (img_base.size[0], img_base.size[1]))
+    multiply_data = img_multiply.load()   
+
+    port_highlight = hex_to_rgba("#F1E9BD")
+
+    colour_list = [[26,0,68],[0,0,0], [255,0,0],[0,0,255],[0,255,0]]
     if type in ["skin"]:
-        colour_exclusions = [[249,174,137],[255,217,186],[224,107,101],[166,54,80],[142,31,12],[112,23,24],[107,0,58],[74,12,6]]
-    for y in range(img.size[1]):
-        for x in range(img.size[0]):
-            if Adata[x, y][3] !=0:
-                pixel = Adata[x, y]
+        colour_list = [[249,174,137],[255,217,186],[224,107,101],[166,54,80],[142,31,12],[112,23,24],[107,0,58],[74,12,6]]
+    for y in range(img_base.size[1]):
+        for x in range(img_base.size[0]):
+            if base_data[x, y][3] !=0:
+                pixel = base_data[x, y]
                 p = [pixel[0],pixel[1],pixel[2]]
                 l = luminance(p)/255
                 shadow = hex_to_rgba("#5C3C83")
-                port_shadow = hex_to_rgba("#976ACD")
-                if False: #Adata(x,y) not in colour_exclusions:
-                    Bdata[x,y] = []
-                else:
+                port_shadow = hex_to_rgba("#4F1F76")
+                base_data[x, y] = (255,255,255,pixel[3]) 
+
+                if p in colour_list:
                     if type in ["skin","skin_grey","grey","blue"]:
                         for i in range(3):
                             p[i] = int(l*255 + (1-l)*(shadow[i]))   
-                        Adata[x, y] = (p[0],p[1],p[2],pixel[3]) 
+                        base_data[x, y] = (p[0],p[1],p[2],pixel[3]) 
                     else:  
-                         
-                        if p == [255,0,0]: 
-                            Adata[x, y] = (255,255,255,pixel[3]) 
-                        elif p == [0,0,255]:  
-                            Adata[x, y] = (port_shadow[0],port_shadow[1],port_shadow[2],pixel[3]) 
-    img.save(save_string)    
-    if location =="portraits/body/nose":
-        image_string = "../images/bases/"+location+"/"+name+"_base.png"
-        save_string = "../images/"+location+"/"+name+"_noshadow.png"
-        img = Image.open(image_string) 
-        Adata = img.load()       
-        for y in range(img.size[1]):
-            for x in range(img.size[0]):
-                if Adata[x, y][3] !=0:
-                    pixel = Adata[x, y]
-                    p = [pixel[0],pixel[1],pixel[2]]
-                    if p == [255,0,0]: 
-                            Adata[x, y] = (255,255,255,pixel[3]) 
-                    elif p == [0,0,255]:  
-                            Adata[x, y] = (0,0,0,0) 
-
-        img.save(save_string)        
+                        if p in [[26,0,68],[0,0,0]]: # black
+                            multiply_data[x, y] = (0,0,0,pixel[3]) 
+                        elif p == [0,0,255]:  #shadow
+                            if type=="noshadow":
+                                base_data[x, y] = (0,0,0,0) 
+                            else:    
+                                multiply_data[x, y] = (port_shadow[0],port_shadow[1],port_shadow[2],int(pixel[3]*0.3)) 
+                        elif p == [0,255,0]:  #highlight
+                            highlight_data[x, y] = (port_highlight[0],port_highlight[1],port_highlight[2],int(pixel[3]*0.7))     
+                else:
+                   overlay_data[x, y] = pixel        
+    img_base.save(save_string_base) 
+    img_overlay.save(save_string_overlay)   
+    img_highlight.save(save_string_highlight)
+    img_multiply.save(save_string_multiply)          
 
 def flipImage():
     image_string = "../images/bases/sprites/outfit/pants/pants_base.png"
@@ -551,7 +547,10 @@ def process_portrait_part(obj):
         elif (obj.name != "Eyes" or item.find("wink")<0):     
             if item!="None":
                 print(obj.name+" "+item)
-                process_image(item, loc,"portrait")
+                if obj.name == "Nose_front":
+                    process_image(item, loc,"noshadow")
+                else:    
+                    process_image(item, loc,"portrait")
 
 def makeWinks():
     for eye_type in eye_type_list_port:

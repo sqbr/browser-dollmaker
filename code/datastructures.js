@@ -432,7 +432,7 @@ portrait_back.src = "images/portrait_back.png";
 const off_canvas = new OffscreenCanvas(256, 256);
 const off_ctx = off_canvas.getContext("2d");
 window.onload = setup;
-var game = setInterval(drawCanvas, 100);//Update canvas every 100 miliseconds
+var game = setInterval(drawCanvas, 500);//Update canvas every 100 miliseconds
 
 //Some useful posts:
 //https://github.com/ninique/Dollmaker-Script
