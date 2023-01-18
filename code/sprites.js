@@ -265,11 +265,11 @@ dimensions: how big is the sprite
 topcorner: coordinates of the top corner of the looking down standing still sprite
 */
 function add_sprite_object(name, list,name_list, colour_list,isWalk, bobs, heightOffset,backOffset, dimensions, offset){
-    sprite_objects.push({name: name,item_list: list, name_list: name_list, colour_list: colour_list, item: 0,  base_item: 0, colour: 0, colour2: 0, image: new Image(), isWalk: isWalk, bobs: bobs, heightOffset: heightOffset, backOffset: backOffset, rowNum: 4, topcorner:[0,0],dimensions: dimensions, offset: offset});
+    sprite_objects.push({name: name,item_list: list, name_list: name_list, colour_list: colour_list, item: 0,  base_item: 0, colour: 0, colour2: 0, base_image: new Image(),multiply_image: new Image(),highlight_image: new Image(),overlay_image: new Image(), isWalk: isWalk, bobs: bobs, heightOffset: heightOffset, backOffset: backOffset, rowNum: 4, topcorner:[0,0],dimensions: dimensions, offset: offset});
 }
 
 function add_special_sprite_object(name, list,name_list, colour_list,dimensions,heightOffset){
-    special_sprite_objects.push({name: name,item_list: list, name_list: name_list, colour_list: colour_list, item: 0,  base_item: 0, colour: 0, colour2: 0, image: new Image(),dimensions: dimensions,heightOffset: heightOffset});
+    special_sprite_objects.push({name: name,item_list: list, name_list: name_list, colour_list: colour_list, item: 0,  base_item: 0, colour: 0, colour2: 0, base_image: new Image(),multiply_image: new Image(),highlight_image: new Image(),overlay_image: new Image(),dimensions: dimensions,heightOffset: heightOffset});
 }
 
 add_sprite_object("Coat_back", sprite_coat_back_list,sprite_coat_back_list.map(nameOf),outfit_colours,false,true,1,0, [16,32],[0,0]);
@@ -318,7 +318,7 @@ function print_sprite_objects(){
         //s+=" colour: "+b.colour1;
         //s+=" heightOffset: "+b.heightOffset;
         s+=" top corner: "+b.topcorner;
-        s+=" src: "+b.image.src;
+        s+=" src: "+b.base_image.src;
         s+=" dimensions: "+b.dimensions.toString();
         //s+=" Offset: "+b.offset.toString();
         s+="<br>";
@@ -333,7 +333,7 @@ function print_sprite_objects(){
         s+=" item: "+b.item;
         s+="Current item :"+(b.item_list[b.item]).name
         //s+=" colour: "+b.colour1;
-        s+=" src: "+b.image.src;
+        s+=" src: "+b.base_image.src;
         s+=" dimensions: "+b.dimensions.toString();
         s+="<br>";
     }

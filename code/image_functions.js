@@ -369,7 +369,10 @@ function fixSpriteSources(){
 
         let item = b.item_list[b.item];
         if (item == none){
-            b.image.src="";
+            b.base_image.src="";
+            b.multiply_image.src="";
+            b.highlight_image.src="";
+            b.overlay_image.src="";
         }else{
         b.topcorner = item.topcorner;
         b.rowNum= item.rowNum;
@@ -398,10 +401,14 @@ function fixSpriteSources(){
         }
         //set colour
         if (item.colour){
-            b.image.src  = "images/sprites/"+loc+"_base.png";
+             loc_string = "images/sprites/"+loc;
         }else{
-            b.image.src = "images/bases/sprites/"+loc+"_base.png";
+            loc_string = "images/bases/sprites/"+loc; 
         }
+        b.base_image.src  =loc_string+"_base.png";
+        b.multiply_image.src  =loc_string+"_multiply_.png";
+        b.highlight_image.src  =loc_string+"_highlight.png";
+        b.overlay_image.src  =loc_string+"_overlay.png";
     }
 }
 }
@@ -412,14 +419,21 @@ function fixSpecialSpriteSources(){
         let b = special_sprite_objects[i];
         let item = b.item_list[b.item];
         if (item == none){
-            b.image.src="";
+            b.base_image.src="";
+            b.multiply_image.src="";
+            b.highlight_image.src="";
+            b.overlay_image.src="";
         }else{
-        let loc = item.location;
-        if (item.colour){
-            b.image.src  = "images/sprites/"+loc+"_base.png";
-        }else{
-            b.image.src = "images/bases/sprites/"+loc+".png";
-        }
+            let loc = item.location;
+            if (item.colour){
+                loc_string = "images/sprites/"+loc;
+            }else{
+                loc_string = "images/bases/sprites/"+loc; 
+            }
+            b.base_image.src  =loc_string+"_base.png";
+            b.multiply_image.src  =loc_string+"_multiply_.png";
+            b.highlight_image.src  =loc_string+"_highlight.png";
+            b.overlay_image.src  =loc_string+"_overlay.png";
 
         }
     }
@@ -449,6 +463,31 @@ function draw_coloured_port(obj, index, colour, ctx, sourceX, sourceY, xpos, ypo
 }
 
 function draw_coloured_sprite(obj, ctx, colour, sourceX, sourceY, sourcewidth,sourceheight,xpos, ypos,width,height){
-    ctx.drawImage(obj.image,sourceX,sourceY,sourcewidth,sourceheight, xpos, ypos,width,height);
+    /*sourcewidth = 16
+    sourceheight = 16
+    sourceX = 0
+    sourceY = 0
+    width = 16
+    height = 16
+    xpos = 0
+    ypos = 0
+    off_ctx.fillStyle = colour;
+    off_ctx.fillRect(0, 0, sourcewidth,sourceheight);
+
+    off_ctx.globalCompositeOperation = "destination-in";
+    off_ctx.drawImage(obj.base_image,sourceX,sourceY,sourcewidth,sourceheight, xpos, ypos,sourcewidth,sourceheight);
+    /*
+    off_ctx.globalCompositeOperation = "multiply";
+    
+    off_ctx.drawImage(obj.multiply_image,sourceX,sourceY,sourcewidth,sourceheight, 0, 0,sourcewidth,sourceheight);
+    /*
+    off_ctx.globalCompositeOperation = "screen";
+    off_ctx.drawImage(obj.highlight_image,sourceX,sourceY,sourcewidth,sourceheight, 0, 0,sourcewidth,sourceheight);
+    
+    off_ctx.globalCompositeOperation = "source-over"; 
+    off_ctx.drawImage(obj.overlay_image,sourceX,sourceY,sourcewidth,sourceheight, 0, 0,sourcewidth,sourceheight);*/
+    
+    //ctx.drawImage(off_canvas,0,0,sourcewidth,sourceheight, xpos, ypos,width,height);
+    ctx.drawImage(obj.base_image,sourceX, sourceY, sourcewidth,sourceheight,xpos, ypos,width,height);
 
 }

@@ -256,7 +256,7 @@ function drawCanvas() {
 
     //preview canvas
     canvas_preview.width = canvas_preview.width; //clears
-    document.getElementById("closet").innerHTML = print_portrait_objects();
+    //document.getElementById("closet").innerHTML = print_portrait_objects();
     let hair = findNameMatch(sprite_objects, "Hairstyle");
     for (let i = 0; i < sprite_objects.length; i += 1){ //sprite preview
         let b = sprite_objects[i];
@@ -314,11 +314,11 @@ function drawCanvas() {
         else    
             canvas.height = 416;
         
-        //document.getElementById("closet").innerHTML = print_sprite_objects();
+        document.getElementById("closet").innerHTML = print_sprite_objects();
         //sourceX, sourceY, sourceWidth, sourceHeight, destWidth and destHeight   
         for (let i = 0; i < sprite_objects.length; i += 1){
             let b = sprite_objects[i];
-            if (b.image.src !=""){ 
+            if (b.base_image.src !=""){ 
                 for (let row = 0; row < 2; row += 1){//rows 1,2   
                     for (let column = 0; column < 2; column += 1)
                         if(b.name !="Hairstyle_top" || column >0)
@@ -353,7 +353,7 @@ function drawCanvas() {
 
             for (let i = 0; i < sprite_objects.length; i += 1){
                 let b = sprite_objects[i];
-                if (b.image.src !=""){ 
+                if (b.base_image.src !=""){ 
                     if (sprite_special_list.includes(b.name) || noWeddingOutfit){
                         //wedding  
                         let wedding_offset =0;
@@ -397,7 +397,7 @@ function drawCanvas() {
             }
             for (let i = 0; i < special_sprite_objects.length; i += 1){
                 let b = special_sprite_objects[i];
-                if (b.image.src !=""){ 
+                if (b.base_image.src !=""){ 
                     draw_coloured_sprite(b, ctx, b.colour1, 0, 0,b.dimensions[0],b.dimensions[1],0, b.heightOffset,b.dimensions[0],b.dimensions[1]);
                 }
             }
@@ -406,7 +406,7 @@ function drawCanvas() {
 
             for (let i = 0; i < sprite_objects.length; i += 1){
                 let b = sprite_objects[i];
-                if (b.image.src !=""){ 
+                if (b.base_image.src !=""){ 
                     if (sprite_special_list.includes(b.name)){
                         if (current_sprite_preset==2){
                             //male 

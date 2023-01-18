@@ -379,13 +379,13 @@ def process_image(name, location,type):
                 l = luminance(p)/255
                 shadow = hex_to_rgba("#5C3C83")
                 port_shadow = hex_to_rgba("#4F1F76")
-                base_data[x, y] = (255,255,255,pixel[3]) 
+                base_data[x, y] = (100,100,100,pixel[3]) 
 
                 if p in colour_list:
                     if type in ["skin","skin_grey","grey","blue"]:
                         for i in range(3):
                             p[i] = int(l*255 + (1-l)*(shadow[i]))   
-                        base_data[x, y] = (p[0],p[1],p[2],pixel[3]) 
+                        multiply_data[x, y] = (p[0],p[1],p[2],pixel[3]) 
                     else:  
                         if p in [[26,0,68],[0,0,0]]: # black
                             multiply_data[x, y] = (0,0,0,pixel[3]) 
@@ -539,12 +539,7 @@ def process_portrait_part(obj):
     else:       
         loc = "portraits/"+obj.location + "/"+(obj.name).lower()   
     for item in obj.item_list:
-        if obj.name == "Blush":
-            if item!="None":
-                process_image(item, loc,"blush")
-        elif (obj.name == "Complexion" and item=="freckles"): 
-            process_image(item, loc,"freckles")       
-        elif (obj.name != "Eyes" or item.find("wink")<0):     
+        if (obj.name != "Eyes" or item.find("wink")<0):     
             if item!="None":
                 print(obj.name+" "+item)
                 if obj.name == "Nose_front":
@@ -633,5 +628,5 @@ for c in closet:
         process_portrait_part(c)
 #makeWinks() 
        
-process_all_portraits()
+#process_all_portraits()
 #make_coat()
