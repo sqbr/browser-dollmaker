@@ -117,12 +117,13 @@ document.addEventListener('alpine:init', () => {
       colourbtn: {
         ['x-html']() {
             output = this.title+': ';
-            output += '<input type="color" x-value ="current_skinColour"  @input="$store.alpineData.'+this.valueName+'=$event.target.value;setVariables(Alpine.store(\'alpineData\'));"/>'
+            output += '<input type="color" :value ="$store.alpineData.'+this.valueName+'"  @input="$store.alpineData.'+this.valueName+'=$event.target.value;setVariables(Alpine.store(\'alpineData\'));"/>'
             return output 
         },
         
     },
   }))
+  //data used by the Alpine components on the webpage
   Alpine.store('alpineData', {
     panelNum : 6,
     current_imageType : 0,
@@ -164,7 +165,7 @@ document.addEventListener('alpine:init', () => {
 
     current_wedding_clothes : 0,
     current_dance_clothes : 0,
-    fixAlpine() {
+    fixAlpine() { //make the alpine components match the variables used by the javascript
         for(let i = 0; i < menu_objects.length; i++){
             m = menu_objects[i];
             var sleeves = 0;
