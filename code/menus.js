@@ -74,7 +74,11 @@ var reader; //GLOBAL File Reader object for demo purpose only
           };//end onload()
         reader.readAsText(filePath);
         return true;
-    }   
+    }  
+    
+    function setColour(input_string){
+      
+    }
 
     /**
      * load user selected file

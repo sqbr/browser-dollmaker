@@ -117,14 +117,10 @@ document.addEventListener('alpine:init', () => {
       colourbtn: {
         ['x-html']() {
             output = this.title+': ';
-
-            output +='<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" x-text="'+'\''+this.buttonName+'\'+niceString(colour_desc('+this.listName+"[$store.alpineData."+this.valueName+"]))"+'" x-bind:style="{ background:'+this.listName+'[$store.alpineData.'+this.valueName+'], color: colorContrast('+this.listName+'[$store.alpineData.'+this.valueName+'])} "></button>';
-            output +='<ul class="dropdown-menu"> <template x-for=" (preset, index) in '+ this.listName+'">'; 
-            output +='<li><button x-bind:style="{ background:'+ this.listName+'[index], color: colorContrast('+this.listName+'[index])}" class="dropdown-item" x-on:click="$store.alpineData.'+this.valueName+'=index;setVariables(Alpine.store(\'alpineData\'));" x-text="niceString(colour_desc(preset))"></a></li>'; 
-            //'+this.listName+'[$store.alpineData.'+this.valueName+']
-            output +='</template></ul>'
+            output += '<input type="color" x-value ="current_skinColour"  @input="$store.alpineData.'+this.valueName+'=$event.target.value;setVariables(Alpine.store(\'alpineData\'));"/>'
             return output 
         },
+        
     },
   }))
   Alpine.store('alpineData', {

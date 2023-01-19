@@ -316,32 +316,16 @@ def HSL_to_RGB(h,s,l):
         B = X
     return [int(R+m), int(G+m), int(B+m)]
 
-def frecklecolour(skincolour):
-            # Given a colour string, returns the appropriate blush colour
-            # Not very reliable
-        if (skincolour=="#000000"):
-            return [100,100,100]    
-        new_colour = hex_to_rgba(skincolour)
+def red_shadow(pixel,shadow):
+    p = [pixel[0],pixel[1],pixel[2]]
+    l = luminance(p)/255
+    if l >0.9:
+        l = 1
+    for i in range(3):
+        p[i] = shadow[i] #int(l*255 + (1-l)*(shadow[i])) 
         
-        shadow = hex_to_rgba("#854C2C")
-        colour = [0,0,0]
-        r = 0.5 #opacity of shadow
-        for i in range(3): #multiply
-           colour[i] = int((1-r)*new_colour[i] + r*new_colour[i]*shadow[i]/255)   
-        return colour
+    return (pixel[0],pixel[1],pixel[2], int(pixel[3]*(1-l)))
 
-def blushcolour(skincolour):
-            # Given a colour string, returns the appropriate blush colour
-            # Not very reliable
-        if (skincolour=="#000000"):
-            skincolour="#525252"    
-        new_colour = hex_to_rgba(skincolour)
-        shadow = hex_to_rgba("#FF0462")
-        colour = [0,0,0]
-        r = 0.3 #opacity of shadow
-        for i in range(3): #multiply
-           colour[i] = int((1-r)*new_colour[i] + r*new_colour[i]*shadow[i]/255)   
-        return colour        
 
 def process_image(name, location,type):
     image_string = "../images/bases/"+location+"/"+name+"_base.png"
@@ -381,11 +365,9 @@ def process_image(name, location,type):
                 port_shadow = hex_to_rgba("#4F1F76")
                 base_data[x, y] = (100,100,100,pixel[3]) 
 
-                if p in colour_list:
-                    if type in ["skin","skin_grey","grey","blue"]:
-                        for i in range(3):
-                            p[i] = int(l*255 + (1-l)*(shadow[i]))   
-                        multiply_data[x, y] = (p[0],p[1],p[2],pixel[3]) 
+                if hue(p)==0:
+                    if type in ["skin","red"]:   
+                        multiply_data[x, y] = red_shadow(pixel,shadow) 
                     else:  
                         if p in [[26,0,68],[0,0,0]]: # black
                             multiply_data[x, y] = (0,0,0,pixel[3]) 
@@ -576,34 +558,34 @@ def process_body_sprites():
             for g in ["female","male"]:
                 process_image(g+"_"+w+"_"+h, "sprites/flower dance","skin") 
  
-    process_image("hairstyles", "sprites/hair","hair")
-    process_image("hairstyles2", "sprites/hair","hair")
-    process_image("facialhair", "sprites/hair/facialhair","hair")
-    process_image("eyes", "sprites/body","eyes") 
+    process_image("hairstyles", "sprites/hair","red")
+    process_image("hairstyles2", "sprites/hair","red")
+    process_image("facialhair", "sprites/hair/facialhair","red")
+    process_image("eyes", "sprites/body","red") 
         
 
 def process_outfit_sprites():
-        process_image("eyewear", "sprites/accessories/eyewear","skin_grey") 
-        process_image("hats", "sprites/outfit/hats","skin_grey")
-        process_image("hats_dec", "sprites/outfit/hats","skin_grey")
-        process_image("pants", "sprites/outfit/pants", "blue")
-        process_image("pants_top", "sprites/outfit/pants_top","skin_grey")
-        process_image("briefs", "sprites/outfit/pants","blue")
-        process_image("shirts", "sprites/outfit/shirts","grey")
-        process_image("shirt decs", "sprites/outfit/shirts/decorations","grey")
-        process_image("overshirt", "sprites/outfit/overshirt","grey")
-        process_image("coat", "sprites/outfit/coat","skin_grey")
-        process_image("coat_dec", "sprites/outfit/coat", "skin_grey")
-        process_image("coat_back", "sprites/outfit/coat", "skin_grey")
-        process_image("neckwear", "sprites/accessories/neckwear","grey")
-        process_image("earrings", "sprites/accessories/earrings","")
+        process_image("eyewear", "sprites/accessories/eyewear","red") 
+        process_image("hats", "sprites/outfit/hats","red")
+        process_image("hats_dec", "sprites/outfit/hats","red")
+        process_image("pants", "sprites/outfit/pants", "red")
+        process_image("pants_top", "sprites/outfit/pants_top","red")
+        process_image("briefs", "sprites/outfit/pants","red")
+        process_image("shirts", "sprites/outfit/shirts","red")
+        process_image("shirt decs", "sprites/outfit/shirts/decorations","red")
+        process_image("overshirt", "sprites/outfit/overshirt","red")
+        process_image("coat", "sprites/outfit/coat","red")
+        process_image("coat_dec", "sprites/outfit/coat", "red")
+        process_image("coat_back", "sprites/outfit/coat", "red")
+        process_image("neckwear", "sprites/accessories/neckwear","red")
+        process_image("earrings", "sprites/accessories/earrings","red")
         for height in ["short","tall"]:
-             process_image("longpants_"+height, "sprites/outfit/pants","blue")
+             process_image("longpants_"+height, "sprites/outfit/pants","red")
              for shoetype in ["boots","flats","flipflops"]:
-                 process_image(height+"_"+shoetype, "sprites/outfit/shoes","grey") 
-             process_image(height, "sprites/outfit/gloves","grey")
+                 process_image(height+"_"+shoetype, "sprites/outfit/shoes","red") 
+             process_image(height, "sprites/outfit/gloves","red")
              for sleevetype in ["short","long"]:
-                 process_image(height+"_"+sleevetype, "sprites/outfit/sleeves","grey") 
+                 process_image(height+"_"+sleevetype, "sprites/outfit/sleeves","red") 
 
 write_temp()
 write_variables()

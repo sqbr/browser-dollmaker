@@ -466,7 +466,7 @@ function draw_coloured_port(obj, index, colour, ctx, sourceX, sourceY, xpos, ypo
 
 function draw_coloured_sprite(obj, ctx, colour, sourceX, sourceY, sourcewidth,sourceheight,xpos, ypos,width,height){
 
-    if (obj.name =="Shirt_dec"){
+    if (!obj.item_list[obj.item].name.includes("None")&&!obj.item_list[obj.item].name.includes("none")){
     off_ctx.globalCompositeOperation = "source-over";
     off_ctx.fillStyle = colour;
     off_ctx.fillRect(0, 0, sourcewidth,sourceheight);
