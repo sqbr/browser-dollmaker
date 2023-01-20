@@ -657,7 +657,7 @@ process_outfit_sprites()
 for c in closet:
     if c.name in []:
         process_portrait_part(c)
-makeWinks() 
+#makeWinks() 
        
 #process_all_portraits()
 #make_coat()
