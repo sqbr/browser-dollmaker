@@ -316,15 +316,22 @@ def HSL_to_RGB(h,s,l):
         B = X
     return [int(R+m), int(G+m), int(B+m)]
 
-def red_shadow(pixel,shadow):
+def red_shadow(pixel,shadow1,edge):
     p = [pixel[0],pixel[1],pixel[2]]
     l = luminance(p)/255
     if l >0.9:
-        l = 1
+        return (0,0,0,0)
+    elif l>0.7:
+        r=1
+    elif l>0.2:
+        r = 2*l -0.4 #creates smooth transition between darker edge and lighter shadow1
+    else:
+        r = 0       
+
     for i in range(3):
-        p[i] = shadow[i] #int(l*255 + (1-l)*(shadow[i])) 
+        p[i] = int(r*shadow1[i] + (1-r)*edge[i] )
         
-    return (pixel[0],pixel[1],pixel[2], int(pixel[3]*(1-l)))
+    return (p[0],p[1],p[2], int(pixel[3]*(1-l)))
 
 
 def process_image(name, location,type):
@@ -333,53 +340,54 @@ def process_image(name, location,type):
         save_string = "../images/"+location+"/"+name+"_noshadow"
     else:    
         save_string = "../images/"+location+"/"+name
-    save_string_base = save_string +"_base.png"
-    save_string_overlay = save_string+"_overlay.png"
-    save_string_highlight = save_string+"_highlight.png"
-    save_string_multiply = save_string+"_multiply.png"
 
+    save_string_base = save_string +"_base.png"
     img_base = Image.open(image_string) 
     base_data = img_base.load() 
 
+    save_string_overlay = save_string+"_overlay.png"
     img_overlay = Image.new("RGBA", (img_base.size[0], img_base.size[1]))
     overlay_data = img_overlay.load()
 
+    save_string_highlight = save_string+"_highlight.png"
     img_highlight = Image.new("RGBA", (img_base.size[0], img_base.size[1]))
     highlight_data = img_highlight.load() 
 
+    save_string_multiply = save_string+"_multiply_red.png"
     img_multiply = Image.new("RGBA", (img_base.size[0], img_base.size[1]))
     multiply_data = img_multiply.load()   
 
     port_highlight = hex_to_rgba("#F1E9BD")
-
-    colour_list = [[26,0,68],[0,0,0], [255,0,0],[0,0,255],[0,255,0]]
-    if type in ["skin"]:
-        colour_list = [[249,174,137],[255,217,186],[224,107,101],[166,54,80],[142,31,12],[112,23,24],[107,0,58],[74,12,6]]
     for y in range(img_base.size[1]):
         for x in range(img_base.size[0]):
             if base_data[x, y][3] !=0:
                 pixel = base_data[x, y]
                 p = [pixel[0],pixel[1],pixel[2]]
                 l = luminance(p)/255
-                shadow = hex_to_rgba("#5C3C83")
+                shadow1 = hex_to_rgba("#830016")
+                edge = hex_to_rgba("#560055")
                 port_shadow = hex_to_rgba("#4F1F76")
                 base_data[x, y] = (100,100,100,pixel[3]) 
 
-                if hue(p)==0:
-                    if type in ["skin","red"]:   
-                        multiply_data[x, y] = red_shadow(pixel,shadow) 
-                    else:  
-                        if p in [[26,0,68],[0,0,0]]: # black
+                if type in ["portrait","noshadow"]:
+                    if luminance(p) < 13: # black
                             multiply_data[x, y] = (0,0,0,pixel[3]) 
-                        elif p == [0,0,255]:  #shadow
-                            if type=="noshadow":
-                                base_data[x, y] = (0,0,0,0) 
-                            else:    
-                                multiply_data[x, y] = (port_shadow[0],port_shadow[1],port_shadow[2],int(pixel[3]*0.3)) 
-                        elif p == [0,255,0]:  #highlight
-                            highlight_data[x, y] = (port_highlight[0],port_highlight[1],port_highlight[2],int(pixel[3]*0.7))     
+                    elif p == [0,0,255]:  #shadow
+                        if type=="noshadow":
+                            base_data[x, y] = (0,0,0,0) 
+                        else:    
+                            multiply_data[x, y] = (port_shadow[0],port_shadow[1],port_shadow[2],int(pixel[3]*0.3)) 
+                    elif p == [0,255,0]:  #highlight
+                        highlight_data[x, y] = (port_highlight[0],port_highlight[1],port_highlight[2],int(pixel[3]*0.7))     
+                    elif p != [255, 0, 0]:
+                        overlay_data[x, y] = pixel    
+
                 else:
-                   overlay_data[x, y] = pixel        
+                    if hue(p)==0:
+                        if type in ["skin","red"]:   
+                            multiply_data[x, y] = red_shadow(pixel,shadow1,edge) 
+                    else:
+                        overlay_data[x, y] = pixel        
     img_base.save(save_string_base) 
     img_overlay.save(save_string_overlay)   
     img_highlight.save(save_string_highlight)
@@ -606,9 +614,9 @@ process_outfit_sprites()
 
 
 for c in closet:
-    if c.name in []:
+    if c.name in [""]:
         process_portrait_part(c)
 #makeWinks() 
        
-#process_all_portraits()
+process_all_portraits()
 #make_coat()

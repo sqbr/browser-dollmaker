@@ -316,7 +316,7 @@ function fixPortSources(){
             }
             if (name.includes("None")||name.includes("none")){
                 b.base_image_list[j].src  ="";
-                b.multiply_image_list[j].src  ="";
+                b.shadow_image_list[j].src  ="";
                 b.highlight_image_list[j].src  ="";
                 b.overlay_image_list[j].src  ="";
 
@@ -326,7 +326,7 @@ function fixPortSources(){
                     name+="_noshadow";
                 save_string = "images/portraits/"+b.location+"/"+name    
                 b.base_image_list[j].src  = save_string+"_base.png";
-                b.multiply_image_list[j].src  = save_string+"_multiply.png";
+                b.shadow_image_list[j].src  = save_string+"_multiply_red.png";
                 b.highlight_image_list[j].src  = save_string+"_highlight.png";
                 b.overlay_image_list[j].src  = save_string+"_overlay.png";
             }
@@ -395,7 +395,7 @@ function fixSpriteSources(){
         }
         if (b.item_list[b.item].name.includes("None")||b.item_list[b.item].name.includes("none")){
             b.base_image.src="";
-            b.multiply_image.src="";
+            b.shadow_image.src="";
             b.highlight_image.src="";
             b.overlay_image.src="";
         } else{
@@ -408,7 +408,7 @@ function fixSpriteSources(){
                 loc_string = "images/bases/sprites/"+loc; 
             }
             b.base_image.src  =loc_string+"_base.png";
-            b.multiply_image.src  =loc_string+"_multiply.png";
+            b.shadow_image.src  =loc_string+"_multiply_red.png";
             b.highlight_image.src  =loc_string+"_highlight.png";
             b.overlay_image.src  =loc_string+"_overlay.png";
         }
@@ -422,7 +422,7 @@ function fixSpecialSpriteSources(){
         let item = b.item_list[b.item];
         if (item == none){
             b.base_image.src="";
-            b.multiply_image.src="";
+            b.shadow_image.src="";
             b.highlight_image.src="";
             b.overlay_image.src="";
         }else{
@@ -433,7 +433,7 @@ function fixSpecialSpriteSources(){
                 loc_string = "images/bases/sprites/"+loc; 
             }
             b.base_image.src  =loc_string+"_base.png";
-            b.multiply_image.src  =loc_string+"_multiply.png";
+            b.shadow_image.src  =loc_string+"_multiply_red.png";
             b.highlight_image.src  =loc_string+"_highlight.png";
             b.overlay_image.src  =loc_string+"_overlay.png";
 
@@ -456,7 +456,7 @@ function draw_coloured_port(obj, index, colour, ctx, sourceX, sourceY, xpos, ypo
     off_ctx.drawImage(obj.base_image_list[index],sourceX,sourceY,256,256, 0, 0,256,256);
 
     off_ctx.globalCompositeOperation = "multiply";
-    off_ctx.drawImage(obj.multiply_image_list[index],sourceX,sourceY,256,256, 0, 0,256,256);
+    off_ctx.drawImage(obj.shadow_image_list[index],sourceX,sourceY,256,256, 0, 0,256,256);
     off_ctx.globalCompositeOperation = "screen";
     off_ctx.drawImage(obj.highlight_image_list[index],sourceX,sourceY,256,256, 0, 0,256,256);
     off_ctx.globalCompositeOperation = "source-over"; 
@@ -476,7 +476,7 @@ function draw_coloured_sprite(obj, ctx, colour, sourceX, sourceY, sourcewidth,so
     
     off_ctx.globalCompositeOperation = "multiply";
     
-    off_ctx.drawImage(obj.multiply_image,sourceX,sourceY,sourcewidth,sourceheight, 0, 0,sourcewidth,sourceheight);
+    off_ctx.drawImage(obj.shadow_image,sourceX,sourceY,sourcewidth,sourceheight, 0, 0,sourcewidth,sourceheight);
     
     off_ctx.globalCompositeOperation = "screen";
     off_ctx.drawImage(obj.highlight_image,sourceX,sourceY,sourcewidth,sourceheight, 0, 0,sourcewidth,sourceheight);
