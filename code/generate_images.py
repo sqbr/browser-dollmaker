@@ -335,6 +335,20 @@ def red_shadow(pixel,shadow1,edge):
         
     return (p[0],p[1],p[2], int(pixel[3]*(1-l)))
 
+def shadow_colours(colour_name):
+    if colour_name=="red": 
+        return [hex_to_rgba("#830016"),hex_to_rgba("#560055")]
+    elif colour_name=="yellow": #yellow
+        return [hex_to_rgba("#004B13"),hex_to_rgba("#00A52A")]
+    elif colour_name=="green": #yellow-green
+        return [hex_to_rgba("#00264B"),hex_to_rgba("#0066C9")]
+    elif colour_name=="aqua": #aqua
+        return [hex_to_rgba("#00024B"),hex_to_rgba("#2D31DA")]
+    elif colour_name=="blue": #blue
+        return [hex_to_rgba("#00024B"),hex_to_rgba("#272BDA")]
+    else: #purple
+        return [hex_to_rgba("#34004B"),hex_to_rgba("#7C00B4")]
+
 
 def process_image(name, location,type):
     image_string = "../images/bases/"+location+"/"+name+"_base.png"
@@ -359,31 +373,31 @@ def process_image(name, location,type):
 
     black_luminance = 13 #luminance level that's treated as black
 
-    save_string_multiply = save_string+"_multiply_red.png"
-    img_multiply = Image.new("RGBA", (img_base.size[0], img_base.size[1]))
-    multiply_data = img_multiply.load()  
+    for colour in shadow_types:
+        save_string_multiply = save_string+"_multiply_"+colour+".png"
+        img_multiply = Image.new("RGBA", (img_base.size[0], img_base.size[1]))
+        multiply_data = img_multiply.load()  
 
-    for y in range(img_base.size[1]):
-        for x in range(img_base.size[0]):
-            if base_data[x, y][3] !=0:
-                pixel = base_data[x, y]
-                p = [pixel[0],pixel[1],pixel[2]]
-                shadow1 = hex_to_rgba("#830016")
-                edge = hex_to_rgba("#560055")
-                port_shadow = hex_to_rgba("#4F1F76")
+        for y in range(img_base.size[1]):
+            for x in range(img_base.size[0]):
+                if base_data[x, y][3] !=0:
+                    pixel = base_data[x, y]
+                    p = [pixel[0],pixel[1],pixel[2]]
+                    [shadow1,edge] = shadow_colours(colour)
+                    port_shadow = hex_to_rgba("#4F1F76")
 
-                if type in ["portrait","noshadow"]:
-                    if luminance(p) < black_luminance: # black
-                            multiply_data[x, y] = (0,0,0,pixel[3]) 
-                    elif p == [0,0,255]:  #shadow
-                        if type!="noshadow":
-                            multiply_data[x, y] = (port_shadow[0],port_shadow[1],port_shadow[2],int(pixel[3]*0.3))   
+                    if type in ["portrait","noshadow"]:
+                        if luminance(p) < black_luminance: # black
+                                multiply_data[x, y] = (0,0,0,pixel[3]) 
+                        elif p == [0,0,255]:  #shadow
+                            if type!="noshadow":
+                                multiply_data[x, y] = (shadow1[0],shadow1[1],shadow1[2],int(pixel[3]*0.3))   
 
-                else:
-                    if hue(p)==0:
-                        multiply_data[x, y] = red_shadow(pixel,shadow1,edge) 
+                    else:
+                        if hue(p)==0:
+                            multiply_data[x, y] = red_shadow(pixel,shadow1,edge) 
 
-    img_multiply.save(save_string_multiply) 
+        img_multiply.save(save_string_multiply) 
 
     for y in range(img_base.size[1]):
         for x in range(img_base.size[0]):

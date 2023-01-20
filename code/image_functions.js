@@ -324,11 +324,31 @@ function fixPortSources(){
             {
                 if (b.name =="Nose_front")
                     name+="_noshadow";
-                save_string = "images/portraits/"+b.location+"/"+name    
+                save_string = "images/portraits/"+b.location+"/"+name 
+                   
                 b.base_image_list[j].src  = save_string+"_base.png";
-                b.shadow_image_list[j].src  = save_string+"_multiply_red.png";
                 b.highlight_image_list[j].src  = save_string+"_highlight.png";
                 b.overlay_image_list[j].src  = save_string+"_overlay.png";
+
+                h = findHue(b.colour1)
+                colour = "purple"
+                if (h <62) 
+                    colour ="red";
+                else{ 
+                if (h<120)
+                    colour ="yellow";
+                else{
+                if (h<180)
+                    colour ="green";
+                else{
+                if (h<240)
+                    colour ="aqua";
+                else{ 
+                if (h<300)
+                    colour ="blue";
+                }}}}
+                b.shadow_image_list[j].src  = save_string+"_multiply_"+colour+".png";
+                
             }
         }
     }
