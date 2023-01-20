@@ -227,6 +227,8 @@ sprite_body_list = ["tall","short","tall_bald", "short_bald"]
 
 # colour functions
 
+shadow_types = ["red", "yellow","green","aqua","blue","purple"]
+
 def hex_to_rgba(value):
     #### Return (red, green, blue, 255) for the color given as #rrggbb or #rgb.
     value = value.lstrip('#')
@@ -353,45 +355,60 @@ def process_image(name, location,type):
     img_highlight = Image.new("RGBA", (img_base.size[0], img_base.size[1]))
     highlight_data = img_highlight.load() 
 
+    port_highlight = hex_to_rgba("#F1E9BD")
+
+    black_luminance = 13 #luminance level that's treated as black
+
     save_string_multiply = save_string+"_multiply_red.png"
     img_multiply = Image.new("RGBA", (img_base.size[0], img_base.size[1]))
-    multiply_data = img_multiply.load()   
+    multiply_data = img_multiply.load()  
 
-    port_highlight = hex_to_rgba("#F1E9BD")
     for y in range(img_base.size[1]):
         for x in range(img_base.size[0]):
             if base_data[x, y][3] !=0:
                 pixel = base_data[x, y]
                 p = [pixel[0],pixel[1],pixel[2]]
-                l = luminance(p)/255
                 shadow1 = hex_to_rgba("#830016")
                 edge = hex_to_rgba("#560055")
                 port_shadow = hex_to_rgba("#4F1F76")
-                base_data[x, y] = (100,100,100,pixel[3]) 
 
                 if type in ["portrait","noshadow"]:
-                    if luminance(p) < 13: # black
+                    if luminance(p) < black_luminance: # black
                             multiply_data[x, y] = (0,0,0,pixel[3]) 
                     elif p == [0,0,255]:  #shadow
-                        if type=="noshadow":
-                            base_data[x, y] = (0,0,0,0) 
-                        else:    
-                            multiply_data[x, y] = (port_shadow[0],port_shadow[1],port_shadow[2],int(pixel[3]*0.3)) 
-                    elif p == [0,255,0]:  #highlight
-                        highlight_data[x, y] = (port_highlight[0],port_highlight[1],port_highlight[2],int(pixel[3]*0.7))     
-                    elif p != [255, 0, 0]:
-                        overlay_data[x, y] = pixel    
+                        if type!="noshadow":
+                            multiply_data[x, y] = (port_shadow[0],port_shadow[1],port_shadow[2],int(pixel[3]*0.3))   
 
                 else:
                     if hue(p)==0:
-                        if type in ["skin","red"]:   
-                            multiply_data[x, y] = red_shadow(pixel,shadow1,edge) 
-                    else:
-                        overlay_data[x, y] = pixel        
+                        multiply_data[x, y] = red_shadow(pixel,shadow1,edge) 
+
+    img_multiply.save(save_string_multiply) 
+
+    for y in range(img_base.size[1]):
+        for x in range(img_base.size[0]):
+            if base_data[x, y][3] !=0:
+                pixel = base_data[x, y]
+                p = [pixel[0],pixel[1],pixel[2]]
+                base_data[x, y] = (100,100,100,pixel[3]) 
+
+                if type in ["portrait","noshadow"]:
+                    if p == [0,0,255]:  #shadow
+                        if type=="noshadow":
+                            base_data[x, y] = (0,0,0,0) 
+                    elif p == [0,255,0]:  #highlight
+                        highlight_data[x, y] = (port_highlight[0],port_highlight[1],port_highlight[2],int(pixel[3]*0.7))     
+                    elif p != [255, 0, 0] and  luminance(p)>black_luminance:
+                        overlay_data[x, y] = pixel    
+
+                else:
+                    if hue(p)!=0:
+                        overlay_data[x, y] = pixel    
+
     img_base.save(save_string_base) 
     img_overlay.save(save_string_overlay)   
     img_highlight.save(save_string_highlight)
-    img_multiply.save(save_string_multiply)          
+                         
 
 def flipImage():
     image_string = "../images/bases/sprites/outfit/pants/pants_base.png"
