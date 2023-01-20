@@ -315,7 +315,9 @@ function print_sprite_objects(){
         //s+="  colour_list: "+b.colour_list.toString();
         s+=" item: "+b.item;
         s+="Current item :"+(b.item_list[b.item]).name
-        //s+=" colour: "+b.colour1;
+        s+=" colour: "+b.colour1;
+        if (typeof b.colour1!='undefined')
+            s+="hue :"+ parseInt(findHue(hex_to_rgb(b.colour1))); 
         //s+=" heightOffset: "+b.heightOffset;
         s+=" top corner: "+b.topcorner;
         s+=" src: "+b.shadow_image.src;

@@ -130,12 +130,12 @@ function print_portrait_objects(){
         b = portrait_objects[i];
         s+="name: "+b.name;
         s+=" location: "+b.location;
-        //s+=" item_list: "+b.item_list.toString();
+        s+=" item_list: "+b.item_list.toString();
         //s+=" colourNum: "+b.colourNum;
         //s+="  value_list: "+b.value_list.toString();
         s+=" colour: "+b.colour1;
         s+=" item: "+b.item_list[b.value_list[0]]
-        //s+=" src: "+b.base_image_list[0].src;
+        s+=" src: "+b.shadow_image_list[0].src;
         s+="<br>";
     }
     return s

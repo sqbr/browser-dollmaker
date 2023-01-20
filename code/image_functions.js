@@ -131,6 +131,28 @@ function colorContrast(colour){
 
 }
 
+function colour_string(hex_colour){
+    //Which colour of shadow to use
+    h = findHue(hex_to_rgb(hex_colour));
+    let colour = "purple";
+    if (h <62) //reds and yellow
+        colour ="red";
+    else{ 
+    if (h<120) //yellow-green
+        colour ="yellow";
+    else{
+    if (h<180) //green-aqua
+        colour ="green";
+    else{
+    if (h<240)
+        colour ="aqua";
+    else{ 
+    if (h<300)
+        colour ="blue";
+    }}}}
+    return colour
+}
+
 function colour_desc(colour){
         //returns a text description of a hex colour string. For screenreader/colourblind support.
         let R = parseInt(colour.slice(1,3),16);
@@ -251,13 +273,13 @@ function fixPortSources(){
                 let front_name = back_list_port[k][0];
                 if (b.name == front_name+"_back"){
                     obj_front = findNameMatch(portrait_objects, front_name);
+                    if (front_name =="Coat" && coat_dec_back_list_port.includes(name)){
+                        obj_dec = findNameMatch(portrait_objects, front_name+"_dec");
+                        b.colour1 = obj_dec.colour1;
+                    }else
+                        b.colour1 = obj_front.colour1;
                     if (back_list_port[k][1].includes(obj_front.item_list[obj_front.value_list[j]]))
-                        name = obj_front.item_list[obj_front.value_list[j]];
-                        if (front_name =="Coat" && coat_dec_back_list_port.includes(name)){
-                            obj_dec = findNameMatch(portrait_objects, front_name+"_dec");
-                            b.colour1 = obj_dec.colour1;
-                        }else
-                            b.colour1 = obj_front.colour1;
+                        name = obj_front.item_list[obj_front.value_list[j]];    
                 }
             }
 
@@ -266,17 +288,19 @@ function fixPortSources(){
                 let front_name = sleeve_list_port[k].name; //eg "Shirt", "Coat" etc
                 if (b.name == front_name+"_sleeves"){ //this is "Shirt_sleeves" etc
                     obj_front = findNameMatch(portrait_objects, front_name); //what shirt etc we are wearing
+                    b.colour1 = obj_front.colour1
                     name = "None";
+                    b.value_list[j] = 0;
                     current_sleeves_list = sleeve_list_port[k].sleeves_list;
                     current_item = obj_front.item_list[obj_front.value_list[j]];
                     if (current_sleeves_list.includes(current_item)){ //the current shirt etc can have sleeves
                             let current_sleeves = sleeve_list[k] //what current sleeve length is
                             if (current_sleeves==0){
-                                b.item_list[j] = 0;
+                                b.value_list[j] = 1;
                                 name = "zilch";
                             }
                             else{
-                                b.item_list[j] = 1;
+                                b.value_list[j] = 2;
                                 if (sleeve_list_port[k].sharp_sleeves.includes(current_item)){
                                     name = "sharp";   
                                 }else{
@@ -284,13 +308,14 @@ function fixPortSources(){
                                 }
                                 
                             } 
-                            b.colour1 = obj_front.colour1
                     }
                 }
                 if (b.name == front_name+"_sleeves_dec"){ //this is "Shirt_sleeves_dec" etc
                     obj_front = findNameMatch(portrait_objects, front_name); //what shirt etc we are wearing
                     obj_dec = findNameMatch(portrait_objects, front_name+"_dec"); //what shirt decoration etc we are wearing
+                    b.colour1 = obj_dec.colour1
                     name = "None";
+                    b.value_list[j] = 0;
                     if (obj_dec.value_list[j]!=0){ //item is decorated
                         current_sleeves_list = sleeve_list_port[k].sleeves_list;
                         current_item = obj_front.item_list[obj_front.value_list[j]];
@@ -298,18 +323,17 @@ function fixPortSources(){
                             let current_dec = sleeve_list_port[k].dec_list[obj_dec.value_list[j]]
                             let current_sleeves = sleeve_list[k]  //what current sleeve length is
                             if (current_sleeves==0){
-                                b.item_list[j] = 0
+                                b.value_list[j] = obj_dec.value_list[j]*current_sleeves_list.length+1;
                                 name = current_dec+" zilch"
                             }
                             else{
-                                b.item_list[j] = 1
+                                b.value_list[j] = obj_dec.value_list[j]*current_sleeves_list.length+2;
                                 if (sleeve_list_port[k].sharp_sleeves.includes(current_item)){
                                     name = current_dec+" sharp";   
                                 }else{
                                     name = current_dec+" round";   
                                 }
                             } 
-                            b.colour1 = obj_dec.colour1
                         }
                     }
                 }
@@ -329,25 +353,7 @@ function fixPortSources(){
                 b.base_image_list[j].src  = save_string+"_base.png";
                 b.highlight_image_list[j].src  = save_string+"_highlight.png";
                 b.overlay_image_list[j].src  = save_string+"_overlay.png";
-
-                h = findHue(b.colour1)
-                colour = "purple"
-                if (h <62) 
-                    colour ="red";
-                else{ 
-                if (h<120)
-                    colour ="yellow";
-                else{
-                if (h<180)
-                    colour ="green";
-                else{
-                if (h<240)
-                    colour ="aqua";
-                else{ 
-                if (h<300)
-                    colour ="blue";
-                }}}}
-                b.shadow_image_list[j].src  = save_string+"_multiply_"+colour+".png";
+                b.shadow_image_list[j].src  = save_string+"_multiply_"+colour_string(b.colour1)+".png";
                 
             }
         }
@@ -363,6 +369,7 @@ function fixSpriteSources(){
             let front_name = sleeve_list_port[k].name; //eg "Shirt", "Coat" etc
             if (b.name == front_name+"_sleeves"){ //this is "Shirt_sleeves" etc
                 obj_front = findNameMatch(portrait_objects, front_name); //what shirt etc we are wearing
+                b.colour1 = obj_front.colour1
                 current_sleeves_list = sleeve_list_port[k].sleeves_list;
                 current_item = obj_front.item_list[obj_front.value_list[0]];
                 if (false){//(current_item =="letterman"){
@@ -371,7 +378,6 @@ function fixSpriteSources(){
                 } else{
                 if (current_sleeves_list.includes(current_item)){ //the current shirt etc can have sleeves
                         b.item =Math.max(0,2*sleeve_list[k]-1+height); //what current sleeve length is
-                        b.colour1 = obj_front.colour1
                 } else{
                         b.item = 0;  
                 }
@@ -396,9 +402,10 @@ function fixSpriteSources(){
                 let front_name = back_list_sprite[k][0];
                 if (b.name == front_name+"_back"){
                     obj_front = findNameMatch(sprite_objects, front_name);
+                    b.colour1 = obj_front.colour1;
                     if (back_list_sprite[k][1].includes(obj_front.item_list[obj_front.value]))
                         b.item = obj_front.item;
-                        b.colour1 = obj_front.colour1;
+                        
                 }
             }
             //code to make fronts of things match the backs. 
@@ -406,10 +413,10 @@ function fixSpriteSources(){
                 let front_name = front_list_sprite[k][0];
                 if (b.name == front_name+"_front"){
                     obj_front = findNameMatch(sprite_objects, front_name);
+                    b.colour1 = obj_front.colour1;
                     if (front_list_sprite[k][1].includes(obj_front.item_list[obj_front.value]))
-                        
                         b.item = obj_front.item;
-                        b.colour1 = obj_front.colour1;
+                        
                 }
             }
         }
@@ -428,7 +435,7 @@ function fixSpriteSources(){
                 loc_string = "images/bases/sprites/"+loc; 
             }
             b.base_image.src  =loc_string+"_base.png";
-            b.shadow_image.src  =loc_string+"_multiply_red.png";
+            b.shadow_image.src  =loc_string+"_multiply_"+colour_string(b.colour1)+".png";
             b.highlight_image.src  =loc_string+"_highlight.png";
             b.overlay_image.src  =loc_string+"_overlay.png";
         }
@@ -453,7 +460,7 @@ function fixSpecialSpriteSources(){
                 loc_string = "images/bases/sprites/"+loc; 
             }
             b.base_image.src  =loc_string+"_base.png";
-            b.shadow_image.src  =loc_string+"_multiply_red.png";
+            b.shadow_image.src  =loc_string+"_multiply_"+colour_string(b.colour1)+".png";
             b.highlight_image.src  =loc_string+"_highlight.png";
             b.overlay_image.src  =loc_string+"_overlay.png";
 
@@ -470,18 +477,18 @@ function draw_coloured_port(obj, index, colour, ctx, sourceX, sourceY, xpos, ypo
         else
             off_ctx.fillStyle = colour;
     }
-    off_ctx.fillRect(0, 0, 256, 256);
+    off_ctx.fillRect(0, 0, 256, 268);
 
     off_ctx.globalCompositeOperation = "destination-in";
-    off_ctx.drawImage(obj.base_image_list[index],sourceX,sourceY,256,256, 0, 0,256,256);
+    off_ctx.drawImage(obj.base_image_list[index],0,0,256,268, 0, 0,256,268);
 
     off_ctx.globalCompositeOperation = "multiply";
-    off_ctx.drawImage(obj.shadow_image_list[index],sourceX,sourceY,256,256, 0, 0,256,256);
+    off_ctx.drawImage(obj.shadow_image_list[index],0,0,256,268, 0, 0,256,268);
     off_ctx.globalCompositeOperation = "screen";
-    off_ctx.drawImage(obj.highlight_image_list[index],sourceX,sourceY,256,256, 0, 0,256,256);
+    off_ctx.drawImage(obj.highlight_image_list[index],0,0,256,268, 0, 0,256,268);
     off_ctx.globalCompositeOperation = "source-over"; 
-    off_ctx.drawImage(obj.overlay_image_list[index],sourceX,sourceY,256,256, 0, 0,256,256);
-    ctx.drawImage(off_canvas,0,0,256,256, xpos, ypos,256,256);
+    off_ctx.drawImage(obj.overlay_image_list[index],0,0,256,268, 0, 0,256,268);
+    ctx.drawImage(off_canvas,sourceX,sourceY,256,256, xpos, ypos,256,256);
 }
 
 function draw_coloured_sprite(obj, ctx, colour, sourceX, sourceY, sourcewidth,sourceheight,xpos, ypos,width,height){

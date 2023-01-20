@@ -38,7 +38,7 @@ const earrings_menu_list = [ none_menu,["Studs",[1],[3]],["Single Stud",[2],[4]]
 const coat_menu_list = [ none_menu, ["Fur Coat",[8,2],[10,0,1]],["Letterman",[9,3],[10,0,3]], ["Chinese collar",[6,0],[3,0,0]],["Short Coat",[1,0],[1,0,0]],["Business Jacket",[1,0],[6,0,0]],["Cool Jacket",[2,0],[6,0,0]], ["Hoodie",[3,0],[5,0,0]],["Open Hoodie",[4,0],[7,0,0]],["Leaves",[5,0],[8,0,0]],];
 //["Cape with collar",[7,1],[2,2,2]],["Cape",[9,1],[2,0,2]],
 
-const overshirt_menu_list = [ none_menu,["Button up V-neck",[5,0],[2,0]],["V-neck",[1,0],[6,0]],["Argyle V-neck",[1,1],[6,28]], ["Sweater",[2,0],[4,0]],["Open Sweater",[3,0],[1,0]],["Suspenders",[4,0],[5,0]],];
+const overshirt_menu_list = [ none_menu,["Button up V-neck",[5,0],[3,0]],["V-neck",[1,0],[6,0]],["Argyle V-neck",[1,1],[6,28]], ["Sweater",[2,0],[4,0]],["Open Sweater",[3,0],[1,0]],["Suspenders",[4,0],[5,0]],];
 
 const shirt_menu_list = [ none_menu,["Bikini",[5,0,0,0],[7,0]],["Strappy Vest",[10,0,0,0],[2,0]],["Halter-neck",[11,0,0,0],[2,0]],["Bodice",[12,0,0,0],[14,0]],["Sleeved Bodice",[13,0,0,0],[14,0]],["T-Shirt",[3,0,0,0],[19,0]],["Striped V-neck",[9,0,4,0],[26,4]],["V-neck",[9,0,0,0],[26,0]],["Low Cut",[8,0,0,0],[27,0]],["Boatneck",[4,0,0,0],[23,0]],["Turtleneck",[7,0,0,0],[21,0]],["Chinese Collar",[6,0,0,0],[21,0]], ["Open Shirt With Vest",[2,2,3,0],[24,25]], ["Open Shirt",[2,2,0,0],[25,0]],  ["Button-up",[1,1,0,0],[12,0]], ["Plaid Button-up",[1,1,1,1],[12,2]],["Stripe Button-up",[1,1,2,0],[12,4]],]
 

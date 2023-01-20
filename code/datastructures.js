@@ -155,12 +155,12 @@ document.addEventListener('alpine:init', () => {
     {name: 'Neckwear', item: 0, colour1: "#46FF00",colour2: outfit_colours[2], sleeves: 0},
     {name: 'Eyewear', item: 0, colour1: "#00FF43",colour2: outfit_colours[4], sleeves: 0},
     {name: 'Earrings', item: 0, colour1: "#00FFC5",colour2: outfit_colours[6], sleeves: 0},
-    {name: 'Shirt', item: 6, colour1: "#008CFF",colour2: outfit_colours[8], sleeves: 0},
+    {name: 'Shirt', item: 6, colour1: "#9DF989",colour2: outfit_colours[8], sleeves: 0},
     {name: 'Overshirt', item: 0, colour1: "#0018FF",colour2: outfit_colours[10], sleeves: 0},
     {name: 'Coat', item: 0, colour1: "#C200FF",colour2: outfit_colours[12], sleeves: 0},
-    {name: 'Pants', item: 2, colour1: "#FF0098",colour2: outfit_colours[14], sleeves: 0},
-    {name: 'Shoes', item: 1, colour1: "#FF001D",colour2: outfit_colours[16], sleeves: 0},
-    {name: 'Gloves', item: 0, colour1: "#FF8E00",colour2: outfit_colours[18], sleeves: 0},
+    {name: 'Pants', item: 2, colour1: "#036BB9",colour2: outfit_colours[14], sleeves: 0},
+    {name: 'Shoes', item: 1, colour1: "#5B2010",colour2: outfit_colours[16], sleeves: 0},
+    {name: 'Gloves', item: 0, colour1: "#9DF989",colour2: outfit_colours[18], sleeves: 0},
     ],
 
     current_wedding_clothes : 0,
@@ -253,7 +253,7 @@ function drawCanvas() {
 
     //preview canvas
     canvas_preview.width = canvas_preview.width; //clears
-    //document.getElementById("closet").innerHTML = print_portrait_objects();
+    document.getElementById("closet").innerHTML = print_portrait_objects();
     let hair = findNameMatch(sprite_objects, "Hairstyle");
     for (let i = 0; i < sprite_objects.length; i += 1){ //sprite preview
         let b = sprite_objects[i];
@@ -269,7 +269,7 @@ function drawCanvas() {
     for (let i = 0; i < portrait_objects.length; i += 1){
         let b = portrait_objects[i];
         if (b.item_list[b.value_list[current_panel]] !="None"){ 
-            draw_coloured_port(b,current_panel,b.colour1,ctx_preview, 0,0,256, getOffset(b.name));
+            draw_coloured_port(b,current_panel,b.colour1,ctx_preview, 0,-getOffset(b.name),256, 0);
         }
     }
     //main canvas
@@ -427,7 +427,7 @@ function setup(){
 }
 let portrait_back = new Image();
 portrait_back.src = "images/portrait_back.png";
-const off_canvas = new OffscreenCanvas(256, 256);
+const off_canvas = new OffscreenCanvas(256, 268);
 const off_ctx = off_canvas.getContext("2d");
 window.onload = setup;
 var game = setInterval(drawCanvas, 500);//Update canvas every 100 miliseconds
