@@ -62,7 +62,8 @@ function setVariables(data_object){
     setSpecialSpriteColour(["Wedding","Flower dance"], skinColour);
 
     setClothing(["Hairstyle"],hairStyle);
-    if ([0,52].includes(hairStyle)){ //all bald hairstyles
+    setClothingColour(["Hairstyle"],hairColour);
+    if ([0,3].includes(hairStyle)){ //all bald hairstyles
         setSpriteVariable(["Head"], 0);
     }
     else{
@@ -166,7 +167,7 @@ document.addEventListener('alpine:init', () => {
     current_wedding_clothes : 0,
     current_dance_clothes : 0,
     fixAlpine() { //make the alpine components match the variables used by the javascript
-        for(let i = 0; i < menu_objects.length; i++){
+        for(let i = 0; i < menu_objects.length-1; i++){
             m = menu_objects[i];
             var sleeves = 0;
             var item = m.item;
@@ -253,7 +254,7 @@ function drawCanvas() {
 
     //preview canvas
     canvas_preview.width = canvas_preview.width; //clears
-    //document.getElementById("closet").innerHTML = print_portrait_objects();
+    document.getElementById("closet").innerHTML = print_portrait_objects();
     let hair = findNameMatch(sprite_objects, "Hairstyle");
     for (let i = 0; i < sprite_objects.length; i += 1){ //sprite preview
         let b = sprite_objects[i];

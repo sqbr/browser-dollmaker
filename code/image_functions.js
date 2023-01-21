@@ -258,9 +258,10 @@ function colour_desc(colour){
 function fixPortSources(){
     // Fixes the "src" attribute for all images in sublist of portrait_objects
     for (let i = 0; i < portrait_objects.length; i += 1){
+        let name = "None"
         let b = portrait_objects[i];
         for (let j = 0; j < panelNum; j += 1){ 
-            let name = b.item_list[b.value_list[j]];
+            name = b.item_list[b.value_list[j]];
 
             //stubble
             if (b.name =="Stubble"){
