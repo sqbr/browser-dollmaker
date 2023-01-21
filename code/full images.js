@@ -162,6 +162,11 @@ function setBothVariable(variablelist, number){
 }
 
 function updateSpecialSprites(){
+    if (current_sprite_preset <2)
+        current_gender = 0; //female
+    else
+        current_gender = 1; //male
+
     setSpecialSpriteVariable(["Flower dance"], Math.max(0,4*current_dance_clothes+2*current_gender+height));
     setSpecialSpriteVariable(["Wedding"], Math.max(0,2*current_wedding_clothes-1+height)); 
 }

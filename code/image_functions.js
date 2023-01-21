@@ -454,6 +454,20 @@ function fixSpecialSpriteSources(){
             b.overlay_image.src="";
         }else{
             let loc = item.location;
+            if (b.name == "Wedding"){
+                if (current_gender ==1)//male love interest
+                    b.heightOffset = 384;
+                else
+                    b.heightOffset = 288;
+            }
+            else{
+                if (current_gender ==1)//male love interest
+                    b.heightOffset = 352;
+                else
+                    b.heightOffset = 320;
+            }        
+
+            
             if (item.colour){
                 loc_string = "images/sprites/"+loc;
             }else{

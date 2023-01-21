@@ -318,6 +318,35 @@ def HSL_to_RGB(h,s,l):
         B = X
     return [int(R+m), int(G+m), int(B+m)]
 
+def hair_highlight(pixel, highlight):
+    p = [pixel[0],pixel[1],pixel[2]]
+    l = luminance(p)/255
+    if l <0.7:
+        r=0
+    else:
+        r = l-0.7 
+        
+    return (highlight[0],highlight[1],highlight[2], int(pixel[3]*r))
+
+def hair_shadow(pixel,shadow1,edge):
+    p = [pixel[0],pixel[1],pixel[2]]
+    l = luminance(p)/255
+    if l >0.7:
+        return (0,0,0,0)
+    elif l>0.6:
+        r=1
+    elif l>0.2:
+        r = 2.5*l -0.5 #creates smooth transition between darker edge and lighter shadow1
+    elif l>0.1:
+        r=0
+    else: #pure black
+        return (0,0,0,pixel[3])
+
+    for i in range(3):
+        p[i] = int(r*shadow1[i] + (1-r)*edge[i] )
+        
+    return (p[0],p[1],p[2], int(pixel[3]*(1-l/0.7)))
+
 def red_shadow(pixel,shadow1,edge):
     p = [pixel[0],pixel[1],pixel[2]]
     l = luminance(p)/255
@@ -374,7 +403,7 @@ def process_image(name, location,type):
     img_highlight = Image.new("RGBA", (img_original.size[0], img_original.size[1]))
     highlight_data = img_highlight.load() 
 
-    port_highlight = hex_to_rgba("#F1E9BD")
+    port_highlight = hex_to_rgba("#FFF7CA")
 
     black_luminance = 13 #luminance level that's treated as black
 
@@ -394,10 +423,13 @@ def process_image(name, location,type):
                     else:     
                         if type in ["portrait","noshadow"]:
                             if p == [0,0,255] and type!="noshadow":  #shadow
-                                multiply_data[x, y] = (shadow1[0],shadow1[1],shadow1[2],int(pixel[3]*0.4))   
+                                multiply_data[x, y] = (shadow1[0],shadow1[1],shadow1[2],int(pixel[3]*0.36))   
                         else:
                             if hue(p)==0:
-                                multiply_data[x, y] = red_shadow(pixel,shadow1,edge) 
+                                if (type =="hair"):  
+                                    multiply_data[x, y] = hair_shadow(pixel,shadow1,edge) 
+                                else:    
+                                    multiply_data[x, y] = red_shadow(pixel,shadow1,edge) 
 
         img_multiply.save(save_string_multiply) 
 
@@ -406,21 +438,29 @@ def process_image(name, location,type):
             if original_data[x, y][3] !=0:
                 pixel = original_data[x, y]
                 p = [pixel[0],pixel[1],pixel[2]]
+                lum = luminance(p)
 
                 if type in ["portrait","noshadow"]:
-                    if p == [0,0,255] and type!="noshadow":  #shadow
-                        base_data[x, y] = (100,100,100,pixel[3])           
+                    if p == [0,0,255]:
+                        if type!="noshadow":  #shadow
+                            base_data[x, y] = (100,100,100,pixel[3])           
                     elif p == [0,255,0]:  #highlight
                         base_data[x, y] = (100,100,100,pixel[3])       
                         highlight_data[x, y] = (port_highlight[0],port_highlight[1],port_highlight[2],int(pixel[3]*0.5))     
                     elif p == [255, 0, 0]: #just base colour
                         base_data[x, y] = (100,100,100,pixel[3])    
-                    elif luminance(p)>black_luminance:
+                    elif lum>black_luminance:
                         overlay_data[x, y] = pixel    
 
                 else:
                     if hue(p)==0:
-                        base_data[x, y] = (100,100,100,pixel[3])       
+                        if (type =="hair"):  
+                            base_data[x, y] = (100,100,100,pixel[3])  
+                            highlight_data[x, y] = hair_highlight(pixel,port_highlight) 
+                        elif p ==[255,255,255]: #white
+                            overlay_data[x, y] = pixel   
+                        else:
+                            base_data[x, y] = (100,100,100,pixel[3])            
                     else:
                         overlay_data[x, y] = pixel  
                         
@@ -607,8 +647,8 @@ def process_body_sprites():
             for g in ["female","male"]:
                 process_image(g+"_"+w+"_"+h, "sprites/flower dance","skin") 
  
-    process_image("hairstyles", "sprites/hair","red")
-    process_image("hairstyles2", "sprites/hair","red")
+    process_image("hairstyles", "sprites/hair","hair")
+    process_image("hairstyles2", "sprites/hair","hair")
     process_image("facialhair", "sprites/hair/facialhair","red")
     process_image("eyes", "sprites/body","red") 
         

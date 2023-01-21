@@ -253,7 +253,7 @@ function drawCanvas() {
 
     //preview canvas
     canvas_preview.width = canvas_preview.width; //clears
-    document.getElementById("closet").innerHTML = print_portrait_objects();
+    //document.getElementById("closet").innerHTML = print_portrait_objects();
     let hair = findNameMatch(sprite_objects, "Hairstyle");
     for (let i = 0; i < sprite_objects.length; i += 1){ //sprite preview
         let b = sprite_objects[i];
@@ -311,7 +311,7 @@ function drawCanvas() {
         else    
             canvas.height = 416;
         
-        document.getElementById("closet").innerHTML = print_sprite_objects();
+        //document.getElementById("closet").innerHTML = print_sprite_objects();
         //sourceX, sourceY, sourceWidth, sourceHeight, destWidth and destHeight   
         for (let i = 0; i < sprite_objects.length; i += 1){
             let b = sprite_objects[i];
@@ -341,7 +341,7 @@ function drawCanvas() {
             var wedding_height = 288;
             var dance_height = 320;
             var sleeping_height = 256
-            if (current_sprite_preset==2){//male love interest
+            if (current_gender ==1){//male love interest
                 wedding_height = 384;
                 dance_height = 352;
             }
@@ -377,7 +377,7 @@ function drawCanvas() {
                             draw_coloured_sprite(b, ctx, b.colour1, oldX(b,0), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,3,0)-3, newY(b,3,0)+sleeping_height-96,b.dimensions[0],b.dimensions[1]);
                     }    
                     if (sprite_special_list.includes(b.name)){    
-                        if (current_sprite_preset==1){
+                        if (current_gender==0){
                             //female 
                             //dance heads
                             for (let column = 0; column < 2; column++)
@@ -405,7 +405,7 @@ function drawCanvas() {
                 let b = sprite_objects[i];
                 if (b.base_image.src !=""){ 
                     if (sprite_special_list.includes(b.name)){
-                        if (current_sprite_preset==2){
+                        if (current_gender ==1){
                             //male 
                             //dance heads
                             draw_coloured_sprite(b, ctx, b.colour1, oldX(b,0), oldY(b,3),b.dimensions[0],b.dimensions[1],newX(b,2,0), newY(b,2,0)+dance_height-64,b.dimensions[0],b.dimensions[1]);

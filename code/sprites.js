@@ -13,7 +13,7 @@ const hairstyles_names = ["Short shaggy", "Pageboy", "side-part", "Afro", "Mod",
 
 const hairstyles2_names = ["Flippy", "Wavy", "Long", "loose pony", "high braid", "Over shoulder", "Wavy over shoulder", "short bob", "short", "80s bob", "Half shaved", "short spiky", "Short wavy", "short centre part", "Short bangs", "blowout", "short centre part", "short shaggy", "wavy long", "shaggy medium", "blowout","half shaved medium", "side part medium"]
 
-const pants_names = ["capris","shorts", "long dress", "short skirt", "pleated skirt", "Dinosaur Pants", "yellow grass skirt", "green grass skirt", "pantaloons", "midi skirt", "baggy pants", "simple dress", "relaxed fit pants", "relaxed fit shorts"];
+const pants_names = ["capris","shorts", "long dress", "short skirt", "pleated skirt", "Dinosaur Pants", "grass skirt", "green grass skirt", "pantaloons", "midi skirt", "baggy pants", "simple dress", "relaxed fit pants", "relaxed fit shorts"];
 
 const shoes_names =["Boots","Flats","Flip-flops"];
 
@@ -79,8 +79,8 @@ for (let row =0; row<2;row++)
     for (let column =0; column<10;column++){
         if (row*10+column< pants_names.length){
             let colour = true;
-            if  ([5,6,7].includes(column))//already coloured
-                colour=false;
+            /*if  ([5,6,7].includes(column))//already coloured
+                colour=false;*/
             sprite_pants_list.push({name: pants_names[row*10+column], location: "outfit/pants/pants", colour: colour,rowNum: 4,topcorner:[64*column,128*row]});
         }
 }
@@ -335,7 +335,7 @@ function print_sprite_objects(){
         s+=" item: "+b.item;
         s+="Current item :"+(b.item_list[b.item]).name
         //s+=" colour: "+b.colour1;
-        s+=" src: "+b.shadow_image.src;
+        s+=" src: "+b.overlay_image.src;
         s+=" dimensions: "+b.dimensions.toString();
         s+="<br>";
     }
