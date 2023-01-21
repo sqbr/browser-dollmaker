@@ -115,7 +115,7 @@ const portrait_objects =[];
 function add_portrait_object(name, list, location){
     let loc;
     if (["Neckwear2","Neckwear3"].includes(name))
-        loc=location+"/Neckwear";
+        loc=location+"/neckwear";
     else    
         loc=location+"/"+name.toLowerCase();
     if (name == "Nose_front")
