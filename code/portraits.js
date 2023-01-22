@@ -5,8 +5,8 @@ const outfit_list_complex = ["Shirt","Coat","Pants_top",];
 const outfit_list_portOnly = [];
 const outfit_list_spriteOnly = ["Pants","Shoes","Gloves",];
 const outfit_list = outfit_list_both.concat(outfit_list_spriteOnly).concat(outfit_list_portOnly);
-const body_list = ["Torso","Head","Complexion","Ears","Nose","Nose_front",];
-const skin_list = ["Torso","Head","Complexion","Ears","Nose","Nose_front","Eyebrows","Mouth","Blush",];
+const body_list = ["Torso","Head","Complexion","Ears","Skull","Nose","Nose_front",];
+const skin_list = ["Torso","Head","Complexion","Ears","Skull","Nose","Nose_front","Eyebrows","Mouth","Blush",];
 const hair_list = ["Hair_back","Hair_front","Facial_hair",];
 const expression_list = ["Eyes","Eyebrows","Mouth",];
 const eye_expression_list_port = ["neutral","side","crescents","narrowed","happy","wide","shock","angry","angry side","sleepy","wink",];
@@ -47,6 +47,7 @@ const coat_list_port = ["None","suit jacket","jacket","hoodie","open hoodie","le
 const coat_dec_list_port = ["None","cape","fur coat","letterman",];
 const neckwear_list_port3 = ["None","tie","beads","choker","scarf","bowtie","pendant","cravat","bandanna",];
 const ears_list = ["regular",];
+const skull_list = ["regular",];
 const hijab_list_port = ["None","hijab",];
 const head_list = ["rectangular","pointed","square","medium","oval","round","jowly",];
 const complexion_list = ["None","light wrinkles","wrinkles","mole","freckles",];
@@ -85,6 +86,7 @@ add_portrait_object("Coat",coat_list_port,"outfit")
 add_portrait_object("Coat_dec",coat_dec_list_port,"outfit/coat")
 add_portrait_object("Neckwear3",neckwear_list_port3,"outfit")
 add_portrait_object("Ears",ears_list,"body")
+add_portrait_object("Skull",skull_list,"body")
 add_portrait_object("Hijab",hijab_list_port,"outfit/hat")
 add_portrait_object("Head",head_list,"body")
 add_portrait_object("Complexion",complexion_list,"body")

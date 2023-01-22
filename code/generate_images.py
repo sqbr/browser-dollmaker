@@ -7,7 +7,7 @@ import glob
 
 # python generate_images.py
 
-body_list = ["Torso", "Head", "Complexion","Ears", "Nose","Nose_front"]
+body_list = ["Torso", "Head", "Complexion","Ears", "Skull", "Nose","Nose_front"]
 expression_list = ["Eyes","Eyebrows", "Mouth"]
 outfit_list_complex = ["Shirt","Coat","Pants_top"]
 outfit_list_portOnly = []
@@ -29,6 +29,7 @@ torso_list = ["medium"]
 head_list =["rectangular","pointed","square","medium","oval","round","jowly",]
 complexion_list =["None","light wrinkles","wrinkles","mole","freckles"]
 ears_list =["regular"]
+skull_list =["regular"]
 nose_list =["None","small","button", "medium", "broad","round","bulbous","pointed","hooked"]
 eyebrow_list = ["None", "slightly downward","raised","flat sad","raised sad","angry","neutral","raised up","half raised","soft","slightly angry","raised soft"]
 eye_expression_list_port = ["neutral","side","crescents","narrowed","happy","wide","shock","angry","angry side","sleepy","wink"]
@@ -201,6 +202,7 @@ add_portrait_object("Coat_dec", coat_dec_list_port,"coat_dec_list_port", "outfit
 add_portrait_object("Neckwear3", neckwear_list_port,"neckwear_list_port3", "outfit")
 
 add_portrait_object("Ears", ears_list,"ears_list", "body")
+add_portrait_object("Skull", skull_list,"skull_list", "body")
 add_portrait_object("Hijab", hijab_list_port,"hijab_list_port", "outfit/hat")
 add_portrait_object("Head", head_list, "head_list", "body")
 
@@ -631,6 +633,15 @@ def makeWinks():
             im_wink.paste(region,(126,0,256,268))
             im_wink.save(save_string)
 
+def makeStubble():
+    loc = "../images/bases/portraits/body/"
+    for head in head_list:
+        save_string = loc+"stubble/"+head+"_base.png"
+        img_mask = Image.open(loc+"head/"+head+"_base.png")
+        img_stubble = Image.open(loc+"hair/facial_hair/stubble_base.png")
+        img_stubble =Image.composite(img_stubble, img_mask, img_mask) 
+        img_stubble.save(save_string)
+
 def process_all_portraits():
     for c in closet:
         if not (c.name in no_render_list):
@@ -679,8 +690,8 @@ def process_outfit_sprites():
 write_temp()
 write_variables()
 
-process_body_sprites()
-process_outfit_sprites()
+#process_body_sprites()
+#process_outfit_sprites()
 
 #flipImage()
 
@@ -695,9 +706,10 @@ process_outfit_sprites()
 
 
 for c in closet:
-    if c.name in []:
+    if c.name in ["Stubble"]:
         process_portrait_part(c)
-#makeWinks() 
+#makeWinks()
+makeStubble() 
        
 #process_all_portraits()
 #make_coat()
