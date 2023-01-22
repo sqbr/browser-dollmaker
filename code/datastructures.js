@@ -167,7 +167,7 @@ document.addEventListener('alpine:init', () => {
     current_complexion: 0,
 
     current_head :3,
-    current_ears :2,
+    current_ears :1,
     current_lips: 2,
     current_hair :11,
     current_Facialhair : 0,
