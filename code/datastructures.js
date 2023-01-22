@@ -18,6 +18,7 @@ function setVariables(data_object){
     current_Facialhair = data_object.current_Facialhair
 
     eye_type = data_object.current_eyeType;
+    current_lips = data_object.current_lips;
 
     eye_expressions = data_object.eye_expressions; 
 
@@ -30,7 +31,6 @@ function setVariables(data_object){
 
     setPortVariable(["Head"],data_object.current_head);
     setPortVariable(["Ears"],data_object.current_ears);
-    setPortVariable(["Lips"],data_object.current_lips);
     setPortVariable(["Complexion"],data_object.current_complexion);
     setPortVariable(["Nose","Nose_front"],data_object.current_nose);
 
@@ -53,6 +53,8 @@ function setVariables(data_object){
 
 
     //calculated from other variables
+    let b;
+
     setSpriteVariable(["Arms","Torso"], height);
     
     setPortColour(skin_list, skinColour);
@@ -61,6 +63,25 @@ function setVariables(data_object){
     setSpriteColour(["Hairstyle","Hairstyle_top", "Facial_hair"], hairColour);
     setBothColour(["Eyes"], eyeColour);
     setSpriteColour(["Torso","Arms","Head"], skinColour);
+    setValuelist("Lips",data_object.mouth_expressions);
+
+    b = findNameMatch(portrait_objects, "Lips");
+    switch (current_lips){
+        case 0:
+        case 1:
+            b.heightOffset = 0;
+            break;
+        case 2:
+            b.heightOffset = 2;
+            break;
+        case 3:
+            b.heightOffset = 4;
+            break;    
+
+    }
+        
+
+
     setSpecialSpriteColour(["Wedding","Flower dance"], skinColour);
 
     setClothing(["Hairstyle"],hairStyle);
@@ -83,7 +104,7 @@ function setVariables(data_object){
         setPortVariable(["Stubble"],1);
     }
 
-    let b = findNameMatch(sprite_objects, "Eyes");
+    b = findNameMatch(sprite_objects, "Eyes");
     b.item = eye_type;
     b = findNameMatch(portrait_objects, "Eyes");
     for (let i = 0; i < 10; i += 1) {
@@ -195,7 +216,7 @@ document.addEventListener('alpine:init', () => {
             this.current_complexion= findNameMatch(portrait_objects,"Complexion").value_list[0];
             this.current_head= findNameMatch(portrait_objects,"Head").value_list[0];
             this.current_ears= findNameMatch(portrait_objects,"Ears").value_list[0];
-            this.current_lips= findNameMatch(portrait_objects,"Lips").value_list[0];
+            this.current_lips= current_lips;
             this.current_nose= findNameMatch(portrait_objects,"Nose").value_list[0];
             this.eye_expressions = eye_expressions;
             this.eyebrow_expressions = findNameMatch(portrait_objects,"Eyebrows").value_list;
@@ -260,7 +281,7 @@ function drawCanvas() {
 
     //preview canvas
     canvas_preview.width = canvas_preview.width; //clears
-    //document.getElementById("closet").innerHTML = print_portrait_objects();
+    document.getElementById("closet").innerHTML = print_portrait_objects();
     let hair = findNameMatch(sprite_objects, "Hairstyle");
     for (let i = 0; i < sprite_objects.length; i += 1){ //sprite preview
         let b = sprite_objects[i];
@@ -276,7 +297,7 @@ function drawCanvas() {
     for (let i = 0; i < portrait_objects.length; i += 1){
         let b = portrait_objects[i];
         if (b.item_list[b.value_list[current_panel]] !="None"){ 
-            draw_coloured_port(b,current_panel,b.colour1,ctx_preview, 0,-getOffset(b.name),256, 0);
+            draw_coloured_port(b,current_panel,b.colour1,ctx_preview, 0,-getOffset(b.name)-b.heightOffset,256, 0);
         }
     }
     //main canvas
@@ -305,7 +326,7 @@ function drawCanvas() {
                     for (let i = 0; i < portrait_objects.length; i += 1){
                         let b = portrait_objects[i];
                         if (b.item_list[b.value_list[row*2+column]] !="None"){ 
-                            draw_coloured_port(b,row*2+column,b.colour1,ctx, 0,-getOffset(b.name), xpos, ypos);
+                            draw_coloured_port(b,row*2+column,b.colour1,ctx, 0,-getOffset(b.name)-b.heightOffset, xpos, ypos);
                         }
                     }
                 }
@@ -318,7 +339,7 @@ function drawCanvas() {
         else    
             canvas.height = 416;
         
-        //document.getElementById("closet").innerHTML = print_sprite_objects();
+        document.getElementById("closet").innerHTML = print_sprite_objects();
         //sourceX, sourceY, sourceWidth, sourceHeight, destWidth and destHeight   
         for (let i = 0; i < sprite_objects.length; i += 1){
             let b = sprite_objects[i];

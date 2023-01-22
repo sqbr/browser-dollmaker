@@ -57,7 +57,6 @@ const nose_list = ["None","small","button","medium","broad","round","bulbous","p
 const eyebrow_list = ["None","slightly downward","raised","flat sad","raised sad","angry","neutral","raised up","half raised","soft","slightly angry","raised soft",];
 const eye_list = ["androgynous neutral","androgynous side","androgynous crescents","androgynous narrowed","androgynous happy","androgynous wide","androgynous shock","androgynous angry","androgynous angry side","androgynous sleepy","androgynous wink","flat neutral","flat side","flat crescents","flat narrowed","flat happy","flat wide","flat shock","flat angry","flat angry side","flat sleepy","flat wink","long neutral","long side","long crescents","long narrowed","long happy","long wide","long shock","long angry","long angry side","long sleepy","long wink","catty neutral","catty side","catty crescents","catty narrowed","catty happy","catty wide","catty shock","catty angry","catty angry side","catty sleepy","catty wink","snake neutral","snake side","snake crescents","snake narrowed","snake happy","snake wide","snake shock","snake angry","snake angry side","snake sleepy","snake wink",];
 const mouth_list = ["toothy smile","grin","big smile","small laugh","wobbly smile","smile","slight smile","small smile","flat","small frown","wobbly frown","frown","pout","dubious","big frown","sneer","clenched","shock","ooh",];
-const lip_list = ["None",];
 const earrings_list_port = ["None","studs","single stud","single small hoop","small hoops","punk","drops","hoops","single hoop",];
 const facial_hair_list_port = ["None","beard","moustache","big moustache","goatee","soul patch","fluffy goatee",];
 const eyewear_list_port = ["None","glasses","square glasses","round glasses","sunglasses","eye-patch","coloured glasses",];
@@ -97,7 +96,7 @@ add_portrait_object("Nose",nose_list,"body")
 add_portrait_object("Eyebrows",eyebrow_list,"expression")
 add_portrait_object("Eyes",eye_list,"expression")
 add_portrait_object("Mouth",mouth_list,"expression")
-add_portrait_object("Lips",lip_list,"body")
+add_portrait_object("Lips",mouth_list,"expression")
 add_portrait_object("Earrings",earrings_list_port,"outfit")
 add_portrait_object("Facial_hair",facial_hair_list_port,"body/hair")
 add_portrait_object("Nose_front",nose_list,"body")
@@ -106,6 +105,8 @@ add_portrait_object("Hair_front",hair_front_list,"body/hair")
 add_portrait_object("Hat",hat_list_port,"outfit")
 add_portrait_object("Hat_dec",hat_dec_list_port,"outfit/hat")
 
+const lip_list = ["No Shadow","Thin","Medium","Thick",];
+const no_lip_list = ["grin","clenched","shock",];
 const facial_hair_list_sprite = ["None","beard","moustache","big moustache","goatee","soul patch","fluffy goatee",];
 const facial_hair_list_menu = ["None","beard","moustache","big moustache","goatee","soul patch","fluffy goatee","stubble",];
 const hat_list_sprite = ["top hat","earmuffs","flower","clip","bow","cap","backwards cap","big bow","cat ears","flat cap","wide hat","cowboy hat","hood","beanie","ribbed beanie","turban","hijab","headphones","wizard","sunhat","night cap","flower crown","bowler","fedora","helmet","witches hat","ear muffs","head band","bandanna",];

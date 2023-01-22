@@ -269,6 +269,12 @@ function fixPortSources(){
                 name = head_list[obj.value_list[0]];
             }
 
+            //stubble
+            if (b.name =="Lips"){
+                if (current_lips==0)
+                    name = "None"    
+            } 
+
             //code to make backs of things match the fronts
             for (let k = 0; k < back_list_port.length; k += 1){ 
                 let front_name = back_list_port[k][0];
@@ -484,6 +490,7 @@ function fixSpecialSpriteSources(){
 }
 
 function draw_coloured_port(obj, index, colour, ctx, sourceX, sourceY, xpos, ypos){
+    if (!(obj.name =="Lips" && (current_lips==0))){
     if (obj.name =="Blush")
         off_ctx.fillStyle = blushcolour(colour);
     else{
@@ -504,6 +511,7 @@ function draw_coloured_port(obj, index, colour, ctx, sourceX, sourceY, xpos, ypo
     off_ctx.globalCompositeOperation = "source-over"; 
     off_ctx.drawImage(obj.overlay_image_list[index],0,0,256,268, 0, 0,256,268);
     ctx.drawImage(off_canvas,sourceX,sourceY,256,256, xpos, ypos,256,256);
+}
 }
 
 function draw_coloured_sprite(obj, ctx, colour, sourceX, sourceY, sourcewidth,sourceheight,xpos, ypos,width,height){

@@ -41,7 +41,8 @@ for type in eye_type_list_port:
         eye_list.append(type+ " "+exp)
 
 mouth_list = ["toothy smile","grin","big smile", "small laugh","wobbly smile","smile","slight smile","small smile", "flat","small frown","wobbly frown","frown","pout","dubious", "big frown", "sneer","clenched","shock","ooh",]
-lip_list = ["None"]
+lip_list = ["No Shadow","Thin","Medium", "Thick"]
+no_lip_list = ["grin","clenched","shock"]
 
 blush_list = ["None","small","big"]
 
@@ -215,7 +216,7 @@ add_portrait_object("Nose", nose_list,"nose_list", "body")
 add_portrait_object("Eyebrows", eyebrow_list,"eyebrow_list", "expression")
 add_portrait_object("Eyes", eye_list,"eye_list", "expression")
 add_portrait_object("Mouth", mouth_list,"mouth_list", "expression")
-add_portrait_object("Lips", lip_list, "lip_list", "body")
+add_portrait_object("Lips", mouth_list, "mouth_list", "expression")
 
 add_portrait_object("Earrings", earrings_list_port,"earrings_list_port", "outfit")
 add_portrait_object("Facial_hair", facial_hair_list_port,"facial_hair_list_port", "body/hair")
@@ -570,12 +571,14 @@ def write_variables():
     content.write("const full_body_list = body_list+hair_list;\n")
     content.write("\n")
     for c in closet:
-        if c.name!="Nose_front":
+        if not (c.name in ["Nose_front","Lips"]):
             content.write(name_string(c))
     content.write("\n")
     for c in closet:
         content.write("add_portrait_object(\""+c.name+"\","+ c.listname+",\""+c.location+"\")\n")
     content.write("\n")    
+    content.write(list_string("lip_list", lip_list))
+    content.write(list_string("no_lip_list", no_lip_list))
     content.write(list_string("facial_hair_list_sprite", facial_hair_list_sprite))
     content.write(list_string("facial_hair_list_menu", facial_hair_list_menu))
     content.write(list_string("hat_list_sprite", hat_list_sprite))
@@ -606,11 +609,11 @@ def write_variables():
 
 def process_portrait_part(obj):
     if obj.name == "Nose_front":
-        loc = "portraits/"+obj.location + "/nose"   
+        loc = "portraits/"+obj.location + "/nose"    
     else:       
         loc = "portraits/"+obj.location + "/"+(obj.name).lower()   
     for item in obj.item_list:
-        if (obj.name != "Eyes" or item.find("wink")<0):     
+        if not ((obj.name == "Eyes" and item.find("wink")>0)):     
             if item!="None":
                 print(obj.name+" "+item)
                 if obj.name == "Nose_front":
@@ -709,7 +712,7 @@ write_variables()
 
 
 for c in closet:
-    if c.name in ["Hair_front","Hair_back"]:
+    if c.name in ["Lips"]:
         process_portrait_part(c)
 #makeWinks()
 #makeStubble() 
