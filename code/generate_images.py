@@ -41,7 +41,7 @@ for type in eye_type_list_port:
         eye_list.append(type+ " "+exp)
 
 mouth_list = ["toothy smile","grin","big smile", "small laugh","wobbly smile","smile","slight smile","small smile", "flat","small frown","wobbly frown","frown","pout","dubious", "big frown", "sneer","clenched","shock","ooh",]
-lip_list = ["No Shadow","Thin","Medium", "Thick"]
+lip_list = ["No Shadow","Thin","Medium", "Thick","Thicker"]
 no_lip_list = ["grin","clenched","shock"]
 
 blush_list = ["None","small","big"]
@@ -712,7 +712,7 @@ write_variables()
 
 
 for c in closet:
-    if c.name in ["Lips"]:
+    if c.name in []:
         process_portrait_part(c)
 #makeWinks()
 #makeStubble() 

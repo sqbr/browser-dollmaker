@@ -105,7 +105,7 @@ add_portrait_object("Hair_front",hair_front_list,"body/hair")
 add_portrait_object("Hat",hat_list_port,"outfit")
 add_portrait_object("Hat_dec",hat_dec_list_port,"outfit/hat")
 
-const lip_list = ["No Shadow","Thin","Medium","Thick",];
+const lip_list = ["No Shadow","Thin","Medium","Thick","Thicker",];
 const no_lip_list = ["grin","clenched","shock",];
 const facial_hair_list_sprite = ["None","beard","moustache","big moustache","goatee","soul patch","fluffy goatee",];
 const facial_hair_list_menu = ["None","beard","moustache","big moustache","goatee","soul patch","fluffy goatee","stubble",];

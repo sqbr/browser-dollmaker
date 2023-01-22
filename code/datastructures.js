@@ -69,14 +69,17 @@ function setVariables(data_object){
     switch (current_lips){
         case 0:
         case 1:
-            b.heightOffset = 0;
-            break;
-        case 2:
             b.heightOffset = 2;
             break;
+        case 2:
+            b.heightOffset = 3;
+            break;
         case 3:
-            b.heightOffset = 4;
-            break;    
+            b.heightOffset = 5;
+            break;
+        case 4:
+            b.heightOffset = 7;
+            break;        
 
     }
         
@@ -165,7 +168,7 @@ document.addEventListener('alpine:init', () => {
 
     current_head :3,
     current_ears :2,
-    current_lips: 0,
+    current_lips: 2,
     current_hair :11,
     current_Facialhair : 0,
     current_nose :3,
