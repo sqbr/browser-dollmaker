@@ -7,7 +7,7 @@ import glob
 
 # python generate_images.py
 
-body_list = ["Torso", "Head", "Complexion","Ears", "Skull", "Nose","Nose_front"]
+body_list = ["Torso", "Head", "Lips","Complexion","Ears", "Skull", "Nose","Nose_front"]
 expression_list = ["Eyes","Eyebrows", "Mouth"]
 outfit_list_complex = ["Shirt","Coat","Pants_top"]
 outfit_list_portOnly = []
@@ -23,12 +23,12 @@ skin_list = body_list + ["Eyebrows", "Mouth","Blush"]
 hair_list = ["Hair_back", "Hair_front","Facial_hair"]
 
 hair_front_list = ["None", "shaggy side","emo","princely","locs bun","long wavy","curly pixie","spiky","short side","smooth bangs","hi-top","afro","long locks","short spiky","centre part","tufts","perm","shaved","buzzcut","jodi","side braid","curly up","short","neat bob","morris","long curly","wavy bob","short back and sides","straight up","neat side"]
-hair_back_list = ["None", "shaggy medium","bob","locs bob","long wavy","curly pony","curly bob","spiky","twin braids","long locks","short spiky","bun","tufts","twintails","perm","long straight","neat bob","side braid","long curly","wavy bob","twin puffs","half up","straight pony low","straight pony high","curly pony high"]
+hair_back_list = ["None", "shaggy medium","bob","locs bob","long wavy","curly pony","curly bob","spiky","twin braids","long locks","short spiky","bun","tufts","twintails","perm","long straight","neat bob","side braid","long curly","wavy bob","twin puffs","half up","straight pony low","straight pony high","curly pony high","generic"]
 
 torso_list = ["medium"]
 head_list =["rectangular","pointed","square","medium","oval","round","jowly",]
 complexion_list =["None","light wrinkles","wrinkles","mole","freckles"]
-ears_list =["regular"]
+ear_list =["None","regular","pointy"]
 skull_list =["regular"]
 nose_list =["None","small","button", "medium", "broad","round","bulbous","pointed","hooked"]
 eyebrow_list = ["None", "slightly downward","raised","flat sad","raised sad","angry","neutral","raised up","half raised","soft","slightly angry","raised soft"]
@@ -41,6 +41,7 @@ for type in eye_type_list_port:
         eye_list.append(type+ " "+exp)
 
 mouth_list = ["toothy smile","grin","big smile", "small laugh","wobbly smile","smile","slight smile","small smile", "flat","small frown","wobbly frown","frown","pout","dubious", "big frown", "sneer","clenched","shock","ooh",]
+lip_list = ["None"]
 
 blush_list = ["None","small","big"]
 
@@ -201,7 +202,7 @@ add_portrait_object("Coat", coat_list_port,"coat_list_port", "outfit")
 add_portrait_object("Coat_dec", coat_dec_list_port,"coat_dec_list_port", "outfit/coat")
 add_portrait_object("Neckwear3", neckwear_list_port,"neckwear_list_port3", "outfit")
 
-add_portrait_object("Ears", ears_list,"ears_list", "body")
+add_portrait_object("Ears", ear_list,"ear_list", "body")
 add_portrait_object("Skull", skull_list,"skull_list", "body")
 add_portrait_object("Hijab", hijab_list_port,"hijab_list_port", "outfit/hat")
 add_portrait_object("Head", head_list, "head_list", "body")
@@ -214,6 +215,7 @@ add_portrait_object("Nose", nose_list,"nose_list", "body")
 add_portrait_object("Eyebrows", eyebrow_list,"eyebrow_list", "expression")
 add_portrait_object("Eyes", eye_list,"eye_list", "expression")
 add_portrait_object("Mouth", mouth_list,"mouth_list", "expression")
+add_portrait_object("Lips", lip_list, "lip_list", "body")
 
 add_portrait_object("Earrings", earrings_list_port,"earrings_list_port", "outfit")
 add_portrait_object("Facial_hair", facial_hair_list_port,"facial_hair_list_port", "body/hair")
@@ -646,7 +648,8 @@ def process_all_portraits():
     for c in closet:
         if not (c.name in no_render_list):
             process_portrait_part(c)
-    makeWinks()     
+    makeWinks() 
+    makeStubble()    
 
 def process_body_sprites():
     process_image("head", "sprites/body/","skin")
@@ -706,10 +709,10 @@ write_variables()
 
 
 for c in closet:
-    if c.name in ["Stubble"]:
+    if c.name in ["Hair_front","Hair_back"]:
         process_portrait_part(c)
 #makeWinks()
-makeStubble() 
+#makeStubble() 
        
 #process_all_portraits()
 #make_coat()

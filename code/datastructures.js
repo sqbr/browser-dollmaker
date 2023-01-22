@@ -29,6 +29,8 @@ function setVariables(data_object){
     setValuelist("Blush",data_object.blush_expressions);
 
     setPortVariable(["Head"],data_object.current_head);
+    setPortVariable(["Ears"],data_object.current_ears);
+    setPortVariable(["Lips"],data_object.current_lips);
     setPortVariable(["Complexion"],data_object.current_complexion);
     setPortVariable(["Nose","Nose_front"],data_object.current_nose);
 
@@ -141,6 +143,8 @@ document.addEventListener('alpine:init', () => {
     current_complexion: 0,
 
     current_head :3,
+    current_ears :2,
+    current_lips: 0,
     current_hair :11,
     current_Facialhair : 0,
     current_nose :3,
@@ -190,6 +194,8 @@ document.addEventListener('alpine:init', () => {
             this.current_hairColour= findNameMatch(sprite_objects,"Hairstyle").colour1;
             this.current_complexion= findNameMatch(portrait_objects,"Complexion").value_list[0];
             this.current_head= findNameMatch(portrait_objects,"Head").value_list[0];
+            this.current_ears= findNameMatch(portrait_objects,"Ears").value_list[0];
+            this.current_lips= findNameMatch(portrait_objects,"Lips").value_list[0];
             this.current_nose= findNameMatch(portrait_objects,"Nose").value_list[0];
             this.eye_expressions = eye_expressions;
             this.eyebrow_expressions = findNameMatch(portrait_objects,"Eyebrows").value_list;

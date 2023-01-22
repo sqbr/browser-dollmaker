@@ -22,7 +22,7 @@ function download() {
   var load_variables = {
     panelNum: panelNum, current_imageType: current_imageType, current_panel: current_panel, height: height, current_eyeType: eye_type, current_wedding_clothes: current_wedding_clothes, current_dance_clothes: current_dance_clothes,
     current_skinColour: findNameMatch(sprite_objects,"Head").colour1,current_eyeColour: findNameMatch(sprite_objects,"Eyes").colour1,current_hairColour: findNameMatch(sprite_objects,"Hairstyle").colour1,
-    current_complexion: findNameMatch(portrait_objects,"Complexion").value_list[0],current_head: findNameMatch(portrait_objects,"Head").value_list[0], current_nose: findNameMatch(portrait_objects,"Nose").value_list[0],
+    current_complexion: findNameMatch(portrait_objects,"Complexion").value_list[0],current_head: findNameMatch(portrait_objects,"Head").value_list[0],current_ears: findNameMatch(portrait_objects,"Ears").value_list[0], current_lips: findNameMatch(portrait_objects,"Lips").value_list[0],current_nose: findNameMatch(portrait_objects,"Nose").value_list[0],
     eye_expressions : eye_expressions, eyebrow_expressions : findNameMatch(portrait_objects,"Eyebrows").value_list,mouth_expressions : findNameMatch(portrait_objects,"Mouth").value_list,blush_expressions : findNameMatch(portrait_objects,"Blush").value_list,
     current_hair: findNameMatch(menu_objects, "Hairstyle").item,current_Facialhair :current_Facialhair, 
     current_menu_objects: current_menu_objects, 
