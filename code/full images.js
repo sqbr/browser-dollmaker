@@ -24,6 +24,8 @@ function add_menu_object(name, list_list, colour_list, port_item_list, port_seco
 
 const none_menu = ["None",[],[]];
 
+const wheelchair_menu_list = [none_menu]
+
 const hat_menu_list = [ none_menu,["Flower",[20,0,0],[3,0]],["Head Band",[17,0,0],[28,0]],["Cat Ears",[18,0,0],[9,0]],["Bandanna",[19,0,0],[29,0]],["Bow",[5,0,0],[5,0]],["Headphones",[3,0,0],[18,0]],["Ear muffs",[16,0,0],[27,0]],["Flower Crown",[10,0,0],[22,0]],["Soft Cap",[11,0,0],[10,0]],["Cap",[2,0,0],[6,0]],["Joja Cap",[2,1,0],[6,5]],["Turban",[14,0,0],[16,0]],["Helmet",[13,0,0],[25,0]],["Beanie",[8,0,0],[15,0]],["Hijab",[0,0,1],[17,0]],["Bobble Hat",[6,3,0],[21,21]],["Fedora",[9,5,0],[24,24]], ["Bowler",[9,5,0],[23,23]],["Top Hat",[9,5,0],[1,1]],["Cowboy Hat",[15,5,0],[12,12]],["Broad Hat",[7,4,0],[11,11]],["Sun Hat",[1,2,0],[20,20]],["Wizard",[4,0,0],[19,0]],["Witch",[12,0,0],[26,0]],];
 
 const hair_menu_list = [ none_menu,["Shaved",[17,0],[56]],["Buzzcut",[18,0],[47]],["Balding",[15,12],[52]],["Short",[22,25],[45]],["Short Side-part",[8,25],[3]],["Neat Side-part",[29,25],[8]],["Floppy side part",[24,25],[79]],["Hi-top",[10,0],[12]],["Short Back and Sides",[27,0],[43]],["Short Spiky",[13,10],[1]],["Curly Mop",[6,7],[32]],["Princely",[3,25],[24]],["Short Shaggy",[1,1],[5]], ["Afro",[11,0],[21]],["Curly Bob",[6,6],[11]],["Emo Bob",[2,2],[10]],["Wavy Bob",[26,19],[42]],["Neat bob",[23,16],[26]],["Perm",[16,14],[53]],["Spiky",[7,7],[68]],["Curly Pony",[21,24],[6]],["Half-up locs",[4,3],[7]],["Half-up Wavy",[28,21],[7]],["Straight Pony Low",[28,22],[13]],["Straight Pony High",[28,23],[36]],["Twin Puffs",[21,20],[50]], ["Side Braid",[20,17],[37]], ["Twintails",[9,13],[31]], ["Bangs Bun",[9,11],[23]], ["Bun",[14,11],[23]],["Twin Braids",[9,8],[35]], ["Long Wavy",[9,4],[9]],["Long Locks",[12,9],[51]],["Long Straight",[9,15],[59]],["Long Curly",[25,18],[54]],];
@@ -60,7 +62,7 @@ const gloves_menu_list = [none_menu];
 for (let i = 0; i < gloves_names.length; i += 1) {
     gloves_menu_list.push([gloves_names[i],[],[i+1]])
 }
-
+add_menu_object("Wheelchair", wheelchair_menu_list, outfit_colours,["Wheelchair"],[], ["Wheelchair"], []);
 add_menu_object("Hat", hat_menu_list, outfit_colours,["Hat","Hat_dec","Hijab"],["Hat_dec"], ["Hat","Hat_dec"], ["Hat_dec"]);
 add_menu_object("Neckwear", neckwear_menu_list, outfit_colours,["Neckwear","Neckwear2","Neckwear3"],[], ["Neckwear"],[]);
 add_menu_object("Eyewear", eyewear_menu_list, outfit_colours,["Eyewear"],[],["Eyewear"],[]);

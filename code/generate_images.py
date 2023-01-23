@@ -12,7 +12,7 @@ expression_list = ["Eyes","Eyebrows", "Mouth"]
 outfit_list_complex = ["Shirt","Coat","Pants_top"]
 outfit_list_portOnly = []
 outfit_list_spriteOnly = ["Pants","Shoes","Gloves"]
-outfit_list_both = ["Neckwear","Neckwear2","Neckwear3","Eyewear","Earrings", "Hat"]
+outfit_list_both = ["Neckwear","Neckwear2","Neckwear3","Eyewear","Earrings", "Hat","Wheelchair"]
 outfit_list = outfit_list_both+ outfit_list_portOnly+ outfit_list_spriteOnly
 
 no_render_list = ["Neckwear2","Neckwear3"]
@@ -88,6 +88,9 @@ coat_sleeve_list_port = [x for x in coat_list_port if not x in ["leaves","cape",
 coat_list_menu = coat_list_port
 coat_dec_list_port = ["None", "cape","fur coat","letterman"]
 
+wheelchair_list_port = ["None"]
+wheelchair_list_sprite = ["None"]
+wheelchair_back_list_sprite = ["None"]
 #hats
 
 hat_back_list_port = ["None","sunhat","wizard","night cap","broad hat","beanie","witch","helmet"]
@@ -115,7 +118,7 @@ pants_top_list_port = ["None","overalls"]
 
 #Combos
 back_list_port = [["Hat", hat_back_list_port],["Coat", coat_back_list_port] ]
-back_list_sprite = [["Coat", coat_back_list_sprite] ]
+back_list_sprite = [["Coat", coat_back_list_sprite],["Wheelchair", wheelchair_back_list_sprite] ]
 front_list_sprite = [["Coat", coat_back_list_sprite] ]
 
 #special
@@ -174,6 +177,7 @@ def add_portrait_object(name, item_list,listname, location):
 # #Behind eyes
 # shown_start = len(closet) # where the visible items start
 
+add_portrait_object("Wheelchair", wheelchair_list_port,"wheelchair_list_port", "outfit/wheelchair")
 add_portrait_object("Hat_back", hat_back_list_port,"hat_back_list_port", "outfit/hat")
 add_portrait_object("Hair_back", hair_back_list, "hair_back_list","body/hair")
 add_portrait_object("Coat_back", coat_back_list_port, "coat_back_list_port","outfit/coat")
@@ -581,6 +585,7 @@ def write_variables():
     content.write(list_string("no_lip_list", no_lip_list))
     content.write(list_string("facial_hair_list_sprite", facial_hair_list_sprite))
     content.write(list_string("facial_hair_list_menu", facial_hair_list_menu))
+    content.write(list_string("wheelchair_list_sprite", wheelchair_list_sprite))
     content.write(list_string("hat_list_sprite", hat_list_sprite))
     content.write(list_string("neckwear_list_sprite", neckwear_list_sprite))
     content.write(list_string("neckwear_list_menu", neckwear_list_menu))
@@ -600,8 +605,9 @@ def write_variables():
     content.write(list_string("coat_sleeve_list_port", coat_sleeve_list_port))
     content.write(list_string("coat_sleeves_dec_list_port", coat_sleeves_dec_list_port))
     content.write("const sleeve_list_port = [{name: \"Shirt\", sleeves_list: shirt_sleeve_list_port,dec_list: shirt_sleeves_dec_list_port, sharp_sleeves: [\"button up\",\"open shirt\"]},{name: \"Overshirt\", sleeves_list: overshirt_sleeve_list_port,dec_list:overshirt_sleeves_dec_list_port,sharp_sleeves: []},{name: \"Coat\", sleeves_list: coat_sleeve_list_port,dec_list:coat_sleeves_dec_list_port,sharp_sleeves: [\"suit jacket\",\"jacket\"]} ];\n")
+    content.write(list_string("wheelchair_back_list_sprite", wheelchair_back_list_sprite))
     content.write(list_string("coat_back_list_sprite", coat_back_list_sprite))
-    content.write("const back_list_sprite = [[\"Coat\", coat_back_list_sprite] ];\n")
+    content.write("const back_list_sprite = [[\"Coat\", coat_back_list_sprite],[\"Wheelchair\", wheelchair_back_list_sprite] ];\n")
     content.write("const front_list_sprite = [[\"Coat\", coat_back_list_sprite] ];\n")
     content.write("\n")
     

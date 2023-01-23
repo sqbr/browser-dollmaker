@@ -180,6 +180,7 @@ document.addEventListener('alpine:init', () => {
     blush_expressions : [0,0,0,0,1,0,0,0,0,0],
 
     current_menu_objects : [
+    {name: 'Wheelchair', item: 0, colour1: "#FEFF00",colour2: outfit_colours[0], sleeves: 0},
     {name: 'Hat', item: 0, colour1: "#FEFF00",colour2: outfit_colours[0], sleeves: 0},
     {name: 'Neckwear', item: 0, colour1: "#46FF00",colour2: outfit_colours[2], sleeves: 0},
     {name: 'Eyewear', item: 0, colour1: "#00FF43",colour2: outfit_colours[4], sleeves: 0},

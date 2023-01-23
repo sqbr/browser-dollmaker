@@ -33,7 +33,7 @@ const imageType_list =["Portrait","Sprite"];
 
 const editing_list =["Body","Outfit", "Expressions","Occasions"];
 
-const torso_offset_list = ["Torso","Shirt","Shirt_collar","Shirt_dec","Shirt_collar_dec","Shirt_sleeves","Shirt_sleeves_dec","Coat","Coat_sleeves","Coat_dec","Coat_sleeves_dec","Coat_back","Pants_top","Overshirt","Overshirt_dec","Overshirt_sleeves","Overshirt_sleeves_dec","Neckwear","Neckwear2","Neckwear3"];
+const torso_offset_list = ["Torso","Shirt","Shirt_collar","Shirt_dec","Shirt_collar_dec","Shirt_sleeves","Shirt_sleeves_dec","Coat","Coat_sleeves","Coat_dec","Coat_sleeves_dec","Coat_back","Pants_top","Overshirt","Overshirt_dec","Overshirt_sleeves","Overshirt_sleeves_dec","Neckwear","Neckwear2","Neckwear3","Wheelchair"];
 
 const panel_list = ["0: Neutral", "1: Happy", "2: Sad", "3: Unique", "4: Blushing", "5: Angry","6","7","8","9","10"];
 
