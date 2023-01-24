@@ -24,7 +24,7 @@ function add_menu_object(name, list_list, colour_list, port_item_list, port_seco
 
 const none_menu = ["None",[],[]];
 
-const wheelchair_menu_list = [none_menu]
+const wheelchair_menu_list = [none_menu,["Manual",[0],[1]]]
 
 const hat_menu_list = [ none_menu,["Flower",[20,0,0],[3,0]],["Head Band",[17,0,0],[28,0]],["Cat Ears",[18,0,0],[9,0]],["Bandanna",[19,0,0],[29,0]],["Bow",[5,0,0],[5,0]],["Headphones",[3,0,0],[18,0]],["Ear muffs",[16,0,0],[27,0]],["Flower Crown",[10,0,0],[22,0]],["Soft Cap",[11,0,0],[10,0]],["Cap",[2,0,0],[6,0]],["Joja Cap",[2,1,0],[6,5]],["Turban",[14,0,0],[16,0]],["Helmet",[13,0,0],[25,0]],["Beanie",[8,0,0],[15,0]],["Hijab",[0,0,1],[17,0]],["Bobble Hat",[6,3,0],[21,21]],["Fedora",[9,5,0],[24,24]], ["Bowler",[9,5,0],[23,23]],["Top Hat",[9,5,0],[1,1]],["Cowboy Hat",[15,5,0],[12,12]],["Broad Hat",[7,4,0],[11,11]],["Sun Hat",[1,2,0],[20,20]],["Wizard",[4,0,0],[19,0]],["Witch",[12,0,0],[26,0]],];
 

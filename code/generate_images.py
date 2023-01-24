@@ -89,8 +89,7 @@ coat_list_menu = coat_list_port
 coat_dec_list_port = ["None", "cape","fur coat","letterman"]
 
 wheelchair_list_port = ["None"]
-wheelchair_list_sprite = ["None"]
-wheelchair_back_list_sprite = ["None"]
+wheelchair_list_sprite = ["manual"]
 #hats
 
 hat_back_list_port = ["None","sunhat","wizard","night cap","broad hat","beanie","witch","helmet"]
@@ -118,7 +117,7 @@ pants_top_list_port = ["None","overalls"]
 
 #Combos
 back_list_port = [["Hat", hat_back_list_port],["Coat", coat_back_list_port] ]
-back_list_sprite = [["Coat", coat_back_list_sprite],["Wheelchair", wheelchair_back_list_sprite] ]
+back_list_sprite = [["Coat", coat_back_list_sprite] ]
 front_list_sprite = [["Coat", coat_back_list_sprite] ]
 
 #special
@@ -605,9 +604,8 @@ def write_variables():
     content.write(list_string("coat_sleeve_list_port", coat_sleeve_list_port))
     content.write(list_string("coat_sleeves_dec_list_port", coat_sleeves_dec_list_port))
     content.write("const sleeve_list_port = [{name: \"Shirt\", sleeves_list: shirt_sleeve_list_port,dec_list: shirt_sleeves_dec_list_port, sharp_sleeves: [\"button up\",\"open shirt\"]},{name: \"Overshirt\", sleeves_list: overshirt_sleeve_list_port,dec_list:overshirt_sleeves_dec_list_port,sharp_sleeves: []},{name: \"Coat\", sleeves_list: coat_sleeve_list_port,dec_list:coat_sleeves_dec_list_port,sharp_sleeves: [\"suit jacket\",\"jacket\"]} ];\n")
-    content.write(list_string("wheelchair_back_list_sprite", wheelchair_back_list_sprite))
     content.write(list_string("coat_back_list_sprite", coat_back_list_sprite))
-    content.write("const back_list_sprite = [[\"Coat\", coat_back_list_sprite],[\"Wheelchair\", wheelchair_back_list_sprite] ];\n")
+    content.write("const back_list_sprite = [[\"Coat\", coat_back_list_sprite]];\n")
     content.write("const front_list_sprite = [[\"Coat\", coat_back_list_sprite] ];\n")
     content.write("\n")
     
@@ -677,33 +675,40 @@ def process_body_sprites():
         
 
 def process_outfit_sprites():
-        process_image("eyewear", "sprites/accessories/eyewear","red") 
-        process_image("hats", "sprites/outfit/hats","red")
-        process_image("hats_dec", "sprites/outfit/hats","red")
-        process_image("pants", "sprites/outfit/pants", "red")
-        process_image("pants_top", "sprites/outfit/pants_top","red")
-        process_image("briefs", "sprites/outfit/pants","red")
-        process_image("shirts", "sprites/outfit/shirts","red")
-        process_image("shirt decs", "sprites/outfit/shirts/decorations","red")
-        process_image("overshirt", "sprites/outfit/overshirt","red")
-        process_image("coat", "sprites/outfit/coat","red")
-        process_image("coat_dec", "sprites/outfit/coat", "red")
-        process_image("coat_back", "sprites/outfit/coat", "red")
-        process_image("neckwear", "sprites/accessories/neckwear","red")
-        process_image("earrings", "sprites/accessories/earrings","red")
-        for height in ["short","tall"]:
-             process_image("longpants_"+height, "sprites/outfit/pants","red")
-             for shoetype in ["boots","flats","flipflops"]:
-                 process_image(height+"_"+shoetype, "sprites/outfit/shoes","red") 
-             process_image(height, "sprites/outfit/gloves","red")
-             for sleevetype in ["short","long"]:
-                 process_image(height+"_"+sleevetype, "sprites/outfit/sleeves","red") 
+    process_image("arms", "sprites/outfit/wheelchair","red") 
+    process_image("sleeves", "sprites/outfit/wheelchair","red") 
+    process_image("feet", "sprites/outfit/wheelchair","red") 
+    process_image("flipflops", "sprites/outfit/wheelchair","red") 
+    for type in ["manual"]:
+        process_image(type+"_back", "sprites/outfit/wheelchair","red") 
+        process_image(type, "sprites/outfit/wheelchair","red") 
+    process_image("eyewear", "sprites/accessories/eyewear","red") 
+    process_image("hats", "sprites/outfit/hats","red")
+    process_image("hats_dec", "sprites/outfit/hats","red")
+    process_image("pants", "sprites/outfit/pants", "red")
+    process_image("pants_top", "sprites/outfit/pants_top","red")
+    process_image("briefs", "sprites/outfit/pants","red")
+    process_image("shirts", "sprites/outfit/shirts","red")
+    process_image("shirt decs", "sprites/outfit/shirts/decorations","red")
+    process_image("overshirt", "sprites/outfit/overshirt","red")
+    process_image("coat", "sprites/outfit/coat","red")
+    process_image("coat_dec", "sprites/outfit/coat", "red")
+    process_image("coat_back", "sprites/outfit/coat", "red")
+    process_image("neckwear", "sprites/accessories/neckwear","red")
+    process_image("earrings", "sprites/accessories/earrings","red")
+    for height in ["short","tall"]:
+            process_image("longpants_"+height, "sprites/outfit/pants","red")
+            for shoetype in ["boots","flats","flipflops"]:
+                process_image(height+"_"+shoetype, "sprites/outfit/shoes","red") 
+            process_image(height, "sprites/outfit/gloves","red")
+            for sleevetype in ["short","long"]:
+                process_image(height+"_"+sleevetype, "sprites/outfit/sleeves","red") 
 
 write_temp()
 write_variables()
 
 #process_body_sprites()
-#process_outfit_sprites()
+process_outfit_sprites()
 
 #flipImage()
 
