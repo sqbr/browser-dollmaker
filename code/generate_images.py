@@ -682,8 +682,8 @@ def process_outfit_sprites():
     process_image("feet", "sprites/outfit/wheelchair","red") 
     process_image("flipflops", "sprites/outfit/wheelchair","red") 
     for type in wheelchair_list_sprite:
-        process_image(type+"_back", "sprites/outfit/wheelchair","red") 
-        process_image(type, "sprites/outfit/wheelchair","red") 
+        process_image(type+"_back", "sprites/outfit/wheelchair","hair") 
+        process_image(type, "sprites/outfit/wheelchair","hair") 
     process_image("eyewear", "sprites/accessories/eyewear","red") 
     process_image("hats", "sprites/outfit/hats","red")
     process_image("hats_dec", "sprites/outfit/hats","red")
