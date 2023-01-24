@@ -138,7 +138,8 @@ function setVariables(data_object){
             default:    
                 setSpriteVariable(["Wheelchair_shoes"], 1);
         }    
-            
+        setSpriteVariable(["Arms"], 2);  
+        setSpriteVariable(["Gloves"], Math.max(0,3*currentGloves));  //0 if 0, 3 otherwise      
 
     }
 
@@ -296,8 +297,9 @@ function newY(obj, row,column){
     if ((obj.name.includes("Hairstyle")) && [1,3].includes(row))
         bob-=1;
     if (findNameMatch(sprite_objects, "Wheelchair").item>0) //there is a wheelchair  
-        bob =0;  
-    return row*32+obj.offset[1]+bob+(1-height)*obj.heightOffset;
+        return row*32+obj.offset[1];
+    else
+        return row*32+obj.offset[1]+bob+(1-height)*obj.heightOffset;
 }
 
 function drawCanvas() {
@@ -315,7 +317,10 @@ function drawCanvas() {
     let hair = findNameMatch(sprite_objects, "Hairstyle");
     for (let i = 0; i < sprite_objects.length; i += 1){ //sprite preview
         let b = sprite_objects[i];
-        if (b.item_list[b.value] !=none){ 
+        if (b.base_image.src !=""){ 
+            if (b.name =="Wheelchair" && b.item!=0){//clear legs
+                ctx_preview.clearRect(64, 100, 64, 40); 
+            }
             for (let column = 0; column < 2; column += 1) //column 1-2
                 if(b.name !="Hairstyle_top" || column >0)
                     draw_coloured_sprite(b, ctx_preview, b.colour1, oldX(b,0), oldY(b,column),b.dimensions[0],b.dimensions[1],4*newX(b,0,column),4*newY(b,0,column),b.dimensions[0]*4,b.dimensions[1]*4);
@@ -374,6 +379,11 @@ function drawCanvas() {
         for (let i = 0; i < sprite_objects.length; i += 1){
             let b = sprite_objects[i];
             if (b.base_image.src !=""){ 
+                if (b.name =="Wheelchair" && b.item!=0){//clear legs
+                    ctx.clearRect(0, 56, 64, 7); 
+                    ctx.clearRect(0, 121, 64, 7); 
+
+                }
                 for (let row = 0; row < 2; row += 1){//rows 1,2   
                     for (let column = 0; column < 2; column += 1)
                         if(b.name !="Hairstyle_top" || column >0)

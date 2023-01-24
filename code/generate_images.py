@@ -676,7 +676,9 @@ def process_body_sprites():
 
 def process_outfit_sprites():
     process_image("arms", "sprites/outfit/wheelchair","red") 
-    process_image("sleeves", "sprites/outfit/wheelchair","red") 
+    process_image("sleeves_long", "sprites/outfit/wheelchair","red") 
+    process_image("sleeves_short", "sprites/outfit/wheelchair","red") 
+    process_image("gloves", "sprites/outfit/wheelchair","red") 
     process_image("feet", "sprites/outfit/wheelchair","red") 
     process_image("flipflops", "sprites/outfit/wheelchair","red") 
     for type in ["manual"]:
