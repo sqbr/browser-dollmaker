@@ -147,6 +147,10 @@ function setVariables(data_object){
 
     }
 
+    fixSpriteSources();
+    fixPortSources();
+    fixSpecialSpriteSources();
+
     drawCanvas();
 }
 
@@ -315,13 +319,13 @@ function drawCanvas() {
     ctx = canvas.getContext("2d");
     canvas_preview = document.getElementById("previewCanvas");
     ctx_preview = canvas_preview.getContext("2d");
-    fixSpriteSources();
+    /*fixSpriteSources();
     fixPortSources();
-    fixSpecialSpriteSources();
+    fixSpecialSpriteSources();*/
 
     //preview canvas
     canvas_preview.width = canvas_preview.width; //clears
-    document.getElementById("closet").innerHTML = print_portrait_objects();
+    //document.getElementById("closet").innerHTML = print_portrait_objects();
     let hair = findNameMatch(sprite_objects, "Hairstyle");
     for (let i = 0; i < sprite_objects.length; i += 1){ //sprite preview
         let b = sprite_objects[i];
@@ -382,7 +386,7 @@ function drawCanvas() {
         else    
             canvas.height = 416;
         
-        document.getElementById("closet").innerHTML = print_sprite_objects();
+        //document.getElementById("closet").innerHTML = print_sprite_objects();
         //sourceX, sourceY, sourceWidth, sourceHeight, destWidth and destHeight   
         for (let i = 0; i < sprite_objects.length; i += 1){
             let b = sprite_objects[i];
