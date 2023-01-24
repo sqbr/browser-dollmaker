@@ -385,6 +385,13 @@ function fixSpriteSources(){
                     b.colour1 = obj_front.colour1
                 } else{
                 if (current_sleeves_list.includes(current_item)){ //the current shirt etc can have sleeves
+                    if (findNameMatch(sprite_objects, "Wheelchair").item>0){ //there's a wheelchair
+                        if (sleeve_list[k] ==0)
+                            b.item = 0; 
+                        else    
+                            b.item =4+sleeve_list[k];
+                    }
+                    else
                         b.item =Math.max(0,2*sleeve_list[k]-1+height); //what current sleeve length is
                 } else{
                         b.item = 0;  

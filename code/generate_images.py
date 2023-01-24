@@ -89,7 +89,7 @@ coat_list_menu = coat_list_port
 coat_dec_list_port = ["None", "cape","fur coat","letterman"]
 
 wheelchair_list_port = ["None"]
-wheelchair_list_sprite = ["manual"]
+wheelchair_list_sprite = ["manual","hospital"]
 #hats
 
 hat_back_list_port = ["None","sunhat","wizard","night cap","broad hat","beanie","witch","helmet"]
@@ -681,7 +681,7 @@ def process_outfit_sprites():
     process_image("gloves", "sprites/outfit/wheelchair","red") 
     process_image("feet", "sprites/outfit/wheelchair","red") 
     process_image("flipflops", "sprites/outfit/wheelchair","red") 
-    for type in ["manual"]:
+    for type in wheelchair_list_sprite:
         process_image(type+"_back", "sprites/outfit/wheelchair","red") 
         process_image(type, "sprites/outfit/wheelchair","red") 
     process_image("eyewear", "sprites/accessories/eyewear","red") 

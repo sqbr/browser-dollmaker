@@ -141,6 +141,10 @@ function setVariables(data_object){
         setSpriteVariable(["Arms"], 2);  
         setSpriteVariable(["Gloves"], Math.max(0,3*currentGloves));  //0 if 0, 3 otherwise      
 
+    }else{
+        setSpriteVariable(["Wheelchair_feet"], 0);
+        setSpriteVariable(["Wheelchair_shoes"], 0);
+
     }
 
     drawCanvas();
@@ -204,7 +208,6 @@ document.addEventListener('alpine:init', () => {
     blush_expressions : [0,0,0,0,1,0,0,0,0,0],
 
     current_menu_objects : [
-    {name: 'Wheelchair', item: 0, colour1: "#FEFF00",colour2: outfit_colours[0], sleeves: 0},
     {name: 'Hat', item: 0, colour1: "#FEFF00",colour2: outfit_colours[0], sleeves: 0},
     {name: 'Neckwear', item: 0, colour1: "#46FF00",colour2: outfit_colours[2], sleeves: 0},
     {name: 'Eyewear', item: 0, colour1: "#00FF43",colour2: outfit_colours[4], sleeves: 0},
@@ -215,6 +218,7 @@ document.addEventListener('alpine:init', () => {
     {name: 'Pants', item: 2, colour1: "#036BB9",colour2: outfit_colours[14], sleeves: 0},
     {name: 'Shoes', item: 1, colour1: "#5B2010",colour2: outfit_colours[16], sleeves: 0},
     {name: 'Gloves', item: 0, colour1: "#9DF989",colour2: outfit_colours[18], sleeves: 0},
+    {name: 'Wheelchair', item: 0, colour1: "#FEFF00",colour2: outfit_colours[0], sleeves: 0},
     ],
 
     current_wedding_clothes : 0,
@@ -269,7 +273,7 @@ function oldX(obj, column){
     //return the X coordinate of the column of the original image
     let xgap = 0;
     if (obj.isWalk){
-        if (findNameMatch(sprite_objects, "Wheelchair").item==0) //there isn't a wheelchair
+        if (findNameMatch(sprite_objects, "Wheelchair").item==0 || !["Torso","Shoes","Pants"].includes(obj.name)) //there isn't a wheelchair
             xgap = obj.dimensions[0];
     }
     return obj.topcorner[0]+column*xgap;
@@ -289,17 +293,21 @@ function newX(obj, row, column){
 function newY(obj, row,column){
     //return the Y coordinate of the row of the new image
     let bob = 0;
-    if (obj.bobs){
-        bob =column%2;
-        if (row == 2)
-            bob-=1;
+    if (findNameMatch(sprite_objects, "Wheelchair").item>0){ //there is a wheelchair 
+        if (["Torso","Shoes","Pants"].includes(obj.name))
+            bob = -1 
+        return row*32+obj.offset[1]+bob;
     }
-    if ((obj.name.includes("Hairstyle")) && [1,3].includes(row))
-        bob-=1;
-    if (findNameMatch(sprite_objects, "Wheelchair").item>0) //there is a wheelchair  
-        return row*32+obj.offset[1];
-    else
+    else{    
+        if (obj.bobs){
+            bob =column%2;
+            if (row == 2)
+                bob-=1;
+        }
+        if ((obj.name.includes("Hairstyle")) && [1,3].includes(row))
+            bob-=1;        
         return row*32+obj.offset[1]+bob+(1-height)*obj.heightOffset;
+    }    
 }
 
 function drawCanvas() {
