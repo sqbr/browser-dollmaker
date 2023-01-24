@@ -371,6 +371,7 @@ function fixSpriteSources(){
     // Fixes the "src" attribute for all images in sublist of sprite_objects
     for (let i = 0; i < sprite_objects.length; i += 1){
         let b = sprite_objects[i];
+        
         //code for sleeves
         for (let k = 0; k < sleeve_list_port.length; k += 1){ 
             let front_name = sleeve_list_port[k].name; //eg "Shirt", "Coat" etc
@@ -427,6 +428,7 @@ function fixSpriteSources(){
                 }
             }
         }
+
         if (b.item_list[b.item].name.includes("None")||b.item_list[b.item].name.includes("none")){
             b.base_image.src="";
             b.shadow_image.src="";

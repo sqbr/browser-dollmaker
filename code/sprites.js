@@ -48,9 +48,17 @@ for (let i =0; i<wheelchair_list_sprite.length;i++){
 }
 
 const sprite_wheelchair_arms_list = [none]
+sprite_wheelchair_arms_list.push({name:"Arms", location: "outfit/wheelchair/arms", colour: true,  rowNum: 4,topcorner:[0,0]})
+
 const sprite_wheelchair_sleeves_list = [none]
+sprite_wheelchair_sleeves_list.push({name:"Long sleeves", location: "outfit/wheelchair/sleeves", colour: true,  rowNum: 4,topcorner:[0,0]})
+
 const sprite_wheelchair_feet_list = [none]
+sprite_wheelchair_feet_list.push({name:"Feet", location: "outfit/wheelchair/feet", colour: true,  rowNum: 4,topcorner:[0,0]})
+
 const sprite_wheelchair_shoes_list = [none]
+sprite_wheelchair_shoes_list.push({name:"Most Shoes", location: "outfit/wheelchair/feet", colour: true,  rowNum: 4,topcorner:[0,0]})
+sprite_wheelchair_shoes_list.push({name:"Flip flops", location: "outfit/wheelchair/flipflops", colour: true,  rowNum: 4,topcorner:[0,0]})
 
 const sprite_torso_list = []
 for (let i =0; i<height_list.length;i++){
@@ -270,11 +278,11 @@ dimensions: how big is the sprite
 topcorner: coordinates of the top corner of the looking down standing still sprite
 */
 function add_sprite_object(name, list,name_list, colour_list,isWalk, bobs, heightOffset,backOffset, dimensions, offset){
-    sprite_objects.push({name: name,item_list: list, name_list: name_list, colour_list: colour_list, item: 0,  base_item: 0, colour: 0, colour2: 0, base_image: new Image(),shadow_image: new Image(),highlight_image: new Image(),overlay_image: new Image(), isWalk: isWalk, bobs: bobs, heightOffset: heightOffset, backOffset: backOffset, rowNum: 4, topcorner:[0,0],dimensions: dimensions, offset: offset});
+    sprite_objects.push({name: name,item_list: list, name_list: name_list, colour_list: colour_list, item: 0,  base_item: 0, colour: "#FF0000", colour2: "#FF0000", base_image: new Image(),shadow_image: new Image(),highlight_image: new Image(),overlay_image: new Image(), isWalk: isWalk, bobs: bobs, heightOffset: heightOffset, backOffset: backOffset, rowNum: 4, topcorner:[0,0],dimensions: dimensions, offset: offset});
 }
 
 function add_special_sprite_object(name, list,name_list, colour_list,dimensions,heightOffset){
-    special_sprite_objects.push({name: name,item_list: list, name_list: name_list, colour_list: colour_list, item: 0,  base_item: 0, colour: 0, colour2: 0, base_image: new Image(),shadow_image: new Image(),highlight_image: new Image(),overlay_image: new Image(),dimensions: dimensions,heightOffset: heightOffset});
+    special_sprite_objects.push({name: name,item_list: list, name_list: name_list, colour_list: colour_list, item: 0,  base_item: 0, colour: "#FF0000", colour2: "#FF0000", base_image: new Image(),shadow_image: new Image(),highlight_image: new Image(),overlay_image: new Image(),dimensions: dimensions,heightOffset: heightOffset});
 }
 
 add_sprite_object("Wheelchair_back", sprite_wheelchair_back_list,sprite_wheelchair_back_list.map(nameOf),outfit_colours,true, false, 0,0, [16,32],[0,0]);
@@ -309,8 +317,8 @@ add_sprite_object("Hat_dec", sprite_hat_dec_list,sprite_hat_dec_list.map(nameOf)
 add_sprite_object("Wheelchair", sprite_wheelchair_list,sprite_wheelchair_list.map(nameOf),outfit_colours,true, false, 0,0, [16,32],[0,0]);
 add_sprite_object("Wheelchair_feet", sprite_wheelchair_feet_list,sprite_wheelchair_feet_list.map(nameOf),outfit_colours,true, false, 0,0, [16,32],[0,0]);
 add_sprite_object("Wheelchair_shoes", sprite_wheelchair_shoes_list,sprite_wheelchair_shoes_list.map(nameOf),outfit_colours,true, false, 0,0, [16,32],[0,0]);
-add_sprite_object("Wheelchair_arms", sprite_wheelchair_arms_list,sprite_wheelchair_arms_list.map(nameOf),outfit_colours,true, false, 0,0, [16,32],[0,0]);
-add_sprite_object("Wheelchair_sleeves", sprite_wheelchair_sleeves_list,sprite_wheelchair_sleeves_list.map(nameOf),outfit_colours,true, false, 0,0, [16,32],[0,0]);
+//add_sprite_object("Wheelchair_arms", sprite_wheelchair_arms_list,sprite_wheelchair_arms_list.map(nameOf),outfit_colours,true, false, 0,0, [16,32],[0,0]);
+//add_sprite_object("Wheelchair_sleeves", sprite_wheelchair_sleeves_list,sprite_wheelchair_sleeves_list.map(nameOf),outfit_colours,true, false, 0,0, [16,32],[0,0]);
 
 add_special_sprite_object("Wedding", sprite_wedding_list,sprite_wedding_list.map(nameOf), skin_colours,[73,40],288);
 add_special_sprite_object("Flower dance", sprite_dance_list,sprite_dance_list.map(nameOf), skin_colours,[68,68],320);

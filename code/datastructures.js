@@ -36,8 +36,10 @@ function setVariables(data_object){
 
     for (let i = 0; i < menu_objects.length-1; i += 1){
         current_item = data_object.current_menu_objects[i].name; 
-        if (current_item=="Shoes")
+        if (current_item=="Shoes"){
             currentShoes = data_object.current_menu_objects[i].item;
+            setSpriteColour(["Wheelchair_shoes"], data_object.current_menu_objects[i].colour1);
+        }    
         else{
             if (current_item=="Gloves")
                 currentGloves = data_object.current_menu_objects[i].item;
@@ -62,7 +64,7 @@ function setVariables(data_object){
     setPortColour(["Stubble"], hairColour);
     setSpriteColour(["Hairstyle","Hairstyle_top", "Facial_hair"], hairColour);
     setBothColour(["Eyes"], eyeColour);
-    setSpriteColour(["Torso","Arms","Head"], skinColour);
+    setSpriteColour(["Torso","Arms","Head","Wheelchair_feet"], skinColour);
     setValuelist("Lips",data_object.mouth_expressions);
 
     b = findNameMatch(portrait_objects, "Lips");
@@ -83,8 +85,6 @@ function setVariables(data_object){
 
     }
         
-
-
     setSpecialSpriteColour(["Wedding","Flower dance"], skinColour);
 
     setClothing(["Hairstyle"],hairStyle);
@@ -119,6 +119,29 @@ function setVariables(data_object){
     let sprite_obj = findNameMatch(sprite_objects, "Pants");
     let pants_obj = findNameMatch(sprite_obj.item_list, "trousers");
     pants_obj.location = "outfit/pants/longpants_"+height_list[height];
+
+    let wheel_obj = findNameMatch(sprite_objects, "Wheelchair")
+    let wheel_back_obj = findNameMatch(sprite_objects, "Wheelchair_back") 
+    wheel_back_obj.item = wheel_obj.item
+    wheel_back_obj.colour1 = wheel_obj.colour1
+    wheel_back_obj.colour2 = wheel_obj.colour2
+
+    if (wheel_obj.item>0){ //there's a wheelchair
+        setSpriteVariable(["Wheelchair_feet"], 1);
+        switch(currentShoes){
+            case 0://no shoes
+                setSpriteVariable(["Wheelchair_shoes"], 0);
+                break;
+            case 3:  //flip flops 
+                setSpriteVariable(["Wheelchair_shoes"], 2); 
+                break;
+            default:    
+                setSpriteVariable(["Wheelchair_shoes"], 1);
+        }    
+            
+
+    }
+
     drawCanvas();
 }
 
@@ -245,7 +268,8 @@ function oldX(obj, column){
     //return the X coordinate of the column of the original image
     let xgap = 0;
     if (obj.isWalk){
-        xgap = obj.dimensions[0];
+        if (findNameMatch(sprite_objects, "Wheelchair").item==0) //there isn't a wheelchair
+            xgap = obj.dimensions[0];
     }
     return obj.topcorner[0]+column*xgap;
 }
@@ -271,6 +295,8 @@ function newY(obj, row,column){
     }
     if ((obj.name.includes("Hairstyle")) && [1,3].includes(row))
         bob-=1;
+    if (findNameMatch(sprite_objects, "Wheelchair").item>0) //there is a wheelchair  
+        bob =0;  
     return row*32+obj.offset[1]+bob+(1-height)*obj.heightOffset;
 }
 
