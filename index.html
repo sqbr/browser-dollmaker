@@ -132,9 +132,18 @@
 
             </div>
 
-            <div x-show="$store.alpineData.currently_editing === 3" ><!-- special -->
+            <div x-show="$store.alpineData.currently_editing === 3" ><!-- Occasions -->
               <div class="row row-cols-2 gy-3">
                 <div class="col"><div x-data="dropdown('Wedding Outfit','','current_wedding_clothes','[\'Regular outfit\'].concat(wedding_clothes_list)')" x-bind="dropbtn" ></div></div>
+                <div class="col"><div x-data="dropdown('Flower Dance Outfit','','current_dance_clothes','dance_clothes_list')" x-bind="dropbtn" ></div></div>
+              </div>  
+
+            </div>
+            <div x-show="$store.alpineData.currently_editing === 4" ><!-- Randomise 
+            "$store.alpineData.skinColour = '#FF0000';setVariables(Alpine.store('alpineData'));"-->
+              <h3>Body</h3>
+              <div class="row row-cols-2 gy-3">
+                <div class="col"><button type="button" class="btn btn-primary" x-on:click="$store.alpineData.current_skinColour = randomElement(skin_colours);$store.alpineData.current_hairColour = randomElement(hair_colours);$store.alpineData.current_eyeColour = randomElement(eye_colours);setVariables(Alpine.store('alpineData'));">Colouring</button></div>
                 <div class="col"><div x-data="dropdown('Flower Dance Outfit','','current_dance_clothes','dance_clothes_list')" x-bind="dropbtn" ></div></div>
               </div>  
 

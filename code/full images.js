@@ -213,6 +213,16 @@ function setClothing(variablelist, number){
     } 
 }
 
+function randomElement(items){
+    return items[Math.floor(Math.random()*items.length)];
+}
+
+function randomiseBodyColour(){
+    skinColour = randomElement(skin_colours);
+    hairColour = randomElement(hair_colours);
+    eyeColour = randomElement(outfit_colours);
+}
+
 function getOffset(name){
     let obj = findNameMatch(portrait_objects, "Head");
     let head = head_list[obj.value_list[0]];

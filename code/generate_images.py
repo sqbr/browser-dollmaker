@@ -126,7 +126,7 @@ wedding_clothes_list = ["suit","dress"]
 #colours
 skin_regular =["#FFE7D6","#FFECD6","#FFD3A6","#FFDFA5","#F1A065","#F1B265","#DA773F","#DA874A","#B05934","#B96A2E","#853F27","#783F1A"]
 skin_weird = ["#C3FFFA","#9BB681","#41AD60","#000000"]
-skin_colours =skin_regular + skin_weird
+skin_colours =skin_regular 
 
 outfit_yellow = ["#F8EABC","#FFE201","#FFCC98","#F7BE4F","#FF9F02"]
 outfit_green = ["#73D080","#8CC54E","#56AA04","#277032","#4F8B20","#7CA838","#8C8A2D"]
@@ -145,7 +145,7 @@ hair_brown = ["#641D00","#923D1F", "#8B4910", "#BB742E",]
 hair_black = ["#391E47", "#48356E","#4B261E", "#5B483C","#5A5A7F", "#602372","#000000"]
 hair_red = ["#FE7423","#FF5565", "#DF433C","#D16132"]
 
-hair_colours = hair_blonde + hair_red+ hair_brown+ hair_grey+ hair_black+ hair_weird
+hair_colours = hair_blonde + hair_red+ hair_brown+ hair_grey+ hair_black
 
 #Object stuff
 

@@ -14,14 +14,14 @@ const eye_type_list_port = ["androgynous","flat","long","catty","snake",];
 
 const eye_colours = ["#000000","#AEB655","#14AC34","#20514C","#29B4C4","#008891","#2E9FF7","#3D2C64","#B200F1","#F39EFF","#FE023A","#D24525","#FF8F2B","#DB8200","#8E3300","#999999","#ffffff",];
 const outfit_colours = ["#F8EABC","#FFE201","#FFCC98","#F7BE4F","#FF9F02","#73D080","#8CC54E","#56AA04","#277032","#4F8B20","#7CA838","#8C8A2D","#A6E7CD","#008186","#477BC8","#3C92ED","#1FDBFF","#2E4D91","#A46FE2","#9431C6","#BF2C92","#D361A7","#A01B54","#FF8B91","#E55773","#F0303C","#B71B00","#B24836","#8E4A17","#912D20","#820000","#630F0F","#FFFFFF","#A8ADAE","#777471","#4C4C56","#482B57","#000000",];
-const skin_colours = ["#FFE7D6","#FFECD6","#FFD3A6","#FFDFA5","#F1A065","#F1B265","#DA773F","#DA874A","#B05934","#B96A2E","#853F27","#783F1A","#C3FFFA","#9BB681","#41AD60","#000000",];
-const hair_colours = ["#FCE374","#F0B50A","#FE7423","#FF5565","#DF433C","#D16132","#641D00","#923D1F","#8B4910","#BB742E","#A59A9D","#E9E9E9","#391E47","#48356E","#4B261E","#5B483C","#5A5A7F","#602372","#000000","#7034ED","#B25DF6","#1B8EF6","#53C7FB","#469951",];
+const skin_colours = ["#FFE7D6","#FFECD6","#FFD3A6","#FFDFA5","#F1A065","#F1B265","#DA773F","#DA874A","#B05934","#B96A2E","#853F27","#783F1A",];
+const hair_colours = ["#FCE374","#F0B50A","#FE7423","#FF5565","#DF433C","#D16132","#641D00","#923D1F","#8B4910","#BB742E","#A59A9D","#E9E9E9","#391E47","#48356E","#4B261E","#5B483C","#5A5A7F","#602372","#000000",];
 
 const colourlist_list = [];
 
-const skinNum = 16; //how many skin colours there are
+const skinNum = 12; //how many skin colours there are
 const eyeNum = 17; //how many eye colours there are
-const hairNum = 24; //how many hair colours there are
+const hairNum = 19; //how many hair colours there are
 const outfitNum = 38; //how many clothing colours there are
 const full_body_list = body_list+hair_list;
 
