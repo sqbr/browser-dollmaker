@@ -213,14 +213,16 @@ function setClothing(variablelist, number){
     } 
 }
 
-function randomElement(items){
-    return items[Math.floor(Math.random()*items.length)];
+function randomMenuItemIndex(menu_string,bias){
+    return randomIndex(findNameMatch(menu_objects,menu_string).name_list,bias);
 }
 
-function randomiseBodyColour(){
-    skinColour = randomElement(skin_colours);
-    hairColour = randomElement(hair_colours);
-    eyeColour = randomElement(outfit_colours);
+function randomPortraitItemIndex(menu_string,bias){
+    return randomIndex(findNameMatch(portrait_objects,menu_string).item_list,bias);
+}
+
+function randomSpriteItemIndex(menu_string,bias){
+    return randomIndex(findNameMatch(sprite_objects,menu_string).name_list,bias);
 }
 
 function getOffset(name){

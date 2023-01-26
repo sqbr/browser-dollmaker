@@ -58,6 +58,20 @@ function nameOf(obj){
     return obj.name;
 }
 
+function randomElement(items){
+    //random element of list items
+    return items[Math.floor(Math.random()*items.length)];
+}
+
+function randomIndex(items,bias){
+    //random integer between 0 and items.length-1
+    //has a bias towards returning zero
+    if (Math.random()< bias)
+        return 0;
+    else  
+        return Math.floor(Math.random()*items.length);
+}
+
 function findNameMatch(list, name){
     //returns the first element of list whose name equals "name"
     for (let i = 0; i < list.length; i += 1) {

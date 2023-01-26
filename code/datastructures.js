@@ -261,7 +261,28 @@ document.addEventListener('alpine:init', () => {
             this.current_hair= findNameMatch(menu_objects,"Hairstyle").item;
             this.current_Facialhair =current_Facialhair;
             
-    }
+    },
+
+    randomiseBodyColouring(){
+        this.current_skinColour = randomElement(skin_colours);
+        this.current_hairColour = randomElement(hair_colours);
+        this.current_eyeColour = randomElement(eye_colours);
+    },
+    randomiseFeatures(){
+        this.current_hair = randomMenuItemIndex("Hairstyle",0);
+        this.current_Facialhair = randomIndex(facial_hair_list_menu,0.75);
+        this.current_head = randomIndex(head_list,0);
+        this.current_nose = Math.max(1,randomIndex(nose_list,0));
+        this.current_lips = randomIndex(lip_list,0);
+        if (Math.random()< 0.9)
+            this.current_ears = 1;
+        else
+            this.current_ears = Math.max(1,randomIndex(ear_list,0));
+        this.current_eyeType = randomIndex(eye_type_list_port,0);
+        this.current_complexion = randomIndex(complexion_list,0);
+        this.height = randomIndex([0,1],0);
+    },
+    
 })
   })
 
