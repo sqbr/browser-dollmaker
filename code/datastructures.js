@@ -208,7 +208,7 @@ document.addEventListener('alpine:init', () => {
 
     eyebrow_expressions : [6,2,3,1,4,5,6,6,6,6],
     eye_expressions : [0,2,1,0,3,4,0,0,0,0],
-    mouth_expressions : [5,1,10,0,3,11,5,5,5,5],
+    mouth_expressions : [5,1,10,0,4,11,5,5,5,5],
     blush_expressions : [0,0,0,0,1,0,0,0,0,0],
 
     current_menu_objects : [
@@ -279,9 +279,76 @@ document.addEventListener('alpine:init', () => {
         else
             this.current_ears = Math.max(1,randomIndex(ear_list,0));
         this.current_eyeType = randomIndex(eye_type_list_port,0);
-        this.current_complexion = randomIndex(complexion_list,0);
+        if (this.current_eyeType>2)//weirder eyes
+            this.current_eyeType = randomIndex(eye_type_list_port,0);
+        this.current_complexion = randomIndex(complexion_list,0.3);
         this.height = randomIndex([0,1],0);
     },
+    randomiseClothingColour(){
+        for(let i = 0; i < menu_objects.length-1; i++){
+            this.current_menu_objects[i].colour1 = randomElement(outfit_colours);
+            this.current_menu_objects[i].colour2 = randomElement(outfit_colours);
+        }
+
+    },
+    randomiseClothingValue(gender){
+        for(let i = 0; i < menu_objects.length-1; i++){
+            let obj = menu_objects[i]
+            possible_values = range(obj.list_list);
+
+            if (["Shoes"].includes(obj.name)) 
+                bias = 0;
+            else {
+                if (["Wheelchair"].includes(obj.name)){
+                    possible_values = [0,1];
+                    bias = 0.9
+                } else{
+                    bias = 0.6;
+                } 
+            }
+                    
+            if (["Pants","Shirt"].includes(obj.name)) 
+                possible_values.splice(0,1);  //remove 0
+            
+            this.current_menu_objects[i].item = randomIndex(possible_values,bias); //possible_values[randomIndex(possible_values,bias)];
+                
+            this.current_menu_objects[i].sleeves = randomIndex([0,1,2],0);
+        }
+        this.current_wedding_clothes= randomIndex([0,1,2],0);
+        if (this.current_wedding_clothes ==0)
+            this.current_dance_clothes= randomIndex([0,1],0);
+        else    
+            this.current_dance_clothes= this.current_wedding_clothes -1;
+
+    },
+    randomiseWoman(){
+        this.randomiseBodyColouring();
+        this.randomiseFeatures();
+        this.randomiseClothingColour();
+        this.randomiseClothingValue(1);
+        this.current_Facialhair = 0;
+        this.current_eyeType = 2;
+        this.current_wedding_clothes= 1;
+        this.current_dance_clothes= 0;
+
+    },
+    randomiseMan(){
+        this.randomiseBodyColouring();
+        this.randomiseFeatures();
+        this.randomiseClothingColour();
+        this.randomiseClothingValue(2);
+        this.current_eyeType = 1;
+        this.current_wedding_clothes= 2;
+        this.current_dance_clothes= 1;
+
+    },
+    randomiseAll(){
+        this.randomiseBodyColouring();
+        this.randomiseFeatures();
+        this.randomiseClothingColour();
+        this.randomiseClothingValue();
+
+    }
     
 })
   })
@@ -343,7 +410,7 @@ function drawCanvas() {
 
     //preview canvas
     canvas_preview.width = canvas_preview.width; //clears
-    //document.getElementById("closet").innerHTML = print_portrait_objects();
+    document.getElementById("closet").innerHTML = print_portrait_objects();
     let hair = findNameMatch(sprite_objects, "Hairstyle");
     for (let i = 0; i < sprite_objects.length; i += 1){ //sprite preview
         let b = sprite_objects[i];
@@ -538,6 +605,14 @@ function drawCanvas() {
 function setup(){
     //document.getElementById("test").innerHTML = print_sprite_objects();
     checkFileAPI();
+    Alpine.store('alpineData').randomiseBodyColouring();
+    Alpine.store('alpineData').randomiseFeatures();
+    Alpine.store('alpineData').randomiseClothingColour();
+    Alpine.store('alpineData').randomiseClothingValue();
+
+    //fix variables
+    setVariables(Alpine.store('alpineData'));
+    Alpine.store('alpineData').fixAlpine();
     drawCanvas();
 }
 let portrait_back = new Image();

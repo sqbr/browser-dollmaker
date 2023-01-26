@@ -328,19 +328,21 @@ function fixPortSources(){
                         current_item = obj_front.item_list[obj_front.value_list[j]];
                         if (current_sleeves_list.includes(obj_front.item_list[obj_front.value_list[j]])){ //the current shirt etc can have sleeves
                             let current_dec = sleeve_list_port[k].dec_list[obj_dec.value_list[j]]
-                            let current_sleeves = sleeve_list[k]  //what current sleeve length is
-                            if (current_sleeves==0){
-                                b.value_list[j] = obj_dec.value_list[j]*current_sleeves_list.length+1;
-                                name = current_dec+" zilch"
-                            }
-                            else{
-                                b.value_list[j] = obj_dec.value_list[j]*current_sleeves_list.length+2;
-                                if (sleeve_list_port[k].sharp_sleeves.includes(current_item)){
-                                    name = current_dec+" sharp";   
-                                }else{
-                                    name = current_dec+" round";   
+                            if (current_dec!="None"){
+                                let current_sleeves = sleeve_list[k]  //what current sleeve length is
+                                if (current_sleeves==0){
+                                    b.value_list[j] = obj_dec.value_list[j]*current_sleeves_list.length+1;
+                                    name = current_dec+" zilch"
                                 }
-                            } 
+                                else{
+                                    b.value_list[j] = obj_dec.value_list[j]*current_sleeves_list.length+2;
+                                    if (sleeve_list_port[k].sharp_sleeves.includes(current_item)){
+                                        name = current_dec+" sharp";   
+                                    }else{
+                                        name = current_dec+" round";   
+                                    }
+                                } 
+                            }
                         }
                     }
                 }
