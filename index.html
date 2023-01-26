@@ -144,12 +144,12 @@
               <h3>Body</h3>
               <div class="row row-cols-2 gy-3">
                 <div class="col"><button type="button" class="btn btn-primary" x-on:click="$store.alpineData.randomiseBodyColouring();setVariables(Alpine.store('alpineData'));">Colouring</button></div>
-                <div class="col"><button type="button" class="btn btn-primary" x-on:click="$store.alpineData.randomiseFeatures();setVariables(Alpine.store('alpineData'));">Features</button></div>
+                <div class="col"><button type="button" class="btn btn-primary" x-on:click="$store.alpineData.randomiseFeatures(0);setVariables(Alpine.store('alpineData'));">Features</button></div>
               </div>  
               <h3>Clothing</h3>
               <div class="row row-cols-2 gy-3">
                 <div class="col"><button type="button" class="btn btn-primary" x-on:click="$store.alpineData.randomiseClothingColour();setVariables(Alpine.store('alpineData'));">Colours</button></div>
-                <div class="col"><button type="button" class="btn btn-primary" x-on:click="$store.alpineData.randomiseClothingValue();setVariables(Alpine.store('alpineData'));">Styles</button></div>
+                <div class="col"><button type="button" class="btn btn-primary" x-on:click="$store.alpineData.randomiseClothingValue(0);setVariables(Alpine.store('alpineData'));">Styles</button></div>
               </div> 
               <h3>Random Gender</h3>
               <div class="row row-cols-2 gy-3">

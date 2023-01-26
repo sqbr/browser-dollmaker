@@ -93,30 +93,37 @@ const menu_object_names = menu_objects.map(nameOf);
 
 gendered_lists = [];
 
-function add_gendered_list(name, male_list,female_list){
+function add_gendered_list(name, male_names,female_names, never_names){
     current_items = menu_objects[gendered_lists.length].name_list;
-    male_index = [];
+    all_list = [];
+    male_list = [];
+    female_list = [];
+    
+
     for (let i = 0; i < current_items.length; i += 1) {
-        male_index.push(current_items.indexOf(male_list[i]));
+        current_item =current_items[i]; 
+        if (!never_names.includes(current_item)){
+            all_list.push(i);
+            if (!male_names.includes(current_item))
+                female_list.push(i);
+            if (!female_names.includes(current_item))
+                male_list.push(i);    
+        }
     }
-    female_index = [];
-    for (let i = 0; i < current_items.length; i += 1) {
-        female_index.push(current_items.indexOf(female_list[i]));
-    }
-    gendered_lists.push({name:name, male_list: male_index,female_list: female_index}) 
+    gendered_lists.push([all_list, male_list,female_list]) 
 }
-add_gendered_list("Hat", hats_male,hats_female);
-add_gendered_list("Neckwear", neckwear_male,neckwear_female);
-add_gendered_list("Eyewear", [],[]);
-add_gendered_list("Earrings", earrings_male,earrings_female);
-add_gendered_list("Shirt", shirt_male,shirt_female);
-add_gendered_list("Overshirt", [],[]);
-add_gendered_list("Coat", [],[]);
-add_gendered_list("Pants", pants_male,pants_female);
-add_gendered_list("Shoes", [],[]);
-add_gendered_list("Gloves", [],[]);
-add_gendered_list("Wheelchair", [],[]);
-add_gendered_list("Hairstyle", hair_male,hair_female);
+add_gendered_list("Hat", hats_male,hats_female,[]);
+add_gendered_list("Neckwear", neckwear_male,neckwear_female,[]);
+add_gendered_list("Eyewear", [],[],[]);
+add_gendered_list("Earrings", earrings_male,earrings_female,[]);
+add_gendered_list("Shirt", shirt_male,shirt_female,["None"]);
+add_gendered_list("Overshirt", [],[],[]);
+add_gendered_list("Coat", [],[],[]);
+add_gendered_list("Pants", pants_male,pants_female,["None"]);
+add_gendered_list("Shoes", [],[],[]);
+add_gendered_list("Gloves", [],[],[]);
+add_gendered_list("Wheelchair", [],[],["Hospital"]);
+add_gendered_list("Hairstyle", hair_male,hair_female,[]);
 
 function setPortVariable(variablelist, number){
     for (let i = 0; i < variablelist.length; i += 1) {
@@ -355,5 +362,22 @@ function print_menu_list(listname){
         //s+=" colour: "+b.colour1;
         s+="<br>";
     }
+    return s
+}
+
+function print_gendered_list(i){
+    s = "";
+    l = gendered_lists[i];
+    s+= "["+gendered_lists[i][0]+"]"
+    /*
+    for (i = 0; i < listname.length; i += 1){
+        s+="name: "+b.name;
+        s+=" name_list: "+b.name_list.toString();
+        
+        //s+="  colour_list: "+b.colour_list.toString();
+        //s+=" item: "+b.item;
+        //s+=" colour: "+b.colour1;
+        s+="<br>";
+    }*/
     return s
 }
