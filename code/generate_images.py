@@ -667,7 +667,10 @@ def process_body_sprites():
             process_image(w+"_"+h, "sprites/wedding","skin") 
             for g in ["female","male"]:
                 process_image(g+"_"+w+"_"+h, "sprites/flower dance","skin") 
- 
+    for w in wedding_clothes_list:
+        process_image(w+"_wheelchair", "sprites/wedding","skin") 
+        for g in ["female","male"]:
+            process_image(g+"_"+w+"_wheelchair", "sprites/flower dance","skin") 
     process_image("hairstyles", "sprites/hair","hair")
     process_image("hairstyles2", "sprites/hair","hair")
     process_image("facialhair", "sprites/hair/facialhair","red")
@@ -709,7 +712,7 @@ def process_outfit_sprites():
 write_temp()
 write_variables()
 
-#process_body_sprites()
+process_body_sprites()
 process_outfit_sprites()
 
 #flipImage()

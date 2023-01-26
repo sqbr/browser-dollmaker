@@ -319,13 +319,10 @@ function drawCanvas() {
     ctx = canvas.getContext("2d");
     canvas_preview = document.getElementById("previewCanvas");
     ctx_preview = canvas_preview.getContext("2d");
-    /*fixSpriteSources();
-    fixPortSources();
-    fixSpecialSpriteSources();*/
 
     //preview canvas
     canvas_preview.width = canvas_preview.width; //clears
-    //document.getElementById("closet").innerHTML = print_portrait_objects();
+    document.getElementById("closet").innerHTML = print_portrait_objects();
     let hair = findNameMatch(sprite_objects, "Hairstyle");
     for (let i = 0; i < sprite_objects.length; i += 1){ //sprite preview
         let b = sprite_objects[i];
@@ -386,7 +383,7 @@ function drawCanvas() {
         else    
             canvas.height = 416;
         
-        //document.getElementById("closet").innerHTML = print_sprite_objects();
+        document.getElementById("closet").innerHTML = print_sprite_objects();
         //sourceX, sourceY, sourceWidth, sourceHeight, destWidth and destHeight   
         for (let i = 0; i < sprite_objects.length; i += 1){
             let b = sprite_objects[i];
@@ -432,10 +429,17 @@ function drawCanvas() {
                 let b = sprite_objects[i];
                 if (b.base_image.src !=""){ 
                     if (sprite_special_list.includes(b.name) || noWeddingOutfit){
+                        if (b.name=="Wheelchair"){
+                            ctx.clearRect(15, wedding_height-40, 64, 7); 
+                            ctx.clearRect(30, wedding_height-40, 64, 7); 
+                        }
                         //wedding  
                         let wedding_offset =0;
-                        if (sprite_special_list.includes(b.name))
+                        if (sprite_special_list.includes(b.name) && b.name!="Wheelchair_back")
                             wedding_offset =1;
+                        if (b.name =="Wheelchair" && b.item!=0){//clear legs
+                            ctx.clearRect(16, 24+wedding_height, 48, 7); 
+                        }    
                         draw_coloured_sprite(b, ctx, b.colour1, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0,0), newY(b,0,0)+wedding_height,b.dimensions[0],b.dimensions[1]);//facing forward
                         draw_coloured_sprite(b, ctx, b.colour1, oldX(b,0), oldY(b,2),b.dimensions[0],b.dimensions[1],newX(b,3,0)+15, newY(b,3,0)+wedding_height-96+wedding_offset,b.dimensions[0],b.dimensions[1]); //sideways not kissing
                         if (b.name =="Eyes")
@@ -448,6 +452,9 @@ function drawCanvas() {
                         }
                     }
                     //sleeping/kissing
+                    if (b.name =="Wheelchair" && b.item!=0){//clear legs
+                        ctx.clearRect(0, sleeping_height+25, 16, 7); 
+                    }  
                     if (b.name =="Eyes")
                         ctx.drawImage(closed_eyes_image, 36, 24,12,12,-1, sleeping_height+3,12,12);
                     else { 
@@ -460,14 +467,18 @@ function drawCanvas() {
                         if (current_gender==0){
                             //female 
                             //dance heads
+                            let dance_offset = 1;   
+                            if (b.name =="Wheelchair_back")
+                                dance_offset = 0;
+                                
                             for (let column = 0; column < 2; column++)
                                 draw_coloured_sprite(b, ctx, b.colour1, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0,0)+column*16, newY(b,0,0)+dance_height,b.dimensions[0],b.dimensions[1]);
                             draw_coloured_sprite(b, ctx, b.colour1, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0,0)+2*16-1, newY(b,0,0)+dance_height,b.dimensions[0],b.dimensions[1]);    
-                            draw_coloured_sprite(b, ctx, b.colour1, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0,0)+3*16, newY(b,0,0)+dance_height+1,b.dimensions[0],b.dimensions[1]);  
+                            draw_coloured_sprite(b, ctx, b.colour1, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0,0)+3*16, newY(b,0,0)+dance_height+dance_offset,b.dimensions[0],b.dimensions[1]);  
                             for (let column = 0; column < 2; column++)
-                                draw_coloured_sprite(b, ctx, b.colour1, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0,0)+column*16, newY(b,0,0)+dance_height+33,b.dimensions[0],b.dimensions[1]);  
+                                draw_coloured_sprite(b, ctx, b.colour1, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0,0)+column*16, newY(b,0,0)+dance_height+32+dance_offset,b.dimensions[0],b.dimensions[1]);  
                             draw_coloured_sprite(b, ctx, b.colour1, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0,0)+2*16, newY(b,0,0)+dance_height+32,b.dimensions[0],b.dimensions[1]);  
-                            draw_coloured_sprite(b, ctx, b.colour1, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0,0)+3*16, newY(b,0,0)+dance_height+33,b.dimensions[0],b.dimensions[1]);  
+                            draw_coloured_sprite(b, ctx, b.colour1, oldX(b,0), oldY(b,0),b.dimensions[0],b.dimensions[1],newX(b,0,0)+3*16, newY(b,0,0)+dance_height+32+dance_offset,b.dimensions[0],b.dimensions[1]);  
                         } 
                     }
                 }
@@ -484,13 +495,16 @@ function drawCanvas() {
             for (let i = 0; i < sprite_objects.length; i += 1){
                 let b = sprite_objects[i];
                 if (b.base_image.src !=""){ 
-                    if (sprite_special_list.includes(b.name)){
+                    if (sprite_special_list.includes(b.name)|| b.name =="Wheelchair"){
                         if (current_gender ==1){
                             //male 
                             //dance heads
+                            dance_offset = 1;  
+                            if (findNameMatch(sprite_objects, "Wheelchair").item>0) //there is a wheelchair    
+                                dance_offset = 0;  
                             draw_coloured_sprite(b, ctx, b.colour1, oldX(b,0), oldY(b,3),b.dimensions[0],b.dimensions[1],newX(b,2,0), newY(b,2,0)+dance_height-64,b.dimensions[0],b.dimensions[1]);
                             for (let column = 1; column < 4; column++)
-                                draw_coloured_sprite(b, ctx, b.colour1, oldX(b,0), oldY(b,3),b.dimensions[0],b.dimensions[1],newX(b,2,0)+column*16, newY(b,2,0)+dance_height-63,b.dimensions[0],b.dimensions[1]);  
+                                draw_coloured_sprite(b, ctx, b.colour1, oldX(b,0), oldY(b,3),b.dimensions[0],b.dimensions[1],newX(b,2,0)+column*16, newY(b,2,0)+dance_height-64+dance_offset,b.dimensions[0],b.dimensions[1]);  
                         }   
                     }
                 }

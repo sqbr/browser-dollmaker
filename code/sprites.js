@@ -2,7 +2,7 @@ const sprite_body_list = ["short","tall","short_bald","tall_bald"];
 
 const height_list = ["short","tall"];
 const sprite_body_names = ["Short","Tall"];
-const sprite_special_list = ["Head","Eyes","Hat","Hat_dec","Earrings","Eyewear","Facial_hair","Hairstyle","Hairstyle_top"]; //show up in flower dance and wedding
+const sprite_special_list = ["Head","Eyes","Hat","Hat_dec","Earrings","Eyewear","Facial_hair","Hairstyle","Hairstyle_top","Wheelchair_back"]; //show up in flower dance and wedding
 
 
 const eyelash_list = eye_type_list_port;
@@ -245,6 +245,10 @@ for (let j =0; j<wedding_clothes_list.length;j++){
         sprite_wedding_list.push({name: h+" "+w, location: "wedding/"+w+"_"+h, colour: true});
     }
 }
+for (let j =0; j<wedding_clothes_list.length;j++){
+    w = wedding_clothes_list[j]
+    sprite_wedding_list.push({name: "wheelchair "+w, location: "wedding/"+w+"_wheelchair", colour: true});
+}
 
 const sprite_dance_list = [];
 for (let j =0; j<dance_clothes_list.length;j++){
@@ -257,6 +261,12 @@ for (let j =0; j<dance_clothes_list.length;j++){
         }
     }
 }
+for (let j =0; j<dance_clothes_list.length;j++){
+    w = dance_clothes_list[j];
+    for (let k =0; k<gender_list.length;k++){
+        g = gender_list[k];
+        sprite_dance_list.push({name: g+" "+w+" wheelchair", location: "flower dance/"+g+"_"+w+"_wheelchair", colour: true});
+    }}
 
 let closed_eyes_image = new Image();
 closed_eyes_image.src = "images/bases/sprites/body/eyes_base.png";

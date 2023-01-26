@@ -168,9 +168,16 @@ function updateSpecialSprites(){
         current_gender = 0; //female
     else
         current_gender = 1; //male
-
-    setSpecialSpriteVariable(["Flower dance"], Math.max(0,4*current_dance_clothes+2*current_gender+height));
-    setSpecialSpriteVariable(["Wedding"], Math.max(0,2*current_wedding_clothes-1+height)); 
+    if (findNameMatch(sprite_objects, "Wheelchair").item>0){ //there is a wheelchair    
+        setSpecialSpriteVariable(["Flower dance"], Math.max(0,8+2*current_dance_clothes+current_gender));
+        if (current_wedding_clothes==0)
+            setSpecialSpriteVariable(["Wedding"], 0);
+        else 
+            setSpecialSpriteVariable(["Wedding"], Math.max(0,4+current_wedding_clothes)); 
+    } else{
+        setSpecialSpriteVariable(["Flower dance"], Math.max(0,4*current_dance_clothes+2*current_gender+height));
+        setSpecialSpriteVariable(["Wedding"], Math.max(0,2*current_wedding_clothes-1+height)); 
+    }
 }
 
 
