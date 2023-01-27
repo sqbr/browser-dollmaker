@@ -276,21 +276,23 @@ document.addEventListener('alpine:init', () => {
             case 0: //androgynous
                 this.current_Facialhair = randomIndex(facial_hair_list_menu,0.75);
                 this.current_eyeType = randomIndex(eye_type_list_port,0);
+                this.current_head = randomIndex(head_list,0);
                 if (this.current_eyeType>2)//weirder eyes
                     this.current_eyeType = randomIndex(eye_type_list_port,0);
                 break;
             case 1: //man
+                this.current_head = randomElement([0,1,2,3,6]);
                 this.current_Facialhair = randomIndex(facial_hair_list_menu,0.75);
                 this.current_eyeType = randomElement([0,1]);
                 break;
             case 2: //woman
+                this.current_head = randomElement([3,4,5,6]);
                 this.current_Facialhair = 0;
                 this.current_eyeType = randomElement([0,2]);
                 
         }
-        
-            
         this.current_head = randomIndex(head_list,0);
+        
         this.current_nose = Math.max(1,randomIndex(nose_list,0));
         this.current_lips = randomIndex(lip_list,0);
         if (Math.random()< 0.9)
@@ -309,7 +311,6 @@ document.addEventListener('alpine:init', () => {
 
     },
     randomiseClothingValue(gender){
-        s = "";
         for(let i = 0; i < menu_objects.length-1; i++){
             let obj = menu_objects[i]
             possible_values = gendered_lists[i][gender];
@@ -323,16 +324,27 @@ document.addEventListener('alpine:init', () => {
                     bias = 0.6;
                 } 
             }   
-            this.current_menu_objects[i].item = possible_values[randomIndex(possible_values,bias)]; //possible_values[randomIndex(possible_values,bias)];
-            s+=" "+ possible_values.toString();   
+            this.current_menu_objects[i].item = possible_values[randomIndex(possible_values,bias)];   
             this.current_menu_objects[i].sleeves = randomIndex([0,1,2],0);
         }
-        this.current_wedding_clothes= randomIndex([0,1,2],0);
-        if (this.current_wedding_clothes ==0)
-            this.current_dance_clothes= randomIndex([0,1],0);
-        else    
-            this.current_dance_clothes= this.current_wedding_clothes -1;
-        //document.getElementById("closet").innerHTML = s;*/
+        switch(gender){
+            case 0: //androgynous
+                this.current_wedding_clothes= randomIndex([0,1,2],0);
+                if (this.current_wedding_clothes ==0)
+                    this.current_dance_clothes= randomIndex([0,1],0);
+                else    
+                    this.current_dance_clothes= this.current_wedding_clothes -1;
+                break;
+            case 1: //man
+                this.current_wedding_clothes= 2;
+                this.current_dance_clothes= 1;
+                break;
+            case 2: //woman
+                this.current_wedding_clothes= 1;
+                this.current_dance_clothes= 0;
+                
+        }
+        
     },
     randomiseAll(){
         this.randomiseBodyColouring();
@@ -345,17 +357,13 @@ document.addEventListener('alpine:init', () => {
         this.randomiseFeatures(1);
         this.randomiseClothingColour();
         this.randomiseClothingValue(1);
-        this.current_wedding_clothes= 2;
-        this.current_dance_clothes= 1;
-
+        
     },
     randomiseWoman(){
         this.randomiseBodyColouring();
         this.randomiseFeatures(2);
         this.randomiseClothingColour();
         this.randomiseClothingValue(2);
-        this.current_wedding_clothes= 1;
-        this.current_dance_clothes= 0;
 
     },
     
@@ -612,7 +620,6 @@ function drawCanvas() {
 }
 
 function setup(){
-    document.getElementById("closet").innerHTML = print_gendered_list(0);
     //document.getElementById("test").innerHTML = print_sprite_objects();
     checkFileAPI();
     Alpine.store('alpineData').randomiseBodyColouring();

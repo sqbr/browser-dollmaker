@@ -28,22 +28,22 @@ const wheelchair_menu_list = [none_menu,["Manual",[0],[1]],["Hospital",[0],[2]]]
 
 const hat_menu_list = [ none_menu,["Flower",[20,0,0],[3,0]],["Head Band",[17,0,0],[28,0]],["Cat Ears",[18,0,0],[9,0]],["Bandanna",[19,0,0],[29,0]],["Bow",[5,0,0],[5,0]],["Headphones",[3,0,0],[18,0]],["Ear muffs",[16,0,0],[27,0]],["Flower Crown",[10,0,0],[22,0]],["Soft Cap",[11,0,0],[10,0]],["Cap",[2,0,0],[6,0]],["Joja Cap",[2,1,0],[6,5]],["Turban",[14,0,0],[16,0]],["Helmet",[13,0,0],[25,0]],["Beanie",[8,0,0],[15,0]],["Hijab",[0,0,1],[17,0]],["Bobble Hat",[6,3,0],[21,21]],["Fedora",[9,5,0],[24,24]], ["Bowler",[9,5,0],[23,23]],["Top Hat",[9,5,0],[1,1]],["Cowboy Hat",[15,5,0],[12,12]],["Broad Hat",[7,4,0],[11,11]],["Sun Hat",[1,2,0],[20,20]],["Wizard",[4,0,0],[19,0]],["Witch",[12,0,0],[26,0]],];
 
-const hats_male =["Soft Cap","Turban","Bowler","Wizard","Cowboy Hat","Fedora","Top Hat"];
-const hats_female =["Flower","Head Band","Bow","Flower Crown","Hijab","Witch" ];
+const hats_male =[9,12,17,18,19,20,21,25];
+const hats_female =[1,2,5,8,15,24 ];
 
 const hair_menu_list = [ none_menu,["Shaved",[17,0],[56]],["Buzzcut",[18,0],[47]],["Balding",[15,12],[52]],["Short",[22,25],[45]],["Short Side-part",[8,25],[3]],["Neat Side-part",[29,25],[8]],["Floppy side part",[24,25],[79]],["Hi-top",[10,0],[12]],["Short Back and Sides",[27,0],[43]],["Short Spiky",[13,10],[1]],["Curly Mop",[6,7],[32]],["Princely",[3,25],[24]],["Short Shaggy",[1,1],[5]], ["Afro",[11,0],[21]],["Curly Bob",[6,6],[11]],["Emo Bob",[2,2],[10]],["Wavy Bob",[26,19],[42]],["Neat bob",[23,16],[26]],["Perm",[16,14],[53]],["Spiky",[7,7],[68]],["Curly Pony",[21,24],[6]],["Half-up locs",[4,3],[7]],["Half-up Wavy",[28,21],[7]],["Straight Pony Low",[28,22],[13]],["Straight Pony High",[28,23],[36]],["Twin Puffs",[21,20],[50]], ["Side Braid",[20,17],[37]], ["Twintails",[9,13],[31]], ["Bangs Bun",[9,11],[23]], ["Bun",[14,11],[23]],["Twin Braids",[9,8],[35]], ["Long Wavy",[9,4],[9]],["Long Locks",[12,9],[51]],["Long Straight",[9,15],[59]],["Long Curly",[25,18],[54]],];
-const hair_male =["Shaved", "Buzzcut","Balding",];
-const hair_female =["Neat bob","Twin Puffs","Side Braid","Twin Braids"];
+const hair_male =[0,2,3,];
+const hair_female =[15,16,18,26,27,28,29,30,31,32,34];
 
 const neckwear_menu_list = [ none_menu,["Pendant",[6,0,0],[8]],["Choker",[3,0,0],[5]], ["Beads",[2,0,0],[6]],["Bowtie",[0,5,0],[3]],["Tie",[1,0,0],[4]],["Cravat",[7,0,0],[4]],["Bandanna",[8,0,0],[7]], ["Scarf",[0,0,4],[7]],];
-const neckwear_male = ["Bowtie","Tie"];
-const neckwear_female = ["Pendant","Choker","Beads"];
+const neckwear_male = [4,5];
+const neckwear_female = [1,2,3];
 
 const eyewear_menu_list = [ none_menu,["Glasses",[1],[1]], ["Square Glasses",[2],[1]],["Round Glasses",[3],[1]],["Sunglasses",[4],[5]],["Coloured Glasses",[6],[3]],["Eye-patch",[5],[6]],];
 
 const earrings_menu_list = [ none_menu,["Studs",[1],[3]],["Single Stud",[2],[4]],["Small Hoops",[4],[3]],["Single Small Hoop",[3],[4]],["Hoops",[7],[1]],["Single Hoop",[8],[5]],["Punk",[5],[3]],["Drops",[6],[1]]];
-const earrings_male = [];
-const earrings_female = ["Studs","Small Hoops","Drops"];
+const earrings_male = [2,4,6];
+const earrings_female = [1,3,5,8];
 
 const coat_menu_list = [ none_menu, ["Fur Coat",[8,2],[10,0,1]],["Letterman",[9,3],[10,0,3]], ["Chinese collar",[6,0],[3,0,0]],["Short Coat",[1,0],[1,0,0]],["Business Jacket",[1,0],[6,0,0]],["Cool Jacket",[2,0],[6,0,0]], ["Hoodie",[3,0],[5,0,0]],["Open Hoodie",[4,0],[7,0,0]],["Leaves",[5,0],[8,0,0]],];
 //["Cape with collar",[7,1],[2,2,2]],["Cape",[9,1],[2,0,2]],
@@ -52,8 +52,8 @@ const overshirt_menu_list = [ none_menu,["Button up V-neck",[5,0],[3,0]],["V-nec
 
 const shirt_menu_list = [ none_menu,["Bikini",[5,0,0,0],[7,0]],["Strappy Vest",[10,0,0,0],[2,0]],["Halter-neck",[11,0,0,0],[2,0]],["Bodice",[12,0,0,0],[14,0]],["Sleeved Bodice",[13,0,0,0],[14,0]],["T-Shirt",[3,0,0,0],[19,0]],["Striped V-neck",[9,0,4,0],[26,4]],["V-neck",[9,0,0,0],[26,0]],["Low Cut",[8,0,0,0],[27,0]],["Boatneck",[4,0,0,0],[23,0]],["Turtleneck",[7,0,0,0],[21,0]],["Chinese Collar",[6,0,0,0],[21,0]], ["Open Shirt With Vest",[2,2,3,0],[24,25]], ["Open Shirt",[2,2,0,0],[25,0]],  ["Button-up",[1,1,0,0],[12,0]], ["Plaid Button-up",[1,1,1,1],[12,2]],["Stripe Button-up",[1,1,2,0],[12,4]],]
 
-const shirt_male = ["Open Shirt"];
-const shirt_female = ["Bikini","Halter-neck","Bodice","Sleeved Bodice"];
+const shirt_male = [14];
+const shirt_female = [1,2,3,4,5,10];
 
 const pants_menu_list = [none_menu];
 const pants_names_all = ["briefs","trousers"].concat(pants_names)
@@ -64,7 +64,7 @@ pants_menu_list.push(["Overalls",[1],[2,1]])
 //pants_menu_list.push(["High-waisted trousers",[0],[2,2]])
 
 const pants_male = [];
-const pants_female = ["long dress","short skirt", "pleated skirt", "grass skirt",  "green grass skirt", "midi skirt", "simple dress"];
+const pants_female = [5,6, 7, 9,  10, 12,14];
 
 const shoes_menu_list = [none_menu];
 for (let i = 0; i < shoes_names.length; i += 1) {
@@ -91,22 +91,22 @@ add_menu_object("Hairstyle", hair_menu_list, hair_colours,["Hair_front", "Hair_b
 
 const menu_object_names = menu_objects.map(nameOf);
 
-gendered_lists = [];
+const gendered_lists = [];
 
 function add_gendered_list(name, male_names,female_names, never_names){
-    current_items = menu_objects[gendered_lists.length].name_list;
+    gender_pos=gendered_lists.length;
+    current_items = menu_objects[gender_pos].name_list;
+    
     all_list = [];
     male_list = [];
     female_list = [];
-    
 
     for (let i = 0; i < current_items.length; i += 1) {
-        current_item =current_items[i]; 
-        if (!never_names.includes(current_item)){
+        if (!never_names.includes(i)){
             all_list.push(i);
-            if (!male_names.includes(current_item))
+            if (!male_names.includes(i))
                 female_list.push(i);
-            if (!female_names.includes(current_item))
+            if (!female_names.includes(i))
                 male_list.push(i);    
         }
     }
@@ -116,13 +116,13 @@ add_gendered_list("Hat", hats_male,hats_female,[]);
 add_gendered_list("Neckwear", neckwear_male,neckwear_female,[]);
 add_gendered_list("Eyewear", [],[],[]);
 add_gendered_list("Earrings", earrings_male,earrings_female,[]);
-add_gendered_list("Shirt", shirt_male,shirt_female,["None"]);
+add_gendered_list("Shirt", shirt_male,shirt_female,[0]);
 add_gendered_list("Overshirt", [],[],[]);
 add_gendered_list("Coat", [],[],[]);
-add_gendered_list("Pants", pants_male,pants_female,["None"]);
+add_gendered_list("Pants", pants_male,pants_female,[0]);
 add_gendered_list("Shoes", [],[],[]);
 add_gendered_list("Gloves", [],[],[]);
-add_gendered_list("Wheelchair", [],[],["Hospital"]);
+add_gendered_list("Wheelchair", [],[],[2]);
 add_gendered_list("Hairstyle", hair_male,hair_female,[]);
 
 function setPortVariable(variablelist, number){
@@ -365,19 +365,19 @@ function print_menu_list(listname){
     return s
 }
 
-function print_gendered_list(i){
+function print_gendered_lists(){
     s = "";
-    l = gendered_lists[i];
-    s+= "["+gendered_lists[i][0]+"]"
-    /*
-    for (i = 0; i < listname.length; i += 1){
-        s+="name: "+b.name;
-        s+=" name_list: "+b.name_list.toString();
-        
-        //s+="  colour_list: "+b.colour_list.toString();
-        //s+=" item: "+b.item;
-        //s+=" colour: "+b.colour1;
-        s+="<br>";
-    }*/
-    return s
+    for (i = 0; i < menu_objects.length; i += 1){
+        s+= menu_objects[i].name+": [" 
+        for (j = 0; j < 3; j += 1){
+            s+= "["
+            list = gendered_lists[i][j];
+            for (k = 0; k < list.length; k += 1){
+                s+=menu_objects[i].name_list[list[k]]+", "
+            }
+            s+= "] "  
+        }
+    s+= "] "  
+    }
+    return s;
 }
