@@ -1,3 +1,9 @@
+function downloadImage() {
+  const canvas = document.getElementById("exportCanvas");
+  const dataURL = canvas.toDataURL("image/png");
+
+}
+
 function download() {
   //from https://stackoverflow.com/questions/13405129/create-and-save-a-file-with-javascript
   var data = "";

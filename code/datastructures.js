@@ -624,6 +624,21 @@ function drawCanvas() {
 
 function setup(){
     //document.getElementById("test").innerHTML = print_sprite_objects();
+    document.getElementById('download').addEventListener('click', function(e) {
+        canvas = document.getElementById("exportCanvas");
+        // Convert our canvas to a data URL
+        let canvasUrl = canvas.toDataURL();
+        // Create an anchor, and set the href value to our data URL
+        const createEl = document.createElement('a');
+        createEl.href = canvasUrl;
+    
+        // This is the name of our downloaded file
+        createEl.download = "download-this-canvas";
+    
+        // Click the download button, causing a download, and then remove it
+        createEl.click();
+        createEl.remove();
+    })
     checkFileAPI();
     Alpine.store('alpineData').randomiseBodyColouring();
     Alpine.store('alpineData').randomiseFeatures(0);
@@ -642,6 +657,7 @@ const off_canvas = new OffscreenCanvas(256, 268);
 const off_ctx = off_canvas.getContext("2d");
 window.onload = setup;
 var game = setInterval(drawCanvas, 500);//Update canvas every 100 miliseconds
+
 
 //Some useful posts:
 //https://github.com/ninique/Dollmaker-Script

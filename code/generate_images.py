@@ -728,7 +728,7 @@ process_outfit_sprites()
 
 
 for c in closet:
-    if c.name in []:
+    if c.name in ["Coat_dec"]:
         process_portrait_part(c)
 #makeWinks()
 #makeStubble() 
