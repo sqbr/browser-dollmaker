@@ -276,10 +276,8 @@ document.addEventListener('alpine:init', () => {
         switch(gender){
             case 0: //androgynous
                 this.current_Facialhair = randomIndex(facial_hair_list_menu,0.75);
-                this.current_eyeType = randomIndex(eye_type_list_port,0);
+                this.current_eyeType = randomElement([0,1,2]);
                 this.current_head = randomIndex(head_list,0);
-                if (this.current_eyeType>2)//weirder eyes
-                    this.current_eyeType = randomIndex(eye_type_list_port,0);
                 break;
             case 1: //man
                 this.current_head = randomElement([0,1,2,3,6]);
@@ -292,6 +290,10 @@ document.addEventListener('alpine:init', () => {
                 this.current_eyeType = randomElement([0,2]);
                 
         }
+
+        if (Math.random()>0.9)//weirder eyes happen rarely
+            this.current_eyeType = randomElement([3,4]);
+            
         this.current_head = randomIndex(head_list,0);
         
         this.current_nose = Math.max(1,randomIndex(nose_list,0));

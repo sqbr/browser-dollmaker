@@ -152,9 +152,9 @@ for (let column =0; column<coat_list_sprite.length;column++){
         sprite_coat_back_list.push({name: coat_list_sprite[column+1], location: "outfit/coat/coat_back", colour: true,rowNum: 4,topcorner:[16*column,0]})
 }
 
-const sprite_coat_front_list = [none];
+const sprite_cape_list = [none];
 for (let column =0; column<coat_list_sprite.length;column++){
-    sprite_coat_front_list.push({name: coat_list_sprite[column+1], location: "outfit/coat/coat", colour: true,rowNum: 4,topcorner:[16*column,0]})
+    sprite_cape_list.push({name: coat_list_sprite[column+1], location: "outfit/coat/coat", colour: true,rowNum: 4,topcorner:[16*column,0]})
 }
 const sprite_eyewear_list = [none]
 for (let column =0; column<eyewear_list_sprite.length-1;column++){   
@@ -319,11 +319,12 @@ add_sprite_object("Gloves", sprite_gloves_list,["None"].concat(gloves_names), ou
 add_sprite_object("Shirt_sleeves", sprite_sleeves_list,sprite_sleeves_list.map(nameOf), outfit_colours,true,false,0,0, [16,32],[0,0]);
 add_sprite_object("Overshirt_sleeves", sprite_sleeves_list,sprite_sleeves_list.map(nameOf), outfit_colours,true,false,0,0, [16,32],[0,0]);
 add_sprite_object("Coat_sleeves", sprite_sleeves_list,sprite_sleeves_list.map(nameOf), outfit_colours,true,false,0,0, [16,32],[0,0]);
-add_sprite_object("Coat_front", sprite_coat_front_list,sprite_coat_list.map(nameOf),outfit_colours,false,true,1,0, [16,32],[0,0]);
 //everything before this gets cleared by wheelchair
 add_sprite_object("Wheelchair", sprite_wheelchair_list,sprite_wheelchair_list.map(nameOf),outfit_colours,true, false, 0,0, [16,32],[0,0]);
 add_sprite_object("Wheelchair_feet", sprite_wheelchair_feet_list,sprite_wheelchair_feet_list.map(nameOf),outfit_colours,true, false, 0,0, [16,32],[0,0]);
 add_sprite_object("Wheelchair_shoes", sprite_wheelchair_shoes_list,sprite_wheelchair_shoes_list.map(nameOf),outfit_colours,true, false, 0,0, [16,32],[0,0]);
+
+add_sprite_object("Cape", sprite_cape_list,sprite_coat_list.map(nameOf),outfit_colours,false,true,1,0, [16,32],[0,0]);
 
 add_sprite_object("Hairstyle_top", sprite_hair_list,sprite_hair_list.map(nameOf), hair_colours,false,true, 1,0,[16,32],[0,1]);
 add_sprite_object("Hat", sprite_hat_list,sprite_hat_list.map(nameOf), outfit_colours,false,true,1,0, [16,32],[0,0]);

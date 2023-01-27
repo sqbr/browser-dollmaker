@@ -45,8 +45,7 @@ const earrings_menu_list = [ none_menu,["Studs",[1],[3]],["Single Stud",[2],[4]]
 const earrings_male = [2,4,6];
 const earrings_female = [1,3,5,8];
 
-const coat_menu_list = [ none_menu, ["Fur Coat",[8,2],[10,0,1]],["Letterman",[9,3],[10,0,3]], ["Chinese collar",[6,0],[3,0,0]],["Short Coat",[1,0],[1,0,0]],["Business Jacket",[1,0],[6,0,0]],["Cool Jacket",[2,0],[6,0,0]], ["Hoodie",[3,0],[5,0,0]],["Open Hoodie",[4,0],[7,0,0]],["Leaves",[5,0],[8,0,0]],];
-//["Cape with collar",[7,1],[2,2,2]],["Cape",[9,1],[2,0,2]],
+const coat_menu_list = [ none_menu, ["Fur Coat",[8,2],[10,0,1]],["Letterman",[9,3],[10,0,3]], ["Chinese collar",[6,0],[3,0,0]],["Short Coat",[1,0],[1,0,0]],["Business Jacket",[1,0],[6,0,0]],["Cool Jacket",[2,0],[6,0,0]], ["Hoodie",[3,0],[5,0,0]],["Open Hoodie",[4,0],[7,0,0]],["Leaves",[5,0],[8,0,0]],["Cape",[10,1],[2,2,2]],["Cape with collar",[7,1],[2,2,2]],];
 
 const overshirt_menu_list = [ none_menu,["Button up V-neck",[5,0],[3,0]],["V-neck",[1,0],[6,0]],["Argyle V-neck",[1,1],[6,28]], ["Sweater",[2,0],[4,0]],["Open Sweater",[3,0],[1,0]],["Suspenders",[4,0],[5,0]],];
 
@@ -81,7 +80,7 @@ add_menu_object("Eyewear", eyewear_menu_list, outfit_colours,["Eyewear"],[],["Ey
 add_menu_object("Earrings", earrings_menu_list, outfit_colours,["Earrings"],[],["Earrings"],[]);
 add_menu_object("Shirt", shirt_menu_list, outfit_colours,["Shirt","Shirt_collar","Shirt_dec","Shirt_collar_dec"],["Shirt_dec","Shirt_collar_dec"],["Shirt","Shirt_dec"],["Shirt_dec"]);
 add_menu_object("Overshirt", overshirt_menu_list, outfit_colours,["Overshirt","Overshirt_dec"],["Overshirt_dec"],["Overshirt","Overshirt_dec"],["Overshirt_dec"]);
-add_menu_object("Coat", coat_menu_list, outfit_colours,["Coat","Coat_dec"],["Coat_dec"],["Coat","Coat_back","Coat_dec"],["Coat_dec"]);
+add_menu_object("Coat", coat_menu_list, outfit_colours,["Coat","Coat_dec"],["Coat_dec"],["Coat","Cape","Coat_dec"],["Coat_dec"]);
 add_menu_object("Pants", pants_menu_list, outfit_colours,["Pants_top"],[],["Pants","Pants top"],[]);
 add_menu_object("Shoes", shoes_menu_list, outfit_colours,[],[],["Shoes"],[]);
 add_menu_object("Gloves", gloves_menu_list, outfit_colours,[],[],["Gloves"],[]);
