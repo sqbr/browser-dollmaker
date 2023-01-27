@@ -1,18 +1,19 @@
 function firstElement(listname){
+    //first element of the array listname
     return listname[0];
 }
 
-const menu_objects = [];
+const menu_objects = []; //all the clothing items chosen in the 'Outfit' tab, and the hairstyle
 
 // name, item list, number, colour, colour 2, portrait list lists, sprite list lists
 
 /*
 Name: String.
 item_list: list of objects as above
-colour_list: list of strings describing whsat colour it can be
+colour_list: list of strings describing what colour it can be. Deprecated.
 item: index of item_list describing current item
-colour: index of colour_list describing current item's colour
-colour2: index of colour_list describing current item's secondary colour
+colour1: current item's colour
+colour2: current item's secondary colour
 ports_list: list of lists [portrait object name, item number]
 sprites_list:list of lists [sprite object name, item number]
 */
@@ -90,9 +91,13 @@ add_menu_object("Hairstyle", hair_menu_list, hair_colours,["Hair_front", "Hair_b
 
 const menu_object_names = menu_objects.map(nameOf);
 
-const gendered_lists = [];
+const gendered_lists = []; //what items can show up in randomised androgynous, masculine, and feminine characters
 
-function add_gendered_list(name, male_names,female_names, never_names){
+function add_gendered_list(name, never_fem,never_masc, never_used){
+    //name is just for clarity
+    //never_fem: items with these indices never show up on feminine characters
+    //never_masc: items with these indices never show up on masculine characters
+    //never_used:  items with these indices never show up on any randomised character
     gender_pos=gendered_lists.length;
     current_items = menu_objects[gender_pos].name_list;
     
@@ -101,11 +106,11 @@ function add_gendered_list(name, male_names,female_names, never_names){
     female_list = [];
 
     for (let i = 0; i < current_items.length; i += 1) {
-        if (!never_names.includes(i)){
+        if (!never_used.includes(i)){
             all_list.push(i);
-            if (!male_names.includes(i))
+            if (!never_fem.includes(i))
                 female_list.push(i);
-            if (!female_names.includes(i))
+            if (!never_masc.includes(i))
                 male_list.push(i);    
         }
     }
@@ -125,6 +130,7 @@ add_gendered_list("Wheelchair", [],[],[2]);
 add_gendered_list("Hairstyle", hair_male,hair_female,[]);
 
 function setPortVariable(variablelist, number){
+    //for every string in 'variablelist', set the portrait element with that name to have value 'number'
     for (let i = 0; i < variablelist.length; i += 1) {
         let b = findNameMatch(portrait_objects, variablelist[i]); //the eleemnt of portrait_objects with the right vriablename
         b.value_list=listOf(number);
@@ -141,6 +147,7 @@ function setPortVariable(variablelist, number){
 }
 
 function setSpriteVariable(variablelist, number){
+    //for every string in 'variablelist', set the sprite element with that name to have value 'number'
     for (let i = 0; i < variablelist.length; i += 1) {
         let b = findNameMatch(sprite_objects, variablelist[i]); //the eleemnt of portrait_objects with the right vriablename
         b.item=number;
@@ -148,6 +155,7 @@ function setSpriteVariable(variablelist, number){
 }
 
 function setSpecialSpriteVariable(variablelist, number){
+    //for every string in 'variablelist', set the special occasion element with that name to have value 'number'
     for (let i = 0; i < variablelist.length; i += 1) {
         let b = findNameMatch(special_sprite_objects, variablelist[i]); //the eleemnt of portrait_objects with the right vriablename
         b.item=number;
@@ -155,16 +163,19 @@ function setSpecialSpriteVariable(variablelist, number){
 }
 
 function setValuelist(variable, list){
+    //for every string in 'variablelist', set the portrait element with that name to have value list 'list'
     let b = findNameMatch(portrait_objects, variable); //the eleemnt of portrait_objects with the right vriablename
     b.value_list=list;
 }
 
 function setBothColour(variablelist, colour){
+    //for every string in 'variablelist', set the portrait and sprite elements with that name to have colour1 'colour'
     setPortColour(variablelist, colour);
     setSpriteColour(variablelist, colour);
 }
 
 function setPortColour(variablelist, colour){
+    //for every string in 'variablelist', set the portrait element with that name to have colour1 'colour'
     for (let i = 0; i < variablelist.length; i += 1) {
         let b = findNameMatch(portrait_objects, variablelist[i]); //the eleemnt of portrait_objects with the right vriablename
         b.colour1=colour;
@@ -172,6 +183,7 @@ function setPortColour(variablelist, colour){
 }
 
 function setSpriteColour(variablelist, colour){
+    //for every string in 'variablelist', set the sprite element with that name to have colour1 'colour'
     for (let i = 0; i < variablelist.length; i += 1) {
         let b = findNameMatch(sprite_objects, variablelist[i]); //the eleemnt of portrait_objects with the right vriablename
         b.colour1=colour;
@@ -179,6 +191,7 @@ function setSpriteColour(variablelist, colour){
 }
 
 function setSpecialSpriteColour(variablelist, colour){
+    //for every string in 'variablelist', set the special event element with that name to have colour1 'colour'
     for (let i = 0; i < special_sprite_objects.length; i += 1) {
         let b = findNameMatch(special_sprite_objects, variablelist[i]); //the eleemnt of portrait_objects with the right vriablename
         b.colour1=colour;
@@ -186,6 +199,7 @@ function setSpecialSpriteColour(variablelist, colour){
 }
 
 function setClothingColour(variablelist, colour){
+    //for every string in 'variablelist', set the portrait and sprite elements associated with the menu object with that name to have colour1 'colour'
     for (let i = 0; i < variablelist.length; i += 1) {
         let menu_obj = findNameMatch(menu_objects, variablelist[i]);
         menu_obj.colour1 = colour;
@@ -195,6 +209,7 @@ function setClothingColour(variablelist, colour){
 }
 
 function setClothingColour2(variablelist, colour){
+    //for every string in 'variablelist', set the portrait and sprite elements associated with the menu object with that name to have colour2 'colour'
     for (let i = 0; i < variablelist.length; i += 1) {
         let menu_obj = findNameMatch(menu_objects, variablelist[i]);
         menu_obj.colour2 = colour;
@@ -204,12 +219,13 @@ function setClothingColour2(variablelist, colour){
 }
 
 function setBothVariable(variablelist, number){
+    //for every string in 'variablelist', set the portrait and sprite elements with that name to have value 'number'
     setPortVariable(variablelist, number);
     setSpriteVariable(variablelist, number);
-    drawCanvas();
 }
 
 function updateSpecialSprites(){
+    //update the wedding and flower dance values to match the gender and wheelchair values
     if (current_sprite_preset <2)
         current_gender = 0; //female
     else
@@ -226,17 +242,8 @@ function updateSpecialSprites(){
     }
 }
 
-
-function setSleeves(variablelist, number){
-
-    if (sleeve_havers.indexOf(variablelist[0])>-1){//this item has sleeves
-        sleeve_list[sleeve_havers.indexOf(variablelist[0])] = number;
-    }
-    else
-        document.getElementById("test").innerHTML = "Unknown sleeve object"
-}
-
 function setClothing(variablelist, number){
+    //for every string in 'variablelist', set the menu object with that name to have value 'number' and update the relevant sprite and portrait objects
     for (let i = 0; i < variablelist.length; i += 1) {
         let menu_obj = findNameMatch(menu_objects, variablelist[i]);
         menu_obj.item = number;
@@ -259,19 +266,8 @@ function setClothing(variablelist, number){
     } 
 }
 
-function randomMenuItemIndex(menu_string,bias){
-    return randomIndex(findNameMatch(menu_objects,menu_string).name_list,bias);
-}
-
-function randomPortraitItemIndex(menu_string,bias){
-    return randomIndex(findNameMatch(portrait_objects,menu_string).item_list,bias);
-}
-
-function randomSpriteItemIndex(menu_string,bias){
-    return randomIndex(findNameMatch(sprite_objects,menu_string).name_list,bias);
-}
-
 function getOffset(name){
+    //how much the portrait image with name 'name' is shifted up or down to match the head shape
     let obj = findNameMatch(portrait_objects, "Head");
     let head = head_list[obj.value_list[0]];
     switch(head){
@@ -335,6 +331,7 @@ function getOffset(name){
 }
 
 function print_menu_objects(){
+    //print the elements of menu_objects. For bug fixing.
     s = "";
     for (i = 0; i < menu_objects.length; i += 1){
         b = menu_objects[i];
@@ -365,6 +362,7 @@ function print_menu_list(listname){
 }
 
 function print_gendered_lists(){
+    //print the elements of gendered_lists. For bug fixing.
     s = "";
     for (i = 0; i < menu_objects.length; i += 1){
         s+= menu_objects[i].name+": [" 

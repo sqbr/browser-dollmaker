@@ -1,10 +1,5 @@
-function downloadImage() {
-  const canvas = document.getElementById("exportCanvas");
-  const dataURL = canvas.toDataURL("image/png");
-
-}
-
 function download() {
+  //download values of all variables that define current character into a json file
   //from https://stackoverflow.com/questions/13405129/create-and-save-a-file-with-javascript
   var data = "";
   var filename = "dollmaker_save.json";

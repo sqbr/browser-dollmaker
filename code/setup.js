@@ -9,8 +9,6 @@ let currently_editing = 0; //which element of editing list we are editing
 let current_panel = 0;
 let current_clothing = 0;
 
-let port_offset = 1;
-
 let height = 0;
 
 let skinColour;
@@ -43,9 +41,6 @@ const back_list = ["Hat","Coat"]; //have a back
 
 const sleeve_havers = ["Shirt","Overshirt","Coat"]
 let sleeve_list = [0,0,0]
-
-const sprite_clothes = ["Shoes","Gloves","Pants"];
-
 
 let canvas;
 let canvas_preview;
@@ -104,7 +99,7 @@ function listOf(n){
 }
 
 function newImageList(){
-    //list of six images
+    //list of ten images
     let x = [];
     for (let i=0;i<10;i++) {
         x[i]=new Image();
@@ -139,6 +134,7 @@ function add_portrait_object(name, list, location){
 }
 
 function print_portrait_objects(){
+    //String summarising portrait_objects. For bug fixing. 
     s = "";
     for (i = 0; i < portrait_objects.length; i += 1){
         b = portrait_objects[i];

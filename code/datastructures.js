@@ -1,5 +1,5 @@
 function setVariables(data_object){
-    //transfer data from webpage to internal javascript
+    //transfer data from webpage/load file to internal javascript
     panelNum =data_object.panelNum; 
 
     current_imageType = data_object.current_imageType; //whether editing sprites or portraits
@@ -7,7 +7,6 @@ function setVariables(data_object){
     current_panel = data_object.current_panel;
     current_clothing = data_object.current_clothing;
     current_sprite_preset = data_object.current_sprite_preset;
-    port_offset = data_object.port_offset;
 
     height = data_object.height;
     skinColour = data_object.current_skinColour;
@@ -156,12 +155,13 @@ function setVariables(data_object){
 
 document.addEventListener('alpine:init', () => {
     Alpine.data('dropdown', (titleInput = "",buttonNameInput = "",valueNameInput = "",listNameInput = "[]") => ({
-      valueName: valueNameInput,
-      listName: listNameInput,
-      title: titleInput,
-      buttonName: buttonNameInput,
+      valueName: valueNameInput, //the value being set
+      listName: listNameInput,//the list iut's being chosen from
+      title: titleInput, //the name for this choice used in the webpage
+      buttonName: buttonNameInput,//extra name info for the button
 
       dropbtn: {
+        //Sets a variable in a list using a dropdown
           ['x-html']() {
             output = "";
             if (this.title!="")
@@ -174,6 +174,7 @@ document.addEventListener('alpine:init', () => {
           },
       },
       colourbtn: {
+        //Sets a colour using the colour picker
         ['x-html']() {
             output = this.title+': ';
             output += '<input type="color" :value ="$store.alpineData.'+this.valueName+'"  @input="$store.alpineData.'+this.valueName+'=$event.target.value;setVariables(Alpine.store(\'alpineData\'));"/>'
@@ -265,11 +266,14 @@ document.addEventListener('alpine:init', () => {
     },
 
     randomiseBodyColouring(){
+        //randomise the skin/eye/hair colour
         this.current_skinColour = randomElement(skin_colours);
         this.current_hairColour = randomElement(hair_colours);
         this.current_eyeColour = randomElement(eye_colours);
     },
     randomiseFeatures(gender){
+        //randomise the nose/head/hairstyle etc
+        // gender: 0 =androgynous, 1 =masculine, 2=feminine
         possible_hair = gendered_lists[menu_objects.length-1][gender];
         this.current_hair =  randomElement(possible_hair);
 
@@ -307,6 +311,7 @@ document.addEventListener('alpine:init', () => {
         this.height = randomIndex([0,1],0);
     },
     randomiseClothingColour(){
+        //randomise all clothing colours
         for(let i = 0; i < menu_objects.length-1; i++){
             this.current_menu_objects[i].colour1 = randomElement(outfit_colours);
             this.current_menu_objects[i].colour2 = randomElement(outfit_colours);
@@ -314,6 +319,8 @@ document.addEventListener('alpine:init', () => {
 
     },
     randomiseClothingValue(gender){
+        //set all clothing values including sleeve length
+        // gender: 0 =androgynous, 1 =masculine, 2=feminine
         for(let i = 0; i < menu_objects.length-1; i++){
             let obj = menu_objects[i]
             possible_values = gendered_lists[i][gender];
@@ -423,6 +430,7 @@ function newY(obj, row,column){
 }
 
 function drawCanvas() {
+    //draw the preview and export canvases
     canvas = document.getElementById("exportCanvas");
     ctx = canvas.getContext("2d");
     canvas_preview = document.getElementById("previewCanvas");
@@ -623,8 +631,9 @@ function drawCanvas() {
 }
 
 function setup(){
-    //document.getElementById("test").innerHTML = print_sprite_objects();
+    
     document.getElementById('download').addEventListener('click', function(e) {
+        // from https://fjolt.com/article/html-canvas-save-as-image
         canvas = document.getElementById("exportCanvas");
         // Convert our canvas to a data URL
         let canvasUrl = canvas.toDataURL();
@@ -633,7 +642,7 @@ function setup(){
         createEl.href = canvasUrl;
     
         // This is the name of our downloaded file
-        createEl.download = "download-this-canvas";
+        createEl.download = "dollmaker image";
     
         // Click the download button, causing a download, and then remove it
         createEl.click();

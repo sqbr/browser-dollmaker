@@ -6,6 +6,7 @@ from PIL import ImageEnhance
 import glob
 
 # python generate_images.py
+# Python scripts to create images for dollmaker from the images in images/bases
 
 body_list = ["Torso", "Head", "Lips","Complexion","Ears", "Skull", "Nose","Nose_front"]
 expression_list = ["Eyes","Eyebrows", "Mouth"]
@@ -230,8 +231,6 @@ add_portrait_object("Eyewear", eyewear_list_port,"eyewear_list_port", "outfit")
 add_portrait_object("Hair_front", hair_front_list,"hair_front_list", "body/hair")
 add_portrait_object("Hat", hat_list_port,"hat_list_port", "outfit")
 add_portrait_object("Hat_dec", hat_dec_list_port,"hat_dec_list_port", "outfit/hat")
-
-sprite_body_list = ["tall","short","tall_bald", "short_bald"]
 
 # colour functions
 
@@ -535,12 +534,6 @@ def colour_list_add(list_name, sublists):
     for l in sublist_names[1:]:
         s+=l+","
     return s+ ");\n"  
-
-def write_temp():
-    content = open("temp.js","w")
-    for i in range(len(hat_list_sprite)):
-        content.write("[\""+hat_list_sprite[i]+"\",["+str(i+1)+"],["+str(i+73)+"]], \n")    
-    content.close()
 
 
 def write_variables():

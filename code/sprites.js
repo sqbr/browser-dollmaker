@@ -1,9 +1,6 @@
-const sprite_body_list = ["short","tall","short_bald","tall_bald"];
-
 const height_list = ["short","tall"];
 const sprite_body_names = ["Short","Tall"];
 const sprite_special_list = ["Head","Eyes","Hat","Hat_dec","Earrings","Eyewear","Facial_hair","Hairstyle","Hairstyle_top","Wheelchair_back"]; //show up in flower dance and wedding
-
 
 const eyelash_list = eye_type_list_port;
 
@@ -22,8 +19,6 @@ const gloves_names = ["Mittens"];
 const sleeves_names =["None", "Short","Long",];
 
 const sleeves_length = ["short","long"];
-
-const coloured_shirts_names = ["Classic overalls", "Shirt", "Mint Blouse", "Dark Shirt", "Skull Shirt", "Light Blue Shirt","Tan Striped Shirt","Green Overalls",'"Good Grief" Shirt',"Aquamarine Shirt","Suit Top","Green Belted Shir","Lime Green Striped Shirt","Red Striped Shirt","Skeleton Shirt","Orange Shirt","Night Sky Shirt","Mayoral Suspenders","Brown Jacket","Sailor Shirt","Green Vest","Yellow and Green Shirt"]
 
 const uncoloured_shirts_names = ["Striped Shirt","Tank Top (low neck)","Tank Top","Crop Tank Top (Low neck)", "Crop Tank Top","Bikini Top","80's Shirt (curvy)","Crop Top Shirt","???","Strapped Top","Button Down Shirt","Crop top", "Tube Top","muscle T", "checked","crop m","crop f","tshirt m","tshirt f","skull","face","boatneck m","boatneck f","open shirt","high neck","","" ]
 
@@ -334,6 +329,7 @@ add_special_sprite_object("Wedding", sprite_wedding_list,sprite_wedding_list.map
 add_special_sprite_object("Flower dance", sprite_dance_list,sprite_dance_list.map(nameOf), skin_colours,[68,68],320);
 
 function print_sprite_objects(){
+    //String summarising sprite_objects. For bug fixing. 
     let s = "";
     for (i = 0; i < sprite_objects.length; i += 1){
         let b = sprite_objects[i];

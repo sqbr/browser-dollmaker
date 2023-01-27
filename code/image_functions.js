@@ -68,6 +68,7 @@ function hexToNum(h){
 }
 
 function hex_to_rgb(colour){
+    // takes hex code, returns RGB array with integers between 0 and 255
     let R = parseInt(colour.slice(1,3),16);
     let G = parseInt(colour.slice(3,5),16);
     let B = parseInt(colour.slice(5,7),16);
@@ -117,6 +118,7 @@ function frecklecolour(skincolour){
 }
 
 function colorContrast(colour){
+    //given a hexcode, returns a nicely contrasting hexcode. No longer used. 
     let R = parseInt(colour.slice(1,3),16);
     let G = parseInt(colour.slice(3,5),16);
     let B = parseInt(colour.slice(5,7),16);
@@ -461,6 +463,7 @@ function fixSpriteSources(){
 }
 
 function fixSpecialSpriteSources(){
+    // Fixes the "src" attribute for all sprites for flower dance/wedding
     updateSpecialSprites();
     for (let i = 0; i < special_sprite_objects.length; i += 1){
         let b = special_sprite_objects[i];
@@ -501,6 +504,15 @@ function fixSpecialSpriteSources(){
 }
 
 function draw_coloured_port(obj, index, colour, ctx, sourceX, sourceY, xpos, ypos){
+    //draw image for portrait object
+    //obj: the object
+    //index: what panel we're drawing
+    //colour: current colour 
+    //ctx: 2Dcontext of relevant canvas
+    //sourceX: X value of top left corner of section we're cutting from source image 
+    //sourceY: Y value of top left corner of section we're cutting from source image 
+    //xpos: X value of top left corner of pasted image 
+    //ypos: Y value of top left corner of pasted image 
     if (!(obj.name =="Lips" && (current_lips==0))){
     if (obj.name =="Blush")
         off_ctx.fillStyle = blushcolour(colour);
@@ -526,6 +538,18 @@ function draw_coloured_port(obj, index, colour, ctx, sourceX, sourceY, xpos, ypo
 }
 
 function draw_coloured_sprite(obj, ctx, colour, sourceX, sourceY, sourcewidth,sourceheight,xpos, ypos,width,height){
+    //draw image for portrait object
+    //obj: the object
+    //ctx: 2Dcontext of relevant canvas
+    //colour: current colour 
+    //sourceX: X value of top left corner of section we're cutting from source image 
+    //sourceY: Y value of top left corner of section we're cutting from source image 
+    //sourcewidth: width of section we're cutting from source image 
+    //sourceheight: height of section we're cutting from source image 
+    //xpos: X value of top left corner of pasted image 
+    //ypos: Y value of top left corner of pasted image 
+    //width: width of pasted image  
+    //height: height of pasted image  
 
     if (!obj.item_list[obj.item].name.includes("None")&&!obj.item_list[obj.item].name.includes("none")){
     off_ctx.globalCompositeOperation = "source-over";
