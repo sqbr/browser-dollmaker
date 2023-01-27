@@ -178,12 +178,13 @@ document.addEventListener('alpine:init', () => {
             output = this.title+': ';
             output += '<input type="color" :value ="$store.alpineData.'+this.valueName+'"  @input="$store.alpineData.'+this.valueName+'=$event.target.value;setVariables(Alpine.store(\'alpineData\'));"/>'
             return output 
+            },
         },
-        
-    },
   }))
   //data used by the Alpine components on the webpage
   Alpine.store('alpineData', {
+
+    dark_theme: true,
     panelNum : 6,
     current_imageType : 0,
     currently_editing : 0,
