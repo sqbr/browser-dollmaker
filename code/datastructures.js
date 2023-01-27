@@ -177,7 +177,7 @@ document.addEventListener('alpine:init', () => {
         //Sets a colour using the colour picker
         ['x-html']() {
             output = this.title+': ';
-            output += '<input type="color" :value ="$store.alpineData.'+this.valueName+'"  @input="$store.alpineData.'+this.valueName+'=$event.target.value;setVariables(Alpine.store(\'alpineData\'));"/>'
+            output += '<input type="color" :value ="$store.alpineData.'+this.valueName+'"  @input="$store.alpineData.'+this.valueName+'=$event.target.value;setVariables(Alpine.store(\'alpineData\'));" :aria-label="colour_desc($store.alpineData.'+this.valueName+')"/>'
             return output 
             },
         },
