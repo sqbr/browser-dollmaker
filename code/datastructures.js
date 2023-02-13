@@ -164,9 +164,10 @@ document.addEventListener('alpine:init', () => {
         //Sets a variable in a list using a dropdown
           ['x-html']() {
             output = "";
+            id = '"drop'+this.title+'"'
             if (this.title!="")
-                output += this.title+': ';   
-            output +='<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" x-text="'+'\''+this.buttonName+'\'+niceString('+this.listName+"[$store.alpineData."+this.valueName+"])"+'"></button>';
+                output += '<label for='+id+'>'+this.title+'</label>: ';   
+            output +='<button id='+id+' class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" x-text="'+'\''+this.buttonName+'\'+niceString('+this.listName+"[$store.alpineData."+this.valueName+"])"+'"></button>';
             output +='<ul class="dropdown-menu"> <template x-for=" (preset, index) in '+ this.listName+'">'; 
             output +='<li><button class="dropdown-item" x-on:click="$store.alpineData.'+this.valueName+'=index;setVariables(Alpine.store(\'alpineData\'));" x-text="niceString(preset)"></a></li>'; 
             output +='</template></ul>'
@@ -176,8 +177,9 @@ document.addEventListener('alpine:init', () => {
       colourbtn: {
         //Sets a colour using the colour picker
         ['x-html']() {
-            output = this.title+': ';
-            output += '<input type="color" :value ="$store.alpineData.'+this.valueName+'"  @input="$store.alpineData.'+this.valueName+'=$event.target.value;setVariables(Alpine.store(\'alpineData\'));" :aria-label="colour_desc($store.alpineData.'+this.valueName+')"/>'
+            id = '"drop'+this.title+'"'
+            output = '<label for='+id+'>'+this.title+'</label>: ';   
+            output += '<input id='+id+' type="color" :value ="$store.alpineData.'+this.valueName+'"  @input="$store.alpineData.'+this.valueName+'=$event.target.value;setVariables(Alpine.store(\'alpineData\'));" :aria-label="colour_desc($store.alpineData.'+this.valueName+')"/>'
             return output 
             },
         },
